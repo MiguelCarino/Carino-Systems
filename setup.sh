@@ -113,7 +113,7 @@ if [[ -f /etc/os-release ]]; then
     desktopOption=1
     ;;
     *Gentoo*)
-    caution "Gentoo is not supported"
+    caution "Gentoo is not supported, and you wouldn't be using scripts anyway"
     ;;
     *Slackware*)
     caution "Slackware is not supported"
@@ -187,12 +187,17 @@ displayMenu ()
         purposeMenu
         ;;
     3)
-        caution "Server Setup Runs"
-        serverSetup
+        purposeMenu
         ;;
+    
     4)
         caution "Exit"
         ;;
+    0)
+        caution "Server Setup Runs"
+        serverSetup
+        ;;
+    
     *)
         error "Bad input"
         ;;
@@ -362,7 +367,7 @@ installproton ()
   if [ $(ls ~/.steam/root/ | grep compatibilitytools.d) ]
   then
       CURRENTVERSION=$(ls ~/.steam/root/compatibilitytools.d | tail -c 3)
-      for I in 11 10 9 8 7 6 5 4 3 2 1
+      for I in 14 13 12 11 10 9 8 7 6 5
        do
            if [[ $CURRENTVERSION -eq $I ]]
            then
@@ -430,7 +435,7 @@ askReboot ()
 distroboxContainers ()
 {
     distrobox-create --name fedora --image quay.io/fedora/fedora:39 -Y
-    distrobox-create --name ubuntu --image docker.io/library/ubuntu:22.04 -Y
+    distrobox-create --name ubuntu --image docker.io/library/ubuntu:24.04 -Y
     #distrobox-create --name rhel --image registry.access.redhat.com/ubi9/ubi -Y
     distrobox-create --name debian --image docker.io/library/debian:12 -Y
     #distrobox-create --name clearlinux --image docker.io/library/clearlinux:latest -Y
