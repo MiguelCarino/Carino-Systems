@@ -200,6 +200,7 @@
                 },{url: 'TC_U49qq7LU',image: 'mu_108.webp'
                 },{url: 'FUH9S44D1BM',image: 'mu_109.webp'
                 },{url: 'uo0jE0oXITk',image: 'mu_110.webp'
+                },{url: 'P_g3sYGuuEA',image: 'mu_111.webp'
                 },
                 // add more albums here
             ];
@@ -301,11 +302,10 @@
                 musiccell.onclick = function() {
                     fetchVideoDetails(album); // Fetch and display video details
                     player.loadVideoById(album.url);
-                    document.getElementById('youtubePlayerContainer').style.display = 'block';
+                    document.getElementById('youtubePlayerContainer').style.display = 'inline';
                 };
                 musicgrid.appendChild(musiccell);
             }
-
 
             function closePlayer() {
                 document.getElementById('youtubePlayerContainer').style.display = 'none';
