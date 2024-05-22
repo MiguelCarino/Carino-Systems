@@ -201,6 +201,13 @@
                 },{url: 'FUH9S44D1BM',image: 'mu_109.webp'
                 },{url: 'uo0jE0oXITk',image: 'mu_110.webp'
                 },{url: 'P_g3sYGuuEA',image: 'mu_111.webp'
+                },{url: 'sdzseU8XGUE',image: 'mu_112.webp'
+                },{url: 'cAIOOYXSdHw',image: 'mu_112.webp'
+                },{url: 'fo8rG29TcwU',image: 'mu_113.webp'
+                },{url: 'S0hhTrdRi5Y',image: 'mu_114.webp'
+                },{url: 'zJGN0Mwg1e0',image: 'mu_114.webp'
+                },{url: 'P_g3sYGuuEA',image: 'mu_115.webp'
+                },{url: 'P_g3sYGuuEA',image: 'mu_116.webp'
                 },
                 // add more albums here
             ];
@@ -312,9 +319,22 @@
                 player.stopVideo(); // Stops the video when closing the player
             }
 
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                }
+                return array;
+            }
+            
             function populateGrid() {
-                for (let i = 0; i < 56; i++) {
-                    addCell(albums[Math.floor(Math.random() * albums.length)]);
+                let shuffledAlbums = shuffle([...albums]); // Create a shuffled copy of the albums array
+            
+                for (let i = 0; i < 60; i++) {
+                    if (i % albums.length === 0) {
+                        shuffledAlbums = shuffle([...albums]); // Re-shuffle after every full cycle
+                    }
+                    addCell(shuffledAlbums[i % albums.length]);
                 }
             }
 

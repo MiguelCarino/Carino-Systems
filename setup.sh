@@ -338,7 +338,7 @@ installSVP ()
         then
           echo "SVP is already installed"
         else
-            wget https://www.svp-team.com/files/svp4-linux.4.5.210-2.tar.bz2
+            wget https://www.svp-team.com/files/svp4-linux.4.6.263.tar.bz2
             tar -xf svp4-linux.4.5.210-2.tar.bz2
             sudo chmod +x svp4-linux-64.run
             sudo -u $(whoami) ./svp4-linux-64.run && rm svp4-latest* svp4-linux-64.run 
