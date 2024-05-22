@@ -89,21 +89,21 @@ switch ($b)
    "1" {
     Write-Host "Installing packages..."
 (
+    "KDE.Okular.Nightly",
+    "Google.Chrome",
     "CodecGuide.K-LiteCodecPack.Mega",
-    #"KDE.Okular",
     "AdrienAllard.FileConverter",
     "7zip.7zip",
+    "OBSProject.OBSStudio",
     "Oracle.JavaRuntimeEnvironment",
     #"Mozilla.Thunderbird",
     "AnyDeskSoftwareGmbH.AnyDesk",
-    #"ventoy.Ventoy",
     #"RustDesk.RustDesk",
-    "OBSProject.OBSStudio",
-    "Google.Chrome",
     #"Telegram.TelegramDesktop",
-    "TheDocumentFoundation.LibreOffice"
-    #"Espanso.Espanso"
-    #"Spotify.Spotify"
+    #"TheDocumentFoundation.LibreOffice",
+    #"KeePassXCTeam.KeePassXC",
+    #"Git.Git"
+    "ONLYOFFICE.DesktopEditors"
 ) | foreach {winget install $_}
    } 
    "2" {#Probably can execute basic case then gaming to avoid repeating so many packages
