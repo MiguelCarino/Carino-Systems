@@ -285,6 +285,7 @@ desktopenvironmentMenu ()
         exit
         ;;
     esac
+    finalTweaks
 }
 graphicDrivers ()
 {
@@ -521,7 +522,6 @@ purposeMenu ()
         sudo $pkgm $argInstall $preFlags $basicUserPackages $basicSystemPackages $gamingPackages $multimediaPackages $developmentPackages $virtconPackages $amdPackagesRPM $supportPackages $ciscoPackages $googlePackages $languagePackages $postFlags
         installSVP #Trying to find a FOSS alternative for smooth video
         distroboxContainers
-        finalTweaks
         sudo usermod -aG libvirt $(whoami)
         #xdg-settings set default-web-browser microsoft-edge.desktop
         ;;
@@ -529,7 +529,6 @@ purposeMenu ()
         # Code to execute when $variable doesn't match any of the specified values
         ;;
     esac
-    finalTweaks
     displayMenu
 }
 serverSetup ()
