@@ -434,10 +434,10 @@ askReboot ()
 }
 distroboxContainers ()
 {
-    distrobox-create --name fedora --image quay.io/fedora/fedora:39 -Y
-    distrobox-create --name ubuntu --image docker.io/library/ubuntu:24.04 -Y
+    distrobox-create --name fedora --image quay.io/fedora/fedora:latest -Y
+    distrobox-create --name ubuntu --image docker.io/library/ubuntu:latest -Y
     #distrobox-create --name rhel --image registry.access.redhat.com/ubi9/ubi -Y
-    distrobox-create --name debian --image docker.io/library/debian:12 -Y
+    distrobox-create --name debian --image docker.io/library/debian:latest -Y
     #distrobox-create --name clearlinux --image docker.io/library/clearlinux:latest -Y
     #distrobox-create --name centos --image quay.io/centos/centos:stream9 -Y
     #distrobox-create --name arch --image docker.io/library/archlinux:latest -Y
