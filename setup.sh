@@ -631,10 +631,14 @@ finalTweaks ()
     gsettings set org.gnome.desktop.session idle-delay 0
     xdg-mime default thunar.desktop inode/directory
     ;;
-    *hyprland*)
+    *Hyprland*)
+    caution "Getting hyprland.conf"
     curl -s https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/profiles/hyprland.conf > ~/.config/hypr/hyprland.conf
+    caution "Getting waybar file"
     wget https://github.com/MiguelCarino/Carino-Systems/blob/main/profiles/waybar.tar.xz && tar -xvf waybar.tar.xz --directory=~/.config/
+    caution "Getting wofi file"
     wget https://github.com/MiguelCarino/Carino-Systems/blob/main/profiles/wofi.tar.xz && tar -xvf wofi.tar.xz --directory=~/.config/
+    caution "Other things"
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
     mkdir ~/.config/hypr/
