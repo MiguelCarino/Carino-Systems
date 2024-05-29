@@ -633,7 +633,8 @@ finalTweaks ()
     ;;
     *hyprland*)
     curl -s https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/profiles/hyprland.conf > ~/.config/hypr/hyprland.conf
-    wget https://github.com/MiguelCarino/Carino-Systems/blob/main/profiles/hyprland.tar.xz && tar -xvf hyprland.tar.xz --directory=~/.config/
+    wget https://github.com/MiguelCarino/Carino-Systems/blob/main/profiles/waybar.tar.xz && tar -xvf waybar.tar.xz --directory=~/.config/
+    wget https://github.com/MiguelCarino/Carino-Systems/blob/main/profiles/wofi.tar.xz && tar -xvf wofi.tar.xz --directory=~/.config/
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
     mkdir ~/.config/hypr/
