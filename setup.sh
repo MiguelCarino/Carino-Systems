@@ -633,7 +633,7 @@ finalTweaks ()
     ;;
     *hyprland*)
     curl -s https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/profiles/hyprland.conf > ~/.config/hypr/hyprland.conf
-    curl -s https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/profiles/hyprland.conf > ~/.config/hypr/hyprland.conf
+    curl -s https://github.com/MiguelCarino/Carino-Systems/tree/d8b71300679cdbd8f26be93307c6679ff59bbe3a/profiles/waybar > ~/.config/hypr/hyprland.conf
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
     mkdir ~/.config/hypr/
