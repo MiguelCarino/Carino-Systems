@@ -646,6 +646,9 @@ finalTweaks ()
     caution "Getting hyprland.conf"
     wget https://github.com/MiguelCarino/Carino-Systems/archive/refs/heads/main.zip
     unzip main.zip
+    rm -rf ~/.config/hypr/
+    rm -rf ~/.config/wofi/
+    rm -rf ~/.config/waybar/
     mv Carino-Systems-main/profiles/hypr /home/$(whoami)/.config/
     mv Carino-Systems-main/profiles/wofi /home/$(whoami)/.config/
     mv Carino-Systems-main/profiles/waybar /home/$(whoami)/.config/
@@ -654,7 +657,6 @@ finalTweaks ()
     caution "Other things"
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
-    mkdir ~/.config/hypr/
     ;;
     *i3*)
     git clone https://gitlab.com/dajhub/i3-dotfiles.git
