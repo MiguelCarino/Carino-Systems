@@ -657,7 +657,6 @@ finalTweaks ()
         mv Carino-Systems-main/profiles/waybar /home/$(whoami)/.config/
         rm -rf main.zip Carino-Systems-main main.zip
     fi
-}
     caution "Other things"
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
