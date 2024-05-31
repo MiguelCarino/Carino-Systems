@@ -188,6 +188,7 @@ displayMenu ()
         ;;
     3)
         desktopenvironmentMenu
+        finalTweaks
         ;;
     4)
         graphicDrivers
@@ -289,7 +290,6 @@ desktopenvironmentMenu ()
         exit
         ;;
     esac
-    finalTweaks
 }
 graphicDrivers ()
 {
@@ -604,6 +604,7 @@ techSetup ()
     desktopenvironment
     graphicDrivers
     #nvtopInstall
+    finalTweaks
     askReboot
     displayMenu
 }

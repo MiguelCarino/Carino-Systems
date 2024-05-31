@@ -13,6 +13,7 @@
     //***************************
 
     "hyprland/workspaces": {
+	"format": "{id}",
         "disable-scroll": true,
     },
 
