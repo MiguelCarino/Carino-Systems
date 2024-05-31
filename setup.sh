@@ -7,7 +7,7 @@ exec > >(tee -a "$LOG") 2>&1
 # Defining Global Variables
 RED="\e[31m"; BLUE="\e[94m"; GREEN="\e[32m"; YELLOW="\e[33m"; ENDCOLOR="\e[0m";USERNAME="MiguelCarino"; REPO="Carino-Systems"; latest_commit=$(curl -s "https://api.github.com/repos/$USERNAME/$REPO/commits?per_page=1" | jq -r '.[0].commit.message');latest_commit_time=$(curl -s "https://api.github.com/repos/$USERNAME/$REPO/commits?per_page=1" | grep -m 1 '"date":' | awk -F'"' '{print $4}');latest_kernel=$(curl -s https://www.kernel.org/releases.json | jq -r '.releases[1].version');hardwareAcceleration=$(glxinfo | grep "direct rendering");hardwareRenderer=$(glxinfo | grep "direct rendering" | awk '{print $3}');archType=$(lscpu | grep -e "^Architecture:" | awk '{print $NF}'); locale_language=$(locale | grep "LANG=" | cut -d'=' -f2)
 # Localized Display Menus
-tech_setup_en_US="-------------------------------------\nSetup Script\n-------------------------------------\nVersion:1.1\nDetected Distribution: $NAME $VERSION\nLatest GitHub Commit: $latest_commit\nLatest Linux Kernel Version: $latest_kernel\nYour Kernel Version: $(uname -r)\nCPU Architecture: $archType\nHardware acceleration enabled: $hardwareAcceleration\nHardware renderer: $hardwareRenderer\n-------------------------------------\nPlease select an option:\n1. Technical Setup\n2. Purpose Setup\n3. Install a Desktop Environment\n4. Install graphic drivers\n5. Install latest protonGE release\n6. Exit"
+tech_setup_en_US="-------------------------------------\nSetup Script\n-------------------------------------\nVersion:1.1\nDetected Distribution: $NAME $VERSION\nLatest GitHub Commit: $latest_commit\nLatest Linux Kernel Version: $latest_kernel\nYour Kernel Version: $(uname -r)\nCPU Architecture: $archType\nHardware acceleration enabled: $hardwareAcceleration\nHardware renderer: $hardwareRenderer\n-------------------------------------\nPlease select an option:\n1. Technical Setup\n2. Purpose Setup\n3. Install a Desktop Environment\n4. Install graphic drivers\n5. Install latest protonGE release\n6. Distro demo\n7. Exit"
 tech_setup_ja_JP="-------------------------------------\nセットアップ スクリプト\n-------------------------------------\nバージョン:1.1\nDetected 検出されたディストリビューション： $DISTRIBUTION $VERSION_ID\n最新のGitHubコミット： $latest_commit\n最新のLinuxカーネルバージョン： $latest_kernel\nあなたのカーネルバージョン： $(uname -r)\nCPUアーキテクチャ： $archType\nハードウェアアクセラレーションが有効： $hardwareAcceleration\nハードウェアレンダラー： $hardwareRenderer\n-------------------------------------\nオプションを選択してください：\n1. 技術的なセットアップ\n2. 目的のセットアップ\n3. サーバーセットアップ\n4. 終了"
 tech_setup_ru_RU="-------------------------------------\nСкрипт установки\n-------------------------------------\nВерсия:1.1\nОбнаруженное распространение: $DISTRIBUTION $VERSION_ID\nПоследний коммит в GitHub: $latest_commit\nПоследняя версия ядра Linux: $latest_kernel\nВаша версия ядра: $(uname -r)\nАрхитектура ЦП: $archType\nАппаратное ускорение отключено: $hardwareAcceleration\nАппаратный рендерер: $hardwareRenderer\n-------------------------------------\nПожалуйста, выберите опцию:\n1. Техническая настройка\n2. Назначение настройки\n3. Настройка сервера\n4. Выход"
 tech_setup_es_ES="-------------------------------------\nSetup Script\n-------------------------------------\nVersion:1.1\nDistribución Detectada: $DISTRIBUTION $VERSION_ID\nLatest GitHub Commit: $latest_commit\nLatest Linux Kernel Version: $latest_kernel\nVersión de Kernel: $(uname -r)\nCPU Architecture: $archType\nHardware acceleration enabled: $hardwareAcceleration\nHardware renderer: $hardwareRenderer\nAceleración de Hardware habilitada: $hardwareAcceleration\nRenderizador de Hardware: $hardwareRenderer\n-------------------------------------\nPor favor, seleccione una opción:\n1. Configuración Técnica\n2. Configuración para propósito de uso\n3. Configuración como servidor\n4. Salir"
@@ -196,6 +196,10 @@ displayMenu ()
         installproton
         ;;
     6)
+        caution "Running distro demo, still on the works"
+        distroDemo
+        ;;
+    7)
         caution "Exit"
         ;;
     0)
@@ -451,6 +455,11 @@ distroboxContainers ()
     #distrobox-create --name opensuset --image registry.opensuse.org/opensuse/tumbleweed:latest  -Y
     #distrobox-create --name gentoo --image docker.io/gentoo/stage3:latest -Y
 }
+distroDemo ()
+{
+    info "this is a great demo of the distro you want to use\nThe current environment you use is the following:\n"
+    ssh -V
+}
 purposeMenu ()
 {
   phase=purpose_setup
@@ -560,6 +569,7 @@ techSetup ()
     ;;
     *Nobara*|*Risi*|*Ultramarine*)
     sudo $pkgm update -y && sudo $pkgm install $essentialPackages -y
+    updateGrub
     ;;
     *Red*)
     caution "RHEL"
