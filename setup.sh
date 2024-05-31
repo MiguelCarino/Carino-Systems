@@ -642,7 +642,7 @@ finalTweaks ()
     gsettings set org.gnome.desktop.session idle-delay 0
     xdg-mime default thunar.desktop inode/directory
     ;;
-    *Hyprland*)
+    *hyprland*|*Hyprland*)
     caution "Getting hyprland.conf"
     wget https://github.com/MiguelCarino/Carino-Systems/archive/refs/heads/main.zip
     unzip main.zip
@@ -651,12 +651,6 @@ finalTweaks ()
     mv Carino-Systems-main/profiles/waybar /home/$(whoami)/.config/
     rm -rf main.zip Carino-Systems-main main.zip
 
-
-    curl -s https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/profiles/hyprland.conf > ~/.config/hypr/hyprland.conf
-    caution "Getting waybar file"
-    wget https://github.com/MiguelCarino/Carino-Systems/blob/873b619d4a0c267a44b132b50bb8ee899701e095/profiles/waybar.tar.xz && tar -xvf waybar.tar.xz --directory=~/.config/
-    caution "Getting wofi file"
-    wget https://github.com/MiguelCarino/Carino-Systems/blob/873b619d4a0c267a44b132b50bb8ee899701e095/profiles/wofi.tar.xz && tar -xvf wofi.tar.xz --directory=~/.config/
     caution "Other things"
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     xdg-mime default thunar.desktop inode/directory
