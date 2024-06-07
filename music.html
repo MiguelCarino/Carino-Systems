@@ -296,7 +296,7 @@
 
             const musicgrid = document.getElementById('musicgrid');
             let player; // This will hold our YouTube player
-
+            
             // This function creates an iframe (YouTube player) after the API code downloads.
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('youtubePlayer', {
@@ -309,6 +309,14 @@
                     }
                 });
             }
+            // Function to slowly scroll the grid downwards
+            function autoScroll() {
+                const scrollSpeed = 4; // Adjust the speed as needed
+                musicgrid.scrollTop += scrollSpeed;
+            }
+
+            // Call autoScroll function every 50 milliseconds (adjust the interval as needed)
+            setInterval(autoScroll, 50);
 
             function onPlayerReady(event) {
                 // Player is ready. You can set up additional options here.
