@@ -3792,7 +3792,7 @@ body.is-preload #header.alt {
     height: 5vh;
     margin-bottom: -0.25em;
     max-height: 32em;
-    min-height: 16em;
+    min-height: 12em;
     position: relative;
     top: -0.25em
 }
