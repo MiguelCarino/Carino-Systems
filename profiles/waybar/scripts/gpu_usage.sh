@@ -10,5 +10,5 @@ usage=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
 # Get GPU temperature
 temperature=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
 
-# Output for Waybar: GPU Usage Percentage
+# Output for Waybar: GPU Usage Percentage, GPU Temperature, and VRAM Usage
 printf "%s%%|%s°C|%.2f GB🐏\n" $usage $temperature $used_gb

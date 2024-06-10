@@ -14,7 +14,7 @@ get_icon() {
     echo "${icons[icon_index]}"
 }
 
-# Query NVIDIA GPU temperature via nvidia-smi
+# Query AMD CPU temperature via sensors
 temperature=$(sensors k10temp-pci-00c3 | grep Tctl | awk '{print $2}' | sed 's/+//')
 
 # Get temperature icon
@@ -26,6 +26,6 @@ usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{p
 # Get used memory
 used_mem=$(free -m | awk 'NR==2{printf "%.2f", $3/1024}')
 
-# Output for Waybar: CPU Usage Percentage, GPU Temperature, and RAM Usage
+# Output for Waybar: CPU Usage Percentage, CPU Temperature, and RAM Usage
 printf "%.0f%%|%s%s|%.2f GB🐏\n" $usage $temperature $temperature_icon $used_mem
 
