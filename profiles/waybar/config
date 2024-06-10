@@ -1,11 +1,11 @@
 {
     "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "margin": "9 13 -10 18",
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "margin": "0 0 0 0",
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces", "hyprland/language", "keyboard-state", "hyprland/submap", "custom/window"],
     "modules-center": ["clock", "custom/dnf", "custom/weather"],
-    "modules-right": ["network", "custom/networkspeed", "pulseaudio", "custom/cpu", "custom/gpu", "backlight", "battery", "tray"],
+    "modules-right": ["network", "pulseaudio", "custom/cpu", "custom/gpu", "backlight", "battery", "tray"],
 
 
     //***************************
@@ -150,18 +150,20 @@
     },
 
     "network": {
-      "interface": "wlp6s0",
-      "format": "{ifname}",
-      //"format-wifi": "{essid} ({signalStrength}%) ",
-      "format-wifi": "Wifi ({signalStrength}%) ",
-      "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-      "format-disconnected": "", //An empty format will hide the module.
-      "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-      "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-      "tooltip-format-ethernet": "{ifname} ",
-      "tooltip-format-disconnected": "Disconnected",
-      "on-click": "kitty nmtui",
-      "max-length": 50,
+        "interface": "enp7s0", //Your inteface name goes here
+        "exec": "~/.config/waybar/scripts/networkspeed.sh",
+        "interval": 1,
+        "format": "{}",
+        //"format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "Wifi ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "format-disconnected": "", //An empty format will hide the module.
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty nmtui",
+        "max-length": 50
     },
 
     "backlight": {
