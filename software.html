@@ -476,6 +476,14 @@
                 clin: 'musescore',
                 cwin: 'Musescore.Musescore',
                 cmac: '--cask musescore'
+            },
+            {
+                id: 'Video player for studying Japanese',
+                url: 'https://ripose-jp.github.io/Memento/',
+                solution: 'Memento',
+                clin: 'flatpak && flatpak install io.github.ripose_jp.Memento',
+                cwin: 'Ripose.Memento',
+                cmac: 'sorry, not available'
             }
         ];
     
@@ -541,19 +549,52 @@
                 clin: 'Sorry, not available',
                 cwin: 'Adobe.Acrobat.Reader.64-bit', //Adobe.PremierePro
                 cmac: '--cask adobe-acrobat-pro'
+            },
+            {
+                id: 'Video Frame Interpolation',
+                url: 'https://www.svp-team.com/',
+                solution: 'SmoothVideo Project',
+                clin: 'Sorry, not available',
+                cwin: 'Adobe.Acrobat.Reader.64-bit', //Adobe.PremierePro
+                cmac: '--cask adobe-acrobat-pro'
             }
         ];
     
         const websites = [
             {
-                id: 'Search Engine',
-                url: 'https://www.google.com',
-                solution: 'Google'
+                id: 'Windows "winget" package browser',
+                url: 'winget packages',
+                solution: 'Winget.run'
             },
             {
-                id: 'Social Media',
-                url: 'https://www.facebook.com',
-                solution: 'Facebook'
+                id: 'macOS "brew" package browser',
+                url: 'https://formulae.brew.sh/',
+                solution: 'formulae.brew.sh'
+            },
+            {
+                id: 'Internet Speed Test',
+                url: 'https://openspeedtest.com/',
+                solution: 'openspeedtest.com'
+            },
+            {
+                id: 'Hardware Database',
+                url: 'https://www.techpowerup.com/',
+                solution: 'techpowerup.com'
+            },
+            {
+                id: 'Japanese dictionary',
+                url: 'https://jisho.org/',
+                solution: 'jisho.org'
+            },
+            {
+                id: 'Live Air Traffic Monitor',
+                url: 'https://www.flightradar24.com',
+                solution: 'flightradar24.com'
+            },
+            {
+                id: 'Live Air Traffic Monitor',
+                url: 'https://www.flightradar24.com',
+                solution: 'flightradar24.com'
             }
         ];
 
@@ -561,12 +602,22 @@
             {
                 id: 'torrents',
                 url: 'https://www.google.com',
-                solution: 'Google'
+                solution: ''
             },
             {
-                id: 'Cracked code',
-                url: 'https://www.facebook.com',
-                solution: 'Facebook'
+                id: 'Game launcher with repacks via torrent',
+                restrictedUrl: 'https://github.com/hydralauncher/hydra?tab=readme-ov-file#installation',
+                solution: ''
+            },
+            {
+                id: 'MS Office for Mac',
+                url: 'https://massgrave.dev/office_for_mac',
+                solution: ''
+            },
+            {
+                id: 'MS Office',
+                url: 'https://massgrave.dev/',
+                solution: ''
             }
         ];
     
@@ -630,29 +681,16 @@
             }
     
              // Create and append the buttons
-             if (type === 'websites') {
-            // Website-specific buttons
-            // Websites don't have installation commands, so we can just add placeholder buttons or any other relevant functionality.
-            const button = document.createElement('button');
-            button.textContent = 'Visit Website';
-            button.className = 'visit-website-button span-space';
-            button.addEventListener('click', () => {
-                window.open(software.url, '_blank');
-            });
-            section3.appendChild(button);
-        } else if (type === 'default') {
-            // Commercial software-specific buttons
-            ['fedora', 'windows', 'macos'].forEach(os => {
+             if (type === 'restricted') {
+                ['dont'].forEach(os => {
                 const button = document.createElement('span');
-                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
-                                os === 'windows' ? `winget install -e --id ${software.cwin}` :
-                                `brew install ${software.cmac}`;
-                button.className = `${os}-button span-space`;
+                const command = `${software.url}`;
+                button.className = `dont-button span-space`;
                 button.setAttribute('data-text', command);
                 button.title = 'Click to copy command';
                 button.addEventListener('click', () => {
                     copyToClipboard(command);
-                    const message = `Command "${command}" has been copied to clipboard.`;
+                    const message = `BEWARE\nSome sites distribute software and content without a proper license nor quality. Some countries or institutions have no legal means nor resources to punish bad distribution practices, and lack the means to distribute legal software and content. This page serves as reference of the most common questionable sources, it is encouraged to block these sites and methods while encouraging using its reliable alternatives. Only download content for testing purposes once you've made sure you're on a computer that you can't rely on for work or have really important data on it.\n${command}" has been copied to clipboard and you shall proceed.`;
                     alert(message);
                 });
                 section3.appendChild(button);
@@ -702,7 +740,7 @@
             }
                 section3.appendChild(button);
             });
-        } else if (type === 'restricted') {
+        } else if (type === 'default') {
             // Free software-specific buttons
             ['fedora', 'windows', 'macos'].forEach(os => {
                 const button = document.createElement('span');
@@ -734,18 +772,20 @@
             filteredSoftware.forEach(software => {
                 const type = documents.includes(software) ? 'documents' :
                              commercialSoftware.includes(software) ? 'commercialSoftware' :
-                             websites.includes(software) ? 'websites' : 'default';
+                             websites.includes(software) ? 'websites' :
+                             restricted.includes(software) ? 'restricted' : 'default';
                 addCell(software, type);
             });
         }
-    
+
         searchInput.addEventListener('input', searchFunction);
-    
+
         // Populate the grid with cells for each type of software
         allSoftware.forEach(software => {
             const type = documents.includes(software) ? 'documents' :
                          commercialSoftware.includes(software) ? 'commercialSoftware' :
-                         websites.includes(software) ? 'websites' : 'default';
+                         websites.includes(software) ? 'websites' :
+                         restricted.includes(software) ? 'restricted' : 'default';
             addCell(software, type);
         });
     </script>
