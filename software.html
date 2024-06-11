@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>Software Solutions</title>
+    <title>Solutions</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <!-- Open Graph Protocol Meta Tags -->
@@ -72,17 +72,19 @@
                     <img src="images/pic07.jpg" alt="" />
                 </span>
                 <header class="major">
-                    <h1>Software Solutions</h1>
+                    <h1>Solutions</h1>
                 </header>
                 <div class="content">
-                    <p>All software here is multiplatform, free and open source.
+                    <p>Get things done.
                     </p>
                 </div>
             </div>
         </section>
         <!-- Main -->
-        <div id="main" style="background-color: #205497;">
-            <input type="text" id="searchInput" style="background-color: #205497; color: rgb(255, 255, 255); border-color: brown;" placeholder="Describe your use case...">
+        <div id="main" style="">
+            <form class="searchbar" method="get" id="search" action="https://duckduckgo.com/">
+                <input type="text" id="searchInput" name="q" style="background-color: #205497; color: rgb(255, 255, 255); border-color: brown;" placeholder="Describe your use case...">
+            </form>
             <div id="softwareid"></div>
         </div>
         <!-- Footer -->
@@ -109,15 +111,27 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    
     <script>
         const softwareid = document.getElementById('softwareid');
-        const software = [{
+        const searchInput = document.getElementById('searchInput');
+    
+        const freeSoftware = [
+            {
                 id: 'Web Browser',
                 url: 'https://www.mozilla.org/en-US/firefox/new/',
                 solution: 'Firefox',
                 clin: 'firefox',
                 cwin: 'Mozilla.Firefox',
                 cmac: '--cask firefox'
+            },
+            {
+                id: 'Music Production',
+                url: 'https://www.giadamusic.com/',
+                solution: 'Giada',
+                clin: 'musescore',
+                cwin: 'Musescore.Musescore',
+                cmac: '--cask musescore'
             },
             {
                 id: 'Office Suite',
@@ -462,83 +476,280 @@
                 clin: 'musescore',
                 cwin: 'Musescore.Musescore',
                 cmac: '--cask musescore'
+            }
+        ];
+    
+        const documents = [
+            {
+                id: 'Technical Documentation',
+                url1: 'https://bing.com/',
+                url2: 'https://google.com/',
+                url3: 'https://yandex.com/',
+                solution: '',
             },
             {
-                id: 'Music Production',
-                url: 'https://www.giadamusic.com/',
-                solution: 'Giada',
-                clin: 'musescore',
-                cwin: 'Musescore.Musescore',
-                cmac: '--cask musescore'
+                id: 'Quote',
+                url1: 'https://bing.com/',
+                url2: 'https://google.com/',
+                url3: 'https://yandex.com/',
+                solution: '',
             },
-            //{ id: 'Media Player', url: 'https://mpv.io/installation/', solution: 'mpv', clin: 'mpv', cwin: 'tsl0922.ImPlay', cmac: 'mpv' },
-            //{ id: 'Media Player', url: 'https://mpv.io/installation/', solution: 'mpv', clin: 'mpv', cwin: 'tsl0922.ImPlay', cmac: 'mpv' },
-            //{ id: 'Media Player', url: 'https://mpv.io/installation/', solution: 'mpv', clin: 'mpv', cwin: 'tsl0922.ImPlay', cmac: 'mpv' },
-            //{ id: 'Media Player', url: 'https://mpv.io/installation/', solution: 'mpv', clin: 'mpv', cwin: 'tsl0922.ImPlay', cmac: 'mpv' },
-            //{ id: 'Media Player', url: 'https://mpv.io/installation/', solution: 'mpv', clin: 'mpv', cwin: 'tsl0922.ImPlay', cmac: 'mpv' },
-            // add more albums here
+            {
+                id: 'Inventory',
+                url1: 'https://bing.com/',
+                url2: 'https://google.com/',
+                url3: 'https://yandex.com/',
+                solution: '',
+            },
+            {
+                id: 'Client list',
+                url1: 'https://bing.com/',
+                url2: 'https://google.com/',
+                url3: 'https://yandex.com/',
+                solution: '',
+            },
+            {
+                id: 'Quote',
+                url1: 'https://bing.com/',
+                url2: 'https://google.com/',
+                url3: 'https://yandex.com/',
+                solution: '',
+            }
+        ];
+    
+        const commercialSoftware = [
+        {
+                id: 'Photo Editing',
+                url: 'https://www.adobe.com/products/photoshop.html',
+                solution: 'Adobe Photoshop',
+                clin: 'Sorry, not available',
+                cwin: 'Sorry, not available',
+                cmac: '--cask adobe-photoshop'
+            },
+            {
+                id: 'Video Editing',
+                url: 'https://www.adobe.com/products/premiere.html',
+                solution: 'Adobe Premiere Pro',
+                clin: 'Sorry, not available',
+                cwin: 'Sorry, not available',
+                cmac: '--cask adobe-premiere-pro'
+            },
+            {
+                id: 'PDF Reader',
+                url: 'https://www.adobe.com/products/acrobat-pro-cc.html',
+                solution: 'Adobe Acrobat Pro',
+                clin: 'Sorry, not available',
+                cwin: 'Adobe.Acrobat.Reader.64-bit', //Adobe.PremierePro
+                cmac: '--cask adobe-acrobat-pro'
+            }
+        ];
+    
+        const websites = [
+            {
+                id: 'Search Engine',
+                url: 'https://www.google.com',
+                solution: 'Google'
+            },
+            {
+                id: 'Social Media',
+                url: 'https://www.facebook.com',
+                solution: 'Facebook'
+            }
         ];
 
-        function addCell(software) {
-    // Create the cell as an anchor element
-    const softcell = document.createElement('a');
-    softcell.target = '_blank';
-    softcell.className = 'softcell';
+        const restricted = [
+            {
+                id: 'torrents',
+                url: 'https://www.google.com',
+                solution: 'Google'
+            },
+            {
+                id: 'Cracked code',
+                url: 'https://www.facebook.com',
+                solution: 'Facebook'
+            }
+        ];
+    
+        const allSoftware = [...freeSoftware, ...documents, ...commercialSoftware, ...websites, ...restricted];
 
-    // Create the three sections within the cell
-    const section1 = document.createElement('div');
-    section1.className = 'section section1';
-    section1.textContent = `${software.id}`; // Content for the first section
-    softcell.appendChild(section1);
 
-    const section2 = document.createElement('div');
-    section2.className = 'section section2';
-    const linksec2 = document.createElement('a');
-    linksec2.href = software.url;
-    linksec2.textContent = `${software.solution}`;
-    linksec2.target = '_blank'; // Open link in a new tab
-    section2.appendChild(linksec2);
-    softcell.appendChild(section2);
+        // Shuffle function to randomize the array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-    const section3 = document.createElement('div');
-    section3.className = 'section section3';
-
-    // Function to copy text to clipboard
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            console.log('Text copied to clipboard');
-        }).catch(err => {
-            console.error('Failed to copy text: ', err);
+        // Randomize the allSoftware array
+        shuffle(allSoftware);
+    
+        function addCell(software, type) {
+            // Create the cell as an anchor element
+            const softcell = document.createElement('a');
+            softcell.target = '_blank';
+            softcell.className = 'softcell';
+    
+            // Apply different styles based on type
+            if (type === 'documents') {
+            softcell.classList.add('documents-cell');
+            } else if (type === 'commercialSoftware') {
+            softcell.classList.add('commercial-software-cell');
+            } else if (type === 'websites') {
+            softcell.classList.add('websites-cell');
+            } else if (type === 'restricted') {
+            softcell.classList.add('restricted-cell'); // Ensure the correct class is added
+            }
+    
+            // Create the three sections within the cell
+            const section1 = document.createElement('div');
+            section1.className = 'section section1';
+            section1.textContent = `${software.id}`; // Content for the first section
+            softcell.appendChild(section1);
+    
+            const section2 = document.createElement('div');
+            section2.className = 'section section2';
+            const linksec2 = document.createElement('a');
+            linksec2.href = software.url;
+            linksec2.textContent = `${software.solution}`;
+            linksec2.target = '_blank'; // Open link in a new tab
+            section2.appendChild(linksec2);
+            softcell.appendChild(section2);
+    
+            const section3 = document.createElement('div');
+            section3.className = 'section section3';
+    
+            // Function to copy text to clipboard
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    console.log('Text copied to clipboard');
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+            }
+    
+             // Create and append the buttons
+             if (type === 'websites') {
+            // Website-specific buttons
+            // Websites don't have installation commands, so we can just add placeholder buttons or any other relevant functionality.
+            const button = document.createElement('button');
+            button.textContent = 'Visit Website';
+            button.className = 'visit-website-button span-space';
+            button.addEventListener('click', () => {
+                window.open(software.url, '_blank');
+            });
+            section3.appendChild(button);
+        } else if (type === 'default') {
+            // Commercial software-specific buttons
+            ['fedora', 'windows', 'macos'].forEach(os => {
+                const button = document.createElement('span');
+                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                                os === 'windows' ? `winget install -e --id ${software.cwin}` :
+                                `brew install ${software.cmac}`;
+                button.className = `${os}-button span-space`;
+                button.setAttribute('data-text', command);
+                button.title = 'Click to copy command';
+                button.addEventListener('click', () => {
+                    copyToClipboard(command);
+                    const message = `Command "${command}" has been copied to clipboard.`;
+                    alert(message);
+                });
+                section3.appendChild(button);
+            });
+        } else if (type === 'commercialSoftware') {
+            // Free software-specific buttons
+            ['fedora', 'windows', 'macos'].forEach(os => {
+                const button = document.createElement('span');
+                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                                os === 'windows' ? `winget install -e --id ${software.cwin}` :
+                                `brew install ${software.cmac}`;
+                button.className = `${os}-button span-space`;
+                button.setAttribute('data-text', command);
+                button.title = 'Click to copy command';
+                button.addEventListener('click', () => {
+                    copyToClipboard(command);
+                    const message = `Command "${command}" has been copied to clipboard.`;
+                    alert(message);
+                });
+                section3.appendChild(button);
+            });
+        } else if (type === 'documents') {
+            // Free software-specific buttons
+            ['pdflin', 'librelin', 'mslin'].forEach(os => {
+                const button = document.createElement('span');
+                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                                os === 'windows' ? `winget install -e --id ${software.cwin}` :
+                                `brew install ${software.cmac}`;
+                button.className = `${os}-button span-space`;
+                button.setAttribute('data-text', command);
+                 // Set the button title based on the button
+            if (os === 'pdflin') {
+                button.title = `${software.url1}`;
+                button.addEventListener('click', () => {
+                window.open(software.url1, '_blank');
+            });
+            } else if (os === 'librelin') {
+                button.title = `${software.url2}`;
+                button.addEventListener('click', () => {
+                window.open(software.url2, '_blank');
+            });
+            } else {
+                button.title = `${software.id}`;
+                button.addEventListener('click', () => {
+                window.open(software.url3, '_blank');
+            });
+            }
+                section3.appendChild(button);
+            });
+        } else if (type === 'restricted') {
+            // Free software-specific buttons
+            ['fedora', 'windows', 'macos'].forEach(os => {
+                const button = document.createElement('span');
+                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                                os === 'windows' ? `winget install -e --id ${software.cwin}` :
+                                `brew install ${software.cmac}`;
+                button.className = `${os}-button span-space`;
+                button.setAttribute('data-text', command);
+                button.title = 'Click to copy command';
+                button.addEventListener('click', () => {
+                    copyToClipboard(command);
+                    const message = `Command "${command}" has been copied to clipboard.`;
+                    alert(message);
+                });
+                section3.appendChild(button);
+            });
+        }
+        
+        softcell.appendChild(section3);
+        
+        // Append the cell to the grid
+        softwareid.appendChild(softcell);
+        }
+    
+        function searchFunction() {
+            softwareid.innerHTML = "";
+            const filter = searchInput.value.trim().toLowerCase();
+            const filteredSoftware = allSoftware.filter(software => software.id.toLowerCase().includes(filter));
+            filteredSoftware.forEach(software => {
+                const type = documents.includes(software) ? 'documents' :
+                             commercialSoftware.includes(software) ? 'commercialSoftware' :
+                             websites.includes(software) ? 'websites' : 'default';
+                addCell(software, type);
+            });
+        }
+    
+        searchInput.addEventListener('input', searchFunction);
+    
+        // Populate the grid with cells for each type of software
+        allSoftware.forEach(software => {
+            const type = documents.includes(software) ? 'documents' :
+                         commercialSoftware.includes(software) ? 'commercialSoftware' :
+                         websites.includes(software) ? 'websites' : 'default';
+            addCell(software, type);
         });
-    }
-
-    // Create and append the buttons
-    ['fedora', 'windows', 'macos'].forEach(os => {
-        const button = document.createElement('span');
-        const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
-                        os === 'windows' ? `winget install -e --id ${software.cwin}` :
-                        `brew install ${software.cmac}`;
-        button.className = `${os}-button span-space`;
-        button.setAttribute('data-text', command);
-        button.title = 'Click to copy command';
-        button.addEventListener('click', () => {
-            copyToClipboard(command);
-            const message = `Command "${command}" has been copied to clipboard.`;
-            alert(message); // Show alert message
-        });
-        section3.appendChild(button);
-    });
-
-    softcell.appendChild(section3);
-
-    // Append the cell to the grid
-    softwareid.appendChild(softcell);
-}
-
-// Populate the grid with cells for each software
-software.forEach(addCell);
-
     </script>
+    
 </body>
 
 </html>

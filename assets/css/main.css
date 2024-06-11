@@ -2948,6 +2948,29 @@ button:disabled,
     transform: scale(1.4)
 }
 
+.buy-button {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background-image: url('../../images/icons/pdf.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform
+}
+
+.pdflin-button:active,
+.pdflin-button:focus,
+.pdflin-button:hover {
+    transform: scale(1.4)
+}
+
 .dont-button {
     display: inline-block;
     width: 26px;
@@ -3054,18 +3077,88 @@ button:disabled,
 }
 
 .softcell {
+    display: block;
+    padding: 10px;
+    margin: 6px;
+    text-decoration: none;
+    color: #000;
     background-size: cover;
     background-position: center;
     transition: transform 0.3s ease;
-    background-color: #205497;
-    margin: 10px;
-    border-bottom: 0px;
     border-radius: 15px;
-    padding: 0
+    border-bottom: 0px;
+    padding: 0;
+}
+
+.softcell {
+    background-color: #205497; /* Blue */
+}
+
+.softcell:after {
+    content: 'Free Software'; /* Your desired character */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    color: #ffffff; /* Color of the character */
+}
+
+.commercial-software-cell {
+    background-color: #FFA500; /* Orange */
+}
+
+.commercial-software-cell:after {
+    content: 'Commercial Software'; /* Your desired character */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    color: #ffffff; /* Color of the character */
+}
+
+.documents-cell {
+    background-color: #804b4b; /* White */
+}
+
+.documents-cell:after {
+    content: 'Document'; /* Your desired character */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    color: #ffffff; /* Color of the character */
+}
+
+.websites-cell {
+    background-color: #000000; /* Black */
+    color: #ffffff; /* White text for better contrast */
+}
+
+.websites-cell:after {
+    content: 'Website'; /* Your desired character */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    color: #ffffff; /* Color of the character */
+}
+
+.restricted-cell {
+    background-color: #851818; /* Black */
+    color: #ffffff; /* White text for better contrast */
+}
+
+.restricted-cell:after {
+    content: 'Restricted'; /* Your desired character */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    font-size: 16px; /* Adjust as needed */
+    color: #ffffff; /* Color of the character */
 }
 
 .softcell:hover {
-    transform: scale(1.1)
+    transform: scale(1.04);
 }
 
 #documentationid {

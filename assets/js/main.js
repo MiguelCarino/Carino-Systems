@@ -113,49 +113,5 @@
             t = l[e];
         document.getElementById("random-phrase").textContent = t
     };
-    const c = document.getElementById("softwareid"),
-        d = document.getElementById("searchInput");
-    d.addEventListener("input", (function() {
-        c.innerHTML = "";
-        const e = d.value.trim().toLowerCase();
-        software.filter((t => t.id.toLowerCase().includes(e))).forEach(addCell)
-    })), albums.forEach(addCell), document.addEventListener("DOMContentLoaded", (e => {
-        document.querySelectorAll(".fedora-button").forEach((e => {
-            e.addEventListener("click", (function() {
-                const e = this.getAttribute("data-text");
-                navigator.clipboard.writeText(e).then((() => {
-                    console.log("Text copied to clipboard")
-                })).catch((e => {
-                    console.error("Error in copying text: ", e)
-                }))
-            }))
-        }))
-    })), document.addEventListener("DOMContentLoaded", (e => {
-        document.querySelectorAll(".windows-button").forEach((e => {
-            e.addEventListener("click", (function() {
-                const e = this.getAttribute("data-text");
-                navigator.clipboard.writeText(e).then((() => {
-                    console.log("Text copied to clipboard")
-                })).catch((e => {
-                    console.error("Error in copying text: ", e)
-                }))
-            }))
-        }))
-    })), document.addEventListener("DOMContentLoaded", (e => {
-        document.querySelectorAll(".macos-button").forEach((e => {
-            e.addEventListener("click", (function() {
-                const e = this.getAttribute("data-text");
-                navigator.clipboard.writeText(e).then((() => {
-                    console.log("Text copied to clipboard")
-                })).catch((e => {
-                    console.error("Error in copying text: ", e)
-                }))
-            }))
-        }))
-    }));
-    
-    
-
-
 
 }(jQuery);
