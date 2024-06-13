@@ -3095,7 +3095,7 @@ button:disabled,
 }
 
 .softcell:after {
-    content: 'Free Software'; /* Your desired character */
+    content: '🔓 Open source Software'; /* Your desired character */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
@@ -3108,7 +3108,7 @@ button:disabled,
 }
 
 .commercial-software-cell:after {
-    content: 'Commercial Software'; /* Your desired character */
+    content: '💰 Commercial Software'; /* Your desired character */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
@@ -3121,7 +3121,7 @@ button:disabled,
 }
 
 .documents-cell:after {
-    content: 'Document'; /* Your desired character */
+    content: '🗋 Document'; /* Your desired character */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
@@ -3135,7 +3135,7 @@ button:disabled,
 }
 
 .websites-cell:after {
-    content: 'Website'; /* Your desired character */
+    content: '🌐 Website'; /* Your desired character */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
@@ -3149,7 +3149,7 @@ button:disabled,
 }
 
 .restricted-cell:after {
-    content: 'Restricted'; /* Your desired character */
+    content: '🛇 Restricted'; /* Your desired character */
     position: absolute;
     bottom: 5px; /* Adjust as needed */
     right: 5px; /* Adjust as needed */
