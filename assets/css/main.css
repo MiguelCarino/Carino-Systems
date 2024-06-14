@@ -2809,7 +2809,7 @@ button:disabled,
 
 .debian-button {
     width: 20px;
-    background-image: url('../../images/icons/debian.svg');
+    background-image: url('../../images/icons/debian.webp');
 }
 
 .windows-button {
