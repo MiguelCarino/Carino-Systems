@@ -42,7 +42,8 @@
             <ul class="links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="os.html">Operating Systems</a></li>
-                <li><a href="music.html">Music</a></li>
+                <li><a href="artificial.html">Artificial Intelligence</a></li>
+                <li><a href="lurking.html">Entertainment</a></li>
             </ul>
             <ul class="actions stacked">
                 <li><a href="#" class="button primary fit">Get Started</a></li>
@@ -120,23 +121,17 @@
                 id: 'Web Browser',
                 url: 'https://www.mozilla.org/en-US/firefox/new/',
                 solution: 'Firefox',
-                clin: 'firefox',
+                cdeb: 'firefox',
+				cfed: 'firefox',
                 cwin: 'Mozilla.Firefox',
                 cmac: '--cask firefox'
-            },
-            {
-                id: 'Music Production',
-                url: 'https://www.giadamusic.com/',
-                solution: 'Giada',
-                clin: 'musescore',
-                cwin: 'Musescore.Musescore',
-                cmac: '--cask musescore'
             },
             {
                 id: 'Office Suite',
                 url: 'https://www.onlyoffice.com/download-desktop.aspx',
                 solution: 'Only Office',
-                clin: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm',
+                cdeb: '&& wget https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb && sudo dpkg -i onlyoffice-desktopeditors_amd64.deb && rm onlyoffice-desktopeditors_amd64.deb',
+				cfed: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm',
                 cwin: 'ONLYOFFICE.DesktopEditors',
                 cmac: '--cask onlyoffice'
             },/*
@@ -144,7 +139,8 @@
                 id: 'Popular Web Browser',
                 url: 'https://www.chromium.org/getting-involved/download-chromium/',
                 solution: 'Chromium',
-                clin: 'chromium',
+                cdeb: '#',
+				cfed: 'chromium',
                 cwin: 'Hibbiki.Chromium',
                 cmac: '--cask chromium'
             },*/
@@ -152,7 +148,8 @@
                 id: 'Media Player',
                 url: 'https://mpv.io/installation/',
                 solution: 'mpv',
-                clin: 'mpv',
+                cdeb: 'mpv',
+				cfed: 'mpv',
                 cwin: 'tsl0922.ImPlay',
                 cmac: 'mpv'
             },
@@ -160,7 +157,8 @@
                 id: 'PDF Reader',
                 url: 'https://okular.kde.org/',
                 solution: 'Okular',
-                clin: 'okular',
+                cdeb: 'okular',
+				cfed: 'okular',
                 cwin: 'KDE.Okular',
                 cmac: 'okular'
             },
@@ -168,7 +166,8 @@
                 id: 'Data Compression',
                 url: 'https://www.7-zip.org/download.html',
                 solution: '7zip',
-                clin: 'p7zip',
+                cdeb: '7zip',
+				cfed: 'p7zip',
                 cwin: 'M2Team.NanaZip',
                 cmac: 'sevenzip'
             },
@@ -176,7 +175,8 @@
                 id: 'Office Suite',
                 url: 'https://www.libreoffice.org/download/download-libreoffice/',
                 solution: 'Libre Office',
-                clin: 'libreoffice',
+                cdeb: '#',
+				cfed: 'libreoffice',
                 cwin: 'TheDocumentFoundation.LibreOffice',
                 cmac: '--cask libreoffice'
             },*/
@@ -184,7 +184,8 @@
                 id: 'Mail Client',
                 url: 'https://www.thunderbird.net/en-US/download/',
                 solution: 'Thunderbird',
-                clin: 'thunderbird',
+                cdeb: 'thunderbird',
+				cfed: 'thunderbird',
                 cwin: 'Mozilla.Thunderbird',
                 cmac: '--cask thunderbird'
             },
@@ -192,7 +193,8 @@
                 id: 'Note-Taking',
                 url: 'https://joplinapp.org/',
                 solution: 'Joplin',
-                clin: 'flatpak && flatpak install flathub net.cozic.joplin_desktop',
+                cdeb: 'flatpak && flatpak install flathub net.cozic.joplin_desktop',
+				cfed: 'flatpak && flatpak install flathub net.cozic.joplin_desktop',
                 cwin: 'Joplin.Joplin',
                 cmac: '--cask joplin'
             },
@@ -200,7 +202,8 @@
                 id: 'Easy Password Manager',
                 url: 'https://buttercup.pw/',
                 solution: 'Buttercup',
-                clin: 'sorry, not available',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
                 cwin: 'Buttercup.Buttercup',
                 cmac: '--cask buttercup'
             },
@@ -208,7 +211,8 @@
                 id: 'Advanced Password Manager',
                 url: 'https://buttercup.pw/',
                 solution: 'KeepassXC',
-                clin: 'keepassxc',
+                cdeb: 'keepassxc',
+				cfed: 'keepassxc',
                 cwin: 'KeePassXCTeam.KeePassXC',
                 cmac: '--cask keepassxc'
             },
@@ -216,7 +220,8 @@
                 id: 'Audio Editor',
                 url: 'https://www.audacityteam.org/',
                 solution: 'Audacity',
-                clin: 'audacity',
+                cdeb: 'audacity',
+				cfed: 'audacity',
                 cwin: 'Audacity.Audacity',
                 cmac: '--cask audacity'
             },
@@ -224,7 +229,8 @@
                 id: 'Code Editor',
                 url: 'https://vscodium.com/',
                 solution: 'VSCodium',
-                clin: 'https://github.com/VSCodium/vscodium/releases/download/1.90.0.24158/codium-1.90.0.24158-el7.x86_64.rpm',
+                cdeb: '&& wget https://github.com/VSCodium/vscodium/releases/download/1.90.1.24165/codium_1.90.1.24165_amd64.deb && sudo dpkg -i codium_1.90.1.24165_amd64.deb && rm codium_1.90.1.24165_amd64.deb',
+				cfed: 'https://github.com/VSCodium/vscodium/releases/download/1.90.1.24165/codium-1.90.1.24165-el7.x86_64.rpm',
                 cwin: 'VSCodium.VSCodium',
                 cmac: '--cask vscodium'
             },
@@ -232,7 +238,8 @@
                 id: 'Time and Activity Tracker',
                 url: 'https://activitywatch.net/downloads/',
                 solution: 'ActivityWatch',
-                clin: 'sorry, not available',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
                 cwin: 'ActivityWatch.ActivityWatch',
                 cmac: '--cask activitywatch'
             },
@@ -240,7 +247,8 @@
                 id: 'Relational Database',
                 url: 'https://mariadb.org/',
                 solution: 'MariaDB',
-                clin: 'mariadb',
+                cdeb: 'mariadb-server',
+				cfed: 'mariadb',
                 cwin: 'MariaDB.Server',
                 cmac: 'mariadb'
             },
@@ -248,7 +256,8 @@
                 id: 'Object Relational Database',
                 url: 'https://www.postgresql.org',
                 solution: 'PostgreSQL',
-                clin: 'postgresql',
+                cdeb: 'postgresql-12',
+				cfed: 'postgresql',
                 cwin: 'PostgreSQL.PostgreSQL',
                 cmac: 'postgresql@14'
             },
@@ -256,7 +265,8 @@
                 id: 'Digital Forensics Platform',
                 url: 'https://www.autopsy.com/download/',
                 solution: 'Autopsy',
-                clin: 'sleuthkit',
+                cdeb: 'sleuthkit',
+				cfed: 'sleuthkit',
                 cwin: 'SleuthKit.Autopsy',
                 cmac: 'autopsy'
             },
@@ -264,7 +274,8 @@
                 id: '3D Modelling',
                 url: 'https://www.blender.org/download/',
                 solution: 'Blender',
-                clin: 'blender',
+                cdeb: 'blender',
+				cfed: 'blender',
                 cwin: 'BlenderFoundation.Blender',
                 cmac: '--cask blender'
             },
@@ -272,7 +283,8 @@
                 id: 'Game engine',
                 url: 'https://godotengine.org/',
                 solution: 'Godot',
-                clin: 'godot',
+                cdeb: 'godot3',
+				cfed: 'godot',
                 cwin: 'GodotEngine.GodotEngine',
                 cmac: '--cask godot'
             },
@@ -280,7 +292,8 @@
                 id: 'System Benchmarking',
                 url: 'https://novabench.com/',
                 solution: 'Novabench',
-                clin: 'sorry, not available',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
                 cwin: 'sorry, not available',
                 cmac: '--cask novabench'
             },
@@ -288,7 +301,8 @@
                 id: 'Universal Database Tool',
                 url: 'https://dbeaver.io/',
                 solution: 'DBeaver',
-                clin: 'dbeaver',
+                cdeb: '&& wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb && sudo dpkg -i dbeaver-ce_latest_amd64.deb && rm dbeaver-ce_latest_amd64.deb',
+				cfed: 'https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm',
                 cwin: 'dbeaver.dbeaver',
                 cmac: '--cask dbeaver-community'
             },
@@ -296,7 +310,8 @@
                 id: 'Offline Text-to-image generation',
                 url: 'https://easydiffusion.github.io/',
                 solution: 'EasyDiffusion',
-                clin: 'sorry, not available',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
                 cwin: 'sorry, not available',
                 cmac: 'sorry, not available'
             },
@@ -304,7 +319,8 @@
                 id: 'Multimedia Framework',
                 url: 'https://ffmpeg.org/',
                 solution: 'FFmpeg',
-                clin: 'ffmpeg',
+                cdeb: 'ffmpeg',
+				cfed: 'ffmpeg',
                 cwin: 'Gyan.FFmpeg',
                 cmac: 'ffmpeg'
             },
@@ -312,7 +328,8 @@
                 id: 'Graphics Editor',
                 url: 'https://www.gimp.org/downloads/',
                 solution: 'Gimp',
-                clin: 'gimp',
+                cdeb: 'gimp',
+				cfed: 'gimp',
                 cwin: 'GIMP.GIMP',
                 cmac: '--cask gimp'
             },
@@ -320,7 +337,8 @@
                 id: 'Font Editor',
                 url: 'https://fontforge.org',
                 solution: 'Fontforge',
-                clin: 'fontforge',
+                cdeb: 'fontforge',
+				cfed: 'fontforge',
                 cwin: 'FontForge.FontForge',
                 cmac: 'fontforge'
             },
@@ -328,7 +346,8 @@
                 id: 'Easy Offline "gpt" Large Language Models',
                 url: 'https://gpt4all.io/',
                 solution: 'gpt4all',
-                clin: 'sorry, not available',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
                 cwin: 'sorry, not available',
                 cmac: 'sorry, not available'
             },
@@ -336,7 +355,8 @@
                 id: 'Offline "gpt" Large Language Models',
                 url: 'https://lmstudio.ai/',
                 solution: 'lmstudio',
-                clin: '',
+                cdeb: '#',
+				cfed: '',
                 cwin: '',
                 cmac: ''
             },
@@ -344,7 +364,8 @@
                 id: 'Vector Graphics Editor',
                 url: 'https://inkscape.org/',
                 solution: 'Inkscape',
-                clin: 'inkscape',
+                cdeb: 'inkscape',
+				cfed: 'inkscape',
                 cwin: 'Inkscape.Inkscape',
                 cmac: '--cask inkscape'
             },
@@ -352,7 +373,8 @@
                 id: 'Media Server',
                 url: 'https://jellyfin.org/downloads/',
                 solution: 'Jellyfin',
-                clin: 'jellyfin',
+                cdeb: '&& wget https://repo.jellyfin.org/files/server/debian/latest-stable/amd64/jellyfin-server_10.9.6+deb12_amd64.deb && sudo dpkg -i jellyfin-server_10.9.6+deb12_amd64.deb && rm jellyfin-server_10.9.6+deb12_amd64.deb ',
+				cfed: 'jellyfin',
                 cwin: 'Jellyfin.Server',
                 cmac: '--cask jellyfin'
             },
@@ -360,7 +382,8 @@
                 id: 'Simple Video Editor',
                 url: 'https://shotcut.org/',
                 solution: 'Shotcut',
-                clin: 'flatpak && flatpak install flathub org.shotcut.Shotcut',
+                cdeb: 'shotcut',
+				cfed: 'flatpak && flatpak install flathub org.shotcut.Shotcut',
                 cwin: 'Meltytech.Shotcut',
                 cmac: '--cask shotcut'
             },
@@ -368,7 +391,8 @@
                 id: 'Advanced Video Editor',
                 url: 'https://kdenlive.org/en/download',
                 solution: 'Kdenlive',
-                clin: 'kdenlive',
+                cdeb: 'kdenlive',
+				cfed: 'kdenlive',
                 cwin: 'KDE.Kdenlive',
                 cmac: '--cask kdenlive'
             },
@@ -376,7 +400,8 @@
                 id: 'Screen Recording and Livestreaming',
                 url: 'https://obsproject.com/download',
                 solution: 'OBS',
-                clin: 'obs-studio',
+                cdeb: 'obs-studio',
+				cfed: 'obs-studio',
                 cwin: 'OBSProject.OBSStudio',
                 cmac: '--cask obs'
             },
@@ -384,7 +409,8 @@
                 id: 'Remote Control Client',
                 url: 'https://github.com/rustdesk/rustdesk/releases/latest',
                 solution: 'RustDesk',
-                clin: 'https://github.com/rustdesk/rustdesk/releases/download/1.2.5/rustdesk-1.2.5-0.x86_64.rpm',
+                cdeb: '&& wget https://github.com/rustdesk/rustdesk/releases/download/1.2.3-2/rustdesk-1.2.3-2-x86_64.deb && sudo dpkg -i rustdesk-1.2.3-2-x86_64.deb && rm rustdesk-1.2.3-2-x86_64.deb',
+				cfed: 'https://github.com/rustdesk/rustdesk/releases/download/1.2.5/rustdesk-1.2.5-0.x86_64.rpm',
                 cwin: 'RustDesk.RustDesk',
                 cmac: '--cask rustdesk'
             },
@@ -392,7 +418,8 @@
                 id: 'Graphics Editor',
                 url: 'https://krita.org/',
                 solution: 'Krita',
-                clin: 'krita',
+                cdeb: 'krita',
+				cfed: 'krita',
                 cwin: 'KDE.Krita',
                 cmac: '--cask krita'
             },
@@ -400,7 +427,8 @@
                 id: 'Torrent Client',
                 url: 'https://www.qbittorrent.org/download',
                 solution: 'qBitTorrent',
-                clin: 'qbittorrent',
+                cdeb: 'qbittorrent',
+				cfed: 'qbittorrent',
                 cwin: 'qBittorrent.qBittorrent',
                 cmac: '--cask qbittorrent'
             },
@@ -408,7 +436,8 @@
                 id: 'Containers and Kubernetes',
                 url: 'https://podman-desktop.io/',
                 solution: 'Podman',
-                clin: 'flatpak && flatpak install flathub io.podman_desktop.PodmanDesktop',
+                cdeb: 'flatpak && flatpak install flathub io.podman_desktop.PodmanDesktop',
+				cfed: 'flatpak && flatpak install flathub io.podman_desktop.PodmanDesktop',
                 cwin: 'RedHat.Podman-Desktop',
                 cmac: 'podman-desktop'
             },
@@ -416,7 +445,8 @@
                 id: 'Geographic information system',
                 url: 'https://qgis.org',
                 solution: 'QGIS',
-                clin: 'qgis',
+                cdeb: 'qgis',
+				cfed: 'qgis',
                 cwin: 'OSGeo.QGIS',
                 cmac: '--cask qgis'
             },
@@ -424,7 +454,8 @@
                 id: 'Collaborative platform',
                 url: 'https://nextcloud.com/',
                 solution: 'Nextcloud',
-                clin: 'nextcloud',
+                cdeb: 'sorry, not available',
+				cfed: 'nextcloud',
                 cwin: 'Nextcloud.NextcloudDesktop',
                 cmac: '--cask nextcloud'
             },
@@ -432,7 +463,8 @@
                 id: 'Collaborative global map',
                 url: 'https://www.openstreetmap.org/',
                 solution: 'Open Street Map',
-                clin: 'gnome-maps',
+                cdeb: 'gnome-maps',
+				cfed: 'gnome-maps',
                 cwin: 'sorry, not available',
                 cmac: 'sorry, not available'
             },
@@ -440,7 +472,8 @@
                 id: 'Offline Web Browser',
                 url: 'https://kiwix.org/',
                 solution: 'Kiwix',
-                clin: 'flatpak && flatpak install flathub org.kiwix.desktop',
+                cdeb: 'flatpak && flatpak install flathub org.kiwix.desktop',
+				cfed: 'flatpak && flatpak install flathub org.kiwix.desktop',
                 cwin: 'Kiwix.KiwixJS',
                 cmac: '--cask kiwix'
             },
@@ -448,7 +481,8 @@
                 id: 'Planetarium (Astronomy)',
                 url: 'https://stellarium.org/',
                 solution: 'Stellarium',
-                clin: 'stellarium',
+                cdeb: 'stellarium',
+				cfed: 'stellarium',
                 cwin: 'Stellarium.Stellarium',
                 cmac: '--cask stellarium'
             },
@@ -456,7 +490,8 @@
                 id: 'Continuous File Synchronization',
                 url: 'https://syncthing.net/',
                 solution: 'Syncthing',
-                clin: 'syncthing',
+                cdeb: '#',
+				cfed: 'syncthing',
                 cwin: 'SyncTrayzor.SyncTrayzor',
                 cmac: 'syncthing'
             },
@@ -464,7 +499,8 @@
                 id: 'Flight Simulator',
                 url: 'https://www.flightgear.org',
                 solution: 'FlightGear',
-                clin: 'FlightGear',
+                cdeb: 'flightgear',
+				cfed: 'FlightGear',
                 cwin: 'FlightGear.FlightGear',
                 cmac: '--cask flightgear'
             },
@@ -472,7 +508,8 @@
                 id: 'Music Notation',
                 url: 'https://musescore.org/',
                 solution: 'MuseScore',
-                clin: 'musescore',
+                cdeb: 'musescore',
+				cfed: 'musescore',
                 cwin: 'Musescore.Musescore',
                 cmac: '--cask musescore'
             },
@@ -480,7 +517,8 @@
                 id: 'Video player for studying Japanese',
                 url: 'https://ripose-jp.github.io/Memento/',
                 solution: 'Memento',
-                clin: 'flatpak && flatpak install io.github.ripose_jp.Memento',
+                cdeb: 'flatpak && flatpak install io.github.ripose_jp.Memento',
+				cfed: 'flatpak && flatpak install io.github.ripose_jp.Memento',
                 cwin: 'Ripose.Memento',
                 cmac: 'sorry, not available'
             }
@@ -529,7 +567,8 @@
                 id: 'Photo Editor',
                 url: 'https://www.adobe.com/products/photoshop.html',
                 solution: 'Adobe Photoshop',
-                clin: 'Sorry, not available',
+                cdeb: 'Sorry, not available',
+				cfed: 'Sorry, not available',
                 cwin: 'Sorry, not available',
                 cmac: '--cask adobe-photoshop'
             },
@@ -537,7 +576,8 @@
                 id: 'Video Editor',
                 url: 'https://www.adobe.com/products/premiere.html',
                 solution: 'Adobe Premiere Pro',
-                clin: 'Sorry, not available',
+                cdeb: 'Sorry, not available',
+				cfed: 'Sorry, not available',
                 cwin: 'Sorry, not available',
                 cmac: '--cask adobe-premiere-pro'
             },
@@ -545,7 +585,8 @@
                 id: 'PDF Reader',
                 url: 'https://www.adobe.com/products/acrobat-pro-cc.html',
                 solution: 'Adobe Acrobat Pro',
-                clin: 'Sorry, not available',
+                cdeb: 'Sorry, not available',
+				cfed: 'Sorry, not available',
                 cwin: 'Adobe.Acrobat.Reader.64-bit',
                 cmac: '--cask adobe-acrobat-pro'
             },
@@ -553,7 +594,8 @@
                 id: 'Video Frame Interpolation',
                 url: 'https://www.svp-team.com/',
                 solution: 'SmoothVideo Project',
-                clin: 'Sorry, not available',
+                cdeb: 'Sorry, not available',
+				cfed: 'Sorry, not available',
                 cwin: 'Adobe.Acrobat.Reader.64-bit',
                 cmac: '--cask adobe-acrobat-pro'
             },
@@ -561,7 +603,8 @@
                 id: 'Remote Control Client',
                 url: 'https://anydesk.com/',
                 solution: 'AnyDesk',
-                clin: 'https://download.anydesk.com/linux/anydesk-6.3.2-1.el8.x86_64.rpm',
+                cdeb: '&& wget https://download.anydesk.com/linux/anydesk_6.3.2-1_amd64.deb && sudo dpkg -i anydesk_6.3.2-1_amd64.deb && rm anydesk_6.3.2-1_amd64.deb',
+				cfed: 'https://download.anydesk.com/linux/anydesk-6.3.2-1.el8.x86_64.rpm',
                 cwin: 'AnyDeskSoftwareGmbH.AnyDesk',
                 cmac: '--cask anydesk'
             },
@@ -569,7 +612,8 @@
                 id: 'Containers and Kubernetes',
                 url: 'https://www.docker.com/',
                 solution: 'Docker',
-                clin: 'dnf-plugins-core && sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && sudo dnf install docker-ce docker-ce-cli containerd.io',
+                cdeb: 'docker',
+				cfed: 'dnf-plugins-core && sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && sudo dnf install docker-ce docker-ce-cli containerd.io',
                 cwin: 'Docker.DockerDesktop',
                 cmac: 'docker'
             }
@@ -1102,9 +1146,10 @@
             });
         } else if (type === 'commercialSoftware') {
             // Free software-specific buttons
-            ['fedora', 'windows', 'macos'].forEach(os => {
+            ['fedora', 'debian', 'windows', 'macos'].forEach(os => {
                 const button = document.createElement('span');
-                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                const command = os === 'fedora' ? `sudo dnf install ${software.cfed}` :
+                                os === 'debian' ? `sudo apt install ${software.cdeb}` :
                                 os === 'windows' ? `winget install -e --id ${software.cwin}` :
                                 `brew install ${software.cmac}`;
                 button.className = `${os}-button span-space`;
@@ -1121,7 +1166,7 @@
             // Free software-specific buttons
             ['pdflin', 'librelin', 'mslin'].forEach(os => {
                 const button = document.createElement('span');
-                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                const command = os === 'fedora' ? `sudo dnf install ${software.cfed}` :
                                 os === 'windows' ? `winget install -e --id ${software.cwin}` :
                                 `brew install ${software.cmac}`;
                 button.className = `${os}-button span-space`;
@@ -1147,9 +1192,10 @@
             });
         } else if (type === 'default') {
             // Free software-specific buttons
-            ['fedora', 'windows', 'macos'].forEach(os => {
+            ['fedora', 'debian', 'windows', 'macos'].forEach(os => {
                 const button = document.createElement('span');
-                const command = os === 'fedora' ? `sudo dnf install ${software.clin}` :
+                const command = os === 'fedora' ? `sudo dnf install ${software.cfed}` :
+                                os === 'debian' ? `sudo apt install ${software.cdeb}` :
                                 os === 'windows' ? `winget install -e --id ${software.cwin}` :
                                 `brew install ${software.cmac}`;
                 button.className = `${os}-button span-space`;

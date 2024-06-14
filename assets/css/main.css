@@ -2776,269 +2776,117 @@ button:disabled,
     opacity: 0.25
 }
 
-.fedora-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/Fedora_icon_\(2021\).svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.fedora-button:active,
-.fedora-button:focus,
-.fedora-button:hover {
-    transform: scale(1.4)
-}
-
-.windows-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/windows.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.windows-button:active,
-.windows-button:focus,
-.windows-button:hover {
-    transform: scale(1.4)
-}
-
-.msterminal-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/terminal.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.msterminal-button:active,
-.msterminal-button:focus,
-.msterminal-button:hover {
-    transform: scale(1.4)
-}
-
-.macos-button {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    padding-top: ;
-    background-image: url('../../images/icons/finder.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.macos-button:active,
-.macos-button:focus,
-.macos-button:hover {
-    transform: scale(1.4)
-}
-
-.linux-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/Fedora_icon_\(2021\).svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center
-}
-
-.mslin-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/msoffice.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.mslin-button:active,
-.mslin-button:focus,
-.mslin-button:hover {
-    transform: scale(1.4)
-}
-
-.librelin-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/libreoffice.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.librelin-button:active,
-.librelin-button:focus,
-.librelin-button:hover {
-    transform: scale(1.4)
-}
-
-.pdflin-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/pdf.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.pdflin-button:active,
-.pdflin-button:focus,
-.pdflin-button:hover {
-    transform: scale(1.4)
-}
-
-.buy-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/pdf.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.pdflin-button:active,
-.pdflin-button:focus,
-.pdflin-button:hover {
-    transform: scale(1.4)
-}
-
+/* Shared button styles */
+.fedora-button,
+.debian-button,
+.windows-button,
+.macos-button,
+.msterminal-button,
+.linux-button,
+.mslin-button,
+.librelin-button,
+.pdflin-button,
+.buy-button,
 .dont-button {
     display: inline-block;
     width: 26px;
     height: 26px;
-    background-image: url('../../images/icons/dont.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    display: inline-block;
     transform: translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
     backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
     transition-duration: 0.3s;
-    transition-property: transform
+    transition-property: transform;
 }
 
+/* Specific button backgrounds */
+.fedora-button {
+    background-image: url('../../images/icons/Fedora_icon_\(2021\).svg');
+}
+
+.debian-button {
+    width: 20px;
+    background-image: url('../../images/icons/debian.svg');
+}
+
+.windows-button {
+    background-image: url('../../images/icons/windows.svg');
+}
+
+.macos-button {
+    width: 32px;
+    height: 32px;
+    background-image: url('../../images/icons/finder.svg');
+}
+
+.msterminal-button {
+    background-image: url('../../images/icons/terminal.webp');
+}
+
+.linux-button {
+    background-image: url('../../images/icons/Fedora_icon_\(2021\).svg');
+}
+
+.mslin-button {
+    background-image: url('../../images/icons/msoffice.svg');
+}
+
+.librelin-button {
+    background-image: url('../../images/icons/libreoffice.svg');
+}
+
+.pdflin-button {
+    background-image: url('../../images/icons/pdf.webp');
+}
+
+.buy-button {
+    background-image: url('../../images/icons/pdf.webp');
+}
+
+.dont-button {
+    background-image: url('../../images/icons/dont.webp');
+}
+
+/* Hover, focus, active states */
+.fedora-button:active,
+.fedora-button:focus,
+.fedora-button:hover,
+.debian-button:active,
+.debian-button:focus,
+.debian-button:hover,
+.windows-button:active,
+.windows-button:focus,
+.windows-button:hover,
+.macos-button:active,
+.macos-button:focus,
+.macos-button:hover,
+.msterminal-button:active,
+.msterminal-button:focus,
+.msterminal-button:hover,
+.linux-button:active,
+.linux-button:focus,
+.linux-button:hover,
+.mslin-button:active,
+.mslin-button:focus,
+.mslin-button:hover,
+.librelin-button:active,
+.librelin-button:focus,
+.librelin-button:hover,
+.pdflin-button:active,
+.pdflin-button:focus,
+.pdflin-button:hover,
+.buy-button:active,
+.buy-button:focus,
+.buy-button:hover,
 .dont-button:active,
 .dont-button:focus,
 .dont-button:hover {
-    transform: scale(1.4)
+    transform: scale(1.4);
 }
 
-.do-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/pdf.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.do-button:active,
-.do-button:focus,
-.do-button:hover {
-    transform: scale(1.4)
-}
-
-.pay-button {
-    display: inline-block;
-    width: 26px;
-    height: 26px;
-    background-image: url('../../images/icons/pdf.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: inline-block;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-    transition-duration: 0.3s;
-    transition-property: transform
-}
-
-.pay-button:active,
-.pay-button:focus,
-.pay-button:hover {
-    transform: scale(1.4)
-}
 
 .selected {
     background-color: #278136;
