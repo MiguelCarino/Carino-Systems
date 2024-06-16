@@ -2306,7 +2306,7 @@ ol li {
 
 ul {
     list-style: disc;
-    margin: 0 0 2em;
+    /*margin: 0 0 2em;*/
     padding-left: 1em;
     padding-bottom: 1em
 }
@@ -2921,7 +2921,7 @@ button:disabled,
     position: relative;
     scroll-behavior: smooth;
     padding: 5px;
-    background: #292731
+    background: #000000 /*Grid Background*/
 }
 
 .softcell {
@@ -3060,7 +3060,7 @@ button:disabled,
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-auto-rows: 200px;
     overflow: auto;
-    height: 100vh;
+    height: 87vh;
     position: relative;
     scroll-behavior: smooth
 }
