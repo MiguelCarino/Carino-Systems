@@ -514,7 +514,7 @@
                 cmac: '--cask musescore'
             },
             {
-                id: 'Video player for studying Japanese',
+                id: 'Video player for studying Japanese (with anime)',
                 url: 'https://ripose-jp.github.io/Memento/',
                 solution: 'Memento',
                 cdeb: 'flatpak && flatpak install io.github.ripose_jp.Memento',
@@ -532,12 +532,30 @@
                 cmac: 'sorry, not available'
             },
             {
-                id: 'Ventoy',
+                id: 'Create bootable USB for multiple ISO files',
                 url: 'https://www.ventoy.net/en/download.html',
-                solution: 'ventoy',
+                solution: 'Ventoy',
                 cdeb: 'sorry, not available',
 				cfed: 'sorry, not available',
                 cwin: 'ventoy.Ventoy',
+                cmac: 'sorry, not available'
+            },
+            {
+                id: 'Torrent streaming on the desktop',
+                url: 'https://webtorrent.io/',
+                solution: 'webtorrent',
+                cdeb: 'sorry, not available',
+				cfed: 'sorry, not available',
+                cwin: 'sorry, not available',
+                cmac: '--cask webtorrent'
+            },
+            {
+                id: 'Setup Script for Linux and Windows Systems',
+                url: 'https://carino.systems/os.html',
+                solution: 'carinosetup',
+                cdeb: 'wget curl && bash <(curl -s https://carino.systems/setup.sh)',
+				cfed: 'wget curl && bash <(curl -s https://carino.systems/setup.sh)',
+                cwin: 'upgrade --all; iwr -useb https://carino.systems/setup.ps1 | iex',
                 cmac: 'sorry, not available'
             }
         ];
@@ -634,6 +652,15 @@
 				cfed: 'dnf-plugins-core && sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo && sudo dnf install docker-ce docker-ce-cli containerd.io',
                 cwin: 'Docker.DockerDesktop',
                 cmac: 'docker'
+            },
+            {
+                id: 'Video game digital distribution service',
+                url: 'https://store.steampowered.com/about/',
+                solution: 'Steam',
+                cdeb: 'steam',
+				cfed: 'steam',
+                cwin: 'Valve.Steam',
+                cmac: '--cask steam'
             }
         ];
     
@@ -914,9 +941,9 @@
                 solution: 'info.cern.ch'
             },
             {
-                id: 'World Births and Deaths simulator',
-                url: 'https://worldbirthsanddeaths.com/',
-                solution: 'worldbirthsanddeaths'
+                id: 'Package Catalog for Linux and Unix',
+                url: 'https://pkgs.org/',
+                solution: 'pkgs.org'
             },
             {
                 id: 'Linux Kernel World ocurrences',
@@ -1104,6 +1131,11 @@
             {
                 id: 'Activate Microsoft Office/Windows',
                 url: 'https://massgrave.dev/',
+                solution: ''
+            },
+            {
+                id: 'Worldwide Movie Torrent Index',
+                url: 'https://yts.mx/',
                 solution: ''
             }
         ];

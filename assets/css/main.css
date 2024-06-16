@@ -2949,6 +2949,7 @@ button:disabled,
     right: 5px; /* Adjust as needed */
     font-size: 16px; /* Adjust as needed */
     color: #ffffff; /* Color of the character */
+    z-index: -1; /*To Hide after content for the cells in the grid background*/
 }
 
 .commercial-software-cell {
