@@ -130,6 +130,34 @@
             `;
         }
     });
-    
+    document.addEventListener("DOMContentLoaded", function() {
+        const bannerSection = document.getElementById('banner');
+        if (bannerSection) {
+            bannerSection.innerHTML = `
+                <!-- Div background animation-->
+                <ul class="circles">
+                    <li class="bg-crimson"></li>
+                    <li class="bg-default"></li>
+                    <li class="bg-white"></li>
+                    <li class="bg-yellow"></li>
+                    <li class="bg-green"></li>
+                    <li class="bg-blue"></li>
+                    <li class="bg-purple"></li>
+                    <li class="bg-teal"></li>
+                    <li class="bg-crimson"></li>
+                    <li class="bg-black"></li>
+                    <li class="bg-orange"></li>
+                </ul>
+                <!-- Div background animation-->
+                <div class="ripple-background">
+                    <div class="circle xxlarge shade1"></div>
+                    <div class="circle xlarge shade2"></div>
+                    <div class="circle large shade3"></div>
+                    <div class="circle medium shade4"></div>
+                    <div class="circle small shade5"></div>
+                </div>
+            `;
+        }
+    });
 
 }(jQuery);

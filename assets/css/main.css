@@ -240,10 +240,7 @@ textarea {
 }
 
 a {
-    -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+   
     border-bottom: dotted 1px;
     color: inherit;
     text-decoration: none
@@ -2920,7 +2917,7 @@ button:disabled,
     height: fit-content;
     position: relative;
     scroll-behavior: smooth;
-    padding: 5px;
+    padding: 1px;
     background: #000000 /*Grid Background*/
 }
 
@@ -3126,7 +3123,7 @@ button:disabled,
     cursor: default;
     height: 13vh;
     max-height: 40em;
-    min-height: 13em;
+    min-height: 15em;
     overflow: hidden;
     position: relative;
     width: 33.3%
@@ -3734,7 +3731,7 @@ body.is-preload #header.alt {
     height: 5vh;
     margin-bottom: -0.25em;
     max-height: 32em;
-    min-height: 12em;
+    min-height: 10em;
     position: relative;
     top: -0.25em
 }
@@ -3762,7 +3759,7 @@ body.is-preload #header.alt {
 }
 
 #banner h1 {
-    font-size: 3.25em
+    font-size: 2.75em
 }
 
 #banner>.inner {
@@ -4217,7 +4214,7 @@ context {
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .circles li {
@@ -4228,29 +4225,25 @@ context {
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
     animation: animate 25s linear infinite;
-    bottom: -150px
+    bottom: -150px;
 }
 
 .circles li:nth-child(1) {
     left: 25%;
     width: 80px;
     height: 80px;
-    animation-delay: 0s
+    animation-delay: 0s;
 }
 
 .circles li:nth-child(2) {
     left: 10%;
-    width: 20px;
-    height: 20px;
     animation-delay: 2s;
-    animation-duration: 12s
+    animation-duration: 12s;
 }
 
 .circles li:nth-child(3) {
     left: 70%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 4s
+    animation-delay: 4s;
 }
 
 .circles li:nth-child(4) {
@@ -4258,28 +4251,26 @@ context {
     width: 60px;
     height: 60px;
     animation-delay: 0s;
-    animation-duration: 18s
+    animation-duration: 18s;
 }
 
 .circles li:nth-child(5) {
     left: 65%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 0s
+    animation-delay: 0s;
 }
 
 .circles li:nth-child(6) {
     left: 75%;
     width: 110px;
     height: 110px;
-    animation-delay: 3s
+    animation-delay: 3s;
 }
 
 .circles li:nth-child(7) {
     left: 35%;
     width: 150px;
     height: 150px;
-    animation-delay: 7s
+    animation-delay: 7s;
 }
 
 .circles li:nth-child(8) {
@@ -4287,7 +4278,7 @@ context {
     width: 25px;
     height: 25px;
     animation-delay: 15s;
-    animation-duration: 45s
+    animation-duration: 45s;
 }
 
 .circles li:nth-child(9) {
@@ -4295,7 +4286,7 @@ context {
     width: 15px;
     height: 15px;
     animation-delay: 2s;
-    animation-duration: 35s
+    animation-duration: 35s;
 }
 
 .circles li:nth-child(10) {
@@ -4303,44 +4294,19 @@ context {
     width: 150px;
     height: 150px;
     animation-delay: 0s;
-    animation-duration: 11s
+    animation-duration: 11s;
 }
 
-.bg-crimson {
-    background-color: crimson
-}
+.bg-crimson { background-color: crimson; }
+.bg-white { background-color: #fff; }
+.bg-yellow { background-color: rgb(220, 207, 20); }
+.bg-green { background-color: rgb(20, 220, 20); }
+.bg-blue { background-color: rgb(20, 147, 220); }
+.bg-purple { background-color: rgb(173, 20, 220); }
+.bg-teal { background-color: rgb(20, 220, 193); }
+.bg-black { background-color: #000; }
+.bg-orange { background-color: rgb(228, 123, 63); }
 
-.bg-white {
-    background-color: #fff
-}
-
-.bg-yellow {
-    background-color: rgb(220, 207, 20)
-}
-
-.bg-green {
-    background-color: rgb(20, 220, 20)
-}
-
-.bg-blue {
-    background-color: rgb(20, 147, 220)
-}
-
-.bg-purple {
-    background-color: rgb(173, 20, 220)
-}
-
-.bg-teal {
-    background-color: rgb(20, 220, 193)
-}
-
-.bg-black {
-    background-color: #000
-}
-
-.bg-orange {
-    background-color: rgb(228, 123, 63)
-}
 
 @keyframes animate {
     0% {
@@ -4357,21 +4323,9 @@ context {
 }
 
 #menu {
-    -moz-transition: -moz-transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
-    -webkit-transition: -webkit-transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
-    -ms-transition: -ms-transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
     transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -ms-align-items: center;
     align-items: center;
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    -ms-justify-content: center;
     justify-content: center;
     pointer-events: none;
     background: rgba(0, 0, 0, 0.712);
@@ -4385,50 +4339,44 @@ context {
     top: 0;
     visibility: hidden;
     width: 100%;
-    z-index: 10002
+    z-index: 10002;
 }
 
 #menu .inner {
-    -moz-transition: -moz-transform 0.35s ease-out, opacity 0.35s ease, visibility 0.35s;
-    -webkit-transition: -webkit-transform 0.35s ease-out, opacity 0.35s ease, visibility 0.35s;
-    -ms-transition: -ms-transform 0.35s ease-out, opacity 0.35s ease, visibility 0.35s;
     transition: transform 0.35s ease-out, opacity 0.35s ease, visibility 0.35s;
-    -moz-transform: rotateX(20deg);
-    -webkit-transform: rotateX(20deg);
-    -ms-transform: rotateX(20deg);
     transform: rotateX(20deg);
-    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
     max-width: 100%;
     max-height: 100vh;
     opacity: 0;
     overflow: auto;
     text-align: center;
     visibility: hidden;
-    width: 80%;
+    width: 50%;
 }
 
-#menu .inner> :first-child {
-    margin-top: 2em
+#menu .inner > :first-child {
+    margin-top: 2em;
 }
 
-#menu .inner> :last-child {
-    margin-bottom: 3em
+#menu .inner > :last-child {
+    margin-bottom: 3em;
 }
 
 #menu ul {
-    margin: 0 0 1em
+    margin: 0 0 1em;
 }
 
 #menu ul.links {
     list-style: none;
-    padding: 0
+    padding: 0;
 }
 
-#menu ul.links>li {
-    padding: 0
+#menu ul.links > li {
+    padding: 0;
 }
 
-#menu ul.links>li>a:not(.button) {
+#menu ul.links > li > a:not(.button) {
     border: 0;
     border-top: solid 1px rgba(212, 212, 255, 0.1);
     display: block;
@@ -4437,24 +4385,21 @@ context {
     letter-spacing: 0.25em;
     line-height: 4em;
     text-decoration: none;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
-#menu ul.links>li>.button {
+#menu ul.links > li > .button {
     display: block;
-    margin: 0.5em 0 0
+    margin: 0.5em 0 0;
 }
 
-#menu ul.links>li:first-child>a:not(.button) {
-    border-top: 0 !important
+#menu ul.links > li:first-child > a:not(.button) {
+    border-top: 0 !important;
 }
 
 #menu .close {
-    -moz-transition: color 0.2s ease-in-out;
-    -webkit-transition: color 0.2s ease-in-out;
-    -ms-transition: color 0.2s ease-in-out;
     transition: color 0.2s ease-in-out;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    tap-highlight-color: rgba(0, 0, 0, 0);
     border: 0;
     cursor: pointer;
     display: block;
@@ -4469,14 +4414,11 @@ context {
     top: 0;
     vertical-align: middle;
     white-space: nowrap;
-    width: 8em
+    width: 8em;
 }
 
 #menu .close:after,
 #menu .close:before {
-    -moz-transition: opacity 0.2s ease-in-out;
-    -webkit-transition: opacity 0.2s ease-in-out;
-    -ms-transition: opacity 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out;
     background-position: center;
     background-repeat: no-repeat;
@@ -4486,47 +4428,41 @@ context {
     position: absolute;
     right: 0;
     top: 0;
-    width: 4em
+    width: 4em;
 }
 
 #menu .close:before {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px' viewBox='0 0 20 20' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23ffffff%3B stroke-width: 2%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='20' y2='20' /%3E%3Cline x1='20' y1='0' x2='0' y2='20' /%3E%3C/svg%3E")
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px' viewBox='0 0 20 20' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %23ffffff%3B stroke-width: 2%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='20' y2='20' /%3E%3Cline x1='20' y1='0' x2='0' y2='20' /%3E%3C/svg%3E");
 }
 
 #menu .close:after {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='20px' height='20px' viewBox='0 0 20 20' zoomAndPan='disable'%3E%3Cstyle%3Eline %7B stroke: %239bf1ff%3B stroke-width: 2%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='20' y2='20' /%3E%3Cline x1='20' y1='0' x2='0' y2='20' /%3E%3C/svg%3E");
-    opacity: 0
+    opacity: 0;
 }
 
 #menu .close:active:after,
 #menu .close:hover:after {
-    opacity: 1
+    opacity: 1;
 }
 
 body.is-ie #menu {
-    background: rgba(42, 47, 74, 0.975)
+    background: rgba(42, 47, 74, 0.975);
 }
 
 body.is-menu-visible #wrapper {
-    -moz-filter: blur(0.5em);
-    -webkit-filter: blur(0.5em);
-    -ms-filter: blur(0.5em);
-    filter: blur(0.5em)
+    filter: blur(0.5em);
 }
 
 body.is-menu-visible #menu {
     pointer-events: auto;
     opacity: 1;
-    visibility: visible
+    visibility: visible;
 }
 
 body.is-menu-visible #menu .inner {
-    -moz-transform: none;
-    -webkit-transform: none;
-    -ms-transform: none;
     transform: none;
     opacity: 1;
-    visibility: visible
+    visibility: visible;
 }
 
 @keyframes gradient {

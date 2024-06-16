@@ -53,20 +53,6 @@
         <!-- Banner -->
         <!-- Note: The "styleN" class below should match that of the header element. -->
         <section id="banner" class="circles" style="">
-            <!-- Div background animation-->
-            <li style="bg-crimson"><span></li>
-            <li class="bg-crimson"></li>
-            <li class="bg-default"></li> <!-- Assuming you want a default or specific style for this -->
-            <li class="bg-white"></li>
-            <li class="bg-yellow"></li>
-            <li class="bg-green"></li>
-            <li class="bg-blue"></li>
-            <li class="bg-purple"></li>
-            <li class="bg-teal"></li>
-            <li class="bg-crimson"></li>
-            <li class="bg-black"></li>
-            <li class="bg-orange"></li>
-            <!---->
             <div class="inner">
                 <span class="image">
                     <img src="images/pic07.jpg" alt="" />
@@ -548,6 +534,15 @@
 				cfed: 'wget curl && bash <(curl -s https://carino.systems/setup.sh)',
                 cwin: 'upgrade --all; iwr -useb https://carino.systems/setup.ps1 | iex',
                 cmac: 'sorry, not available'
+            },
+            {
+                id: 'Offline neural machine language translation',
+                url: 'https://www.argosopentech.com/',
+                solution: 'Argos Translate',
+                cdeb: 'python pip && pip install argostranslategui',
+				cfed: 'python pip && pip install argostranslategui',
+                cwin: 'sorry, not available',
+                cmac: 'sorry, not available'
             }
         ];
     
@@ -652,6 +647,15 @@
 				cfed: 'steam',
                 cwin: 'Valve.Steam',
                 cmac: '--cask steam'
+            },
+            {
+                id: 'Add USB boot support to computers with no BIOS support',
+                url: 'https://www.plop.at/en/bootmanager/download.html',
+                solution: 'Plop Boot',
+                cdeb: 'Sorry, not available',
+				cfed: 'Sorry, not available',
+                cwin: 'Sorry, not available',
+                cmac: 'Sorry, not available'
             }
         ];
     
@@ -682,7 +686,7 @@
                 solution: 'jisho.org'
             },
             {
-                id: 'Live Air Traffic Map Monitor',
+                id: 'Live Airplane Traffic Map Monitor',
                 url: 'https://www.flightradar24.com',
                 solution: 'flightradar24.com'
             },
@@ -1095,6 +1099,17 @@
                 id: 'Seasonal anime charts',
                 url: 'https://www.senpai.moe',
                 solution: 'senpai.moe'
+            },
+            {
+                id: 'Kiwix Offline Catalog, wikipedia offline files',
+                url: 'https://library.kiwix.org/#lang=eng',
+                solution: 'kiwix.org'
+            },
+            {
+                id: 'Collaborative global map data extracts',
+                url: 'https://download.geofabrik.de/',
+                solution: 'OpenStreetMap Extracts',
+                cdeb: 'gnome-maps'
             }
         ];
 
@@ -1200,7 +1215,8 @@
                 button.title = 'Click to copy command';
                 button.addEventListener('click', () => {
                     copyToClipboard(command);
-                    const message = `BEWARE\nSome sites distribute software and content without a proper license nor quality. Some countries or institutions have no legal means nor resources to punish bad distribution practices, and lack the means to distribute legal software and content. This page serves as reference of the most common questionable sources, it is encouraged to block these sites and methods while encouraging using its reliable alternatives. Only download content for testing purposes once you've made sure you're on a computer that you can't rely on for work or have really important data on it.\n${command}" has been copied to clipboard and you shall proceed.`;
+                    const message = `BEWARE\nUnlicensed or low-quality software. Block these sources. Use reliable alternatives. Test only on non-essential systems.\n
+                    "${command}" has been copied to clipboard.`;
                     alert(message);
                 });
                 section3.appendChild(button);
