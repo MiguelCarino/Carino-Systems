@@ -2939,7 +2939,7 @@ button:disabled,
 }
 
 .softcell {
-    background-color: #205497; /* Blue */
+    background-color: #28a745; /* Blue */
 }
 
 .softcell:after {
@@ -2953,7 +2953,7 @@ button:disabled,
 }
 
 .commercial-software-cell {
-    background-color: #FFA500; /* Orange */
+    background-color: #007bff; /* Orange */
 }
 
 .commercial-software-cell:after {
@@ -2966,7 +2966,7 @@ button:disabled,
 }
 
 .documents-cell {
-    background-color: #804b4b; /* White */
+    background-color: #6c757d; /* White */
 }
 
 .documents-cell:after {
@@ -2979,7 +2979,7 @@ button:disabled,
 }
 
 .websites-cell {
-    background-color: #000000; /* Black */
+    background-color: #6f42c1; /* Black */
     color: #ffffff; /* White text for better contrast */
 }
 
