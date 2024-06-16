@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<body class="is-preload" onload="loadTawkToChat()">
+<body class="is-preload">
     <!-- Wrapper -->
     <div id="wrapper">
         <!-- Header -->
@@ -53,29 +53,6 @@
         </nav>
         <!--Background animations-->
         <section id="banner" class="circles" style="">
-            <!-- Div background animation-->
-            <li style="bg-crimson"></li>
-            <li class="bg-crimson"></li>
-            <li class="bg-default"></li> <!-- Assuming you want a default or specific style for this -->
-            <li class="bg-white"></li>
-            <li class="bg-yellow"></li>
-            <li class="bg-green"></li>
-            <li class="bg-blue"></li>
-            <li class="bg-purple"></li>
-            <li class="bg-teal"></li>
-            <li class="bg-crimson"></li>
-            <li class="bg-black"></li>
-            <li class="bg-orange"></li>
-            <!---->
-            <!-- Div background animation-->
-            <div class="ripple-background">
-                <div class="circle xxlarge shade1"></div>
-                <div class="circle xlarge shade2"></div>
-                <div class="circle large shade3"></div>
-                <div class="circle medium shade4"></div>
-                <div class="circle small shade5"></div>
-            </div>
-            <!---->
             <div class="inner">
                 <span class="image">
                     <img src="" alt="" />
@@ -147,88 +124,6 @@
                         <p>Need to finish the other modules first.</p>
                     </header>
                 </article>
-                <!--<article>
-                    <span class="image">
-                        <img src="images/layout/banner_2_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="news.html" class="link">News</a></h3>
-                        <p>Livestreaming viewer and probably something else.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_3_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="artificial.html" class="link">Artificial Intelligence &#8482;</a></h3>
-                        <p>The latest and greatest corpo hype.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_3_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="rpa.html" class="link">Robotic Process Automation</a></h3>
-                        <p>The worst corpo hype.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_6_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="diffusion.html" class="link">Diffusion models</a></h3>
-                        <p>Image generation.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_4_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="containers.html" class="link">Containers</a></h3>
-                        <p>Software deployment made easy.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_5_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="offline.html" class="link">Offline computing</a></h3>
-                        <p>Going off the grid.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_3_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="quantum.html" class="link">Quantum Computing</a></h3>
-                        <p>I've studied it over a decade, still don't know what it does.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_5_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="linux.html" class="link">Linux</a></h3>
-                        <p>Because I won't shut up about it.</p>
-                    </header>
-                </article>
-                <article>
-                    <span class="image">
-                        <img src="images/layout/banner_3_ogp.webp" alt="" />
-                    </span>
-                    <header class="major">
-                        <h3><a href="disinformation.html" class="link">Disinformation</a></h3>
-                        <p>Learn to search for once.</p>
-                    </header>
-                </article>-->
-
             </section>
         </div>
         <!-- Footer -->
@@ -248,6 +143,11 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTawkToChat(); // Call the function when the DOM is fully loaded
+        });
+    </script>
     <!--End of scripts-->
 </body>
 

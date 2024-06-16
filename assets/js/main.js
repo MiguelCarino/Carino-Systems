@@ -107,15 +107,37 @@
     })).on("keydown", (function(e) {
         27 == e.keyCode && s._hide()
     }));
-    const l = ["「 In doubt, reboot 」", "「 Viruses are mostly explicitly accepted, but you didn't notice 」", "「 Never trust brands, only reviews 」", "「 Always copy your files, never cut them 」", "「 Update your system if you have some spare time, otherwise it will update when you don't 」", "「 You can't download RAM 」", "「 Most cloud services you use are on land, and even underwater 」", "「 Clean your keyboard throughly at least twice a year, don't ask why 」", "「 Antivirus are malware that hate competition 」", "「 All software is licensed, even if it's free 」", "「 The less social networks you have, the more sane you are 」", "「 There's no way you can be %100 anonymous on the internet 」", "「 A real backup is made by three copies, on two different types of storage, with one copy offsite 」", "「 Data redundancy is not a backup 」", "「 Remembering your passwords is a fatal security flaw, use a password manager instead 」", "「 AI is a misleading commercial term, same as High Definition 」", "「 Automation doesn't imply optimization 」"];
-    window.onload = function() {
-        const e = Math.floor(Math.random() * l.length),
-            t = l[e];
-        document.getElementById("random-phrase").textContent = t
-    };
-
     document.addEventListener("DOMContentLoaded", function() {
-        var copyright = document.getElementById("copyright");
+        // Array of phrases
+        const l = [
+            "「 In doubt, reboot 」",
+            "「 Viruses are mostly explicitly accepted, but you didn't notice 」",
+            "「 Never trust brands, only reviews 」",
+            "「 Always copy your files, never cut them 」",
+            "「 Update your system if you have some spare time, otherwise it will update when you don't 」",
+            "「 You can't download RAM 」",
+            "「 Most cloud services you use are on land, and even underwater 」",
+            "「 Clean your keyboard thoroughly at least twice a year, don't ask why 」",
+            "「 Antivirus are malware that hate competition 」",
+            "「 All software is licensed, even if it's free 」",
+            "「 The less social networks you have, the more sane you are 」",
+            "「 There's no way you can be %100 anonymous on the internet 」",
+            "「 A real backup is made by three copies, on two different types of storage, with one copy offsite 」",
+            "「 Data redundancy is not a backup 」",
+            "「 Remembering your passwords is a fatal security flaw, use a password manager instead 」",
+            "「 AI is a misleading commercial term, same as High Definition 」",
+            "「 Automation doesn't imply optimization 」"
+        ];
+    
+        // Set random phrase
+        const randomPhraseElement = document.getElementById("random-phrase");
+        if (randomPhraseElement) {
+            const randomIndex = Math.floor(Math.random() * l.length);
+            randomPhraseElement.textContent = l[randomIndex];
+        }
+    
+        // Set copyright information
+        const copyright = document.getElementById("copyright");
         if (copyright) {
             copyright.innerHTML = `
                 <ul class="copyright">
@@ -130,34 +152,19 @@
             `;
         }
     });
-    document.addEventListener("DOMContentLoaded", function() {
-        const bannerSection = document.getElementById('banner');
-        if (bannerSection) {
-            bannerSection.innerHTML = `
-                <!-- Div background animation-->
-                <ul class="circles">
-                    <li class="bg-crimson"></li>
-                    <li class="bg-default"></li>
-                    <li class="bg-white"></li>
-                    <li class="bg-yellow"></li>
-                    <li class="bg-green"></li>
-                    <li class="bg-blue"></li>
-                    <li class="bg-purple"></li>
-                    <li class="bg-teal"></li>
-                    <li class="bg-crimson"></li>
-                    <li class="bg-black"></li>
-                    <li class="bg-orange"></li>
-                </ul>
-                <!-- Div background animation-->
-                <div class="ripple-background">
-                    <div class="circle xxlarge shade1"></div>
-                    <div class="circle xlarge shade2"></div>
-                    <div class="circle large shade3"></div>
-                    <div class="circle medium shade4"></div>
-                    <div class="circle small shade5"></div>
-                </div>
-            `;
-        }
-    });
+    
+    function loadTawkToChat() {
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/655c3bf8d600b968d31553e3/1hfo4kh3h';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    }
 
 }(jQuery);
