@@ -25,7 +25,36 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
-
+<style>
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        padding: 10px;
+    }
+    nav a {
+        cursor: pointer;
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007bff;
+    }
+    .iframe-container {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        transition: width 0.3s, height 0.3s;
+    }
+    .iframe-container.active {
+        width: 60%;
+        height: 90vh; /* Adjust height as needed */
+    }
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
 <body class="is-preload">
     <!-- Wrapper -->
     <div id="wrapper">
@@ -108,7 +137,7 @@
                 </article>
                 <article>
                     <span class="image">
-                        <img src="images/layout/banner_2_ogp.webp" alt="" />
+                        <img src="images/layout/banner_5_ogp.webp" alt="" />
                     </span>
                     <header class="major">
                         <h3><a href="music.html" class="link">Music section</a></h3>
@@ -147,6 +176,17 @@
         document.addEventListener("DOMContentLoaded", function() {
             loadTawkToChat(); // Call the function when the DOM is fully loaded
         });
+    </script>
+    <script>
+        function toggleIframe(id) {
+            // Hide all iframes
+            const iframes = document.querySelectorAll('.iframe-container');
+            iframes.forEach(iframe => iframe.classList.remove('active'));
+
+            // Show the selected iframe
+            const selectedIframe = document.getElementById(id);
+            selectedIframe.classList.add('active');
+        }
     </script>
     <!--End of scripts-->
 </body>
