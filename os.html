@@ -35,10 +35,10 @@
     }
 
     .square {
-        width: 200px;
+        width: 250px;
         height: 200px;
         /*background-color: rgb(255, 255, 255);*/
-        margin: 20px;
+        margin: 10px;
         background-position: center;
         display: inline-block;
         transform: translateZ(0);
@@ -57,53 +57,32 @@
 
     .desktop-fedora {
         background-image: url('images/banners/fedoradesktop.webp');
-        /* Replace with your image URL */
         background-size: cover;
-        /* This will cover the entire area of the paragraph */
         max-width: 600px;
-        /* Maximum width of the paragraph */
         height: 340px;
-        /* Set a height for the paragraph */
         margin: 0 auto;
-        /* This centers the paragraph if the parent is wider */
         padding: 20px;
-        /* Optional: For internal spacing */
         color: white;
-        /* Optional: Change text color if needed */
     }
 
     .desktop-windows {
         background-image: url('images/banners/windows11desktop.webp');
-        /* Replace with your image URL */
         background-size: cover;
-        /* This will cover the entire area of the paragraph */
         max-width: 600px;
-        /* Maximum width of the paragraph */
         height: 340px;
-        /* Set a height for the paragraph */
         margin: 0 auto;
-        /* This centers the paragraph if the parent is wider */
         padding: 20px;
-        /* Optional: For internal spacing */
         color: white;
-        /* Optional: Change text color if needed */
     }
 
     .desktop-macos {
         background-image: url('images/banners/macosdesktop.webp');
-        /* Replace with your image URL */
         background-size: cover;
-        /* This will cover the entire area of the paragraph */
         max-width: 600px;
-        /* Maximum width of the paragraph */
         height: 340px;
-        /* Set a height for the paragraph */
         margin: 0 auto;
-        /* This centers the paragraph if the parent is wider */
         padding: 20px;
-        /* Optional: For internal spacing */
         color: white;
-        /* Optional: Change text color if needed */
     }
 
     .fedora-setup {
@@ -129,6 +108,79 @@
         background-repeat: no-repeat;
         background-position: center;
     }
+    .advancedSelector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 87vh;
+            margin: 0;
+            flex-direction: column;
+    }
+    .header-text {
+        color: aliceblue;
+    }
+    .imageContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .button-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 20px;
+    }
+    .button-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .central-square {
+        width: 525px;
+        height: 700px;
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+        max-width: 33%;
+    }
+    .central-square img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .btn {
+        margin: 5px;
+        padding: 10px;
+        cursor: pointer;
+        min-width: 100px;
+    }
+    .btn.active {
+        background-color: #007bff;
+        color: white;
+    }
+    h1 {
+        margin: 10px 0;
+    }
+    
+    .textContainer {
+        margin-left: 20px;
+        max-width: 10%;
+    }
+    
+    .link-button {
+        display: grid;
+        padding: 10px 10px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        place-items: center;
+    }
+
 </style>
 
 <body class="is-preload">
@@ -141,7 +193,7 @@
         <header id="header" class="alt style2">
             <a href="index.html" class="logo"><strong>Carino</strong> <span>Systems</span></a>
             <nav>
-                <a href="#menu">Menu</a>
+                <!--Footer will be migrated here eventually-->
             </nav>
         </header>
 
@@ -185,8 +237,10 @@
                         <div id="option1" class="square" style="background-image: url(images/icons/Fedora_icon_\(2021\).svg); background-size: cover;"></div>
                         <div id="option2" class="square" style="background-image: url(images/icons/windows.svg); background-size: cover;"></div>
                         <div id="option3" class="square" style="background-image: url(images/icons/finder.svg); background-size: cover;"></div>
+                        <div id="option4" class="square" style="background-image: url(images/icons/redfed.webp); background-size: cover;"></div>
                     </div>
                 </div>
+                <div id="contentHtml"></div>
             </section>
 
             <!-- Two -->
@@ -206,36 +260,6 @@
                         <b><span class="fedora-button" id="fedora-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="bash <(curl -s https://carino.systems/setup.sh)">Click to copy</span><span class="windows-button" id="windows-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="iwr -useb https://carino.systems/setup.ps1 | iex">Click to copy</span><span class="macos-button" id="macos-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="macOS">Sorry, not available</span></b>
                     </div>
                 </div>
-            </section>
-            <!--<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic09.jpg" alt="" data-position="top center" />
-									</a>
-									<div class="content">
-										<div class="inner">
-											<header class="major">
-												<h3>Virtualization</h3>
-											</header>
-											<p>You can test a virtual machine easily <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/">on Windows</a> or any <a href="https://virt-manager.org/download">Linux System</a> .</p>
-										</div>
-									</div>
-								</section>
-								<section>
-									<a href="generic.html" class="image">
-										<img src="images/pic09.jpg" alt="" data-position="top center" />
-									</a>
-									<div class="content">
-										<div class="inner">
-											<header class="major">
-												<h3>WSL2</h3>
-											</header>
-											<p>If you're on Windows and don't want to risk anything, you can easily setup a WSL2 Linux distribution.</p>
-											<ul class="actions">
-												<li><a href="https://learn.microsoft.com/en-us/windows/wsl/install" class="button">Install WSL2</a></li>
-											</ul>
-										</div>
-									</div>
-								</section>-->
             </section>
 
             <!-- Three -->
@@ -261,96 +285,216 @@
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            //Tawkt
-            loadTawkToChat(); 
-            //
-            document.getElementById('option1').addEventListener('click', function() {
-                updateContent(1);
+            // Load TawkTo chat
+            loadTawkToChat();
+    
+            // Add event listeners to options
+            const options = [1, 2, 3, 4];
+            options.forEach(option => {
+                document.getElementById(`option${option}`).addEventListener('click', function() {
+                    updateContent(option);
+                    document.getElementById('contentHtml').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
-
-            document.getElementById('option2').addEventListener('click', function() {
-                updateContent(2);
-            });
-
-            document.getElementById('option3').addEventListener('click', function() {
-                updateContent(3);
-            });
-
+    
             function updateContent(option) {
-                var contentArea = document.getElementById('content-area');
-                if (option === 1) {
-                    contentArea.innerHTML = '<div style="text-align: center;"><h3>Fedora Linux</h3><p class="desktop-fedora"></p><br><p>The most innovative system with the best and latest technologies for general,<br> development, office, creative and gaming use cases without issues.</p><li><a href="https://fedoraproject.org/#editions" target="_blank" class="button" style="background-color: #0c4191;">Download</a></li></div><section><a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a><div class="content"><div style="text-align: center;"><header class=""><h3>Installing your operating system</h3></header><p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your usb with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p><li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li></div></div></section>';
-                } else if (option === 2) {
-                    contentArea.innerHTML = '<div style="text-align: center;"><h3>Windows</h3><p class="desktop-windows"></p><br><p>Most used desktop operating system in the world,<br>supported by countless business.</p><li><a href="https://www.microsoft.com/en-us/software-download/windows11/" target="_blank" class="button" style="background-color: green;">Download</a></li></div><section><a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a><div class="content"><div style="text-align: center;"><header class=""><h3>Installing your operating system</h3></header><p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your usb with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p><li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li></div></div></section>';
-                } else if (option === 3) {
-                    contentArea.innerHTML = '<div style="text-align: center;"><h3>macOS</h3><p class="desktop-macos"></p><br><p>Most used system by creative professional all over the world.</p><li><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12" target="_blank" class="button" style="background-color: rgb(0, 0, 0);">Download</a></li></div>';
+                const contentArea = document.getElementById('content-area');
+                let contentHtml = '';
+    
+                switch (option) {
+                    case 1:
+                        contentHtml = `
+                            <div style="text-align: center;">
+                                <br>
+                                <br>
+                                <h3>Fedora Linux</h3>
+                                <p class="desktop-fedora"></p><br>
+                                <p>The most innovative system with the best and latest technologies for general,
+                                development, office, creative and gaming use cases without issues.</p>
+                                <li><a href="https://fedoraproject.org/#editions" target="_blank" class="button" style="background-color: #0c4191;">Download</a></li>
+                            </div>
+                            <section>
+                                <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
+                                <div class="content">
+                                    <div style="text-align: center;">
+                                        <header><h3>Installing your operating system</h3></header>
+                                        <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
+                                        It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
+                                        If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
+                                        <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
+                                    </div>
+                                </div>
+                            </section>`;
+                        break;
+                    case 2:
+                        contentHtml = `
+                            <div style="text-align: center;">
+                                <br>
+                                <br>
+                                <h3>Windows</h3>
+                                <p class="desktop-windows"></p><br>
+                                <p>Most used desktop operating system in the world,
+                                supported by countless businesses.</p>
+                                <li><a href="https://www.microsoft.com/en-us/software-download/windows11/" target="_blank" class="button" style="background-color: green;">Download</a></li>
+                            </div>
+                            <section>
+                                <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
+                                <div class="content">
+                                    <div style="text-align: center;">
+                                        <header><h3>Installing your operating system</h3></header>
+                                        <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
+                                        It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
+                                        If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
+                                        <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
+                                    </div>
+                                </div>
+                            </section>`;
+                        break;
+                    case 3:
+                        contentHtml = `
+                            <div style="text-align: center;">
+                                <br>
+                                <br>
+                                <h3>macOS</h3>
+                                <p class="desktop-macos"></p><br>
+                                <p>Most used system by creative professionals all over the world.</p>
+                                <li><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12" target="_blank" class="button" style="background-color: rgb(0, 0, 0);">Download</a></li>
+                            </div>`;
+                        break;
+                    case 4:
+                        contentHtml = `
+                            <div class="imageContainer advancedSelector">
+                                <div class="button-column">
+                                    <h1>Family</h1>
+                                    <div class="button-row">
+                                        <button class="btn" data-side="top" data-index="1">Windows</button>
+                                        <button class="btn" data-side="top" data-index="2">macOS</button>
+                                        <button class="btn" data-side="top" data-index="3">Linux</button>
+                                        <button class="btn" data-side="top" data-index="4">BSD</button>
+                                    </div>
+                                    <h1>Use Case</h1>
+                                    <div class="button-row">
+                                        <button class="btn" data-side="left" data-index="1">Work</button>
+                                        <button class="btn" data-side="left" data-index="2">Gaming</button>
+                                        <button class="btn" data-side="left" data-index="3">Server</button>
+                                        <button class="btn" data-side="left" data-index="4">Enthusiast</button>
+                                    </div>
+                                    <h1>Style</h1>
+                                    <div class="button-row">
+                                        <button class="btn" data-side="bottom" data-index="1">TASKBAR</button>
+                                        <button class="btn" data-side="bottom" data-index="2">DOCK</button>
+                                        <button class="btn" data-side="bottom" data-index="3">TILING</button>
+                                        <button class="btn" data-side="bottom" data-index="4">CLI</button>
+                                    </div>
+                                </div>
+                                <div class="central-square" id="centralSquare">
+                                    <img src="raw/1-1-1-1.webp" alt="Image 1" id="centralImage">
+                                </div>
+                                <div class="textContainer">
+                                    <p id="permutationText">Text based on permutation</p>
+                                </div>
+                            </div>
+                            
+                            <a id="linkButton" class="link-button" href="#" target="_blank">Download</a>`;
+                        break;
+                }
+    
+                contentArea.innerHTML = contentHtml;
+    
+                // Re-add event listeners for buttons in option 4
+                if (option === 4) {
+                    const buttons = document.querySelectorAll('.btn');
+                    const centralImage = document.getElementById('centralImage');
+                    const permutationTextElement = document.getElementById('permutationText');
+                    const linkButton = document.getElementById('linkButton');
+                    
+                    const permutationContent = {
+                        '3-1-1': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
+                        '3-1-2': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
+                        '3-1-3': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
+                        '3-1-4': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
+                        '3-2-1': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
+                        '3-2-2': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
+                        '3-2-3': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
+                        '3-2-4': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
+                        '3-3-1': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
+                        '3-3-2': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
+                        '3-3-3': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
+                        '3-3-4': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
+                        '3-4-1': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
+                        '3-4-2': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
+                        '3-4-3': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
+                        '3-4-4': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
+                        // Add more permutations as needed
+                    };
+                    
+                    let selectedButtons = {
+                        top: 1,
+                        left: 1,
+                        bottom: 1,
+                    };
+                    
+                    buttons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const side = this.getAttribute('data-side');
+                            const index = this.getAttribute('data-index');
+                            selectedButtons[side] = index;
+    
+                            // Remove active class from previous buttons on the same side
+                            buttons.forEach(btn => {
+                                if (btn.getAttribute('data-side') === side) {
+                                    btn.classList.remove('active');
+                                }
+                            });
+    
+                            // Add active class to the clicked button
+                            this.classList.add('active');
+    
+                            updateOption4Content();
+                        });
+                    });
+                    
+                    function updateOption4Content() {
+                        const key = `${selectedButtons.top}-${selectedButtons.left}-${selectedButtons.bottom}`;
+                        const newImage = `images/os/${key}.webp`;
+                        centralImage.src = newImage;
+    
+                        // Update text and link based on the permutation
+                        const content = permutationContent[key] || ['Default text for unmatched permutation', 'https://www.microsoft.com/en-us/software-download/windows11/'];
+                        permutationTextElement.textContent = content[0] ;
+                        linkButton.href = content[1];
+                    }
+                    
+                    updateOption4Content(); // Initial call to set the image, text, and link based on the default selection
                 }
             }
+    
             document.getElementById('scrollButton01').addEventListener('click', function() {
                 document.getElementById('setupos').scrollIntoView({
                     behavior: 'smooth'
                 });
             });
-            document.getElementById('option1').addEventListener('click', function() {
-                document.getElementById('selectos').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-            document.getElementById('option2').addEventListener('click', function() {
-                document.getElementById('selectos').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-            document.getElementById('option3').addEventListener('click', function() {
-                document.getElementById('selectos').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-            
-            //Copies commands to clipboard
-            document.querySelectorAll('.fedora-button').forEach(element => {
-                element.addEventListener('click', function() {
-                    const text = this.getAttribute('data-text');
-                    navigator.clipboard.writeText(text).then(() => {
-                        console.log('Text copied to clipboard');
-                        // Show alert message
-                        const message = `"The command: ${text}" has copied to the clipboard`;
-                        alert(message);
-                    }).catch(err => {
-                        console.error('Error in copying text: ', err);
-                    });
-                });
-            });
-
-            document.querySelectorAll('.windows-button').forEach(element => {
-                element.addEventListener('click', function() {
-                    const text = this.getAttribute('data-text');
-                    navigator.clipboard.writeText(text).then(() => {
-                        console.log('Text copied to clipboard');
-                        // Show alert message
-                        const message = `"The command: ${text}" has copied to the clipboard`;
-                        alert(message);
-                    }).catch(err => {
-                        console.error('Error in copying text: ', err);
-                    });
-                });
-            });
-
-            document.querySelectorAll('.macos-button').forEach(element => {
-                element.addEventListener('click', function() {
-                    const text = this.getAttribute('data-text');
-                    navigator.clipboard.writeText(text).then(() => {
-                        console.log('Text copied to clipboard');
-                        // Show alert message
-                        const message = `"The command: ${text}" has copied to the clipboard`;
-                        alert(message);
-                    }).catch(err => {
-                        console.error('Error in copying text: ', err);
+    
+            // Copies commands to clipboard
+            const buttonClasses = ['fedora-button', 'windows-button', 'macos-button'];
+            buttonClasses.forEach(buttonClass => {
+                document.querySelectorAll(`.${buttonClass}`).forEach(element => {
+                    element.addEventListener('click', function() {
+                        const text = this.getAttribute('data-text');
+                        navigator.clipboard.writeText(text).then(() => {
+                            console.log('Text copied to clipboard');
+                            alert(`"The command: ${text}" has been copied to the clipboard`);
+                        }).catch(err => {
+                            console.error('Error in copying text: ', err);
+                        });
                     });
                 });
             });
         });
-    </script>
+    </script>    
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.scrolly.min.js"></script>
     <script src="assets/js/jquery.scrollex.min.js"></script>
