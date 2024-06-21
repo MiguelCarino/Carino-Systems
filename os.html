@@ -31,14 +31,17 @@
 <style>
     .container {
         display: flex;
+        flex-direction: row;
         justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .square {
-        width: 250px;
-        height: 200px;
+        width: 150px;
+        height: 140px;
         /*background-color: rgb(255, 255, 255);*/
-        margin: 10px;
+        margin: 5px;
         background-position: center;
         display: inline-block;
         transform: translateZ(0);
@@ -306,9 +309,7 @@
                 switch (option) {
                     case 1:
                         contentHtml = `
-                            <div style="text-align: center;">
-                                <br>
-                                <br>
+                            <div style="text-align: center; padding-top: 70px;">
                                 <h3>Fedora Linux</h3>
                                 <p class="desktop-fedora"></p><br>
                                 <p>The most innovative system with the best and latest technologies for general,
@@ -330,9 +331,7 @@
                         break;
                     case 2:
                         contentHtml = `
-                            <div style="text-align: center;">
-                                <br>
-                                <br>
+                            <div style="text-align: center; padding-top: 70px;">
                                 <h3>Windows</h3>
                                 <p class="desktop-windows"></p><br>
                                 <p>Most used desktop operating system in the world,
@@ -354,9 +353,7 @@
                         break;
                     case 3:
                         contentHtml = `
-                            <div style="text-align: center;">
-                                <br>
-                                <br>
+                            <div style="text-align: center; padding-top: 70px;">
                                 <h3>macOS</h3>
                                 <p class="desktop-macos"></p><br>
                                 <p>Most used system by creative professionals all over the world.</p>
