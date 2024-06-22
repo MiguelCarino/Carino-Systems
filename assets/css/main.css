@@ -3057,8 +3057,8 @@ button:disabled,
 
 #musicgrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-auto-rows: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-auto-rows: 170px;
     overflow: auto;
     height: 87vh;
     position: relative;
