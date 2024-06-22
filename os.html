@@ -173,16 +173,23 @@
         margin-left: 20px;
         max-width: 10%;
     }
-    
+    .button-container {
+        display: flex;
+        justify-content: center; /* Centers the buttons horizontally */
+        align-items: center; /* Centers the buttons vertically */
+        gap: 10px; /* Space between the buttons */
+    }
+
     .link-button {
-        display: grid;
         padding: 10px 10px;
         background-color: #007bff;
         color: white;
         text-decoration: none;
         border-radius: 10px;
-        place-items: center;
+        max-width: 50%;
+        text-align: center; /* Center text inside the button */
     }
+
 
 </style>
 
@@ -200,19 +207,6 @@
             </nav>
         </header>
 
-        <!-- Menu -->
-        <nav id="menu">
-            <ul class="links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="software.html">Software Solutions</a></li>
-                <li><a href="artificial.html">Artifical Intelligence</a></li>
-                <li><a href="lurking.html">Entertainment</a></li>
-            </ul>
-            <ul class="actions stacked">
-                <li><a href="#" class="button primary fit">Get Started</a></li>
-                <li><a href="#" class="button fit">Log In</a></li>
-            </ul>
-        </nav>
         <!--Background animations-->
         <section id="banner" class="circles" style="">
             <div class="inner">
@@ -287,209 +281,272 @@
 
     <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load TawkTo chat
-            loadTawkToChat();
-    
-            // Add event listeners to options
-            const options = [1, 2, 3, 4];
-            options.forEach(option => {
-                document.getElementById(`option${option}`).addEventListener('click', function() {
-                    updateContent(option);
-                    document.getElementById('contentHtml').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-    
-            function updateContent(option) {
-                const contentArea = document.getElementById('content-area');
-                let contentHtml = '';
-    
-                switch (option) {
-                    case 1:
-                        contentHtml = `
-                            <div style="text-align: center; padding-top: 70px;">
-                                <h3>Fedora Linux</h3>
-                                <p class="desktop-fedora"></p><br>
-                                <p>The most innovative system with the best and latest technologies for general,
-                                development, office, creative and gaming use cases without issues.</p>
-                                <li><a href="https://fedoraproject.org/#editions" target="_blank" class="button" style="background-color: #0c4191;">Download</a></li>
-                            </div>
-                            <section>
-                                <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
-                                <div class="content">
-                                    <div style="text-align: center;">
-                                        <header><h3>Installing your operating system</h3></header>
-                                        <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
-                                        It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
-                                        If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
-                                        <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
-                                    </div>
-                                </div>
-                            </section>`;
-                        break;
-                    case 2:
-                        contentHtml = `
-                            <div style="text-align: center; padding-top: 70px;">
-                                <h3>Windows</h3>
-                                <p class="desktop-windows"></p><br>
-                                <p>Most used desktop operating system in the world,
-                                supported by countless businesses.</p>
-                                <li><a href="https://www.microsoft.com/en-us/software-download/windows11/" target="_blank" class="button" style="background-color: green;">Download</a></li>
-                            </div>
-                            <section>
-                                <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
-                                <div class="content">
-                                    <div style="text-align: center;">
-                                        <header><h3>Installing your operating system</h3></header>
-                                        <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
-                                        It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
-                                        If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
-                                        <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
-                                    </div>
-                                </div>
-                            </section>`;
-                        break;
-                    case 3:
-                        contentHtml = `
-                            <div style="text-align: center; padding-top: 70px;">
-                                <h3>macOS</h3>
-                                <p class="desktop-macos"></p><br>
-                                <p>Most used system by creative professionals all over the world.</p>
-                                <li><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12" target="_blank" class="button" style="background-color: rgb(0, 0, 0);">Download</a></li>
-                            </div>`;
-                        break;
-                    case 4:
-                        contentHtml = `
-                            <div class="imageContainer advancedSelector">
-                                <div class="button-column">
-                                    <h1>Family</h1>
-                                    <div class="button-row">
-                                        <button class="btn" data-side="top" data-index="1">Windows</button>
-                                        <button class="btn" data-side="top" data-index="2">macOS</button>
-                                        <button class="btn" data-side="top" data-index="3">Linux</button>
-                                        <button class="btn" data-side="top" data-index="4">BSD</button>
-                                    </div>
-                                    <h1>Use Case</h1>
-                                    <div class="button-row">
-                                        <button class="btn" data-side="left" data-index="1">Work</button>
-                                        <button class="btn" data-side="left" data-index="2">Gaming</button>
-                                        <button class="btn" data-side="left" data-index="3">Server</button>
-                                        <button class="btn" data-side="left" data-index="4">Enthusiast</button>
-                                    </div>
-                                    <h1>Style</h1>
-                                    <div class="button-row">
-                                        <button class="btn" data-side="bottom" data-index="1">TASKBAR</button>
-                                        <button class="btn" data-side="bottom" data-index="2">DOCK</button>
-                                        <button class="btn" data-side="bottom" data-index="3">TILING</button>
-                                        <button class="btn" data-side="bottom" data-index="4">CLI</button>
-                                    </div>
-                                </div>
-                                <div class="central-square" id="centralSquare">
-                                    <img src="raw/1-1-1-1.webp" alt="Image 1" id="centralImage">
-                                </div>
-                                <div class="textContainer">
-                                    <p id="permutationText">Text based on permutation</p>
-                                </div>
-                            </div>
-                            
-                            <a id="linkButton" class="link-button" href="#" target="_blank">Download</a>`;
-                        break;
-                }
-    
-                contentArea.innerHTML = contentHtml;
-    
-                // Re-add event listeners for buttons in option 4
-                if (option === 4) {
-                    const buttons = document.querySelectorAll('.btn');
-                    const centralImage = document.getElementById('centralImage');
-                    const permutationTextElement = document.getElementById('permutationText');
-                    const linkButton = document.getElementById('linkButton');
-                    
-                    const permutationContent = {
-                        '3-1-1': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
-                        '3-1-2': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
-                        '3-1-3': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
-                        '3-1-4': ['Fedora Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://fedoraproject.org/#editions'],
-                        '3-2-1': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
-                        '3-2-2': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
-                        '3-2-3': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
-                        '3-2-4': ['Bazzite Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://bazzite.gg/'],
-                        '3-3-1': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
-                        '3-3-2': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
-                        '3-3-3': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
-                        '3-3-4': ['Debian Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.debian.org/'],
-                        '3-4-1': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
-                        '3-4-2': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
-                        '3-4-3': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
-                        '3-4-4': ['Gentoo Linux Kernel: 6.9.4 Toolchain: \nGcc 14.1.1 Binutils 2.41 Gdb 14.1 LLVM 18 Perl 5.38 RPM 4.19 Golang 1.22 Boost 1.83 Python 3.12.3 OpenSSL/LibreSSL OpenSSH', 'https://www.gentoo.org/downloads/'],
-                        // Add more permutations as needed
-                    };
-                    
-                    let selectedButtons = {
-                        top: 1,
-                        left: 1,
-                        bottom: 1,
-                    };
-                    
-                    buttons.forEach(button => {
-                        button.addEventListener('click', function() {
-                            const side = this.getAttribute('data-side');
-                            const index = this.getAttribute('data-index');
-                            selectedButtons[side] = index;
-    
-                            // Remove active class from previous buttons on the same side
-                            buttons.forEach(btn => {
-                                if (btn.getAttribute('data-side') === side) {
-                                    btn.classList.remove('active');
-                                }
-                            });
-    
-                            // Add active class to the clicked button
-                            this.classList.add('active');
-    
-                            updateOption4Content();
-                        });
-                    });
-                    
-                    function updateOption4Content() {
-                        const key = `${selectedButtons.top}-${selectedButtons.left}-${selectedButtons.bottom}`;
-                        const newImage = `images/os/${key}.webp`;
-                        centralImage.src = newImage;
-    
-                        // Update text and link based on the permutation
-                        const content = permutationContent[key] || ['Default text for unmatched permutation', 'https://www.microsoft.com/en-us/software-download/windows11/'];
-                        permutationTextElement.textContent = content[0] ;
-                        linkButton.href = content[1];
-                    }
-                    
-                    updateOption4Content(); // Initial call to set the image, text, and link based on the default selection
-                }
-            }
-    
-            document.getElementById('scrollButton01').addEventListener('click', function() {
-                document.getElementById('setupos').scrollIntoView({
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listeners to options
+        const options = [1, 2, 3, 4];
+        options.forEach(option => {
+            document.getElementById(`option${option}`).addEventListener('click', function() {
+                updateContent(option);
+                document.getElementById('contentHtml').scrollIntoView({
                     behavior: 'smooth'
                 });
             });
+        });
     
-            // Copies commands to clipboard
-            const buttonClasses = ['fedora-button', 'windows-button', 'macos-button'];
-            buttonClasses.forEach(buttonClass => {
-                document.querySelectorAll(`.${buttonClass}`).forEach(element => {
-                    element.addEventListener('click', function() {
-                        const text = this.getAttribute('data-text');
-                        navigator.clipboard.writeText(text).then(() => {
-                            console.log('Text copied to clipboard');
-                            alert(`"The command: ${text}" has been copied to the clipboard`);
-                        }).catch(err => {
-                            console.error('Error in copying text: ', err);
+        const commonData = {
+            'fedora': {
+                text1: 'Fedora Linux Kernel: 6.9.4 Toolchain: Gcc 14.1.1 LLVM 18.1.6 Perl 5.38 Golang 1.22.4 Python 3.12.3 OpenSSL 3.2.1 OpenSSH 9.6p1',
+                text2: 'Nothing',
+                link: 'https://fedoraproject.org/#editions'
+            },
+            'debian': {
+                text1: 'Debian Linux Kernel: 6.9.4 Toolchain: Gcc 12.2.0 LLVM 14.0.6 Perl 5.38 Golang 1.19.8 Python 3.11.2 OpenSSL 3.0.11 OpenSSH 9.2p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'ubuntu': {
+                text1: 'Debian Linux Kernel: 6.9.4 Toolchain: Gcc 13.2.0 LLVM 18.1.3 Perl 5.38 Golang 1.22.2 Python 3.12.3 OpenSSL 3.0.13 OpenSSH 9.6p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'variation2Text': 'Variation 2 Text for 3-2-1',
+            'variation2Link': 'https://link2.com'
+        };
+    
+        const permutationContent = {
+            '3-1-1': [
+                [commonData.fedora.text1, commonData.fedora.link, '3-1-1-imageA.webp'],
+            ],
+            '3-2-1': [
+                [commonData.fedora.text2, commonData.fedora.link, '3-2-1-imageA.webp'],
+                [commonData.variation2Text, commonData.variation2Link, '3-2-1-imageB.webp'],
+            ],
+            '3-3-1': [
+                [commonData.debian.text1, commonData.fedora.link, '3-3-1-imageA.webp'],
+                [commonData.debian.text2, commonData.debian.link, '3-3-1-imageB.webp'],
+            ],
+            '3-3-2': [
+                [commonData.debian.text1, commonData.fedora.link, '3-3-2-imageA.webp'],
+                [commonData.debian.text2, commonData.debian.link, '3-3-2-imageB.webp'],
+            ],
+            '3-3-3': [
+                [commonData.debian.text1, commonData.fedora.link, '3-3-3-imageA.webp'],
+                [commonData.debian.text2, commonData.debian.link, '3-3-3-imageB.webp'],
+            ],
+            '3-3-4': [
+                [commonData.debian.text1, commonData.fedora.link, '3-3-4-imageA.webp'],
+            ],
+            // Add more permutations as needed
+        };
+    
+        function updateContent(option) {
+            const contentArea = document.getElementById('content-area');
+            let contentHtml = '';
+        
+            switch (option) {
+                case 1:
+                    contentHtml = `
+                        <div style="text-align: center; padding-top: 70px;">
+                            <h3>Fedora Linux</h3>
+                            <p class="desktop-fedora"></p><br>
+                            <p>The most innovative system with the best and latest technologies for general,
+                            development, office, creative and gaming use cases without issues.</p>
+                            <li><a href="https://fedoraproject.org/#editions" target="_blank" class="button" style="background-color: #0c4191;">Download</a></li>
+                        </div>
+                        <section>
+                            <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
+                            <div class="content">
+                                <div style="text-align: center;">
+                                    <header><h3>Installing your operating system</h3></header>
+                                    <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
+                                    It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
+                                    If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
+                                    <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
+                                </div>
+                            </div>
+                        </section>`;
+                    break;
+                case 2:
+                    contentHtml = `
+                        <div style="text-align: center; padding-top: 70px;">
+                            <h3>Windows</h3>
+                            <p class="desktop-windows"></p><br>
+                            <p>Most used desktop operating system in the world,
+                            supported by countless businesses.</p>
+                            <li><a href="https://www.microsoft.com/en-us/software-download/windows11/" target="_blank" class="button" style="background-color: green;">Download</a></li>
+                        </div>
+                        <section>
+                            <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
+                            <div class="content">
+                                <div style="text-align: center;">
+                                    <header><h3>Installing your operating system</h3></header>
+                                    <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
+                                    It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
+                                    If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
+                                    <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
+                                </div>
+                            </div>
+                        </section>`;
+                    break;
+                case 3:
+                    contentHtml = `
+                        <div style="text-align: center; padding-top: 70px;">
+                            <h3>macOS</h3>
+                            <p class="desktop-macos"></p><br>
+                            <p>Most used system by creative professionals all over the world.</p>
+                            <li><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12" target="_blank" class="button" style="background-color: rgb(0, 0, 0);">Download</a></li>
+                        </div>`;
+                    break;
+                case 4:
+                    contentHtml = `
+                        <div class="imageContainer advancedSelector">
+                            <div class="button-column">
+                                <h1>Family</h1>
+                                <div class="button-row">
+                                    <button class="btn" data-side="top" data-index="1">Windows</button>
+                                    <button class="btn" data-side="top" data-index="2">macOS</button>
+                                    <button class="btn" data-side="top" data-index="3">Linux</button>
+                                    <button class="btn" data-side="top" data-index="4">BSD</button>
+                                </div>
+                                <h1>Use Case</h1>
+                                <div class="button-row">
+                                    <button class="btn" data-side="left" data-index="1">Work</button>
+                                    <button class="btn" data-side="left" data-index="2">Gaming</button>
+                                    <button class="btn" data-side="left" data-index="3">Server</button>
+                                    <button class="btn" data-side="left" data-index="4">Enthusiast</button>
+                                </div>
+                                <h1>Style</h1>
+                                <div class="button-row">
+                                    <button class="btn" data-side="bottom" data-index="1">TASKBAR</button>
+                                    <button class="btn" data-side="bottom" data-index="2">DOCK</button>
+                                    <button class="btn" data-side="bottom" data-index="3">TILING</button>
+                                    <button class="btn" data-side="bottom" data-index="4">CLI</button>
+                                </div>
+                            </div>
+                            <div class="central-square" id="centralSquare">
+                                <img src="images/os/1-1-1.webp" alt="Image 1" id="centralImage">
+                            </div>
+                            <div class="textContainer">
+                                <p id="permutationText">Text based on permutation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="button-container">
+                            <a id="linkButton" class="link-button" href="#" target="_blank">Download</a>
+                        </div>`;
+                    break;
+            }
+        
+            contentArea.innerHTML = contentHtml;
+        
+            // Re-add event listeners for buttons in option 4
+            if (option === 4) {
+                const buttons = document.querySelectorAll('.btn');
+                const centralImage = document.getElementById('centralImage');
+                const permutationTextElement = document.getElementById('permutationText');
+                const linkButton = document.getElementById('linkButton');
+                
+                let selectedButtons = {
+                    top: 1,
+                    left: 1,
+                    bottom: 1,
+                };
+                
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const side = this.getAttribute('data-side');
+                        const index = this.getAttribute('data-index');
+                        selectedButtons[side] = index;
+                    
+                        // Remove active class from previous buttons on the same side
+                        buttons.forEach(btn => {
+                            if (btn.getAttribute('data-side') === side) {
+                                btn.classList.remove('active');
+                            }
                         });
+                    
+                        // Add active class to the clicked button
+                        this.classList.add('active');
+                    
+                        updateOption4Content();
+                    });
+                });
+            
+                async function fetchImages(prefix) {
+                    // Assuming the images are accessible at /images/os/
+                    const imageFilenames = [
+                        `${prefix}-imageA.webp`,
+                        `${prefix}-imageB.webp`,
+                        `${prefix}-variation1.webp`,
+                        `${prefix}-variation2.webp`,
+                    ];
+                
+                    const existingImages = [];
+                
+                    for (const filename of imageFilenames) {
+                        try {
+                            const response = await fetch(`images/os/${filename}`);
+                            if (response.ok) {
+                                existingImages.push(filename);
+                            }
+                        } catch (error) {
+                            console.error(`Error fetching image: ${filename}`, error);
+                        }
+                    }
+                
+                    return existingImages;
+                }
+            
+                async function updateOption4Content() {
+                    const key = `${selectedButtons.top}-${selectedButtons.left}-${selectedButtons.bottom}`;
+                    const variations = permutationContent[key] || [['Default text for unmatched permutation', 'https://defaultlink.com', 'default-image.webp']];
+                    
+                    const randomVariation = variations[Math.floor(Math.random() * variations.length)];
+                    const [text, link, image] = randomVariation;
+                
+                    const images = await fetchImages(key);
+                    const selectedImage = images.find(img => img.includes(image));
+                
+                    if (selectedImage) {
+                        centralImage.src = `images/os/${selectedImage}`;
+                    } else {
+                        centralImage.src = `images/os/${key}.webp`;
+                    }
+                
+                    permutationTextElement.textContent = text;
+                    linkButton.href = link;
+                }
+            
+                updateOption4Content(); // Initial call to set the image, text, and link based on the default selection
+            
+                // Add event listener to centralImage for random content update
+                centralImage.addEventListener('click', updateOption4Content);
+            }
+        }
+    
+        document.getElementById('scrollButton01').addEventListener('click', function() {
+            document.getElementById('setupos').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    
+        // Copies commands to clipboard
+        const buttonClasses = ['fedora-button', 'windows-button', 'macos-button'];
+        buttonClasses.forEach(buttonClass => {
+            document.querySelectorAll(`.${buttonClass}`).forEach(element => {
+                element.addEventListener('click', function() {
+                    const text = this.getAttribute('data-text');
+                    navigator.clipboard.writeText(text).then(() => {
+                        console.log('Text copied to clipboard');
+                        alert(`"The command: ${text}" has been copied to the clipboard`);
+                    }).catch(err => {
+                        console.error('Error in copying text: ', err);
                     });
                 });
             });
         });
+    });
+
     </script>    
     
     <script src="assets/js/jquery.min.js"></script>
