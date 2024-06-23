@@ -295,27 +295,52 @@
     
         const commonData = {
             'fedora': {
-                text1: 'Fedora Linux 40 Kernel: 6.9.4 Gcc 14.1.1 LLVM 18.1.6 Perl 5.38 Golang 1.22.4 Python 3.12.3 OpenSSL 3.2.1 OpenSSH 9.6p1',
+                text1: 'Fedora 40\nKernel: 6.9.4\nGcc 14.1.1\nLLVM 18.1.6\nPerl 5.38\nGolang 1.22.4\nPython 3.12.3\nOpenSSL 3.2.1\nOpenSSH 9.6p1',
                 text2: 'Nothing',
                 link: 'https://fedoraproject.org/#editions'
             },
             'debian': {
-                text1: 'Debian Linux 12 Kernel: 6.1.0 Gcc 12.2.0 LLVM 14.0.6 Perl 5.38 Golang 1.19.8 Python 3.11.2 OpenSSL 3.0.11 OpenSSH 9.2p1',
+                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'gentoo': {
+                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'arch': {
+                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'nix': {
+                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
+                text2: 'Nothing',
+                link: 'https://www.debian.org/'
+            },
+            'bsd': {
+                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
                 text2: 'Nothing',
                 link: 'https://www.debian.org/'
             },
             'ubuntu': {
-                text1: 'Debian Linux Kernel: 6.9.4 Gcc 13.2.0 LLVM 18.1.3 Perl 5.38 Golang 1.22.2 Python 3.12.3 OpenSSL 3.0.13 OpenSSH 9.6p1',
-                text2: 'Nothing',
+                text1: 'Ubuntu 24.04\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
+                text2: 'Ubuntu 24.04 LTS\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
                 link: 'https://www.debian.org/'
             },
+            'macos': {
+                text1: 'Sonoma\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
+                text2: 'Nothing',
+                link: 'https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12'
+            },
             'windows': {
-                text1: 'NT Kernel: 6.9.4 Gcc 13.2.0 LLVM 18.1.3 Perl 5.38 Golang 1.22.2 Python 3.12.3 OpenSSL 3.0.13 OpenSSH 9.6p1',
+                text1: 'Windows 11 23H2\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1',
                 text2: 'Nothing',
                 link: 'https://www.microsoft.com/en-us/software-download/windows11/'
             },
             'windowsserver': {
-                text1: 'Debian Linux Kernel: 6.9.4 Gcc 13.2.0 LLVM 18.1.3 Perl 5.38 Golang 1.22.2 Python 3.12.3 OpenSSL 3.0.13 OpenSSH_for_Windows7.7p1 9.6p1',
+                text1: 'Windows Server 2022\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1',
                 text2: 'Nothing',
                 link: 'https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2022'
             },
@@ -324,6 +349,30 @@
         };
     
         const permutationContent = {
+            '1-3-1': [
+                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
+            ],
+            '1-3-2': [
+                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
+            ],
+            '1-3-3': [
+                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
+            ],
+            '1-3-4': [
+                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
+            ],
+            '2-1-1': [
+                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
+            ],
+            '2-2-1': [
+                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
+            ],
+            '2-3-1': [
+                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
+            ],
+            '2-4-1': [
+                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
+            ],
             '3-1-1': [
                 [commonData.fedora.text1, commonData.fedora.link, '3-1-1-imageA.webp'],
             ],
@@ -336,7 +385,7 @@
             ],
             '3-3-1': [
                 [commonData.debian.text1, commonData.fedora.link, '3-3-1-imageA.webp'],
-                [commonData.debian.text2, commonData.debian.link, '3-3-1-imageB.webp'],
+                [commonData.fedora.text1, commonData.fedora.link, '3-3-1-imageB.webp'],
             ],
             '3-3-2': [
                 [commonData.debian.text1, commonData.fedora.link, '3-3-2-imageA.webp'],
@@ -440,8 +489,8 @@
                                 <img src="images/os/1-1-1.webp" alt="Image 1" id="centralImage">
                             </div>
                             <div class="textContainer">
-                                <p id="permutationText">Text based on permutation</p>
-                            </div>
+                                 <p id="permutationText" style="white-space: pre-wrap;"></p>
+                        </div>
                         </div>
                         
                         <div class="button-container">
@@ -512,7 +561,7 @@
             
                 async function updateOption4Content() {
                     const key = `${selectedButtons.top}-${selectedButtons.left}-${selectedButtons.bottom}`;
-                    const variations = permutationContent[key] || [['Default text for unmatched permutation', 'https://defaultlink.com', 'default-image.webp']];
+                    const variations = permutationContent[key] || [['Windows 11 23H2\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1', 'https://www.microsoft.com/en-us/software-download/windows11/', '3-1-1-imageA.webp']];
                     
                     const randomVariation = variations[Math.floor(Math.random() * variations.length)];
                     const [text, link, image] = randomVariation;
