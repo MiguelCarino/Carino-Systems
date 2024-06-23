@@ -2915,7 +2915,7 @@ button:disabled,
 
 #softwareid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     overflow: auto;
     height: fit-content;
     position: relative;
@@ -3010,17 +3010,6 @@ button:disabled,
     transform: scale(1.04);
 }
 
-#documentationid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    overflow: auto;
-    height: fit-content;
-    position: relative;
-    scroll-behavior: smooth;
-    padding: 5px;
-    background: #292731
-}
-
 .documentationcell {
     background-size: cover;
     background-position: center;
@@ -3036,15 +3025,9 @@ button:disabled,
 }
 
 .section {
-    flex: 1;
-    text-align: center;
-    padding: 1px
-}
-
-.section {
     width: 100%;
     text-align: center;
-    padding: 1.4vh
+    padding: 1vh
 }
 
 .section1 {}
