@@ -141,7 +141,7 @@
         if (copyright) {
             copyright.innerHTML = `
                 <ul class="copyright">
-                    <li><b>&copy; Carino Systems</b></li>
+                    <li><b>Carino Systems™</b></li>
                     <li>Design: a modified <a href="https://html5up.net">HTML5 UP</a> template</li>
                     <li>
                         <a href="https://github.com/MiguelCarino" class="icon brands alt fa-github"><span class="label">Github</span></a>

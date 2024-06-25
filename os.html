@@ -29,168 +29,203 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&amp;display=swap" media="print" onload="this.media='all'">
 </head>
 <style>
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
 
-    .square {
-        width: 150px;
-        height: 140px;
-        /*background-color: rgb(255, 255, 255);*/
-        margin: 5px;
-        background-position: center;
-        display: inline-block;
-        transform: translateZ(0);
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-        backface-visibility: hidden;
-        -moz-osx-font-smoothing: grayscale;
-        transition-duration: 0.3s;
-        transition-property: transform;
-    }
+        .rowTitle {
+            align-self: center;
+            font-size: x-large;
+        }
 
-    .square:hover,
-    .square:focus,
-    .square:active {
-        transform: scale(1.2);
-    }
-
-    .desktop-fedora {
-        background-image: url('images/banners/fedoradesktop.webp');
-        background-size: cover;
-        max-width: 600px;
-        height: 340px;
-        margin: 0 auto;
-        padding: 20px;
-        color: white;
-    }
-
-    .desktop-windows {
-        background-image: url('images/banners/windows11desktop.webp');
-        background-size: cover;
-        max-width: 600px;
-        height: 340px;
-        margin: 0 auto;
-        padding: 20px;
-        color: white;
-    }
-
-    .desktop-macos {
-        background-image: url('images/banners/macosdesktop.webp');
-        background-size: cover;
-        max-width: 600px;
-        height: 340px;
-        margin: 0 auto;
-        padding: 20px;
-        color: white;
-    }
-
-    .fedora-setup {
-        display: inline-block;
-        background-color: #0c4191;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    .windows-setup {
-        display: inline-block;
-        background-color: green;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    .macos-setup {
-        display: inline-block;
-        background-color: rgb(0, 0, 0);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    .advancedSelector {
+        .selectcontainer {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 87vh;
-            margin: 0;
             flex-direction: column;
-    }
-    .header-text {
-        color: aliceblue;
-    }
-    .imageContainer {
+            align-items: center;
+            gap: 20px;
+            margin: auto;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            width: 99%;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 40%;
+        }
+
+        .button-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            flex-wrap: wrap;
+        }
+
+        .button-row {
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 30px;
-    }
-    .button-column {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 20px;
-    }
-    .button-row {
-        display: flex;
-        flex-direction: row;
         justify-content: center;
+        gap: 5px;
         flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-    .central-square {
-        width: 525px;
-        height: 700px;
-        background-color: #ddd;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 20px;
-        max-width: 33%;
-    }
-    .central-square img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-    .btn {
-        margin: 5px;
-        padding: 10px;
-        cursor: pointer;
-        min-width: 100px;
-    }
-    .btn.active {
-        background-color: #007bff;
-        color: white;
-    }
-    h1 {
-        margin: 10px 0;
-    }
+        }
     
-    .textContainer {
-        margin-left: 20px;
-        max-width: 10%;
-    }
-    .button-container {
-        display: flex;
-        justify-content: center; /* Centers the buttons horizontally */
-        align-items: center; /* Centers the buttons vertically */
-        gap: 10px; /* Space between the buttons */
-    }
+        .btn {
+            font-family: Arial, sans-serif;
+            font-weight: lighter;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: small;
+            min-width: 21%;
+            flex: 1 0 21%; /* Allow buttons to grow and shrink equally */
+            max-width: 21%; /* Ensure buttons don't exceed 21% of the row's width */
+            height: 50px; /* Set a fixed height for uniform button size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-    .link-button {
-        padding: 10px 10px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        max-width: 50%;
-        text-align: center; /* Center text inside the button */
-    }
+        .btn.active {
+            background-color: #0056b3;
+        }
 
+        .image-box-container {
+            position: relative;
+            width: 787px;
+            height: 442px;
+            border: 1px solid #000;
+            background-color: #fff;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
 
+        .image-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .image-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .image-box img.active {
+            display: block;
+        }
+
+        #img-background {
+            z-index: 1;
+        }
+
+        #img-main {
+            z-index: 2;
+        }
+
+        #img-foreground {
+            z-index: 3;
+        }
+
+        .text-box-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            z-index: 4;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            flex: 1;
+            min-width: 48%;
+            padding-top: 20px;
+        }
+
+        .colorful-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 400px;
+            padding: 20px;
+            background-color: #ffeb3b;
+            border-radius: 10px;
+        }
+
+        .colorful-div:nth-child(2) {
+            background-color: #4caf50;
+        }
+
+        .colorful-div button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .colorful-div p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .button-div {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            height: 410px;
+        }
+
+        .colorful-divs-row {
+            display: flex;
+            gap: 230px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        @media (max-width: 1000px) {
+            .row {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .colorful-divs-row {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        @media (max-width: 800px) {
+            .row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .colorful-divs-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
 </style>
 
 <body class="is-preload">
@@ -201,17 +236,17 @@
         <!-- Header -->
         <!-- Note: The "styleN" class below should match that of the banner element. -->
         <header id="header" class="alt style2">
-            <a href="index.html" class="logo"><strong>Carino</strong> <span>Systems</span></a>
+            <a href="index.html" class="logo"><strong>Carino</strong> <span>Systems™</span></a>
             <nav>
                 <!--Footer will be migrated here eventually-->
             </nav>
         </header>
 
         <!--Background animations-->
-        <section id="banner" class="circles" style="">
+        <section id="banner" style="">
             <div class="inner">
                 <span class="image">
-                    <img src="images/pic07.jpg" alt="" />
+                    <img src="#" alt="" />
                 </span>
                 <header class="major">
                     <h1>Operating Systems</h1>
@@ -226,48 +261,55 @@
         <div id="main">
             <!-- One -->
             <section id="one" class="spotlights">
-                <header class="">
-                    <h3 style="text-align: center;" id="selectos">Select an operating system</h3>
-                </header>
-                <div class="container">
-                    <div class="container">
-                        <div id="option1" class="square" style="background-image: url(images/icons/Fedora_icon_\(2021\).svg); background-size: cover;"></div>
-                        <div id="option2" class="square" style="background-image: url(images/icons/windows.svg); background-size: cover;"></div>
-                        <div id="option3" class="square" style="background-image: url(images/icons/finder.svg); background-size: cover;"></div>
-                        <div id="option4" class="square" style="background-image: url(images/icons/redfed.webp); background-size: cover;"></div>
+                <div class="selectcontainer">
+                    <div class="row">
+                        <div class="left-column">
+                                    <b class="rowTitle">Family</b>
+                                    <div class="button-row">
+                                        <button class="btn active" data-row="1" data-index="Windows">Windows</button>
+                                        <button class="btn" data-row="1" data-index="macOS">macOS</button>
+                                        <button class="btn" data-row="1" data-index="Linux">Linux</button>
+                                        <button class="btn" data-row="1" data-index="BSD">BSD</button>
+                                    </div>
+                                    <b class="rowTitle">Use Case</b>
+                                    <div class="button-row">
+                                        <button class="btn active" data-row="2" data-index="Work">Work</button>
+                                        <button class="btn" data-row="2" data-index="Gaming">Gaming</button>
+                                        <button class="btn" data-row="2" data-index="Server">Server</button>
+                                        <button class="btn" data-row="2" data-index="Enthusiast">Enthusiast</button>
+                                    </div>
+                                    <b class="rowTitle">Style</b>
+                                    <div class="button-row">
+                                        <button class="btn active" data-row="3" data-index="Taskbar">Taskbar</button>
+                                        <button class="btn" data-row="3" data-index="Dock">Dock</button>
+                                        <button class="btn" data-row="3" data-index="Tiling">Tiling</button>
+                                        <button class="btn" data-row="3" data-index="CLI">CLI</button>
+                                    </div>
+                        </div>
+                        <div class="right-column">
+                            <div class="image-box-container" id="imageBoxContainer">
+                                <div class="text-box-overlay" id="text-main">Main text will appear here</div>
+                                <div class="image-box" id="imageBox">
+                                    <img id="img-background" alt="Background Image">
+                                    <img id="img-main" alt="Main Image">
+                                    <img id="img-foreground" alt="Foreground Image">
+                                </div>
+                            </div>
+                            <div class="text-box" id="text-background">Background text will appear here</div>
+                        </div>
+                    </div>
+                    <div class="colorful-divs-row">
+                        <div class="colorful-div">
+                            <p>Do you like it?</p>
+                            <button id="firstButton">Download the ISO</button>
+                        </div>
+                        <div class="colorful-div">
+                            <p>Already have it?</p>
+                            <button id="secondButton">Run the setup script</button>
+                        </div>
                     </div>
                 </div>
-                <div id="contentHtml"></div>
             </section>
-
-            <!-- Two -->
-            <section id="two" class="spotlights">
-                <div id="content-area" style="">
-                    <!-- Content will be dynamically loaded here -->
-                </div>
-            </section>
-            <section>
-                <div class="" style="text-align: center; padding-top: 190px;">
-                    <button id="scrollButton01">Go to system setup</button>
-                    <header class="" id="setupos">
-                        <h3 style="padding-top: 30px;">Setup your operating system</h3>
-                    </header>
-                    <p>Once you have your system installed, run the following command in your terminal.</p>
-                    <div style="padding:10px; border-radius:5px;">
-                        <b><span class="fedora-button" id="fedora-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="bash <(curl -s https://carino.systems/setup.sh)">Click to copy</span><span class="windows-button" id="windows-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="iwr -useb https://carino.systems/setup.ps1 | iex">Click to copy</span><span class="macos-button" id="macos-button" style="width: 156px; height: 156px; padding-top: 130px; margin-left: 10px; margin-right: 10px;" data-text="macOS">Sorry, not available</span></b>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Three -->
-            <section id="three">
-                <div class="inner">
-                    <ul class="actions" style="padding-left: 45%;">
-                        <li><a href="index.html" class="button next">Go Back</a></li>
-                    </ul>
-                </div>
-            </section>
-
         </div>
 
         <!-- Footer -->
@@ -281,334 +323,218 @@
 
     <!-- Scripts -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add event listeners to options
-        const options = [1, 2, 3, 4];
-        options.forEach(option => {
-            document.getElementById(`option${option}`).addEventListener('click', function() {
-                updateContent(option);
-                document.getElementById('contentHtml').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    
-        const commonData = {
-            'fedora': {
-                text1: 'Fedora 40\nKernel: 6.9.4\nGcc 14.1.1\nLLVM 18.1.6\nPerl 5.38\nGolang 1.22.4\nPython 3.12.3\nOpenSSL 3.2.1\nOpenSSH 9.6p1',
-                text2: 'Nothing',
-                link: 'https://fedoraproject.org/#editions'
-            },
-            'debian': {
-                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
-                text2: 'Nothing',
-                link: 'https://www.debian.org/'
-            },
-            'gentoo': {
-                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
-                text2: 'Nothing',
-                link: 'https://www.debian.org/'
-            },
-            'arch': {
-                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
-                text2: 'Nothing',
-                link: 'https://www.debian.org/'
-            },
-            'nix': {
-                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
-                text2: 'Nothing',
-                link: 'https://www.debian.org/'
-            },
-            'bsd': {
-                text1: 'Debian 12\nKernel: 6.1.0\nGcc 12.2.0\nLLVM 14.0.6\nPerl 5.38\nGolang 1.19.8\nPython 3.11.2\nOpenSSL 3.0.11\nOpenSSH 9.2p1',
-                text2: 'Nothing',
-                link: 'https://www.debian.org/'
-            },
-            'ubuntu': {
-                text1: 'Ubuntu 24.04\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
-                text2: 'Ubuntu 24.04 LTS\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
-                link: 'https://www.debian.org/'
-            },
-            'macos': {
-                text1: 'Sonoma\nKernel: 6.9.4\nGcc 13.2.0\nLLVM 18.1.3\nPerl 5.38\nGolang 1.22.2\nPython 3.12.3\nOpenSSL 3.0.13\nOpenSSH 9.6p1',
-                text2: 'Nothing',
-                link: 'https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12'
-            },
-            'windows': {
-                text1: 'Windows 11 23H2\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1',
-                text2: 'Nothing',
-                link: 'https://www.microsoft.com/en-us/software-download/windows11/'
-            },
-            'windowsserver': {
-                text1: 'Windows Server 2022\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1',
-                text2: 'Nothing',
-                link: 'https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2022'
-            },
-            'variation2Text': 'Variation 2 Text for 3-2-1',
-            'variation2Link': 'https://link2.com'
-        };
-    
-        const permutationContent = {
-            '1-3-1': [
-                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
-            ],
-            '1-3-2': [
-                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
-            ],
-            '1-3-3': [
-                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
-            ],
-            '1-3-4': [
-                [commonData.windowsserver.text1, commonData.windowsserver.link, '3-1-1-imageA.webp'],
-            ],
-            '2-1-1': [
-                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
-            ],
-            '2-2-1': [
-                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
-            ],
-            '2-3-1': [
-                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
-            ],
-            '2-4-1': [
-                [commonData.macos.text1, commonData.macos.link, '3-1-1-imageA.webp'],
-            ],
-            '3-1-1': [
-                [commonData.fedora.text1, commonData.fedora.link, '3-1-1-imageA.webp'],
-            ],
-            '3-1-2': [
-                [commonData.fedora.text1, commonData.fedora.link, '3-1-1-imageA.webp'],
-            ],
-            '3-2-1': [
-                [commonData.fedora.text2, commonData.fedora.link, '3-2-1-imageA.webp'],
-                [commonData.variation2Text, commonData.variation2Link, '3-2-1-imageB.webp'],
-            ],
-            '3-3-1': [
-                [commonData.debian.text1, commonData.fedora.link, '3-3-1-imageA.webp'],
-                [commonData.fedora.text1, commonData.fedora.link, '3-3-1-imageB.webp'],
-            ],
-            '3-3-2': [
-                [commonData.debian.text1, commonData.fedora.link, '3-3-2-imageA.webp'],
-                [commonData.debian.text2, commonData.debian.link, '3-3-2-imageB.webp'],
-            ],
-            '3-3-3': [
-                [commonData.debian.text1, commonData.fedora.link, '3-3-3-imageA.webp'],
-                [commonData.debian.text2, commonData.debian.link, '3-3-3-imageB.webp'],
-            ],
-            '3-3-4': [
-                [commonData.debian.text1, commonData.fedora.link, '3-3-4-imageA.webp'],
-            ],
-            // Add more permutations as needed
-        };
-    
-        function updateContent(option) {
-            const contentArea = document.getElementById('content-area');
-            let contentHtml = '';
-        
-            switch (option) {
-                case 1:
-                    contentHtml = `
-                        <div style="text-align: center; padding-top: 70px;">
-                            <h3>Fedora Linux</h3>
-                            <p class="desktop-fedora"></p><br>
-                            <p>The most innovative system with the best and latest technologies for general,
-                            development, office, creative and gaming use cases without issues.</p>
-                            <li><a href="https://fedoraproject.org/#editions" target="_blank" class="button" style="background-color: #0c4191;">Download</a></li>
-                        </div>
-                        <section>
-                            <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
-                            <div class="content">
-                                <div style="text-align: center;">
-                                    <header><h3>Installing your operating system</h3></header>
-                                    <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
-                                    It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
-                                    If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
-                                    <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
-                                </div>
-                            </div>
-                        </section>`;
-                    break;
-                case 2:
-                    contentHtml = `
-                        <div style="text-align: center; padding-top: 70px;">
-                            <h3>Windows</h3>
-                            <p class="desktop-windows"></p><br>
-                            <p>Most used desktop operating system in the world,
-                            supported by countless businesses.</p>
-                            <li><a href="https://www.microsoft.com/en-us/software-download/windows11/" target="_blank" class="button" style="background-color: green;">Download</a></li>
-                        </div>
-                        <section>
-                            <a href="#" class="image"><img src="images/pic09.jpg" alt="" data-position="top center" /></a>
-                            <div class="content">
-                                <div style="text-align: center;">
-                                    <header><h3>Installing your operating system</h3></header>
-                                    <p>Download <a href="https://www.ventoy.net/en/download.html"><b>Ventoy</b></a> and format your USB with it. Then copy the ISO(s) you need from here (excepting for macOS).<br>
-                                    It is extremely recommended you <a href="">test the ISO in a VM</a> and/or <a href="">do some basic research</a> to make sure the OS will cover your needs.<br>
-                                    If you do not know what distro to choose, take the <a href="https://distrochooser.de/en/">test</a> or simply <a href="https://distro.moe/">choose a random distro</a>.</p>
-                                    <li><a href="https://www.ventoy.net/en/download.html" class="button">Download Ventoy</a></li>
-                                </div>
-                            </div>
-                        </section>`;
-                    break;
-                case 3:
-                    contentHtml = `
-                        <div style="text-align: center; padding-top: 70px;">
-                            <h3>macOS</h3>
-                            <p class="desktop-macos"></p><br>
-                            <p>Most used system by creative professionals all over the world.</p>
-                            <li><a href="https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12" target="_blank" class="button" style="background-color: rgb(0, 0, 0);">Download</a></li>
-                        </div>`;
-                    break;
-                case 4:
-                    contentHtml = `
-                        <div class="imageContainer advancedSelector">
-                            <div class="button-column">
-                                <h1>Family</h1>
-                                <div class="button-row">
-                                    <button class="btn" data-side="top" data-index="1">Windows</button>
-                                    <button class="btn" data-side="top" data-index="2">macOS</button>
-                                    <button class="btn" data-side="top" data-index="3">Linux</button>
-                                    <button class="btn" data-side="top" data-index="4">BSD</button>
-                                </div>
-                                <h1>Use Case</h1>
-                                <div class="button-row">
-                                    <button class="btn" data-side="left" data-index="1">Work</button>
-                                    <button class="btn" data-side="left" data-index="2">Gaming</button>
-                                    <button class="btn" data-side="left" data-index="3">Server</button>
-                                    <button class="btn" data-side="left" data-index="4">Enthusiast</button>
-                                </div>
-                                <h1>Style</h1>
-                                <div class="button-row">
-                                    <button class="btn" data-side="bottom" data-index="1">TASKBAR</button>
-                                    <button class="btn" data-side="bottom" data-index="2">DOCK</button>
-                                    <button class="btn" data-side="bottom" data-index="3">TILING</button>
-                                    <button class="btn" data-side="bottom" data-index="4">CLI</button>
-                                </div>
-                            </div>
-                            <div class="central-square" id="centralSquare">
-                                <img src="images/os/1-1-1.webp" alt="Image 1" id="centralImage">
-                            </div>
-                            <div class="textContainer">
-                                 <p id="permutationText" style="white-space: pre-wrap;"></p>
-                        </div>
-                        </div>
-                        
-                        <div class="button-container">
-                            <a id="linkButton" class="link-button" href="#" target="_blank">Download</a>
-                        </div>`;
-                    break;
-            }
-        
-            contentArea.innerHTML = contentHtml;
-        
-            // Re-add event listeners for buttons in option 4
-            if (option === 4) {
-                const buttons = document.querySelectorAll('.btn');
-                const centralImage = document.getElementById('centralImage');
-                const permutationTextElement = document.getElementById('permutationText');
-                const linkButton = document.getElementById('linkButton');
-                
-                let selectedButtons = {
-                    top: 1,
-                    left: 1,
-                    bottom: 1,
-                };
-                
-                buttons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const side = this.getAttribute('data-side');
-                        const index = this.getAttribute('data-index');
-                        selectedButtons[side] = index;
-                    
-                        // Remove active class from previous buttons on the same side
-                        buttons.forEach(btn => {
-                            if (btn.getAttribute('data-side') === side) {
-                                btn.classList.remove('active');
-                            }
-                        });
-                    
-                        // Add active class to the clicked button
-                        this.classList.add('active');
-                    
-                        updateOption4Content();
-                    });
-                });
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.btn');
+            const mainImage = document.getElementById('img-main');
+            const backgroundImage = document.getElementById('img-background');
+            const foregroundImage = document.getElementById('img-foreground');
+            const imageBoxContainer = document.getElementById('imageBoxContainer');
+            const textMain = document.getElementById('text-main');
+            const textBackground = document.getElementById('text-background');
+            const firstButton = document.getElementById('firstButton');
+            const secondButton = document.getElementById('secondButton');
             
-                async function fetchImages(prefix) {
-                    // Assuming the images are accessible at /images/os/
-                    const imageFilenames = [
-                        `${prefix}-imageA.webp`,
-                        `${prefix}-imageB.webp`,
-                        `${prefix}-variation1.webp`,
-                        `${prefix}-variation2.webp`,
-                    ];
-                
-                    const existingImages = [];
-                
-                    for (const filename of imageFilenames) {
-                        try {
-                            const response = await fetch(`images/os/${filename}`);
-                            if (response.ok) {
-                                existingImages.push(filename);
-                            }
-                        } catch (error) {
-                            console.error(`Error fetching image: ${filename}`, error);
-                        }
-                    }
-                
-                    return existingImages;
-                }
-            
-                async function updateOption4Content() {
-                    const key = `${selectedButtons.top}-${selectedButtons.left}-${selectedButtons.bottom}`;
-                    const variations = permutationContent[key] || [['Windows 11 23H2\nGcc None\nLLVM None\nPerl None\nGolang None\nPython None\nOpenSSL 3.0.13\nOpenSSH_for_Windows7.7p1', 'https://www.microsoft.com/en-us/software-download/windows11/', '3-1-1-imageA.webp']];
-                    
-                    const randomVariation = variations[Math.floor(Math.random() * variations.length)];
-                    const [text, link, image] = randomVariation;
-                
-                    const images = await fetchImages(key);
-                    const selectedImage = images.find(img => img.includes(image));
-                
-                    if (selectedImage) {
-                        centralImage.src = `images/os/${selectedImage}`;
-                    } else {
-                        centralImage.src = `images/os/${key}.webp`;
-                    }
-                
-                    permutationTextElement.textContent = text;
-                    linkButton.href = link;
-                }
-            
-                updateOption4Content(); // Initial call to set the image, text, and link based on the default selection
-            
-                // Add event listener to centralImage for random content update
-                centralImage.addEventListener('click', updateOption4Content);
-            }
-        }
-    
-        document.getElementById('scrollButton01').addEventListener('click', function() {
-            document.getElementById('setupos').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    
-        // Copies commands to clipboard
-        const buttonClasses = ['fedora-button', 'windows-button', 'macos-button'];
-        buttonClasses.forEach(buttonClass => {
-            document.querySelectorAll(`.${buttonClass}`).forEach(element => {
-                element.addEventListener('click', function() {
-                    const text = this.getAttribute('data-text');
-                    navigator.clipboard.writeText(text).then(() => {
-                        console.log('Text copied to clipboard');
-                        alert(`"The command: ${text}" has been copied to the clipboard`);
-                    }).catch(err => {
-                        console.error('Error in copying text: ', err);
-                    });
-                });
-            });
-        });
-    });
+            // Ensure the first buttons of each row are selected by default
+            let selectedButtons = { row1: 'Windows', row2: 'Work', row3: 'Taskbar' };
 
+            const data = {
+                'Windows-Work': [
+                    { image: 'images/os/Windows.svg', foregroundImage: 'images/os/Linux.svg', text: '', link: 'https://www.microsoft.com/en-us/software-download/windows11/' }
+                ],
+                'Windows-Gaming': [
+                    { image: 'Windows.svg', foregroundImage: 'Linux.svg', text: '', link: 'https://www.microsoft.com/en-us/software-download/windows11/' }
+                ],
+                'Windows-Server': [
+                    { image: 'Windows.svg', foregroundImage: 'Linux.svg', text: '', link: 'https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2022' }
+                ],
+                'Windows-Enthusiast': [
+                    { image: 'Windows.svg', foregroundImage: 'Linux.svg', text: '', link: 'https://www.microsoft.com/en-us/software-download/windows11/' }
+                ],
+                'macOS-Work': [
+                    { image: 'macos.svg', text: 'Main text for macOS-Work (A)', link: 'https://example.com/macos-work-a' },
+                    { image: 'path_to_image_macos_work_b.jpg', text: 'Main text for macOS-Work (B)', link: 'https://example.com/macos-work-b' }
+                ],
+                'macOS-Gaming': [
+                    { image: 'macos.svg', text: 'Main text for macOS-Gaming (A)', link: 'https://example.com/macos-gaming-a' },
+                    { image: 'path_to_image_macos_gaming_b.jpg', text: 'Main text for macOS-Gaming (B)', link: 'https://example.com/macos-gaming-b' }
+                ],
+                'macOS-Server': [
+                    { image: 'macos.svg', text: 'Main text for macOS-Server (A)', link: 'https://example.com/macos-server-a' },
+                    { image: 'macos.svg', text: 'Main text for macOS-Server (B)', link: 'https://example.com/macos-server-b' }
+                ],
+                'macOS-Enthusiast': [
+                    { image: 'macos.svg', text: 'Main text for macOS-Enthusiast (A)', link: 'https://example.com/macos-enthusiast-a' },
+                    { image: 'path_to_image_macos_enthusiast_b.jpg', text: 'Main text for macOS-Enthusiast (B)', link: 'https://example.com/macos-enthusiast-b' }
+                ],
+                'Linux-Work': [
+                    { image: 'path_to_image_linux_work_a.jpg', text: 'Main text for Linux-Work (A)', link: 'https://example.com/linux-work-a' },
+                    { image: 'path_to_image_linux_work_b.jpg', text: 'Main text for Linux-Work (B)', link: 'https://example.com/linux-work-b' }
+                ],
+                'Linux-Gaming': [
+                    { image: 'path_to_image_linux_gaming_a.jpg', text: 'Main text for Linux-Gaming (A)', link: 'https://example.com/linux-gaming-a' },
+                    { image: 'path_to_image_linux_gaming_b.jpg', text: 'Main text for Linux-Gaming (B)', link: 'https://example.com/linux-gaming-b' }
+                ],
+                'Linux-Server': [
+                    { image: 'path_to_image_linux_server_a.jpg', text: 'Main text for Linux-Server (A)', link: 'https://example.com/linux-server-a' },
+                    { image: 'path_to_image_linux_server_b.jpg', text: 'Main text for Linux-Server (B)', link: 'https://example.com/linux-server-b' }
+                ],
+                'Linux-Enthusiast': [
+                    { image: 'path_to_image_linux_enthusiast_a.jpg', text: 'Main text for Linux-Enthusiast (A)', link: 'https://example.com/linux-enthusiast-a' },
+                    { image: 'path_to_image_linux_enthusiast_b.jpg', text: 'Main text for Linux-Enthusiast (B)', link: 'https://example.com/linux-enthusiast-b' }
+                ],
+                'BSD-Work': [
+                    { image: 'path_to_image_bsd_work_a.jpg', text: 'Main text for BSD-Work (A)', link: 'https://example.com/bsd-work-a' },
+                    { image: 'path_to_image_bsd_work_b.jpg', text: 'Main text for BSD-Work (B)', link: 'https://example.com/bsd-work-b' }
+                ],
+                'BSD-Gaming': [
+                    { image: 'path_to_image_bsd_gaming_a.jpg', text: 'Main text for BSD-Gaming (A)', link: 'https://example.com/bsd-gaming-a' },
+                    { image: 'path_to_image_bsd_gaming_b.jpg', text: 'Main text for BSD-Gaming (B)', link: 'https://example.com/bsd-gaming-b' }
+                ],
+                'BSD-Server': [
+                    { image: 'path_to_image_bsd_server_a.jpg', text: 'Main text for BSD-Server (A)', link: 'https://example.com/bsd-server-a' },
+                    { image: 'path_to_image_bsd_server_b.jpg', text: 'Main text for BSD-Server (B)', link: 'https://example.com/bsd-server-b' }
+                ],
+                'BSD-Enthusiast': [
+                    { image: 'path_to_image_bsd_enthusiast_a.jpg', text: 'Main text for BSD-Enthusiast (A)', link: 'https://example.com/bsd-enthusiast-a' },
+                    { image: 'path_to_image_bsd_enthusiast_b.jpg', text: 'Main text for BSD-Enthusiast (B)', link: 'https://example.com/bsd-enthusiast-b' }
+                ]
+            };
+
+            const backgroundData = {
+                'Taskbar': [
+                    { image: 'images/os/Taskbar.webp', text: 'Background text for Taskbar (A)' }
+                ],
+                'Dock': [
+                    { image: 'Dock.webp', text: 'Background text for Dock (A)' }
+                ],
+                'Tiling': [
+                    { image: 'Redhat.svg', text: 'Background text for Tiling (A)' },
+                    { image: 'path_to_tiling_windows_b.jpg', text: 'Background text for Tiling (B)' }
+                ],
+                'CLI': [
+                    { image: 'Linux.svg', text: 'Background text for CLI (A)' },
+                    { image: 'path_to_cli_windows_b.jpg', text: 'Background text for CLI (B)' }
+                ]
+            };
+
+            function getRandomElement(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function updateImagesAndTexts() {
+                const mainKey = `${selectedButtons.row1}-${selectedButtons.row2}`;
+
+                const mainContent = getRandomElement(data[mainKey]);
+
+                if (mainContent) {
+                    mainImage.src = mainContent.image;
+                    foregroundImage.src = mainContent.foregroundImage; // Assuming mainContent has foregroundImage property
+                    textMain.innerHTML = mainContent.text.replace(/\n/g, '<br>');
+                    firstButton.onclick = () => window.open(mainContent.link, '_blank');
+                } else {
+                    mainImage.src = '';
+                    foregroundImage.src = ''; // Clear foreground image
+                    textMain.innerHTML = 'Main text will appear here';
+                    firstButton.onclick = null;
+                }
+
+                mainImage.classList.add('active');
+                foregroundImage.classList.add('active'); // Activate the foreground image
+            }
+
+            function updateBackgroundContent() {
+                const style = selectedButtons.row3;
+                const backgroundContent = getRandomElement(backgroundData[style]);
+
+                if (backgroundContent) {
+                    backgroundImage.src = backgroundContent.image;
+                    textBackground.innerHTML = backgroundContent.text.replace(/\n/g, '<br>');
+                    secondButton.onclick = () => {
+                        navigator.clipboard.writeText(backgroundContent.text).then(() => {
+                            alert(`Copied to clipboard: ${backgroundContent.text}`);
+                        });
+                    };
+                } else {
+                    backgroundImage.src = '';
+                    textBackground.innerHTML = 'Background text will appear here';
+                    secondButton.onclick = null;
+                }
+
+                backgroundImage.classList.add('active');
+            }
+
+            function downloadCombinedImage() {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 1920;
+                canvas.height = 1080;
+
+                const images = [
+                    backgroundImage,
+                    mainImage,
+                    foregroundImage
+                ];
+
+                let imagesLoaded = 0;
+
+                images.forEach((img) => {
+                    if (img.src) {
+                        const image = new Image();
+                        image.crossOrigin = 'anonymous';
+                        image.src = img.src;
+
+                        image.onload = () => {
+                            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            imagesLoaded++;
+
+                            if (imagesLoaded === images.length) {
+                                const dataURL = canvas.toDataURL('image/png');
+                                const link = document.createElement('a');
+                                link.href = dataURL;
+                                link.download = 'combined-image.png';
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            }
+                        };
+                    } else {
+                        imagesLoaded++;
+                    }
+                });
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const row = button.getAttribute('data-row');
+                    const index = button.getAttribute('data-index');
+
+                    selectedButtons[`row${row}`] = index;
+
+                    buttons.forEach(btn => {
+                        if (btn.getAttribute('data-row') === row) {
+                            btn.classList.remove('active');
+                        }
+                    });
+
+                    button.classList.add('active');
+
+                    if (row === '1' || row === '2') {
+                        updateImagesAndTexts();
+                    } else if (row === '3') {
+                        updateBackgroundContent();
+                    }
+                });
+            });
+
+            // Set initial states and update content
+            document.querySelector('[data-row="1"][data-index="Windows"]').classList.add('active');
+            document.querySelector('[data-row="2"][data-index="Work"]').classList.add('active');
+            document.querySelector('[data-row="3"][data-index="Taskbar"]').classList.add('active');
+            updateImagesAndTexts();
+            updateBackgroundContent();
+
+            imageBoxContainer.addEventListener('click', downloadCombinedImage);
+        });
     </script>    
     
     <script src="assets/js/jquery.min.js"></script>
