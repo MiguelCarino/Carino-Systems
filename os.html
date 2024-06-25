@@ -29,7 +29,39 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&amp;display=swap" media="print" onload="this.media='all'">
 </head>
 <style>
-
+    body {
+        font-family: 'HomeVideo';
+        background-color: #000;
+        color: #0a7bf3;
+    }
+    header.major> :first-child:after {
+        background-color: #ac0e0e;
+    }
+    #header .logo strong {
+        background-color: #0a7bf3;
+    }
+    #header .logo:hover strong {
+        background-color: #ffffff;
+    }
+    h1 {
+        color: #0a7bf3;
+    }
+    #footer .copyright li {
+        color: #0a7bf3;
+    }
+    b {
+        color: #0a7bf3;
+    }
+    .wrapper {
+        background-color: #000;
+    }
+    #banner:after {
+        background-color: #000000;
+    }
+    .main {
+        background-color:#000;
+    }
+    
         .rowTitle {
             align-self: center;
             font-size: x-large;
@@ -41,6 +73,7 @@
             align-items: center;
             gap: 20px;
             margin: auto;
+            background-color: #000;
         }
 
         .row {
@@ -48,7 +81,7 @@
             width: 100%;
             justify-content: space-between;
             align-items: center;
-            width: 99%;
+            width: 82%;
         }
 
         .left-column {
@@ -74,9 +107,9 @@
         }
     
         .btn {
-            font-family: Arial, sans-serif;
+            font-family: 'HomeVideo';
             font-weight: lighter;
-            background-color: #007bff;
+            background-color: #173a7c;
             color: white;
             border: none;
             border-radius: 5px;
@@ -93,13 +126,13 @@
         }
 
         .btn.active {
-            background-color: #0056b3;
+            background-color: #0a7bf3;
         }
 
         .image-box-container {
             position: relative;
-            width: 787px;
-            height: 442px;
+            width: 617px;
+            height: 342px;
             border: 1px solid #000;
             background-color: #fff;
             flex-shrink: 0;
@@ -170,16 +203,18 @@
         }
 
         .colorful-div:nth-child(2) {
-            background-color: #4caf50;
+            background-color: #0a7bf3;
         }
 
         .colorful-div button {
+            font-family: 'HomeVideo';
             padding: 10px;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            vertical-align: ;
         }
 
         .colorful-div p {
@@ -196,8 +231,9 @@
         }
 
         .colorful-divs-row {
+            color: #970101;
             display: flex;
-            gap: 230px;
+            gap: 390px;
             justify-content: center;
             width: 100%;
         }
@@ -221,6 +257,7 @@
             }
 
             .colorful-divs-row {
+                
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
@@ -304,7 +341,7 @@
                             <button id="firstButton">Download the ISO</button>
                         </div>
                         <div class="colorful-div">
-                            <p>Already have it?</p>
+                            <p>Installed already?</p>
                             <button id="secondButton">Run the setup script</button>
                         </div>
                     </div>

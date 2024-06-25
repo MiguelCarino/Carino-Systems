@@ -1,6 +1,44 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideo-BLG6G.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideoBold-R90Dv.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
 a,
 abbr,
 acronym,
@@ -202,7 +240,7 @@ input,
 select,
 textarea {
     color: #ffffff;
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-family: "RedHatFont", sans-serif;
     font-size: 17pt;
     font-weight: 300;
     letter-spacing: 0.025em;
@@ -354,7 +392,7 @@ blockquote {
 
 code {
     background: rgba(212, 212, 255, 0.035);
-    font-family: "Courier New", monospace;
+    /*font-family: "Courier New", monospace;*/
     font-size: 0.9em;
     margin: 0 0.25em;
     padding: 0.25em 0.65em
@@ -362,7 +400,7 @@ code {
 
 pre {
     -webkit-overflow-scrolling: touch;
-    font-family: "Courier New", monospace;
+    /*font-family: "Courier New", monospace;*/
     font-size: 0.9em;
     margin: 0 0 2em
 }
@@ -2100,7 +2138,7 @@ input[type="radio"]+label:before {
     text-rendering: auto;
     line-height: 1;
     text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
+    /*font-family: 'Font Awesome 5 Free';*/
     font-weight: 900
 }
 
@@ -2190,7 +2228,7 @@ input[type="radio"]+label:before {
     text-rendering: auto;
     line-height: 1;
     text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
+    /*font-family: 'Font Awesome 5 Free';*/
     font-weight: 400
 }
 
@@ -2207,7 +2245,7 @@ input[type="radio"]+label:before {
 }
 
 .icon.brands:before {
-    font-family: 'Font Awesome 5 Brands'
+    /*font-family: 'Font Awesome 5 Brands'*/
 }
 
 .icon.alt:before {
@@ -2464,13 +2502,13 @@ ul.pagination li>.page {
 }
 
 ul.pagination li>.page.active {
-    background-color: #ffffff;
+    : #ffffff;
     color: #242943
 }
 
 ul.pagination li>.page.active:hover {
     background-color: #9bf1ff;
-    color: #242943 !important
+    color: #f0f3ff !important
 }
 
 ul.pagination li>.page.active:active {
@@ -3704,7 +3742,7 @@ body.is-preload #header.alt {
     -webkit-align-items: center;
     -ms-align-items: center;
     align-items: center;
-    background-image: url("../../images/banners/");
+    /*background-image: url("../../images/banners/");*/
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
@@ -4368,7 +4406,7 @@ body.is-menu-visible #menu .inner {
         cursor: pointer;
         min-height: 2em;
         font-size: 25px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        /*font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif*/
     }
 
     .description {
