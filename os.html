@@ -373,13 +373,36 @@
             
             // Ensure the first buttons of each row are selected by default
             let selectedButtons = { row1: 'Windows', row2: 'Work', row3: 'Taskbar' };
-
+            
+            const userImages = {
+                'Windows': ['images/user/user001.png'],
+                'macOS': ['images/user/macos1.png', 'images/user/macos2.png'],
+                'Linux': ['images/user/linux1.png', 'images/user/linux2.png', 'images/user/linux3.png'],
+                'BSD': ['images/user/bsd1.png', 'images/user/bsd2.png']
+            };
+        
+            const foregroundImages = {
+                'Windows': ['images/os/Windows.png'],
+                'macOS': ['images/os/macos_fg1.png', 'images/os/macos_fg2.png'],
+                'Linux': ['images/os/linux_fg1.png', 'images/os/linux_fg2.png'],
+                'BSD': ['images/os/bsd_fg1.png', 'images/os/bsd_fg2.png']
+            };
             const data = {
                 'Windows-Work': [
-                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Windows.png', text: '', link: 'https://www.microsoft.com/en-us/software-download/windows11/' }
+                { 
+                    image: getRandomElement(userImages['Windows']), 
+                    foregroundImage: getRandomElement(foregroundImages['Windows']), 
+                    text: '', 
+                    link: 'https://www.microsoft.com/en-us/software-download/windows11/'
+                }
                 ],
                 'Windows-Gaming': [
-                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Windows.png', text: '', link: 'https://www.microsoft.com/en-us/software-download/windows11/' }
+                { 
+                    image: getRandomElement(userImages['Windows']), 
+                    foregroundImage: getRandomElement(foregroundImages['Windows']), 
+                    text: '', 
+                    link: 'https://www.microsoft.com/en-us/software-download/windows11/'
+                }
                 ],
                 'Windows-Server': [
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Windows.png', text: '', link: 'https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2022' }
@@ -406,21 +429,25 @@
                 'Linux-Work': [
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Redhat.png', text: '', link: 'https://example.com/linux-work-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os//Opensuse.png', text: '', link: 'https://example.com/linux-work-a' },
+                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Arch.png', text: '', link: 'https://example.com/linux-work-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Fedora.png', text: '', link: 'https://example.com/linux-work-b' }
                 ],
                 'Linux-Gaming': [
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Redhat.png', text: '', link: 'https://example.com/linux-gaming-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os//Opensuse.png', text: '', link: 'https://example.com/linux-work-a' },
+                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Arch.png', text: '', link: 'https://example.com/linux-work-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Fedora.png', text: '', link: 'https://example.com/linux-gaming-b' }
                 ],
                 'Linux-Server': [
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Redhat.png', text: 'Main text for Linux-Server (A)', link: 'https://example.com/linux-server-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Opensuse.png', text: '', link: 'https://example.com/linux-work-a' },
+                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Arch.png', text: '', link: 'https://example.com/linux-work-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Fedora.png', text: 'Main text for Linux-Server (B)', link: 'https://example.com/linux-server-b' }
                 ],
                 'Linux-Enthusiast': [
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Redhat.png', text: 'Main text for Linux-Enthusiast (A)', link: 'https://example.com/linux-enthusiast-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os//Opensuse.png', text: '', link: 'https://example.com/linux-work-a' },
+                    { image: 'images/user/user001.png', foregroundImage: 'images/os/Arch.png', text: '', link: 'https://example.com/linux-work-a' },
                     { image: 'images/user/user001.png', foregroundImage: 'images/os/Fedora.png', text: 'Main text for Linux-Enthusiast (B)', link: 'https://example.com/linux-enthusiast-b' }
                 ],
                 'BSD-Work': [
@@ -443,7 +470,8 @@
 
             const backgroundData = {
                 'Taskbar': [
-                    { image: 'images/os/Taskbar.webp', text: 'Background text for Taskbar (A)' }
+                    { image: 'images/os/Taskbar.webp', text: 'Tas' },
+                    { image: 'images/os/Taskbar.webp', text: 'Tas' }
                 ],
                 'Dock': [
                     { image: 'images/os/dummy.png', text: 'Background text for Dock (A)' }
