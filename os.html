@@ -381,16 +381,16 @@
 
     const userImages = {
         'Windows': ['images/user/user001.png'],
-        'macOS': ['images/user/macos1.png', 'images/user/macos2.png'],
-        'Linux': ['images/user/linux1.png', 'images/user/linux2.png', 'images/user/linux3.png'],
+        'macOS': ['images/user/user001.png'],
+        'Linux': ['images/user/user001.png', 'images/user/linux2.png', 'images/user/linux3.png'],
         'BSD': ['images/user/bsd1.png', 'images/user/bsd2.png']
     };
 
     const foregroundImages = {
         'Windows': ['images/os/Windows.png'],
         'WindowsServer': ['images/os/Windows.png'],
-        'macOS': ['images/os/macos_fg1.png', 'images/osacos_fg2.png'],
-        'Linux': ['images/os/linux_fg1.png', 'images/os//mlinux_fg2.png'],
+        'macOS': ['images/os/macos.png'],
+        'Linux': ['images/os/Redhat.png'],
         'BSD': ['images/os/bsd_fg1.png', 'images/os/bsd_fg2.png']
     };
 
@@ -430,113 +430,113 @@
         'macOS-Work': [
             {
                 image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
+                foregroundImage: foregroundImages['macOS'],
                 text: '\nMain text for macOS-Work',
                 link: 'https://example.com/macos-work-a'
-            },
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Work',
-                link: 'https://example.com/macos-work-b'
             }
         ],
         'macOS-Gaming': [
-            {
+        {
                 image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Gaming',
-                link: 'https://example.com/macos-gaming-a'
-            },
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Gaming',
-                link: 'https://example.com/macos-gaming-b'
+                foregroundImage: foregroundImages['macOS'],
+                text: '\nMain text for macOS-Work',
+                link: 'https://example.com/macos-work-a'
             }
         ],
         'macOS-Server': [
             {
                 image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Server',
-                link: 'https://example.com/macos-server-a'
-            },
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Server',
-                link: 'https://example.com/macos-server-b'
+                foregroundImage: foregroundImages['macOS'],
+                text: '\nMain text for macOS-Work',
+                link: 'https://example.com/macos-work-a'
             }
         ],
         'macOS-Enthusiast': [
             {
                 image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Enthusiast',
-                link: 'https://example.com/macos-enthusiast-a'
-            },
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: getRandomElement(foregroundImages['macOS']),
-                text: '\nMain text for macOS-Enthusiast',
-                link: 'https://example.com/macos-enthusiast-b'
+                foregroundImage: foregroundImages['macOS'],
+                text: '\nMain text for macOS-Work',
+                link: 'https://example.com/macos-work-a'
             }
         ],
         'Linux-Work': [
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nEnterprise-grade stability and support',
-                link: 'https://example.com/linux-work-a'
+                foregroundImage: ['images/os/Redhat.png'],
+                text: '\nMain text for Linux-Worka',
+                link: 'https://developers.redhat.com/products/rhel/download/'
             },
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Work',
-                link: 'https://example.com/linux-work-b'
+                foregroundImage: ['images/os/Opensuse.png'],
+                text: '\nMain text for Linux-Workb',
+                link: 'https://www.opensuse.org/'
+            },
+            {
+                image: getRandomElement(userImages['Linux']),
+                foregroundImage: ['images/os/Fedora.png'],
+                text: '\nMain text for Linux-Workd',
+                link: 'https://fedoraproject.org/'
             }
         ],
         'Linux-Gaming': [
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Gaming',
-                link: 'https://example.com/linux-gaming-a'
+                foregroundImage: ['images/os/Redhat.png'],
+                text: '\nMain text for Linux-Worka',
+                link: 'https://developers.redhat.com/products/rhel/download/'
             },
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Gaming',
-                link: 'https://example.com/linux-gaming-b'
+                foregroundImage: ['images/os/Opensuse.png'],
+                text: '\nMain text for Linux-Workb',
+                link: 'https://www.opensuse.org/'
+            },
+            {
+                image: getRandomElement(userImages['Linux']),
+                foregroundImage: ['images/os/Fedora.png'],
+                text: '\nMain text for Linux-Workd',
+                link: 'https://fedoraproject.org/'
             }
         ],
         'Linux-Server': [
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Server',
-                link: 'https://example.com/linux-server-a'
+                foregroundImage: ['images/os/Redhat.png'],
+                text: '\nMain text for Linux-Worka',
+                link: 'https://developers.redhat.com/products/rhel/download/'
             },
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Server',
-                link: 'https://example.com/linux-server-b'
+                foregroundImage: ['images/os/Opensuse.png'],
+                text: '\nMain text for Linux-Workb',
+                link: 'https://www.opensuse.org/'
+            },
+            {
+                image: getRandomElement(userImages['Linux']),
+                foregroundImage: ['images/os/Fedora.png'],
+                text: '\nMain text for Linux-Workd',
+                link: 'https://fedoraproject.org/'
             }
         ],
         'Linux-Enthusiast': [
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Enthusiast',
-                link: 'https://example.com/linux-enthusiast-a'
+                foregroundImage: ['images/os/Redhat.png'],
+                text: '\nMain text for Linux-Worka',
+                link: 'https://developers.redhat.com/products/rhel/download/'
             },
             {
                 image: getRandomElement(userImages['Linux']),
-                foregroundImage: getRandomElement(foregroundImages['Linux']),
-                text: '\nMain text for Linux-Enthusiast',
-                link: 'https://example.com/linux-enthusiast-b'
+                foregroundImage: ['images/os/Opensuse.png'],
+                text: '\nMain text for Linux-Workb',
+                link: 'https://www.opensuse.org/'
+            },
+            {
+                image: getRandomElement(userImages['Linux']),
+                foregroundImage: ['images/os/Fedora.png'],
+                text: '\nMain text for Linux-Workd',
+                link: 'https://fedoraproject.org/'
             }
         ],
         'BSD-Work': [
