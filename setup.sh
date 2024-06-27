@@ -8,13 +8,13 @@ exec > >(tee -a "$LOG") 2>&1
 RED="\e[31m"; BLUE="\e[94m"; GREEN="\e[32m"; YELLOW="\e[33m"; ENDCOLOR="\e[0m";USERNAME="MiguelCarino"; REPO="Carino-Systems"; latest_commit=$(curl -s "https://api.github.com/repos/$USERNAME/$REPO/commits?per_page=1" | jq -r '.[0].commit.message');latest_commit_time=$(curl -s "https://api.github.com/repos/$USERNAME/$REPO/commits?per_page=1" | grep -m 1 '"date":' | awk -F'"' '{print $4}');latest_kernel=$(curl -s https://www.kernel.org/releases.json | jq -r '.releases[1].version');hardwareAcceleration=$(glxinfo | grep "direct rendering");hardwareRenderer=$(glxinfo | grep "direct rendering" | awk '{print $3}');archType=$(lscpu | grep -e "^Architecture:" | awk '{print $NF}'); locale_language=$(locale | grep "LANG=" | cut -d'=' -f2)
 # Localized Display Menus
 tech_setup_en_US="-------------------------------------\nSetup Script\n-------------------------------------\nVersion:1.1\nDetected Distribution: $NAME $VERSION\nLatest GitHub Commit: $latest_commit\nLatest Linux Kernel Version: $latest_kernel\nYour Kernel Version: $(uname -r)\nCPU Architecture: $archType\nHardware acceleration enabled: $hardwareAcceleration\nHardware renderer: $hardwareRenderer\n-------------------------------------\nPlease select an option:\n1. Technical Setup\n2. Purpose Setup\n3. Install a Desktop Environment\n4. Install graphic drivers\n5. Install latest protonGE release\n6. Distro demo\n7. Exit"
-tech_setup_ja_JP="-------------------------------------\nセットアップ スクリプト\n-------------------------------------\nバージョン:1.1\nDetected 検出されたディストリビューション： $DISTRIBUTION $VERSION_ID\n最新のGitHubコミット： $latest_commit\n最新のLinuxカーネルバージョン： $latest_kernel\nあなたのカーネルバージョン： $(uname -r)\nCPUアーキテクチャ： $archType\nハードウェアアクセラレーションが有効： $hardwareAcceleration\nハードウェアレンダラー： $hardwareRenderer\n-------------------------------------\nオプションを選択してください：\n1. 技術的なセットアップ\n2. 目的のセットアップ\n3. サーバーセットアップ\n4. 終了"
-tech_setup_ru_RU="-------------------------------------\nСкрипт установки\n-------------------------------------\nВерсия:1.1\nОбнаруженное распространение: $DISTRIBUTION $VERSION_ID\nПоследний коммит в GitHub: $latest_commit\nПоследняя версия ядра Linux: $latest_kernel\nВаша версия ядра: $(uname -r)\nАрхитектура ЦП: $archType\nАппаратное ускорение отключено: $hardwareAcceleration\nАппаратный рендерер: $hardwareRenderer\n-------------------------------------\nПожалуйста, выберите опцию:\n1. Техническая настройка\n2. Назначение настройки\n3. Настройка сервера\n4. Выход"
-tech_setup_es_ES="-------------------------------------\nSetup Script\n-------------------------------------\nVersion:1.1\nDistribución Detectada: $DISTRIBUTION $VERSION_ID\nLatest GitHub Commit: $latest_commit\nLatest Linux Kernel Version: $latest_kernel\nVersión de Kernel: $(uname -r)\nCPU Architecture: $archType\nHardware acceleration enabled: $hardwareAcceleration\nHardware renderer: $hardwareRenderer\nAceleración de Hardware habilitada: $hardwareAcceleration\nRenderizador de Hardware: $hardwareRenderer\n-------------------------------------\nPor favor, seleccione una opción:\n1. Configuración Técnica\n2. Configuración para propósito de uso\n3. Configuración como servidor\n4. Salir"
-tech_setup_fi_FI="-------------------------------------\nAsennusskripti\n-------------------------------------\nVersio:1.1\nTunnistettu jakelu: $DISTRIBUTION $VERSION_ID\nViimeisin GitHubin sitoutuminen: $latest_commit\nViimeisin Linux-ytimen versio: $latest_kernel\nKäyttämäsi ytimen versio: $(uname -r)\nSuorittimen arkkitehtuuri: $archType\nLaitteistokiihdytys käytössä: $hardwareAcceleration\nLaitteiston renderöinti: $hardwareRenderer\n-------------------------------------\nValitse vaihtoehto:\n1. Tekninen asennus\n2. Tarkoitusasennus\n3. Palvelimen asennus\n4. Poistu"
-tech_setup_zh_CN="-------------------------------------\n“安装脚本\n-------------------------------------\n版本：1.1\n检测到的发行版：$DISTRIBUTION $VERSION_ID\n最新的GitHub提交：$latest_commit\n最新的Linux内核版本：$latest_kernel\n您的内核版本：$(uname -r)\nCPU架构：$archType\n硬件加速启用：$hardwareAcceleration\n硬件渲染器：$hardwareRenderer\n-------------------------------------\n请选择一个选项：\n1. 技术设置\n2. 目的设置\n3. 服务器设置\n4. 退出"
-tech_setup_ko_KR="-------------------------------------\n설정 스크립트\n-------------------------------------\n버전:1.1\n감지된 배포판: $DISTRIBUTION $VERSION_ID\n최근 GitHub 커밋: $latest_commit\n최신 Linux 커널 버전: $latest_kernel\n사용 중인 커널 버전: $(uname -r)\nCPU 아키텍처: $archType\n하드웨어 가속 활성화됨: $hardwareAcceleration\n하드웨어 렌더러: $hardwareRenderer\n-------------------------------------\n옵션을 선택하세요:\n1. 기술 설정\n2. 목적 설정\n3. 서버 설정\n4. 종료"
-tech_setup_he_IL="-------------------------------------\n סקריפט התקנה של \n-------------------------------------\nגרסה:1.1\nהתפלגות שזוהתה: $DISTRIBUTION $VERSION_ID\nהתחייבות GitHub אחרונה: $latest_commit\nגרסת הליבה של Linux האחרונה: $latest_kernel\nגרסת הליבה שלך: $(uname -r)\nארכיטקטורת CPU: $archType\nתאוצה בחומרה מופעלת: $hardwareAcceleration\nמנדף חומרה: $hardwareRenderer\n-------------------------------------\nאנא בחר אופציה:\n1. הגדרת טכנית\n2. הגדרת מטרה\n3. הגדרת שרת\n4. יציאה"
+tech_setup_ja_JP="-------------------------------------\nセットアップ スクリプト\n-------------------------------------\nバージョン:1.1\n検出されたディストリビューション： $DISTRIBUTION $VERSION_ID\n最新のGitHubコミット： $latest_commit\n最新のLinuxカーネルバージョン： $latest_kernel\nあなたのカーネルバージョン： $(uname -r)\nCPUアーキテクチャ： $archType\nハードウェアアクセラレーションが有効： $hardwareAcceleration\nハードウェアレンダラー： $hardwareRenderer\n-------------------------------------\nオプションを選択してください：\n1. 技術的なセットアップ\n2. 目的のセットアップ\n3. デスクトップ環境のインストール\n4. グラフィックドライバーのインストール\n5. 最新のProtonGEリリースのインストール\n6. ディストロのデモ\n7. 終了"
+tech_setup_ru_RU="-------------------------------------\nСкрипт установки\n-------------------------------------\nВерсия:1.1\nОбнаруженное распространение: $DISTRIBUTION $VERSION_ID\nПоследний коммит в GitHub: $latest_commit\nПоследняя версия ядра Linux: $latest_kernel\nВаша версия ядра: $(uname -r)\nАрхитектура ЦП: $archType\nАппаратное ускорение включено: $hardwareAcceleration\nАппаратный рендерер: $hardwareRenderer\n-------------------------------------\nПожалуйста, выберите опцию:\n1. Техническая настройка\n2. Настройка цели\n3. Установка рабочего окружения\n4. Установка графических драйверов\n5. Установка последнего релиза ProtonGE\n6. Демо-дистрибутив\n7. Выход"
+tech_setup_es_ES="-------------------------------------\nScript de Configuración\n-------------------------------------\nVersión:1.1\nDistribución Detectada: $DISTRIBUTION $VERSION_ID\nÚltimo Commit de GitHub: $latest_commit\nÚltima Versión del Kernel de Linux: $latest_kernel\nVersión de tu Kernel: $(uname -r)\nArquitectura de la CPU: $archType\nAceleración de Hardware habilitada: $hardwareAcceleration\nRenderizador de Hardware: $hardwareRenderer\n-------------------------------------\nPor favor, seleccione una opción:\n1. Configuración Técnica\n2. Configuración de Propósito\n3. Instalar un Entorno de Escritorio\n4. Instalar controladores gráficos\n5. Instalar la última versión de ProtonGE\n6. Demostración del Distro\n7. Salir"
+tech_setup_fi_FI="-------------------------------------\nAsennusskripti\n-------------------------------------\nVersio:1.1\nTunnistettu jakelu: $DISTRIBUTION $VERSION_ID\nViimeisin GitHubin sitoutuminen: $latest_commit\nViimeisin Linux-ytimen versio: $latest_kernel\nKäyttämäsi ytimen versio: $(uname -r)\nSuorittimen arkkitehtuuri: $archType\nLaitteistokiihdytys käytössä: $hardwareAcceleration\nLaitteiston renderöinti: $hardwareRenderer\n-------------------------------------\nValitse vaihtoehto:\n1. Tekninen asennus\n2. Tarkoitusasennus\n3. Työpöytäympäristön asentaminen\n4. Grafiikka-ajureiden asentaminen\n5. Viimeisimmän ProtonGE-julkaisun asentaminen\n6. Distro-esittely\n7. Poistu"
+tech_setup_zh_CN="-------------------------------------\n安装脚本\n-------------------------------------\n版本：1.1\n检测到的发行版：$DISTRIBUTION $VERSION_ID\n最新的GitHub提交：$latest_commit\n最新的Linux内核版本：$latest_kernel\n您的内核版本：$(uname -r)\nCPU架构：$archType\n硬件加速启用：$hardwareAcceleration\n硬件渲染器：$hardwareRenderer\n-------------------------------------\n请选择一个选项：\n1. 技术设置\n2. 目的设置\n3. 安装桌面环境\n4. 安装图形驱动程序\n5. 安装最新的ProtonGE版本\n6. 发行版演示\n7. 退出"
+tech_setup_ko_KR="-------------------------------------\n설정 스크립트\n-------------------------------------\n버전:1.1\n감지된 배포판: $DISTRIBUTION $VERSION_ID\n최근 GitHub 커밋: $latest_commit\n최신 Linux 커널 버전: $latest_kernel\n사용 중인 커널 버전: $(uname -r)\nCPU 아키텍처: $archType\n하드웨어 가속 활성화됨: $hardwareAcceleration\n하드웨어 렌더러: $hardwareRenderer\n-------------------------------------\n옵션을 선택하세요:\n1. 기술 설정\n2. 목적 설정\n3. 데스크톱 환경 설치\n4. 그래픽 드라이버 설치\n5. 최신 ProtonGE 릴리스 설치\n6. 배포판 데모\n7. 종료"
+tech_setup_he_IL="-------------------------------------\n סקריפט התקנה\n-------------------------------------\nגרסה:1.1\nהפצה מזוהה: $DISTRIBUTION $VERSION_ID\nהתחייבות GitHub אחרונה: $latest_commit\nגרסת הליבה האחרונה של Linux: $latest_kernel\nגרסת הליבה שלך: $(uname -r)\nארכיטקטורת ה-CPU: $archType\nהאצת חומרה מופעלת: $hardwareAcceleration\nמנדף חומרה: $hardwareRenderer\n-------------------------------------\nאנא בחר אופציה:\n1. הגדרה טכנית\n2. הגדרת מטרה\n3. התקנת סביבת שולחן עבודה\n4. התקנת מנהלי התקנים גרפיים\n5. התקנת גרסת ProtonGE האחרונה\n6. הדגמת הפצה\n7. יציאה"
 purpose_setup_en_US="-------------------------------------\nPlease select a purpose for your distro\n-------------------------------------\n1. Basic\n2. Gaming\n3. Corporate\n4. Development\n5. Astronomy\n6. Comp-Neuro\n7. Desing\n8. Jam\n9. Security Lab\n10. Robotics\n11. Scientific\n12. Offline"
 purpose_setup_ja_JP="ディストリビューションの目的を選択してください:\n1. ベーシック\n2. ゲーミング\n3. コーポレート\n4. 開発\n5. 天文学\n6. コンプ-ニューロ\n7. デザイン\n8. ジャム\n9. セキュリティラボ\n10. ロボティクス\n11. 科学的\n12. オフライン"
 purpose_setup_ru_RU="Выберите цель для вашего дистрибутива:\n1. Базовый\n2. Игровой\n3. Корпоративный\n4. Разработка\n5. Астрономия\n6. Комп-Нейро\n7. Дизайн\n8. Джем\n9. Лаборатория безопасности\n10. Робототехника\n11. Научный\n12. Оффлайн"
@@ -372,35 +372,37 @@ sharedFolder ()
             echo -e "No Windows shared folders were added\n--------------------------------------"
         fi
 }
-installproton ()
-{
-  if [ $(ls ~/.steam/root/ | grep compatibilitytools.d) ]
-  then
-      CURRENTVERSION=$(ls ~/.steam/root/compatibilitytools.d | tail -c 3)
-      for I in 14 13 12 11 10 9 8 7 6 5
-       do
-           if [[ $CURRENTVERSION -eq $I ]]
-           then
-               echo -e "${GREEN}You already have the latest ProtonGE $I version.${ENDCOLOR}"
-           else
-               PROTONVERSION=$I
-               wget https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-$PROTONVERSION/GE-Proton9-$PROTONVERSION.tar.gz &> /dev/null
-               if [ $? -eq 0 ]
-               then
-                   echo -e "Installing version $PROTONVERSION..."
-                   sudo tar -xf GE-Proton9-$PROTONVERSION.tar.gz -C ~/.steam/root/compatibilitytools.d && rm GE-Proton9-$PROTONVERSION.tar.gz
-                   echo -e "${GREEN}ProtonGE $PROTONVERSION has been installed.${ENDCOLOR}"
-                   break
-               else
-                   echo -e "${RED}Version $PROTONVERSION not found (yet).${ENDCOLOR}" &> /dev/null
-               fi
-           fi
-       done
+installproton() {
+  COMPATIBILITY_DIR="$HOME/.steam/root/compatibilitytools.d"
+  LATEST_VERSION=14
+
+  if [ -d "$COMPATIBILITY_DIR" ]; then
+    CURRENT_VERSION=$(ls "$COMPATIBILITY_DIR" | grep -Eo '[0-9]+' | sort -nr | head -n 1)
+    if [ "$CURRENT_VERSION" -eq "$LATEST_VERSION" ]; then
+      echo -e "${GREEN}You already have the latest ProtonGE $CURRENT_VERSION version.${ENDCOLOR}"
+      return
+    fi
   else
-      sudo mkdir -p ~/.steam/root/compatibilitytools.d
-      installproton
+    mkdir -p "$COMPATIBILITY_DIR"
   fi
+
+  for VERSION in {14..7}; do
+    if [ "$CURRENT_VERSION" -eq "$VERSION" ]; then
+      continue
+    fi
+
+    wget -q "https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-$VERSION/GE-Proton9-$VERSION.tar.gz"
+    if [ $? -eq 0 ]; then
+      echo -e "Installing version $VERSION..."
+      tar -xf "GE-Proton9-$VERSION.tar.gz" -C "$COMPATIBILITY_DIR" && rm "GE-Proton9-$VERSION.tar.gz"
+      echo -e "${GREEN}ProtonGE $VERSION has been installed.${ENDCOLOR}"
+      break
+    else
+      echo -e "${RED}Version $VERSION not found (yet).${ENDCOLOR}"
+    fi
+  done
 }
+
 microsoftRepo ()
 {
     case $NAME in 
