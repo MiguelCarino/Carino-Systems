@@ -364,14 +364,13 @@
 
     <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.btn');
     const mainImage = document.getElementById('img-main');
     const backgroundImage = document.getElementById('img-background');
     const foregroundImage = document.getElementById('img-foreground');
     const imageBoxContainer = document.getElementById('imageBoxContainer');
     const textMain = document.getElementById('text-main');
-    const textBackground = document.getElementById('text-background');
     const firstButton = document.getElementById('firstButton');
     const secondButton = document.getElementById('secondButton');
     const thirdButton = document.getElementById('thirdButton');
@@ -379,301 +378,142 @@
     // Ensure the first buttons of each row are selected by default
     let selectedButtons = { row1: 'Windows', row2: 'Work', row3: 'Taskbar' };
 
-    const userImages = {
-        'Windows': ['images/user/user001.png'],
-        'macOS': ['images/user/user001.png'],
-        'Linux': ['images/user/user001.png', 'images/user/linux2.png', 'images/user/linux3.png'],
-        'BSD': ['images/user/bsd1.png', 'images/user/bsd2.png']
-    };
-
     const foregroundImages = {
-        'Windows': ['images/os/Windows.png'],
-        'WindowsServer': ['images/os/Windows.png'],
-        'macOS': ['images/os/macos.png'],
-        'Linux': ['images/os/Redhat.png'],
-        'BSD': ['images/os/bsd_fg1.png', 'images/os/bsd_fg2.png']
+        'Windows': ['images/os/Windows.png', 'images/os/Windows.png'],
+        'macOS': ['images/os/macos.png', 'images/os/macos.png'],
+        'Linux': ['images/os/Fedora.png', 'images/os/fedora_old.png'],
+        'BSD': ['images/os/Redhat.png']
     };
 
-    const data = {
-        'Windows-Work': [
-            {
-                image: getRandomElement(userImages['Windows']),
-                foregroundImage: foregroundImages['Windows'],
-                text: '\nMain text for Windows-Work',
-                link: 'https://www.microsoft.com/en-us/software-download/windows11/'
-            }
-        ],
-        'Windows-Gaming': [
-            {
-                image: getRandomElement(userImages['Windows']),
-                foregroundImage: foregroundImages['Windows'],
-                text: '\nMain text for Windows-Gaming',
-                link: 'https://www.microsoft.com/en-us/software-download/windows11/'
-            }
-        ],
-        'Windows-Server': [
-            {
-                image: getRandomElement(userImages['Windows']),
-                foregroundImage: foregroundImages['WindowsServer'],
-                text: '\nMain text for Windows-Server',
-                link: 'https://www.microsoft.com/en-US/evalcenter/evaluate-windows-server-2022'
-            }
-        ],
-        'Windows-Enthusiast': [
-            {
-                image: getRandomElement(userImages['Windows']),
-                foregroundImage: foregroundImages['Windows'],
-                text: '\nMain text for Windows-Enthusiast',
-                link: 'https://www.microsoft.com/en-us/software-download/windows11/'
-            }
-        ],
-        'macOS-Work': [
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: foregroundImages['macOS'],
-                text: '\nMain text for macOS-Work',
-                link: 'https://example.com/macos-work-a'
-            }
-        ],
-        'macOS-Gaming': [
-        {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: foregroundImages['macOS'],
-                text: '\nMain text for macOS-Work',
-                link: 'https://example.com/macos-work-a'
-            }
-        ],
-        'macOS-Server': [
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: foregroundImages['macOS'],
-                text: '\nMain text for macOS-Work',
-                link: 'https://example.com/macos-work-a'
-            }
-        ],
-        'macOS-Enthusiast': [
-            {
-                image: getRandomElement(userImages['macOS']),
-                foregroundImage: foregroundImages['macOS'],
-                text: '\nMain text for macOS-Work',
-                link: 'https://example.com/macos-work-a'
-            }
-        ],
-        'Linux-Work': [
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Redhat.png'],
-                text: '\nMain text for Linux-Worka',
-                link: 'https://developers.redhat.com/products/rhel/download/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Opensuse.png'],
-                text: '\nMain text for Linux-Workb',
-                link: 'https://www.opensuse.org/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Fedora.png'],
-                text: '\nMain text for Linux-Workd',
-                link: 'https://fedoraproject.org/'
-            }
-        ],
-        'Linux-Gaming': [
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Redhat.png'],
-                text: '\nMain text for Linux-Worka',
-                link: 'https://developers.redhat.com/products/rhel/download/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Opensuse.png'],
-                text: '\nMain text for Linux-Workb',
-                link: 'https://www.opensuse.org/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Fedora.png'],
-                text: '\nMain text for Linux-Workd',
-                link: 'https://fedoraproject.org/'
-            }
-        ],
-        'Linux-Server': [
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Redhat.png'],
-                text: '\nMain text for Linux-Worka',
-                link: 'https://developers.redhat.com/products/rhel/download/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Opensuse.png'],
-                text: '\nMain text for Linux-Workb',
-                link: 'https://www.opensuse.org/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Fedora.png'],
-                text: '\nMain text for Linux-Workd',
-                link: 'https://fedoraproject.org/'
-            }
-        ],
-        'Linux-Enthusiast': [
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Redhat.png'],
-                text: '\nMain text for Linux-Worka',
-                link: 'https://developers.redhat.com/products/rhel/download/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Opensuse.png'],
-                text: '\nMain text for Linux-Workb',
-                link: 'https://www.opensuse.org/'
-            },
-            {
-                image: getRandomElement(userImages['Linux']),
-                foregroundImage: ['images/os/Fedora.png'],
-                text: '\nMain text for Linux-Workd',
-                link: 'https://fedoraproject.org/'
-            }
-        ],
-        'BSD-Work': [
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Work',
-                link: 'https://example.com/bsd-work-a'
-            },
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Work',
-                link: 'https://example.com/bsd-work-b'
-            }
-        ],
-        'BSD-Gaming': [
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Gaming',
-                link: 'https://example.com/bsd-gaming-a'
-            },
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Gaming',
-                link: 'https://example.com/bsd-gaming-b'
-            }
-        ],
-        'BSD-Server': [
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Server',
-                link: 'https://example.com/bsd-server-a'
-            },
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Server',
-                link: 'https://example.com/bsd-server-b'
-            }
-        ],
-        'BSD-Enthusiast': [
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Enthusiast',
-                link: 'https://example.com/bsd-enthusiast-a'
-            },
-            {
-                image: getRandomElement(userImages['BSD']),
-                foregroundImage: getRandomElement(foregroundImages['BSD']),
-                text: '\nMain text for BSD-Enthusiast',
-                link: 'https://example.com/bsd-enthusiast-b'
-            }
-        ]
+    const middleImages = {
+        'Windows': ['images/user/user001.png', 'images/user/user001.png'],
+        'macOS': ['images/user/user001.png', 'images/user/user001.png'],
+        'Linux': ['images/user/user001.png', 'images/user/user001.png'],
+        'BSD': ['images/user/user001.png', 'images/user/user001.png']
     };
 
-    const backgroundData = {
-        'Taskbar': [
-            { image: 'images/os/Taskbar.webp', text: 'Background text for Taskbar' }
-        ],
-        'Dock': [
-            { image: 'images/os/dummy.png', text: 'Background text for Dock' }
-        ],
-        'Tiling': [
-            { image: 'images/os/dummy.png', text: 'Background text for Tiling' }
-        ],
-        'CLI': [
-            { image: 'images/os/dummy.png', text: 'Background text for CLI' }
-        ]
+    const backgroundImages = {
+        'Windows': ['images/os/Taskbar.webp', 'images/os/Taskbar.webp'],
+        'macOS': ['images/background/macos1.png', 'images/background/macos2.png'],
+        'Linux': ['images/background/Linux1.png', 'images/background/Linux2.png'],
+        'BSD': ['images/background/BSD1.png', 'images/background/BSD2.png']
+    };
+
+    const downloadLinks = {
+        'Windows-Work-Taskbar': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Work-Dock': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Work-Tiling': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Work-CLI': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Gaming-Taskbar': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Gaming-Dock': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Gaming-Tiling': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Gaming-CLI': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Server-Taskbar': 'https://www.microsoft.com/en-us/windows-server/',
+        'Windows-Server-Dock': 'https://www.microsoft.com/en-us/windows-server/',
+        'Windows-Server-Tiling': 'https://www.microsoft.com/en-us/windows-server/',
+        'Windows-Server-CLI': 'https://www.microsoft.com/en-us/windows-server/',
+        'Windows-Enthusiast-Taskbar': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Enthusiast-Dock': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Enthusiast-Tiling': 'https://www.microsoft.com/software-download/windows11',
+        'Windows-Enthusiast-CLI': 'https://www.microsoft.com/software-download/windows11',
+        'macOS-Work-Taskbar': 'https://www.apple.com/macos/',
+        'macOS-Work-Dock': 'https://www.apple.com/macos/',
+        'macOS-Work-Tiling': 'https://www.apple.com/macos/',
+        'macOS-Work-CLI': 'https://www.apple.com/macos/',
+        'macOS-Gaming-Taskbar': 'https://www.apple.com/macos/',
+        'macOS-Gaming-Dock': 'https://www.apple.com/macos/',
+        'macOS-Gaming-Tiling': 'https://www.apple.com/macos/',
+        'macOS-Gaming-CLI': 'https://www.apple.com/macos/',
+        'macOS-Server-Taskbar': 'https://www.apple.com/macos/',
+        'macOS-Server-Dock': 'https://www.apple.com/macos/',
+        'macOS-Server-Tiling': 'https://www.apple.com/macos/',
+        'macOS-Server-CLI': 'https://www.apple.com/macos/',
+        'macOS-Enthusiast-Taskbar': 'https://www.apple.com/macos/',
+        'macOS-Enthusiast-Dock': 'https://www.apple.com/macos/',
+        'macOS-Enthusiast-Tiling': 'https://www.apple.com/macos/',
+        'macOS-Enthusiast-CLI': 'https://www.apple.com/macos/',
+        'Linux-Work-Taskbar': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-XFCE-x86_64-LIVE-20240614.iso',
+        'Linux-Work-Dock': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-WORK-x86_64-LIVE-20240614.iso',
+        'Linux-Work-Tiling': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-SWAY-x86_64-LIVE-20240614.iso',
+        'Linux-Work-CLI': 'https://download.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-40-1.14.iso',
+        'Linux-Gaming-Taskbar': 'https://download.bazzite.gg/bazzite-stable.iso',
+        'Linux-Gaming-Dock': 'https://download.bazzite.gg/bazzite-gnome-stable.iso',
+        'Linux-Gaming-Tiling': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-SWAY-x86_64-LIVE-20240614.iso',
+        'Linux-Gaming-CLI': 'https://download.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-40-1.14.iso',
+        'Linux-Server-Taskbar': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-XFCE-x86_64-LIVE-20240614.iso',
+        'Linux-Server-Dock': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-WORK-x86_64-LIVE-20240614.iso',
+        'Linux-Server-Tiling': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-SWAY-x86_64-LIVE-20240614.iso',
+        'Linux-Server-CLI': 'https://download.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-40-1.14.iso',
+        'Linux-Enthusiast-Taskbar': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-KDE-x86_64-LIVE-20240614.iso',
+        'Linux-Enthusiast-Dock': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-WORK-x86_64-LIVE-20240614.iso',
+        'Linux-Enthusiast-Tiling': 'https://dl.fedoraproject.org/pub/alt/live-respins/F40-SWAY-x86_64-LIVE-20240614.iso',
+        'Linux-Enthusiast-CLI': 'https://download.fedoraproject.org/pub/fedora/linux/releases/40/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-40-1.14.iso',
+        'BSD-Work-Taskbar': 'https://download.ghostbsd.org/releases/amd64/24.04.1/GhostBSD-24.04.1.iso',
+        'BSD-Work-Dock': 'https://github.com/helloSystem/ISO/releases/download/r0.8.1/hello-0.8.1_0H324-FreeBSD-13.1-amd64.iso',
+        'BSD-Work-Tiling': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Work-CLI': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Gaming-Taskbar': 'https://download.ghostbsd.org/releases/amd64/24.04.1/GhostBSD-24.04.1.iso',
+        'BSD-Gaming-Dock': 'https://github.com/helloSystem/ISO/releases/download/r0.8.1/hello-0.8.1_0H324-FreeBSD-13.1-amd64.iso',
+        'BSD-Gaming-Tiling': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Gaming-CLI': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Server-Taskbar': 'https://download.ghostbsd.org/releases/amd64/24.04.1/GhostBSD-24.04.1.iso',
+        'BSD-Server-Dock': 'https://github.com/helloSystem/ISO/releases/download/r0.8.1/hello-0.8.1_0H324-FreeBSD-13.1-amd64.iso',
+        'BSD-Server-Tiling': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Server-CLI': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Enthusiast-Taskbar': 'https://download.ghostbsd.org/releases/amd64/24.04.1/GhostBSD-24.04.1.iso',
+        'BSD-Enthusiast-Dock': 'https://github.com/helloSystem/ISO/releases/download/r0.8.1/hello-0.8.1_0H324-FreeBSD-13.1-amd64.iso',
+        'BSD-Enthusiast-Tiling': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        'BSD-Enthusiast-CLI': 'https://download.freebsd.org/releases/amd64/amd64/ISO-IMAGES/14.1/FreeBSD-14.1-RELEASE-amd64-disc1.iso',
+        // Add other permutations as necessary
+    };
+
+    const setupScripts = {
+        'Windows': 'iwr -useb https://carino.systems/setup.ps1 | iex',
+        'macOS': '#',
+        'Linux': 'bash <(curl -s https://carino.systems/setup.sh)',
+        'BSD': 'bash <(curl -s https://carino.systems/setup.sh)'
     };
 
     function getRandomElement(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    function updateRow1Content() {
+    function updateForegroundContent() {
         const row1Key = selectedButtons.row1;
+        const foregroundImageSrc = getRandomElement(foregroundImages[row1Key]);
+        foregroundImage.src = foregroundImageSrc;
 
-        const row1Content = getRandomElement(data[`${row1Key}-${selectedButtons.row2}`]); // Use current row2 selection
+        secondButton.onclick = () => {
+            navigator.clipboard.writeText(setupScripts[row1Key]).then(() => {
+                alert('Text copied to clipboard');
+            });
+        };
 
-        if (row1Content) {
-            foregroundImage.src = row1Content.foregroundImage; // Assuming row1Content has foregroundImage property
-            textMain.innerHTML = row1Content.text.replace(/\n/g, '<br>');
-            secondButton.onclick = () => {
-                alert(`Setup script for ${row1Key}`);
-            };
-        } else {
-            foregroundImage.src = ''; // Clear foreground image
-            textMain.innerHTML = 'Main text will appear here';
-            secondButton.onclick = null;
-        }
-
-        foregroundImage.classList.add('active'); // Activate the foreground image
+        foregroundImage.classList.add('active');
     }
 
-    function updateRow2Content() {
-        const row2Key = selectedButtons.row2;
+    function updateMiddleContent() {
+        const row1Key = selectedButtons.row1;
+        const middleImageSrc = getRandomElement(middleImages[row1Key]);
+        mainImage.src = middleImageSrc;
 
-        const row2Content = getRandomElement(data[`${selectedButtons.row1}-${row2Key}`]); // Use current row1 selection
-
-        if (row2Content) {
-            mainImage.src = row2Content.image;
-            textMain.innerHTML = row2Content.text.replace(/\n/g, '<br>');
-        } else {
-            mainImage.src = '';
-            textMain.innerHTML = 'Main text will appear here';
-        }
-
-        mainImage.classList.add('active'); // Activate the main image
+        mainImage.classList.add('active');
     }
 
     function updateBackgroundContent() {
-        const style = selectedButtons.row3;
-        const backgroundContent = getRandomElement(backgroundData[style]);
-
-        if (backgroundContent) {
-            backgroundImage.src = backgroundContent.image;
-            textBackground.innerHTML = backgroundContent.text.replace(/\n/g, '<br>');
-        } else {
-            backgroundImage.src = '';
-            textBackground.innerHTML = 'Background text will appear here';
-        }
+        const row1Key = selectedButtons.row1;
+        const backgroundImageSrc = getRandomElement(backgroundImages[row1Key]);
+        backgroundImage.src = backgroundImageSrc;
 
         backgroundImage.classList.add('active');
     }
 
     function updateDownloadLink() {
-        const mainKey = `${selectedButtons.row1}-${selectedButtons.row2}`;
+        const permutationKey = `${selectedButtons.row1}-${selectedButtons.row2}-${selectedButtons.row3}`;
+        const downloadLink = downloadLinks[permutationKey];
 
-        const mainContent = getRandomElement(data[mainKey]);
-
-        if (mainContent) {
-            firstButton.onclick = () => window.open(mainContent.link, '_blank');
+        if (downloadLink) {
+            firstButton.onclick = () => window.open(downloadLink, '_blank');
         } else {
             firstButton.onclick = null;
         }
@@ -737,14 +577,13 @@
             button.classList.add('active');
 
             if (row === '1') {
-                updateRow1Content();
-                updateDownloadLink();
+                updateForegroundContent();
             } else if (row === '2') {
-                updateRow2Content();
-                updateDownloadLink();
+                updateMiddleContent();
             } else if (row === '3') {
                 updateBackgroundContent();
             }
+            updateDownloadLink(); // Ensure download link is updated for any button press
         });
     });
 
@@ -752,8 +591,8 @@
     document.querySelector('[data-row="1"][data-index="Windows"]').classList.add('active');
     document.querySelector('[data-row="2"][data-index="Work"]').classList.add('active');
     document.querySelector('[data-row="3"][data-index="Taskbar"]').classList.add('active');
-    updateRow1Content();
-    updateRow2Content();
+    updateForegroundContent();
+    updateMiddleContent();
     updateBackgroundContent();
     updateDownloadLink();
 
@@ -761,6 +600,18 @@
 
     thirdButton.onclick = () => window.open('https://carino.systems/solutions.html', '_blank');
 });
+</script>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+
+</html>
 
     </script>    
     
