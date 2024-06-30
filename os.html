@@ -33,7 +33,7 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        background-color: #f0f0f0;
+        background-color: #f0f0f000;
     }
 
     .container-75vh {
@@ -134,7 +134,7 @@
         height: 18vh;
         justify-content: center;
         align-items: center;
-        background-color: #f9f9f9;
+        background-color: #f9f9f900;
         border: 2px solid #007bff;
         transition: height 0.3s ease-in-out;
         padding: 20px;
@@ -149,7 +149,7 @@
     }
 
     .code-container pre {
-        background: #f4f4f4;
+        background: rgba(0, 0, 0, 0)
         padding: 20px;
         border: 1px solid #ccc;
         width: 80%;
@@ -212,17 +212,21 @@
                         <p>Windows</p>
                     </div>
                     <div class="section" data-target="hidden2" data-secondary="secondaryHidden2">
-                        <img src="images/icons/finder.svg" alt="Image 2">
+                        <img src="images/icons/finder.svg" alt="Image 2" >
                         <p>macOS</p>
                     </div>
                     <div class="section" data-target="hidden3" data-secondary="secondaryHidden3">
                         <img src="images/icons/Fedora_icon_(2021).svg" alt="Image 3">
                         <p>Linux</p>
                     </div>
-                    <div class="section" data-target="hidden4" data-secondary="secondaryHidden4">
-                        <img src="images/icons/terminal.webp" alt="Image 4">
+                    <!--<div class="section" data-target="hidden4" data-secondary="secondaryHidden4">
+                        <img src="images/icons/terminal.webp" alt="Image 4" style="height: 70%; padding-top: 50%;">
                         <p>BSD</p>
                     </div>
+                    <div class="section" data-target="hidden5" data-secondary="secondaryHidden5">
+                        <img src="images/icons/terminal.webp" alt="Image 5" style="height: 70%; padding-top: 50%;">
+                        <p>Others</p>
+                    </div>-->
                 </div>
 
                 <!-- Hidden containers for detailed sections -->
@@ -250,34 +254,45 @@
                     <!-- Hidden section 3 -->
                     <div class="container-50vh hidden" id="hidden3">
                         <div class="section" data-text="Linux Detail 3 Selected">
-                            <img src="images/os/selectrhel.webp"" alt="Image 6-6">
-                            <p>Debian</p>
+                            <a href="https://www.debian.org/" target="_blank">
+                                <img src="images/os/selectrhel.webp" alt="Image 1-6">
+                                <p>Debian</p>
+                            </a>
                         </div>
                         <div class="section" data-text="Linux Detail Selected">
-                            <img src="images/os/selectfedora.webp" alt="Image 1-6">
-                            <p>Fedora</p>
+                            <a href="https://https://fedoraproject.org/" target="_blank">
+                                <img src="images/os/selectfedora.webp" alt="Image 6-6">
+                                <p>Fedora</p>
+                            </a>
                         </div>
                         <div class="section" data-text="Linux Detail 3 Selected">
-                            <img src="images/os/selectsuse.webp"" alt="Image 4-6">
-                            <p>openSUSE</p>
+                            <a href="https://www.opensuse.org" target="_blank">
+                                <img src="images/os/selectsuse.webp" alt="Image 6-6">
+                                <p>OpenSUSE</p>
+                            </a>
                         </div>
                         <div class="section" data-text="Linux Detail 2 Selected">
-                            <img src="images/os/selectrhel.webp" alt="Image 2-6">
-                            <p>CentOS</p>
+                            <a href="https://www.centos.org/centos-stream/" target="_blank">
+                                <img src="images/os/selectrhel.webp" alt="Image 6-6">
+                                <p>CentOS Stream</p>
+                            </a>
                         </div>
                         <div class="section" data-text="Linux Detail 3 Selected">
-                            <img src="images/os/selectrhel.webp"" alt="Image 3-6">
-                            <p>Alma Linux</p>
+                            <a href="https://almalinux.org/" target="_blank">
+                                <img src="images/os/selectrhel.webp" alt="Image 6-6">
+                                <p>Alma</p>
+                            </a>
                         </div>
-                       
                         <div class="section" data-text="Linux Detail 3 Selected">
-                            <img src="images/os/selectrhel.webp"" alt="Image 5-6">
-                            <p>Red Hat</p>
+                            <a href="https://developers.redhat.com/products/rhel/download" target="_blank">
+                                <img src="images/os/selectrhel.webp" alt="Image 6-6">
+                                <p>Red Hat</p>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Hidden section 4 -->
-                    <div class="container-50vh hidden" id="hidden4">
+                   <!--<div class="container-50vh hidden" id="hidden4">
                         <div class="section" data-text="BSD Detail 1 Selected">
                             <a href="https://carino.systems/music.html" target="_blank">
                                 <img src="images/layout/banner_1.webp" alt="Image 4-1">
@@ -302,7 +317,29 @@
                                 <p>DragonFly BSD</p>
                             </a>
                         </div>
-                    </div>
+                    </div>-->
+
+                    <!-- Hidden section 5 -->
+                    <!--<div class="container-50vh hidden" id="hidden5">
+                        <div class="section" data-text="Windows Detail Selected">
+                            <a href="https://www.haiku-os.org/" target="_blank">
+                                <img src="https://via.placeholder.com/200x200" alt="Image 5-1">
+                                <p>Haiku</p>
+                            </a>
+                        </div>
+                        <div class="section" data-text="Windows Detail 4 Selected">
+                            <a href="https://plan9.io/plan9/" target="_blank">
+                                <img src="https://via.placeholder.com/200x200" alt="Image 5-2">
+                                <p>Plan 9</p>
+                            </a>
+                        </div>
+                        <div class="section" data-text="Windows Detail 4 Selected">
+                            <a href="http://collapseos.org/" target="_blank">
+                                <img src="https://via.placeholder.com/200x200" alt="Image 5-2">
+                                <p>collapseOS</p>
+                            </a>
+                        </div>
+                    </div>-->
 
                     <!-- Secondary hidden containers -->
                     <div class="secondary-hidden-container" id="secondaryHidden1">
