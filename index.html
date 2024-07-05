@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carino Systems™</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
@@ -36,7 +37,7 @@
                 </a>
             </div>
             <div class="highlight" id="about">
-                <a href="#about">
+                <a href="solutions.html">
                     <h2>Solutions</h2>
                 </a>
             </div>
@@ -85,24 +86,6 @@
             const randomIndex = Math.floor(Math.random() * l.length);
             randomPhraseElement.textContent = l[randomIndex];
         }
-
-        // Navigation content
-        const navContent = `
-            <div class="logo">MyLogo</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        `;
-        document.getElementById('navbar').innerHTML = navContent;
-
-        // Footer content
-        const footerContent = `
-            <p>&copy; 2024 Carino Systems. All rights reserved.</p>
-        `;
-        document.getElementById('footer').innerHTML = footerContent;
     });
 </script>
 </html>

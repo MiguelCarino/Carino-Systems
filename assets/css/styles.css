@@ -1,3 +1,99 @@
+@font-face {
+    font-family: 'LiberationSans';
+    src: url('../webfonts/LiberationSans-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LiberationSans';
+    src: url('../webfonts/LiberationSans-Bold.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LiberationSans';
+    src: url('../webfonts/LiberationSans-Italic.ttf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'LiberationSans';
+    src: url('../webfonts/LiberationSans-BoldItalic.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'LiberationMono';
+    src: url('../webfonts/LiberationMono-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LiberationMono';
+    src: url('../webfonts/LiberationMono-Bold.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LiberationMono';
+    src: url('../webfonts/LiberationMono-Italic.ttf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'LiberationMono';
+    src: url('../webfonts/LiberationMono-BoldItalic.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'RedHatFont';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideo-BLG6G.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideoBold-R90Dv.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
 /* Basic Reset */
 * {
     font-family: Liberation;
@@ -8,7 +104,7 @@
 
 /* Body Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Liberation;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -28,7 +124,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0 20px;
 }
 
 nav .logo {
@@ -156,7 +252,7 @@ footer {
     background: #0b50aa;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
+    padding: 5px 0;
     /*margin-top: 20px;*/
     position: sticky;
     bottom: 0;
