@@ -1,0 +1,212 @@
+/* Fonts */
+@font-face {
+    font-family: 'Liberation';
+    src: url('../webfonts/LiberationMono-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Liberation';
+    src: url('../webfonts/LiberationMono-Bold.ttf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Liberation';
+    src: url('../webfonts/LiberationMono-Italic.ttf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Liberation';
+    src: url('../webfonts/LiberationMono-BoldItalic.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'RedHat';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RedHat';
+    src: url('../webfonts/RedHatDisplay-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RedHat';
+    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'RedHat';
+    src: url('../webfonts/RedHatDisplay-BoldItalic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideo-BLG6G.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'HomeVideo';
+    src: url('../webfonts/HomeVideoBold-R90Dv.ttf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Basic Reset */
+* {
+    font-family: Liberation;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+nav {
+    background: #0b50aa;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Link Styling */
+
+a:link {
+   color: rgb(123, 255, 0);
+   text-decoration: none; /* Removes text underline */
+}
+
+a:visited {
+  color: rgb(235, 248, 51);
+}
+
+a:hover {
+  color: rgb(255, 255, 255);
+}
+
+a:active {
+  color: rgb(243, 243, 248);
+} 
+
+/* Header Styling */
+header {
+    background: #f4f4f4;
+    color: #333;
+    padding: 40px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Main Content Area */
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Highlight Container */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 90%;
+}
+
+/* Highlight Div Style */
+.highlight {
+    flex: 1 1 calc(33.333% - 40px);
+    height: 200px;
+    background: url('https://picsum.photos/200/300') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.highlight:hover {
+    transform: scale(1.1);
+}
+
+.highlight h2 {
+    margin: 0;
+}
+
+/* Content Div Style */
+.content {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #e4e4e4;
+    border-radius: 8px;
+}
+
+/* Footer Styling */
+footer {
+    background: #0b50aa;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 0;
+}
