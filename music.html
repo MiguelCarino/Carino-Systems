@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/solutions.css">
+    <link rel="icon" href="assets/images/logo.webp">
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/solutions.js" defer></script>
+    <!-- Open Graph Protocol Meta Tags -->
+    <meta property="og:title" content="Carino Systems"/>
+    <meta property="twitter:title" content="Carino Systems"/>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carino.systems"/>
+    <meta property="og:image" content="https://carino.systems/images/ogp.webp"/>
+    <meta property="og:description" content="Friendly IT solutions, openly available"/>
+    <meta property="og:site_name" content="Carino Systems"/>
+    <meta property="og:locale" content="en_US"/>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar"></nav>
+    <main>
+        <div id="musicgrid"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+</body>
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+    // URL to the raw HTML content from the GitHub repository
+    const repoHtmlUrl = 'https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/index.html';
+    const repoScriptUrl = 'https://github.com/MiguelCarino/MusicGrid/blob/main/assets/js/main.js'; // Adjust this to your script file path
+
+    // Function to load a script
+    function loadScript(url) {
+        const script = document.createElement('script');
+        script.src = url;
+        script.type = 'text/javascript';
+        script.async = true;
+        document.body.appendChild(script);
+    }
+
+    fetch(repoHtmlUrl)
+        .then(response => response.text())
+        .then(data => {
+            // Insert the fetched content into the div with id "content"
+            document.getElementById('musicgrid').innerHTML = data;
+
+            // Load the associated script
+            loadScript(repoScriptUrl);
+        })
+        .catch(error => {
+            console.error('Error fetching content from GitHub:', error);
+            document.getElementById('musicgrid').innerHTML = '<p>Failed to load content. Please try again later.</p>';
+        });
+});
+</script>
+</html>
