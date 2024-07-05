@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Navigation content
     const navContent = `
-        <div class="logo"><a href="#home"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
+        <div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
         <ul>
             <li><a href="https://github.com/MiguelCarino" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
             <li><a href="https://www.linkedin.com/in/miguelcarino94" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
