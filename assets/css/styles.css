@@ -1,71 +1,3 @@
-/* Fonts */
-@font-face {
-    font-family: 'Liberation';
-    src: url('../webfonts/LiberationMono-Regular.ttf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Liberation';
-    src: url('../webfonts/LiberationMono-Bold.ttf') format('opentype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Liberation';
-    src: url('../webfonts/LiberationMono-Italic.ttf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Liberation';
-    src: url('../webfonts/LiberationMono-BoldItalic.ttf') format('opentype');
-    font-weight: bold;
-    font-style: italic;
-}
-@font-face {
-    font-family: 'RedHat';
-    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RedHat';
-    src: url('../webfonts/RedHatDisplay-Bold.otf') format('opentype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'RedHat';
-    src: url('../webfonts/RedHatDisplay-Italic.otf') format('opentype');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'RedHat';
-    src: url('../webfonts/RedHatDisplay-BoldItalic.otf') format('opentype');
-    font-weight: bold;
-    font-style: italic;
-}
-@font-face {
-    font-family: 'HomeVideo';
-    src: url('../webfonts/HomeVideo-BLG6G.ttf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'HomeVideo';
-    src: url('../webfonts/HomeVideoBold-R90Dv.ttf') format('opentype');
-    font-weight: bold;
-    font-style: italic;
-}
-
 /* Basic Reset */
 * {
     font-family: Liberation;
@@ -78,6 +10,15 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 /* Navigation Bar */
@@ -115,30 +56,30 @@ nav ul li a:hover {
 }
 
 /* Link Styling */
-
 a:link {
-   color: rgb(123, 255, 0);
-   text-decoration: none; /* Removes text underline */
+    color: rgb(123, 255, 0);
+    text-decoration: none; /* Removes text underline */
 }
 
 a:visited {
-  color: rgb(235, 248, 51);
+    color: rgb(235, 248, 51);
 }
 
 a:hover {
-  color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 a:active {
-  color: rgb(243, 243, 248);
+    color: rgb(243, 243, 248);
 } 
 
 /* Header Styling */
 header {
-    background: #f4f4f4;
+    background: #000000;
     color: #333;
     padding: 40px 0;
     text-align: center;
+    color: #fff;
 }
 
 header h1 {
@@ -154,13 +95,15 @@ main {
     padding: 20px;
     display: flex;
     justify-content: center;
+    flex: 1; /* Ensure main takes up all available space */
+    background-color: #000000;
 }
 
 /* Highlight Container */
 .main-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     width: 90%;
 }
@@ -168,7 +111,7 @@ main {
 /* Highlight Div Style */
 .highlight {
     flex: 1 1 calc(33.333% - 40px);
-    height: 200px;
+    height: 30vh;
     background: url('https://picsum.photos/200/300') no-repeat center center;
     background-size: cover;
     border-radius: 8px;
@@ -180,8 +123,18 @@ main {
     transition: transform 0.3s ease;
 }
 
+.highlight a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .highlight:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 
 .highlight h2 {
@@ -204,9 +157,25 @@ footer {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
     margin: 0;
+}
+
+/* Resolution Styles */
+@media screen and (max-width: 480px) {
+
+    body,
+    html {
+        min-width: 320px
+    }
+    .main-container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
 }
