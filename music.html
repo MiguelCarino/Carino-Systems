@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solutions</title>
+    <title>Music</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/solutions.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/assets/css/grid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MiguelCarino/MusicGrid@main/assets/css/grid.css">
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
-    <script src="https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/assets/js/grid.js"></script>
-    <script src="https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/assets/js/catalog.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MiguelCarino/MusicGrid@main/assets/js/grid.js" defer></script>
+    <script src="assets/js/catalog.js" defer></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -24,40 +24,29 @@
 <body>
     <!-- Navigation Bar -->
     <nav id="navbar"></nav>
-    <main>
-        <div id="Catalog"></div>
-    </main>
-
+    <!-- Hidden Video Info Bar -->
+    <div id="catalog">
+        <div id="videoInfoBar" class="hidden">
+            <div class="column" id="albumImage"></div>
+            <div class="column" id="videoTitle"></div>
+            <div class="column" id="videoLinks"></div>
+            <div class="column" id="videoPlayer"></div>
+        </div>
+        <!-- Main Content Area -->
+        <div id="musicgrid"></div>
+    </div>
     <!-- Footer -->
     <footer id="footer"></footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize the grid functionalities
+            if (typeof populateGrid === 'function') {
+                populateGrid();
+            } else {
+                console.error('populateGrid function is not available');
+            }
+        });
+    </script>
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // URL to the raw HTML content from the GitHub repository
-        const repoHtmlUrl = 'https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/index.html';
-
-        fetch(repoHtmlUrl)
-            .then(response => response.text())
-            .then(data => {
-                // Create a temporary div to hold the fetched HTML
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = data;
-
-                // Extract the div with id "musicgrid"
-                const musicgridContent = tempDiv.querySelector('#musicgrid');
-                if (musicgridContent) {
-                    document.getElementById('Catalog').innerHTML = musicgridContent.innerHTML;
-                }
-
-                // Initialize the grid functionalities
-                if (typeof populateGrid === 'function') {
-                    populateGrid();
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching content from GitHub:', error);
-                document.getElementById('Catalog').innerHTML = '<p>Failed to load content. Please try again later.</p>';
-            });
-    });
-</script>
 </html>
