@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/solutions.css">
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/solutions.js" defer></script>
+    <script src="https://github.com/MiguelCarino/MusicGrid/blob/main/assets/js/main.js"></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -31,9 +31,9 @@
 </body>
 <script>
      document.addEventListener("DOMContentLoaded", function() {
-    // URL to the raw HTML content from the GitHub repository
+    /*// URL to the raw HTML content from the GitHub repository
     const repoHtmlUrl = 'https://raw.githubusercontent.com/MiguelCarino/MusicGrid/main/index.html';
-    const repoScriptUrl = 'https://github.com/MiguelCarino/MusicGrid/blob/main/assets/js/main.js'; // Adjust this to your script file path
+    const repoScriptUrl = 'https://github.com/MiguelCarino/MusicGrid/blob/main/assets/js/main.js'; // Adjust this to your script file path*/
 
     // Function to load a script
     function loadScript(url) {
@@ -48,14 +48,14 @@
         .then(response => response.text())
         .then(data => {
             // Insert the fetched content into the div with id "content"
-            document.getElementById('musicgrid').innerHTML = data;
+            document.getElementById('Catalog').innerHTML = data;
 
             // Load the associated script
             loadScript(repoScriptUrl);
         })
         .catch(error => {
             console.error('Error fetching content from GitHub:', error);
-            document.getElementById('musicgrid').innerHTML = '<p>Failed to load content. Please try again later.</p>';
+            document.getElementById('Catalog').innerHTML = '<p>Failed to load content. Please try again later.</p>';
         });
 });
 </script>
