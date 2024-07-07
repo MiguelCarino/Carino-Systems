@@ -1,6 +1,6 @@
 const freeSoftware = [
     {
-        id: 'Web Browser',
+        id: 'Firefox Web Browser',
         url: 'https://www.mozilla.org/en-US/firefox/new/',
         solution: 'Firefox',
         cdeb: 'firefox',
@@ -16,16 +16,25 @@ const freeSoftware = [
         cfed: 'https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors.x86_64.rpm',
         cwin: 'ONLYOFFICE.DesktopEditors',
         cmac: '--cask onlyoffice'
-    },/*
+    },
     {
-        id: 'Popular Web Browser',
+        id: 'Chromium Web Browser',
         url: 'https://www.chromium.org/getting-involved/download-chromium/',
         solution: 'Chromium',
         cdeb: '#',
         cfed: 'chromium',
         cwin: 'Hibbiki.Chromium',
         cmac: '--cask chromium'
-    },*/
+    },
+    {
+        id: 'Chrome Web Browser',
+        url: 'https://www.google.com/chrome/',
+        solution: 'Chromium',
+        cdeb: '&& wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && rm google-chrome-stable_current_amd64.deb',
+        cfed: 'https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm',
+        cwin: 'Hibbiki.Chromium',
+        cmac: '--cask chromium'
+    },
     {
         id: 'Media Player',
         url: 'https://mpv.io/installation/',
@@ -665,9 +674,24 @@ const websites = [
         solution: 'Microsoft Product Keys'
     },
     {
-        id: 'Global DNS Propagation Checker',
-        url: 'https://www.whatsmydns.net/',
-        solution: 'whatsmydns.net'
+        id: 'DNS Propagation Check',
+        url: 'https://dnsmap.io/',
+        solution: 'dnsmap.io'
+    },
+    {
+        id: 'DNS Analytics and Comparison',
+        url: 'https://www.dnsperf.com/',
+        solution: 'dnsperf.com'
+    },
+    {
+        id: 'DNS Analytics and Comparison',
+        url: 'https://www.dnsperf.com/',
+        solution: 'dnsperf.com'
+    },
+    {
+        id: 'Public Content Delivery',
+        url: 'https://www.dnsperf.com/',
+        solution: 'dnsperf.com'
     },
     {
         id: 'Summarized Terms of Service',
