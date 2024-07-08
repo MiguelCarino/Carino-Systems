@@ -1,4 +1,4 @@
-const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp'
+export const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp'
 },{url: 'YPrs3DqraWM',image: 'mu_2.webp'
 },{url: 'EX67uWOlbgs',image: 'mu_2.webp'
 },{url: 'Hi8HjWTUqwI',image: 'mu_2.webp'
