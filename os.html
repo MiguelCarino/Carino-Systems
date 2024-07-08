@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MiguelCarino/OSGrid@main/assets/css/os.css">
+    <link rel="icon" href="assets/images/logo.webp">
+    <script src="assets/js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/MiguelCarino/OSGrid@main/assets/js/os.js" defer></script>
+    <!-- Open Graph Protocol Meta Tags -->
+    <meta property="og:title" content="Carino Systems"/>
+    <meta property="twitter:title" content="Carino Systems"/>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carino.systems"/>
+    <meta property="og:image" content="https://carino.systems/images/ogp.webp"/>
+    <meta property="og:description" content="Friendly IT solutions, openly available"/>
+    <meta property="og:site_name" content="Carino Systems"/>
+    <meta property="og:locale" content="en_US"/>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar"></nav>
+
+    <!-- Header -->
+    <header>
+        <h1>Operating Systems</h1>
+        <h2>Choose your poison.</h2>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <div class="first-row" id="firstRow">
+            <div class="square" onclick="selectMainSquare('Windows', this)">Windows</div>
+            <div class="square" onclick="selectMainSquare('macOS', this)">macOS</div>
+            <div class="square" onclick="selectMainSquare('Linux', this)">Linux</div>
+        </div>
+        <div class="second-row" id="secondRow">
+            <!-- These squares will be dynamically populated based on the selection above -->
+        </div>
+        <div class="big-square" id="bigSquare">
+            Please select an operating system to get information
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+</body>
+</html>
