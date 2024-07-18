@@ -152,12 +152,12 @@ nav ul li a:hover {
 
 /* Link Styling */
 a:link {
-    color: rgb(0, 0, 0);
-    /*text-decoration: none; /* Removes text underline */*/
+    color: rgb(255, 255, 255);
+    text-decoration: none; /* Removes text underline */
 }
 
 a:visited {
-    color: rgb(0, 0, 0);
+    color: rgb(178, 34, 245);
 }
 
 a:hover {
