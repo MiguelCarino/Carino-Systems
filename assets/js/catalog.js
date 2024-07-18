@@ -188,6 +188,18 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp'
 },{url: 'CUosSQZSw5c',image: 'mu_137.webp'
 },{url: 'd5HQdXkkfso',image: 'mu_138.webp'
 },{url: 'DrQRS40OKNE',image: 'mu_139.webp'
+},{url: '3z8y7enYB30',image: 'mu_140.webp'
+},{url: 'u5rpOXS9O8Q',image: 'mu_141.webp'
+},{url: 'M_lyQ-OCIYs',image: 'mu_141.webp'
+},{url: 'AoHFCLxTkE4',image: 'mu_142.webp'
+},{url: 'GydqGpcudL4',image: 'mu_142.webp'
+},{url: 'iFS_lAg_tSo',image: 'mu_143.webp'
+},{url: 'mN-CqIytN2U',image: 'mu_144.webp'
+},{url: 'Q6dot3WZiu4',image: 'mu_144.webp'
+},{url: '4QEy1efy1Yw',image: 'mu_145.webp'
+},{url: 'MuS_v3HVB_8',image: 'mu_145.webp'
+},{url: 'kXcOyYEldZY',image: 'mu_146.webp'
+},{url: 'eYoINidnLRQ',image: 'mu_147.webp'
 },
 // add more albums here
 ];
