@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solutions</title>
+    <title>Streaming</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://miguelcarino.github.io/SolutionGrid/index.html/assets/css/solutions.css">
+    <link rel="stylesheet" href="assets/css/streaming.css">
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
-    <script type="module" src="https://miguelcarino.github.io/SolutionGrid/index.html/assets/js/solutions.js" defer></script>
+    <script src="assets/js/streaming.js" type="module" defer></script>
+    <script src="assets/js/catalogstreaming.js" type="module" defer></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -22,24 +23,17 @@
 <body>
     <!-- Navigation Bar -->
     <nav id="navbar"></nav>
-
-    <!-- Header -->
-    <header>
-        <h1>Solutions</h1>
-        <h2>Commercial Software, Free and Open Source Software, Useful Websites and Documents.</h2>
-    </header>
-
-    <!-- Main Content Area -->
-    <main>
-        <div class="searchbar-container">
-            <form class="searchbar" method="get" id="search" action="https://duckduckgo.com/">
-                <input type="text" id="searchInput" name="q" placeholder="$ > Describe your use case or search the web....">
-            </form>
-        </div>
-        <div class="softwareid-container">
-            <div id="softwareid"></div>
-        </div>
-    </main>
+    
+    <!-- Multiviewer -->
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Streaming Channels</h2>
+        </aside>
+        <main id="livestreams">
+            <!-- Video streams will be added here dynamically -->
+        </main>
+    </div>
+    <div id="notification" class="notification"></div>
 
     <!-- Footer -->
     <footer id="footer"></footer>
