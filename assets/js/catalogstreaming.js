@@ -1,8 +1,8 @@
 const apiKey = 'AIzaSyCxJJiioJa44xJ8OA9jrLNKqmTBblZlArc'; // Replace with your actual YouTube Data API key
 const channels = {
-    '͏🖧 Monitoring': [
-                { name: '🖧 Monitoring Stream 1', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
-                { name: '🖧 Monitoring Stream 2', icon: 'https://via.placeholder.com/20', videoId: 'YDfiTGGPYCk', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
+            '͏Monitoring': [
+                { name: 'Monitoring Stream 1', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
+                { name: 'Monitoring Stream 2', icon: 'https://via.placeholder.com/20', videoId: 'YDfiTGGPYCk', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
                 // Add more channels as needed
             ],
             '🌐 Worldwide': [
