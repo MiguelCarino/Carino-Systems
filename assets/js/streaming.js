@@ -103,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoId = await fetchLiveVideoId(channelId);
         if (videoId) {
             checkEmbeddableAndToggleStream(videoId);
+        } else {
+            showNotification('No live stream available for this channel.');
         }
     }
 
