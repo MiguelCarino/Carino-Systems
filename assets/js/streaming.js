@@ -107,40 +107,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadStreams(category) {
-        try {
-            const subMenu = document.querySelector(`button[data-category="${category}"]`).nextElementSibling;
-            subMenu.innerHTML = '';
+        const cleanedCategory = cleanCategoryName(category);
+        console.log(`Cleaned category: ${cleanedCategory}`); // Debug log
+        if (!channels.hasOwnProperty(cleanedCategory)) {
+            console.error(`channels does not contain the key: ${cleanedCategory}`);
+            return;
+        }
 
-            console.log('Loading streams for category:', category); // Debug log
+        const subMenu = document.querySelector(`button[data-category="${cleanedCategory}"]`).nextElementSibling;
+        subMenu.innerHTML = '';
 
-            const streams = await Promise.all(channels[category].map(async stream => {
-                if (stream.videoId) {
-                    return stream;
-                } else {
-                    const videoId = await fetchLiveVideoId(stream.channelId);
-                    return { ...stream, videoId };
-                }
-            }));
+        console.log('Loading streams for category:', cleanedCategory);
 
-            streams.forEach(stream => {
-                if (stream.videoId) {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
-                    listItem.dataset.videoId = stream.videoId;
-                    listItem.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                        checkEmbeddableAndToggleStream(stream.videoId);
-                    });
-                    subMenu.appendChild(listItem);
-                }
-            });
-
-            if (category === 'Monitoring' || subMenu.style.display === 'block') {
-                subMenu.style.display = 'block';
-                subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
+        const streams = await Promise.all(channels[cleanedCategory].map(async stream => {
+            if (stream.videoId) {
+                return stream;
+            } else {
+                const videoId = await fetchLiveVideoId(stream.channelId);
+                return { ...stream, videoId };
             }
-        } catch (error) {
-            console.error(`Error loading streams for category "${category}":`, error);
+        }));
+
+        streams.forEach(stream => {
+            if (stream.videoId) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
+                listItem.dataset.videoId = stream.videoId;
+                listItem.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    checkEmbeddableAndToggleStream(stream.videoId);
+                });
+                subMenu.appendChild(listItem);
+            }
+        });
+
+        if (category === 'Monitoring' || subMenu.style.display === 'block') {
+            subMenu.style.display = 'block';
+            subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
         }
     }
 
@@ -200,40 +203,33 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Attempting to load initial category: ${category}`); // Debug log
         const cleanedCategory = cleanCategoryName(category);
         console.log(`Cleaned category: ${cleanedCategory}`); // Log cleaned category
-        console.log(`Character codes for cleaned category: ${logCharCodes(cleanedCategory)}`); // Log character codes
+        if (!channels.hasOwnProperty(cleanedCategory)) {
+            console.error(`channels does not contain the key: ${cleanedCategory}`);
+            return;
+        }
 
-        try {
-            const button = document.querySelector(`button[data-category="${cleanedCategory}"]`);
-            if (button) {
-                button.classList.add('active');
-                button.nextElementSibling.style.display = 'block';
-                button.nextElementSibling.style.maxHeight = button.nextElementSibling.scrollHeight + 'px';
+        const button = document.querySelector(`button[data-category="${cleanedCategory}"]`);
+        if (button) {
+            button.classList.add('active');
+            button.nextElementSibling.style.display = 'block';
+            button.nextElementSibling.style.maxHeight = button.nextElementSibling.scrollHeight + 'px';
 
-                if (!channels.hasOwnProperty(cleanedCategory)) {
-                    console.error(`channels does not contain the key: ${cleanedCategory}`);
+            const streams = await Promise.all(channels[cleanedCategory].map(async stream => {
+                if (stream.videoId) {
+                    return stream;
                 } else {
-                    console.log(`channels contains the key: ${cleanedCategory}`);
+                    const videoId = await fetchLiveVideoId(stream.channelId);
+                    return { ...stream, videoId };
                 }
+            }));
 
-                const streams = await Promise.all(channels[cleanedCategory].map(async stream => {
-                    if (stream.videoId) {
-                        return stream;
-                    } else {
-                        const videoId = await fetchLiveVideoId(stream.channelId);
-                        return { ...stream, videoId };
-                    }
-                }));
-
-                streams.forEach(stream => {
-                    if (stream.videoId) {
-                        checkEmbeddableAndToggleStream(stream.videoId);
-                    }
-                });
-            } else {
-                console.error(`Button for category "${cleanedCategory}" not found.`);
-            }
-        } catch (error) {
-            console.error(`Error loading initial category "${cleanedCategory}":`, error);
+            streams.forEach(stream => {
+                if (stream.videoId) {
+                    checkEmbeddableAndToggleStream(stream.videoId);
+                }
+            });
+        } else {
+            console.error(`Button for category "${cleanedCategory}" not found.`);
         }
     }
 
