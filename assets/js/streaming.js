@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Utility function to clean category names and remove invisible characters
     function cleanCategoryName(name) {
-        return name.replace(/[^\x20-\x7E]/g, '').replace(/\s+/g, ' ').trim();
-    }
+        return name.replace(/[^\x20-\x7E\xA0-\xFF\u00A0-\uFFFF]/g, '').replace(/\s+/g, ' ').trim();
+    }    
 
     // Utility function to log character codes
     function logCharCodes(str) {
