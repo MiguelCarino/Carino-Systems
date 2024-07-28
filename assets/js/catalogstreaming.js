@@ -28,9 +28,12 @@ const channels = {
         { name: 'Canada Stream 3', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
     ],
     '🇯🇵 Japan': [
-        { name: 'Japan Stream 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
-        { name: 'HBCニュース', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCCTpf5c_9HDo_OSu3aX8uFQ' },
-        { name: 'HTB北海道ニュース', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCSWOnDD1KIriGmyQ7SgNA4A' },
+        { name: 'ABCニュース', icon: 'assets/channels/jap_abctv.webp', videoId: '', channelId: 'UCPW-5qfYGNR8XYrvESrqJKA' },
+        { name: 'テレ朝ニュース', icon: 'assets/channels/jap_ann.webp', videoId: '', channelId: 'UCGCZAYq5Xxojl_tSXcVJhiQ' },
+        { name: 'HBCニュース', icon: 'assets/channels/jap_hbc.webp', videoId: '', channelId: 'UCCTpf5c_9HDo_OSu3aX8uFQ' },
+        { name: 'HTB北海道ニュース', icon: 'assets/channels/jap_htb.webp', videoId: '', channelId: 'UCSWOnDD1KIriGmyQ7SgNA4A' },
+        { name: 'サンテレビニュース', icon: 'assets/channels/jap_suntv.webp', videoId: '', channelId: 'UCtf-aWCCwZPep5woQd9lAIQ' },
+        { name: 'STVニュース北海道', icon: 'assets/channels/jap_stv.webp', videoId: '', channelId: 'UCOZv-6MiXqJdLpmYtR431Ow' }
     ],
     '🇲🇽 Mexico': [
         { name: 'Claro Sports 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCqfCJBfrFSO4tZM1LNZTBFQ' },
