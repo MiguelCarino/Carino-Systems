@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyCxJJiioJa44xJ8OA9jrLNKqmTBblZlArc'; // Replace with your actual YouTube Data API key
+const apiKey = 'AIzaSyCmtV8QIecdM2A-5YCGRPanLqIsOIjoV74'; // Replace with your actual YouTube Data API key
 const channels = {
     'Monitoring': [
         { name: 'Earthquake Monitoring 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCZmcd4cQ2H_ELWAuUdOMgRQ' },
