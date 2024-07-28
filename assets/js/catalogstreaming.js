@@ -1,9 +1,9 @@
-const apiKey = 'YOUR_YOUTUBE_API_KEY'; // Replace with your actual YouTube Data API key
+const apiKey = 'AIzaSyCxJJiioJa44xJ8OA9jrLNKqmTBblZlArc'; // Replace with your actual YouTube Data API key
 
 const channels = {
     'Monitoring': [
-        { name: 'Monitoring Stream 1', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
-        { name: 'Monitoring Stream 2', icon: 'https://via.placeholder.com/20', videoId: 'YDfiTGGPYCk', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
+        { name: 'Earthquake Monitoring', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCZmcd4cQ2H_ELWAuUdOMgRQ' },
+        { name: 'Olympics', icon: 'https://via.placeholder.com/20', videoId: '4KHId1aqJwo', channelId: '' }
         // Add more channels as needed
     ],
     'Worldwide': [
@@ -14,7 +14,8 @@ const channels = {
     'United States': [
         { name: 'US News Stream', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
         { name: 'US Music Stream', icon: 'https://via.placeholder.com/20', videoId: 'H-N6-MHn3DA', channelId: 'UCef1-8eOpJgud7szVPlZQAQ' },
-        { name: 'US Sports Stream', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
+        { name: 'US Sports Stream', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
+        { name: 'NASA TV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCLA_DiR1FfKNvjuUpBHmylQ' }
     ],
     'United Kingdom': [
         { name: 'UK Entertainment Stream', icon: 'https://via.placeholder.com/20', videoId: 'hY7m5jjJ9mM' },
@@ -32,7 +33,7 @@ const channels = {
         { name: 'Japan Stream 3', icon: 'https://via.placeholder.com/20', videoId: '6n54sAragz0', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
     ],
     'Mexico': [
-        { name: 'Mexico Stream 1', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
+        { name: 'Claro Sports 1', icon: 'https://via.placeholder.com/20', videoId: 'wn9fcbHdjxc', channelId: 'UCqfCJBfrFSO4tZM1LNZTBFQ' },
         { name: 'Mexico Stream 2', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
         { name: 'Mexico Stream 3', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
     ],
