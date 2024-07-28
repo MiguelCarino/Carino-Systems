@@ -3,7 +3,7 @@ const channels = {
     'Monitoring': [
         { name: 'Earthquake Monitoring 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCZmcd4cQ2H_ELWAuUdOMgRQ' },
         { name: 'Earthquake Monitoring 2', icon: 'https://via.placeholder.com/20', videoId: 'MT23xDdXe8U', channelId: '' },
-        { name: 'Olympics Medal count', icon: 'https://via.placeholder.com/20', videoId: '4KHId1aqJwo', channelId: '' }
+        { name: 'Olympics Medal count', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCU4Diuu_J3KRX2Rkj40ZZnA' }
         // Add more channels as needed
     ],
     '🌐 Worldwide': [
@@ -36,9 +36,9 @@ const channels = {
         { name: 'STVニュース北海道', icon: 'assets/channels/jap_stv.webp', videoId: '', channelId: 'UCOZv-6MiXqJdLpmYtR431Ow' }
     ],
     '🇲🇽 Mexico': [
-        { name: 'Claro Sports 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCqfCJBfrFSO4tZM1LNZTBFQ' },
-        { name: 'Mexico Stream 2', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
-        { name: 'Mexico Stream 3', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' }
+        { name: 'Nmas', icon: 'assets/channels/mx_nmas.webp', videoId: '', channelId: 'UCqfCJBfrFSO4tZM1LNZTBFQ' },
+        { name: 'TelediarioMX', icon: 'assets/channels/mx_telediario.webp', videoId: '', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA' },
+        { name: 'Milenio', icon: 'assets/channels/mx_milenio.webp', videoId: '', channelId: 'UCFxHplbcoJK9m70c4VyTIxg' }
     ],
     '🇦🇺 Australia': [
         { name: 'ABC News (Australia)', icon: 'https://via.placeholder.com/20', videoId: 'vOTiJkg1voo', channelId: 'UCVgO39Bk5sMo66-6o6Spn6Q' }
