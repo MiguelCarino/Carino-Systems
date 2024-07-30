@@ -201,6 +201,7 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp'
 },{url: 'MuS_v3HVB_8',image: 'mu_145.webp'
 },{url: 'kXcOyYEldZY',image: 'mu_146.webp'
 },{url: 'eYoINidnLRQ',image: 'mu_147.webp'
+},{url: 'omzJvwYO440',image: 'mu_148.webp'
 },
 // add more albums here
 ];
