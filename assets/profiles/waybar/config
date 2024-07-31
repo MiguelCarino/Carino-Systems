@@ -1,0 +1,200 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    //"margin": "9 13 -10 18",
+    "margin": "0 0 0 0",
+    // Choose the order of the modules
+    "modules-left": ["hyprland/workspaces", "hyprland/language", "keyboard-state", "hyprland/submap", "custom/window"],
+    "modules-center": ["clock", "custom/dnf", "custom/weather"],
+    "modules-right": ["network", "pulseaudio", "custom/cpu", "custom/gpu", "backlight", "battery", "tray"],
+
+
+    //***************************
+    //*  Modules configuration  *
+    //***************************
+
+    "hyprland/workspaces": {
+	"format": "{id}",
+        "disable-scroll": true,
+    },
+
+    "hyprland/language": {
+        "format-en": "US 💬 |",
+        "format-es": "ES 💬 |",
+	"min-length": 5,
+	"tooltip": false
+    },
+
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{icon} ",
+        "format-icons": {
+            "locked": " ",
+            "unlocked": ""
+        },
+    },
+
+    "custom/window": {
+        //"exec": "~/.config/waybar/scripts/window_title_module.sh",
+	//"exec": "hyprctl activewindow | awk '/title:/ {print $2 $3}'",
+	"exec": "hyprctl activewindow | awk '/title:/ {str = str $2 \" \" $3 \" \" $4 \" - \" } /initialTitle:/ {str = str $2 \" \" $3} END {printf \"%s\", str}'",
+	"interval": 2,
+        "format": "{}",
+	"style": {
+	    "default": {
+      		"font-family": "Red Hat Display",
+	      	"font-size": "12px"
+    		}
+  	}
+    },
+
+    "custom/steam_fps": {
+	"format": "{output}",
+	"exec": "~/.config/waybar/scripts/steam_fps.py",
+	"interval": 1
+    },
+
+    "custom/dnf": {
+        "format": "{} ",
+        "interval": 3600,                     			// every hour
+        "exec": "(dnf check-update -q|grep -c ^[a-z0-9]",	// # of updates
+        "exec-if": "exit 0",                  			// always run; consider advanced run conditions
+        //"on-click": "foot sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "tooltip": false,
+    },
+
+    "custom/mail": {
+        "format": "{} ",
+        "exec": "$HOME/.config/waybar/scripts/checkgmail.py",
+        "interval": 120,
+        "on-click": "thunderbird ; pkill -SIGRTMIN+9 waybar",
+        "signal": 9,
+        "tooltip": false,
+    },
+
+    "hyprland/submap": {
+        "format": "pon {}"
+    },
+
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a, %b %d, %H:%M:%S}",
+	"interval": 1,
+	//"format": "{%a, %d %b  %H:%M:%S}",
+	//"tooltip-format": "<big>{:%Y %B}</big>\\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/scripts/wttr.py",
+        "return-type": "json"
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "reverse-scrolling": 1,
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "  {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% 🎙",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "min-length": 13,
+    },
+
+    "custom/storage": {
+        "format": "{} ⽥",
+        "interval": 3, 
+        "exec": "df / | awk 'NR==2{print $5}'",
+        "tooltip": false,
+    },
+
+   "custom/gpu": {
+      "exec": "$HOME/.config/waybar/scripts/gpu_usage.sh",
+      "on-click": "kitty nvtop",
+      "interval": 2,
+      "format": "{}",
+      "min-length": 4
+   },
+   
+    "custom/cpu": {
+        "exec": "$HOME/.config/waybar/scripts/cpu_usage.sh",
+        "on-click": "kitty htop",
+        "interval": 2,
+        "format": "{}",
+        "min-length": 4
+    },
+    
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false,
+    },
+
+    "custom/networkspeed": {
+      "exec": "~/.config/waybar/scripts/networkspeed.sh",
+      "interval": 1,
+      "format": "{}"
+    },
+
+    "network": {
+    "interface": "enp7s0",
+    "exec": "~/.config/waybar/scripts/networkspeed.sh",
+    "interval": 1,
+    "format": "{}",
+    //"format-wifi": "{essid} ({signalStrength}%) ",
+    "format-wifi": "Wifi ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} 🌐",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "kitty nmtui",
+    "max-length": 50
+},
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+        "format-icons": [""],
+        "min-length": 7,
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
+	"on-update": "$HOME/.config/waybar/scripts/check_battery.sh",
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 0
+    },
+}
