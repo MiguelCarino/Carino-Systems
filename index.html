@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carino Systems™</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" href="assets/images/logo.webp">
-    <script src="assets/js/main.js" defer></script>
+    <!-- <script src="assets/js/main.js" defer></script> -->
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -16,7 +17,8 @@
     <meta property="og:description" content="Friendly IT solutions, openly available"/>
     <meta property="og:site_name" content="Carino Systems"/>
     <meta property="og:locale" content="en_US"/>
-    <style>body {
+    <style>
+    body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
@@ -76,25 +78,52 @@
     }
     
     .tile {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
         font-weight: bold;
+        font-size: 22px;
         position: relative;
-        color: white;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
         overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: background-color 0.3s ease-in-out, background-image 0.3s ease-in-out;
+        transition: background-color 0.3s ease-in-out, background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
         height: 150px; /* Fixed height for all tiles */
-        background-size: cover; /* Ensure background images cover the tile */
-        background-position: center;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
         opacity: 0; /* Initially hidden */
-        transform: translateY(50px); /* Initial position for sliding effect */
-        animation: slideIn 1s forwards; /* Slide-in animation */
+        transform: translateY(10vh); /* Initial position for sliding effect */
+        animation: slideIn 2s forwards; /* Slide-in animation */
     }
+    
+    .tile-bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the video covers the entire tile */
+        z-index: -1; /* Place the video behind the text */
+        pointer-events: none; /* Allow clicks to pass through to the tile */
+        transition: opacity 0.3s ease-in-out; /* Smooth transition for video */
+    }
+    
+    /* Keep the video visible initially */
+    .tile-bg-video {
+        opacity: 0;
+    }
+    
+    /* On hover, hide the video and show the background color */
+    .tile:hover .tile-bg-video {
+        opacity: 1; /* Hide the video */
+        filter: brightness(0.7); /* Optional: Adjust brightness for better readability */
+    }
+    
+    /* Adjust the background color on hover */
+    .tile:hover {
+        background-color: rgba(0, 0, 0, 0.8); /* Example color, adjust as needed */
+    }
+
     
     /* Dynamic widths */
     .tile.small-tile {
@@ -158,11 +187,58 @@
         background-color: #40E0D0;
     }
     
+    .icon-row {
+        display: flex;
+        gap: 15px; /* Space between icons */
+        justify-content: center; /* Center the icons */
+        padding: 10px; /* Padding around the icons */
+    }
+
+    .icon-link {
+        color: #fff; /* Icon color */
+        font-size: 29px; /* Icon size */
+        text-decoration: none; /* Remove underline from links */
+        transition: color 0.3s; /* Smooth color transition */
+    }
+
+    .icon-link:hover {
+        color: #0073b1; /* Change color on hover */
+    }
+
     /* Hover Effects */
     .tile:hover {
-        background-image: var(--bgImage);
+        background-image: var(--bgVideo);
         background-color: transparent;
-        opacity: 0.7;
+        opacity: 0.1;
+        filter: brightness(0.9);
+    }
+
+    .contrast-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+        color: #fff;
+        transition: color 0.3s;
+    }
+    .contrast-toggle:hover {
+        color: #0073b1; /* Match the hover effect of social icons */
+    }
+    
+    .high-contrast {
+        background-color: #000;
+        color: yellow;
+    }
+
+    .high-contrast-tile {
+        font-size: 52px;
+        opacity: 1;
+        width: 100%;
+    }
+
+    .white-mode {
+        background-color: #fff;
+        color: #000;
     }
     
     /* Slide-in Animation */
@@ -215,8 +291,26 @@
 <body>
     <div class="container">
         <div class="left-column">
-            <h1>Carino Systems</h1>
+            <!--<div><button id="contrastToggle" class="contrast-toggle" aria-label="Toggle Contrast">
+                <i class="fas fa-adjust"></i>
+            </div>-->
+            <h1>Miguel Cariño</h1>
             <h2>Openly available IT solutions</h2>
+            <div class="icon-row">
+                <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/MiguelCarino" target="_blank" class="icon-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://mastodon.social/@miguelcarino" target="_blank" class="icon-link">
+                    <i class="fab fa-mastodon"></i>
+                </a>
+                <a href="https://steamcommunity.com/id/HabiOS/" target="_blank" class="icon-link">
+                    <i class="fab fa-steam"></i>
+                </a>
+            </div>
+            
             <p id="random-phrase"></p>
         </div>
         <div class="right-column">
@@ -225,7 +319,8 @@
     </div>
 </body>
 
-<script>document.addEventListener("DOMContentLoaded", function () {
+<script>
+document.addEventListener("DOMContentLoaded", function () {
     const phrases = [
         "「 In doubt, reboot. 」",
         "「 Viruses are often inadvertently accepted, but you may not have noticed. 」",
@@ -252,12 +347,12 @@
     }
 
     const tilesData = [
-        { type: 'big-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgImage: 'assets/images/bg1.jpg' },
-        { type: 'medium-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgImage: 'assets/images/bg2.jpg' },
-        { type: 'small-tile', color: 'scarlet', text: 'Hardware', link: 'hardware.html', bgImage: 'assets/images/bg3.jpg' },
-        { type: 'small-tile', color: 'crimson', text: 'Streaming', link: 'streaming.html', bgImage: 'assets/images/bg1.jpg' },
-        { type: 'medium-tile', color: 'indigo', text: 'Music', link: 'music.html', bgImage: 'assets/images/bg2.jpg' },
-        { type: 'big-tile', color: 'scarlet', text: 'Test your computer', link: 'testing.hmtl', bgImage: 'assets/images/bg3.jpg' },
+        { type: 'big-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'medium-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'small-tile', color: 'scarlet', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'small-tile', color: 'crimson', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'medium-tile', color: 'indigo', text: 'Music', link: 'music.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'big-tile', color: 'scarlet', text: 'Test your computer', link: 'testing.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
         // Add more tiles as needed
     ];
 
@@ -270,11 +365,32 @@
         tileElement.textContent = tile.text;
         tileElement.style.animationDelay = `${index * 0.1}s`; // Delay each tile's animation
 
-        // Set the background image in a CSS variable for hover effect
-        tileElement.style.setProperty('--bgImage', `url('${tile.bgImage}')`);
+        // Create a video element for the background
+        const videoElement = document.createElement('video');
+        videoElement.src = tile.bgVideo;
+        videoElement.autoplay = true;
+        videoElement.loop = true;
+        videoElement.muted = true; // Mute to allow autoplay in most browsers
+        videoElement.className = 'tile-bg-video';
+
+        // Append the video element to the tile
+        tileElement.appendChild(videoElement);
 
         // Append the tile to the container
         tilesContainer.appendChild(tileElement);
+    });
+    
+    const contrastButton = document.getElementById('contrastToggle');
+    let contrastMode = 0;
+    contrastButton.addEventListener('click', () => {
+        contrastMode = (contrastMode + 1) % 3;
+        if (contrastMode === 0) {
+            document.body.className = '';
+        } else if (contrastMode === 1) {
+            document.body.className = 'white-mode';
+        } else {
+            document.body.className = 'high-contrast, high-contrast-tile';
+        }
     });
 });
 
