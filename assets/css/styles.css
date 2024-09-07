@@ -124,8 +124,10 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    position: sticky; /* Make the navbar sticky */
+    top: 0; /* Stick to the top of the page */
+    z-index: 1000; /* Ensure it stays above other content */
 }
-
 nav .logo {
     font-size: 1.5em;
     font-weight: bold;
