@@ -27,19 +27,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Navigation content with icons
     const navContent = `
         <div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
-        <h2 style="color: #ffffff; padding-left: 24vh;">${currentTitle.split(' ')[0]}</h2>
+        <h2 style="color: #ffffff; padding-left: 0vh;">${currentTitle.split(' ')[0]}</h2>
         <ul>
             <li><a href="https://github.com/MiguelCarino" target="_blank" class="icon-link">
-                <i class="fab fa-github"></i> <span class="label">GitHub</span>
+                <i class="fab fa-github"></i> <span class="label"></span>
             </a></li>
             <li><a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-link">
-                <i class="fab fa-linkedin"></i> <span class="label">LinkedIn</span>
+                <i class="fab fa-linkedin"></i> <span class="label"></span>
             </a></li>
             <li><a href="https://mastodon.social/@miguelcarino" target="_blank" class="icon-link">
-                <i class="fab fa-mastodon"></i> <span class="label">Mastodon</span>
+                <i class="fab fa-mastodon"></i> <span class="label"></span>
             </a></li>
             <li><a href="https://steamcommunity.com/id/HabiOS/" target="_blank" class="icon-link">
-                <i class="fab fa-steam"></i> <span class="label">Steam</span>
+                <i class="fab fa-steam"></i> <span class="label"></span>
             </a></li>
         </ul>
     `;
