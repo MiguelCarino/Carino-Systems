@@ -216,6 +216,8 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'slX_3mocFes',image: 'mu_153.webp',tag: 'Pendulum'
 },{url: 'HW-MMu4GLWk',image: 'mu_154.webp',tag: 'Necry Talkie'
 },{url: 'KdrP8A7jz5M',image: 'mu_155.webp',tag: 'Necry Talkie'
+},{url: 'rRvzFShVOPY',image: 'mu_156.webp',tag: 'Necry Talkie'
+},{url: '0l-qw9yRFOA',image: 'mu_156.webp',tag: 'Necry Talkie'
 },
 // add more albums here
 ];
