@@ -121,7 +121,7 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'vn7vfza-6fQ',image: 'mu_89.webp',tag: ''
 },{url: 'P44CjuM-tfA',image: 'mu_90.webp',tag: ''
 },{url: '9kr-aqnc5Ho',image: 'mu_90.webp',tag: ''
-},{url: 'hrHlNhtNHqE',image: 'mu_91.webp',tag: ''
+},{url: 'tkOozjVuFP4',image: 'mu_91.webp',tag: 'Necry Talkie'
 },{url: 'dQuwq-SAbPc',image: 'mu_92.webp',tag: ''
 },{url: 'JL1AYJ9zBJE',image: 'mu_93.webp',tag: ''
 },{url: '4eFDXIwIE9w',image: 'mu_93.webp',tag: ''
@@ -214,6 +214,7 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'ScsIl7Y0SVE',image: 'mu_153.webp',tag: 'Pendulum'
 },{url: 'sYTouavUBBw',image: 'mu_153.webp',tag: 'Pendulum'
 },{url: 'slX_3mocFes',image: 'mu_153.webp',tag: 'Pendulum'
+},{url: 'HW-MMu4GLWk',image: 'mu_154.webp',tag: 'Necry Talkie'
 },
 // add more albums here
 ];
