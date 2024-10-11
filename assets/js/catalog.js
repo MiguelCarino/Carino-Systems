@@ -218,6 +218,8 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'KdrP8A7jz5M',image: 'mu_155.webp',tag: 'Necry Talkie'
 },{url: 'rRvzFShVOPY',image: 'mu_156.webp',tag: 'Necry Talkie'
 },{url: '0l-qw9yRFOA',image: 'mu_156.webp',tag: 'Necry Talkie'
+},{url: '2jghKg0Q0EU',image: 'mu_157.webp',tag: 'ГлюкоZа'
+},{url: 'Fm_iyGAutqc',image: 'mu_158.webp',tag: 'ГлюкоZа'
 },
 // add more albums here
 ];
