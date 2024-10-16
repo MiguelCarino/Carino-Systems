@@ -220,6 +220,7 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: '0l-qw9yRFOA',image: 'mu_156.webp',tag: 'Necry Talkie'
 },{url: '2jghKg0Q0EU',image: 'mu_157.webp',tag: 'ГлюкоZа'
 },{url: 'Fm_iyGAutqc',image: 'mu_158.webp',tag: 'ГлюкоZа'
+},{url: '8BH5sxq1yaI',image: 'mu_159.webp',tag: 'Clairo'
 },
 // add more albums here
 ];
