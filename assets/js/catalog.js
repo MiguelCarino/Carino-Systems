@@ -228,6 +228,11 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'nLavzXXZCcs',image: 'mu_161.webp',tag: 'Clairo'
 },{url: 'TZl0MHwgn8c',image: 'mu_161.webp',tag: 'Clairo'
 },{url: 'grLkaZIC2tI',image: 'mu_161.webp',tag: 'Clairo'
+},{url: 'BYk1sS329Mg',image: 'mu_162.webp',tag: 'Panteon rococo'
+},{url: '4eoHD3fuHgA',image: 'mu_163.webp',tag: 'Panteon rococo'
+},{url: 'mkZ8VfkEgFQ',image: 'mu_164.webp',tag: 'El gran silencio'
+},{url: 'BZAkzCw17GM',image: 'mu_165.webp',tag: 'Chicos del barrio'
+},{url: 'BZAkzCw17GM',image: 'mu_165.webp',tag: 'Chicos del barrio'
 },
 // add more albums here
 ];
