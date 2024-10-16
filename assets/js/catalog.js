@@ -221,6 +221,13 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: '2jghKg0Q0EU',image: 'mu_157.webp',tag: 'ГлюкоZа'
 },{url: 'Fm_iyGAutqc',image: 'mu_158.webp',tag: 'ГлюкоZа'
 },{url: '8BH5sxq1yaI',image: 'mu_159.webp',tag: 'Clairo'
+},{url: 'Egb3kRRsOxk',image: 'mu_159.webp',tag: 'Clairo'
+},{url: 'hLrGvkul3_k',image: 'mu_159.webp',tag: 'Clairo'
+},{url: 'CeA92xqw-QI',image: 'mu_160.webp',tag: 'Clairo'
+},{url: 'L9l8zCOwEII',image: 'mu_160.webp',tag: 'Clairo'
+},{url: 'nLavzXXZCcs',image: 'mu_161.webp',tag: 'Clairo'
+},{url: 'TZl0MHwgn8c',image: 'mu_161.webp',tag: 'Clairo'
+},{url: 'grLkaZIC2tI',image: 'mu_161.webp',tag: 'Clairo'
 },
 // add more albums here
 ];
