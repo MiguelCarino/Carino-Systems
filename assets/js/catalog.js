@@ -232,7 +232,8 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: '4eoHD3fuHgA',image: 'mu_163.webp',tag: 'Panteon rococo'
 },{url: 'mkZ8VfkEgFQ',image: 'mu_164.webp',tag: 'El gran silencio'
 },{url: 'BZAkzCw17GM',image: 'mu_165.webp',tag: 'Chicos del barrio'
-},{url: 'BZAkzCw17GM',image: 'mu_165.webp',tag: 'Chicos del barrio'
+},{url: 'j1RAUoM2pro',image: 'mu_168.webp',tag: 'Baka Mitai by Astrophysics'
+},{url: 's0NME1GfbIc',image: 'mu_167.webp',tag: 'Boa'
 },
 // add more albums here
 ];
