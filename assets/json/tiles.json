@@ -1,0 +1,197 @@
+[
+    {
+        "name": "Microsoft Windows",
+        "content": "The standard for decades, with a vast user base in homes and businesses.",
+        "bg": "#ffdddd",
+        "font": "Arial",
+        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+        "subgroup": [
+            {
+                "name": "Windows 10",
+                "content": "Popular for its robust security and performance.",
+                "bg": "#e0ffff",
+                "font": "Arial",
+                "bg-img": "windows10-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows10.svg",
+                "url": "https://www.microsoft.com/en-us/software-download/windows10"
+            },
+            {
+                "name": "Windows 11",
+                "content": "Latest Windows OS with advanced features.",
+                "bg": "#e6f0ff",
+                "font": "Verdana",
+                "bg-img": "windows11-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows11.svg",
+                "url": "https://www.microsoft.com/en-us/software-download/windows11"
+            }
+        ]
+    },
+    {
+        "name": "Apple macOS",
+        "content": "Known for its sleek design and integration with Apple's ecosystem.",
+        "bg": "#ddffdd",
+        "font": "Verdana",
+        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+        "subgroup": [
+            {
+                "name": "macOS Monterey",
+                "content": "Packed with powerful new features.",
+                "bg": "#f0e6ff",
+                "font": "Helvetica",
+                "bg-img": "monterey-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/monterey.svg",
+                "url": "https://www.apple.com/macos/monterey/"
+            },
+            {
+                "name": "macOS Big Sur",
+                "content": "A major redesign with a fresh look.",
+                "bg": "#f8d7da",
+                "font": "Georgia",
+                "bg-img": "bigsur-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/bigsur.svg",
+                "url": "https://www.apple.com/macos/big-sur/"
+            }
+        ]
+    },
+    {
+        "name": "GNU/Linux Community",
+        "content": "A symbol of freedom and choice, with diverse distributions for users.",
+        "bg": "#51a2da",
+        "font": "LiberationMono",
+        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "subgroup": [
+            {
+                "name": "Debian",
+                "content": "A stable, universal OS, ideal for both desktop and server environments.",
+                "bg": "#d6eaff",
+                "font": "Arial",
+                "bg-img": "debian-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.svg",
+                "url": "https://www.debian.org/"
+            },
+            {
+                "name": "Fedora",
+                "content": "A cutting-edge, community-driven OS backed by Red Hat.",
+                "bg": "#f0f8ff",
+                "font": "Verdana",
+                "bg-img": "fedora-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/fedora.svg",
+                "url": "https://getfedora.org/"
+            },
+            {
+                "name": "Gentoo",
+                "content": "A highly customizable OS for advanced users who want control over their system.",
+                "bg": "#e8e8ff",
+                "font": "Courier New",
+                "bg-img": "gentoo-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/gentoo.svg",
+                "url": "https://www.gentoo.org/"
+            },
+            {
+                "name": "Guix",
+                "content": "A functional package management and OS with a strong focus on freedom and customization.",
+                "bg": "#e6ffcc",
+                "font": "Georgia",
+                "bg-img": "guix-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/guix.svg",
+                "url": "https://guix.gnu.org/"
+            }
+        ]
+    },
+    {
+        "name": "GNU/Linux Enterprise",
+        "content": "Optimized for business and enterprise environments, offering stability and support.",
+        "bg": "#a2d1f1",
+        "font": "RedHatFont",
+        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "subgroup": [
+            {
+                "name": "Ubuntu",
+                "content": "Popular with businesses for its ease of use and robust support ecosystem.",
+                "bg": "#e0d1ff",
+                "font": "Arial",
+                "bg-img": "ubuntu-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/ubuntu.svg",
+                "url": "https://ubuntu.com/"
+            },
+            {
+                "name": "Red Hat Enterprise Linux",
+                "content": "A top choice for enterprise environments, offering extensive support and stability.",
+                "bg": "#ffdfdf",
+                "font": "Courier New",
+                "bg-img": "rhel-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/redhat.svg",
+                "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux"
+            },
+            {
+                "name": "openSUSE",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img": "opensuse-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "url": "https://www.opensuse.org/"
+            }
+        ]
+    },
+    {
+        "name": "BSD",
+        "content": "A secure and reliable OS for advanced users, focusing on Unix-like performance.",
+        "bg": "#d3d3ff",
+        "font": "Georgia",
+        "bg-img": "bsd-bg.jpg",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/bsd.svg",
+        "subgroup": [
+            {
+                "name": "OpenBSD",
+                "content": "A security-focused OS known for its robustness and reliability.",
+                "bg": "#e8e8e8",
+                "font": "Arial",
+                "bg-img": "openbsd-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/openbsd.svg",
+                "url": "https://www.openbsd.org/"
+            },
+            {
+                "name": "FreeBSD",
+                "content": "An advanced OS for modern servers, desktops, and embedded systems.",
+                "bg": "#f8f8ff",
+                "font": "Verdana",
+                "bg-img": "freebsd-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/freebsd.svg",
+                "url": "https://www.freebsd.org/"
+            }
+        ]
+    },
+    {
+        "name": "Others",
+        "content": "Other operating systems that cater to niche markets and specific use cases.",
+        "bg": "#cfcfcf",
+        "font": "HomeVideo",
+        "bg-img": "others-bg.jpg",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/terminal.svg",
+        "subgroup": [
+            {
+                "name": "ReactOS",
+                "content": "An open-source OS compatible with Windows applications and drivers.",
+                "bg": "#f0f0f0",
+                "font": "Tahoma",
+                "bg-img": "reactos-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/reactos.svg",
+                "url": "https://reactos.org/"
+            },
+            {
+                "name": "Haiku",
+                "content": "An open-source OS inspired by BeOS, focusing on personal computing.",
+                "bg": "#f5f5dc",
+                "font": "Helvetica",
+                "bg-img": "haiku-bg.jpg",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/haiku.svg",
+                "url": "https://www.haiku-os.org/"
+            }
+        ]
+    }
+]
