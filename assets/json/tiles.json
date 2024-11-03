@@ -1,66 +1,319 @@
 [
     {
-        "name": "GNU/Linux Community",
-        "content": "A symbol of freedom and choice, with diverse distributions for users.",
+        "name": "Microsoft Windows",
+        "content": "The standard for decades, with a vast user base in homes and businesses. Backed by Microsoft.",
+        "bg": "#ffdddd",
+        "font": "Arial",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+        "bg-img-full": "",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+        "subgroup": [
+            {
+                "name": "Windows 10",
+                "content": "Popular for its robust security and performance. Still being used by people who didn't want to upgrade to it from Windows 7 back in the day. Support will end on October, 2025",
+                "bg": "#e0ffff",
+                "font": "Arial",
+                "bg-img-top": "",
+                "bg-img-full": "https://carino.systems/assets/images/windows10.webp",
+                "img": "https://carino.systems/assets/images/windows10.webp",
+                "url": "https://www.microsoft.com/en-us/software-download/windows10"
+            },
+            {
+                "name": "Windows 11",
+                "content": "Latest Windows release with advanced and intrusive features. But who cares.",
+                "bg": "#e6f0ff",
+                "font": "Verdana",
+                "bg-img-top": "",
+                "bg-img-full": "https://carino.systems/assets/images/windows11.webp",
+                "img": "https://carino.systems/assets/images/windows11.webp",
+                "url": "https://www.microsoft.com/en-us/software-download/windows11"
+            },
+            {
+                "name": "Windows Server 2019",
+                "content": "Server Edition. EXTENDED Security Support will end on January, 2029",
+                "bg": "#e6f0ff",
+                "font": "Verdana",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "url": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2019"
+            },
+            {
+                "name": "Windows Server 2022",
+                "content": "Latest Windows OS with advanced features. Support will end on October, 2026.",
+                "bg": "#e6f0ff",
+                "font": "Verdana",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "url": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022"
+            },
+            {
+                "name": "Windows Server 2025",
+                "content": "Latest Windows OS with advanced features. Support will end on October, 2029.",
+                "bg": "#e6f0ff",
+                "font": "Verdana",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
+                "url": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2025"
+            }
+        ]
+    },
+    {
+        "name": "Apple macOS",
+        "content": "Known for its sleek design and integration with Apple's ecosystem. Backed by Apple.",
+        "bg": "#ddffdd",
+        "font": "Verdana",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+        "bg-img-full": "",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+        "subgroup": [
+            {
+                "name": "macOS Ventura (2022)",
+                "content": "Ummm.",
+                "bg": "#f0e6ff",
+                "font": "Helvetica",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "url": "https://apps.apple.com/us/app/macos-ventura/id1638787999?mt=12"
+            },
+            {
+                "name": "macOS Sonoma (2023)",
+                "content": "Uhhh.",
+                "bg": "#f8d7da",
+                "font": "Georgia",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "url": "https://apps.apple.com/us/app/macos-sonoma/id6450717509?mt=12"
+            },
+            {
+                "name": "macOS Sequoia (2024)",
+                "content": "The newest.",
+                "bg": "#f8d7da",
+                "font": "Georgia",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/finder.svg",
+                "url": "https://apps.apple.com/al/app/macos-sequoia/id6596773750?mt=12"
+            }
+        ]
+    },
+    {
+        "name": "GNU/Linux",
+        "content": "Known for its security, customization, community-driven and open-source development. Backed by donations, organizations and corporations.",
         "bg": "#51a2da",
         "font": "LiberationMono",
-        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "bg-img-full": "",
         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
         "subgroup": [
             {
+                "name": "Pop!_OS",
+                "content": "Designed for productivity and ease of use, offering a user-friendly experience with a focus on developers and engineers.",
+                "bg": "#e6ffcc",
+                "font": "Georgia",
+                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
+                "bg-img-full": "",
+                "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
+                "url": "https://pop.system76.com/"
+            },
+            {
                 "name": "Debian",
-                "content": "A stable, universal OS, ideal for both desktop and server environments.",
+                "content": "Focuses on stability and uptime reliability, with update support lasting five years. It serves as the foundation for many .deb-based distributions.",
                 "bg": "#d6eaff",
                 "font": "Arial",
-                "bg-img": "debian-bg.jpg",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.svg",
+                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.webp",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.webp",
                 "url": "https://www.debian.org/",
                 "subgroup": [
                     {
-                        "name": "Debian Stable",
-                        "content": "Most stable and tested version, suitable for production.",
+                        "name": "Net-installer",
+                        "content": "Requires internet connection, guides you through either a text or graphic installer.",
                         "bg": "#cce7ff",
                         "font": "Verdana",
-                        "bg-img": "debian-stable-bg.jpg",
+                        "bg-img-top": "debian-stable-bg.jpg",
+                        "bg-img-full": "",
                         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-stable.svg",
-                        "url": "https://www.debian.org/releases/stable/"
+                        "url": "https://www.debian.org/"
+                    },
+                    {
+                        "name": "Live Boot images",
+                        "content": "Bootable Debian images to use it right away, can start an optional graphical installation.",
+                        "bg": "#e0e0ff",
+                        "font": "Courier New",
+                        "bg-img-top": "debian-testing-bg.jpg",
+                        "bg-img-full": "",
+                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-testing.svg",
+                        "url": "https://www.debian.org/CD/live/"
                     },
                     {
                         "name": "Debian Testing",
-                        "content": "A rolling version with newer features, tested but less stable.",
+                        "content": "A rolling release with more current software.",
                         "bg": "#e0e0ff",
                         "font": "Courier New",
-                        "bg-img": "debian-testing-bg.jpg",
+                        "bg-img-top": "debian-testing-bg.jpg",
+                        "bg-img-full": "",
                         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-testing.svg",
-                        "url": "https://www.debian.org/releases/testing/"
+                        "url": "https://www.debian.org/devel/debian-installer/"
                     }
                 ]
             },
             {
                 "name": "Fedora",
-                "content": "A cutting-edge, community-driven OS backed by Red Hat.",
+                "content": "Focuses on innovation of the latest open source technologies, and stability through package testing. With a regular six-month release cycle.",
                 "bg": "#f0f8ff",
                 "font": "Verdana",
-                "bg-img": "fedora-bg.jpg",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/fedora.svg",
-                "url": "https://getfedora.org/"
+                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                "url": "https://getfedora.org/",
+                "subgroup": [
+                    {
+                        "name": "Workstation",
+                        "content": "The flagship version, polished and easy to use.",
+                        "bg": "#e0f7fa",
+                        "font": "Arial",
+                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "bg-img-full": "",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://fedoraproject.org/workstation/"
+                    },
+                    {
+                        "name": "Spins",
+                        "content": "Fedora with a different desktop environment to choose from.",
+                        "bg": "#e0f7fa",
+                        "font": "Arial",
+                        "bg-img-top": "",
+                        "bg-img-full": "https://fedoraproject.org/assets/images/spins/screenshot-kde.jpg",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://fedoraproject.org/spins/"
+                    },
+                    {
+                        "name": "Network installer",
+                        "content": "To build your system as you please. Requires internet connection, guides you through either a text or graphic installer.",
+                        "bg": "#e0f7fa",
+                        "font": "Arial",
+                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "bg-img-full": "",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://alt.fedoraproject.org/"
+                    },
+                    {
+                        "name": "Server",
+                        "content": "Optimized for server environments with modular components.",
+                        "bg": "#e6f2ff",
+                        "font": "Courier New",
+                        "bg-img-top": "fedora-server-bg.jpg",
+                        "bg-img-full": "",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://getfedora.org/en/server/"
+                    },
+                    {
+                        "name": "Labs",
+                        "content": "Purpose-driven images, like Astronomy or Data Science.",
+                        "bg": "#e0f7fa",
+                        "font": "Arial",
+                        "bg-img-top": "",
+                        "bg-img-full": "https://fedoraproject.org/assets/images/labs/screenshot-design-suite.jpg",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://fedoraproject.org/labs"
+                    },
+                    {
+                        "name": "Atomic",
+                        "content": "Features a lightweight and unchangeable system that enhances stability and security. Meant to simply roll back during an update error.",
+                        "bg": "#e0f7fa",
+                        "font": "Arial",
+                        "bg-img-top": "",
+                        "bg-img-full": "https://fedoraproject.org/assets/images/spins/screenshot-kde.jpg",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
+                        "url": "https://fedoraproject.org/spins/"
+                    }
+                ]
+            },
+            {
+                "name": "Guix",
+                "content": "Focuses on rolling release model, 100% open source licensing and system reproducibility, so systems can be built the same easily on other computers.",
+                "bg": "#e6ffcc",
+                "font": "Georgia",
+                "bg-img-top": "https://guix.gnu.org/themes/initial/img/Guix.png",
+                "bg-img-full": "",
+                "img": "https://carino.systems/assets/images/Guix.webp",
+                "url": "https://guix.gnu.org/"
+            },
+            {
+                "name": "Gentoo",
+                "content": "Focuses on minimalism, rolling release model and enabling its users to compile all of their packages if needed for maximum optimization.",
+                "bg": "#e8e8ff",
+                "font": "Courier New",
+                "bg-img-top": "https://www.gentoo.org/assets/img/logo/gentoo-3d.png",
+                "bg-img-full": "",
+                "img": "https://www.gentoo.org/assets/img/logo/gentoo-3d.png",
+                "url": "https://www.gentoo.org/"
+            },
+            {
+                "name": "Arch",
+                "content": "Focusing on minimalism and rolling release model. So its users can build their system exactly as they want.",
+                "bg": "#e6ffcc",
+                "font": "Georgia",
+                "bg-img-top": "https://carino.systems/assets/images/arch.webp",
+                "bg-img-full": "",
+                "img": "https://carino.systems/assets/images/arch.webp",
+                "url": "https://archlinux.org/download/"
             }
         ]
     },
     {
         "name": "GNU/Linux Enterprise",
-        "content": "Optimized for business and enterprise environments, offering stability and support.",
+        "content": "Designed and optimized for business and enterprise environments, offering stability and support.",
         "bg": "#a2d1f1",
         "font": "RedHatFont",
-        "bg-img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "bg-img-full": "",
         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
         "subgroup": [
+            {
+                "name": "Ubuntu",
+                "content": "Popular with businesses for its ease of use and robust support ecosystem.",
+                "bg": "#e0d1ff",
+                "font": "Arial",
+                "bg-img-top": "ubuntu-bg.jpg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/ubuntu.svg",
+                "url": "https://ubuntu.com/",
+                "subgroup": [
+                    {
+                        "name": "Ubuntu Desktop",
+                        "content": "A stable and reliable enterprise-grade OS with long-term support.",
+                        "bg": "#ffe6e6",
+                        "font": "Georgia",
+                        "bg-img-top": "rhel8-bg.jpg",
+                        "bg-img-full": "",
+                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel8.svg",
+                        "url": "https://releases.ubuntu.com/24.10/"
+                    },
+                    {
+                        "name": "Ubuntu LTS (Long Term Support)",
+                        "content": "The latest RHEL version with updated features and tools.",
+                        "bg": "#ffd6d6",
+                        "font": "Arial",
+                        "bg-img-top": "rhel9-bg.jpg",
+                        "bg-img-full": "",
+                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel9.svg",
+                        "url": "https://releases.ubuntu.com/focal/"
+                    }
+                ]
+            },
             {
                 "name": "Red Hat Enterprise Linux",
                 "content": "A top choice for enterprise environments, offering extensive support and stability.",
                 "bg": "#ffdfdf",
                 "font": "Courier New",
-                "bg-img": "rhel-bg.jpg",
+                "bg-img-top": "rhel-bg.jpg",
+                "bg-img-full": "",
                 "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/redhat.svg",
                 "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
                 "subgroup": [
@@ -69,7 +322,8 @@
                         "content": "A stable and reliable enterprise-grade OS with long-term support.",
                         "bg": "#ffe6e6",
                         "font": "Georgia",
-                        "bg-img": "rhel8-bg.jpg",
+                        "bg-img-top": "rhel8-bg.jpg",
+                        "bg-img-full": "",
                         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel8.svg",
                         "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
                     },
@@ -78,11 +332,32 @@
                         "content": "The latest RHEL version with updated features and tools.",
                         "bg": "#ffd6d6",
                         "font": "Arial",
-                        "bg-img": "rhel9-bg.jpg",
+                        "bg-img-top": "rhel9-bg.jpg",
+                        "bg-img-full": "",
                         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel9.svg",
                         "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
                     }
                 ]
+            },
+            {
+                "name": "Alma Linux",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img-top": "opensuse-bg.jpg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "url": "https://www.opensuse.org/"
+            },
+            {
+                "name": "openSUSE",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img-top": "opensuse-bg.jpg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "url": "https://www.opensuse.org/"
             }
         ]
     }
