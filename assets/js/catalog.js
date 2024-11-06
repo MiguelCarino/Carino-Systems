@@ -236,8 +236,7 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 's0NME1GfbIc',image: 'mu_167.webp',tag: 'Boa'
 },{url: 'B8TClXpFbC4',image: 'mu_169.webp',tag: 'Sambo Master'
 },{url: 'QpotQZsxzsc',image: 'mu_170.webp',tag: 'Allie X'
-},{url: 'fZcwPx-tSTo',image: 'mu_170.webp',tag: 'Sexy Sushi'
-},{url: 'fZcwPx-tSTo',image: 'mu_170.webp',tag: 'Sexy Sushi'
+},{url: 'fZcwPx-tSTo',image: 'mu_171.webp',tag: 'Sexy Sushi'
 },
 // add more albums here
 ];
