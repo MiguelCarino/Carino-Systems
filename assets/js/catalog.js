@@ -234,6 +234,10 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'BZAkzCw17GM',image: 'mu_165.webp',tag: 'Chicos del barrio'
 },{url: 'j1RAUoM2pro',image: 'mu_168.webp',tag: 'Baka Mitai by Astrophysics'
 },{url: 's0NME1GfbIc',image: 'mu_167.webp',tag: 'Boa'
+},{url: 'B8TClXpFbC4',image: 'mu_169.webp',tag: 'Sambo Master'
+},{url: 'QpotQZsxzsc',image: 'mu_170.webp',tag: 'Allie X'
+},{url: 'fZcwPx-tSTo',image: 'mu_170.webp',tag: 'Sexy Sushi'
+},{url: 'fZcwPx-tSTo',image: 'mu_170.webp',tag: 'Sexy Sushi'
 },
 // add more albums here
 ];
