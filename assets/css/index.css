@@ -1,0 +1,269 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Ensure full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack columns vertically */
+    align-items: center; /* Center horizontally */
+    width: 80%;
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.left-column {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.right-column {
+    width: 100%;
+}
+
+.left-column h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+#random-phrase {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Center tiles horizontally */
+    margin-top: 20px; /* Space between the text and tiles */
+}
+
+.tile {
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    font-weight: bold;
+    font-size: 22px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    height: 150px; /* Fixed height for all tiles */
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(10vh); /* Initial position for sliding effect */
+    animation: slideIn 2s forwards; /* Slide-in animation */
+}
+
+.tile-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire tile */
+    z-index: -1; /* Place the video behind the text */
+    pointer-events: none; /* Allow clicks to pass through to the tile */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for video */
+}
+
+/* Keep the video visible initially */
+.tile-bg-video {
+    opacity: 0;
+}
+
+/* On hover, hide the video and show the background color */
+.tile:hover .tile-bg-video {
+    opacity: 1; /* Hide the video */
+    filter: brightness(0.7); /* Optional: Adjust brightness for better readability */
+}
+
+/* Adjust the background color on hover */
+.tile:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Example color, adjust as needed */
+}
+
+
+/* Dynamic widths */
+.tile.small-tile {
+    flex: 1 1 20%; /* Small tiles take 20% of the row */
+}
+
+.tile.medium-tile {
+    flex: 1 1 30%; /* Medium tiles take 30% of the row */
+}
+
+.tile.big-tile {
+    flex: 1 1 40%; /* Big tiles take 40% of the row */
+}
+
+/* Color Types */
+.ultramarine {
+    background-color: #3F00FF;
+}
+
+.emerald {
+    background-color: #50C878;
+}
+
+.scarlet {
+    background-color: #FF2400;
+}
+
+.coral {
+    background-color: #FF7F50;
+}
+
+.amber {
+    background-color: #FFC107;
+}
+
+.teal {
+    background-color: #008080;
+}
+
+.violet {
+    background-color: #8A2BE2;
+}
+
+.crimson {
+    background-color: #DC143C;
+}
+
+.indigo {
+    background-color: #4B0082;
+}
+
+.lime {
+    background-color: #00FF00;
+}
+
+.ruby {
+    background-color: #E0115F;
+}
+
+.turquoise {
+    background-color: #40E0D0;
+}
+
+.icon-row {
+    display: flex;
+    gap: 15px; /* Space between icons */
+    justify-content: center; /* Center the icons */
+    padding: 10px; /* Padding around the icons */
+}
+
+.icon-link {
+    color: #fff; /* Icon color */
+    font-size: 29px; /* Icon size */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.icon-link:hover {
+    color: #0073b1; /* Change color on hover */
+}
+
+/* Hover Effects */
+.tile:hover {
+    background-image: var(--bgVideo);
+    background-color: transparent;
+    opacity: 0.1;
+    filter: brightness(0.9);
+}
+
+.contrast-toggle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    transition: color 0.3s;
+}
+.contrast-toggle:hover {
+    color: #0073b1; /* Match the hover effect of social icons */
+}
+
+.high-contrast {
+    background-color: #000;
+    color: yellow;
+}
+
+.high-contrast-tile {
+    font-size: 52px;
+    opacity: 1;
+    width: 100%;
+}
+
+.white-mode {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1366px) {
+    .container {
+    flex-direction: column; /* Stack columns vertically */
+    }
+    .tile.small-tile {
+        flex: 1 1 30%; /* Adjust small tiles to 30% of the row */
+    }
+
+    .tile.medium-tile {
+        flex: 1 1 45%; /* Adjust medium tiles to 45% of the row */
+    }
+
+    .tile.big-tile {
+        flex: 1 1 90%; /* Adjust big tiles to 90% of the row */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .left-column, .right-column {
+        width: 100%;
+    }
+
+    .tiles {
+        justify-content: center;
+    }
+
+    .tile {
+        width: 100%; /* Full width for tiles on mobile */
+        height: 200px; /* Increase height for better appearance on mobile */
+    }
+}
