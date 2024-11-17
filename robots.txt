@@ -1,0 +1,14 @@
+# Allow only index.html to be indexed
+User-agent: *
+Allow: /index.html
+Disallow: /
+
+# Sitemap location (if you have a sitemap)
+#Sitemap: https://carino.systems/sitemap.xml
+
+# Crawl-delay directive (optional, to reduce server load)
+Crawl-delay: 10
+
+# Block specific bots (optional)
+User-agent: BadBot
+Disallow: /
