@@ -60,7 +60,7 @@
         ]
     },
     {
-        "title": "365 Admin",
+        "title": "Multimedia",
         "services": [
             { "name": "Microsoft 365 Admin Center", "link": "https://admin.cloud.microsoft", "icon": "fas fa-tools", "value": "Microsoft 365 Admin Center" },
             { "name": "Microsoft 365 Apps Admin Center", "link": "https://config.office.com", "icon": "fas fa-tools", "value": "Microsoft 365 Apps Admin Center" },
