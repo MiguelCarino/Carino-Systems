@@ -255,8 +255,8 @@ main {
     text-align: center;
     padding: 10px;
     position: fixed;
-    top: 5vh;
-    right: 2vh;
+    /*top: 5vh;
+    right: 2vh;*/
     z-index: 1000;
     border-radius: 5px;
     display: none;
