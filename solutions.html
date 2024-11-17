@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solutions</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://miguelcarino.github.io/SolutionGrid/assets/css/solutions.css">
+    <link rel="stylesheet" href="https://miguelcarino.github.io/MicrosoftLinks/assets/css/main.css">
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
-    <script type="module" src="https://miguelcarino.github.io/SolutionGrid/assets/js/solutions.js" defer></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -20,28 +19,26 @@
     <meta property="og:locale" content="en_US"/>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav id="navbar"></nav>
-
-    <!-- Header -->
-    <header>
-        <h2>Commercial Software, Free and Open Source Software, Useful Websites and Documents.</h2>
-    </header>
-
-    <!-- Main Content Area -->
-    <main>
-        <center>
-        <div class="box-input">
-            <div class="border">
-              <input id="searchInput" type="text" name="text" class="input" placeholder="What do you need? Press enter if nothing appears.">
+    <div class="container">
+        <div class="sidebar">
+            <img style="max-width: 7vh;" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
+            <h2>Microsoft Links</h2>
+            <div id="button-row">
+                <!-- Buttons will be injected here by JavaScript -->
             </div>
         </div>
-        </center>
-        <div class="softwareid-container">
-            <div id="softwareid"></div>
+        <div class="main-content">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search...">
+            </div>
+            <h2 id="category-title">Basic</h2>
+            <div class="main-grid" id="main-grid">
+                <!-- Grid items will be injected here by JavaScript -->
+            </div>
         </div>
-    </main>
-
+    </div>
+    <script src="assets/json/solutions.json" type="application/json"></script>
+    <script src="https://miguelcarino.github.io/MicrosoftLinks/assets/js/main.js"></script>
     <!-- Footer -->
     <footer id="footer"></footer>
 </body>
