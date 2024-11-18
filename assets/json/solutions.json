@@ -1,38 +1,31 @@
 [
     {
-        "title": "Highlighted",
+        "title": "Curated Highlighs",
         "services": [
-            { "name": "Windows 11", "description": "Most used desktop os", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
-            { "name": "Microsoft Edge", "description": "Most used desktop os", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
-            { "name": "Firefox Web Browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Google Chrome", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Google Chrome", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
-            { "name": "Epiphany", "link": "https://www.microsoft.com/edge", "icon": "fab fa-safari", "value": "Epiphany", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" }
+            { "name": "Mozilla Firefox", "description": "Privacy-focused web browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" }
         ]
     },
     {
-        "title": "Software",
+        "title": "Basic Software",
         "services": [
-            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
-            { "name": "Firefox Web Browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Google Chrome", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Google Chrome", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
-            { "name": "Epiphany", "link": "https://www.microsoft.com/edge", "icon": "fab fa-safari", "value": "Epiphany", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "Mozilla Firefox", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Libre Office", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Libre Office Suite", "windowscmd": "TheDocumentFoundation.LibreOffice", "macoscmd": "--cask libreoffice", "linuxflatpak": "org.libreoffice.LibreOffice"},
             { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"}
+        ]
+    },
+    {
+        "title": "Web Browsers",
+        "services": [
+            { "name": "Google Chrome", "link": "https://www.google.com/chrome/", "icon": "fab fa-chrome", "value": "Google Chrome", "windowscmd": "Google.Chrome", "macoscmd": "--cask google-chrome", "linuxflatpak": "com.google.Chrome" },
+            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "Microsoft.Edge", "macoscmd": "--cask microsoft-edge", "linuxflatpak": "com.microsoft.Edge" },
+            { "name": "Mozilla Firefox", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Epiphany", "link": "https://apps.gnome.org/Epiphany/", "icon": "fab fa-safari", "value": "Epiphany", "linuxdnf": "epiphany", "linuxapt": "epiphany", "linuxrhel": "epiphany", "linuxzyp": "epiphany", "linuxflatpak": "org.gnome.Epiphany" }
         ]
     },
     {
         "title": "Multimedia",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "MPV Media Player", "link": "https://mpv.io/installation/", "icon":"fab fa-video", "value": "MPV Media Player", "windowscmd": "tsl0922.ImPlay", "macoscmd": "mpv--cask stolendata-mpv", "linuxflatpak": "io.mpv.Mpv"}
         ]
     },
     {
