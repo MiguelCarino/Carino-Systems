@@ -1,333 +1,116 @@
 [
     {
-        "title": "Basic",
+        "title": "Highlighted",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
-            { "name": "Outlook", "link": "https://login.live.com", "icon": "fas fa-envelope", "value": "Outlook" },
-            { "name": "OneDrive", "link": "https://login.microsoftonline.com", "icon": "fas fa-cloud", "value": "OneDrive" },
-            { "name": "Microsoft 365", "link": "https://login.microsoftonline.com", "icon": "fab fa-microsoft", "value": "Microsoft 365" },
-            { "name": "Teams by meeting ID", "link": "https://www.microsoft.com/en-us/microsoft-teams/join-a-meeting", "icon": "fas fa-users", "value": "Teams by meeting ID" },
-            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge" },
-            { "name": "Copilot", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
-            { "name": "Copilot Notebook", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
-            { "name": "Bing Image Creator", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
-            { "name": "Windows Server", "link": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022", "icon": "fas fa-server", "value": "Windows Server" },
-            { "name": "Windows Insider Program", "link": "https://insider.windows.com", "icon": "fas fa-cogs", "value": "Windows Insider Program" }
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
-        "title": "Developer Tools",
+        "title": "Software",
+        "services": [
+            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#" },
+            { "name": "Firefox Web Browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "org.mozilla.firefox", "linuxcmd": "firefox" },
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"}
+        ]
+    },
+    {
+        "title": "Multimedia",
+        "services": [
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+        ]
+    },
+    {
+        "title": "Development",
         "services": [
             { "name": ".NET", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net" },
             { "name": "Visual Studio", "link": "https://visualstudio.microsoft.com/downloads/", "icon": "fas fa-code", "value": "Visual Studio" },
-            { "name": "VS Code", "link": "https://code.visualstudio.com/download", "value": "VS Code", "windowscmd": "Microsoft.VisualStudioCode", "macoscmd": "--cask visual-studio-code", "linuxflatpak": "com.visualstudio.code"},
+            { "name": "Visual Studio Code", "link": "https://code.visualstudio.com/download", "value": "Visual Studio Code,VS Code", "windowscmd": "Microsoft.VisualStudioCode", "macoscmd": "--cask visual-studio-code", "linuxflatpak": "com.visualstudio.code"},
+            { "name": "Visual Studio Code in the Web", "link": "https://www.vscode.dev/", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web" },
             { "name": "Powershell", "link": "https://github.com/PowerShell/PowerShell", "icon": "fas fa-terminal", "value": "Powershell" },
             { "name": ".NET Framework", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
             { "name": "C++ Build Tools", "link": "https://visualstudio.microsoft.com/visual-cpp-build-tools/", "icon": "fas fa-tools", "value": "C++ Build Tools" },
-            { "name": "Azure Linux", "link": "https://github.com/microsoft/azurelinux", "icon": "fas fa-cloud", "value": "Azure Linux" },
-            { "name": "GitHub", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" }
-        ]
-    },
-    {
-        "title": "Commercial Software",
-        "services": [
             { "name": "Microsoft Power BI", "link": "https://powerbi.microsoft.com", "icon": "fas fa-chart-bar", "value": "Microsoft Power BI" },
-            { "name": "Microsoft Dynamics 365", "link": "https://dynamics.microsoft.com", "icon": "fas fa-briefcase", "value": "Microsoft Dynamics 365" },
-            { "name": "Visual Studio", "link": "https://visualstudio.microsoft.com/downloads/", "icon": "fas fa-code", "value": "Visual Studio" },
-            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge" },
             { "name": "Microsoft SQL Server", "link": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads", "icon": "fas fa-database", "value": "Microsoft SQL Server" }
         ]
     },
     {
-        "title": "Open Source",
+        "title": "Web Development",
         "services": [
-            { "name": ".NET", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net" },
-            { "name": "VS Code", "link": "https://code.visualstudio.com/download", "icon": "fas fa-code-branch", "value": "VS Code" },
-            { "name": "Powershell", "link": "https://github.com/PowerShell/PowerShell", "icon": "fas fa-terminal", "value": "Powershell" },
-            { "name": ".NET Framework", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
-            { "name": "C++ Build Tools", "link": "https://visualstudio.microsoft.com/visual-cpp-build-tools/", "icon": "fas fa-tools", "value": "C++ Build Tools" },
-            { "name": "Azure Linux", "link": "https://github.com/microsoft/azurelinux", "icon": "fas fa-cloud", "value": "Azure Linux" },
-            { "name": "GitHub", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" },
-            { "name": "Microsoft Open Source", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" }
+            { "name": "Adaptive Cards Designer", "link": "https://adaptivecards.io/designer/", "icon": "fas fa-id-card", "value": "Adaptive Cards Designer" }
         ]
     },
     {
-        "title": "Packages and Updates",
+        "title": "Language",
         "services": [
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+        ]
+    },
+    {
+        "title": "Music",
+        "services": [
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+        ]
+    },
+    {
+        "title": "Cybersecurity and malware",
+        "services": [
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+        ]
+    },
+    {
+        "title": "Operating Systems",
+        "services": [
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
+            { "name": "Windows Server", "link": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022", "icon": "fas fa-server", "value": "Windows Server" },
             { "name": "Winget Packages", "link": "https://winget.run/", "icon": "fas fa-chart-bar", "value": "Winget Packages" },
             { "name": ".NET NuGet Packages", "link": "https://www.nuget.org/", "icon": "fas fa-briefcase", "value": ".NET NuGet Packages,dotnet" },
             { "name": "Microsoft Update Catalog", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" }
         ]
     },
     {
-        "title": "Multimedia",
-        "services": [
-            { "name": "Microsoft 365 Admin Center", "link": "https://admin.cloud.microsoft", "icon": "fas fa-tools", "value": "Microsoft 365 Admin Center" },
-            { "name": "Microsoft 365 Apps Admin Center", "link": "https://config.office.com", "icon": "fas fa-tools", "value": "Microsoft 365 Apps Admin Center" },
-            { "name": "Exchange Admin Center (EAC) New", "link": "https://admin.exchange.microsoft.com", "icon": "fas fa-envelope", "value": "Exchange Admin Center (EAC) New" },
-            { "name": "Exchange Admin Center (EAC) Old", "link": "https://outlook.office365.com/ecp/", "icon": "fas fa-envelope", "value": "Exchange Admin Center (EAC) Old" },
-            { "name": "Microsoft Purview Microsoft 365 Compliance", "link": "https://compliance.microsoft.com", "icon": "fas fa-shield-alt", "value": "Microsoft Purview Microsoft 365 Compliance" },
-            { "name": "Microsoft 365 network connectivity test", "link": "https://connectivity.office.com", "icon": "fas fa-network-wired", "value": "Microsoft 365 network connectivity test" },
-            { "name": "Microsoft 365 Network Insights Preview", "link": "https://portal.office.com/adminportal/home#/networkperformance", "icon": "fas fa-network-wired", "value": "Microsoft 365 Network Insights Preview" },
-            { "name": "Microsoft Call Quality Dashboard (Teams)", "link": "https://cqd.teams.microsoft.com", "icon": "fas fa-chart-bar", "value": "Microsoft Call Quality Dashboard (Teams)" },
-            { "name": "Microsoft Call Quality Dashboard (Lync)", "link": "https://cqd.lync.com", "icon": "fas fa-chart-bar", "value": "Microsoft Call Quality Dashboard (Lync)" },
-            { "name": "Microsoft Intune Admin Center Endpoint Manager", "link": "https://intune.microsoft.com", "icon": "fas fa-mobile-alt", "value": "Microsoft Intune Admin Center Endpoint Manager" },
-            { "name": "Microsoft Endpoint Manager Admin Console Release Candidate", "link": "https://rc-devicemanagement.portal.azure.com", "icon": "fas fa-mobile-alt", "value": "Microsoft Endpoint Manager Admin Console Release Candidate" },
-            { "name": "Microsoft Endpoint Manager Admin Console Old", "link": "https://devicemanagement.portal.azure.com", "icon": "fas fa-mobile-alt", "value": "Microsoft Endpoint Manager Admin Console Old" },
-            { "name": "Microsoft Intune for Education", "link": "https://intuneeducation.portal.azure.com", "icon": "fas fa-book", "value": "Microsoft Intune for Education" },
-            { "name": "Microsoft Online", "link": "https://portal.microsoftonline.com/IWDefault.aspx", "icon": "fas fa-globe", "value": "Microsoft Online" },
-            { "name": "Microsoft Store for Business", "link": "https://businessstore.microsoft.com", "icon": "fas fa-store", "value": "Microsoft Store for Business" },
-            { "name": "Microsoft Store for Education", "link": "https://educationstore.microsoft.com", "icon": "fas fa-store", "value": "Microsoft Store for Education" },
-            { "name": "Microsoft Stream Admin Center", "link": "https://web.microsoftstream.com/admin", "icon": "fas fa-video", "value": "Microsoft Stream Admin Center" },
-            { "name": "Microsoft Purview Azure and Fabric Governance", "link": "https://web.purview.azure.com/", "icon": "fas fa-shield-alt", "value": "Microsoft Purview Azure and Fabric Governance" },
-            { "name": "Microsoft Purview Preview Azure and Fabric Governance", "link": "https://purview.microsoft.com/", "icon": "fas fa-shield-alt", "value": "Microsoft Purview Preview Azure and Fabric Governance" },
-            { "name": "Microsoft Teams Admin Center", "link": "https://admin.teams.microsoft.com", "icon": "fas fa-users", "value": "Microsoft Teams Admin Center" },
-            { "name": "Teams Rooms Pro Management portal", "link": "https://portal.rooms.microsoft.com/", "icon": "fas fa-users", "value": "Teams Rooms Pro Management portal" },
-            { "name": "My Staff (preview)", "link": "https://mystaff.microsoft.com", "icon": "fas fa-users", "value": "My Staff (preview)" },
-            { "name": "Power Apps ISV Studio", "link": "https://isvstudio.powerapps.com/home", "icon": "fas fa-tools", "value": "Power Apps ISV Studio" },
-            { "name": "Power Apps Maker Portal", "link": "https://make.powerapps.com", "icon": "fas fa-tools", "value": "Power Apps Maker Portal" },
-            { "name": "Power Automate Maker Portal Microsoft Flow", "link": "https://make.powerautomate.com", "icon": "fas fa-sync", "value": "Power Automate Maker Portal Microsoft Flow" },
-            { "name": "Power BI Admin Portal", "link": "https://app.powerbi.com/admin-portal/usageMetrics?noSignUpCheck=1", "icon": "fas fa-chart-bar", "value": "Power BI Admin Portal" },
-            { "name": "Power Pages Preview", "link": "https://make.powerpages.microsoft.com/", "icon": "fas fa-file", "value": "Power Pages Preview" },
-            { "name": "Power Platform admin center", "link": "https://admin.powerplatform.microsoft.com", "icon": "fas fa-tools", "value": "Power Platform admin center" },
-            { "name": "Power Virtual Agents Portal", "link": "https://powerva.microsoft.com", "icon": "fas fa-robot", "value": "Power Virtual Agents Portal" },
-            { "name": "Phone Number Service Center", "link": "https://pstnsd.powerappsportals.com/", "icon": "fas fa-phone", "value": "Phone Number Service Center" },
-            { "name": "SharePoint Admin Center", "link": "https://admin.microsoft.com/sharepoint", "icon": "fas fa-share-alt", "value": "SharePoint Admin Center" },
-            { "name": "SharePoint look book", "link": "https://lookbook.microsoft.com/", "icon": "fas fa-book", "value": "SharePoint look book" },
-            { "name": "Skype for Business admin center Deprecated", "link": "https://webdir2a.online.lync.com/LSCP", "icon": "fas fa-skype", "value": "Skype for Business admin center Deprecated" },
-            { "name": "Yammer Admin", "link": "https://www.yammer.com/office365/admin", "icon": "fas fa-comments", "value": "Yammer Admin" },
-            { "name": "Migrate Stream (Classic) to Stream (on SharePoint)", "link": "https://admin.microsoft.com/#/featureexplorer/migration/StreamMigration", "icon": "fas fa-exchange-alt", "value": "Migrate Stream (Classic) to Stream (on SharePoint)" },
-            { "name": "My Applications (My Apps)", "link": "https://myapps.microsoft.com/", "icon": "fas fa-th", "value": "My Applications (My Apps)" },
-            { "name": "My Access", "link": "https://myaccess.microsoft.com/", "icon": "fas fa-unlock-alt", "value": "My Access" }
-        ]
-    },
-    {
-        "title": "Admin Portals",
-        "services": [
-            { "name": "Kaizala Management Portal", "link": "https://manage.kaiza.la/", "icon": "fas fa-tools", "value": "Kaizala Management Portal" },
-            { "name": "Azure Portal", "link": "https://portal.azure.com", "icon": "fas fa-cloud", "value": "Azure Portal" },
-            { "name": "Azure DevOps", "link": "https://dev.azure.com", "icon": "fas fa-project-diagram", "value": "Azure DevOps" },
-            { "name": "Power Automate", "link": "https://flow.microsoft.com", "icon": "fas fa-sync", "value": "Power Automate" },
-            { "name": "Teams", "link": "https://teams.microsoft.com/v2/", "icon": "fas fa-users", "value": "Teams" }
-        ]
-    },
-    {
-        "title": "AI / Machine Learning",
+        "title": "AI / Machine learning",
         "services": [
             { "name": "Copilot", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
-            { "name": "Azure AI Studio", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" },
-            { "name": "Azure Machine Learning Studio", "link": "https://ml.azure.com", "icon": "fas fa-brain", "value": "Azure Machine Learning Studio" },
-            { "name": "Azure OpenAI Studio", "link": "https://oai.azure.com/portal", "icon": "fas fa-brain", "value": "Azure OpenAI Studio" },
-            { "name": "Bot Framework Dev Portal", "link": "https://dev.botframework.com", "icon": "fas fa-robot", "value": "Bot Framework Dev Portal" },
-            { "name": "Custom Translator", "link": "https://portal.customtranslator.azure.ai/", "icon": "fas fa-language", "value": "Custom Translator" },
-            { "name": "Custom Vision", "link": "https://www.customvision.ai/", "icon": "fas fa-eye", "value": "Custom Vision" },
-            { "name": "Language Studio", "link": "https://language.azure.com/", "icon": "fas fa-language", "value": "Language Studio" },
-            { "name": "LUIS Portal - Language Understanding", "link": "https://www.luis.ai/", "icon": "fas fa-language", "value": "LUIS Portal - Language Understanding" },
-            { "name": "QnA Maker Portal", "link": "https://www.qnamaker.ai/", "icon": "fas fa-question", "value": "QnA Maker Portal" },
-            { "name": "Speech Studio", "link": "https://speech.microsoft.com/", "icon": "fas fa-microphone", "value": "Speech Studio" },
-            { "name": "Vision Studio Preview", "link": "https://preview.vision.azure.com/", "icon": "fas fa-eye", "value": "Vision Studio Preview" },
-            { "name": "Video Indexer", "link": "https://www.videoindexer.ai/", "icon": "fas fa-video", "value": "Video Indexer" }
+            { "name": "Copilot Notebook", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
+            { "name": "Bing Image Creator", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
+            { "name": "Azure AI Studio", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" }
         ]
     },
     {
-        "title": "Azure",
-        "services": [
-            { "name": "Microsoft Azure Portal", "link": "https://portal.azure.com", "icon": "fas fa-cloud", "value": "Microsoft Azure Portal" },
-            { "name": "Microsoft Azure Release Candidate", "link": "https://rc.portal.azure.com", "icon": "fas fa-cloud", "value": "Microsoft Azure Release Candidate" },
-            { "name": "Microsoft Azure Preview", "link": "https://preview.portal.azure.com", "icon": "fas fa-cloud", "value": "Microsoft Azure Preview" },
-            { "name": "Microsoft Entra Admin Center (Formerly Azure AD Admin Center) Identity Management", "link": "https://entra.microsoft.com", "icon": "fas fa-user-shield", "value": "Microsoft Entra Admin Center (Formerly Azure AD Admin Center) Identity Management" },
-            { "name": "Create New Tenant / Azure Active Directory", "link": "https://account.azure.com/organization", "icon": "fas fa-user-plus", "value": "Create New Tenant / Azure Active Directory" },
-            { "name": "Tenant Lookup", "link": "https://gettenantpartitionweb.azurewebsites.net/", "icon": "fas fa-user-plus", "value": "Tenant Lookup" },
-            { "name": "Azure Cloud Shell", "link": "https://shell.azure.com", "icon": "fas fa-terminal", "value": "Azure Cloud Shell, powershell" },
-            { "name": "Azure Cosmos DB", "link": "https://cosmos.azure.com", "icon": "fas fa-database", "value": "Azure Cosmos DB" },
-            { "name": "Azure Cosmos DB - Connection string authentication", "link": "https://cosmos.azure.com/sunset/", "icon": "fas fa-database", "value": "Azure Cosmos DB - Connection string authentication" },
-            { "name": "Azure Data Factory", "link": "https://adf.azure.com", "icon": "fas fa-industry", "value": "Azure Data Factory" },
-            { "name": "Azure Synapse Analytics", "link": "https://web.azuresynapse.net/", "icon": "fas fa-chart-line", "value": "Azure Synapse Analytics" },
-            { "name": "Azure Non-profit Portal", "link": "https://nonprofit.microsoft.com", "icon": "fas fa-hands-helping", "value": "Azure Non-profit Portal" },
-            { "name": "Azure Resource Explorer", "link": "https://resources.azure.com", "icon": "fas fa-search", "value": "Azure Resource Explorer" },
-            { "name": "Azure Resource Explorer Raw", "link": "https://resources.azure.com/raw", "icon": "fas fa-search", "value": "Azure Resource Explorer Raw" },
-            { "name": "Typespec Azure API playground (Explorer)", "link": "https://azure.github.io/typespec-azure/playground", "icon": "fas fa-play", "value": "Typespec Azure API playground (Explorer)" },
-            { "name": "Azure Authentication methods", "link": "https://aad.portal.azure.com/#blade/Microsoft_AAD_IAM/AuthenticationMethodsMenuBlade/AdminAuthMethods/", "icon": "fas fa-key", "value": "Azure Authentication methods" },
-            { "name": "Azure Backup Center", "link": "https://portal.azure.com/#blade/Microsoft_Azure_DataProtection/BackupCenterMenuBlade/overview", "icon": "fas fa-archive", "value": "Azure Backup Center" },
-            { "name": "Privileged Identity Management", "link": "https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/CommonMenuBlade/quickStart", "icon": "fas fa-user-shield", "value": "Privileged Identity Management" },
-            { "name": "Desktop Analytics Portal", "link": "https://devicemanagement.portal.azure.com/#blade/Microsoft_M365_ManageClient/ManageClientFrameBlade", "icon": "fas fa-chart-bar", "value": "Desktop Analytics Portal" },
-            { "name": "Azure Sentinel", "link": "https://portal.azure.com/#blade/Microsoft_Azure_Security_Insights/WorkspaceSelectorBlade", "icon": "fas fa-shield-alt", "value": "Azure Sentinel" },
-            { "name": "Azure Universal Print Raw", "link": "https://portal.azure.com/#blade/Universal_Print/MainMenuBlade/Overview", "icon": "fas fa-print", "value": "Azure Universal Print Raw" },
-            { "name": "Intune", "link": "https://intune.microsoft.com", "icon": "fas fa-mobile-alt", "value": "Intune" }
-        ]
-    },
-    {
-        "title": "Microsoft Licensing/Support Portals",
-        "services": [
-            { "name": "Azure Subscriptions", "link": "https://account.azure.com/Subscriptions", "icon": "fas fa-money-check-alt", "value": "Azure Subscriptions" },
-            { "name": "Azure New Support Request", "link": "https://portal.azure.com/#create/Microsoft.Support", "icon": "fas fa-life-ring", "value": "Azure New Support Request" },
-            { "name": "Microsoft Azure Enterprise Portal", "link": "https://ea.azure.com", "icon": "fas fa-building", "value": "Microsoft Azure Enterprise Portal" },
-            { "name": "Microsoft FastTrack Includes App Assure", "link": "https://fasttrack.microsoft.com", "icon": "fas fa-fast-forward", "value": "Microsoft FastTrack Includes App Assure" },
-            { "name": "Microsoft License Advisor", "link": "https://mla.microsoft.com", "icon": "fas fa-id-card", "value": "Microsoft License Advisor" },
-            { "name": "Microsoft services Hub", "link": "https://serviceshub.microsoft.com", "icon": "fas fa-hands-helping", "value": "Microsoft services Hub" },
-            { "name": "Microsoft Volume Licensing eAgreements", "link": "https://eagreements.microsoft.com/", "icon": "fas fa-file-contract", "value": "Microsoft Volume Licensing eAgreements" },
-            { "name": "Next Generation Volume Licensing", "link": "https://businessaccount.microsoft.com", "icon": "fas fa-file-contract", "value": "Next Generation Volume Licensing" },
-            { "name": "Volume Licensing Service Center", "link": "https://www.microsoft.com/Licensing/servicecenter/", "icon": "fas fa-file-contract", "value": "Volume Licensing Service Center" }
-        ]
-    },
-    {
-        "title": "Microsoft Defender / Security IT Admin Portals",
-        "services": [
-            { "name": "Microsoft Security Copilot", "link": "https://securitycopilot.microsoft.com/", "icon": "fas fa-robot", "value": "Microsoft Security Copilot" },
-            { "name": "Microsoft Defender Threat Intelligence", "link": "https://ti.defender.microsoft.com/", "icon": "fas fa-shield-alt", "value": "Microsoft Defender Threat Intelligence" },
-            { "name": "Microsoft 365 Defender Previously Microsoft 365 security", "link": "https://security.microsoft.com", "icon": "fas fa-shield-alt", "value": "Microsoft 365 Defender Previously Microsoft 365 security" },
-            { "name": "Microsoft Defender for Cloud Apps", "link": "https://security.microsoft.com/cloudapps/policies/management", "icon": "fas fa-cloud", "value": "Microsoft Defender for Cloud Apps" },
-            { "name": "Microsoft Defender for Endpoints (MDE) Deprecated: Previously Defender ATP", "link": "https://securitycenter.windows.com", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Endpoints (MDE) Deprecated: Previously Defender ATP" },
-            { "name": "Microsoft Defender for Identity (MDI) Deprecated: Previously Azure ATP", "link": "https://portal.atp.azure.com", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Identity (MDI) Deprecated: Previously Azure ATP" },
-            { "name": "Microsoft Defender for Internet of Things (IoT)", "link": "https://portal.azure.com/#blade/Microsoft_Azure_IoT_Defender/IoTDefenderDashboard", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Internet of Things (IoT)" },
-            { "name": "Microsoft Defender ATP Testground Being deprecated 09/30/2022", "link": "https://demo.wd.microsoft.com/", "icon": "fas fa-shield-alt", "value": "Microsoft Defender ATP Testground Being deprecated 09/30/2022" },
-            { "name": "Attack simulation training sub-portal", "link": "https://security.microsoft.com/attacksimulator", "icon": "fas fa-skull-crossbones", "value": "Attack simulation training sub-portal" },
-            { "name": "Microsoft Defender for Cloud (MDC) Azure Security Center (ASC)", "link": "https://portal.azure.com/#blade/Microsoft_Azure_Security/SecurityMenuBlade/0", "icon": "fas fa-cloud", "value": "Microsoft Defender for Cloud (MDC) Azure Security Center (ASC)" },
-            { "name": "Microsoft Secure Score", "link": "https://security.microsoft.com/securescore", "icon": "fas fa-lock", "value": "Microsoft Secure Score" },
-            { "name": "Microsoft Security Intelligence", "link": "https://microsoft.com/wdsi", "icon": "fas fa-brain", "value": "Microsoft Security Intelligence" },
-            { "name": "Multi-factor authentication (MFA)", "link": "https://account.activedirectory.windowsazure.com/usermanagement/multifactorverification.aspx", "icon": "fas fa-key", "value": "Multi-factor authentication (MFA)" },
-            { "name": "CloudKnox Permissions Management", "link": "https://c1.app.mciem.cloudknox.io", "icon": "fas fa-key", "value": "CloudKnox Permissions Management" },
-            { "name": "Microsoft AccountGuard", "link": "https://accountguard.microsoft.com", "icon": "fas fa-user-shield", "value": "Microsoft AccountGuard" },
-            { "name": "Office 365 Security & Compliance Deprecated", "link": "https://protection.office.com", "icon": "fas fa-exclamation-triangle", "value": "Office 365 Security & Compliance Deprecated" },
-            { "name": "Entra ID Error Code Lookup", "link": "https://login.microsoftonline.com/error", "icon": "fas fa-search", "value": "Entra ID Error Code Lookup" },
-            { "name": "Report an unsafe site (login)", "link": "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site", "icon": "fas fa-exclamation-triangle", "value": "Report an unsafe site (login)" },
-            { "name": "Report an unsafe site (guest)", "link": "https://www.microsoft.com/en-us/wdsi/support/report-unsafe-site-guest", "icon": "fas fa-exclamation-triangle", "value": "Report an unsafe site (guest)" },
-            { "name": "Submit a file for malware analysis", "link": "https://www.microsoft.com/en-us/wdsi/filesubmission", "icon": "fas fa-bug", "value": "Submit a file for malware analysis" },
-            { "name": "Submit Vulnerability", "link": "https://msrc.microsoft.com/report/vulnerability", "icon": "fas fa-bug", "value": "Submit Vulnerability" },
-            { "name": "Reporting Infringement or DCMA Notice to Microsoft", "link": "https://www.microsoft.com/en-us/legal/intellectualproperty/infringement", "icon": "fas fa-gavel", "value": "Reporting Infringement or DCMA Notice to Microsoft" },
-            { "name": "Reporting Issue with Bingbot", "link": "https://www.microsoft.com/en-us/legal/intellectualproperty/infringement", "icon": "fas fa-gavel", "value": "Reporting Issue with Bingbot" },
-            { "name": "Submit Abuse Report (CERT)", "link": "https://msrc.microsoft.com/report/abuse", "icon": "fas fa-exclamation-triangle", "value": "Submit Abuse Report (CERT)" }
-        ]
-    },
-    {
-        "title": "Developer Portals",
-        "services": [
-            { "name": "Copilot Studio", "link": "https://copilotstudio.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot Studio" },
-            { "name": "Microsoft Fabric", "link": "https://fabric.microsoft.com/", "icon": "fas fa-cubes", "value": "Microsoft Fabric" },
-            { "name": "Actionable Messages Developer Dashboard", "link": "https://outlook.office.com/connectors/oam/publish", "icon": "fas fa-envelope-open-text", "value": "Actionable Messages Developer Dashboard" },
-            { "name": "Actionable Message Designer", "link": "https://amdesigner.azurewebsites.net/", "icon": "fas fa-envelope-open-text", "value": "Actionable Message Designer" },
-            { "name": "Adaptive Cards Designer", "link": "https://adaptivecards.io/designer/", "icon": "fas fa-id-card", "value": "Adaptive Cards Designer" },
-            { "name": "Applied AI Form Recognizer Studio - Preview", "link": "https://formrecognizer.appliedai.azure.com", "icon": "fas fa-file-alt", "value": "Applied AI Form Recognizer Studio - Preview" },
-            { "name": "Azure Data Explorer", "link": "https://dataexplorer.azure.com/", "icon": "fas fa-search", "value": "Azure Data Explorer" },
-            { "name": "Azure DevOps", "link": "https://aex.dev.azure.com/me", "icon": "fas fa-project-diagram", "value": "Azure DevOps" },
-            { "name": "Bing Maps Portal", "link": "https://www.bingmapsportal.com/", "icon": "fas fa-map", "value": "Bing Maps Portal" },
-            { "name": "Microsoft Graph Explorer", "link": "https://developer.microsoft.com/en-us/graph/graph-explorer", "icon": "fas fa-code", "value": "Microsoft Graph Explorer" },
-            { "name": "JWT/MS Token Decoder", "link": "https://jwt.ms/", "icon": "fas fa-key", "value": "JWT/MS Token Decoder" },
-            { "name": "Message Card Playground New Tool - Actionable Message Designer", "link": "https://messagecardplayground.azurewebsites.net/", "icon": "fas fa-envelope-open-text", "value": "Message Card Playground New Tool - Actionable Message Designer" },
-            { "name": "Microsoft Graph Toolkit", "link": "https://mgt.dev/", "icon": "fas fa-code", "value": "Microsoft Graph Toolkit" },
-            { "name": "Visual Studio (VS) Code in the Web", "link": "https://www.vscode.dev/", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web" },
-            { "name": "Visual Studio (VS) Code in the Web Insiders Version", "link": "https://insiders.vscode.dev/", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web Insiders Version" },
-            { "name": "Microsoft AppSource", "link": "https://appsource.microsoft.com/", "icon": "fas fa-th-large", "value": "Microsoft AppSource" },
-            { "name": "Visual Studio Subscriptions", "link": "https://my.visualstudio.com", "icon": "fas fa-envelope", "value": "Visual Studio Subscriptions" },
-            { "name": "Visual Studio Subscriptions Management", "link": "https://manage.visualstudio.com", "icon": "fas fa-envelope", "value": "Visual Studio Subscriptions Management" },
-            { "name": "Microsoft Clarity (HeatMaps & Sessions Recordings)", "link": "https://clarity.microsoft.com/", "icon": "fas fa-thermometer-half", "value": "Microsoft Clarity (HeatMaps & Sessions Recordings)" },
-            { "name": "Bing WebMaster Tools", "link": "https://www.bing.com/webmasters", "icon": "fas fa-tools", "value": "Bing WebMaster Tools" },
-            { "name": "Developer Portal for Teams", "link": "https://dev.teams.microsoft.com", "icon": "fas fa-users", "value": "Developer Portal for Teams" },
-            { "name": "Microsoft 365 Developer Program Dashboard", "link": "https://developer.microsoft.com/microsoft-365/profile", "icon": "fas fa-tools", "value": "Microsoft 365 Developer Program Dashboard" }
-        ]
-    },
-    {
-        "title": "Health / Status Portals",
+        "title": "Monitoring and Status",
         "services": [
             { "name": "Microsoft Service health status Microsoft 365, Azure, Power Platform", "link": "https://status.cloud.microsoft", "icon": "fas fa-heartbeat", "value": "Microsoft Service health status Microsoft 365, Azure, Power Platform" },
-            { "name": "Microsoft 365 Service health status", "link": "https://portal.office.com/servicestatus", "icon": "fas fa-heartbeat", "value": "Microsoft 365 Service health status" },
-            { "name": "Microsoft 365 Service health status (Admin portal)", "link": "https://admin.microsoft.com/AdminPortal/Home#/servicehealth", "icon": "fas fa-heartbeat", "value": "Microsoft 365 Service health status (Admin portal)" },
             { "name": "Azure DevOps - Status", "link": "https://status.dev.azure.com", "icon": "fas fa-heartbeat", "value": "Azure DevOps - Status" },
-            { "name": "Azure Service Health -> Service issues", "link": "https://portal.azure.com/?source=akams%2F#blade/Microsoft_Azure_Health/AzureHealthBrowseBlade/serviceIssues", "icon": "fas fa-heartbeat", "value": "Azure Service Health -> Service issues" },
-            { "name": "Azure - Status", "link": "https://status.azure.com/status/", "icon": "fas fa-heartbeat", "value": "Azure - Status" },
-            { "name": "Windows release health", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" },
-            { "name": "Twitter - Microsoft 365 Status Page", "link": "https://twitter.com/MSFT365Status", "icon": "fab fa-twitter", "value": "Twitter - Microsoft 365 Status Page" }
+            { "name": "Windows release health", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" }
         ]
     },
     {
-        "title": "Microsoft Partner / MSP Portals",
+        "title": "Corporate",
         "services": [
-            { "name": "Microsoft Partner Center", "link": "https://partner.microsoft.com", "icon": "fas fa-handshake", "value": "Microsoft Partner Center" },
-            { "name": "Azure for Partners", "link": "https://microsoft.github.io/PartnerResources/", "icon": "fas fa-handshake", "value": "Azure for Partners" },
-            { "name": "Microsoft Partner Resources", "link": "https://partner.microsoft.com/en-US/partnership/azure-for-partners", "icon": "fas fa-handshake", "value": "Microsoft Partner Resources" },
-            { "name": "Dynamics 365 for Partners", "link": "https://dynamicspartners.transform.microsoft.com/", "icon": "fas fa-handshake", "value": "Dynamics 365 for Partners" },
-            { "name": "Modern Work for Partners", "link": "https://cloudpartners.transform.microsoft.com/", "icon": "fas fa-handshake", "value": "Modern Work for Partners" },
-            { "name": "Power Platform for Partners", "link": "https://powerplatformpartners.transform.microsoft.com/", "icon": "fas fa-handshake", "value": "Power Platform for Partners" },
-            { "name": "Microsoft Security Partners", "link": "https://securitypartners.transform.microsoft.com/", "icon": "fas fa-handshake", "value": "Microsoft Security Partners" },
-            { "name": "Partner Led Customer Trials", "link": "https://trials.transform.microsoft.com/", "icon": "fas fa-handshake", "value": "Partner Led Customer Trials" },
-            { "name": "Einvoice", "link": "https://einvoice.microsoft.com", "icon": "fas fa-file-invoice-dollar", "value": "Einvoice" },
-            { "name": "Partner Cybersecurity Investment Program", "link": "https://cloudaccelerator.microsoft.com/csi-partner-investment", "icon": "fas fa-shield-alt", "value": "Partner Cybersecurity Investment Program" },
-            { "name": "SupplierWeb", "link": "https://supplier.microsoft.com/", "icon": "fas fa-people-carry", "value": "SupplierWeb" }
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
-        "title": "Microsoft Trials",
+        "title": "Entertainment",
         "services": [
-            { "name": "Microsoft Defender for Identity Trial -3-month", "link": "https://signup.microsoft.com/Signup?OfferId=a0db242a-96d7-4f99-bd52-05c0d5556257&ali=1", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Identity Trial -3-month" },
-            { "name": "Microsoft Defender for Office 365 (Plan 2) 90 Day, Full Tenant Trial", "link": "https://signup.microsoft.com/signup/logout?OfferId=20298c4d-d500-47fa-b3cd-a3f7d75d9253", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Office 365 (Plan 2) 90 Day, Full Tenant Trial" },
-            { "name": "Microsoft Defender for Endpoint P2 Trial - 3-month", "link": "https://signup.microsoft.com/create-account/signup?products=7f379fee-c4f9-4278-b0a1-e4c8c2fcdf7e&ru=https://aka.ms/MDEp2OpenTrial", "icon": "fas fa-shield-alt", "value": "Microsoft Defender for Endpoint P2 Trial - 3-month" },
-            { "name": "Microsoft 365 E5 Security Trial - 1-month", "link": "https://signup.microsoft.com/Signup?OfferId=b73fce33-ac89-4175-b199-0173b4c74b1f&ali=1", "icon": "fas fa-shield-alt", "value": "Microsoft 365 E5 Security Trial - 1-month" },
-            { "name": "App governance add-on to Microsoft Defender for Cloud Apps Trial - 90-day", "link": "https://signup.microsoft.com/get-started/signup?products=a52e9277-0d85-4480-8cae-a84bc2ab32ae&culture=en-us&country=US&ali=1", "icon": "fas fa-shield-alt", "value": "App governance add-on to Microsoft Defender for Cloud Apps Trial - 90-day" },
-            { "name": "Microsoft 365 Defender portal trials hub", "link": "https://security.microsoft.com/trialHorizontalHub?sku=MDO&ref=DocsRef", "icon": "fas fa-shield-alt", "value": "Microsoft 365 Defender portal trials hub" },
-            { "name": "Microsoft Purview compliance portal trials hub", "link": "https://compliance.microsoft.com/trialHorizontalHub?sku=ComplianceE5&ref=DocsRef", "icon": "fas fa-shield-alt", "value": "Microsoft Purview compliance portal trials hub" },
-            { "name": "Microsoft 365 E5 Insider Risk Management Trial", "link": "https://signup.microsoft.com/signup?OfferId=7B74C69A-2BFC-41C9-AAF1-23070354622D", "icon": "fas fa-shield-alt", "value": "Microsoft 365 E5 Insider Risk Management Trial" },
-            { "name": "Microsoft 365 E5 Information Protection and Governance Trial", "link": "https://signup.microsoft.com/signup?OfferId=503D4D1D-0169-4E1F-AE26-DB041C54C5C4", "icon": "fas fa-shield-alt", "value": "Microsoft 365 E5 Information Protection and Governance Trial" },
-            { "name": "Microsoft 365 E5 Compliance Trial", "link": "https://signup.microsoft.com/Signup?OfferId=d53d8416-fd1f-4552-831c-b5828ef2cbde&ali=1", "icon": "fas fa-shield-alt", "value": "Microsoft 365 E5 Compliance Trial" },
-            { "name": "Compliance Manager Premium Assessment Add-On Trial - 90-day", "link": "https://signup.microsoft.com/get-started/signup?products=e320704d-b7c9-4012-b6a6-0a2679790360&culture=en-us&country=US&ali=1", "icon": "fas fa-shield-alt", "value": "Compliance Manager Premium Assessment Add-On Trial - 90-day" },
-            { "name": "Microsoft 365 E5 eDiscovery and Audit Trial", "link": "https://signup.microsoft.com/signup?OfferId=c6ca396f-4467-4761-95f6-b6d9a5386716", "icon": "fas fa-shield-alt", "value": "Microsoft 365 E5 eDiscovery and Audit Trial" },
-            { "name": "Privacy Management - subject rights request (50) Trial - 90-day", "link": "https://signup.microsoft.com/get-started/signup?products=1c6c565d-cae2-4648-aa92-bf52b523fdbd&ali=1", "icon": "fas fa-shield-alt", "value": "Privacy Management - subject rights request (50) Trial - 90-day" },
-            { "name": "Priva Privacy Risk Management Trial - 90-day", "link": "https://signup.microsoft.com/get-started/signup?products=e6b633e0-1b1e-4d95-b414-3ce9e8023c39", "icon": "fas fa-shield-alt", "value": "Priva Privacy Risk Management Trial - 90-day" },
-            { "name": "Sign-up for Office 365 E3, 25 licenses trial, 30-day", "link": "https://signup.microsoft.com/get-started/signup?OfferId=B07A1127-DE83-4a6d-9F85-2C104BDAE8B4&dl=ENTERPRISEPACK&ali=1&products=cfq7ttc0k59j%3a0009&bac=1", "icon": "fas fa-shield-alt", "value": "Sign-up for Office 365 E3, 25 licenses trial, 30-day" },
-            { "name": "Microsoft 365 Business Premium Trial, 1 Month", "link": "https://signup.microsoft.com/get-started/signup?products=53e11149-82f9-4bca-a7f2-8f72592e4f03&mproducts=CFQ7TTC0LCHC:0003&fmproducts=CFQ7TTC0LCHC:0003&culture=en-in&country=in&ali=1", "icon": "fas fa-shield-alt", "value": "Microsoft 365 Business Premium Trial, 1 Month" },
-            { "name": "Sign-up for Azure $200 US Credits in 3 months, 12 months free services trial", "link": "https://azure.microsoft.com/en-us/offers/ms-azr-0044p/", "icon": "fas fa-shield-alt", "value": "Sign-up for Azure $200 US Credits in 3 months, 12 months free services trial" },
-            { "name": "Sign-up for Dynamics 365 for 30 days trial", "link": "https://trials.dynamics.com", "icon": "fas fa-shield-alt", "value": "Sign-up for Dynamics 365 for 30 days trial" },
-            { "name": "Sign-up for Microsoft 365 Developer Program trial", "link": "https://developer.microsoft.com/en-us/microsoft-365/dev-program", "icon": "fas fa-shield-alt", "value": "Sign-up for Microsoft 365 Developer Program trial" },
-            { "name": "Sign-up for Intune, 1-month trial", "link": "https://go.microsoft.com/fwlink/?linkid=2019088", "icon": "fas fa-shield-alt", "value": "Sign-up for Intune, 1-month trial" }
+            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
-        "title": "Other Useful Microsoft Portals",
+        "title": "Open Source",
         "services": [
-            { "name": "Azure Active Directory - Where is your data located?", "link": "https://msit.powerbi.com/view?r=eyJrIjoiODdjOWViZDctMWRhZS00ODUzLWI4MmQtNWM5NjBkZTBkNjFlIiwidCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsImMiOjV9", "icon": "fas fa-map-marker-alt", "value": "Azure Active Directory - Where is your data located?" },
-            { "name": "Azure Cosmos DB Query Playground", "link": "https://www.documentdb.com/sql/demo", "icon": "fas fa-play", "value": "Azure Cosmos DB Query Playground" },
-            { "name": "Azure Lighthouse Blade", "link": "https://portal.azure.com/#blade/Microsoft_Azure_CustomerHub/LighthouseBlade", "icon": "fas fa-lightbulb", "value": "Azure Lighthouse Blade" },
-            { "name": "Azure Pass - Activate Azure subscription using Azure Pass Codes", "link": "https://www.microsoftazurepass.com/", "icon": "fas fa-passport", "value": "Azure Pass - Activate Azure subscription using Azure Pass Codes" },
-            { "name": "Customer Digital Experiences Previously Demos.Microsoft.com", "link": "https://cdx.transform.microsoft.com", "icon": "fas fa-laptop", "value": "Customer Digital Experiences Previously Demos.Microsoft.com" },
-            { "name": "Deployment Guides for Microsoft 365", "link": "https://assistants.microsoft.com/", "icon": "fas fa-book", "value": "Deployment Guides for Microsoft 365" },
-            { "name": "Enterprise Skills Initiative", "link": "https://esi.microsoft.com/", "icon": "fas fa-university", "value": "Enterprise Skills Initiative" },
-            { "name": "Fast Cloud File Migrations", "link": "https://mover.io/", "icon": "fas fa-cloud-upload-alt", "value": "Fast Cloud File Migrations" },
-            { "name": "Feedback", "link": "https://feedbackportal.microsoft.com/", "icon": "fas fa-comment-dots", "value": "Feedback" },
-            { "name": "Group Policy Search", "link": "https://gpsearch.azurewebsites.net/", "icon": "fas fa-search", "value": "Group Policy Search" },
-            { "name": "Infringement Report", "link": "https://msrc.microsoft.com/report/infringement", "icon": "fas fa-gavel", "value": "Infringement Report" },
-            { "name": "Legacy Applications (B2B Redeem Invite)", "link": "https://account.activedirectory.windowsazure.com/", "icon": "fas fa-globe", "value": "Legacy Applications (B2B Redeem Invite)" },
-            { "name": "Microsoft 365 Lighthouse", "link": "https://lighthouse.microsoft.com/", "icon": "fas fa-lightbulb", "value": "Microsoft 365 Lighthouse" },
-            { "name": "Microsoft 365 Message Center Archive", "link": "https://mc.merill.net/", "icon": "fas fa-archive", "value": "Microsoft 365 Message Center Archive" },
-            { "name": "Microsoft Adoption", "link": "https://adoption.microsoft.com/", "icon": "fas fa-child", "value": "Microsoft Adoption" },
-            { "name": "Microsoft Assessments", "link": "https://learn.microsoft.com/en-gb/assessments/", "icon": "fas fa-book-open", "value": "Microsoft Assessments" },
-            { "name": "Microsoft Community", "link": "https://answers.microsoft.com", "icon": "fas fa-users", "value": "Microsoft Community" },
-            { "name": "Microsoft Documentation", "link": "https://learn.microsoft.com/docs/", "icon": "fas fa-book", "value": "Microsoft Documentation" },
-            { "name": "Microsoft Dynamics 365 and Power Platform Roadmap", "link": "https://experience.dynamics.com/releaseplans/", "icon": "fas fa-road", "value": "Microsoft Dynamics 365 and Power Platform Roadmap" },
-            { "name": "Microsoft Dynamics Lifecycle services", "link": "https://lcs.dynamics.com", "icon": "fas fa-cogs", "value": "Microsoft Dynamics Lifecycle services" },
-            { "name": "Microsoft Events", "link": "https://events.microsoft.com", "icon": "fas fa-calendar-alt", "value": "Microsoft Events" },
-            { "name": "Microsoft Exam Sandbox", "link": "https://mscertdemo.starttest.com/", "icon": "fas fa-pencil-alt", "value": "Microsoft Exam Sandbox" },
-            { "name": "Microsoft Home Use Program", "link": "https://www.microsoft.com/home-use-program", "icon": "fas fa-home", "value": "Microsoft Home Use Program" },
-            { "name": "Microsoft MVP", "link": "https://mvp.microsoft.com", "icon": "fas fa-medal", "value": "Microsoft MVP" },
-            { "name": "Microsoft Remote Connectivity Analyzer", "link": "https://testconnectivity.microsoft.com", "icon": "fas fa-satellite-dish", "value": "Microsoft Remote Connectivity Analyzer" },
-            { "name": "Microsoft Reseller Profile Registration Portal", "link": "https://reselleruat.microsoftcrmportals.com/", "icon": "fas fa-id-badge", "value": "Microsoft Reseller Profile Registration Portal" },
-            { "name": "Microsoft Security Response Center", "link": "https://msrc-blog.microsoft.com/", "icon": "fas fa-shield-alt", "value": "Microsoft Security Response Center" },
-            { "name": "Microsoft Startups", "link": "https://www.microsoft.com/startups", "icon": "fas fa-rocket", "value": "Microsoft Startups" },
-            { "name": "Microsoft for Startups Founders Hub", "link": "https://foundershub.startups.microsoft.com/", "icon": "fas fa-rocket", "value": "Microsoft for Startups Founders Hub" },
-            { "name": "Microsoft Training", "link": "https://learn.microsoft.com/training/", "icon": "fas fa-chalkboard-teacher", "value": "Microsoft Training" },
-            { "name": "Microsoft Unlocked", "link": "https://unlocked.microsoft.com/", "icon": "fas fa-unlock", "value": "Microsoft Unlocked" },
-            { "name": "Office 365 Anti-Spam IP Delist Portal", "link": "https://sender.office.com", "icon": "fas fa-bug", "value": "Office 365 Anti-Spam IP Delist Portal" },
-            { "name": "Office UI Fabric icons", "link": "https://uifabricicons.azurewebsites.net/", "icon": "fas fa-icons", "value": "Office UI Fabric icons" },
-            { "name": "Outlook Oauth Sandbox", "link": "https://myadevcenter.outlook.office365.com/", "icon": "fas fa-envelope-open", "value": "Outlook Oauth Sandbox" },
-            { "name": "Outlook.com Smart Network Data Service", "link": "https://sendersupport.olc.protection.outlook.com/snds/index.aspx", "icon": "fas fa-envelope-open", "value": "Outlook.com Smart Network Data Service" },
-            { "name": "Power BI Playground", "link": "https://playground.powerbi.com/", "icon": "fas fa-play", "value": "Power BI Playground" },
-            { "name": "PowerShell Gallery", "link": "https://www.powershellgallery.com/", "icon": "fas fa-terminal", "value": "PowerShell Gallery" },
-            { "name": "Service Trust Portal", "link": "https://servicetrust.microsoft.com", "icon": "fas fa-shield-alt", "value": "Service Trust Portal" },
-            { "name": "Tech Community Video Hub", "link": "https://techcommunity.microsoft.com/t5/video-hub/ct-p/VideoHub", "icon": "fas fa-video", "value": "Tech Community Video Hub" },
-            { "name": "Windows 365 Subscription URL", "link": "https://windows365.microsoft.com", "icon": "fab fa-windows", "value": "Windows 365 Subscription URL" },
-            { "name": "Windows Virtual Desktop Consent Page", "link": "https://rdweb.wvd.microsoft.com", "icon": "fab fa-windows", "value": "Windows Virtual Desktop Consent Page" },
-            { "name": "Setup Office", "link": "https://setup.office.com/", "icon": "fas fa-cog", "value": "Setup Office" },
-            { "name": "Setup Office Redeem", "link": "https://setup.office.com/redeem/", "icon": "fas fa-cog", "value": "Setup Office Redeem" },
-            { "name": "Microsoft Lifecycle", "link": "https://learn.microsoft.com/en-us/lifecycle/products/", "icon": "fas fa-hourglass-half", "value": "Microsoft Lifecycle" },
-            { "name": "Windows Admin Center", "link": "https://aka.ms/WACDownload", "icon": "fas fa-wrench", "value": "Windows Admin Center" }
+            { "name": "GitHub", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" },
+            { "name": "Microsoft Open Source", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" }
         ]
     }
 ]
