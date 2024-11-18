@@ -3,7 +3,7 @@
         "title": "Highlighted",
         "services": [
             { "name": "Windows 11", "description": "Most used desktop os", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
-            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
+            { "name": "Microsoft Edge", "description": "Most used desktop os", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
             { "name": "Firefox Web Browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
             { "name": "Google Chrome", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Google Chrome", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" },
             { "name": "Epiphany", "link": "https://www.microsoft.com/edge", "icon": "fab fa-safari", "value": "Epiphany", "linuxdnf": "#", "linuxapt": "#", "linuxrhel": "#", "linuxzyp": "#", "linuxflatpak": "#" }
