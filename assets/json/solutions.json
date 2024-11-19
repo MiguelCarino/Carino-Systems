@@ -8,108 +8,120 @@
     {
         "title": "Basic Software",
         "services": [
-            { "name": "Mozilla Firefox", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Libre Office", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Libre Office Suite", "windowscmd": "TheDocumentFoundation.LibreOffice", "macoscmd": "--cask libreoffice", "linuxflatpak": "org.libreoffice.LibreOffice"},
-            { "name": "#", "link": "#", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"}
+            { "name": "Mozilla Firefox", "description": "", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Libre Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Libre Office Suite", "windowscmd": "TheDocumentFoundation.LibreOffice", "macoscmd": "--cask libreoffice", "linuxflatpak": "org.libreoffice.LibreOffice"},
+            { "name": "Only Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Only Office Suite", "windowscmd": "ONLYOFFICE.DesktopEditors", "macoscmd": "--cask onlyoffice", "linuxflatpak": "org.onlyoffice.desktopeditors"}
         ]
     },
     {
         "title": "Web Browsers",
         "services": [
-            { "name": "Google Chrome", "link": "https://www.google.com/chrome/", "icon": "fab fa-chrome", "value": "Google Chrome", "windowscmd": "Google.Chrome", "macoscmd": "--cask google-chrome", "linuxflatpak": "com.google.Chrome" },
-            { "name": "Microsoft Edge", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge", "windowscmd": "Microsoft.Edge", "macoscmd": "--cask microsoft-edge", "linuxflatpak": "com.microsoft.Edge" },
-            { "name": "Mozilla Firefox", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Epiphany", "link": "https://apps.gnome.org/Epiphany/", "icon": "fab fa-safari", "value": "Epiphany", "linuxdnf": "epiphany", "linuxapt": "epiphany", "linuxrhel": "epiphany", "linuxzyp": "epiphany", "linuxflatpak": "org.gnome.Epiphany" }
+            { "name": "Chromium Web Browser", "description": "Blink browser bought by Google", "link": "https://www.chromium.org/getting-involved/download-chromium/", "icon": "fab fa-chrome", "value": "Chromium Web Browser", "windowscmd": "Hibbiki.Chromium", "macoscmd": "--cask chromium", "linuxflatpak": "org.chromium.Chromium"},
+            { "name": "Google Chrome", "description": "Google's Chromium browser", "link": "https://www.google.com/chrome/", "icon": "fab fa-chrome", "value": "Google Chrome Chromium Web Browser", "windowscmd": "Google.Chrome", "macoscmd": "--cask google-chrome", "linuxflatpak": "com.google.Chrome" },
+            { "name": "Microsoft Edge", "description": "Microsoft's Chromium browser", "link": "https://www.microsoft.com/edge", "icon": "fab fa-edge", "value": "Microsoft Edge Chromium Web Browser", "windowscmd": "Microsoft.Edge", "macoscmd": "--cask microsoft-edge", "linuxflatpak": "com.microsoft.Edge" },
+            { "name": "Brave", "description": "Brave's Chromium browser", "link": "https://brave.com/", "icon": "fab fa-brave", "value": "Brave Chromium Web Browser", "windowscmd": "Brave.Brave", "macoscmd": "--cask brave-browser", "linuxflatpak": "com.brave.Browser"},
+            { "name": "Yandex", "description": "Yandex's Chromium browser", "link": "https://browser.yandex.com/", "icon": "fab fa-yandex", "value": "Yandex Chromium Web Browser", "windowscmd": "Yandex.Browser", "macoscmd": "--cask yandex", "linuxflatpak": "ru.yandex.Browser"},
+            { "name": "Opera", "description": "Opera's Chromium browser", "link": "https://www.opera.com/", "icon": "fab fa-opera", "value": "Opera Chromium Web Browser", "windowscmd": "Opera.Opera", "macoscmd": "--cask opera", "linuxflatpak": "com.opera.Opera"},
+            { "name": "vivaldi", "description": "Vivaldi's Chromium browser", "link": "https://vivaldi.com/", "icon": "fab fa-v", "value": "Vivaldi Chromium Web Browser", "windowscmd": "VivaldiTechnologies.Vivaldi", "macoscmd": "--cask vivaldi", "linuxflatpak": "com.vivaldi.Vivaldi"},
+            { "name": "Arc", "description": "Stylish Chromium browser", "link": "https://arc.net/", "icon": "fab fa-a", "value": "Arch Chromium Web Browser", "windowscmd": "TheBrowserCompany.Arc", "macoscmd": "--cask arc", "linuxflatpak": ""},
+            { "name": "Mozilla Firefox", "description": "Most popular Gecko browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Mozilla Firefox Enterprise", "description": "Security updates only", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox.ESR", "macoscmd": "--cask firefox@esr", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" },
+            { "name": "Librefox", "description": "Privacy-oriented Firefox's fork", "link": "#", "icon": "fab fa-firefox", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "Floorp", "description": "Firefox with Edge-like UI", "link": "#", "icon": "fab fa-f", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "#", "icon": "fab fa-z", "value": "#", "windowscmd": "", "macoscmd": "--cask zen-browser", "linuxflatpak": "io.github.zen_browser.zen"},
+            { "name": "Tor", "description": "Firefox using Tor network", "link": "https://www.torproject.org/download/", "icon": "fab fa-t", "value": "Tor Firefox Gecko Browser", "windowscmd": "TorProject.TorBrowser", "macoscmd": "--cask tor-browser", "linuxflatpak": "org.torproject.torbrowser-launcher"},
+            { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "#", "icon": "fab fa-m", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Multimedia",
         "services": [
-            { "name": "MPV Media Player", "link": "https://mpv.io/installation/", "icon":"fab fa-video", "value": "MPV Media Player", "windowscmd": "tsl0922.ImPlay", "macoscmd": "mpv--cask stolendata-mpv", "linuxflatpak": "io.mpv.Mpv"}
+            { "name": "MPV Media Player", "description": "", "link": "https://mpv.io/installation/", "icon":"fab fa-video", "value": "MPV Media Player", "windowscmd": "tsl0922.ImPlay", "macoscmd": "mpv--cask stolendata-mpv", "linuxflatpak": "io.mpv.Mpv"}
         ]
     },
     {
         "title": "Development",
         "services": [
-            { "name": ".NET", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net" },
-            { "name": "Visual Studio", "link": "https://visualstudio.microsoft.com/downloads/", "icon": "fas fa-code", "value": "Visual Studio" },
-            { "name": "Visual Studio Code", "link": "https://code.visualstudio.com/download", "value": "Visual Studio Code,VS Code", "windowscmd": "Microsoft.VisualStudioCode", "macoscmd": "--cask visual-studio-code", "linuxflatpak": "com.visualstudio.code"},
-            { "name": "Visual Studio Code in the Web", "link": "https://www.vscode.dev/", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web" },
-            { "name": "Powershell", "link": "https://github.com/PowerShell/PowerShell", "icon": "fas fa-terminal", "value": "Powershell" },
-            { "name": ".NET Framework", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
-            { "name": "C++ Build Tools", "link": "https://visualstudio.microsoft.com/visual-cpp-build-tools/", "icon": "fas fa-tools", "value": "C++ Build Tools" },
-            { "name": "Microsoft Power BI", "link": "https://powerbi.microsoft.com", "icon": "fas fa-chart-bar", "value": "Microsoft Power BI" },
-            { "name": "Microsoft SQL Server", "link": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads", "icon": "fas fa-database", "value": "Microsoft SQL Server" }
+            { "name": ".NET", "description": "", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net" },
+            { "name": "Visual Studio", "description": "", "link": "https://visualstudio.microsoft.com/downloads/", "icon": "fas fa-code", "value": "Visual Studio" },
+            { "name": "Visual Studio Code", "description": "", "link": "https://code.visualstudio.com/download", "value": "Visual Studio Code,VS Code", "windowscmd": "Microsoft.VisualStudioCode", "macoscmd": "--cask visual-studio-code", "linuxflatpak": "com.visualstudio.code"},
+            { "name": "Visual Studio Code in the Web", "description": "", "link": "https://www.vscode.dev/", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web" },
+            { "name": "Powershell", "description": "", "link": "https://github.com/PowerShell/PowerShell", "icon": "fas fa-terminal", "value": "Powershell" },
+            { "name": ".NET Framework", "description": "", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
+            { "name": "C++ Build Tools", "description": "", "link": "https://visualstudio.microsoft.com/visual-cpp-build-tools/", "icon": "fas fa-tools", "value": "C++ Build Tools" },
+            { "name": "Microsoft Power BI", "description": "", "link": "https://powerbi.microsoft.com", "icon": "fas fa-chart-bar", "value": "Microsoft Power BI" },
+            { "name": "Microsoft SQL Server", "description": "", "link": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads", "icon": "fas fa-database", "value": "Microsoft SQL Server" }
         ]
     },
     {
         "title": "Web Development",
         "services": [
-            { "name": "Adaptive Cards Designer", "link": "https://adaptivecards.io/designer/", "icon": "fas fa-id-card", "value": "Adaptive Cards Designer" }
+            { "name": "Adaptive Cards Designer", "description": "", "link": "https://adaptivecards.io/designer/", "icon": "fas fa-id-card", "value": "Adaptive Cards Designer" }
         ]
     },
     {
         "title": "Language",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
         "title": "Music",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
         "title": "Cybersecurity and malware",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
         "title": "Operating Systems",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
-            { "name": "Windows Server", "link": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022", "icon": "fas fa-server", "value": "Windows Server" },
-            { "name": "Winget Packages", "link": "https://winget.run/", "icon": "fas fa-chart-bar", "value": "Winget Packages" },
-            { "name": ".NET NuGet Packages", "link": "https://www.nuget.org/", "icon": "fas fa-briefcase", "value": ".NET NuGet Packages,dotnet" },
-            { "name": "Microsoft Update Catalog", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" }
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
+            { "name": "Windows Server", "description": "", "link": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022", "icon": "fas fa-server", "value": "Windows Server" },
+            { "name": "Winget Packages", "description": "", "link": "https://winget.run/", "icon": "fas fa-chart-bar", "value": "Winget Packages" },
+            { "name": ".NET NuGet Packages", "description": "", "link": "https://www.nuget.org/", "icon": "fas fa-briefcase", "value": ".NET NuGet Packages,dotnet" },
+            { "name": "Microsoft Update Catalog", "description": "", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" }
         ]
     },
     {
         "title": "AI / Machine learning",
         "services": [
-            { "name": "Copilot", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
-            { "name": "Copilot Notebook", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
-            { "name": "Bing Image Creator", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
-            { "name": "Azure AI Studio", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" }
+            { "name": "Copilot", "description": "", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
+            { "name": "Copilot Notebook", "description": "", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
+            { "name": "Bing Image Creator", "description": "", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
+            { "name": "Azure AI Studio", "description": "", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" }
         ]
     },
     {
         "title": "Monitoring and Status",
         "services": [
-            { "name": "Microsoft Service health status Microsoft 365, Azure, Power Platform", "link": "https://status.cloud.microsoft", "icon": "fas fa-heartbeat", "value": "Microsoft Service health status Microsoft 365, Azure, Power Platform" },
-            { "name": "Azure DevOps - Status", "link": "https://status.dev.azure.com", "icon": "fas fa-heartbeat", "value": "Azure DevOps - Status" },
-            { "name": "Windows release health", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" }
+            { "name": "Microsoft Service health status Microsoft 365, Azure, Power Platform", "description": "", "link": "https://status.cloud.microsoft", "icon": "fas fa-heartbeat", "value": "Microsoft Service health status Microsoft 365, Azure, Power Platform" },
+            { "name": "Azure DevOps - Status", "description": "", "link": "https://status.dev.azure.com", "icon": "fas fa-heartbeat", "value": "Azure DevOps - Status" },
+            { "name": "Windows release health", "description": "", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" }
         ]
     },
     {
         "title": "Corporate",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
         "title": "Entertainment",
         "services": [
-            { "name": "Windows 11", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
         ]
     },
     {
         "title": "Open Source",
         "services": [
-            { "name": "GitHub", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" },
-            { "name": "Microsoft Open Source", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" }
+            { "name": "GitHub", "description": "", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" },
+            { "name": "Microsoft Open Source", "description": "", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" }
         ]
     }
 ]
