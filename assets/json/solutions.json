@@ -2,20 +2,26 @@
     {
         "title": "Curated Highlighs",
         "services": [
-            { "name": "Mozilla Firefox", "description": "Privacy-focused web browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" }
+            { "name": "Mozilla Firefox", "description": "Privacy-focused web browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Blender", "description": "3D Model Editor", "link": "https://www.blender.org/download/", "icon": "fab fa-b", "value": "Blender 3D Model Editor", "windowscmd": "BlenderFoundation.Blender", "macoscmd": "--cask blender", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.blender.Blender"}
         ]
     },
     {
         "title": "Basic Software",
         "services": [
-            { "name": "Mozilla Firefox", "description": "", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Libre Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Libre Office Suite", "windowscmd": "TheDocumentFoundation.LibreOffice", "macoscmd": "--cask libreoffice", "linuxflatpak": "org.libreoffice.LibreOffice"},
-            { "name": "Only Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-building", "value": "Only Office Suite", "windowscmd": "ONLYOFFICE.DesktopEditors", "macoscmd": "--cask onlyoffice", "linuxflatpak": "org.onlyoffice.desktopeditors"},
-            { "name": "7zip", "description": "Data compression", "link": "https://www.7-zip.org/download.html", "icon": "fab fa-7zip", "value": "7zip Data compression", "windowscmd": "M2Team.NanaZip", "macoscmd": "sevenzip", "linuxdnf": "p7zip", "linuxapt": "7zip", "linuxrhel": "", "linuxzyp": "7zip", "linuxflatpak": ""},
-            { "name": "Gedit", "description": "Note taking", "link": "https://gedit-technology.github.io/apps/gedit/", "icon": "fab fa-notepad", "value": "Gedit Note Taking Writing", "windowscmd": "gnome.gedit", "macoscmd": "gedit", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.gnome.gedit"},
-            { "name": "Joplin", "description": "Advanced Note taking", "link": "https://joplinapp.org/", "icon": "fab fa-notepad", "value": "Joplin Note Taking Writing Advanced", "windowscmd": "Joplin.Joplin", "macoscmd": "--cask joplin", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "net.cozic.joplin_desktop"},
-            { "name": "Buttercup", "description": "Easy Password Manager", "link": "https://buttercup.pw/", "icon": "fab fa-key", "value": "Buttercup Easy Password Manager", "windowscmd": "Buttercup.Buttercup", "macoscmd": "--cask buttercup", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": ""},
-            { "name": "KeePassXC", "description": "Password Manager", "link": "https://keepassxc.org/", "icon": "fab fa-key", "value": "Keepass Advanced Password Manager", "windowscmd": "KeePassXCTeam.KeePassXC", "macoscmd": "--cask keepassxc", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.keepassxc.KeePassXC"}
+            { "name": "Mozilla Firefox", "description": "Privacy-focused web browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Libre Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-l", "value": "Libre Office Suite", "windowscmd": "TheDocumentFoundation.LibreOffice", "macoscmd": "--cask libreoffice", "linuxflatpak": "org.libreoffice.LibreOffice"},
+            { "name": "Only Office", "description": "Office Suite", "link": "https://www.libreoffice.org/download/download-libreoffice/", "icon": "fab fa-o", "value": "Only Office Suite", "windowscmd": "ONLYOFFICE.DesktopEditors", "macoscmd": "--cask onlyoffice", "linuxflatpak": "org.onlyoffice.desktopeditors"},
+            { "name": "7zip", "description": "Data compression", "link": "https://www.7-zip.org/download.html", "icon": "fab fa-7", "value": "7zip Data compression", "windowscmd": "M2Team.NanaZip", "macoscmd": "sevenzip", "linuxdnf": "p7zip", "linuxapt": "7zip", "linuxrhel": "", "linuxzyp": "7zip", "linuxflatpak": ""},
+            { "name": "Gedit", "description": "Note taking", "link": "https://gedit-technology.github.io/apps/gedit/", "icon": "fab fa-g", "value": "Gedit Note Taking Writing", "windowscmd": "gnome.gedit", "macoscmd": "gedit", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.gnome.gedit"},
+            { "name": "Joplin", "description": "Advanced Note taking", "link": "https://joplinapp.org/", "icon": "fab fa-j", "value": "Joplin Note Taking Writing Advanced", "windowscmd": "Joplin.Joplin", "macoscmd": "--cask joplin", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "net.cozic.joplin_desktop"},
+            { "name": "Buttercup", "description": "Easy Password Manager", "link": "https://buttercup.pw/", "icon": "fab fa-b", "value": "Buttercup Easy Password Manager", "windowscmd": "Buttercup.Buttercup", "macoscmd": "--cask buttercup", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": ""},
+            { "name": "KeePassXC", "description": "Password Manager", "link": "https://keepassxc.org/", "icon": "fab fa-k", "value": "Keepass Advanced Password Manager", "windowscmd": "KeePassXCTeam.KeePassXC", "macoscmd": "--cask keepassxc", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.keepassxc.KeePassXC"},
+            { "name": "Thunderbird", "description": "Mail Client", "link": "https://www.thunderbird.net/en-US/download/", "icon": "fab fa-t", "value": "Thunderbird Mail Client", "windowscmd": "Mozilla.Thunderbird", "macoscmd": "--cask thunderbird", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.mozilla.Thunderbird"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
@@ -29,26 +35,30 @@
             { "name": "Opera", "description": "Opera's Chromium browser", "link": "https://www.opera.com/", "icon": "fab fa-opera", "value": "Opera Chromium Web Browser", "windowscmd": "Opera.Opera", "macoscmd": "--cask opera", "linuxflatpak": "com.opera.Opera"},
             { "name": "vivaldi", "description": "Vivaldi's Chromium browser", "link": "https://vivaldi.com/", "icon": "fab fa-v", "value": "Vivaldi Chromium Web Browser", "windowscmd": "VivaldiTechnologies.Vivaldi", "macoscmd": "--cask vivaldi", "linuxflatpak": "com.vivaldi.Vivaldi"},
             { "name": "Arc", "description": "Stylish Chromium browser", "link": "https://arc.net/", "icon": "fab fa-a", "value": "Arch Chromium Web Browser", "windowscmd": "TheBrowserCompany.Arc", "macoscmd": "--cask arc", "linuxflatpak": ""},
-            { "name": "Mozilla Firefox", "description": "Most popular Gecko browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "firefox", "linuxapt": "firefox", "linuxrhel": "firefox", "linuxzyp": "firefox", "linuxflatpak": "org.mozilla.firefox" },
-            { "name": "Mozilla Firefox Enterprise", "description": "Security updates only", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox.ESR", "macoscmd": "--cask firefox@esr", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" },
-            { "name": "Librefox", "description": "Privacy-oriented Firefox's fork", "link": "#", "icon": "fab fa-firefox", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "Floorp", "description": "Firefox with Edge-like UI", "link": "#", "icon": "fab fa-f", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "#", "icon": "fab fa-z", "value": "#", "windowscmd": "", "macoscmd": "--cask zen-browser", "linuxflatpak": "io.github.zen_browser.zen"},
+            { "name": "Mozilla Firefox", "description": "Privacy-focused web browser", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser", "windowscmd": "Mozilla.Firefox", "macoscmd": "--cask firefox", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.mozilla.firefox" },
+            { "name": "Mozilla Firefox Enterprise", "description": "Security updates only", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser for Enterprise", "windowscmd": "Mozilla.Firefox.ESR", "macoscmd": "--cask firefox@esr", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" },
+            { "name": "Librefox", "description": "Privacy-oriented Firefox's fork", "link": "https://librewolf.net/", "icon": "fab fa-firefox", "value": "Firefox Web Browser privacy oriented fork", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
+            { "name": "Floorp", "description": "Firefox with Edge-like UI", "link": "https://floorp.app/", "icon": "fab fa-f", "value": "Firefox Web Browser Japanese Edge style privacy oriented fork", "windowscmd": "", "macoscmd": "--cask floorp", "linuxflatpak": "one.ablaze.floorp"},
+            { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "#", "icon": "fab fa-z", "value": "Firefox Web Browser Arch style fork", "windowscmd": "", "macoscmd": "--cask zen-browser", "linuxflatpak": "io.github.zen_browser.zen"},
             { "name": "Tor", "description": "Firefox using Tor network", "link": "https://www.torproject.org/download/", "icon": "fab fa-t", "value": "Tor Firefox Gecko Browser", "windowscmd": "TorProject.TorBrowser", "macoscmd": "--cask tor-browser", "linuxflatpak": "org.torproject.torbrowser-launcher"},
-            { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "#", "icon": "fab fa-m", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"},
-            { "name": "Epiphany", "description": "A Webkit browser", "link": "#", "icon": "fab fa-safari", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxflatpak": "#"}
+            { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "#", "icon": "fab fa-m", "value": "#", "windowscmd": "", "macoscmd": "--cask mullvad-browser", "linuxflatpak": "net.mullvad.MullvadBrowser"},
+            { "name": "Epiphany", "description": "A Webkit browser", "link": "#", "icon": "fab fa-safari", "value": "#", "windowscmd": "", "macoscmd": "", "linuxflatpak": "org.gnome.Epiphany"}
         ]
     },
     {
-        "title": "Multimedia",
+        "title": "Multimedia and Graphics",
         "services": [
-            { "name": "MPV Media Player", "description": "", "link": "https://mpv.io/installation/", "icon":"fab fa-video", "value": "MPV Media Player", "windowscmd": "tsl0922.ImPlay", "macoscmd": "mpv--cask stolendata-mpv", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "io.mpv.Mpv"},
-            { "name": "FFMPEG", "description": "Multimedia Framework", "link": "https://ffmpeg.org/", "icon": "fab fa-terminal", "value": "FFMPEG Multimedia Framework", "windowscmd": "Gyan.FFmpeg", "macoscmd": "ffmpeg", "linuxdnf": "ffmpeg", "linuxapt": "ffmpeg", "linuxrhel": "ffmpeg", "linuxzyp": "ffmpeg", "linuxflatpak": ""},
-            { "name": "Okular", "description": "PDF Reader", "link": "https://okular.kde.org/", "icon": "fab fa-adobe", "value": "Okular PDF Reader", "windowscmd": "KDE.Okular", "macoscmd": "", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.kde.okular"},
-            { "name": "Audacity", "description": "Audio Editor", "link": "https://www.audacityteam.org/", "icon": "fab fa-audacity", "value": "Audacity Audio Editor", "windowscmd": "Audacity.Audacity", "macoscmd": "--cask audacity", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.audacityteam.Audacity"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "MPV Media Player", "description": "", "link": "https://mpv.io/installation/", "icon":"fab fa-m", "value": "MPV Media Player", "windowscmd": "tsl0922.ImPlay", "macoscmd": "mpv--cask stolendata-mpv", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "io.mpv.Mpv"},
+            { "name": "FFMPEG", "description": "Multimedia Framework", "link": "https://ffmpeg.org/", "icon": "fab fa-f", "value": "FFMPEG Multimedia Framework", "windowscmd": "Gyan.FFmpeg", "macoscmd": "ffmpeg", "linuxdnf": "ffmpeg", "linuxapt": "ffmpeg", "linuxrhel": "ffmpeg", "linuxzyp": "ffmpeg", "linuxflatpak": ""},
+            { "name": "Okular", "description": "PDF Reader", "link": "https://okular.kde.org/", "icon": "fab fa-o", "value": "Okular PDF Reader", "windowscmd": "KDE.Okular", "macoscmd": "", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.kde.okular"},
+            { "name": "Audacity", "description": "Audio Editor", "link": "https://www.audacityteam.org/", "icon": "fab fa-a", "value": "Audacity Audio Editor", "windowscmd": "Audacity.Audacity", "macoscmd": "--cask audacity", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.audacityteam.Audacity"},
+            { "name": "Gimp", "description": "Graphics Editor", "link": "https://www.gimp.org/downloads/", "icon": "fab fa-g", "value": "Gimp Graphics Editor", "windowscmd": "GIMP.GIMP", "macoscmd": "--cask gimp", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.gimp.GIMP"},
+            { "name": "Fontforge", "description": "Font Editor", "link": "https://fontforge.org", "icon": "fab fa-f", "value": "Fontforge Font Editor", "windowscmd": "FontForge.FontForge", "macoscmd": "fontforge", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.fontforge.FontForge"},
+            { "name": "Inkscape", "description": "Vector Graphics Editor", "link": "https://inkscape.org/", "icon": "fab fa-i", "value": "Inkscape Vector Graphics Editor", "windowscmd": "Inkscape.Inkscape", "macoscmd": "--cask inkscape", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.inkscape.Inkscape"},
+            { "name": "Jellyfin", "description": "Media Server", "link": "https://jellyfin.org/downloads/", "icon": "fab fa-j", "value": "Jellyfin Media Server", "windowscmd": "Jellyfin.Server", "macoscmd": "--cask jellyfin", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.jellyfin.JellyfinServer"},
+            { "name": "Kdenlive", "description": "Video Editor", "link": "https://kdenlive.org/en/download", "icon": "fab fa-k", "value": "Kdenlive Video Editor", "windowscmd": "KDE.Kdenlive", "macoscmd": "--cask kdenlive", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.kde.kdenlive"},
+            { "name": "OBS", "description": "Screen Recording and Livestreaming", "link": "https://obsproject.com/download", "icon": "fab fa-o", "value": "OBS Studio Screen Recording and Livestreaming", "windowscmd": "OBSProject.OBSStudio", "macoscmd": "--cask obs", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "com.obsproject.Studio"},
+            { "name": "Blender", "description": "3D Model Editor", "link": "https://www.blender.org/download/", "icon": "fab fa-b", "value": "Blender 3D Model Editor", "windowscmd": "BlenderFoundation.Blender", "macoscmd": "--cask blender", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.blender.Blender"},
             { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
@@ -64,33 +74,46 @@
             { "name": ".NET Framework", "description": "", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
             { "name": "C++ Build Tools", "description": "", "link": "https://visualstudio.microsoft.com/visual-cpp-build-tools/", "icon": "fas fa-tools", "value": "C++ Build Tools" },
             { "name": "Microsoft Power BI", "description": "", "link": "https://powerbi.microsoft.com", "icon": "fas fa-chart-bar", "value": "Microsoft Power BI" },
-            { "name": "Microsoft SQL Server", "description": "", "link": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads", "icon": "fas fa-database", "value": "Microsoft SQL Server" },
+            { "name": "SQL Server Management Studio", "description": "", "link": "https://www.microsoft.com/en-us/sql-server/sql-server-downloads", "icon": "fas fa-database", "value": "Microsoft SQL Server Management Studio", "windowscmd": "Microsoft.SQLServerManagementStudio", "macoscmd": "", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" },
+            { "name": "Dbeaver", "description": "Universal database tool and SQL client", "link": "https://dbeaver.io/", "icon": "fab fa-d", "value": "Dbeaver Universal database tool and SQL client", "windowscmd": "dbeaver.dbeaver", "macoscmd": "--cask dbeaver-community", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "io.dbeaver.DBeaverCommunity"},
             { "name": "MariaDB", "description": "Relational Database", "link": "https://mariadb.org/", "icon": "fas fa-database", "value": "SQL Mariadb Relational Database", "windowscmd": "MariaDB.Server", "macoscmd": "mariadb", "linuxdnf": "mariadb", "linuxapt": "mariadb", "linuxrhel": "mariadb", "linuxzyp": "mariadb", "linuxflatpak": "" },
-            { "name": "PostgreSQL", "description": "Object Relational Database", "link": "https://www.postgresql.org", "icon": "fas fa-database", "value": "PostgreSQL Object Relational Database", "windowscmd": "PostgreSQL.PostgreSQL", "macoscmd": "postgresql@17", "linuxdnf": "postgresql", "linuxapt": "postgresql-16", "linuxrhel": "postgresql", "linuxzyp": "postgresql17", "linuxflatpak": "" }
+            { "name": "PostgreSQL", "description": "Object Relational Database", "link": "https://www.postgresql.org", "icon": "fas fa-database", "value": "PostgreSQL Object Relational Database", "windowscmd": "PostgreSQL.PostgreSQL", "macoscmd": "postgresql@17", "linuxdnf": "postgresql", "linuxapt": "postgresql-16", "linuxrhel": "postgresql", "linuxzyp": "postgresql17", "linuxflatpak": "" },
+            { "name": "Godot", "description": "Game engine", "link": "https://godotengine.org/", "icon": "fab fa-g", "value": "Godot Game Engine", "windowscmd": "GodotEngine.GodotEngine", "macoscmd": "--cask godot", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "org.godotengine.Godot"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
-        "title": "Web Development",
+        "title": "IT and Services",
         "services": [
-            { "name": "Adaptive Cards Designer", "description": "", "link": "https://adaptivecards.io/designer/", "icon": "fas fa-id-card", "value": "Adaptive Cards Designer" }
+            { "name": "Anydesk", "description": "Remote Control Client", "link": "https://anydesk.com/", "icon": "fab fa-a", "value": "#", "windowscmd": "AnyDeskSoftwareGmbH.AnyDesk", "macoscmd": "--cask anydesk", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "com.anydesk.Anydesk"},
+            { "name": "Podman", "description": "Manage OCI containers and pods", "link": "https://podman.io/", "icon": "fab fa-p", "value": "Podman Manage OCI containers and pods", "windowscmd": "RedHat.Podman", "macoscmd": "podman", "linuxdnf": "podman", "linuxapt": "podman", "linuxrhel": "podman", "linuxzyp": "podman", "linuxflatpak": ""},
+            { "name": "Podman Desktop", "description": "Graphically manage OCI containers", "link": "https://podman-desktop.io/", "icon": "fab fa-p", "value": "Graphically Manage OCI podman docker containers and pods", "windowscmd": "RedHat.Podman-Desktop", "macoscmd": "--cask podman-desktop", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "io.podman_desktop.PodmanDesktop"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Language",
         "services": [
-            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Music",
         "services": [
-            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Cybersecurity and malware",
         "services": [
-            { "name": "Autopsy", "description": "Digital Forensics Platform", "link": "https://www.autopsy.com/download/", "icon":"fab fa-windows", "value": "Autopsy SleuthKit Digital Forensics Platform", "windowscmd": "SleuthKit.Autopsy", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
+            { "name": "Autopsy", "description": "Digital Forensics Platform", "link": "https://www.autopsy.com/download/", "icon":"fab fa-windows", "value": "Autopsy SleuthKit Digital Forensics Platform", "windowscmd": "SleuthKit.Autopsy", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
@@ -100,7 +123,8 @@
             { "name": "Windows Server", "description": "", "link": "https://www.microsoft.com/es-es/evalcenter/download-windows-server-2022", "icon": "fas fa-server", "value": "Windows Server" },
             { "name": "Winget Packages", "description": "", "link": "https://winget.run/", "icon": "fas fa-chart-bar", "value": "Winget Packages" },
             { "name": ".NET NuGet Packages", "description": "", "link": "https://www.nuget.org/", "icon": "fas fa-briefcase", "value": ".NET NuGet Packages,dotnet" },
-            { "name": "Microsoft Update Catalog", "description": "", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" }
+            { "name": "Microsoft Update Catalog", "description": "", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" },
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
@@ -109,7 +133,11 @@
             { "name": "Copilot", "description": "", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
             { "name": "Copilot Notebook", "description": "", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
             { "name": "Bing Image Creator", "description": "", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
-            { "name": "Azure AI Studio", "description": "", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" }
+            { "name": "Azure AI Studio", "description": "", "link": "https://ai.azure.com", "icon": "fas fa-brain", "value": "Azure AI Studio" },
+            { "name": "Alpaca", "description": "Offline Large Language Models", "link": "https://jeffser.com/alpaca/", "icon": "fab fa-a", "value": "Alpaca Easy Offline GPT Large Language Models", "windowscmd": "", "macoscmd": "", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "com.jeffser.Alpaca"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
@@ -118,26 +146,31 @@
             { "name": "Microsoft Service health status Microsoft 365, Azure, Power Platform", "description": "", "link": "https://status.cloud.microsoft", "icon": "fas fa-heartbeat", "value": "Microsoft Service health status Microsoft 365, Azure, Power Platform" },
             { "name": "Azure DevOps - Status", "description": "", "link": "https://status.dev.azure.com", "icon": "fas fa-heartbeat", "value": "Azure DevOps - Status" },
             { "name": "Windows release health", "description": "", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" },
-            { "name": "Activity Watch", "description": "Time and Activity Tracker", "link": "https://activitywatch.net/downloads/", "icon": "fas fa-monitor", "value": "Time and Activity Tracker Watch", "windowscmd": "ActivityWatch.ActivityWatch", "macoscmd": "--cask activitywatch", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" }
+            { "name": "Activity Watch", "description": "Time and Activity Tracker", "link": "https://activitywatch.net/downloads/", "icon": "fas fa-monitor", "value": "Time and Activity Tracker Watch", "windowscmd": "ActivityWatch.ActivityWatch", "macoscmd": "--cask activitywatch", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "" },
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Corporate",
         "services": [
-            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Entertainment",
         "services": [
-            { "name": "Windows 11", "description": "", "link": "https://www.microsoft.com/software-download/windows11", "icon":"fab fa-windows", "value": "Windows 11"}
+            { "name": "Steam", "description": "Video game digital distribution service", "link": "https://store.steampowered.com/about/", "icon": "fab fa-steam", "value": "Valve Steam Video game digital distribution service", "windowscmd": "Valve.Steam", "macoscmd": "--cask steam", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "com.valvesoftware.Steam"},
+            { "name": "GOG", "description": "Video game digital distribution service", "link": "https://www.gog.com/", "icon": "fab fa-g", "value": "GOG Video game digital distribution service", "windowscmd": "GOG.Galaxy", "macoscmd": "--cask gog-galaxy", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": ""},
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     },
     {
         "title": "Open Source",
         "services": [
             { "name": "GitHub", "description": "", "link": "https://github.com", "icon": "fab fa-github", "value": "GitHub" },
-            { "name": "Microsoft Open Source", "description": "", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" }
+            { "name": "Microsoft Open Source", "description": "", "link": "https://opensource.microsoft.com", "icon": "fas fa-code-branch", "value": "Microsoft Open Source" },
+            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windowscmd": "#", "macoscmd": "#", "linuxdnf": "", "linuxapt": "", "linuxrhel": "", "linuxzyp": "", "linuxflatpak": "#"}
         ]
     }
 ]
