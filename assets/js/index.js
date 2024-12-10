@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const tilesData = [
         { type: 'small-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        { type: 'small-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'medium-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
         { type: 'small-tile', color: 'crimson', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
         //{ type: 'small-tile', color: 'scarlet', text: 'Topics', link: 'topics.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
         { type: 'small-tile', color: 'indigo', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
