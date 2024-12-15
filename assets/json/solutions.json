@@ -21,11 +21,7 @@
             { "name": "Buttercup", "description": "Easy Password Manager", "link": "https://buttercup.pw/", "icon": "fab fa-b", "value": "Buttercup Easy Password Manager", "windows": "Buttercup.Buttercup", "macos": "--cask buttercup", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "KeePassXC", "description": "Password Manager", "link": "https://keepassxc.org/", "icon": "fas fa-key", "value": "Keepass Advanced Password Manager", "windows": "KeePassXCTeam.KeePassXC", "macos": "--cask keepassxc", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "org.keepassxc.KeePassXC"},
             { "name": "Thunderbird", "description": "Mail Client", "link": "https://www.thunderbird.net/en-US/download/", "icon": "fab fa-t", "value": "Thunderbird Mail Client", "windows": "Mozilla.Thunderbird", "macos": "--cask thunderbird", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "org.mozilla.Thunderbird"},
-            { "name": "Okular", "description": "PDF Reader", "link": "https://okular.kde.org/", "icon": "fas fa-file", "value": "Okular PDF Reader", "windows": "KDE.Okular", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "org.kde.okular"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Okular", "description": "PDF Reader", "link": "https://okular.kde.org/", "icon": "fas fa-file", "value": "Okular PDF Reader", "windows": "KDE.Okular", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "org.kde.okular"}
         ]
     },
     {
@@ -43,10 +39,10 @@
             { "name": "Mozilla Firefox Enterprise", "description": "Security updates only", "link": "https://www.mozilla.org/en-US/firefox/new/", "icon": "fab fa-firefox", "value": "Firefox Web Browser for Enterprise", "windows": "Mozilla.Firefox.ESR", "macos": "--cask firefox@esr", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "" },
             { "name": "Librefox", "description": "Privacy-oriented Firefox's fork", "link": "https://librewolf.net/", "icon": "fab fa-firefox", "value": "Firefox Web Browser privacy oriented fork", "windows": "LibreWolf.LibreWolf", "macos": "--cask librewolf", "flatpak": "io.gitlab.librewolf-community"},
             { "name": "Floorp", "description": "Firefox with Edge-like UI", "link": "https://floorp.app/", "icon": "fab fa-f", "value": "Firefox Web Browser Japanese Edge style privacy oriented fork", "windows": "", "macos": "--cask floorp", "flatpak": "one.ablaze.floorp"},
-            { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "#", "icon": "fab fa-z", "value": "Firefox Web Browser Arch style fork", "windows": "", "macos": "--cask zen-browser", "flatpak": "io.github.zen_browser.zen"},
+            { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "https://zen-browser.app/", "icon": "fab fa-z", "value": "Firefox Web Browser Arch style fork", "windows": "", "macos": "--cask zen-browser", "flatpak": "io.github.zen_browser.zen"},
             { "name": "Tor", "description": "Firefox using Tor network", "link": "https://www.torproject.org/download/", "icon": "fab fa-t", "value": "Tor Firefox Gecko Browser", "windows": "TorProject.TorBrowser", "macos": "--cask tor-browser", "flatpak": "org.torproject.torbrowser-launcher"},
-            { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "https://mullvad.net/en/browser", "icon": "fab fa-m", "value": "#", "windows": "", "macos": "--cask mullvad-browser", "flatpak": "net.mullvad.MullvadBrowser"},
-            { "name": "Epiphany", "description": "A Webkit browser", "link": "#", "icon": "fab fa-safari", "value": "#", "windows": "", "macos": "", "flatpak": "org.gnome.Epiphany"}
+            { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "https://mullvad.net/en/browser", "icon": "fab fa-m", "value": "Mullvad's Firefox's fork", "windows": "", "macos": "--cask mullvad-browser", "flatpak": "net.mullvad.MullvadBrowser"},
+            { "name": "Epiphany", "description": "A Webkit browser", "link": "https://apps.gnome.org/Epiphany/", "icon": "fas fa-globe", "value": "Webkit browser", "windows": "", "macos": "", "flatpak": "org.gnome.Epiphany"}
         ]
     },
     {
@@ -73,12 +69,16 @@
             { "name": "yearmonth.day", "description": "Printable Calendar", "link": "https://yearmonth.day/", "icon": "fas fa-calendar", "value": "Printable Calendar", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "int10h.org", "description": "Old Computer Font Catalog", "link": "#", "icon": "fab fa-font", "value": "Old Computer Font Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "binfalse.de", "description": "Create an unscanable letter", "link": "https://binfalse.de/2016/02/08/create-an-unscanable-letter/", "icon": "fas fa-file", "value": "Create an unscanable letter", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Web gradients", "description": "Web gradients", "link": "https://webgradients.com/", "icon": "fab fa-css", "value": "Web gradients", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Web gradients", "description": "Web gradients", "link": "https://webgradients.com/", "icon": "fas fa-paintbrush", "value": "Web gradients", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "vtracer", "description": "Raster to Vector Graphics Converter built on top of visioncortex", "link": "https://www.visioncortex.org/vtracer/", "icon": "fas fa-images", "value": "vtracer Raster to Vector Graphics Converter built on top of visioncortex", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "vecta.io", "description": "SVG compressor", "link": "https://vecta.io/nano", "icon": "fas fa-image", "value": "SVG compressor vector", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Whitescreen.online", "description": "Color, animation and fake (loading) screens", "link": "https://www.whitescreen.online/", "icon": "fas fa-tv", "value": "Color, animation and fake (loading) screens", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Online Signatures", "description": "Handwritten-like signature generator", "link": "https://onlinesignatures.net/", "icon": "fas fa-signature", "value": "Handwritten-like signature generator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "sketch metademolab", "description": "Transform static sketches into animations", "link": "https://sketch.metademolab.com/canvas", "icon": "fas fa-person", "value": "Transform static sketches into animations", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "rxresu.me", "description": "Resume builder", "link": "https://rxresu.me/", "icon": "fas fa-suitcase", "value": "Resume builder", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "UIverse", "description": "Open-Source UI elements", "link": "https://uiverse.io/", "icon": "fas fa-earth", "value": "Open-Source UI elements", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Gentype", "description": "Make alphabet themed pictures", "link": "https://labs.google/gentype", "icon": "fas fa-images", "value": "Make alphabet themed pictures", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Photopea", "description": "Online Photo Editor", "link": "https://www.photopea.com/", "icon": "fas fa-paintbrush", "value": "Online Photo Editor", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -102,8 +102,8 @@
             { "name": "Detexify", "description": "Symbol finder for LaTeX", "link": "http://detexify.kirelabs.org/classify.html", "icon": "fas fa-pencil", "value": "Symbol finder for LaTeX", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "learnxinyminutes.com", "description": "Programming language documentation written as code", "link": "https://learnxinyminutes.com/", "icon": "fas fa-code", "value": "Programming language documentation written as code learn minutes", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Vim Adventures", "description": "Learn vim with a game", "link": "https://vim-adventures.com/", "icon": "fas fa-star", "value": "Learn vim with a game", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Test web automation", "description": "Practice Test Automation Website", "link": "https://practice.expandtesting.com/", "icon": "fas fa-robot", "value": "Practice Test Automation Website", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Selenium", "description": "Suite of tools for automating web browsers", "link": "https://www.selenium.dev/", "icon": "fas fa-robot", "value": "Suite of tools for automating web browsers", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
         ]
     },
     {
@@ -134,9 +134,7 @@
             { "name": "Choose a license", "description": "Choose an open source license", "link": "https://choosealicense.com/", "icon": "fas fa-c", "value": "Choose an open source license", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Porkbun", "description": "Buy Domains", "link": "https://porkbun.com/", "icon": "fas fa-dollar", "value": "buy domains porkbun", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "pagespeed.web.dev", "description": "Optimize web pages on all devices", "link": "https://pagespeed.web.dev/", "icon": "fas fa-globe", "value": "Optimize web pages on all devices", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "All-in-one OSINT tool, for checking a websites data", "link": "https://web-check.xyz/", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "", "description": "All-in-one OSINT tool, for checking a websites data", "link": "https://web-check.xyz/", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
         ]
     },
     {
@@ -170,8 +168,8 @@
             { "name": "rx.linkfanel.net", "description": "High Frequency Receivers Map", "link": "http://rx.linkfanel.net/", "icon": "fas fa-radio", "value": "High Frequency Receivers Map", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "szynalski.com", "description": "Frequency Tone Generator", "link": "https://www.szynalski.com/tone-generator", "icon": "fas fa-stairs", "value": "Frequency Tone Generator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "OpenStreeMap Extracts", "description": "Collaborative global map data extracts", "link": "https://download.geofabrik.de/", "icon": "fas fa-map", "value": "Collaborative global map data extracts", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fas fa-globe", "value": "#", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fas fa-globe", "value": "#", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
+            { "name": "litolutions", "description": "Steb by step textbook solutions", "link": "https://www.litsolutions.org/", "icon": "fas fa-book", "value": "Steb by step textbook solutions", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "planecrashinfo.com", "description": "Information about plane crashes", "link": "https://planecrashinfo.com/", "icon": "fas fa-plane", "value": "Information about plane crashes", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -199,7 +197,18 @@
             { "name": "senpai.moe", "description": "Seasonal anime charts", "link": "https://www.senpai.moe", "icon": "fas fa-leaf", "value": "Seasonal anime charts", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "slowroads.io", "description": "Endless driving zen", "link": "https://slowroads.io/", "icon": "fas fa-car", "value": "Endless driving zen slowroads", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "ztype", "description": "Endless typing shooter", "link": "https://zty.pe/", "icon": "fas fa-gun", "value": "Endless typing shooter", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Read Their Lips", "description": "Lip reading from video", "link": "https://www.readtheirlips.com/", "icon": "fas fa-eye", "value": "Lip reading from video", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Dungeons Crawl", "description": "Dungeon and Dragons Mapmaking", "link": "https://www.dungeonscrawl.com/", "icon": "fas fa-dragon", "value": "Dungeon and Dragons Mapmaking", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Rasterbator", "description": "Distribute an image into multiple paper sheets", "link": "https://rasterbator.net/", "icon": "fas fa-file", "value": "Distribute an image into multiple paper sheets", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Surprise Date Spot", "description": "Surprise Date Spot", "link": "https://surprisedatespot.com/", "icon": "fas fa-heart", "value": "Surprise Date Spot", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Shop your TV", "description": "Find featured items on TV shows", "link": "https://shopyourtv.com/", "icon": "fas fa-star", "value": "Find featured items on TV shows", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
+            { "name": "Entertrained", "description": "Read books by typing them", "link": "https://entertrained.app/", "icon": "fab fa-css", "value": "Read books by typing them", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Food Mood", "description": "Combine two cuisines into one recipe", "link": "https://artsandculture.google.com/experiment/food-mood/HwHnGalZ3up0EA", "icon": "fab fa-css", "value": "Combine two cuisines into one recipe", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "iptv-org", "description": "IPTV channels from all over the world", "link": "https://iptv-org.github.io/", "icon": "fas fa-tv", "value": "IPTV channels from all over the world", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "geospy.ai", "description": "Image Based Geolocation Tool", "link": "https://geospy.ai/", "icon": "fab fa-css", "value": "Image Based Geolocation Tool", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "mapgenie.io", "description": "Interactive maps from games", "link": "https://mapgenie.io/", "icon": "fas fa-map", "value": "Interactive maps from games", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "notable-people", "description": "Origin place of the most notable people in history", "link": "", "icon": "fas fa-person", "value": "Origin place of the most notable people in history", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "housecreep.com", "description": "Map of stigmatized properties", "link": "https://www.housecreep.com/", "icon": "fas fa-ghost", "value": "Map of stigmatized properties", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -234,9 +243,7 @@
             { "name": "terminaltrove", "description": "cli/terminal Tools Catalog", "link": "https://terminaltrove.com/", "icon": "fas fa-terminal", "value": "cli/terminal Tools Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "fwupd.org", "description": "Linux Vendor Firmware Service", "link": "https://fwupd.org/", "icon": "fab fa-linux", "value": "Linux Vendor Firmware Service", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Crontab.guru", "description": "Simple editor for crontab schedule expressions", "link": "https://crontab.guru/", "icon": "fas fa-calendar", "value": "Simple editor for crontab schedule expressions", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Microsoft Product Keys", "description": "Redeem Microsoft Product Keys", "link": "https://signup.microsoft.com/get-started/setupKey", "icon": "fas fa-key", "value": "Redeem Microsoft Product Keys", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -245,16 +252,14 @@
             { "name": "Copilot", "description": "", "link": "https://copilot.microsoft.com/", "icon": "fas fa-robot", "value": "Copilot" },
             { "name": "Copilot Notebook", "description": "", "link": "https://copilot.microsoft.com/?showntbk=1", "icon": "fas fa-robot", "value": "Copilot Notebook" },
             { "name": "Bing Image Creator", "description": "", "link": "https://www.bing.com/images/create", "icon": "fas fa-images", "value": "Bing Image Creator" },
-            { "name": "Azure AI Studio", "description": "", "link": "https://ai.azure.com", "icon": "fas fa-artificial", "value": "Azure AI Studio" },
+            { "name": "Azure AI Studio", "description": "", "link": "https://ai.azure.com", "icon": "fab fa-microsoft", "value": "Azure AI Studio" },
             { "name": "Alpaca", "description": "Offline Large Language Models", "link": "https://jeffser.com/alpaca/", "icon": "fab fa-a", "value": "Alpaca Easy Offline GPT Large Language Models", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "com.jeffser.Alpaca"},
             { "name": "EasyDiffusion", "description": "Offline Text-to-image generation", "link": "https://easydiffusion.github.io/", "icon": "fab fa-e", "value": "EasyDiffusion Offline Text-to-image generation", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Civitai", "description": "Stable Difussion Model Catalog", "link": "https://civitai.com/", "icon": "fas fa-robot", "value": "Stable Difussion Model Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Hugging Face", "description": "AI models and datasets", "link": "https://huggingface.co/", "icon": "fas fa-robot", "value": "AI models and datasets huggingface", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "duck.ai", "description": "Privacy oriented AI chat by DuckDuckGo", "link": "https://duck.ai/", "icon": "fas fa-robot", "value": "Privacy oriented AI chat by DuckDuckGo", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "ollama", "description": "Easily run large language models on the terminal", "link": "https://ollama.com/", "icon": "fas fa-robot", "value": "Easily run large language models on the terminal ollama", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Notebooklm", "description": "AI-powered research assistant and note-taking tool by Google", "link": "https://notebooklm.google.com/", "icon": "fab fa-google", "value": "AI-powered research assistant and note-taking tool by Google", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "Notebooklm", "description": "AI-powered research assistant and note-taking tool by Google", "link": "https://notebooklm.google.com/", "icon": "fab fa-google", "value": "AI-powered research assistant and note-taking tool by Google", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -263,7 +268,7 @@
             { "name": "Microsoft Service health status Microsoft 365, Azure, Power Platform", "description": "", "link": "https://status.cloud.microsoft", "icon": "fas fa-heartbeat", "value": "Microsoft Service health status Microsoft 365, Azure, Power Platform" },
             { "name": "Azure DevOps - Status", "description": "", "link": "https://status.dev.azure.com", "icon": "fas fa-heartbeat", "value": "Azure DevOps - Status" },
             { "name": "Windows release health", "description": "", "link": "https://learn.microsoft.com/windows/release-health/", "icon": "fas fa-heartbeat", "value": "Windows release health" },
-            { "name": "Activity Watch", "description": "Time and Activity Tracker", "link": "https://activitywatch.net/downloads/", "icon": "fas fa-monitor", "value": "Time and Activity Tracker Watch", "windows": "ActivityWatch.ActivityWatch", "macos": "--cask activitywatch", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "" },
+            { "name": "Activity Watch", "description": "Time and Activity Tracker", "link": "https://activitywatch.net/downloads/", "icon": "fas fa-clock", "value": "Time and Activity Tracker Watch", "windows": "ActivityWatch.ActivityWatch", "macos": "--cask activitywatch", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "" },
             { "name": "Web SDR", "description": "Frequency Receivers Catalog", "link": "https://websdr.org/", "icon": "fas fa-radio", "value": "SDR Frequency Receivers Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
@@ -276,18 +281,15 @@
             { "name": "Hyphenator", "description": "Lyric Hyphenator", "link": "https://juiciobrennan.com/hyphenator/", "icon": "fas fa-h", "value": "Lyric Hyphenator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Reverse Dictionary", "description": "Reverse dictionary to find words by description", "link": "https://reverse-dictionary.virock.org/", "icon": "fas fa-book", "value": "Reverse dictionary Find words by description", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Urban Dictionary", "description": "Dictionary for slang words and phrases", "link": "https://www.urbandictionary.com/", "icon": "fas fa-book", "value": "Dictionary for slang words and phrases", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "otranscirbe", "description": "Transcribe audio/video files or YouTube videos", "link": "https://otranscribe.com/", "icon": "fas fa-sound", "value": "Transcribe audio/video files or YouTube videos", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "otranscirbe", "description": "Transcribe audio/video files or YouTube videos", "link": "https://otranscribe.com/", "icon": "fab fa-youtube", "value": "Transcribe audio/video files or YouTube videos", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
-        "title": "Licensing",
+        "title": "Hardware",
         "services": [
-            { "name": "Microsoft Product Keys", "description": "Redeem Microsoft Product Keys", "link": "https://signup.microsoft.com/get-started/setupKey", "icon": "fas fa-key", "value": "Redeem Microsoft Product Keys", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
+            { "name": "laauto.com", "description": "Auto repair resources and parts for cars", "link": "https://www.1aauto.com/", "icon": "fas fa-car", "value": "Auto repair resources and parts for cars", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "thisoldhouse.com", "description": "Home Improvement and Remodeling", "link": "https://www.thisoldhouse.com/", "icon": "fas fa-house", "value": "Home Improvement and Remodeling", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "manualslib.com", "description": "Manuals Library", "link": "https://manualslib.com/", "icon": "fas fa-book", "value": "Manuals Library", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
