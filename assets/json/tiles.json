@@ -10,7 +10,7 @@
         "subgroup": [
             {
                 "name": "Windows 10",
-                "content": "Popular for its robust security and performance. Still being used by people who didn't want to upgrade to it from Windows 7 back in the day. Support will end on October, 2025",
+                "content": "Popular for its robust performance. Support will end on October, 2025",
                 "bg": "#e0ffff",
                 "font": "Arial",
                 "bg-img-top": "",
@@ -103,23 +103,13 @@
     },
     {
         "name": "GNU/Linux",
-        "content": "Known for its security, customization, community-driven and open-source development. Backed by donations, organizations and corporations.",
+        "content": "Known for its security, customization, community-driven and open-source development.",
         "bg": "#51a2da",
         "font": "LiberationMono",
         "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
         "bg-img-full": "",
         "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
         "subgroup": [
-            {
-                "name": "Pop!_OS",
-                "content": "Designed for productivity and ease of use, offering a user-friendly experience with a focus on developers and engineers.",
-                "bg": "#e6ffcc",
-                "font": "Georgia",
-                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
-                "bg-img-full": "",
-                "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
-                "url": "https://pop.system76.com/"
-            },
             {
                 "name": "Debian",
                 "content": "Focuses on stability and uptime reliability, with update support lasting five years. It serves as the foundation for many .deb-based distributions.",
@@ -161,6 +151,16 @@
                         "url": "https://www.debian.org/devel/debian-installer/"
                     }
                 ]
+            },
+            {
+                "name": "Pop!_OS",
+                "content": "Designed for productivity and ease of use, offering a user-friendly experience with a focus on developers and engineers.",
+                "bg": "#e6ffcc",
+                "font": "Georgia",
+                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
+                "bg-img-full": "",
+                "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
+                "url": "https://pop.system76.com/"
             },
             {
                 "name": "Fedora",
@@ -235,44 +235,24 @@
                 ]
             },
             {
+                "name": "CentOS Stream",
+                "content": "Provides a stable and predictable platform for developers and system administrators.",
+                "bg": "#f0f0f0",
+                "font": "Courier New",
+                "bg-img-top": "/home/carino/centos-logo.png",
+                "bg-img-full": "",
+                "img": "/home/carino/centos-logo.png",
+                "url": "https://www.centos.org/stream/"
+            },
+            {
                 "name": "openSUSE",
                 "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
                 "bg": "#e0ffe0",
                 "font": "Verdana",
-                "bg-img-top": "../../assets/images/opensuse.webp",
+                "bg-img-top": "opensuse-bg.jpg",
                 "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.webp",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
                 "url": "https://www.opensuse.org/"
-            },
-            {
-                "name": "Guix",
-                "content": "Focuses on rolling release model, 100% open source licensing and system reproducibility, so systems can be built the same easily on other computers.",
-                "bg": "#e6ffcc",
-                "font": "Georgia",
-                "bg-img-top": "https://guix.gnu.org/themes/initial/img/Guix.png",
-                "bg-img-full": "",
-                "img": "https://carino.systems/assets/images/Guix.webp",
-                "url": "https://guix.gnu.org/"
-            },
-            {
-                "name": "Gentoo",
-                "content": "Focuses on minimalism, rolling release model and enabling its users to compile all of their packages if needed for maximum optimization.",
-                "bg": "#e8e8ff",
-                "font": "Courier New",
-                "bg-img-top": "https://www.gentoo.org/assets/img/logo/gentoo-3d.png",
-                "bg-img-full": "",
-                "img": "https://www.gentoo.org/assets/img/logo/gentoo-3d.png",
-                "url": "https://www.gentoo.org/"
-            },
-            {
-                "name": "Arch",
-                "content": "Focusing on minimalism and rolling release model. So its users can build their system exactly as they want.",
-                "bg": "#e6ffcc",
-                "font": "Georgia",
-                "bg-img-top": "https://carino.systems/assets/images/arch.webp",
-                "bg-img-full": "",
-                "img": "https://carino.systems/assets/images/arch.webp",
-                "url": "https://archlinux.org/download/"
             }
         ]
     },
@@ -281,9 +261,9 @@
         "content": "Designed and optimized for business and enterprise environments, offering stability and support.",
         "bg": "#a2d1f1",
         "font": "RedHatFont",
-        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.webp",
         "bg-img-full": "",
-        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rinux.webp",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.webp",
         "subgroup": [
             {
                 "name": "Ubuntu",
@@ -318,6 +298,16 @@
                 ]
             },
             {
+                "name": "SUSE",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img-top": "opensuse-bg.jpg",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "url": "https://www.suse.com/"
+            },
+            {
                 "name": "Red Hat Enterprise Linux",
                 "content": "A top choice for enterprise environments, offering extensive support and stability.",
                 "bg": "#ffdfdf",
@@ -348,16 +338,6 @@
                         "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
                     }
                 ]
-            },
-            {
-                "name": "SUSE",
-                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
-                "bg": "#e0ffe0",
-                "font": "Verdana",
-                "bg-img-top": "../../assets/images/suse-logo.webp",
-                "bg-img-full": "",
-                "img": "../../assets/images/suse-logo.webp",
-                "url": "https://www.suse.com/products/"
             },
             {
                 "name": "Alma Linux",
