@@ -42,7 +42,8 @@
             { "name": "Zen", "description": "Firefox with Arc-like UI", "link": "https://zen-browser.app/", "icon": "fab fa-z", "value": "Firefox Web Browser Arch style fork", "windows": "", "macos": "--cask zen-browser", "flatpak": "io.github.zen_browser.zen"},
             { "name": "Tor", "description": "Firefox using Tor network", "link": "https://www.torproject.org/download/", "icon": "fab fa-t", "value": "Tor Firefox Gecko Browser", "windows": "TorProject.TorBrowser", "macos": "--cask tor-browser", "flatpak": "org.torproject.torbrowser-launcher"},
             { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "https://mullvad.net/en/browser", "icon": "fab fa-m", "value": "Mullvad's Firefox's fork", "windows": "", "macos": "--cask mullvad-browser", "flatpak": "net.mullvad.MullvadBrowser"},
-            { "name": "Epiphany", "description": "A Webkit browser", "link": "https://apps.gnome.org/Epiphany/", "icon": "fas fa-globe", "value": "Webkit browser", "windows": "", "macos": "", "flatpak": "org.gnome.Epiphany"}
+            { "name": "Epiphany", "description": "A Webkit browser", "link": "https://apps.gnome.org/Epiphany/", "icon": "fas fa-globe", "value": "Webkit browser", "windows": "", "macos": "", "flatpak": "org.gnome.Epiphany"},
+            { "name": "whattrainisitnow.com", "description": "Firefox version release versions and schedules", "link": "https://whattrainisitnow.com/", "icon": "fab fa-firefox", "value": "Firefox version release versions and schedules train", "windows": "", "macos": "", "flatpak": ""}
         ]
     },
     {
@@ -133,7 +134,8 @@
             { "name": "Choose a license", "description": "Choose an open source license", "link": "https://choosealicense.com/", "icon": "fas fa-c", "value": "Choose an open source license", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Porkbun", "description": "Buy Domains", "link": "https://porkbun.com/", "icon": "fas fa-dollar", "value": "buy domains porkbun", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "pagespeed.web.dev", "description": "Optimize web pages on all devices", "link": "https://pagespeed.web.dev/", "icon": "fas fa-globe", "value": "Optimize web pages on all devices", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "web-check.xyz", "description": "Tool for checking website data", "link": "https://web-check.xyz/", "icon": "fas fa-globe", "value": "All-in-one OSINT tool, for checking a websites data", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
+            { "name": "web-check.xyz", "description": "Tool for checking website data", "link": "https://web-check.xyz/", "icon": "fas fa-globe", "value": "All-in-one OSINT tool, for checking a websites data", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "endoflife.date", "description": "End-of-life dates and support lifecycles", "link": "https://endoflife.date/", "icon": "fas fa-cross", "value": "End-of-life dates and support lifecycles", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
@@ -208,7 +210,8 @@
             { "name": "mapgenie.io", "description": "Interactive maps from games", "link": "https://mapgenie.io/", "icon": "fas fa-map", "value": "Interactive maps from games", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "notable-people", "description": "Origin place of the most notable people in history", "link": "", "icon": "fas fa-person", "value": "Origin place of the most notable people in history", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "housecreep.com", "description": "Map of stigmatized properties", "link": "https://www.housecreep.com/", "icon": "fas fa-ghost", "value": "Map of stigmatized properties", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Vim Adventures", "description": "Learn vim with a game", "link": "https://vim-adventures.com/", "icon": "fas fa-star", "value": "Learn vim with a game", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
+            { "name": "Vim Adventures", "description": "Learn vim with a game", "link": "https://vim-adventures.com/", "icon": "fas fa-star", "value": "Learn vim with a game", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "OpenBVE", "description": "Train driving simulator", "link": "https://openbve-project.net/", "icon": "fas fa-train", "value": "Train driving simulator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
