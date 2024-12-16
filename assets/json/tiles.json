@@ -10,7 +10,7 @@
         "subgroup": [
             {
                 "name": "Windows 10",
-                "content": "Popular for its robust performance. Support will end on October, 2025",
+                "content": "Popular for its robust performance. Support will end in October, 2025.",
                 "bg": "#e0ffff",
                 "font": "Arial",
                 "bg-img-top": "",
@@ -30,7 +30,7 @@
             },
             {
                 "name": "Windows Server 2019",
-                "content": "Server Edition. EXTENDED Security Support will end on January, 2029",
+                "content": "Active support ended. Security support will end in January, 2029.",
                 "bg": "#e6f0ff",
                 "font": "Verdana",
                 "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
@@ -40,7 +40,7 @@
             },
             {
                 "name": "Windows Server 2022",
-                "content": "Latest Windows OS with advanced features. Support will end on October, 2026.",
+                "content": "Active support will end in October, 2026. Security support will end in 2031.",
                 "bg": "#e6f0ff",
                 "font": "Verdana",
                 "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
@@ -50,7 +50,7 @@
             },
             {
                 "name": "Windows Server 2025",
-                "content": "Latest Windows OS with advanced features. Support will end on October, 2029.",
+                "content": "Active support will end in October, 2029. Security support will end in 2034.",
                 "bg": "#e6f0ff",
                 "font": "Verdana",
                 "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/windows.svg",
@@ -112,7 +112,7 @@
         "subgroup": [
             {
                 "name": "Debian",
-                "content": "Focuses on stability and uptime reliability, with update support lasting five years. It serves as the foundation for many .deb-based distributions.",
+                "content": "Focuses on environment stability and uptime reliability, with update support lasting five years.",
                 "bg": "#d6eaff",
                 "font": "Arial",
                 "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.webp",
@@ -154,7 +154,7 @@
             },
             {
                 "name": "Pop!_OS",
-                "content": "Designed for productivity and ease of use, offering a user-friendly experience with a focus on developers and engineers.",
+                "content": "Focused for development, engineering and STEM research. Two year releases. NVIDIA ready.",
                 "bg": "#e6ffcc",
                 "font": "Georgia",
                 "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
@@ -164,7 +164,7 @@
             },
             {
                 "name": "Fedora",
-                "content": "Focuses on innovation of the latest open source technologies, and stability through package testing. With a regular six-month release cycle.",
+                "content": "Focuses on innovation of the latest open source technologies. With a regular six-month release cycle.",
                 "bg": "#f0f8ff",
                 "font": "Verdana",
                 "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
@@ -194,7 +194,7 @@
                     },
                     {
                         "name": "Network installer",
-                        "content": "To build your system as you please. Requires internet connection, guides you through either a text or graphic installer.",
+                        "content": "Guides you through either a text or graphic installer to build your system. Requires internet connection.",
                         "bg": "#e0f7fa",
                         "font": "Arial",
                         "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
@@ -224,7 +224,7 @@
                     },
                     {
                         "name": "Atomic",
-                        "content": "Features a lightweight and unchangeable system that enhances stability and security. Meant to simply roll back during an update error.",
+                        "content": "Features an unchangeable system that simply rolls back during an update error.",
                         "bg": "#e0f7fa",
                         "font": "Arial",
                         "bg-img-top": "",
@@ -261,9 +261,9 @@
         "content": "Designed and optimized for business and enterprise environments, offering stability and support.",
         "bg": "#a2d1f1",
         "font": "RedHatFont",
-        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.webp",
+        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.svg",
         "bg-img-full": "",
-        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.webp",
+        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.svg",
         "subgroup": [
             {
                 "name": "Ubuntu",
