@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const tilesData = [
-        { type: 'small-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        { type: 'medium-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        { type: 'small-tile', color: 'crimson', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        //{ type: 'small-tile', color: 'scarlet', text: 'Topics', link: 'topics.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        { type: 'small-tile', color: 'indigo', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
-        { type: 'small-tile', color: 'ultramarine', text: 'Music', link: 'music.html', bgVideo: 'https://samplelib.com/lib/preview/webm/sample-5s.webm' },
+        { type: 'small-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'medium-tile', color: 'emerald', text: 'Solutions', link: 'solutions.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'small-tile', color: 'crimson', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDMud2VibTYxMzQw.webm' },
+        //{ type: 'small-tile', color: 'scarlet', text: 'Topics', link: 'topics.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'medium-tile', color: 'indigo', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDQud2VibTYxNzY0.webm' },
+        { type: 'medium-tile', color: 'ultramarine', text: 'Music', link: 'music.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
         // Add more tiles as needed
     ];
 
