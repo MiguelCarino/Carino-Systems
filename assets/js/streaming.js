@@ -80,14 +80,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    async function fetchLiveVideoId(channelId) {
+    async function fetchLiveVideoId(channelId, filterKeyword = null) {
         const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`);
         const data = await response.json();
+        
         if (data.items && data.items.length > 0) {
-            return data.items[0].id.videoId;
+            if (filterKeyword) {
+                // Filter based on the keyword in the title
+                const filteredItem = data.items.find(item => item.snippet.title.toLowerCase().includes(filterKeyword.toLowerCase()));
+                if (filteredItem) {
+                    return filteredItem.id.videoId;
+                }
+            } else {
+                // Return the first livestream if no filter keyword is provided
+                return data.items[0].id.videoId;
+            }
         }
         return null;
     }
+    
 
     async function checkEmbeddableAndToggleStream(videoId) {
         const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=status&id=${videoId}&key=${apiKey}`);
@@ -110,26 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadStreams(category) {
         const cleanedCategory = cleanCategoryName(category);
-        console.log(`Cleaned category: ${cleanedCategory}`); // Debug log
         if (!channels.hasOwnProperty(cleanedCategory)) {
             console.error(`channels does not contain the key: ${cleanedCategory}`);
             return;
         }
-
+    
         const subMenu = document.querySelector(`button[data-category="${cleanedCategory}"]`).nextElementSibling;
         subMenu.innerHTML = '';
-
-        console.log('Loading streams for category:', cleanedCategory);
-
+    
         const streams = await Promise.all(channels[cleanedCategory].map(async stream => {
-            if (stream.videoId) {
-                return stream;
-            } else {
-                const videoId = await fetchLiveVideoId(stream.channelId);
-                return { ...stream, videoId };
-            }
+            const videoId = await fetchLiveVideoId(stream.channelId, stream.filterKeyword);
+            return { ...stream, videoId };
         }));
-
+    
         streams.forEach(stream => {
             if (stream.videoId) {
                 const listItem = document.createElement('li');
@@ -142,12 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 subMenu.appendChild(listItem);
             }
         });
-
-        if (category === 'Monitoring' || subMenu.style.display === 'block') {
+    
+        if (category === 'Ney Year Eve' || subMenu.style.display === 'block') {
             subMenu.style.display = 'block';
             subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
         }
     }
+    
 
     function toggleStream(videoId) {
         let streamDiv = document.querySelector(`.stream[data-video-id="${videoId}"]`);
