@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const phrases = [
         "「 In doubt, reboot. 」",
-        "「 Viruses are often inadvertently accepted, but you may not have noticed. 」",
-        "「 Never trust brands, only reviews. 」",
-        "「 Always copy your files, never cut them. 」",
-        "「 Update your system when you can; otherwise, it will update when you don't. 」",
+        "「 Viruses are often inadvertently accepted by thee. 」",
+        "「 Never trust blindly. Question first. 」",
+        "「 Copy your files instead of cutting them. 」",
+        "「 Update when you have time; otherwise, it will update when you don't. 」",
         "「 You can't download RAM. 」",
         "「 The Cloud is mostly on land and underwater. 」",
-        "「 Clean your keyboard thoroughly at least once a year; don't ask. 」",
-        "「 Antivirus software is malware that hates competition. 」",
-        "「 All software is licensed, even if it's free. 」",
-        "「 There's no way you can be 100% anonymous on the internet. 」",
-        "「 A real backup is made by three copies, on two different types of storage, with one copy offsite. 」",
-        "「 Data redundancy is not a backup. 」",
+        "「 Clean your keyboard thoroughly at least once a year. 」",
+        "「 Antivirus software is useless against bad digital practices. 」",
+        "「 All software is licensed, even if it's offered for free. 」",
+        "「 Being 100% anonymous on the internet is virtually impossible. 」",
+        "「 A reliable backup consists of three copies: two on different storage types, and one offsite. 」",
+        "「 Data redundancy alone is not a backup. 」",
         "「 Remembering your passwords is a flaw; use a password manager instead. 」",
-        "「 AI is a misleading commercial term, just like 'High Definition.' 」",
-        "「 Automation doesn't imply optimization. 」"
+        "「 AI is often a misleading commercial term, just like 'High Definition.' 」",
+        "「 Automation doesn't guarantee optimization. 」"
     ];
 
     const randomPhraseElement = document.getElementById("random-phrase");
