@@ -1,10 +1,10 @@
 const apiKey = 'AIzaSyCmtV8QIecdM2A-5YCGRPanLqIsOIjoV74'; // Replace with your actual YouTube Data API key
 const channels = {
     'New Year Eve': [
-        { name: 'EarthTV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCRuyAVeVd7oUwh0LWmxxBBQ', filterKeyword: 'The world live'},
-        { name: 'New York', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'LIVE NEW YORK NEW YEARS 2025 COUNTDOWN'},
-        { name: 'London', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'LIVE LONDON NEW YEARS 2025 COUNTDOWN'},
-        { name: 'Seoul', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'LIVE 서울 2025년 새해 카운트다운'},
+        { name: 'EarthTV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCRuyAVeVd7oUwh0LWmxxBBQ', filterKeyword: 'world'},
+        { name: 'New York', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'YORK'},
+        { name: 'London', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'LONDON'},
+        { name: 'Seoul', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: '서울'},
         { name: 'Central Standard Time', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCKm6ufPsvELiPzpa4V6IY2w', filterKeyword: 'cst'},
         // Add more channels as needed
     ],

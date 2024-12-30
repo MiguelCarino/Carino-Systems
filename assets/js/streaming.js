@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.dataset.category = category;
         button.textContent = category;
 
-        if (category === 'Monitoring') {
-            console.log('Setting Monitoring button as active'); // Debug log
+        if (category === 'New Year Eve') {
+            console.log('Setting New Year Eve button as active'); // Debug log
             button.classList.add('active');
         }
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const submenu = document.createElement('ul');
         submenu.classList.add('submenu');
-        if (category === 'Monitoring') {
+        if (category === 'New Year Eve') {
             submenu.style.display = 'block';
         }
 
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkEmbeddableAndToggleStream(videoId);
             });
         } else {
-            await loadInitialCategory('Monitoring');
+            await loadInitialCategory('New Year Eve');
         }
     }
 
