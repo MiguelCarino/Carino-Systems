@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyCmtV8QIecdM2A-5YCGRPanLqIsOIjoV74'; // Replace with your actual YouTube Data API key
+const apiKey = 'AIzaSyCpa3fdO-0Lf7n0Sy_kKXkWo0rFDldMZmo'; // Replace with your actual YouTube Data API key
 const channels = {
     'New Year Eve': [
         { name: 'EarthTV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCRuyAVeVd7oUwh0LWmxxBBQ', filterKeyword: 'world'},
