@@ -251,6 +251,8 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'Atd6WRAeyPA',image: 'mu_176.webp',tag: 'Pokemon'
 },{url: 'NeB-lWNkhfA',image: 'mu_177.webp',tag: 'Laufey'
 },{url: 'DF6W1XD25Dc',image: 'mu_178.webp',tag: 'Звери'
+},{url: 'PULwDISWun8',image: 'mu_179.webp',tag: 'Sayonara Wild Hearts'
+},{url: 'dDiGKUcfmVk',image: 'mu_179.webp',tag: 'Sayonara Wild Hearts'
 },
 // add more albums here
 ];
