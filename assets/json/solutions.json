@@ -85,10 +85,11 @@
     {
         "title": "Development",
         "services": [
-            { "name": ".NET", "description": "", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net" },
+            { "name": ".NET", "description": "", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-dot-circle", "value": "dotnet,.net", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "" },
+            { "name": ".NET Framework", "description": "", "link": "https://dotnet.microsoft.com/en-us/download", "icon": "fas fa-paintbrush", "value": "Online Photo Editor", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Visual Studio", "description": "Microsoft ", "link": "https://visualstudio.microsoft.com/downloads/", "icon": "fas fa-code", "value": "Visual Studio" },
-            { "name": "Visual Studio Code", "description": "Microsoft's Code Editor", "link": "https://code.visualstudio.com/download", "value": "Visual Studio Code VS Code", "windows": "Microsoft.VisualStudioCode", "macos": "--cask visual-studio-code", "flatpak": "com.visualstudio.code"},
-            { "name": "VSCodium", "description": "Telemetry-free Visual Studio Code", "link": "https://code.visualstudio.com/download", "value": "Visual Studio Code VS Code Codium FOSS Open Source", "windows": "VSCodium.VSCodium", "macos": "--cask vscodium", "flatpak": "com.vscodium.codium"},
+            { "name": "Visual Studio Code", "description": "Microsoft's Code Editor", "link": "https://code.visualstudio.com/download", "icon": "fas fa-code", "value": "Visual Studio Code VS Code", "windows": "Microsoft.VisualStudioCode", "macos": "--cask visual-studio-code", "flatpak": "com.visualstudio.code"},
+            { "name": "VSCodium", "description": "Telemetry-free Visual Studio Code", "link": "https://code.visualstudio.com/download", "icon": "fas fa-code", "value": "Visual Studio Code VS Codium", "windows": "VSCodium.VSCodium", "macos": "--cask vscodium", "flatpak": "com.vscodium.codium"},
             { "name": "Visual Studio Code Web", "description": "VS Code on the web browser", "link": "https://www.vscode.dev/", "icon": "fas fa-code", "icon": "fas fa-code", "value": "Visual Studio (VS) Code in the Web" },
             { "name": "Powershell", "description": "", "link": "https://github.com/PowerShell/PowerShell", "icon": "fas fa-terminal", "value": "Powershell", "windows": "Microsoft.PowerShell", "macos": "--cask powershell", "flatpak": "com.visualstudio.code" },
             { "name": ".NET Framework", "description": "", "link": "https://dotnet.microsoft.com/en-us/download/dotnet-framework", "icon": "fas fa-cogs", "value": "dotnet,.net,framework" },
@@ -174,7 +175,7 @@
         ]
     },
     {
-        "title": "Entertainment and Gaming",
+        "title": "Gaming and Entertainment",
         "services": [
             { "name": "Steam", "description": "Video game digital distribution service", "link": "https://store.steampowered.com/about/", "icon": "fab fa-steam", "value": "Valve Steam Video game digital distribution service", "windows": "Valve.Steam", "macos": "--cask steam", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "com.valvesoftware.Steam"},
             { "name": "GOG", "description": "Video game digital distribution service", "link": "https://www.gog.com/", "icon": "fab fa-g", "value": "GOG Video game digital distribution service", "windows": "GOG.Galaxy", "macos": "--cask gog-galaxy", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
@@ -227,20 +228,25 @@
     {
         "title": "Operating Systems",
         "services": [
+            { "name": "Simple Setup", "description": "Setup Script for Linux and Windows Systems", "link": "https://carino.systems/setup.sh", "icon": "fas fa-code", "value": "Simple Setup Script Linux and Windows Systems", "windows": "upgrade --all; iwr -useb https://carino.systems/setup.ps1 | iex", "macos": "", "fedora": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "debian": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "rhel": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "suse": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "flatpak": ""},
             { "name": "Download Operating Systems", "description": "", "link": "os.html", "icon":"fab fa-windows", "value": "Download Operating Systems"},
-            { "name": "Winget Packages", "description": "Windows winget package browser", "link": "https://winget.run/", "icon": "fab fa-windows", "value": "Winget Packages" },
+            { "name": "Ventoy", "description": "Create bootable USB for multiple ISO files", "link": "https://www.ventoy.net/en/download.html", "icon": "fab fa-v", "value": "Ventoy", "windows": "ventoy.Ventoy", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Winget Packages", "description": "Windows winget package catalog", "link": "https://winget.run/", "icon": "fab fa-windows", "value": "Winget Packages catalog" },
+            { "name": "Homebrew", "description": "macOS brew package catalog", "link": "https://formulae.brew.sh/", "icon": "fab fa-apple", "value": "macOS homebrew package catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Flathub", "description": "Flatpak packages for Linux", "link": "https://flathub.org/", "icon": "fab fa-linux", "value": "Flathub Flatpak packages for Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": ".NET NuGet Packages", "description": "NuGet package manager for .NET.", "link": "https://www.nuget.org/", "icon": "fas fa-box", "value": ".NET NuGet Packages,dotnet" },
+            { "name": "pkgs.org", "description": "Package Catalog for Linux and Unix", "link": "https://pkgs.org/", "icon": "fas fa-box", "value": "Package Catalog for Linux and Unix", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "packages.fedoraproject.org", "description": "Package Catalog for Fedora", "link": "https://packages.fedoraproject.org/", "icon": "fab fa-fedora", "value": "Package Catalog for Fedora Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "packages.ubuntu.com", "description": "Package Catalog for Ubuntu", "link": "https://packages.ubuntu.com/", "icon": "fab fa-ubuntu", "value": "Package Catalog for Ubuntu Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "packages.debian.org", "description": "Package Catalog for Debian", "link": "https://packages.debian.org/index", "icon": "fab fa-debian", "value": "Package Catalog for Debian Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "software.opensuse.org", "description": "Package Catalog for openSUSE", "link": "https://software.opensuse.org/packages", "icon": "fab fa-opensuse", "value": "Package Catalog for opensuse Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "pkgs.org", "description": "Package Catalog for Linux and Unix", "link": "https://pkgs.org/", "icon": "fas fa-box", "value": "Package Catalog for Linux and Unix", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Microsoft Update Catalog", "description": "", "link": "https://www.catalog.update.microsoft.com", "icon": "fas fa-download", "value": "Microsoft Update Catalog" },
             { "name": "Open Recall", "description": "Microsoft Windows Recall alternative", "link": "https://github.com/openrecall/openrecall", "icon": "fab fa-microsoft", "value": "open Microsoft Windows Recall alternative", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Ventoy", "description": "Create bootable USB for multiple ISO files", "link": "https://www.ventoy.net/en/download.html", "icon": "fab fa-v", "value": "Ventoy", "windows": "ventoy.Ventoy", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Simple Setup", "description": "Setup Script for Linux and Windows Systems", "link": "https://carino.systems/setup.sh", "icon": "fas fa-code", "value": "Simple Setup Script Linux and Windows Systems", "windows": "upgrade --all; iwr -useb https://carino.systems/setup.ps1 | iex", "macos": "", "fedora": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "debian": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "rhel": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "suse": "wget curl && bash <(curl -s https://carino.systems/setup.sh)", "flatpak": ""},
             { "name": "Wix Toolset", "description": "Create your Windows installers", "link": "https://wixtoolset.org/", "icon": "fab fa-windows", "value": "Wix Toolset Create your Windows installers", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Plop Boot", "description": "Add USB boot support to computers with no BIOS support", "link": "https://www.plop.at/en/bootmanager/download.html", "icon": "fab fa-usb", "value": "Add USB boot support to computers with no BIOS support", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Homebrew", "description": "macOS brew package browser", "link": "https://formulae.brew.sh/", "icon": "fab fa-apple", "value": "macOS homebrew packages browser", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "Flathub", "description": "Flatpak packages for Linux", "link": "https://flathub.org/", "icon": "fas fa-box", "value": "Flathub Flatpak packages for Linux", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Compart", "description": "Unicode Character Catalog", "link": "https://www.compart.com/en/unicode/", "icon": "fab fa-computer", "value": "Compart Unicode Character Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Nvidia", "description": "Nvidia Drivers", "link": "https://www.nvidia.com/Download/index.aspx", "icon": "fas fa-download", "value": "NVIDIA Drivers", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "pkgs.org", "description": "Package Catalog for Linux and Unix", "link": "https://pkgs.org/", "icon": "fas fa-box", "value": "Package Catalog for Linux and Unix", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "vidarholen.net", "description": "Linux Kernel Word ocurrences", "link": "https://www.vidarholen.net/contents/wordcount/", "icon": "fab fa-linux", "value": "Linux Kernel Word ocurrences", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "kernel.org", "description": "Linux Kernel Archive", "link": "https://kernel.org/", "icon": "fab fa-linux", "value": "Linux Kernel Archive", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "terminaltrove", "description": "cli/terminal Tools Catalog", "link": "https://terminaltrove.com/", "icon": "fas fa-terminal", "value": "cli/terminal Tools Catalog", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
@@ -298,7 +304,7 @@
     {
         "title": "Open Source related",
         "services": [
-            { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"},
+            { "name": "NSA", "description": "National Security Agency’s Open Source Software Site", "link": "https://code.nsa.gov/", "icon": "fas fa-flag", "value": "National Security Agency Open Source Software Site", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "", "description": "#", "link": "#", "icon": "fab fa-css", "value": "#", "windows": "#", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": "#"}
         ]
     }
