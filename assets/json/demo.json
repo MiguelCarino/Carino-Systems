@@ -1,0 +1,17 @@
+{
+  "header": {
+    "title": "Demo Graph",
+    "description": "A simple graph to demonstrate dynamic updates and relationships."
+  },
+  "customNodes": {
+    "Group A": ["Node 1", "Node 2"],
+    "Group B": ["Node 3", "Node 4"]
+  },
+  "nodes": [
+    { "id": "Central Node", "group": 1, "targets": ["Node 1", "Node 3"] },
+    { "id": "Node 1", "group": 2, "targets": ["Node 2"] },
+    { "id": "Node 2", "group": 2, "targets": [] },
+    { "id": "Node 3", "group": 3, "targets": ["Node 4"] },
+    { "id": "Node 4", "group": 3, "targets": [] }
+  ]
+}

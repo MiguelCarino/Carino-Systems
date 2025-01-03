@@ -1,0 +1,31 @@
+{
+    "header": {
+      "title": "Programming Languages",
+      "description": "Explore programming languages and their features."
+    },
+    "customNodes": {
+      "Memory Safe": ["Rust", "Go", "Python"],
+      "Object-Oriented": ["Java", "C++", "Python", "Ruby"],
+      "Functional": ["Haskell", "Scala", "Lisp"],
+      "Scripting": ["JavaScript", "PHP", "Python"],
+      "Low-Level": ["C", "Assembly", "Rust", "Zig"]
+    },
+    "nodes": [
+      { "id": "Programming Languages", "group": 1, "targets": ["Java", "C++", "Python", "Rust", "JavaScript", "Haskell", "Assembly", "C", "Lisp", "Go", "PHP", "Scala", "Ruby", "Zig"] },
+      { "id": "Java", "group": 3, "targets": [], "link": "https://www.oracle.com/java/" },
+      { "id": "C++", "group": 3, "targets": [], "link": "https://isocpp.org/" },
+      { "id": "Python", "group": 3, "targets": [], "link": "https://www.python.org/" },
+      { "id": "Rust", "group": 3, "targets": [], "link": "https://www.rust-lang.org/" },
+      { "id": "JavaScript", "group": 3, "targets": [], "link": "https://www.javascript.com/" },
+      { "id": "PHP", "group": 3, "targets": [], "link": "https://www.php.net/" },
+      { "id": "Haskell", "group": 3, "targets": [], "link": "https://www.haskell.org/" },
+      { "id": "Lisp", "group": 3, "targets": [], "link": "https://common-lisp.net/" },
+      { "id": "C", "group": 3, "targets": [], "link": "https://en.cppreference.com/w/c/language" },
+      { "id": "Assembly", "group": 3, "targets": [], "link": "https://en.wikipedia.org/wiki/Assembly_language" },
+      { "id": "Go", "group": 3, "targets": [], "link": "https://go.dev/" },
+      { "id": "Scala", "group": 3, "targets": [], "link": "https://www.scala-lang.org/" },
+      { "id": "Ruby", "group": 3, "targets": [], "link": "https://www.ruby-lang.org/" },
+      { "id": "Zig", "group": 3, "targets": [], "link": "https://ziglang.org/" }
+    ]
+  }
+  
