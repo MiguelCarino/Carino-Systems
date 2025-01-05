@@ -1,4 +1,5 @@
 import { apiKey, channels } from './catalogstreaming.js';
+const channelCache = {}; // Cache for channel API results
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
@@ -84,23 +85,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function fetchLiveVideoId(channelId, filterKeyword = null) {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`);
+    // Check if the channel data is already cached
+    if (!channelCache[channelId]) {
+        // Fetch data from the YouTube API if not cached
+        const response = await fetch(
+            `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
+        );
         const data = await response.json();
-        
-        if (data.items && data.items.length > 0) {
-            if (filterKeyword) {
-                // Filter based on the keyword in the title
-                const filteredItem = data.items.find(item => item.snippet.title.toLowerCase().includes(filterKeyword.toLowerCase()));
-                if (filteredItem) {
-                    return filteredItem.id.videoId;
-                }
-            } else {
-                // Return the first livestream if no filter keyword is provided
-                return data.items[0].id.videoId;
-            }
-        }
-        return null;
+        channelCache[channelId] = data.items || []; // Cache the result
     }
+
+    const videos = channelCache[channelId]; // Retrieve cached data
+
+    if (videos.length > 0) {
+        if (filterKeyword) {
+            // Filter videos by keyword
+            const filteredItem = videos.find(item =>
+                item.snippet.title.toLowerCase().includes(filterKeyword.toLowerCase())
+            );
+            if (filteredItem) {
+                return filteredItem.id.videoId;
+            }
+        } else {
+            // Return the first livestream if no filter keyword is provided
+            return videos[0].id.videoId;
+        }
+    }
+
+    return null; // No matching live stream
+}
+
     
 
     async function checkEmbeddableAndToggleStream(videoId) {
@@ -124,38 +138,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadStreams(category) {
         const cleanedCategory = cleanCategoryName(category);
-        livestreamsDiv.innerHTML = ''; // Clear all currently loaded streams
         if (!channels.hasOwnProperty(cleanedCategory)) {
             console.error(`channels does not contain the key: ${cleanedCategory}`);
             return;
         }
     
+        // Reference the category's submenu
         const subMenu = document.querySelector(`button[data-category="${cleanedCategory}"]`).nextElementSibling;
-        subMenu.innerHTML = '';
+        subMenu.innerHTML = ''; // Clear the submenu for this category
     
-        const streams = await Promise.all(channels[cleanedCategory].map(async stream => {
-            const videoId = await fetchLiveVideoId(stream.channelId, stream.filterKeyword);
-            return { ...stream, videoId };
-        }));
+        // Fetch live video IDs for the selected category
+        const streams = await Promise.all(
+            channels[cleanedCategory].map(async (stream) => {
+                if (stream.videoId) {
+                    return stream; // Use predefined videoId
+                } else {
+                    const videoId = await fetchLiveVideoId(stream.channelId, stream.filterKeyword);
+                    return { ...stream, videoId }; // Add fetched videoId
+                }
+            })
+        );
     
-        streams.forEach(stream => {
-            if (stream.videoId) {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
-                listItem.dataset.videoId = stream.videoId;
-                listItem.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    checkEmbeddableAndToggleStream(stream.videoId);
-                });
-                subMenu.appendChild(listItem);
-            }
+        // Populate the submenu with the streams
+        streams.forEach((stream) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
+            listItem.dataset.videoId = stream.videoId;
+    
+            // Load the stream only when the user clicks
+            listItem.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (stream.videoId) {
+                    toggleStream(stream.videoId); // Load the stream into livestreamsDiv
+                }
+            });
+    
+            subMenu.appendChild(listItem);
         });
     
-        if (category === 'Ney Year Eve' || subMenu.style.display === 'block') {
+        // Handle submenu visibility and default category logic
+        if (category === 'Monitoring' || subMenu.style.display === 'block') {
             subMenu.style.display = 'block';
             subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
         }
     }
+    
     
 
     function toggleStream(videoId) {
