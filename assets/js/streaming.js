@@ -1,5 +1,4 @@
 import { apiKey, channels } from './catalogstreaming.js';
-const channelCache = {}; // Cache for channel API results
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
@@ -85,36 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function fetchLiveVideoId(channelId, filterKeyword = null) {
-    // Check if the channel data is already cached
-    if (!channelCache[channelId]) {
-        // Fetch data from the YouTube API if not cached
-        const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`
-        );
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`);
         const data = await response.json();
-        channelCache[channelId] = data.items || []; // Cache the result
-    }
-
-    const videos = channelCache[channelId]; // Retrieve cached data
-
-    if (videos.length > 0) {
-        if (filterKeyword) {
-            // Filter videos by keyword
-            const filteredItem = videos.find(item =>
-                item.snippet.title.toLowerCase().includes(filterKeyword.toLowerCase())
-            );
-            if (filteredItem) {
-                return filteredItem.id.videoId;
+        
+        if (data.items && data.items.length > 0) {
+            if (filterKeyword) {
+                // Filter based on the keyword in the title
+                const filteredItem = data.items.find(item => item.snippet.title.toLowerCase().includes(filterKeyword.toLowerCase()));
+                if (filteredItem) {
+                    return filteredItem.id.videoId;
+                }
+            } else {
+                // Return the first livestream if no filter keyword is provided
+                return data.items[0].id.videoId;
             }
-        } else {
-            // Return the first livestream if no filter keyword is provided
-            return videos[0].id.videoId;
         }
+        return null;
     }
-
-    return null; // No matching live stream
-}
-
     
 
     async function checkEmbeddableAndToggleStream(videoId) {
