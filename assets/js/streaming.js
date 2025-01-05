@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.dataset.category = category;
         button.textContent = category;
 
-        if (category === 'New Year Eve') {
-            console.log('Setting New Year Eve button as active'); // Debug log
+        if (category === 'Monitoring') {
+            console.log('Setting Monitoring button as active'); // Debug log
             button.classList.add('active');
         }
 
@@ -35,25 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const submenu = document.createElement('ul');
         submenu.classList.add('submenu');
-        if (category === 'New Year Eve') {
+        if (category === 'Monitoring') {
             submenu.style.display = 'block';
         }
 
-        channels[rawCategory].forEach(stream => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
-            listItem.dataset.videoId = stream.videoId;
-            listItem.dataset.channelId = stream.channelId;
-            listItem.addEventListener('click', (event) => {
-                event.stopPropagation();
-                if (stream.videoId) {
-                    checkEmbeddableAndToggleStream(stream.videoId);
-                } else {
-                    loadAndToggleStreamByChannelId(stream.channelId);
-                }
+        if (category === 'Monitoring') {
+            channels[rawCategory].forEach(stream => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
+                listItem.dataset.videoId = stream.videoId;
+                listItem.dataset.channelId = stream.channelId;
+                listItem.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (stream.videoId) {
+                        checkEmbeddableAndToggleStream(stream.videoId);
+                    } else {
+                        loadAndToggleStreamByChannelId(stream.channelId);
+                    }
+                });
+                submenu.appendChild(listItem);
             });
-            submenu.appendChild(listItem);
-        });
+        }
+        
 
         sidebar.appendChild(submenu);
     }
@@ -121,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadStreams(category) {
         const cleanedCategory = cleanCategoryName(category);
+        livestreamsDiv.innerHTML = ''; // Clear all currently loaded streams
         if (!channels.hasOwnProperty(cleanedCategory)) {
             console.error(`channels does not contain the key: ${cleanedCategory}`);
             return;
@@ -250,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkEmbeddableAndToggleStream(videoId);
             });
         } else {
-            await loadInitialCategory('New Year Eve');
+            await loadInitialCategory('Monitoring');
         }
     }
 

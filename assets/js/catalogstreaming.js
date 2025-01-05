@@ -1,11 +1,5 @@
 const apiKey = 'AIzaSyCpa3fdO-0Lf7n0Sy_kKXkWo0rFDldMZmo'; // Replace with your actual YouTube Data API key
 const channels = {
-    'New Year Eve': [
-        { name: 'EarthTV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCRuyAVeVd7oUwh0LWmxxBBQ', filterKeyword: 'world'},
-        { name: 'New York', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCl0skuFDwMqmo67HcS-ULnA', filterKeyword: 'YORK'},
-        { name: 'Central Standard Time', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCKm6ufPsvELiPzpa4V6IY2w', filterKeyword: 'cst'}
-        // Add more channels as needed
-    ],
     'Monitoring': [
         { name: 'Earthquake Monitoring 1', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCZmcd4cQ2H_ELWAuUdOMgRQ', filterKeyword: ''},
         { name: 'Earthquake Monitoring 2', icon: 'https://via.placeholder.com/20', videoId: 'MT23xDdXe8U', channelId: '', filterKeyword: ''}
@@ -17,10 +11,11 @@ const channels = {
         // Add more channels as needed
     ],
     '🇺🇸 United States': [
-        { name: 'US News Stream', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA', filterKeyword: ''},
-        { name: 'US Music Stream', icon: 'https://via.placeholder.com/20', videoId: 'H-N6-MHn3DA', channelId: 'UCef1-8eOpJgud7szVPlZQAQ', filterKeyword: ''},
-        { name: 'US Sports Stream', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCfSvKJAIiyWqNU5rhNtp1UA', filterKeyword: ''},
-        { name: 'NASA TV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCLA_DiR1FfKNvjuUpBHmylQ' }
+        { name: 'ABC News', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCBi2mrWuNuyYy4gbM6fU18Q', filterKeyword: 'news'},
+        { name: 'NBC News', icon: 'https://via.placeholder.com/20', videoId: 'H-N6-MHn3DA', channelId: 'UCeY0bbntWzzVIaj2z3QigXg', filterKeyword: 'news'},
+        { name: 'Fox News', icon: 'https://via.placeholder.com/20', videoId: '-E0AHOOGo24', channelId: 'UCJg9wBPyKMNA5sRDnvzmkdg', filterKeyword: 'news'},
+        { name: 'NASA TV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCLA_DiR1FfKNvjuUpBHmylQ', filterKeyword: '' },
+        { name: 'NASA TV', icon: 'https://via.placeholder.com/20', videoId: '', channelId: 'UCLA_DiR1FfKNvjuUpBHmylQ', filterKeyword: 'High' }
     ],
     '🇬🇧 United Kingdom': [
         { name: 'UK Entertainment Stream', icon: 'https://via.placeholder.com/20', videoId: 'hY7m5jjJ9mM', filterKeyword: ''},
