@@ -43,7 +43,10 @@
             { "name": "Tor", "description": "Firefox using Tor network", "link": "https://www.torproject.org/download/", "icon": "fab fa-t", "value": "Tor Firefox Gecko Browser", "windows": "TorProject.TorBrowser", "macos": "--cask tor-browser", "flatpak": "org.torproject.torbrowser-launcher"},
             { "name": "Mullvad", "description": "Mullvad's Firefox's fork", "link": "https://mullvad.net/en/browser", "icon": "fab fa-m", "value": "Mullvad's Firefox's fork", "windows": "", "macos": "--cask mullvad-browser", "flatpak": "net.mullvad.MullvadBrowser"},
             { "name": "Epiphany", "description": "A Webkit browser", "link": "https://apps.gnome.org/Epiphany/", "icon": "fas fa-globe", "value": "Webkit browser", "windows": "", "macos": "", "flatpak": "org.gnome.Epiphany"},
-            { "name": "whattrainisitnow.com", "description": "Firefox version release versions and schedules", "link": "https://whattrainisitnow.com/", "icon": "fab fa-firefox", "value": "Firefox version release versions and schedules train", "windows": "", "macos": "", "flatpak": ""}
+            { "name": "whattrainisitnow.com", "description": "Firefox version release versions and schedules", "link": "https://whattrainisitnow.com/", "icon": "fab fa-firefox", "value": "Firefox version release versions and schedules train", "windows": "", "macos": "", "flatpak": ""},
+            { "name": "toolz/adblock", "description": "Adblock testing", "link": "https://d3ward.github.io/toolz/adblock", "icon": "fas fa-ad", "value": "web Adblock testing", "windows": "", "macos": "", "flatpak": ""},
+            { "name": "toolz/fontlist", "description": "Webfont testing", "link": "https://d3ward.github.io/toolz/fontlist", "icon": "fas fa-font", "value": "web Font testing", "windows": "", "macos": "", "flatpak": ""},
+            { "name": "david.li", "description": "WebGL testing", "link": "https://david.li/", "icon": "fas fa-brush", "value": "WebGL Font testing", "windows": "", "macos": "", "flatpak": ""}
         ]
     },
     {
@@ -212,13 +215,15 @@
             { "name": "notable-people", "description": "Origin place of the most notable people in history", "link": "https://tjukanovt.github.io/notable-people", "icon": "fas fa-person", "value": "Origin place of the most notable people in history", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "housecreep.com", "description": "Map of stigmatized properties", "link": "https://www.housecreep.com/", "icon": "fas fa-ghost", "value": "Map of stigmatized properties", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Vim Adventures", "description": "Learn vim with a game", "link": "https://vim-adventures.com/", "icon": "fas fa-star", "value": "Learn vim with a game", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
-            { "name": "OpenBVE", "description": "Train driving simulator", "link": "https://openbve-project.net/", "icon": "fas fa-train", "value": "Train driving simulator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
+            { "name": "OpenBVE", "description": "Train driving simulator", "link": "https://openbve-project.net/", "icon": "fas fa-train", "value": "Train driving simulator", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "Grayjay", "description": "Multi-platform media application", "link": "https://grayjay.app/", "icon": "fab fa-youtube", "value": "grayjay futo multi-platform media application", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""}
         ]
     },
     {
         "title": "(Cyber)Security",
         "services": [
             { "name": "Autopsy", "description": "Digital Forensics Platform", "link": "https://www.autopsy.com/download/", "icon":"fab fa-windows", "value": "Autopsy SleuthKit Digital Forensics Platform", "windows": "SleuthKit.Autopsy", "macos": "#", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
+            { "name": "OpenSCAP", "description": "Security Compliance Solution", "link": "https://www.open-scap.org/", "icon": "fas fa-eye", "value": "Security Compliance Solution", "windows": "", "macos": "--cask scap-workbench", "fedora": "openscap-scanner scap-workbench", "debian": "libopenscap8 scap-workbench", "rhel": "openscap-scanner scap-workbench", "suse": "openscap-utils scap-workbench", "flatpak": ""},
             { "name": "Virus total", "description": "Scan files, domains and links for virus/malware", "link": "https://www.virustotal.com/", "icon": "fas fa-virus", "value": "Scan files, domains and links for virus/malware", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "Have I been pwned", "description": "Check if your email or password are in a data breach", "link": "https://haveibeenpwned.com/", "icon": "fas fa-question", "value": "Check if your email or password are in a data breach", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
             { "name": "lolbas", "description": "Microsoft Windows binaries that can be exploited", "link": "https://lolbas-project.github.io/", "icon": "fas fa-virus", "value": "Microsoft Windows binaries that can be exploited", "windows": "", "macos": "", "fedora": "", "debian": "", "rhel": "", "suse": "", "flatpak": ""},
