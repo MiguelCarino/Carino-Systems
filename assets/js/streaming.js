@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.dataset.category = category;
         button.textContent = category;
 
-        if (category === 'Monitoring') {
+        if (category === 'Testing') {
             console.log('Setting Monitoring button as active'); // Debug log
             button.classList.add('active');
         }
@@ -35,27 +35,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const submenu = document.createElement('ul');
         submenu.classList.add('submenu');
-        if (category === 'Monitoring') {
+        if (category === 'Testing') {
             submenu.style.display = 'block';
         }
 
-        if (category === 'Monitoring') {
+        if (category === 'Testing') {
             channels[rawCategory].forEach(stream => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
-                listItem.dataset.videoId = stream.videoId;
-                listItem.dataset.channelId = stream.channelId;
+                listItem.dataset.platform = stream.platform;
+                listItem.dataset.videoId = stream.videoId || '';
+                listItem.dataset.channelId = stream.channelId || '';
+                listItem.dataset.url = stream.relativeUrl || '';
+        
                 listItem.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    if (stream.videoId) {
-                        checkEmbeddableAndToggleStream(stream.videoId);
-                    } else {
-                        loadAndToggleStreamByChannelId(stream.channelId);
+        
+                    switch (stream.platform) {
+                        case 'youtube':
+                            if (stream.videoId) {
+                                checkEmbeddableAndToggleStream(stream.videoId);
+                            } else if (stream.channelId) {
+                                loadAndToggleStreamByChannelId(stream.channelId);
+                            } else {
+                                console.warn(`YouTube stream '${stream.name}' is missing both videoId and channelId.`);
+                            }
+                            break;
+        
+                        case 'odysee':
+                            if (stream.relativeUrl) {
+                                const baseUrl = PLATFORM_BASE_URLS[stream.platform];
+                                const fullUrl = baseUrl ? `${baseUrl}${stream.relativeUrl}` : stream.relativeUrl;
+                                toggleExternalStream(fullUrl);
+                            } else {
+                                console.warn(`External stream '${stream.name}' is missing a relativeUrl.`);
+                            }
+                            break;
+                        case 'rumble':
+                            if (stream.relativeUrl) {
+                                const baseUrl = PLATFORM_BASE_URLS[stream.platform];
+                                const fullUrl = baseUrl ? `${baseUrl}${stream.relativeUrl}` : stream.relativeUrl;
+                                toggleExternalStream(fullUrl);
+                            } else {
+                                console.warn(`External stream '${stream.name}' is missing a relativeUrl.`);
+                            }
+                            break;
+                        case 'utube': {
+                            const baseUrl = PLATFORM_BASE_URLS[stream.platform];
+                            if (baseUrl) {
+                                // Replace placeholder ${relativeUrl} with the actual value from the stream
+                                const fullUrl = baseUrl.replace('${relativeUrl}', stream.relativeUrl || '');
+                                toggleExternalStream(fullUrl);
+                                console.log(`Generated URL for ${stream.platform}: ${fullUrl}`);
+                                return { ...stream, url: fullUrl };
+                            } else {
+                                console.warn(`Base URL not defined for platform '${stream.platform}'.`);
+                                return null;
+                            }
+                        }
+                            break;
+                        case 'rutube':
+                            if (stream.relativeUrl) {
+                                const baseUrl = PLATFORM_BASE_URLS[stream.platform];
+                                const fullUrl = baseUrl ? `${baseUrl}${stream.relativeUrl}` : stream.relativeUrl;
+                                toggleExternalStream(fullUrl);
+                            } else {
+                                console.warn(`External stream '${stream.name}' is missing a relativeUrl.`);
+                            }
+                            break;
+        
+                        default:
+                            console.warn(`Unsupported platform '${stream.platform}' for stream '${stream.name}'.`);
+                            break;
                     }
                 });
+        
                 submenu.appendChild(listItem);
             });
         }
+        
         
 
         sidebar.appendChild(submenu);
@@ -63,6 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const categoryButtons = document.querySelectorAll('.sidebar button');
     const livestreamsDiv = document.getElementById('livestreams');
+    const PLATFORM_BASE_URLS = {
+        odysee: 'https://odysee.com/$/embed/',
+        rutube: 'https://rutube.ru/play/embed/live/video/',
+        utube: 'https://www.youtube.com/embed/live_stream?channel=${relativeUrl}&mute=1&autoplay=1',
+        rumble: 'https://rumble.com/embed/'
+    };
 
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -129,33 +193,51 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
     
-        // Reference the category's submenu
         const subMenu = document.querySelector(`button[data-category="${cleanedCategory}"]`).nextElementSibling;
         subMenu.innerHTML = ''; // Clear the submenu for this category
     
-        // Fetch live video IDs for the selected category
         const streams = await Promise.all(
             channels[cleanedCategory].map(async (stream) => {
-                if (stream.videoId) {
-                    return stream; // Use predefined videoId
+                if (stream.platform === 'youtube') {
+                    console.log(`Processing YouTube stream: ${stream.name}`);
+                    if (stream.videoId) {
+                        return stream; // Use predefined videoId
+                    } else {
+                        try {
+                            const videoId = await fetchLiveVideoId(stream.channelId, stream.filterKeyword);
+                            return { ...stream, videoId }; // Add fetched videoId
+                        } catch (error) {
+                            console.error(`Failed to fetch YouTube video ID for ${stream.name}:`, error);
+                            return null; // Skip this stream
+                        }
+                    }
                 } else {
-                    const videoId = await fetchLiveVideoId(stream.channelId, stream.filterKeyword);
-                    return { ...stream, videoId }; // Add fetched videoId
+                    console.log(`Processing external stream (${stream.platform}): ${stream.name}`);
+                    // Construct the full URL for non-YouTube platforms
+                    const baseUrl = PLATFORM_BASE_URLS[stream.platform];
+                    const fullUrl = baseUrl ? `${baseUrl}${stream.relativeUrl}` : stream.relativeUrl;
+        
+                    console.log(`Generated URL for platform ${stream.platform}: ${fullUrl}`); // Debug log
+        
+                    return { ...stream, url: fullUrl };
                 }
             })
         );
+        
     
-        // Populate the submenu with the streams
         streams.forEach((stream) => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `<img src="${stream.icon}" alt="${stream.name}"><span>${stream.name}</span>`;
-            listItem.dataset.videoId = stream.videoId;
+            listItem.dataset.platform = stream.platform;
+            listItem.dataset.url = stream.url || '';
+            listItem.dataset.videoId = stream.videoId || '';
     
-            // Load the stream only when the user clicks
             listItem.addEventListener('click', (event) => {
                 event.stopPropagation();
-                if (stream.videoId) {
-                    toggleStream(stream.videoId); // Load the stream into livestreamsDiv
+                if (stream.platform === 'youtube' && stream.videoId) {
+                    toggleStream(stream.videoId); // Load YouTube stream
+                } else if (stream.platform !== 'youtube') {
+                    toggleExternalStream(stream.url); // Load other platform stream
                 }
             });
     
@@ -163,14 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     
         // Handle submenu visibility and default category logic
-        if (category === 'Monitoring' || subMenu.style.display === 'block') {
+        if (category === 'Testing' || subMenu.style.display === 'block') {
             subMenu.style.display = 'block';
             subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
         }
-    }
-    
-    
-
+    }    
+   
     function toggleStream(videoId) {
         let streamDiv = document.querySelector(`.stream[data-video-id="${videoId}"]`);
 
@@ -195,7 +275,37 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeStreams();
         updateUrl();
     }
-
+    function toggleExternalStream(url) {
+        const livestreamsDiv = document.getElementById('livestreams'); // Ensure this is properly referenced
+    
+        let streamDiv = document.querySelector(`.stream[data-url="${url}"]`);
+    
+        if (streamDiv) {
+            // If the stream is already loaded, remove it
+            livestreamsDiv.removeChild(streamDiv);
+        } else {
+            // Otherwise, add a new stream iframe
+            streamDiv = document.createElement('div');
+            streamDiv.className = 'stream';
+            streamDiv.dataset.url = url;
+            streamDiv.innerHTML = `
+                <iframe src="${url}" frameborder="0" allowfullscreen></iframe>
+            `;
+    
+            // Add error handling for iframe load issues
+            streamDiv.querySelector('iframe').addEventListener('error', () => {
+                livestreamsDiv.removeChild(streamDiv);
+                showNotification('Unable to load the stream.');
+            });
+    
+            livestreamsDiv.appendChild(streamDiv);
+        }
+    
+        // Resize streams dynamically
+        resizeStreams();
+        updateUrl();
+    }
+    
     function resizeStreams() {
         const streams = document.querySelectorAll('.stream');
         const count = streams.length;
@@ -267,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkEmbeddableAndToggleStream(videoId);
             });
         } else {
-            await loadInitialCategory('Monitoring');
+            await loadInitialCategory('Testing');
         }
     }
 
