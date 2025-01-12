@@ -1,6 +1,6 @@
 [
     {
-        "name": "Microsoft Windows",
+        "name": "Windows",
         "content": "The standard for decades, with a vast user base in homes and businesses. Backed by Microsoft.",
         "bg": "#ffdddd",
         "font": "Arial",
@@ -61,7 +61,7 @@
         ]
     },
     {
-        "name": "Apple macOS",
+        "name": "macOS",
         "content": "Known for its sleek design and integration with Apple's ecosystem. Backed by Apple.",
         "bg": "#ddffdd",
         "font": "Verdana",
@@ -115,9 +115,9 @@
                 "content": "Focuses on environment stability and uptime reliability, with update support lasting five years.",
                 "bg": "#d6eaff",
                 "font": "Arial",
-                "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.webp",
+                "bg-img-top": "assets/images/debian.webp",
                 "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian.webp",
+                "img": "assets/images/debian.webp",
                 "url": "https://www.debian.org/",
                 "subgroup": [
                     {
@@ -127,7 +127,7 @@
                         "font": "Verdana",
                         "bg-img-top": "debian-stable-bg.jpg",
                         "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-stable.svg",
+                        "img": "assets/images/debian.webp",
                         "url": "https://www.debian.org/"
                     },
                     {
@@ -137,7 +137,7 @@
                         "font": "Courier New",
                         "bg-img-top": "debian-testing-bg.jpg",
                         "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-testing.svg",
+                        "img": "assets/images/debian.webp",
                         "url": "https://www.debian.org/CD/live/"
                     },
                     {
@@ -147,24 +147,14 @@
                         "font": "Courier New",
                         "bg-img-top": "debian-testing-bg.jpg",
                         "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/debian-testing.svg",
+                        "img": "assets/images/debian.webp",
                         "url": "https://www.debian.org/devel/debian-installer/"
                     }
                 ]
             },
             {
-                "name": "Pop!_OS",
-                "content": "Focused for development, engineering and STEM research. Two year releases. NVIDIA ready.",
-                "bg": "#e6ffcc",
-                "font": "Georgia",
-                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
-                "bg-img-full": "",
-                "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Pop_OS-Logo-nobg.svg/800px-Pop_OS-Logo-nobg.svg.png?20200519213455",
-                "url": "https://pop.system76.com/"
-            },
-            {
                 "name": "Fedora",
-                "content": "Focuses on innovation of the latest open source technologies. With a regular six-month release cycle.",
+                "content": "Focuses on innovating the latest open-source technologies with a six-month release cycle.",
                 "bg": "#f0f8ff",
                 "font": "Verdana",
                 "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
@@ -194,7 +184,7 @@
                     },
                     {
                         "name": "Network installer",
-                        "content": "Guides you through either a text or graphic installer to build your system. Requires internet connection.",
+                        "content": "Guides you through a installer to build your system. Requires internet connection.",
                         "bg": "#e0f7fa",
                         "font": "Arial",
                         "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fedora_icon_%282021%29.svg",
@@ -239,82 +229,19 @@
                 "content": "Provides a stable and predictable platform for developers and system administrators.",
                 "bg": "#f0f0f0",
                 "font": "Courier New",
-                "bg-img-top": "/home/carino/centos-logo.png",
+                "bg-img-top": "assets/images/centos.svg",
                 "bg-img-full": "",
-                "img": "/home/carino/centos-logo.png",
+                "img": "assets/images/centos.svg",
                 "url": "https://www.centos.org/download/"
-            },
-            {
-                "name": "openSUSE",
-                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
-                "bg": "#e0ffe0",
-                "font": "Verdana",
-                "bg-img-top": "opensuse-bg.jpg",
-                "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
-                "url": "https://www.opensuse.org/"
-            }
-        ]
-    },
-    {
-        "name": "GNU/Linux Enterprise",
-        "content": "Designed and optimized for business and enterprise environments, offering stability and support.",
-        "bg": "#a2d1f1",
-        "font": "RedHatFont",
-        "bg-img-top": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.svg",
-        "bg-img-full": "",
-        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rainux.svg",
-        "subgroup": [
-            {
-                "name": "Ubuntu",
-                "content": "Popular with businesses for its ease of use and robust support ecosystem.",
-                "bg": "#e0d1ff",
-                "font": "Arial",
-                "bg-img-top": "ubuntu-bg.jpg",
-                "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/ubuntu.svg",
-                "url": "https://ubuntu.com/",
-                "subgroup": [
-                    {
-                        "name": "Ubuntu Desktop",
-                        "content": "A stable and reliable enterprise-grade OS with long-term support.",
-                        "bg": "#ffe6e6",
-                        "font": "Georgia",
-                        "bg-img-top": "rhel8-bg.jpg",
-                        "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel8.svg",
-                        "url": "https://releases.ubuntu.com/24.10/"
-                    },
-                    {
-                        "name": "Ubuntu LTS (Long Term Support)",
-                        "content": "The latest RHEL version with updated features and tools.",
-                        "bg": "#ffd6d6",
-                        "font": "Arial",
-                        "bg-img-top": "rhel9-bg.jpg",
-                        "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel9.svg",
-                        "url": "https://releases.ubuntu.com/focal/"
-                    }
-                ]
-            },
-            {
-                "name": "SUSE",
-                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
-                "bg": "#e0ffe0",
-                "font": "Verdana",
-                "bg-img-top": "opensuse-bg.jpg",
-                "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
-                "url": "https://www.suse.com/"
             },
             {
                 "name": "Red Hat Enterprise Linux",
                 "content": "A top choice for enterprise environments, offering extensive support and stability.",
                 "bg": "#ffdfdf",
                 "font": "Courier New",
-                "bg-img-top": "rhel-bg.jpg",
-                "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/redhat.svg",
+                "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
                 "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
                 "subgroup": [
                     {
@@ -322,9 +249,9 @@
                         "content": "A stable and reliable enterprise-grade OS with long-term support.",
                         "bg": "#ffe6e6",
                         "font": "Georgia",
-                        "bg-img-top": "rhel8-bg.jpg",
-                        "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel8.svg",
+                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                        "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
                         "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
                     },
                     {
@@ -332,12 +259,32 @@
                         "content": "The latest RHEL version with updated features and tools.",
                         "bg": "#ffd6d6",
                         "font": "Arial",
-                        "bg-img-top": "rhel9-bg.jpg",
-                        "bg-img-full": "",
-                        "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/rhel9.svg",
+                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                        "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
+                        "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
                         "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
                     }
                 ]
+            },
+            {
+                "name": "openSUSE",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img-top": "assets/images/opensuse.webp",
+                "bg-img-full": "",
+                "img": "https://github.com/openSUSE/artwork/blob/master/logos/buttons/button-colour.png?raw=true",
+                "url": "https://www.opensuse.org/"
+            },
+            {
+                "name": "SUSE",
+                "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
+                "bg": "#e0ffe0",
+                "font": "Verdana",
+                "bg-img-top": "assets/images/suse-logo.webp",
+                "bg-img-full": "",
+                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "url": "https://www.suse.com/"
             },
             {
                 "name": "Alma Linux",
