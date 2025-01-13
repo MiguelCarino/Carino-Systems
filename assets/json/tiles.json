@@ -242,29 +242,7 @@
                 "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
                 "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
                 "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux",
-                "subgroup": [
-                    {
-                        "name": "RHEL 8",
-                        "content": "A stable and reliable enterprise-grade OS with long-term support.",
-                        "bg": "#ffe6e6",
-                        "font": "Georgia",
-                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
-                    },
-                    {
-                        "name": "RHEL 9",
-                        "content": "The latest RHEL version with updated features and tools.",
-                        "bg": "#ffd6d6",
-                        "font": "Arial",
-                        "bg-img-top": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "bg-img-full": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "img": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg",
-                        "url": "https://access.redhat.com/products/red-hat-enterprise-linux"
-                    }
-                ]
+                "url": "https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux"
             },
             {
                 "name": "openSUSE",
@@ -281,20 +259,20 @@
                 "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
                 "bg": "#e0ffe0",
                 "font": "Verdana",
-                "bg-img-top": "assets/images/suse-logo.webp",
+                "bg-img-top": "assets/images/suse.svg",
                 "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
+                "img": "assets/images/suse-logo.svg",
                 "url": "https://www.suse.com/"
             },
             {
                 "name": "Alma Linux",
                 "content": "A flexible OS available in both enterprise (Leap) and cutting-edge (Tumbleweed) versions.",
-                "bg": "#e0ffe0",
+                "bg": "#0e3b5c",
                 "font": "Verdana",
-                "bg-img-top": "opensuse-bg.jpg",
+                "bg-img-top": "assets/images/almalinux-logo.svg"    ,
                 "bg-img-full": "",
-                "img": "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/main/assets/images/opensuse.svg",
-                "url": "https://www.opensuse.org/"
+                "img": "assets/images/almalinux-icon.svg",
+                "url": "https://almalinux.org/"
             }
         ]
     }
