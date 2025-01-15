@@ -152,6 +152,10 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+#navbar {
+    width: 100%; /* Make navbar span the full width of the viewport */
+}
+
 /* Link Styling */
 a:link {
     color: rgb(255, 255, 255);
