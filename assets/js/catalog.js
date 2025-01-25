@@ -253,6 +253,11 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'DF6W1XD25Dc',image: 'mu_178.webp',tag: 'Звери'
 },{url: 'PULwDISWun8',image: 'mu_179.webp',tag: 'Sayonara Wild Hearts'
 },{url: 'dDiGKUcfmVk',image: 'mu_179.webp',tag: 'Sayonara Wild Hearts'
+},{url: 'eDYh23NrD0U',image: 'mu_180.webp',tag: 'Akira - The Blithering Heights'
+},{url: 'YZxOI2RNrII',image: 'mu_181.webp',tag: 'Ashterra - The Moon'
+},{url: 'JBtUeBUyVaY',image: 'mu_182.webp',tag: 'Astropilot - A Drowning'
+},{url: 'qA-GBRf_hzc',image: 'mu_182.webp',tag: 'Astropilot - Only Hope'
+},{url: 'fxPiRPnPqLs',image: 'mu_182.webp',tag: 'Astropilot - Patterns of Awareness'
 },
 // add more albums here
 ];
