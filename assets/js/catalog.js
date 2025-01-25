@@ -258,6 +258,13 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'JBtUeBUyVaY',image: 'mu_182.webp',tag: 'Astropilot - A Drowning'
 },{url: 'qA-GBRf_hzc',image: 'mu_182.webp',tag: 'Astropilot - Only Hope'
 },{url: 'fxPiRPnPqLs',image: 'mu_182.webp',tag: 'Astropilot - Patterns of Awareness'
+},{url: 'IIOJdMdS56k',image: 'mu_183.webp',tag: 'Swing Out Sister - Breakout'
+},{url: '5Nl5zBqXc1o',image: 'mu_183.webp',tag: 'Swing Out Sister - Twilight World'
+},{url: 'a6rmmFNhxdI',image: 'mu_183.webp',tag: 'Swing Out Sister - Fooled by a smile'
+},{url: 'CU9pEi3ByTw',image: 'mu_184.webp',tag: 'Swing Out Sister - You on my mind'
+},{url: '8bIFadXgDO0',image: 'mu_185.webp',tag: 'Swing Out Sister - Lala'
+},{url: '5pd0V1ZfK_g',image: 'mu_186.webp',tag: 'Swing Out Sister - Better make it better'
+},{url: '5pd0V1ZfK_g',image: 'mu_186.webp',tag: 'Swing Out Sister - Better make it better'
 },
 // add more albums here
 ];
