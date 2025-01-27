@@ -264,7 +264,8 @@ const albums = [{url: 'bc0sJvtKrRM',image: 'mu_1.webp',tag: ''
 },{url: 'CU9pEi3ByTw',image: 'mu_184.webp',tag: 'Swing Out Sister - You on my mind'
 },{url: '8bIFadXgDO0',image: 'mu_185.webp',tag: 'Swing Out Sister - Lala'
 },{url: '5pd0V1ZfK_g',image: 'mu_186.webp',tag: 'Swing Out Sister - Better make it better'
-},{url: '5pd0V1ZfK_g',image: 'mu_186.webp',tag: 'Swing Out Sister - Better make it better'
+},{url: 'CwjshPNrWtY',image: 'mu_187.webp',tag: 'Magdalena Bay - Histerical Us'
+},{url: 'Xcq3xMCcGlI',image: 'mu_188.webp',tag: 'Magdalena Bay - Cry for me'
 },
 // add more albums here
 ];
