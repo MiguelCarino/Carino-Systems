@@ -22,10 +22,15 @@
     <!-- Navigation Bar -->
     <nav id="navbar"></nav>
     <div class="container">
-    <div id="header">
+    <div id="header"><div id="buttons-container">
+        <button id="load-json-files">Select a topic ▼</button>
+        <ul id="json-list" class="hidden"></ul> <!-- Dropdown list for JSON files -->
+    </div>
+    
         <h1 id="title">Loading...</h1>
         <p id="description">Please wait while we load the content.</p>
-        <div id="buttons"></div>
+        <div id="buttons"></div> <!-- Existing buttons will be added here dynamically -->
+        
     </div>
     <div id="chart"></div>
     </div>
