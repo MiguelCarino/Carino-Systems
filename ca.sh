@@ -6,10 +6,10 @@ if [ "$#" -gt 0 ]; then
         bash <(curl -s https://miguelcarino.github.io/SimpleSetup/setup.sh) "$@"
         ;;
     *vp9*)
-        bash <(curl -s https://miguelcarino.github.io/SimpleTranscoding/simple.sh) "$@"
+        bash <(curl -s https://miguelcarino.github.io/SimpleTranscoding/transcode.sh) "$@"
         ;;
     *av1*)
-        bash <(curl -s https://miguelcarino.github.io/SimpleTranscoding/simple.sh) "$@"
+        bash <(curl -s https://miguelcarino.github.io/SimpleTranscoding/transcode.sh) "$@"
         ;;
     *)
         echo "No valid option provided."
