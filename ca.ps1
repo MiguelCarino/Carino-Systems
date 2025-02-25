@@ -7,9 +7,11 @@ function Invoke-ScriptFromURL {
         [string]$Url,
         [string]$Arguments
     )
-    
-    $ScriptContent = Invoke-WebRequest -Uri $Url -UseBasicParsing | Select-Object -ExpandProperty Content
-    Invoke-Expression "$ScriptContent $Arguments"
+
+    $TempScript = [System.IO.Path]::GetTempFileName() + ".ps1"
+    Invoke-WebRequest -Uri $Url -UseBasicParsing | Select-Object -ExpandProperty Content | Set-Content -Path $TempScript
+    & $TempScript @Arguments  # Execute script safely
+    Remove-Item -Path $TempScript -Force  # Clean up
 }
 
 if ($Arg1) {
@@ -22,6 +24,14 @@ if ($Arg1) {
         }
         "*av1*" {
             Invoke-ScriptFromURL -Url "https://miguelcarino.github.io/SimpleTranscoding/transcode.ps1" -Arguments ($args -join " ")
+        }
+        "test" {
+            if (Test-Path "./test.ps1") {
+                Write-Host "Running test.ps1..."
+                & "./test.ps1"
+            } else {
+                Write-Host "test.ps1 not found!"
+            }
         }
         default {
             Write-Host "No valid option provided."
