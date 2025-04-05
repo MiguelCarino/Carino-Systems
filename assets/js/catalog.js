@@ -267,6 +267,7 @@ const albums = [{url: 'bc0sJvtKrRM', spotifyurl: '3LlQyxWlsx8y4rZtkETUjl', apple
 },{url: 'CwjshPNrWtY', spotifyurl: '0vMlVGJuREJk3c7vvObE5Z', applemusicurl: 'album/hysterical-us/1570541671?i=1570541941', image: 'mu_187.webp',tag: 'Magdalena Bay - Histerical Us'
 },{url: 'Xcq3xMCcGlI', spotifyurl: '4rVs9KjC3YVA7v54kVSHUV', applemusicurl: 'album/cry-for-me/1751414757?i=1751414771', image: 'mu_188.webp',tag: 'Magdalena Bay - Cry for me'
 },{url: 'N-w6qgiNeys', spotifyurl: '3LlQyxWlsx8y4rZtkETUjl', applemusicurl: 'song/tunnel-vision/1751414767', image: 'mu_188.webp',tag: 'Magdalena Bay - Tunnel Vision'
+},{url: '-OwLVuyj3Jg', spotifyurl: '3vtceW4EYrv3enjfz7MTff?si=d83c7eaa86584889', applemusicurl: 'song/nancy-tries-to-take-the-night/1783713623', image: 'mu_189.webp',tag: 'Black Country, New Road- Nancy Tries to Take the Night'
 },
 // add more albums here
 ];
