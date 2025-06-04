@@ -12,7 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "「 All software is licensed, even if it's offered for free. 」",
         "「 Being 100% anonymous on the internet is virtually impossible. 」",
         "「 A reliable backup consists of three copies: two on different storage types, and one offsite. 」",
-        "「 Data redundancy alone is not a backup. 」",
+        "「 Data redundancy is not a backup. 」",
+        "「 Social engineering is often more effective than hacking. 」",
+        "「 Your digital footprint is permanent; think before you post. 」",
+        "「 Your device is only as secure as your habits. 」",
         "「 Remembering your passwords is a flaw; use a password manager instead. 」",
         "「 AI is often a misleading commercial term, just like 'High Definition.' 」",
         "「 Automation doesn't guarantee optimization. 」"
@@ -31,7 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
         //{ type: 'small-tile', color: 'scarlet', text: 'Topics', link: 'topics.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
         { type: 'small-tile', color: 'indigo', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDQud2VibTYxNzY0.webm' },
         { type: 'small-tile', color: 'coral', text: 'Music', link: 'music.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
-        { type: 'small-tile', color: 'violet', text: 'Graphy', link: 'graphy.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'plum', text: 'Graphy', link: 'graphy.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'sapphire', text: 'Customer Support', link: 'https://support.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'coral', text: 'Speedtest', link: 'https://speed.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'black', text: 'Teleprompter', link: 'https://teleprompter.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'navy', text: 'Color', link: 'https://color.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         // Add more tiles as needed
     ];
 

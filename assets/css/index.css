@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #111;
+    background-color: #111111;
     color: white;
     display: flex;
     justify-content: center;
@@ -91,7 +91,7 @@ a:link {
 
 /* Keep the video visible initially */
 .tile-bg-video {
-    opacity: 0;
+    opacity: 0.3;
 }
 
 /* On hover, hide the video and show the background color */
@@ -120,6 +120,10 @@ a:link {
 }
 
 /* Color Types */
+.black {
+    background-color: #2d2d2d;
+}
+
 .ultramarine {
     background-color: #3F00FF;
 }
@@ -166,6 +170,53 @@ a:link {
 
 .turquoise {
     background-color: #40E0D0;
+}
+.sapphire {
+    background-color: #0F52BA; /* Sapphire */
+}
+
+.peach {
+    background-color: #FFDAB9; /* Peach */
+}
+
+.mint {
+    background-color: #98FF98; /* Mint */
+}
+
+.burgundy {
+    background-color: #800020; /* Burgundy */
+}
+
+.gold {
+    background-color: #FFD700; /* Gold */
+}
+
+.silver {
+    background-color: #C0C0C0; /* Silver */
+}
+
+.plum {
+    background-color: #8E4585; /* Plum */
+}
+
+.cyan {
+    background-color: #00FFFF; /* Cyan */
+}
+
+.magenta {
+    background-color: #FF00FF; /* Magenta */
+}
+
+.charcoal {
+    background-color: #36454F; /* Charcoal */
+}
+
+.navy {
+    background-color: #000080; /* Navy */
+}
+
+.fuchsia {
+    background-color: #FF00FF; /* Fuchsia */
 }
 
 .icon-row {
