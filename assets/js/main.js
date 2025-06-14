@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('footer').innerHTML = footerContent;
       }
 
-      console.log('grid.js loaded with FA:', faUrl);
+      console.log('environment.js loaded with FA:', faUrl);
     })
     .catch(err => {
       console.error('Failed to load environment.json:', err);
