@@ -38,5 +38,20 @@
     <script src="https://miguelcarino.github.io/Graphy/assets/js/script.js"></script>
     <!-- Footer -->
     <footer id="footer"></footer>
-</body>
+</body><script>
+    // Navigation content with icons
+    const navContent = (currentTitle) => `
+        <div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
+        <h2 style="color: #ffffff; padding-right: 12vh;">${currentTitle.split(' ')[0]}</h2>
+        <ul>
+            <li><a href="https://miguelcarino.github.io/Graphy/" target="_blank" class="icon-link">
+                <i class="fab fa-github"></i> <span class="label"></span>
+            </a></li>
+            <li><a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-link">
+                <i class="fab fa-linkedin"></i> <span class="label"></span>
+            </a></li>
+        </ul>
+    `;
+    document.getElementById('navbar').innerHTML = navContent;
+    </script>
 </html>
