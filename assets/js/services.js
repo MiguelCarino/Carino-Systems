@@ -20,6 +20,7 @@
 
   // Create a service object with title, favicon, and custom text, and an optional dynamic count
   function createService(title, favicon, isDynamic = false, customText = "Inbox") {
+    console.log(`Creating service: ${customText}`); // Debugging: Log service creation
     if (isDynamic) {
       const count = Math.round(Math.random() * 13); // Random count for services like Gmail
       const emailCount = count === 10 ? '50+' : (count === 12 ? '100+' : count);
@@ -32,6 +33,7 @@
 
   // Update favicon and title dynamically
   function updateFaviconAndTitle(data) {
+    console.log("Updating favicon and title with data:", data); // Debugging: Log data being updated
     const out = `?v=${Math.random().toString(36).substr(2, 9)}`; // Cache-busting query
     const link = document.createElement('link');
     link.type = 'image/x-icon';
@@ -51,23 +53,29 @@
 
   // Handle tab visibility change
   function handleVisibilityChange() {
+    console.log("Visibility change triggered. Document hidden:", document.hidden); // Debugging: Log visibility state
     if (document.hidden) {
+      console.log("Tab is now hidden, setting random service.");
       setRandomService();
     } else {
+      console.log("Tab is now active, restoring original state.");
       restoreOriginalState();
     }
   }
 
   // Set a random service from the list
   function setRandomService() {
+    console.log("Setting random service..."); // Debugging: Log when random service is set
     // Dynamically get the service names from the keys of the `services` object
     const serviceNames = Object.keys(services);
     const randomServiceName = serviceNames[Math.floor(Math.random() * serviceNames.length)];
+    console.log("Random service selected:", randomServiceName); // Debugging: Log selected service name
     updateFaviconAndTitle(services[randomServiceName]());
   }
 
   // Restore original favicon and title
   function restoreOriginalState() {
+    console.log("Restoring original favicon and title..."); // Debugging: Log restoration process
     updateFaviconAndTitle({ title: originalTitle, favicon: originalFavicon });
   }
 
@@ -76,6 +84,9 @@
                         document.querySelector("[rel='shortcut icon']").href : 
                         'https://carino.systems/assets/images/logo.webp';
   let originalTitle = document.title;
+
+  console.log("Initial title:", originalTitle); // Debugging: Log initial title
+  console.log("Initial favicon:", originalFavicon); // Debugging: Log initial favicon
 
   // Listen for visibility change event
   document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -94,5 +105,11 @@
   });
 
   // Initialize the favicon manager
+  console.log("Initial random service will be set.");
   setRandomService(); // Optionally call this to set an initial random service
+
+  // Additional debugging to show what's happening with the visibility state:
+  setInterval(() => {
+    console.log("Current document visibility state:", document.hidden ? "Hidden" : "Visible");
+  }, 5000); // Log visibility state every 5 seconds
 }();
