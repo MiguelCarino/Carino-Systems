@@ -24,7 +24,7 @@
     } else {
       title = `${customText}`;  // Use the custom text if not dynamic
     }
-    return { title, favicon };
+    return { title, favicon };``
   }
 
   // Update favicon and title dynamically
