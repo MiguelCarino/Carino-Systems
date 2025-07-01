@@ -6,13 +6,14 @@
     fedora: function() { return createService("Install Fedora", 'https://fedoraproject.org/favicon.ico', false, "Fedora"); },
     opensuse: function() { return createService("Install openSUSE", 'https://www.opensuse.org/build/images/favicon.png', false, "openSUSE"); },
     redhat: function() { return createService("Install Red Hat", 'https://www.redhat.com/favicon.ico', false, "Red Hat"); },
-    gentoo: function() { return createService("Install Gentoo", 'https://www.gentoo.org/favicon.ico', false, "Gentoo"); },
-    guix: function() { return createService("Install Guix", 'https://guix.gnu.org/themes/initial/img/icon.png', false, "Guix"); },
+    gentoo: function() { return createService("Install Gentoo", 'https://www.gentoo.org/favicon.ico', false, "Install Gentoo"); },
     kernel: function() { return createService("The Linux Kernel Archives", 'https://www.kernel.org/theme/images/logos/favicon.png', false, "Linux Kernel"); },
     fourchan: function() { return createService("4chan", "https://s.4cdn.org/image/favicon.ico", true, "4chan - Replies"); },
     outlook: function() { return createService("Outlook", "https://res-h3.public.cdn.office.net/owamail/20230414002.05/resources/images/favicons/mail-unseen.ico", true, "Inbox"); },
-    tinder: function() { return createService("Tinder", "https://tinder.com/favicon-32x32.png", true, "Messages"); }
-  };
+    tinder: function() { return createService("Tinder", "https://tinder.com/favicon-32x32.png", true, "Messages"); },
+    steamps2: function() { return createService("Steam", "https://store.steampowered.com/favicon.ico", false, "PlanetSide 2 on Steam"); },
+    steamrgg0: function() { return createService("Steam", "https://store.steampowered.com/favicon.ico", false, "Yakuza 0 on Steam"); }
+    };
 
   // Create a service object with title, favicon, and custom text, and an optional dynamic count
   function createService(title, favicon, isDynamic = false, customText = "Inbox") {
