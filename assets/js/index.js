@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { type: 'small-tile', color: 'sapphire', text: 'Customer Support', link: 'https://support.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'coral', text: 'Speedtest', link: 'https://speed.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'black', text: 'Teleprompter', link: 'https://teleprompter.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'navy', text: 'Color', link: 'https://color.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'navy', text: 'Netplan Editor', link: 'https://netplan.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         // Add more tiles as needed
     ];
 
