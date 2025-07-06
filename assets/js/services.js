@@ -2,19 +2,24 @@
   const services = {
     instagram: () => createService("Messages", "https://static.cdninstagram.com/rsrc.php/v4/yI/r/VsNE-OHk_8a.png", true),
     gmail: () => createService("Inbox", "https://workspace.google.com/lp/static/images/logo-gmail.png", true),
-    ubuntu: () => createService("Ubuntu", "https://assets.ubuntu.com/v1/be7e4cc6-COF-favicon-32x32.png"),
-    popos: () => createService("Pop_OS!", "https://cdn11.bigcommerce.com/s-pywjnxrcr2/product_images/system76_logo-fav-32x32.png"),
-    debian: () => createService("Debian", "https://www.debian.org/favicon.ico"),
-    arch: () => createService("Arch Linux", "https://archlinux.org/static/favicon.png"),
-    fedora: () => createService("Fedora", "https://fedoraproject.org/favicon.ico"),
-    opensuse: () => createService("openSUSE", "https://www.opensuse.org/build/images/favicon.png"),
-    redhat: () => createService("Red Hat", "https://www.redhat.com/favicon.ico"),
-    gentoo: () => createService("Gentoo", "https://www.gentoo.org/favicon.ico"),
-    guix: () => createService("Guix", "https://guix.gnu.org/themes/initial/img/icon.png"),
+    ubuntu: () => createService("How to remove Ubuntu", "https://assets.ubuntu.com/v1/be7e4cc6-COF-favicon-32x32.png"),
+    debian: () => createService("Debian for life", "https://www.debian.org/favicon.ico"),
+    arch: () => createService("I use Arch btw", "https://archlinux.org/static/favicon.png"),
+    fedora: () => createService("I use Fedora", "https://fedoraproject.org/favicon.ico"),
+    opensuse: () => createService("openSUSE: Leap into fun!", "https://www.opensuse.org/build/images/favicon.png"),
+    redhat: () => createService("Le Red Hat", "https://www.redhat.com/favicon.ico"),
+    gentoo: () => createService("Install Gentoo", "https://www.gentoo.org/favicon.ico"),
+    guix: () => createService("Guix for reproducibility", "https://guix.gnu.org/themes/initial/img/icon.png"),
     kernel: () => createService("Linux Kernel", "https://www.kernel.org/theme/images/logos/favicon.png"),
     fourchan: () => createService("4chan - Replies", "https://s.4cdn.org/image/favicon.ico", true),
     outlook: () => createService("Inbox", "https://res-h3.public.cdn.office.net/owamail/20230414002.05/resources/images/favicons/mail-unseen.ico", true),
-    steamps2: () => createService("PlanetSide 2", "https://store.steampowered.com/favicon.ico")
+    steamps2: () => createService("PlanetSide 2 on Steam", "https://store.steampowered.com/favicon.ico"),
+    vanusovereignity: () => createService("Join the Vanu Sovereignty", "https://static.wikia.nocookie.net/planetside2/images/9/90/Icon_VS.png"),
+    newconglomerate: () => createService("Join the New Conglomerate", "https://static.wikia.nocookie.net/planetside2/images/1/1b/Icon_NC.png"),
+    terranrepublic: () => createService("Join the Terran Republic", "https://static.wikia.nocookie.net/planetside2/images/4/4a/Icon_TR.png"),
+    nso: () => createService("Nanite Systems Operatives", "https://static.wikia.nocookie.net/planetside2/images/4/47/Icon_NSO.png"),
+    rgg0: () => createService("Ryu Ga Gotoku 0", "https://miguelcarino.github.io/AssetsAndData/NonFree/ICO/0.ico"),
+    rgg7: () => createService("Ryu Ga Gotoku 7", "https://miguelcarino.github.io/AssetsAndData/NonFree/ICO/7.ico")
   };
 
   function createService(baseTitle, favicon, isDynamic = false) {
