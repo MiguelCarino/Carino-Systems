@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { type: 'small-tile', color: 'black', text: 'Teleprompter', link: 'https://teleprompter.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'navy', text: 'Netplan Editor', link: 'https://netplan.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'navy', text: 'Metadata Viewer', link: 'https://metadata.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'coral', text: 'URL Shortener', link: 'https://url.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
         // Add more tiles as needed
     ];
 
