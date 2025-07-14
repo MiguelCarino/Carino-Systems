@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { type: 'small-tile', color: 'navy', text: 'Netplan Editor', link: 'https://netplan.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'navy', text: 'Metadata Viewer', link: 'https://metadata.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         { type: 'small-tile', color: 'coral', text: 'URL Shortener', link: 'https://url.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'small-tile', color: 'plum', text: 'Countdown', link: 'https://countdown.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'sapphire', text: 'Password Generator', link: 'https://password.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         // Add more tiles as needed
     ];
 
