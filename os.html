@@ -1,51 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OS</title>
-    <link rel="stylesheet" href="https://miguelcarino.github.io/OSGrid/assets/css/os.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/fonts.css">
-    <link rel="icon" href="assets/images/logo.webp">
-    <script src="assets/js/main.js" defer></script>
-    <script src="https://miguelcarino.github.io/OSGrid/assets/js/os.js"></script>
-    <!-- Open Graph Protocol Meta Tags -->
-    <meta property="og:title" content="Carino Systems"/>
-    <meta property="twitter:title" content="Carino Systems"/>
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://carino.systems"/>
-    <meta property="og:image" content="images/ogp.webp"/>
-    <meta property="og:description" content="Friendly IT solutions, openly available"/>
-    <meta property="og:site_name" content="Carino Systems"/>
-    <meta property="og:locale" content="en_US"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="https://carino.systems/assets/images/logo.webp">
+  <title>Operating Systems</title>
+  <style>
+    body, h1, h2, p, ul, li, a, button {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: var(--bg, #f0f0f0);
+      color: var(--text, #121212);
+    }
+    .dark-mode {
+      --bg: #f4f4f4;
+      --text: #000;
+    }
+    .left-navbar {
+      width: 180px;
+      background-color: #00274d;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .dark-mode .left-navbar {
+      background-color: #1a1a1a;
+    }
+    .nav-container {
+      margin-top: 20px;
+    }
+    .nav-group {
+      margin-bottom: 10px;
+      border-radius: 8px;
+      padding: 5px;
+    }
+    .nav-item, .sub-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .nav-item img, .sub-item img {
+      width: 20px;
+      height: 20px;
+    }
+    .nav-item:hover, .sub-item:hover,
+    .nav-item.active, .sub-item.active {
+      background-color: var(--highlight, #005bb5);
+    }
+    .sub-item.active {
+      font-weight: bold;
+      color: white;
+    }
+    .sub-item {
+      padding-left: 35px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+    .sub-list {
+      display: none;
+      flex-direction: column;
+      transition: all 0.3s ease-in-out;
+    }
+    .nav-item.open + .sub-list {
+      display: flex;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+    }
+    .top-navbar {
+      background-color: #005bb5;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #page-title {
+      font-size: 1.5rem;
+    }
+    #dark-toggle {
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+    }
+    #page-content {
+      padding: 20px;
+    }
+    .hero {
+      background: linear-gradient(to bottom, #0a85d8, #00274d);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .btn.primary {
+      background-color: #005bb5;
+      color: white;
+    }
+    .btn.primary:hover {
+      background-color: #003f8f;
+    }
+    .btn.secondary {
+      background-color: white;
+      color: #0a85d8;
+      border: 1px solid #0a85d8;
+    }
+    .btn.secondary:hover {
+      background-color: #f0f8ff;
+    }
+    .features {
+      background-color: #f9f9f9;
+      padding: 30px 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .features .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    .features .feature {
+      flex: 1 1 30%;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav id="navbar"></nav>
-    <div class="container">
-    <div class="tiles"></div> <!-- Tiles will be dynamically loaded here -->
-    <div class="content-div">
-        <h1>Hover over an option</h1>
-        <p>This content will update on hover.</p>
-    </div>
-    <div class="row"></div>
-</div>
-<!-- Footer -->
-<footer id="footer"></footer>
-</body>
+  <aside class="left-navbar">
+    <div class="nav-container" id="nav-container"></div>
+  </aside>
+  <main class="main-content">
+    <header class="top-navbar">
+      <h1 id="page-title">Operating Systems</h1>
+      <!--<button id="dark-toggle">🌙</button>-->
+    </header>
+    <section id="page-content"></section>
+  </main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    const navContent = (currentTitle) => `
-<div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
-<h2 style="color: #ffffff; padding-right: 12vh;">${currentTitle.split(' ')[0]}</h2>
-<ul>
-    <li><a href="https://github.com/MiguelCarino/OSGrid" target="_blank" class="icon-link">
-        <i class="fab fa-github"></i> <span class="label"></span>
-    </a></li>
-    <li><a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-link">
-        <i class="fab fa-linkedin"></i> <span class="label"></span>
-    </a></li>
-</ul>
-`;
+  let config = {};
+
+  fetch('config.json')
+    .then(res => res.json())
+    .then(data => {
+      config = data;
+      renderNav();
+      loadFromHash();
+    });
+
+  function renderNav() {
+    const navContainer = document.getElementById("nav-container");
+    navContainer.innerHTML = config.nav.map(item => {
+      const subList = (item.sub || []).map(sub => `
+        <div class="sub-item" data-id="${item.id}" data-subid="${sub.id}" style="display:none">
+          ${sub.icon ? `<img src="${sub.icon}" />` : ''}<span>${sub.name}</span>
+        </div>`).join('');
+      return `
+        <div class="nav-group">
+          <div class="nav-item" data-id="${item.id}">
+            <img src="${item.icon}" alt="${item.name}" />
+            <span>${item.name}</span>
+          </div>
+          ${subList}
+        </div>`;
+    }).join('');
+
+    document.querySelectorAll(".nav-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const id = item.dataset.id;
+        updateActive(id, null);
+        window.location.hash = `#${id}`;
+      });
+    });
+
+    document.querySelectorAll(".sub-item").forEach(sub => {
+      sub.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = sub.dataset.id;
+        const subid = sub.dataset.subid;
+        updateActive(id, subid);
+        window.location.hash = `#${id}#${subid}`;
+      });
+    });
+  }
+
+  function updateActive(id, subid = null) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.sub-item').forEach(s => {
+      s.classList.remove('active');
+      s.style.display = 'none';
+    });
+
+    const navItem = document.querySelector(`.nav-item[data-id="${id}"]`);
+    if (navItem) navItem.classList.add('active');
+
+    document.querySelectorAll(`.sub-item[data-id="${id}"]`).forEach(s => {
+      s.style.display = 'flex';
+    });
+
+    if (subid) {
+      const sub = document.querySelector(`.sub-item[data-subid="${subid}"]`);
+      if (sub) sub.classList.add('active');
+    }
+
+    loadPageFromIds(id, subid);
+  }
+
+  function loadPageFromIds(id, subid) {
+    const item = config.nav.find(n => n.id === id);
+    let page = item?.page;
+    let md = item?.md;
+
+    if (subid && item?.sub) {
+      const sub = item.sub.find(s => s.id === subid);
+      page = sub?.page;
+      md = sub?.md;
+    }
+
+    if (md) {
+      renderMarkdown(md);
+    } else if (page) {
+      renderPage(page);
+    }
+  }
+
+    function renderPage(page) {
+    const title = page.title || "";
+
+    const hero = `
+      <section class="hero">
+        <div class="hero-content">
+          <h1>${page.hero.heading}</h1>
+          <p>${page.hero.subheading}</p>
+          <div class="cta-buttons">
+            ${(page.hero.buttons || []).map(btn => 
+              `<a href="${btn.url}" class="btn ${btn.style}">${btn.text}</a>`).join('')}
+          </div>
+        </div>
+      </section>`;
+
+    const features = `
+      <section class="features">
+        <div class="container">
+          ${(page.features || []).map(f => `
+            <div class="feature">
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+              ${(f.buttons || []).map(btn => 
+                `<a href="${btn.url}" class="btn ${btn.style}" style="margin-top: 10px; display: inline-block;">${btn.text}</a>`).join('')}
+            </div>`).join('')}
+        </div>
+      </section>`;
+
+    document.getElementById("page-title").textContent = title;
+    document.getElementById("page-content").innerHTML = hero + features;
+    scrollTo(0, 0);
+  }
+
+
+  function renderMarkdown(mdPath) {
+    fetch(mdPath)
+      .then(res => res.text())
+      .then(text => {
+        const html = marked.parse(text);
+        document.getElementById("page-title").textContent = "Markdown Page";
+        document.getElementById("page-content").innerHTML = `
+          <section class="markdown">
+            <div class="container">${html}</div>
+          </section>`;
+        scrollTo(0, 0);
+      })
+      .catch(() => {
+        document.getElementById("page-content").innerHTML = `<p>⚠️ Failed to load markdown file.</p>`;
+      });
+  }
+
+  function loadFromHash() {
+    const parts = location.hash.slice(1).split("#");
+    const id = parts[0] || config.nav[0].id;
+    const subid = parts[1] || null;
+    updateActive(id, subid);
+  }
+
+  window.addEventListener("hashchange", loadFromHash);
+  //document.getElementById("dark-toggle").onclick = () => {
+  //  document.body.classList.toggle("dark-mode");
+  //}
 </script>
+
+</body>
 </html>
