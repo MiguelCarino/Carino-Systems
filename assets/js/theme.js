@@ -63,34 +63,33 @@ export async function initTheme({
   }
 
   function propagateThemeToLinks(theme) {
-      const links = document.querySelectorAll('a[href]');
-      console.log(`[Theme] Propagating ?theme=${theme} to internal links...`);
-
-      links.forEach(link => {
-        try {
-          const url = new URL(link.href, location.origin);
-
-          // Skip if not same-origin
-          if (url.origin !== location.origin) {
-            console.log(`→ External link skipped: ${link.href}`);
-            return;
-          }
-
-          if (theme === defaultTheme) {
-            url.searchParams.delete('theme');
-          } else {
-            url.searchParams.set('theme', theme);
-          }
-
-          link.href = url.pathname + url.search;
-          console.log(`→ Updated internal link: ${link.href}`);
-
-        } catch (e) {
-          console.warn('Skipping malformed link:', link.href);
+    const allowedRootDomain = 'carino.systems'; // customize this
+    const links = document.querySelectorAll('a[href]');
+    console.log(`[Theme] Propagating ?theme=${theme} to internal/subdomain links...`);
+    
+    links.forEach(link => {
+      try {
+        const url = new URL(link.href, location.origin);
+      
+        // Check if it's the same root domain or subdomain
+        if (!url.hostname.endsWith(`.${allowedRootDomain}`) && url.hostname !== allowedRootDomain) {
+          console.log(`→ External link skipped: ${link.href}`);
+          return;
         }
-      });
-    }
-
+      
+        if (theme === defaultTheme) {
+          url.searchParams.delete('theme');
+        } else {
+          url.searchParams.set('theme', theme);
+        }
+      
+        link.href = url.origin + url.pathname + url.search;
+        console.log(`→ Updated internal/subdomain link: ${link.href}`);
+      } catch (e) {
+        console.warn('Skipping malformed link:', link.href);
+      }
+    });
+  }
 
   async function detectThemes(folder) {
     // Only works in development or with a server-side endpoint
