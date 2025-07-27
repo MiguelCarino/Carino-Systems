@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Inject custom styles
       const style = document.createElement('style');
-      style.textContent = `
+      /*style.textContent = `
         .icon-link {
             text-decoration: none;
             color: #333;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .icon-link i {
             font-size: 20px;
         }
-      `;
+      `;*//*Declared in the theme*/
       document.head.appendChild(style);
 
       // Current page title

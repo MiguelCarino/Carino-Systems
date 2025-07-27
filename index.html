@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carino Systems™</title>
+    <link rel="stylesheet" href="assets/css/core.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link id="theme-style" rel="stylesheet" />    
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/index.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
     <script src="assets/js/services.js"></script>
     <!-- <script src="assets/js/main.js" defer></script> -->
     <!-- Open Graph Protocol Meta Tags -->
@@ -21,14 +22,16 @@
     <meta property="og:site_name" content="Carino Systems"/>
     <meta property="og:locale" content="en_US"/>
 </head>
-<body>  
-        <div class="left-column">
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar"></nav>
+    <div class="left-column">
            <!--<div><button id="contrastToggle" class="contrast-toggle" aria-label="Toggle Contrast">
                 <i class="fas fa-adjust"></i>
             </div>-->
-            <a href="index.html"><h1>Miguel Cariño</h1></a>
-            <h2>Openly available solutions</h2>
-            <div class="icon-row">
+            <!--<a href="index.html"><h1>Miguel Cariño</h1></a>-->
+            <h1 class="left-column">Openly available solutions</h1>
+            <!--<div class="icon-row">
                 <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-link">
                     <i class="fab fa-linkedin"></i>
                 </a>
@@ -41,13 +44,47 @@
                 <a href="https://server.carino.systems/" target="_blank" class="icon-link">
                     <i class="fas fa-server"></i>
                 </a>
-            </div>
-            
-            <p id="random-phrase"></p>
+            </div>-->
+            <p id="random-phrase" class="random-phrase"></p>
         </div>
         <div class="right-column">
             <div class="tiles"></div>
         </div>
     </div>
+    <script type="module">
+      import { initTheme } from './assets/js/theme.js';
+  // First build the navbar
+  const navContent = (currentTitle) => `
+    <div class="logo">
+      <a href="index.html"><b style="color: #ffffff">Carino</b>
+      <b class="nav-logo-name">Systems™</b></a>
+    </div>
+    <!--<h2>${currentTitle}</h2>-->
+    <ul class="icon-list">
+      <li>
+        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-button" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-button" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <button id="toggle-theme" class="icon-button" title="Toggle Theme">
+          <i class="fas fa-brush"></i>
+        </button>
+      </li>
+    </ul>
+
+  `;
+
+  document.getElementById('navbar').innerHTML = navContent(document.title);
+
+  // Then initialize theme
+initTheme({
+  defaultTheme: 'carino',
+  themes: ['carino', 'retro', 'moe'],
+  toggleButtonId: 'toggle-theme'
+});
+</script>
+
 </body>
 </html>
