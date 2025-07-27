@@ -1,18 +1,17 @@
-// theme.js
 export async function initTheme({
   defaultTheme = 'carino',
   themes = [],
-  themeFolder = 'assets/',
   dropdownId = 'theme-select',
-  toggleButtonId = 'toggle-theme',
-  linkId = 'theme-style'
+  toggleButtonId = 'toggle-theme'
 } = {}) {
-  const styleLink = document.getElementById(linkId);
   const themeSelect = document.getElementById(dropdownId);
   const toggleBtn = document.getElementById(toggleButtonId);
-
-  const themeList = themes.length ? themes : await detectThemes(themeFolder);
-  const currentTheme = getThemeFromUrl() || localStorage.getItem('theme') || defaultTheme;
+  const themeList = [...new Set(themes.length ? themes : await detectThemes())];
+  const currentTheme =
+    getThemeFromUrl() ||
+    getThemeFromCookie() ||
+    localStorage.getItem('theme') ||
+    defaultTheme;
 
   setTheme(currentTheme, false);
 
@@ -35,18 +34,12 @@ export async function initTheme({
     });
   }
 
-  function getThemeFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('theme')) return urlParams.get('theme');
-    if (window.location.hash.startsWith('#')) return window.location.hash.slice(1);
-    return null;
-  }
-
   function setTheme(theme, updateUrl = true) {
     if (!themeList.includes(theme)) theme = defaultTheme;
 
-    styleLink.href = `${themeFolder}${theme}.css`;
+    document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    setCrossDomainThemeCookie(theme);
 
     if (updateUrl) {
       const url = new URL(window.location.href);
@@ -62,27 +55,53 @@ export async function initTheme({
     if (themeSelect) themeSelect.value = theme;
   }
 
+  function getThemeFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('theme')) return urlParams.get('theme');
+    if (window.location.hash.startsWith('#')) return window.location.hash.slice(1);
+    return null;
+  }
+
+  function setCrossDomainThemeCookie(theme) {
+    const baseDomain = getBaseDomain(location.hostname);
+    document.cookie = `theme=${theme};path=/;domain=.${baseDomain};max-age=31536000`;
+  }
+
+  function getThemeFromCookie() {
+    const match = document.cookie.match(/(?:^|;\s*)theme=([^;]*)/);
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function getBaseDomain(hostname) {
+    const parts = hostname.split('.');
+    if (parts.length <= 2) return hostname;
+    const tlds = ['co.uk', 'com.mx', 'org.mx'];
+    const lastTwo = parts.slice(-2).join('.');
+    const lastThree = parts.slice(-3).join('.');
+    return tlds.includes(lastTwo) ? lastThree : lastTwo;
+  }
+
   function propagateThemeToLinks(theme) {
-    const allowedRootDomain = 'carino.systems'; // customize this
-    const links = document.querySelectorAll('a[href]');
-    console.log(`[Theme] Propagating ?theme=${theme} to internal/subdomain links...`);
-    
-    links.forEach(link => {
+    const devFallbackDomain = 'carino.systems';
+    const allowedRootDomain =
+      location.hostname === '127.0.0.1' || location.hostname === 'localhost'
+        ? devFallbackDomain
+        : getBaseDomain(location.hostname);
+
+    document.querySelectorAll('a[href]').forEach(link => {
       try {
         const url = new URL(link.href, location.origin);
-      
-        // Check if it's the same root domain or subdomain
         if (!url.hostname.endsWith(`.${allowedRootDomain}`) && url.hostname !== allowedRootDomain) {
           console.log(`→ External link skipped: ${link.href}`);
           return;
         }
-      
+
         if (theme === defaultTheme) {
           url.searchParams.delete('theme');
         } else {
           url.searchParams.set('theme', theme);
         }
-      
+
         link.href = url.origin + url.pathname + url.search;
         console.log(`→ Updated internal/subdomain link: ${link.href}`);
       } catch (e) {
@@ -91,9 +110,8 @@ export async function initTheme({
     });
   }
 
-  async function detectThemes(folder) {
-    // Only works in development or with a server-side endpoint
-    console.warn('Automatic theme detection requires server support.');
-    return [defaultTheme, 'carino', 'moe']; // fallback
+  async function detectThemes() {
+    console.warn('Theme detection is static fallback.');
+    return [defaultTheme, 'carino', 'retro', 'moe'];
   }
 }

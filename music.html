@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://music.carino.systems/assets/css/grid.css">
+    <link rel="stylesheet" href="assets/css/core.css">
     <link rel="icon" href="assets/images/logo.webp">
     <script src="assets/js/main.js" defer></script>
     <script src="https://music.carino.systems/assets/js/grid.js" defer></script>
@@ -36,22 +35,50 @@
     </div>
     <!-- Footer -->
     <footer id="footer"></footer>
+    <script type="module">
+      import { initTheme } from './assets/js/theme.js';
 
-    <script>
-    // Navigation content with icons
-    const navContent = (currentTitle) => `
-        <div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
-        <h2 style="color: #ffffff; padding-right: 12vh;">${currentTitle.split(' ')[0]}</h2>
-        <ul>
-            <li><a href="https://github.com/MiguelCarino" target="_blank" class="icon-link">
-                <i class="fab fa-github"></i> <span class="label"></span>
-            </a></li>
-            <li><a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-link">
-                <i class="fab fa-linkedin"></i> <span class="label"></span>
-            </a></li>
-        </ul>
-    `;
-    document.getElementById('navbar').innerHTML = navContent;
+      initTheme({
+        defaultTheme: 'carino',
+        /*themes: ['blue', 'black', 'pink'], // Optional if you use auto-detect later*/
+        themeFolder: './assets/themes'
+      });
+    </script>
+    <script type="module">
+  import { initTheme } from './assets/js/theme.js';
+
+  // First build the navbar
+  const navContent = (currentTitle) => `
+    <div class="logo">
+      <a href="index.html"><b style="color: #ffffff">Carino</b>
+      <b class="nav-logo-name"">Systems™</b></a>
+    </div>
+    <h2>${currentTitle}</h2>
+    <ul class="icon-list">
+      <li>
+        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-button" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-button" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <button id="toggle-theme" class="icon-button" title="Toggle Theme">
+          <i class="fas fa-brush"></i>
+        </button>
+      </li>
+    </ul>
+
+  `;
+  document.getElementById('navbar').innerHTML = navContent(document.title);
+
+  // Then initialize theme
+  initTheme({
+  defaultTheme: 'carino',
+  themeFolder: './assets/themes/',
+  themes: ['carino', 'retro', 'moe'],
+  toggleButtonId: 'toggle-theme',
+  linkId: 'theme-style'
+});
     </script>
 </body>
 </html>

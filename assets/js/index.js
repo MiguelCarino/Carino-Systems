@@ -28,21 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const tilesData = [
-        { type: 'small-tile', color: 'ultramarine', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'emerald', text: 'Software', link: 'software.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
-        { type: 'small-tile', color: 'crimson', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDMud2VibTYxMzQw.webm' },
+        { type: 'small-tile', color: 'alpha', text: 'Operating Systems', link: 'os.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'beta', text: 'Software', link: 'software.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'small-tile', color: 'gamma', text: 'Hardware', link: 'hardware.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDMud2VibTYxMzQw.webm' },
         //{ type: 'small-tile', color: 'scarlet', text: 'Topics', link: 'topics.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
-        { type: 'small-tile', color: 'indigo', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDQud2VibTYxNzY0.webm' },
-        { type: 'small-tile', color: 'coral', text: 'Music', link: 'music.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
-        { type: 'small-tile', color: 'plum', text: 'Graphy', link: 'graphy.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'sapphire', text: 'Customer Support', link: 'https://support.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'coral', text: 'Speedtest', link: 'https://speed.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'black', text: 'Teleprompter', link: 'https://teleprompter.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'navy', text: 'Netplan Editor', link: 'https://netplan.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'navy', text: 'Metadata Viewer', link: 'https://metadata.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'coral', text: 'URL Shortener', link: 'https://url.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
-        { type: 'small-tile', color: 'plum', text: 'Countdown', link: 'https://countdown.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
-        { type: 'small-tile', color: 'sapphire', text: 'Password Generator', link: 'https://password.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'delta', text: 'Streaming', link: 'streaming.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDQud2VibTYxNzY0.webm' },
+        { type: 'small-tile', color: 'epsilon', text: 'Music', link: 'music.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'small-tile', color: 'zeta', text: 'Graphy', link: 'graphy.html', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'eta', text: 'Customer Support', link: 'https://support.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'theta', text: 'Speedtest', link: 'https://speed.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'iota', text: 'Teleprompter', link: 'https://teleprompter.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'kappa', text: 'Netplan Editor', link: 'https://netplan.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'lambda', text: 'Metadata Viewer', link: 'https://metadata.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'mu', text: 'URL Shortener', link: 'https://url.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDUud2VibTI2NjUz.webm' },
+        { type: 'small-tile', color: 'nu', text: 'Countdown', link: 'https://countdown.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
+        { type: 'small-tile', color: 'xi', text: 'Password Generator', link: 'https://password.carino.systems', bgVideo: 'https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/As/MDEud2VibTQwODE1.webm' },
         // Add more tiles as needed
     ];
 
@@ -53,18 +53,18 @@ document.addEventListener("DOMContentLoaded", function () {
         tileElement.href = tile.link;
         tileElement.className = `tile ${tile.type} ${tile.color}`;
         tileElement.textContent = tile.text;
-        tileElement.style.animationDelay = `${index * 0.1}s`; // Delay each tile's animation
+        /*tileElement.style.animationDelay = `${index * 0.1}s`; // Delay each tile's animation*/
 
         // Create a video element for the background
-        const videoElement = document.createElement('video');
+        /*const videoElement = document.createElement('video');
         videoElement.src = tile.bgVideo;
         videoElement.autoplay = true;
         videoElement.loop = true;
         videoElement.muted = true; // Mute to allow autoplay in most browsers
-        videoElement.className = 'tile-bg-video';
+        videoElement.className = 'tile-bg-video';*/
 
         // Append the video element to the tile
-        tileElement.appendChild(videoElement);
+        /*tileElement.appendChild(videoElement);*/
 
         // Append the tile to the container
         tilesContainer.appendChild(tileElement);

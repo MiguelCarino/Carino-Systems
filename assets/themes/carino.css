@@ -1,0 +1,666 @@
+/*======================
+  Custom Fonts
+=======================*/
+
+/*======================
+  Global Reset
+=======================*/
+* {
+    font-family: 'LiberationSans';
+}
+
+/*======================
+  Body & Layout
+=======================*/
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.4;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+/*======================
+  Containers & Layout
+=======================*/
+.container {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.left-column {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.right-column {
+    width: 95%;
+    padding-left: 5%;
+}
+
+.left-column h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/*======================
+  Navigation Bar
+=======================*/
+nav {
+    background: #0b50aa;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-logo-name {
+  color: #111;
+}
+
+.nav-title {
+  color: #ffffff;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: normal;
+}
+nav .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.toggle-theme-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  font-family: 'Segoe UI', 'Noto Sans', sans-serif;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.toggle-theme-button i {
+  font-size: 1.2em;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Gradient shimmer overlay */
+.toggle-theme-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+.toggle-theme-button:hover::before {
+  left: 100%;
+}
+
+.toggle-theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.toggle-theme-button:hover i {
+  transform: rotate(-8deg) scale(1.1);
+  color: #98b7ff;
+}
+
+.toggle-theme-button:active {
+  transform: scale(0.97);
+}
+/*======================
+  Index
+=======================*/
+.h2-title {
+  color: #ffffff;
+}
+.random-phrase {
+  color: #ffffff;
+}
+/*======================
+  Sidebar
+=======================*/
+.sidebar {
+    background-color: #0078d4;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+.sidebar button {
+    width: 100%;
+    background-color: #005a9e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    text-align: left;
+}
+.sidebar button:hover,
+.sidebar button.active {
+    background-color: #004578;
+}
+
+/*======================
+  Main Content
+=======================*/
+main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #000;
+    overflow-y: auto;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    width: 90%;
+}
+
+.highlight {
+    flex: 1 1 calc(33.333% - 40px);
+    height: 30vh;
+    background: url('https://picsum.photos/200/300') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.highlight:hover {
+    transform: scale(1.02);
+}
+
+/*======================
+  Tiles
+=======================*/
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tile {
+    font-weight: bold;
+    font-size: 22px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10vh);
+    animation: slideIn 2s forwards;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.tile-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.tile:hover .tile-bg-video {
+    opacity: 1;
+    filter: brightness(0.7);
+}
+
+.tile:hover {
+    background-color: rgb(231, 231, 231);
+}
+
+/* Tile sizes */
+.tile.small-tile { flex: 1 1 20%; }
+.tile.medium-tile { flex: 1 1 30%; }
+.tile.big-tile { flex: 1 1 40%; }
+/*======================
+  Music Site
+=======================*/
+#musicgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-auto-rows: 130px;
+    overflow: auto;
+    height: calc(100vh - 0vh); /* Adjust height considering the video bar */
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.cell {
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.cell:hover {
+    transform: scale(1.1);
+}
+
+/* Video Info Bar */
+/* Base styling for the Video Info Bar */
+#videoInfoBar {
+    position: fixed;
+    bottom: 20px; /* Start at the bottom of the screen for both devices */
+    right: 20px; /* Position slightly from the edge */
+    max-width: 80vw; /* For mobile, make sure it’s not too wide */
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+
+/* When the video info bar is active (visible) */
+#videoInfoBar.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Content inside the info bar */
+#videoInfoBar .content {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Album image inside the video info bar */
+#videoInfoBar #albumImage img {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Text content: Title and description */
+#videoInfoBar .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#videoInfoBar .description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+/* Controls section */
+#videoInfoBar .controls {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+/* Individual control buttons */
+#videoInfoBar .controls button {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Hover effect for buttons */
+#videoInfoBar .controls button:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.column {
+    padding: 10px;
+    flex-grow: 1;
+    text-align: center;
+    width: 100;
+}
+
+#albumImage img {
+    height: 28vh;
+    max-width: 28vh;
+    padding: 0;
+}
+
+#videoPlayer iframe {
+    width: 100;
+    height: 100;
+}
+
+/*======================
+  Color Classes
+=======================*/
+.black { background-color: #2d2d2d; }
+.ultramarine { background-color: #3F00FF; }
+.emerald { background-color: #50C878; }
+.scarlet { background-color: #FF2400; }
+.coral { background-color: #FF7F50; }
+.amber { background-color: #FFC107; }
+.teal { background-color: #008080; }
+.violet { background-color: #8A2BE2; }
+.crimson { background-color: #DC143C; }
+.indigo { background-color: #4B0082; }
+.lime { background-color: #00FF00; }
+.ruby { background-color: #E0115F; }
+.turquoise { background-color: #40E0D0; }
+.sapphire { background-color: #0F52BA; }
+.peach { background-color: #FFDAB9; }
+.mint { background-color: #98FF98; }
+.burgundy { background-color: #800020; }
+.gold { background-color: #FFD700; }
+.silver { background-color: #C0C0C0; }
+.plum { background-color: #8E4585; }
+.cyan { background-color: #00FFFF; }
+.magenta { background-color: #FF00FF; }
+.charcoal { background-color: #36454F; }
+.navy { background-color: #000080; }
+.fuchsia { background-color: #FF00FF; }
+
+/*======================
+  Responsive Design
+=======================*/
+@media (max-width: 1366px) {
+    .tile.small-tile { flex: 1 1 30%; }
+    .tile.medium-tile { flex: 1 1 45%; }
+    .tile.big-tile { flex: 1 1 90%; }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .tile {
+        width: 100%;
+        height: 200px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .left-column, .right-column {
+        width: 100%;
+    }
+
+    .tiles {
+        justify-content: center;
+    }
+}
+/*======================
+  Searchbar
+=======================*/
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    color: #000000;
+    font-weight: bold;
+    font-family: RedHatFont;
+}
+/*======================
+  Utility + Effects
+=======================*/
+a:link, a:hover, a:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.icon-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+}
+.icon-link {
+    color: #fff;
+    font-size: 29px;
+    transition: color 0.3s;
+}
+.icon-link:hover {
+    color: #0073b1;
+}
+
+.icon-list {
+  display: flex;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  padding: 0.6em;
+  width: 2.75em;
+  height: 2.75em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-button i {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.18) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.25) 75%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  transition: left 0.6s ease;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.icon-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at top left,
+    rgba(255, 255, 255, 0.35),
+    transparent 70%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.icon-button:hover::before {
+  left: 100%;
+}
+
+.icon-button:hover {
+  color: #000080;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.15);
+}
+
+.icon-button:hover i {
+  transform: scale(1.2) rotate(-8deg);
+}
+
+.icon-button:active {
+  transform: scale(0.94);
+}
+
+
+.notification {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    z-index: 1000;
+    border-radius: 5px;
+    display: none;
+}
+
+footer {
+    background: #0b50aa;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/*======================
+  Animations
+=======================*/
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes twinkle {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.toggle-theme-button::after {
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.4) 10%, transparent 11%) 10% 10% / 8% 8%,
+    radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 11%) 70% 30% / 6% 6%,
+    radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 11%) 50% 70% / 5% 5%;
+  background-repeat: no-repeat;
+  animation: twinkle 2s infinite ease-in-out;
+}
+/*======================
+  Animations Music Site
+=======================*/
+@media (max-width: 768px) {
+    #musicgrid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Smaller grid items for mobile */
+    }
+}
+
+/* Disable hover effect on mobile */
+@media (max-width: 768px) {
+    .cell:hover {
+        transform: none; /* Remove hover scale effect on touch devices */
+    }
+}
+
+@media (max-width: 768px) {
+    #videoInfoBar {
+        width: 80vw; /* Make it take most of the screen width on mobile */
+        bottom: 10px; /* Keep it near the bottom */
+        right: 10px; /* Position from the right */
+        max-width: 100%; /* Full-width on very small devices */
+    }
+}
