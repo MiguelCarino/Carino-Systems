@@ -628,7 +628,7 @@
 {
   "id": "rhel",
   "name": "Red Hat Enterprise Linux",
-  "icon": "https://www.redhat.com/profiles/rh/themes/custom/rhdc/favicon.ico",
+  "icon": "https://github.com/MiguelCarino/AssetsAndData/raw/refs/heads/main/NonFree/ICO/redhat.ico",
   "page": {
     "title": "RHEL",
     "hero": {
