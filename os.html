@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="assets/css/core.css">
   <script src="assets/js/main.js" defer></script>
   <title>Operating Systems</title>
-  <style>
-  </style>
+</head>
   <!--<style>
     body, h1, h2, p, ul, li, a, button {
       margin: 0;
@@ -170,20 +169,22 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
   </style>-->
-</head>
-<body>
+<body class="os">
   <!-- Navigation Bar -->
   <nav id="navbar"></nav>
-  <aside class="sidebar">
-    <div class="sidebar" id="sidebar"></div>
-  </aside>
-  <main class="main-content">
-    <header class="top-navbar">
-      <h1 id="page-title">Operating Systems</h1>
-      <!--<button id="dark-toggle">🌙</button>-->
-    </header>
-    <section id="page-content"></section>
-  </main><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <div id="layout">
+    <aside class="os-sidebar">
+      <div class="os-sidebar" id="os-sidebar"></div>
+    </aside>
+    <main class="main-content">
+      <header class="top-navbar">
+        <h1 id="page-title">Operating Systems</h1>
+        <!--<button id="dark-toggle">🌙</button>-->
+      </header>
+      <section id="page-content"></section>
+    </main>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
       <script type="module">
       import { initTheme } from './assets/js/theme.js';
@@ -230,7 +231,7 @@ initTheme({
     });
 
   function renderNav() {
-    const navContainer = document.getElementById("sidebar");
+    const navContainer = document.getElementById("os-sidebar");
     navContainer.innerHTML = config.nav.map(item => {
       const subList = (item.sub || []).map(sub => `
         <div class="sub-item" data-id="${item.id}" data-subid="${sub.id}" style="display:none">
@@ -322,7 +323,7 @@ initTheme({
 
     const features = `
       <section class="features">
-        <div class="sidebar">
+        <div class="os-sidebar-features">
           ${(page.features || []).map(f => `
             <div class="feature">
               <h2>${f.title}</h2>
@@ -347,7 +348,7 @@ initTheme({
         document.getElementById("page-title").textContent = "Markdown Page";
         document.getElementById("page-content").innerHTML = `
           <section class="markdown">
-            <div class="sidebar">${html}</div>
+            <div class="os-sidebar">${html}</div>
           </section>`;
         scrollTo(0, 0);
       })
