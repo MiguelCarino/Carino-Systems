@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hardware</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" href="assets/images/logo.webp">
+    <link rel="stylesheet" href="assets/css/core.css">
     <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/catalog.js" defer></script>
     <!-- Open Graph Protocol Meta Tags -->
     <meta property="og:title" content="Carino Systems"/>
     <meta property="twitter:title" content="Carino Systems"/>
@@ -143,9 +142,6 @@
     <!-- Navigation Bar -->
     <nav id="navbar"></nav>
     <!-- Header -->
-    <header>
-        <h2>Biased, based, and graced with shameless recommendations.</h2>
-    </header>
     <!-- Content and Warranty Section -->
     <div class="container">
         <div id="content">
@@ -177,7 +173,10 @@
     <!-- Footer -->
     <footer id="footer"></footer>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+      <script type="module">
+      import { initTheme } from './assets/js/theme.js';
         document.addEventListener('DOMContentLoaded', () => {
             
             const categories = {
@@ -494,17 +493,34 @@
             });
         });
     const navContent = (currentTitle) => `
-    <div class="logo"><a href="index.html"><b style="color: #ffffff">Carino</b> <b style="color: #000000">Systems™</b></a></div>
-    <h2 style="color: #ffffff; padding-right: 12vh;">${currentTitle.split(' ')[0]}</h2>
-    <ul>
-        <li><a href="https://github.com/MiguelCarino/MusicGrid" target="_blank" class="icon-link">
-            <i class="fab fa-github"></i> <span class="label"></span>
-        </a></li>
-        <li><a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-link">
-            <i class="fab fa-linkedin"></i> <span class="label"></span>
-        </a></li>
+    <div class="logo">
+      <a href="index.html"><b style="color: #ffffff">Carino</b>
+      <b class="nav-logo-name">Systems™</b></a>
+    </div>
+    <!--<h2>${currentTitle}</h2>-->
+    <ul class="icon-list">
+      <li>
+        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-button" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-button" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <button id="toggle-theme" class="icon-button" title="Toggle Theme">
+          <i class="fas fa-brush"></i>
+        </button>
+      </li>
     </ul>
-    `;
+
+  `;
+   document.getElementById('navbar').innerHTML = navContent(document.title);
+
+  // Then initialize theme
+initTheme({
+  defaultTheme: 'carino',
+  themes: ['carino', 'retro', 'moe'],
+  toggleButtonId: 'toggle-theme'
+});
     </script>
 </body>
 </html>

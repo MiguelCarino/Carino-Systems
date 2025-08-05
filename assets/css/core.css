@@ -378,11 +378,6 @@ nav ul li a:hover {
 .dark-mode .left-navbar {
   background-color: #1a1a1a;
 }
-.sidebar-group {
-  margin-bottom: 10px;
-  border-radius: 8px;
-  padding: 5px;
-}
 .nav-item img, .sub-item img {
   width: 1.4em; /*20px*/
   height: 1.4em;
@@ -520,7 +515,7 @@ nav ul li a:hover {
     background-color: var(--sidebar-bg);
     color: var(--nav-logo-name);
     align-items: center;
-    padding: 20px 0;
+    padding: 5px 0;
     height: 100vh;
     border-right-color: var(--sidebar-border-right);
     border-bottom-color: var(--sidebar-border-bottom);
@@ -541,11 +536,10 @@ nav ul li a:hover {
     overflow-y: auto;
 }
 .sidebar-group {
-      margin-bottom: 10px;
-      border-radius: 8px;
-      padding: 5px;
-    }
-
+  margin-bottom: 2px;
+  border-radius: 8px;
+  padding: 1px;
+}
 .sidebar h2 {
     margin-bottom: 20px;
 }

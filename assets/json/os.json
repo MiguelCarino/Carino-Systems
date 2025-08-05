@@ -307,7 +307,7 @@
     },
     {
       "id": "linux",
-      "name": "Linux",
+      "name": "GNU/Linux",
       "icon": "https://img.icons8.com/color/48/linux.png",
       "color": "#fdd835",
       "page": {
