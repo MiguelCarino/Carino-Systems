@@ -2,16 +2,16 @@
   "nav": [
     {
       "id": "windows",
-      "name": "Windows",
+      "name": "Microsoft Windows",
       "icon": "https://img.icons8.com/color/48/windows-10.png",
       "color": "#0078D7",
       "page": {
-        "title": "Windows OS",
+        "title": "Microsoft Windows",
         "hero": {
           "heading": "Microsoft Windows",
           "subheading": "Powering most of the world’s personal computers.",
           "buttons": [
-            { "text": "Visit Windows", "url": "#", "style": "primary" }
+            { "text": "Visit Microsoft Windows", "url": "https://www.microsoft.com/en-us/windows/", "style": "primary" }
           ]
         },
         "features": [
@@ -40,20 +40,17 @@
             "title": "Windows 11",
             "hero": {
               "heading": "Welcome to Windows 11",
-              "subheading": "Modern design, enhanced productivity, and gaming redefined.",
+              "subheading": "Modern design, enhanced productivity, and surveillance redefined.",
               "buttons": [
-                { "text": "Get Windows 11", "url": "#", "style": "primary" }
+                { "text": "Get Windows 11", "url": "https://www.microsoft.com/en-us/software-download/windows11", "style": "primary" }
               ]
             },
             "features": [
               { "title": "Redesigned UI", "description": "Centered Start menu and rounded corners." },
-              { "title": "Productivity Tools", "description": "Snap layouts, virtual desktops, and Teams integration." },
+              { "title": "Productivity Tools", "description": "Snap layouts, virtual desktops, and Teams integration. The same as everyone else." },
               {
                 "title": "Gaming Performance",
-                "description": "Auto HDR, DirectStorage, and Game Pass.",
-                "buttons": [
-                  { "text": "See Gaming Features", "url": "#", "style": "secondary" }
-                ]
+                "description": "Auto HDR, DirectStorage, and Game Pass."
               }
             ]
           }
@@ -61,14 +58,14 @@
         {
           "id": "windows-server-2025",
           "name": "Windows Server 2025",
-          "icon": "https://img.icons8.com/color/48/windows-server.png",
+          "icon": "https://img.icons8.com/color/48/windows-10.png",
           "page": {
             "title": "Windows Server 2025",
             "hero": {
               "heading": "Powering the Future of Infrastructure",
               "subheading": "Enterprise-grade performance, hybrid cloud readiness, and enhanced security.",
               "buttons": [
-                { "text": "Explore Server 2025", "url": "#", "style": "primary" }
+                { "text": "Get Windows Server 2025", "url": "https://www.microsoft.com/en-us/evalcenter/download-windows-server-2025", "style": "primary" }
               ]
             },
             "features": [
@@ -93,14 +90,14 @@
         {
   "id": "windows-server-2019",
   "name": "Windows Server 2019",
-  "icon": "https://img.icons8.com/color/48/windows-server.png",
+  "icon": "https://img.icons8.com/color/48/windows-10.png",
   "page": {
     "title": "Windows Server 2019",
     "hero": {
       "heading": "Secure and Hybrid-Ready",
       "subheading": "Built for modern datacenters and hybrid cloud environments.",
       "buttons": [
-        { "text": "Learn More", "url": "#", "style": "primary" }
+        { "text": "Get Windows Server 2019", "url": "https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019", "style": "primary" }
       ]
     },
     "features": [
@@ -125,14 +122,14 @@
 {
   "id": "windows-server-2022",
   "name": "Windows Server 2022",
-  "icon": "https://img.icons8.com/color/48/windows-server.png",
+  "icon": "https://img.icons8.com/color/48/windows-10.png",
   "page": {
     "title": "Windows Server 2022",
     "hero": {
       "heading": "Secure, Scalable, and Azure-Connected",
       "subheading": "Built for mission-critical workloads with enhanced networking and security.",
       "buttons": [
-        { "text": "Explore Server 2022", "url": "#", "style": "primary" }
+        { "text": "Get Windows Server 2022", "url": "https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022", "style": "primary" }
       ]
     },
     "features": [
@@ -153,38 +150,6 @@
       }
     ]
   }
-},
-{
-  "id": "windows-ltsc",
-  "name": "Windows LTSC",
-  "icon": "https://img.icons8.com/color/48/windows-10.png",
-  "page": {
-    "title": "Windows LTSC",
-    "hero": {
-      "heading": "Long-Term Stability, Minimal Disruption",
-      "subheading": "Perfect for devices that need stability and minimal change over time.",
-      "buttons": [
-        { "text": "View LTSC Options", "url": "#", "style": "primary" }
-      ]
-    },
-    "features": [
-      {
-        "title": "10-Year Support Cycle",
-        "description": "Five years mainstream support + five years extended support."
-      },
-      {
-        "title": "Minimal Updates",
-        "description": "No feature updates — just security and reliability patches."
-      },
-      {
-        "title": "Ideal for Critical Devices",
-        "description": "Designed for medical systems, industrial controllers, and kiosks.",
-        "buttons": [
-          { "text": "See Use Cases", "url": "#", "style": "secondary" }
-        ]
-      }
-    ]
-  }
 }
 ,
         {
@@ -193,17 +158,28 @@
           "page": {
             "title": "Legacy Windows",
             "hero": {
-              "heading": "Classic Windows Releases",
-              "subheading": "A history of innovation and evolution in operating systems.",
-              "buttons": [
-                { "text": "Learn More", "url": "#", "style": "secondary" }
-              ]
+              "heading": "Microsoft Windows Releases",
+              "subheading": "A brief history of Microsoft OS releases. They are oficially unsupported."
             },
             "features": [
-              { "title": "Windows XP", "description": "Stable and beloved by many users worldwide." },
-              { "title": "Windows 7", "description": "Popular for business environments." },
-              { "title": "Windows 10", "description": "A bridge to Windows 11 with modern support." }
-            ]
+            { "title": "Windows 1.0 (1985)", "description": "Introduced a graphical user interface, basic multitasking." },
+    { "title": "Windows 2.0 (1987)", "description": "Introduced overlapping windows and improved graphics." },
+    { "title": "Windows 3.0 (1990)", "description": "Gained popularity with enhanced user interface and multitasking capabilities." },
+    { "title": "Windows 3.1 (1992)", "description": "Introduced TrueType fonts and improved multimedia support." },
+    { "title": "Windows 95 (1995)", "description": "A major overhaul with a new Start menu and taskbar." },
+    { "title": "Windows 98 (1998)", "description": "Improved hardware support and introduced the Quick Launch bar." },
+    { "title": "Windows ME (2000)", "description": "Focused on home users with multimedia features." },
+    { "title": "Windows NT 3.1 (1993)", "description": "The first version of Windows NT, aimed at business users." },
+    { "title": "Windows NT 4.0 (1996)", "description": "Combined the Windows 95 interface with NT stability." },
+    { "title": "Windows 2000 (2000)", "description": "Targeted at businesses with improved reliability and security." },
+    { "title": "Windows XP (2001)", "description": "Stable and beloved by many users worldwide." },
+    { "title": "Windows Vista (2007)", "description": "Introduced a new visual style and enhanced security features." },
+    { "title": "Windows 7 (2009)", "description": "Popular for business environments with improved performance and usability." },
+    { "title": "Windows 8 (2012)", "description": "Introduced a new Start screen optimized for touch devices." },
+    { "title": "Windows 8.1 (2013)", "description": "Refined the user experience and reintroduced the Start button." },
+    { "title": "Windows 10 (2015)", "description": "A bridge to Windows 11 with modern support and features." }
+]
+
           }
         }
       ]
@@ -219,7 +195,7 @@
           "heading": "Refined and Integrated",
           "subheading": "macOS is designed for performance and seamless Apple integration.",
           "buttons": [
-            { "text": "Explore macOS", "url": "#", "style": "primary" }
+            { "text": "Explore macOS", "url": "https://www.apple.com/mx/os/macos/", "style": "primary" }
           ]
         },
         "features": [
@@ -302,6 +278,37 @@
       }
     ]
   }
+},{
+  "id": "macos-tahoe",
+  "name": "macOS Tahoe",
+  "icon": "https://img.icons8.com/color/48/mac-os.png",
+  "page": {
+    "title": "macOS Tahoe",
+    "hero": {
+      "heading": "Elevate Your Mac Experience",
+      "subheading": "iPhone mirroring, window tiling, and AI-powered productivity tools — seamlessly integrated.",
+      "buttons": [
+        { "text": "Discover Tahoe", "url": "#", "style": "primary" }
+      ]
+    },
+    "features": [
+      {
+        "title": "iPhone Mirroring",
+        "description": "Control your iPhone directly from your Mac — live, interactive, and private."
+      },
+      {
+        "title": "Window Tiling",
+        "description": "Snap windows effortlessly with smart layout suggestions."
+      },
+      {
+        "title": "Apple Intelligence",
+        "description": "Integrated AI system offering writing assistance, smart replies, and more.",
+        "buttons": [
+          { "text": "Meet Apple Intelligence", "url": "#", "style": "secondary" }
+        ]
+      }
+    ]
+  }
 }
       ]
     },
@@ -321,7 +328,7 @@
         },
         "features": [
           {
-            "title": "Open Source",
+            "title": "Linux Kernel",
             "description": "Fully customizable and community-driven.",
             "buttons": [
               { "text": "Open Source Benefits", "url": "#", "style": "secondary" }
@@ -347,7 +354,7 @@
       "heading": "The Universal Operating System",
       "subheading": "Rock-solid, free, and trusted by servers and desktops worldwide.",
       "buttons": [
-        { "text": "Get Debian", "url": "#", "style": "primary" }
+        { "text": "Get Debian", "url": "https://www.debian.org/", "style": "primary" }
       ]
     },
     "features": [
@@ -371,17 +378,17 @@
       "heading": "Cutting-Edge, Stable, and Open Source",
       "subheading": "Powered by innovation, used by developers, loved by communities.",
       "buttons": [
-        { "text": "Download Fedora", "url": "#", "style": "primary" }
+        { "text": "Official Website", "url": "https://fedoraproject.org/", "style": "primary" },
+        { "text": "Download Fedora", "url": "https://fedoraproject.org/workstation/download/", "style": "primary" }
       ]
     },
     "features": [
-      { "title": "Bleeding Edge", "description": "Get the latest features fast — from GNOME to Wayland." },
+      { "title": "Bleeding Edge but stable", "description": "Get the latest features, not the latest untested versions." },
       { "title": "Workstation & Server", "description": "Tailored for developers, sysadmins, and containers." },
-      {
-        "title": "Strong Community",
-        "description": "Backed by Red Hat with open governance.",
-        "buttons": [{ "text": "Join Fedora", "url": "#", "style": "secondary" }]
-      }
+      { "title": "Multiple Desktop Environments", "description": "Supports most popular desktop environments.",
+        "buttons": [{ "text": "Check the Spins", "url": "https://fedoraproject.org/spins/", "style": "secondary" }] },
+      { "title": "Workstation & Server", "description": "Tailored for developers, sysadmins, and containers.",
+        "buttons": [{ "text": "Join Fedora", "url": "#", "style": "secondary" }] }
     ]
   }
 },
@@ -395,7 +402,8 @@
       "heading": "Extreme Customization, Maximum Performance",
       "subheading": "Source-based distribution for power users and performance tuning.",
       "buttons": [
-        { "text": "Build Your System", "url": "#", "style": "primary" }
+        { "text": "Official Website", "url": "https://fedoraproject.org/", "style": "primary" },
+        { "text": "Download Gentoo", "url": "https://fedoraproject.org/workstation/download/", "style": "primary" }
       ]
     },
     "features": [
@@ -419,7 +427,8 @@
       "heading": "Simplicity, Transparency, Control",
       "subheading": "A rolling release for users who want to understand their system.",
       "buttons": [
-        { "text": "Install Arch", "url": "#", "style": "primary" }
+        { "text": "Official Website", "url": "https://archlinux.org/", "style": "primary" },
+        { "text": "Download Arch", "url": "https://archlinux.org/download/", "style": "primary" }
       ]
     },
     "features": [
@@ -443,7 +452,8 @@
       "heading": "Functional Package Management",
       "subheading": "Declarative, reproducible, and respecting user freedom.",
       "buttons": [
-        { "text": "Explore Guix", "url": "#", "style": "primary" }
+        { "text": "Official Website", "url": "https://guix.gnu.org/", "style": "primary" },
+        { "text": "Download Guix", "url": "https://guix.gnu.org/en/download/", "style": "primary" }
       ]
     },
     "features": [
