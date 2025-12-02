@@ -1,90 +1,991 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carino Systems™</title>
-    <link rel="stylesheet" href="assets/css/core.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link id="theme-style" rel="stylesheet" />    
-    <link rel="icon" href="assets/images/logo.webp">
-    <script src="assets/js/index.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/services.js"></script>
-    <!-- <script src="assets/js/main.js" defer></script> -->
-    <!-- Open Graph Protocol Meta Tags -->
-    <meta property="og:title" content="Carino Systems"/>
-    <meta property="twitter:title" content="Carino Systems"/>
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://carino.systems"/>
-    <meta property="og:image" content="https://carino.systems/images/ogp.webp"/>
-    <meta property="og:description" content="Friendly IT solutions, openly available"/>
-    <meta property="og:site_name" content="Carino Systems"/>
-    <meta property="og:locale" content="en_US"/>
+  <meta charset="UTF-8" />
+  <title>Carino Systems — Openly Available Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon will be changed by JS -->
+  <link id="cs-favicon" rel="icon" type="image/png" href="icons/theme-fedora.png" />
+
+  <style>
+    /* ============= RESET & BASE LAYOUT ============= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* no scrolling */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Hiragino Sans", "Noto Sans JP", sans-serif;
+
+      /* default variables – overridden by theme-* */
+      --bg-body: #020617;
+      --fg-main: #e5f2ff;
+      --fg-muted: #94a3b8;
+
+      --shell-bg: transparent;
+      --shell-border: transparent;
+      --shell-radius: 0;
+
+      --left-bg: rgba(15, 23, 42, 0.85);
+      --left-border: rgba(148, 163, 184, 0.4);
+      --left-radius: 16px;
+
+      --group-bg: rgba(15, 23, 42, 0.9);
+      --group-border: rgba(148, 163, 184, 0.45);
+      --group-radius: 12px;
+
+      --chip-bg: rgba(15, 23, 42, 0.9);
+      --chip-border: rgba(148, 163, 184, 0.9);
+
+      --tile-radius: 10px;
+      --tile-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
+
+      --floating-bg: rgba(15, 23, 42, 0.9);
+      --floating-border: rgba(148, 163, 184, 0.9);
+      --floating-fg: #e5f2ff;
+
+      --footer-bg: transparent;
+      --footer-fg: rgba(226, 232, 240, 0.9);
+
+      /* default link colors (overridden by theme) */
+      --link-color: #93c5fd;
+      --link-hover-color: #bfdbfe;
+
+      /* tile colors palette (used by JS for randomization) */
+      --tile-color-1: #c7d2fe;
+      --tile-color-2: #fee2b3;
+      --tile-color-3: #fecaca;
+      --tile-color-4: #fef3c7;
+      --tile-color-5: #bbf7d0;
+      --tile-color-6: #bfdbfe;
+      --tile-color-7: #f9a8d4;
+      --tile-color-8: #fed7aa;
+      --tile-color-9: #bae6fd;
+      --tile-color-10: #fecdd3;
+      --tile-color-11: #fef08a;
+      --tile-color-12: #e9d5ff;
+
+      --tile-fg: #111827;
+      --tile-bg-default: #e5e7eb;
+    }
+
+    body {
+      background: var(--bg-body);
+      color: var(--fg-main);
+    }
+
+    /* Global link colors based on theme */
+    a {
+      color: var(--link-color);
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+    }
+
+    .cs-main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.6rem 1.2rem;
+    }
+
+    /* transparent shell: only controls layout, not visuals */
+    .panel-shell {
+      width: min(1100px, 100%);
+      height: min(540px, calc(100vh - 36px)); /* allow footer */
+      display: grid;
+      grid-template-columns: 0.95fr 1.55fr;
+      padding: 1.2rem 1.3rem;
+      gap: 1.2rem;
+
+      background: var(--shell-bg);
+      border-radius: var(--shell-radius);
+      border: none;
+      box-shadow: none;
+      position: relative;
+      overflow: visible;
+    }
+
+    .panel-left {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      background: var(--left-bg);
+      border-radius: var(--left-radius);
+      border: 2px solid var(--left-border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+    }
+
+    .left-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 0.35rem;
+      color: var(--fg-muted);
+    }
+
+    .left-title {
+      margin: 0;
+      font-size: 1.4rem;
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+    }
+
+    .left-sub {
+      margin: 0.7rem 0 0.9rem;
+      font-size: 0.8rem;
+      color: var(--fg-main);
+      opacity: 0.9;
+    }
+
+    /* PREVIEW AREA */
+    .preview-area {
+      margin-bottom: 0.9rem;
+    }
+
+    .preview-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.85);
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-label {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(226, 232, 240, 0.8);
+    }
+
+    .preview-placeholder {
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .preview-frame img,
+    .preview-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .left-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .section-chip {
+      border-radius: 999px;
+      padding: 0.18rem 0.7rem;
+      font-size: 0.7rem;
+      border: 2px solid var(--chip-border);
+      background: var(--chip-bg);
+      color: var(--fg-main);
+    }
+
+    .left-meta {
+      margin-top: auto;
+      font-size: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .left-meta-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.2rem;
+      color: var(--fg-main);
+    }
+
+    .meta-label {
+      opacity: 0.7;
+    }
+
+    .meta-value {
+      font-weight: 600;
+    }
+
+    .panel-right {
+      display: grid;
+      grid-template-rows: repeat(4, 1fr);
+      gap: 0.7rem;
+      color: var(--fg-main);
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      padding: 0.45rem 0.7rem 0.6rem;
+      background: var(--group-bg);
+      border-radius: var(--group-radius);
+      border: 2px solid var(--group-border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(16px);
+      cursor: default;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+        border-color 0.12s ease-out;
+    }
+
+    .group:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.9);
+      border-color: #ffffff;
+    }
+
+    .group-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-size: 0.76rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .group-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .group-sub {
+      font-size: 0.7rem;
+      opacity: 0.75;
+    }
+
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    .group:nth-child(2) .group-grid,
+    .group:nth-child(4) .group-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .tile {
+      padding: 0.38rem 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--tile-radius);
+      box-shadow: var(--tile-shadow);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--tile-fg);
+      background: var(--tile-bg-default);
+      cursor: pointer;
+      transition:
+        transform 0.14s ease-out,
+        box-shadow 0.14s ease-out,
+        filter 0.14s ease-out;
+    }
+
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
+      filter: brightness(1.04);
+    }
+
+    .cs-footer {
+      height: 36px;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      background: var(--footer-bg);
+      color: var(--footer-fg);
+    }
+
+    @media (max-width: 940px) {
+      .cs-main {
+        padding: 0.4rem 0.6rem;
+      }
+      .panel-shell {
+        transform: scale(0.96);
+        transform-origin: center top;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .panel-shell {
+        grid-template-columns: 1fr;
+        height: calc(100vh - 36px);
+        transform: scale(0.9);
+        transform-origin: center top;
+      }
+      .panel-left {
+        min-height: 42%;
+      }
+      /* Hide preview on mobile to avoid overlap */
+      .preview-area {
+        display: none;
+      }
+    }
+
+    /* ============= FLOATING NAV (no navbar) ============= */
+    .floating-nav {
+      position: fixed;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      z-index: 40;
+    }
+
+    .floating-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 2px solid var(--floating-border);
+      background: var(--floating-bg);
+      color: var(--floating-fg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      transition: transform 0.14s ease-out, box-shadow 0.14s ease-out,
+        background 0.14s ease-out, border-color 0.14s ease-out;
+      text-decoration: none;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.95);
+      border-color: #ffffff;
+    }
+
+    .floating-btn img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+    }
+
+    .floating-theme-toggle {
+      font-size: 0.9rem;
+      border-style: dashed;
+    }
+
+    /* hidden on index */
+    .page-index .floating-nav {
+      display: none;
+    }
+
+    /* ============= THEMES (with link colors) ============= */
+
+    body.theme-fedora {
+      --bg-body:
+        radial-gradient(circle at 0 0, #1e293b 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #0f172a 0, transparent 55%),
+        #020617;
+      --fg-main: #e5f2ff;
+      --fg-muted: #94a3b8;
+
+      --left-bg: rgba(15, 23, 42, 0.92);
+      --left-border: rgba(96, 165, 250, 0.8);
+
+      --group-bg: rgba(15, 23, 42, 0.95);
+      --group-border: rgba(59, 130, 246, 0.85);
+
+      --chip-bg: rgba(15, 23, 42, 0.92);
+      --chip-border: #3b82f6;
+
+      --floating-bg: rgba(15, 23, 42, 0.95);
+      --floating-border: rgba(96, 165, 250, 0.95);
+      --floating-fg: #e5f2ff;
+
+      --footer-bg: transparent;
+      --footer-fg: rgba(226, 232, 240, 0.9);
+
+      --link-color: #93c5fd;
+      --link-hover-color: #bfdbfe;
+
+      font-family: "Liberation Sans", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.theme-gentoo {
+      --bg-body:
+        radial-gradient(circle at 0 0, #312e81 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #1f2937 0, transparent 55%),
+        #020617;
+      --fg-main: #f5f3ff;
+      --fg-muted: #c7d2fe;
+
+      --left-bg: rgba(15, 23, 42, 0.96);
+      --left-border: rgba(165, 180, 252, 0.9);
+
+      --group-bg: rgba(17, 24, 39, 0.98);
+      --group-border: rgba(165, 180, 252, 0.9);
+
+      --chip-bg: rgba(17, 24, 39, 0.94);
+      --chip-border: rgba(196, 181, 253, 0.9);
+
+      --floating-bg: rgba(17, 24, 39, 0.97);
+      --floating-border: rgba(196, 181, 253, 0.95);
+      --floating-fg: #e0e7ff;
+
+      --footer-bg: transparent;
+      --footer-fg: rgba(224, 231, 255, 0.9);
+
+      --link-color: #c4b5fd;
+      --link-hover-color: #e0e7ff;
+
+      font-family: "Cantarell", "Noto Sans", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.theme-opensuse {
+      --bg-body:
+        radial-gradient(circle at 0 0, #064e3b 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #022c22 0, transparent 55%),
+        #020617;
+      --fg-main: #ecfdf5;
+      --fg-muted: #a7f3d0;
+
+      --left-bg: rgba(6, 24, 18, 0.96);
+      --left-border: rgba(52, 211, 153, 0.95);
+
+      --group-bg: rgba(6, 24, 18, 0.98);
+      --group-border: rgba(74, 222, 128, 0.95);
+
+      --chip-bg: rgba(6, 24, 18, 0.94);
+      --chip-border: rgba(74, 222, 128, 0.95);
+
+      --floating-bg: rgba(6, 24, 18, 0.97);
+      --floating-border: rgba(74, 222, 128, 0.95);
+      --floating-fg: #ecfdf5;
+
+      --footer-bg: transparent;
+      --footer-fg: rgba(209, 250, 229, 0.9);
+
+      --link-color: #34d399;
+      --link-hover-color: #6ee7b7;
+
+      font-family: "Noto Sans", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* Moe: flat cake pastel, no gradients */
+    body.theme-moe {
+      --bg-body: #fff0de;
+      --fg-main: #4b5563;
+      --fg-muted: #9ca3af;
+
+      --left-bg: #fffdf7;
+      --left-border: #facc15;
+
+      --group-bg: #fef9c3;
+      --group-border: #f9a8d4;
+
+      --chip-bg: #fdf2ff;
+      --chip-border: #f9a8d4;
+
+      --floating-bg: #f9a8d4;
+      --floating-border: #f97373;
+      --floating-fg: #4b5563;
+
+      --footer-bg: #fff0de;
+      --footer-fg: #1d1d1c;
+
+      --link-color: #1d1d1c;
+      --link-hover-color: #f472b6;
+
+      font-family: "Nunito", "Rounded Mplus 1c", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* Moe group title color */
+    body.theme-moe .group-title {
+      color: #f97373;
+    }
+
+    body.theme-cyberpunk {
+      --bg-body:
+        radial-gradient(circle at 0 0, #ff2fd3 0, transparent 50%),
+        radial-gradient(circle at 100% 100%, #35e4ff 0, transparent 55%),
+        linear-gradient(135deg, #05001a, #02010b);
+      --fg-main: #e5e7eb;
+      --fg-muted: #9ca3af;
+
+      --left-bg: rgba(3, 7, 18, 0.96);
+      --left-border: rgba(244, 63, 94, 0.9);
+
+      --group-bg: rgba(10, 10, 26, 0.98);
+      --group-border: rgba(59, 130, 246, 0.95);
+
+      --chip-bg: rgba(10, 10, 26, 0.94);
+      --chip-border: rgba(244, 63, 94, 0.95);
+
+      --floating-bg: rgba(10, 10, 26, 0.98);
+      --floating-border: rgba(56, 189, 248, 0.95);
+      --floating-fg: #f9fafb;
+
+      --footer-bg: transparent;
+      --footer-fg: rgba(209, 213, 219, 0.9);
+
+      --link-color: #f9a8ff;
+      --link-hover-color: #facc15;
+
+      font-family: "Orbitron", "Rajdhani", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* Cyberpunk group title color */
+    body.theme-cyberpunk .group-title {
+      color: #f9a8ff;
+      text-shadow: 0 0 6px rgba(249, 168, 255, 0.8);
+    }
+
+    /* High-contrast black & white */
+    body.theme-contrast {
+      --bg-body: #000000;
+      --fg-main: #ffffff;
+      --fg-muted: #e5e5e5;
+
+      --left-bg: #000000;
+      --left-border: #ffffff;
+
+      --group-bg: #000000;
+      --group-border: #ffffff;
+
+      --chip-bg: #000000;
+      --chip-border: #ffffff;
+
+      --floating-bg: #000000;
+      --floating-border: #ffffff;
+      --floating-fg: #ffffff;
+
+      --footer-bg: #000000;
+      --footer-fg: #ffffff;
+
+      --link-color: #ffffff;
+      --link-hover-color: #ffffff;
+
+      --tile-fg: #ffffff;
+      --tile-bg-default: #000000;
+
+      /* keep palette black so JS randomization, if used, stays monochrome */
+      --tile-color-1: #000000;
+      --tile-color-2: #000000;
+      --tile-color-3: #000000;
+
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    body.theme-contrast .panel-left,
+    body.theme-contrast .group,
+    body.theme-contrast .floating-btn {
+      box-shadow: 0 0 0 1px #ffffff;
+      backdrop-filter: none;
+    }
+
+    body.theme-contrast .group:hover {
+      transform: none;
+      box-shadow: 0 0 0 2px #ffffff;
+    }
+
+    body.theme-contrast .tile {
+      box-shadow: 0 0 0 1px #ffffff;
+    }
+
+    body.theme-contrast .tile:hover {
+      box-shadow: 0 0 0 2px #ffffff;
+      filter: none;
+      transform: none;
+    }
+  </style>
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <nav id="navbar"></nav>
-    <div class="left-column">
-           <!--<div><button id="contrastToggle" class="contrast-toggle" aria-label="Toggle Contrast">
-                <i class="fas fa-adjust"></i>
-            </div>-->
-            <!--<a href="index.html"><h1>Miguel Cariño</h1></a>-->
-            <h1 class="left-column">Openly available solutions</h1>
-            <!--<div class="icon-row">
-                <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-link">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/MiguelCarino" target="_blank" class="icon-link">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://steamcommunity.com/id/HabiOS/" target="_blank" class="icon-link">
-                    <i class="fab fa-steam"></i>
-                </a>
-                <a href="https://server.carino.systems/" target="_blank" class="icon-link">
-                    <i class="fas fa-server"></i>
-                </a>
-            </div>-->
-            <p id="random-phrase" class="random-phrase"></p>
+
+<!--
+  page-index  -> hides floating nav
+  data-shuffle-theme -> random theme on load if "true"
+  data-github        -> URL for GitHub icon
+-->
+<body class="page-index" data-shuffle-theme="true" data-github="https://github.com/youruser">
+  <main class="cs-main">
+    <div class="panel-shell">
+      <!-- LEFT PANEL -->
+      <aside class="panel-left">
+        <div class="left-label">Carino</div>
+        <h1 class="left-title">Openly available<br />solutions</h1>
+        <p class="left-sub">
+          「 A reliable backup consists of three copies:
+          two nearby, one far away. 」
+        </p>
+
+        <!-- Preview area: shows image or webm based on tile/group hover -->
+        <div class="preview-area">
+          <div class="preview-frame">
+            <div class="preview-label"></div>
+            <div class="preview-placeholder" id="preview-placeholder">
+              Hover a tile on the right to preview.
+            </div>
+            <img id="preview-image" alt="Group preview" />
+            <video id="preview-video" muted loop playsinline></video>
+          </div>
         </div>
-        <div class="right-column">
-            <div class="tiles"></div>
+
+        <div class="left-sections">
         </div>
+
+        <div class="left-meta">
+          <div class="left-meta-row">
+            <span class="meta-label">Links</span>
+            <span class="meta-value">Github - LinkedIn</span>
+          </div>
+          <div class="left-meta-row">
+            <span class="meta-label">Languages</span>
+            <span class="meta-value">EN - ES - RU - JA</span>
+          </div>
+          <div class="left-meta-row">
+            <span class="meta-label">Platforms</span>
+            <span class="meta-value">GNU/Linux - Windows - macOS
+            </span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT PANEL -->
+      <section class="panel-right">
+        <!-- Group 1: Infra -->
+        <div class="group"
+             data-preview-type="video"
+             data-preview-src="assets/webm/infra.webm">
+          <div class="group-header infra">
+            <span class="group-title">Infra</span>
+            <span class="group-sub">Systems &amp; networking</span>
+          </div>
+          <div class="group-grid">
+            <a href="os.html" class="tile">Operating Systems</a>
+            <a href="software.html" class="tile">Software</a>
+            <a href="hardware.html" class="tile">Hardware</a>
+            <a href="https://netplan.carino.systems" class="tile">Netplan Editor</a>
+          </div>
+        </div>
+
+        <!-- Group 2: Media -->
+        <div class="group"
+             data-preview-type="video"
+             data-preview-src="assets/webm/media.webm">
+          <div class="group-header media">
+            <span class="group-title">Media</span>
+            <span class="group-sub">Audio / visual</span>
+          </div>
+          <div class="group-grid">
+            <a href="streaming.html" class="tile">Streaming</a>
+            <a href="https://music.carino.systems/" class="tile">Music</a>
+            <a href="graphy.html" class="tile">Graphy</a>
+          </div>
+        </div>
+
+        <!-- Group 3: Tools -->
+        <div class="group"
+             data-preview-type="video"
+             data-preview-src="assets/webm/tools.webm">
+          <div class="group-header tools">
+            <span class="group-title">Tools</span>
+            <span class="group-sub">Support &amp; diagnostics</span>
+          </div>
+          <div class="group-grid">
+            <a href="https://support.carino.systems/" class="tile">Customer Support</a>
+            <a href="https://speed.carino.systems/" class="tile">Speedtest</a>
+            <a href="https://metadata.carino.systems/" class="tile">Metadata Viewer</a>
+            <a href="https://url.carino.systems/" class="tile">URL Shortener</a>
+            <a href="https://dicom.carino.systems/" class="tile">DICOM Tag Editor</a>
+          </div>
+        </div>
+
+        <!-- Group 4: Utility -->
+        <div class="group"
+             data-preview-type="video"
+             data-preview-src="assets/webm/utility.webm">
+          <div class="group-header misc">
+            <span class="group-title">Utility</span>
+            <span class="group-sub">Everyday helpers</span>
+          </div>
+          <div class="group-grid">
+            <a href="https://teleprompter.carino.systems" class="tile">Teleprompter</a>
+            <a href="https://countdown.carino.systems/" class="tile">Countdown</a>
+            <a href="https://password.carino.systems/" class="tile">Password Generator</a>
+          </div>
+        </div>
+      </section>
     </div>
-    <script type="module">
-      import { initTheme } from './assets/js/theme.js';
-  // First build the navbar
-  const navContent = (currentTitle) => `
-    <div class="logo">
-      <a href="index.html"><b style="color: #ffffff">Carino</b>
-      <b class="nav-logo-name">Systems™</b></a>
-    </div>
-    <!--<h2>${currentTitle}</h2>-->
-    <ul class="icon-list">
-      <li>
-        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-button" title="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/miguelcarino94" target="_blank" class="icon-button" title="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <button id="toggle-theme" class="icon-button" title="Toggle Theme">
-          <i class="fas fa-brush"></i>
-        </button>
-      </li>
-    </ul>
+  </main>
 
-  `;
+  <footer class="cs-footer">
+    <span><a href="index.html" style="text-decoration: none;">Carino Systems™</a> 2025</span>
+  </footer>
 
-  document.getElementById('navbar').innerHTML = navContent(document.title);
+  <!-- Floating nav: hidden on index via .page-index -->
+  <div class="floating-nav">
+    <!-- Theme icon / home -->
+    <a href="index.html" class="floating-btn" aria-label="Carino Systems home">
+      <img id="cs-theme-logo" src="icons/theme-fedora.png" alt="Theme icon" />
+    </a>
+    <!-- GitHub (href set from body[data-github]) -->
+    <a href="#" id="floating-github" class="floating-btn" aria-label="GitHub">
+      <img src="icons/github.svg" alt="GitHub" />
+    </a>
+    <!-- Theme toggle -->
+    <button class="floating-btn floating-theme-toggle nav-theme-toggle"
+            type="button"
+            aria-label="Change theme">
+      ✨
+    </button>
+  </div>
 
-  // Then initialize theme
-initTheme({
-  defaultTheme: 'carino',
-  themes: ['carino', 'retro', 'moe'],
-  toggleButtonId: 'toggle-theme'
-});
-</script>
+  <script>
+    (function () {
+      const STORAGE_KEY = "cs-theme";
 
+      const THEMES = [
+        {
+          id: "fedora",
+          bodyClass: "theme-fedora",
+          label: "Fedora",
+          favicon: "icons/theme-fedora.png",
+          logo: "icons/theme-fedora.png",
+        },
+        {
+          id: "gentoo",
+          bodyClass: "theme-gentoo",
+          label: "Gentoo",
+          favicon: "icons/theme-gentoo.png",
+          logo: "icons/theme-gentoo.png",
+        },
+        {
+          id: "opensuse",
+          bodyClass: "theme-opensuse",
+          label: "openSUSE",
+          favicon: "icons/theme-opensuse.png",
+          logo: "icons/theme-opensuse.png",
+        },
+        {
+          id: "cyberpunk",
+          bodyClass: "theme-cyberpunk",
+          label: "Cyberpunk",
+          favicon: "icons/theme-cyberpunk.png",
+          logo: "icons/theme-cyberpunk.png",
+        },
+        {
+          id: "moe",
+          bodyClass: "theme-moe",
+          label: "Moe",
+          favicon: "icons/theme-moe.png",
+          logo: "icons/theme-moe.png",
+        },
+        {
+          id: "contrast",
+          bodyClass: "theme-contrast",
+          label: "High Contrast",
+          favicon: "icons/theme-contrast.png",
+          logo: "icons/theme-contrast.png",
+        },
+      ];
+
+      function getThemeIndexById(id) {
+        return THEMES.findIndex((t) => t.id === id);
+      }
+
+      function applyTileColors() {
+        const tiles = document.querySelectorAll(".tile");
+        if (!tiles.length) return;
+
+        const isContrast = document.body.classList.contains("theme-contrast");
+        const styles = getComputedStyle(document.body);
+        const palette = [];
+
+        for (let i = 1; i <= 12; i++) {
+          const v = styles.getPropertyValue(`--tile-color-${i}`).trim();
+          if (v) palette.push(v);
+        }
+
+        tiles.forEach((tile) => {
+          if (isContrast || !palette.length) {
+            // High-contrast or no palette: keep default
+            tile.style.backgroundColor = "var(--tile-bg-default)";
+          } else {
+            const color = palette[Math.floor(Math.random() * palette.length)];
+            tile.style.backgroundColor = color;
+          }
+        });
+      }
+
+      function applyTheme(themeId) {
+        const theme = THEMES.find((t) => t.id === themeId) || THEMES[0];
+
+        document.body.classList.remove(
+          ...THEMES.map((t) => t.bodyClass)
+        );
+        document.body.classList.add(theme.bodyClass);
+
+        const fav = document.getElementById("cs-favicon");
+        if (fav) fav.href = theme.favicon;
+
+        const logo = document.getElementById("cs-theme-logo");
+        if (logo) {
+          logo.src = theme.logo;
+          logo.alt = theme.label + " theme icon";
+        }
+
+        const btn = document.querySelector(".nav-theme-toggle");
+        if (btn) {
+          btn.title = "Theme: " + theme.label;
+          btn.setAttribute("data-theme-id", theme.id);
+        }
+
+        localStorage.setItem(STORAGE_KEY, theme.id);
+
+        // Re-randomize tile colors whenever theme changes
+        applyTileColors();
+      }
+
+      function setupThemeToggle() {
+        const btn = document.querySelector(".nav-theme-toggle");
+        if (!btn) return;
+
+        btn.addEventListener("click", () => {
+          const currentId = btn.getAttribute("data-theme-id") || "fedora";
+          const currentIndex = getThemeIndexById(currentId);
+          const nextIndex = (currentIndex + 1) % THEMES.length;
+          applyTheme(THEMES[nextIndex].id);
+        });
+      }
+
+      function setupFloatingGithub() {
+        const ghLink = document.getElementById("floating-github");
+        if (!ghLink) return;
+        const url = document.body.getAttribute("data-github");
+        if (url) ghLink.href = url;
+      }
+
+      function setupPreview() {
+        // Skip preview logic entirely on mobile (where preview is hidden)
+        if (window.matchMedia("(max-width: 760px)").matches) return;
+
+        const groups = document.querySelectorAll(".group[data-preview-type]");
+        const tiles = document.querySelectorAll(".group .tile");
+        const img = document.getElementById("preview-image");
+        const video = document.getElementById("preview-video");
+        const placeholder = document.getElementById("preview-placeholder");
+
+        if (!groups.length || !img || !video || !placeholder) return;
+
+        function showPreview(type, src) {
+          placeholder.style.display = "none";
+
+          if (type === "video") {
+            img.style.display = "none";
+            img.removeAttribute("src");
+
+            video.style.display = "block";
+            if (video.getAttribute("src") !== src) {
+              video.src = src;
+              video.load();
+            }
+            video.play().catch(() => {});
+          } else if (type === "image") {
+            video.pause();
+            video.removeAttribute("src");
+            video.load();
+            video.style.display = "none";
+
+            img.style.display = "block";
+            img.src = src;
+          }
+        }
+
+        function attachPreviewListener(el) {
+          el.addEventListener("mouseenter", () => {
+            let type = el.getAttribute("data-preview-type");
+            let src = el.getAttribute("data-preview-src");
+
+            // If tile/group doesn't define its own, fall back to group-level
+            if (!type || !src) {
+              const group = el.closest(".group");
+              if (group) {
+                type = group.getAttribute("data-preview-type");
+                src = group.getAttribute("data-preview-src");
+              }
+            }
+
+            if (!type || !src) return;
+            showPreview(type, src);
+          });
+        }
+
+        // Allow preview on both groups (header area) and individual tiles
+        groups.forEach((group) => attachPreviewListener(group));
+        tiles.forEach((tile) => attachPreviewListener(tile));
+
+        // Initial preview from first group
+        const first = groups[0];
+        if (first) {
+          const type = first.getAttribute("data-preview-type");
+          const src = first.getAttribute("data-preview-src");
+          if (type && src) {
+            showPreview(type, src);
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const shuffleFlag =
+          document.body.getAttribute("data-shuffle-theme") === "true";
+        const stored = localStorage.getItem(STORAGE_KEY);
+        let initialId;
+
+        if (shuffleFlag) {
+          const randomIndex = Math.floor(Math.random() * THEMES.length);
+          initialId = THEMES[randomIndex].id;
+        } else if (stored && getThemeIndexById(stored) !== -1) {
+          initialId = stored;
+        } else {
+          initialId = "fedora";
+        }
+
+        applyTheme(initialId);
+        setupThemeToggle();
+        setupFloatingGithub();
+        setupPreview();
+      });
+    })();
+  </script>
 </body>
 </html>
