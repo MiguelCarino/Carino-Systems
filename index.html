@@ -2,991 +2,172 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Carino Systems — Openly Available Solutions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Favicon will be changed by JS -->
-  <link id="cs-favicon" rel="icon" type="image/png" href="icons/theme-fedora.png" />
-
-  <style>
-    /* ============= RESET & BASE LAYOUT ============= */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden; /* no scrolling */
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Hiragino Sans", "Noto Sans JP", sans-serif;
-
-      /* default variables – overridden by theme-* */
-      --bg-body: #020617;
-      --fg-main: #e5f2ff;
-      --fg-muted: #94a3b8;
-
-      --shell-bg: transparent;
-      --shell-border: transparent;
-      --shell-radius: 0;
-
-      --left-bg: rgba(15, 23, 42, 0.85);
-      --left-border: rgba(148, 163, 184, 0.4);
-      --left-radius: 16px;
-
-      --group-bg: rgba(15, 23, 42, 0.9);
-      --group-border: rgba(148, 163, 184, 0.45);
-      --group-radius: 12px;
-
-      --chip-bg: rgba(15, 23, 42, 0.9);
-      --chip-border: rgba(148, 163, 184, 0.9);
-
-      --tile-radius: 10px;
-      --tile-shadow: 0 6px 14px rgba(15, 23, 42, 0.8);
-
-      --floating-bg: rgba(15, 23, 42, 0.9);
-      --floating-border: rgba(148, 163, 184, 0.9);
-      --floating-fg: #e5f2ff;
-
-      --footer-bg: transparent;
-      --footer-fg: rgba(226, 232, 240, 0.9);
-
-      /* default link colors (overridden by theme) */
-      --link-color: #93c5fd;
-      --link-hover-color: #bfdbfe;
-
-      /* tile colors palette (used by JS for randomization) */
-      --tile-color-1: #c7d2fe;
-      --tile-color-2: #fee2b3;
-      --tile-color-3: #fecaca;
-      --tile-color-4: #fef3c7;
-      --tile-color-5: #bbf7d0;
-      --tile-color-6: #bfdbfe;
-      --tile-color-7: #f9a8d4;
-      --tile-color-8: #fed7aa;
-      --tile-color-9: #bae6fd;
-      --tile-color-10: #fecdd3;
-      --tile-color-11: #fef08a;
-      --tile-color-12: #e9d5ff;
-
-      --tile-fg: #111827;
-      --tile-bg-default: #e5e7eb;
-    }
-
-    body {
-      background: var(--bg-body);
-      color: var(--fg-main);
-    }
-
-    /* Global link colors based on theme */
-    a {
-      color: var(--link-color);
-    }
-
-    a:hover {
-      color: var(--link-hover-color);
-    }
-
-    .cs-main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.6rem 1.2rem;
-    }
-
-    /* transparent shell: only controls layout, not visuals */
-    .panel-shell {
-      width: min(1100px, 100%);
-      height: min(540px, calc(100vh - 36px)); /* allow footer */
-      display: grid;
-      grid-template-columns: 0.95fr 1.55fr;
-      padding: 1.2rem 1.3rem;
-      gap: 1.2rem;
-
-      background: var(--shell-bg);
-      border-radius: var(--shell-radius);
-      border: none;
-      box-shadow: none;
-      position: relative;
-      overflow: visible;
-    }
-
-    .panel-left {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      background: var(--left-bg);
-      border-radius: var(--left-radius);
-      border: 2px solid var(--left-border);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(18px);
-    }
-
-    .left-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 0.35rem;
-      color: var(--fg-muted);
-    }
-
-    .left-title {
-      margin: 0;
-      font-size: 1.4rem;
-      line-height: 1.3;
-      letter-spacing: 0.04em;
-    }
-
-    .left-sub {
-      margin: 0.7rem 0 0.9rem;
-      font-size: 0.8rem;
-      color: var(--fg-main);
-      opacity: 0.9;
-    }
-
-    /* PREVIEW AREA */
-    .preview-area {
-      margin-bottom: 0.9rem;
-    }
-
-    .preview-frame {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid rgba(148, 163, 184, 0.9);
-      background: rgba(15, 23, 42, 0.85);
-      height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .preview-label {
-      position: absolute;
-      top: 6px;
-      left: 10px;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: rgba(226, 232, 240, 0.8);
-    }
-
-    .preview-placeholder {
-      font-size: 0.75rem;
-      color: rgba(148, 163, 184, 0.9);
-    }
-
-    .preview-frame img,
-    .preview-frame video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-
-    .left-sections {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
-      margin-top: 0.2rem;
-    }
-
-    .section-chip {
-      border-radius: 999px;
-      padding: 0.18rem 0.7rem;
-      font-size: 0.7rem;
-      border: 2px solid var(--chip-border);
-      background: var(--chip-bg);
-      color: var(--fg-main);
-    }
-
-    .left-meta {
-      margin-top: auto;
-      font-size: 0.7rem;
-      padding-top: 0.7rem;
-      border-top: 1px solid rgba(148, 163, 184, 0.5);
-    }
-
-    .left-meta-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.2rem;
-      color: var(--fg-main);
-    }
-
-    .meta-label {
-      opacity: 0.7;
-    }
-
-    .meta-value {
-      font-weight: 600;
-    }
-
-    .panel-right {
-      display: grid;
-      grid-template-rows: repeat(4, 1fr);
-      gap: 0.7rem;
-      color: var(--fg-main);
-    }
-
-    .group {
-      display: flex;
-      flex-direction: column;
-      padding: 0.45rem 0.7rem 0.6rem;
-      background: var(--group-bg);
-      border-radius: var(--group-radius);
-      border: 2px solid var(--group-border);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(16px);
-      cursor: default;
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
-        border-color 0.12s ease-out;
-    }
-
-    .group:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.9);
-      border-color: #ffffff;
-    }
-
-    .group-header {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      font-size: 0.76rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .group-title {
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    .group-sub {
-      font-size: 0.7rem;
-      opacity: 0.75;
-    }
-
-    .group-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.4rem;
-    }
-
-    .group:nth-child(2) .group-grid,
-    .group:nth-child(4) .group-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .tile {
-      padding: 0.38rem 0.5rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--tile-radius);
-      box-shadow: var(--tile-shadow);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      color: var(--tile-fg);
-      background: var(--tile-bg-default);
-      cursor: pointer;
-      transition:
-        transform 0.14s ease-out,
-        box-shadow 0.14s ease-out,
-        filter 0.14s ease-out;
-    }
-
-    .tile:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.85);
-      filter: brightness(1.04);
-    }
-
-    .cs-footer {
-      height: 36px;
-      min-height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      background: var(--footer-bg);
-      color: var(--footer-fg);
-    }
-
-    @media (max-width: 940px) {
-      .cs-main {
-        padding: 0.4rem 0.6rem;
-      }
-      .panel-shell {
-        transform: scale(0.96);
-        transform-origin: center top;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .panel-shell {
-        grid-template-columns: 1fr;
-        height: calc(100vh - 36px);
-        transform: scale(0.9);
-        transform-origin: center top;
-      }
-      .panel-left {
-        min-height: 42%;
-      }
-      /* Hide preview on mobile to avoid overlap */
-      .preview-area {
-        display: none;
-      }
-    }
-
-    /* ============= FLOATING NAV (no navbar) ============= */
-    .floating-nav {
-      position: fixed;
-      right: 1.1rem;
-      bottom: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      z-index: 40;
-    }
-
-    .floating-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 2px solid var(--floating-border);
-      background: var(--floating-bg);
-      color: var(--floating-fg);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      transition: transform 0.14s ease-out, box-shadow 0.14s ease-out,
-        background 0.14s ease-out, border-color 0.14s ease-out;
-      text-decoration: none;
-    }
-
-    .floating-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.95);
-      border-color: #ffffff;
-    }
-
-    .floating-btn img {
-      width: 18px;
-      height: 18px;
-      object-fit: contain;
-    }
-
-    .floating-theme-toggle {
-      font-size: 0.9rem;
-      border-style: dashed;
-    }
-
-    /* hidden on index */
-    .page-index .floating-nav {
-      display: none;
-    }
-
-    /* ============= THEMES (with link colors) ============= */
-
-    body.theme-fedora {
-      --bg-body:
-        radial-gradient(circle at 0 0, #1e293b 0, transparent 55%),
-        radial-gradient(circle at 100% 100%, #0f172a 0, transparent 55%),
-        #020617;
-      --fg-main: #e5f2ff;
-      --fg-muted: #94a3b8;
-
-      --left-bg: rgba(15, 23, 42, 0.92);
-      --left-border: rgba(96, 165, 250, 0.8);
-
-      --group-bg: rgba(15, 23, 42, 0.95);
-      --group-border: rgba(59, 130, 246, 0.85);
-
-      --chip-bg: rgba(15, 23, 42, 0.92);
-      --chip-border: #3b82f6;
-
-      --floating-bg: rgba(15, 23, 42, 0.95);
-      --floating-border: rgba(96, 165, 250, 0.95);
-      --floating-fg: #e5f2ff;
-
-      --footer-bg: transparent;
-      --footer-fg: rgba(226, 232, 240, 0.9);
-
-      --link-color: #93c5fd;
-      --link-hover-color: #bfdbfe;
-
-      font-family: "Liberation Sans", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body.theme-gentoo {
-      --bg-body:
-        radial-gradient(circle at 0 0, #312e81 0, transparent 55%),
-        radial-gradient(circle at 100% 100%, #1f2937 0, transparent 55%),
-        #020617;
-      --fg-main: #f5f3ff;
-      --fg-muted: #c7d2fe;
-
-      --left-bg: rgba(15, 23, 42, 0.96);
-      --left-border: rgba(165, 180, 252, 0.9);
-
-      --group-bg: rgba(17, 24, 39, 0.98);
-      --group-border: rgba(165, 180, 252, 0.9);
-
-      --chip-bg: rgba(17, 24, 39, 0.94);
-      --chip-border: rgba(196, 181, 253, 0.9);
-
-      --floating-bg: rgba(17, 24, 39, 0.97);
-      --floating-border: rgba(196, 181, 253, 0.95);
-      --floating-fg: #e0e7ff;
-
-      --footer-bg: transparent;
-      --footer-fg: rgba(224, 231, 255, 0.9);
-
-      --link-color: #c4b5fd;
-      --link-hover-color: #e0e7ff;
-
-      font-family: "Cantarell", "Noto Sans", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body.theme-opensuse {
-      --bg-body:
-        radial-gradient(circle at 0 0, #064e3b 0, transparent 55%),
-        radial-gradient(circle at 100% 100%, #022c22 0, transparent 55%),
-        #020617;
-      --fg-main: #ecfdf5;
-      --fg-muted: #a7f3d0;
-
-      --left-bg: rgba(6, 24, 18, 0.96);
-      --left-border: rgba(52, 211, 153, 0.95);
-
-      --group-bg: rgba(6, 24, 18, 0.98);
-      --group-border: rgba(74, 222, 128, 0.95);
-
-      --chip-bg: rgba(6, 24, 18, 0.94);
-      --chip-border: rgba(74, 222, 128, 0.95);
-
-      --floating-bg: rgba(6, 24, 18, 0.97);
-      --floating-border: rgba(74, 222, 128, 0.95);
-      --floating-fg: #ecfdf5;
-
-      --footer-bg: transparent;
-      --footer-fg: rgba(209, 250, 229, 0.9);
-
-      --link-color: #34d399;
-      --link-hover-color: #6ee7b7;
-
-      font-family: "Noto Sans", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* Moe: flat cake pastel, no gradients */
-    body.theme-moe {
-      --bg-body: #fff0de;
-      --fg-main: #4b5563;
-      --fg-muted: #9ca3af;
-
-      --left-bg: #fffdf7;
-      --left-border: #facc15;
-
-      --group-bg: #fef9c3;
-      --group-border: #f9a8d4;
-
-      --chip-bg: #fdf2ff;
-      --chip-border: #f9a8d4;
-
-      --floating-bg: #f9a8d4;
-      --floating-border: #f97373;
-      --floating-fg: #4b5563;
-
-      --footer-bg: #fff0de;
-      --footer-fg: #1d1d1c;
-
-      --link-color: #1d1d1c;
-      --link-hover-color: #f472b6;
-
-      font-family: "Nunito", "Rounded Mplus 1c", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* Moe group title color */
-    body.theme-moe .group-title {
-      color: #f97373;
-    }
-
-    body.theme-cyberpunk {
-      --bg-body:
-        radial-gradient(circle at 0 0, #ff2fd3 0, transparent 50%),
-        radial-gradient(circle at 100% 100%, #35e4ff 0, transparent 55%),
-        linear-gradient(135deg, #05001a, #02010b);
-      --fg-main: #e5e7eb;
-      --fg-muted: #9ca3af;
-
-      --left-bg: rgba(3, 7, 18, 0.96);
-      --left-border: rgba(244, 63, 94, 0.9);
-
-      --group-bg: rgba(10, 10, 26, 0.98);
-      --group-border: rgba(59, 130, 246, 0.95);
-
-      --chip-bg: rgba(10, 10, 26, 0.94);
-      --chip-border: rgba(244, 63, 94, 0.95);
-
-      --floating-bg: rgba(10, 10, 26, 0.98);
-      --floating-border: rgba(56, 189, 248, 0.95);
-      --floating-fg: #f9fafb;
-
-      --footer-bg: transparent;
-      --footer-fg: rgba(209, 213, 219, 0.9);
-
-      --link-color: #f9a8ff;
-      --link-hover-color: #facc15;
-
-      font-family: "Orbitron", "Rajdhani", system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* Cyberpunk group title color */
-    body.theme-cyberpunk .group-title {
-      color: #f9a8ff;
-      text-shadow: 0 0 6px rgba(249, 168, 255, 0.8);
-    }
-
-    /* High-contrast black & white */
-    body.theme-contrast {
-      --bg-body: #000000;
-      --fg-main: #ffffff;
-      --fg-muted: #e5e5e5;
-
-      --left-bg: #000000;
-      --left-border: #ffffff;
-
-      --group-bg: #000000;
-      --group-border: #ffffff;
-
-      --chip-bg: #000000;
-      --chip-border: #ffffff;
-
-      --floating-bg: #000000;
-      --floating-border: #ffffff;
-      --floating-fg: #ffffff;
-
-      --footer-bg: #000000;
-      --footer-fg: #ffffff;
-
-      --link-color: #ffffff;
-      --link-hover-color: #ffffff;
-
-      --tile-fg: #ffffff;
-      --tile-bg-default: #000000;
-
-      /* keep palette black so JS randomization, if used, stays monochrome */
-      --tile-color-1: #000000;
-      --tile-color-2: #000000;
-      --tile-color-3: #000000;
-
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Hiragino Sans", "Noto Sans JP", sans-serif;
-    }
-
-    body.theme-contrast .panel-left,
-    body.theme-contrast .group,
-    body.theme-contrast .floating-btn {
-      box-shadow: 0 0 0 1px #ffffff;
-      backdrop-filter: none;
-    }
-
-    body.theme-contrast .group:hover {
-      transform: none;
-      box-shadow: 0 0 0 2px #ffffff;
-    }
-
-    body.theme-contrast .tile {
-      box-shadow: 0 0 0 1px #ffffff;
-    }
-
-    body.theme-contrast .tile:hover {
-      box-shadow: 0 0 0 2px #ffffff;
-      filter: none;
-      transform: none;
-    }
-  </style>
+  <link rel="icon" href="logo.webp">
+  <title>Carino Systems — Dashboard</title>
+  <link rel="stylesheet" href="./assets/css/core.css" />
 </head>
+<body data-theme="cyberpunk">
 
-<!--
-  page-index  -> hides floating nav
-  data-shuffle-theme -> random theme on load if "true"
-  data-github        -> URL for GitHub icon
--->
-<body class="page-index" data-shuffle-theme="true" data-github="https://github.com/youruser">
-  <main class="cs-main">
-    <div class="panel-shell">
-      <!-- LEFT PANEL -->
-      <aside class="panel-left">
-        <div class="left-label">Carino</div>
-        <h1 class="left-title">Openly available<br />solutions</h1>
-        <p class="left-sub">
-          「 A reliable backup consists of three copies:
-          two nearby, one far away. 」
-        </p>
+  <div class="layout-shell">
+    
+    <header class="hero-hud" id="heroHud" title="Click to toggle details">
+      
+      <div class="hud-row-top">
+        
+        <div class="hud-group brand-group">
+          <div class="brand-title">Carino</div>
+          <div class="brand-sub" id="greeting">System Ready.</div>
+          <div class="brand-links">
+            <a href="https://github.com" target="_blank" class="social-btn" aria-label="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-btn" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            </a>
+            <a href="https://store.steampowered.com" target="_blank" class="social-btn steam-btn" aria-label="Steam">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.358 0 0 5.378 0 12.003c0 5.167 3.273 9.549 7.878 11.288l1.965-6.88a2.31 2.31 0 0 1-.715-2.308c0-2.272 1.843-4.115 4.116-4.115 2.272 0 4.115 1.842 4.115 4.115 0 2.272-1.843 4.115-4.115 4.115-.621 0-1.209-.138-1.74-.383l-2.377 3.565c.923.26 1.897.402 2.901.402 6.65 0 12.042-5.389 12.042-12.037C24.066 5.378 18.674 0 11.979 0zM14.07 9.405c1.22 0 2.21 .992 2.21 2.21 0 1.22-.99 2.21-2.21 2.21-1.22 0-2.21-.99-2.21-2.21 0-1.218.99-2.21 2.21-2.21zm-4.251 5.101a1.636 1.636 0 0 0-.834-1.633l2.053 1.02a.71.71 0 0 1-.712.466.71.71 0 0 1-.507-.028z"/></svg>
+            </a>
+          </div>
+        </div>
 
-        <!-- Preview area: shows image or webm based on tile/group hover -->
-        <div class="preview-area">
-          <div class="preview-frame">
-            <div class="preview-label"></div>
-            <div class="preview-placeholder" id="preview-placeholder">
-              Hover a tile on the right to preview.
+        <div class="hud-divider"></div>
+
+        <div class="hud-group time-group">
+          <div class="clock-display" id="clockLocal">00:00:00</div>
+          <div class="date-display" id="dateStr">Loading...</div>
+          <div class="mini-meta">
+            <span class="meta-pill" id="tzName">UTC</span>
+            <span class="meta-pill font-mono hud-toggle" id="clockUTC">00:00Z</span>
+            <span class="meta-pill font-mono hud-toggle" id="clockEpoch">1700000000</span>
+          </div>
+        </div>
+
+        <div class="hud-divider hud-toggle"></div>
+
+        <div class="hud-group system-group hud-toggle">
+          <div class="sys-row">
+            <span class="sys-label">CLIENT</span>
+            <span class="sys-value" id="sysClient">...</span>
+          </div>
+          <div class="sys-row">
+            <span class="sys-label">IPV4</span>
+            <div class="sys-val-wrapper">
+              <span class="sys-value font-mono" id="ipv4">...</span>
+              <span class="status-dot unknown" id="dot4"></span>
             </div>
-            <img id="preview-image" alt="Group preview" />
-            <video id="preview-video" muted loop playsinline></video>
+          </div>
+          <div class="sys-row">
+            <span class="sys-label">IPV6</span>
+            <div class="sys-val-wrapper">
+              <span class="sys-value font-mono" id="ipv6">...</span>
+              <span class="status-dot unknown" id="dot6"></span>
+            </div>
+          </div>
+          <div class="sys-row">
+            <span class="sys-label">PING</span>
+            <span class="sys-value font-mono" id="pingVal">-- ms</span>
           </div>
         </div>
 
-        <div class="left-sections">
+      </div>
+
+      <div class="hud-row-bottom">
+        <span class="ticker-label">LATEST</span>
+        <span class="ticker-text">Updating the whole css and js shared ecosystem, sorry for breaking themes all over the place.</span>
+      </div>
+
+    </header>
+<div class="hud-metadata">
+    <!--<section class="toolbar">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Search systems... (/)" autocomplete="off" />
+      </div>
+      <div class="controls-wrapper">
+        <button class="icon-btn" id="retryNetwork" title="Refresh Network">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        </button>
+        <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        </button>
+      </div>
+    </section>-->
+
+    <main class="main-content">
+      
+      <div class="grid-section">
+        <h3 class="section-header">Infrastructure</h3>
+        <div class="bento-grid">
+          <a href="os.html" class="tile tile-wide">
+            <div class="tile-content-row">
+              <span class="tile-icon">🖥️</span>
+              <div class="tile-body"><span class="tile-title">Operating Systems</span><span class="tile-sub">Management & Provisioning</span></div>
+            </div>
+          </a>
+          <a href="hardware.html" class="tile">
+            <span class="tile-icon">🔌</span>
+            <div class="tile-body"><span class="tile-title">Hardware</span><span class="tile-sub">Inventory</span></div>
+          </a>
+          <a href="https://netplan.carino.systems" class="tile">
+            <span class="tile-icon">🕸️</span>
+            <div class="tile-body"><span class="tile-title">Netplan</span><span class="tile-sub">Config Editor</span></div>
+          </a>
         </div>
+      </div>
 
-        <div class="left-meta">
-          <div class="left-meta-row">
-            <span class="meta-label">Links</span>
-            <span class="meta-value">Github - LinkedIn</span>
-          </div>
-          <div class="left-meta-row">
-            <span class="meta-label">Languages</span>
-            <span class="meta-value">EN - ES - RU - JA</span>
-          </div>
-          <div class="left-meta-row">
-            <span class="meta-label">Platforms</span>
-            <span class="meta-value">GNU/Linux - Windows - macOS
-            </span>
-          </div>
+      <div class="grid-section">
+        <h3 class="section-header">Media Studio</h3>
+        <div class="bento-grid">
+          <a href="streaming.html" class="tile">
+            <span class="tile-icon">📡</span>
+            <div class="tile-body"><span class="tile-title">Streaming</span><span class="tile-sub">OBS Control</span></div>
+          </a>
+          <a href="https://music.carino.systems/" class="tile">
+            <span class="tile-icon">🎵</span>
+            <div class="tile-body"><span class="tile-title">Music</span><span class="tile-sub">Subsonic</span></div>
+          </a>
+          <a href="graphy.html" class="tile">
+            <span class="tile-icon">📸</span>
+            <div class="tile-body"><span class="tile-title">Graphy</span><span class="tile-sub">Photo Assets</span></div>
+          </a>
+          <a href="#" class="tile tile-highlight">
+            <span class="tile-icon">🎙️</span>
+            <div class="tile-body"><span class="tile-title">Prompter</span><span class="tile-sub">Script reader</span></div>
+          </a>
         </div>
-      </aside>
+      </div>
 
-      <!-- RIGHT PANEL -->
-      <section class="panel-right">
-        <!-- Group 1: Infra -->
-        <div class="group"
-             data-preview-type="video"
-             data-preview-src="assets/webm/infra.webm">
-          <div class="group-header infra">
-            <span class="group-title">Infra</span>
-            <span class="group-sub">Systems &amp; networking</span>
-          </div>
-          <div class="group-grid">
-            <a href="os.html" class="tile">Operating Systems</a>
-            <a href="https://software.carino.systems" class="tile">Software</a>
-            <a href="hardware.html" class="tile">Hardware</a>
-            <a href="https://netplan.carino.systems" class="tile">Netplan Editor</a>
-          </div>
+      <div class="grid-section">
+        <h3 class="section-header">Utilities</h3>
+        <div class="bento-grid">
+          <a href="https://speed.carino.systems/" class="tile">
+            <span class="tile-icon">⚡</span>
+            <div class="tile-body"><span class="tile-title">Speedtest</span><span class="tile-sub">10GbE Check</span></div>
+          </a>
+          <a href="https://password.carino.systems/" class="tile">
+            <span class="tile-icon">🔐</span>
+            <div class="tile-body"><span class="tile-title">PassGen</span><span class="tile-sub">Secure Vault</span></div>
+          </a>
+          <a href="https://url.carino.systems/" class="tile">
+            <span class="tile-icon">🔗</span>
+            <div class="tile-body"><span class="tile-title">Shortener</span><span class="tile-sub">Go links</span></div>
+          </a>
+           <a href="https://dicom.carino.systems/" class="tile">
+            <span class="tile-icon">🏥</span>
+            <div class="tile-body"><span class="tile-title">DICOM</span><span class="tile-sub">Tag Editor</span></div>
+          </a>
         </div>
+      </div>
 
-        <!-- Group 2: Media -->
-        <div class="group"
-             data-preview-type="video"
-             data-preview-src="assets/webm/media.webm">
-          <div class="group-header media">
-            <span class="group-title">Media</span>
-            <span class="group-sub">Audio / visual</span>
-          </div>
-          <div class="group-grid">
-            <a href="streaming.html" class="tile">Streaming</a>
-            <a href="https://music.carino.systems/" class="tile">Music</a>
-            <a href="graphy.html" class="tile">Graphy</a>
-          </div>
-        </div>
-
-        <!-- Group 3: Tools -->
-        <div class="group"
-             data-preview-type="video"
-             data-preview-src="assets/webm/tools.webm">
-          <div class="group-header tools">
-            <span class="group-title">Tools</span>
-            <span class="group-sub">Support &amp; diagnostics</span>
-          </div>
-          <div class="group-grid">
-            <a href="https://support.carino.systems/" class="tile">Customer Support</a>
-            <a href="https://speed.carino.systems/" class="tile">Speedtest</a>
-            <a href="https://ip.carino.systems/" class="tile">IP check</a>
-            <a href="https://metadata.carino.systems/" class="tile">Metadata Viewer</a>
-            <a href="https://url.carino.systems/" class="tile">URL Shortener</a>
-            <a href="https://dicom.carino.systems/" class="tile">DICOM Tag Editor</a>
-          </div>
-        </div>
-
-        <!-- Group 4: Utility -->
-        <div class="group"
-             data-preview-type="video"
-             data-preview-src="assets/webm/utility.webm">
-          <div class="group-header misc">
-            <span class="group-title">Utility</span>
-            <span class="group-sub">Everyday helpers</span>
-          </div>
-          <div class="group-grid">
-            <a href="https://teleprompter.carino.systems" class="tile">Teleprompter</a>
-            <a href="https://countdown.carino.systems/" class="tile">Countdown</a>
-            <a href="https://password.carino.systems/" class="tile">Password Generator</a>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="cs-footer">
-    <span><a href="index.html" style="text-decoration: none;">Carino Systems™</a> 2025</span>
-  </footer>
-
-  <!-- Floating nav: hidden on index via .page-index -->
-  <div class="floating-nav">
-    <!-- Theme icon / home -->
-    <a href="index.html" class="floating-btn" aria-label="Carino Systems home">
-      <img id="cs-theme-logo" src="icons/theme-fedora.png" alt="Theme icon" />
-    </a>
-    <!-- GitHub (href set from body[data-github]) -->
-    <a href="#" id="floating-github" class="floating-btn" aria-label="GitHub">
-      <img src="icons/github.svg" alt="GitHub" />
-    </a>
-    <!-- Theme toggle -->
-    <button class="floating-btn floating-theme-toggle nav-theme-toggle"
-            type="button"
-            aria-label="Change theme">
-      ✨
-    </button>
+    </main>
   </div>
 
-  <script>
-    (function () {
-      const STORAGE_KEY = "cs-theme";
-
-      const THEMES = [
-        {
-          id: "fedora",
-          bodyClass: "theme-fedora",
-          label: "Fedora",
-          favicon: "icons/theme-fedora.png",
-          logo: "icons/theme-fedora.png",
-        },
-        {
-          id: "gentoo",
-          bodyClass: "theme-gentoo",
-          label: "Gentoo",
-          favicon: "icons/theme-gentoo.png",
-          logo: "icons/theme-gentoo.png",
-        },
-        {
-          id: "opensuse",
-          bodyClass: "theme-opensuse",
-          label: "openSUSE",
-          favicon: "icons/theme-opensuse.png",
-          logo: "icons/theme-opensuse.png",
-        },
-        {
-          id: "cyberpunk",
-          bodyClass: "theme-cyberpunk",
-          label: "Cyberpunk",
-          favicon: "icons/theme-cyberpunk.png",
-          logo: "icons/theme-cyberpunk.png",
-        },
-        {
-          id: "moe",
-          bodyClass: "theme-moe",
-          label: "Moe",
-          favicon: "icons/theme-moe.png",
-          logo: "icons/theme-moe.png",
-        },
-        {
-          id: "contrast",
-          bodyClass: "theme-contrast",
-          label: "High Contrast",
-          favicon: "icons/theme-contrast.png",
-          logo: "icons/theme-contrast.png",
-        },
-      ];
-
-      function getThemeIndexById(id) {
-        return THEMES.findIndex((t) => t.id === id);
-      }
-
-      function applyTileColors() {
-        const tiles = document.querySelectorAll(".tile");
-        if (!tiles.length) return;
-
-        const isContrast = document.body.classList.contains("theme-contrast");
-        const styles = getComputedStyle(document.body);
-        const palette = [];
-
-        for (let i = 1; i <= 12; i++) {
-          const v = styles.getPropertyValue(`--tile-color-${i}`).trim();
-          if (v) palette.push(v);
-        }
-
-        tiles.forEach((tile) => {
-          if (isContrast || !palette.length) {
-            // High-contrast or no palette: keep default
-            tile.style.backgroundColor = "var(--tile-bg-default)";
-          } else {
-            const color = palette[Math.floor(Math.random() * palette.length)];
-            tile.style.backgroundColor = color;
-          }
-        });
-      }
-
-      function applyTheme(themeId) {
-        const theme = THEMES.find((t) => t.id === themeId) || THEMES[0];
-
-        document.body.classList.remove(
-          ...THEMES.map((t) => t.bodyClass)
-        );
-        document.body.classList.add(theme.bodyClass);
-
-        const fav = document.getElementById("cs-favicon");
-        if (fav) fav.href = theme.favicon;
-
-        const logo = document.getElementById("cs-theme-logo");
-        if (logo) {
-          logo.src = theme.logo;
-          logo.alt = theme.label + " theme icon";
-        }
-
-        const btn = document.querySelector(".nav-theme-toggle");
-        if (btn) {
-          btn.title = "Theme: " + theme.label;
-          btn.setAttribute("data-theme-id", theme.id);
-        }
-
-        localStorage.setItem(STORAGE_KEY, theme.id);
-
-        // Re-randomize tile colors whenever theme changes
-        applyTileColors();
-      }
-
-      function setupThemeToggle() {
-        const btn = document.querySelector(".nav-theme-toggle");
-        if (!btn) return;
-
-        btn.addEventListener("click", () => {
-          const currentId = btn.getAttribute("data-theme-id") || "fedora";
-          const currentIndex = getThemeIndexById(currentId);
-          const nextIndex = (currentIndex + 1) % THEMES.length;
-          applyTheme(THEMES[nextIndex].id);
-        });
-      }
-
-      function setupFloatingGithub() {
-        const ghLink = document.getElementById("floating-github");
-        if (!ghLink) return;
-        const url = document.body.getAttribute("data-github");
-        if (url) ghLink.href = url;
-      }
-
-      function setupPreview() {
-        // Skip preview logic entirely on mobile (where preview is hidden)
-        if (window.matchMedia("(max-width: 760px)").matches) return;
-
-        const groups = document.querySelectorAll(".group[data-preview-type]");
-        const tiles = document.querySelectorAll(".group .tile");
-        const img = document.getElementById("preview-image");
-        const video = document.getElementById("preview-video");
-        const placeholder = document.getElementById("preview-placeholder");
-
-        if (!groups.length || !img || !video || !placeholder) return;
-
-        function showPreview(type, src) {
-          placeholder.style.display = "none";
-
-          if (type === "video") {
-            img.style.display = "none";
-            img.removeAttribute("src");
-
-            video.style.display = "block";
-            if (video.getAttribute("src") !== src) {
-              video.src = src;
-              video.load();
-            }
-            video.play().catch(() => {});
-          } else if (type === "image") {
-            video.pause();
-            video.removeAttribute("src");
-            video.load();
-            video.style.display = "none";
-
-            img.style.display = "block";
-            img.src = src;
-          }
-        }
-
-        function attachPreviewListener(el) {
-          el.addEventListener("mouseenter", () => {
-            let type = el.getAttribute("data-preview-type");
-            let src = el.getAttribute("data-preview-src");
-
-            // If tile/group doesn't define its own, fall back to group-level
-            if (!type || !src) {
-              const group = el.closest(".group");
-              if (group) {
-                type = group.getAttribute("data-preview-type");
-                src = group.getAttribute("data-preview-src");
-              }
-            }
-
-            if (!type || !src) return;
-            showPreview(type, src);
-          });
-        }
-
-        // Allow preview on both groups (header area) and individual tiles
-        groups.forEach((group) => attachPreviewListener(group));
-        tiles.forEach((tile) => attachPreviewListener(tile));
-
-        // Initial preview from first group
-        const first = groups[0];
-        if (first) {
-          const type = first.getAttribute("data-preview-type");
-          const src = first.getAttribute("data-preview-src");
-          if (type && src) {
-            showPreview(type, src);
-          }
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const shuffleFlag =
-          document.body.getAttribute("data-shuffle-theme") === "true";
-        const stored = localStorage.getItem(STORAGE_KEY);
-        let initialId;
-
-        if (shuffleFlag) {
-          const randomIndex = Math.floor(Math.random() * THEMES.length);
-          initialId = THEMES[randomIndex].id;
-        } else if (stored && getThemeIndexById(stored) !== -1) {
-          initialId = stored;
-        } else {
-          initialId = "fedora";
-        }
-
-        applyTheme(initialId);
-        setupThemeToggle();
-        setupFloatingGithub();
-        setupPreview();
-      });
-    })();
-  </script>
+  <!--<script src="./assets/js/search-animate.js"></script>-->
+  <script src="./assets/js/clock-network.js"></script>
+  <script src="./assets/js/theme-manager.js"></script>
 </body>
 </html>
