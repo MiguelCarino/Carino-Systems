@@ -34,38 +34,16 @@ function updateTime() {
     if (elGreet.textContent !== greet) elGreet.textContent = greet;
   }
 }
-
-// === REAL-TIME SYSTEM STATS (Memory) ===
-function updateRealtimeStats() {
-  const elMem = document.getElementById('sysMem');
-  if (elMem) {
-    // performance.memory is Chrome/Edge/Chromium only
-    if (performance && performance.memory) {
-      const used = Math.round(performance.memory.usedJSHeapSize / 1048576);
-      const limit = Math.round(performance.memory.jsHeapSizeLimit / 1048576);
-      elMem.textContent = `${used} / ${limit} MB`;
-    } else {
-      // Clear message for Safari/Firefox
-      elMem.textContent = "Restricted (Privacy)"; 
-      elMem.style.opacity = "0.6"; // Visual hint
-    }
-  }
-}
-
-setInterval(() => {
-  updateTime();
-  updateRealtimeStats();
-}, 1000);
+setInterval(updateTime, 1000);
 updateTime();
-updateRealtimeStats();
 
 
-// === STATIC SYSTEM INFO ===
+// === SYSTEM INFO & HARDWARE ===
 const $ = (id) => document.getElementById(id);
 
 function detectSystem() {
   const ua = navigator.userAgent;
-  let os = "Linux";
+  let os = "Unknown";
   let browser = "Browser";
   let browserVersion = "";
 
@@ -74,15 +52,13 @@ function detectSystem() {
   else if (ua.includes("Mac") || ua.includes("PPC")) os = "macOS";
   else if (ua.includes("Android")) os = "Android";
   else if (ua.includes("iPhone") || ua.includes("iPad")) os = "iOS";
-  else if (ua.includes("Linux")) {
-    if (ua.includes("Fedora")) os = "Fedora";
-    else if (ua.includes("Ubuntu")) os = "Ubuntu";
-    else if (ua.includes("Debian")) os = "Debian";
-    else if (ua.includes("Arch")) os = "Arch Linux";
-    else if (ua.includes("Gentoo")) os = "Gentoo";
-    else if (ua.includes("NixOS")) os = "NixOS";
-    else os = "Linux";
-  }
+  else if (ua.includes("Fedora")) os = "Fedora";
+  else if (ua.includes("Ubuntu")) os = "Ubuntu";
+  else if (ua.includes("Debian")) os = "Debian";
+  else if (ua.includes("Arch")) os = "Arch Linux";
+  else if (ua.includes("Gentoo")) os = "Gentoo";
+  else if (ua.includes("NixOS")) os = "NixOS";
+  else if (ua.includes("Linux")) os = "Linux";
 
   // 2. BROWSER DETECTION
   if (ua.includes("Edg")) {
@@ -111,7 +87,23 @@ function detectSystem() {
   const el = $('sysClient');
   if(el) el.textContent = `${browser}${versionText} on ${os}`;
 
-  // 3. GPU DETECTION & ANGLE BACKEND
+  // 3. CPU CORES
+  const elCPU = $('sysCPU');
+  if(elCPU) {
+    const cores = navigator.hardwareConcurrency;
+    elCPU.textContent = cores ? `${cores} Logical Cores` : "Unknown";
+  }
+
+  // 4. DISPLAY
+  const elScreen = $('sysScreen');
+  if(elScreen) {
+    const w = window.screen.width;
+    const h = window.screen.height;
+    const dpr = window.devicePixelRatio || 1;
+    elScreen.textContent = `${w}x${h} (${dpr.toFixed(1)}x)`;
+  }
+
+  // 5. GPU DETECTION & TYPE
   const elGPU = $('sysGPU');
   if (elGPU) {
     try {
@@ -119,43 +111,42 @@ function detectSystem() {
       const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
       
       if (gl) {
-        // Use RENDERER as requested to avoid deprecation warning
         const renderer = gl.getParameter(gl.RENDERER);
-        
         let cleanName = renderer;
         let angleBackend = "";
+        let gpuType = ""; // New Classification
 
-        // Parse ANGLE info if present
+        // Classification Logic
+        if (renderer.includes("AMD") || renderer.includes("NVIDIA") || renderer.includes("GeForce") || renderer.includes("Radeon")) {
+            gpuType = "Discrete";
+        } else if (renderer.includes("Intel") || renderer.includes("Iris") || renderer.includes("Mali") || renderer.includes("Adreno")) {
+            gpuType = "Integrated";
+        } else {
+            gpuType = "CPU-Fallback";
+        }
+
+        // Parse ANGLE info
         if (renderer.includes("ANGLE (")) {
           const content = renderer.match(/ANGLE \((.*)\)/);
           if (content && content[1]) {
             const parts = content[1].split(', ');
-            // part[1] is usually the nice name (e.g. NVIDIA RTX 3080)
-            // part[2] often contains the backend info (e.g. Direct3D11)
             cleanName = parts[1] ? parts[1].trim() : parts[0]; 
-
-            if (renderer.includes("Direct3D11")) angleBackend = "ANGLE (Direct3D 11)";
-            else if (renderer.includes("Direct3D9")) angleBackend = "ANGLE (Direct3D 9)";
+            
+            if (renderer.includes("Direct3D11")) angleBackend = "ANGLE (D3D 11)";
             else if (renderer.includes("OpenGL")) angleBackend = "ANGLE (OpenGL)";
             else if (renderer.includes("Metal")) angleBackend = "ANGLE (Metal)";
             else if (renderer.includes("Vulkan")) angleBackend = "ANGLE (Vulkan)";
           }
         }
         
-        // Cleanup extra shader version noise if present
         cleanName = cleanName.replace(/\s(vs|ps|gs|ds|es|cs)_\d_\d/g, "");
 
-        // SET HTML: GPU Name + Backend below
-        if (angleBackend) {
-          elGPU.innerHTML = `${cleanName}<br><span style="font-size:0.75em; opacity:0.7; display:block; margin-top:2px;">${angleBackend}</span>`;
-          // Ensure parent container aligns top so the break looks good
-          elGPU.style.lineHeight = "1.2"; 
-          elGPU.style.textAlign = "right"; 
-        } else {
-          elGPU.textContent = cleanName;
-        }
-        
-        elGPU.title = renderer; // Full raw info on hover
+        // Display: GPU Name + Type + Backend
+        const subline = `<span style="font-size:0.75em; opacity:0.7; display:block; margin-top:2px;">[${gpuType}] ${angleBackend}</span>`;
+        elGPU.innerHTML = `${cleanName}${subline}`;
+        elGPU.style.lineHeight = "1.2"; 
+        elGPU.style.textAlign = "right"; 
+        elGPU.title = renderer;
 
       } else {
         elGPU.textContent = "WebGL Disabled";
@@ -164,34 +155,15 @@ function detectSystem() {
       elGPU.textContent = "Error";
     }
   }
-
-  // 4. CONNECTION TYPE
-  const elConn = $('sysConn');
-  if (elConn) {
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (conn && conn.effectiveType) {
-      const type = conn.effectiveType.toUpperCase(); 
-      const down = conn.downlink ? ` (${conn.downlink}Mbps)` : '';
-      elConn.textContent = type + down;
-      
-      conn.addEventListener('change', () => {
-         elConn.textContent = (conn.effectiveType || "Unknown").toUpperCase() + (conn.downlink ? ` (${conn.downlink}Mbps)` : '');
-      });
-    } else {
-      elConn.textContent = "Restricted (Privacy)";
-      elConn.style.opacity = "0.6";
-    }
-  }
 }
 
 
-// === ROBUST NETWORK DETECTION (From your snippet) ===
+// === ROBUST NETWORK & BANDWIDTH TEST ===
 
 async function fetchJSON(url, { timeoutMs = 4000 } = {}) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    // Using mode: 'cors' and cache: 'no-store' as requested
     const res = await fetch(url, { mode: "cors", signal: ctrl.signal, cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
@@ -228,7 +200,6 @@ async function detectIPv4() {
 async function checkPing() {
   const start = performance.now();
   try {
-    // Ping current page (reliable, avoids 404s on favicons)
     await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' }); 
     const duration = Math.round(performance.now() - start);
     const el = $('pingVal');
@@ -239,6 +210,47 @@ async function checkPing() {
   }
 }
 
+// === BROADBAND SPEED TEST ===
+function formatSpeed(bitsPerSecond) {
+    const kbps = bitsPerSecond / 1000;
+    const mbps = kbps / 1000;
+    if (mbps >= 1) return mbps.toFixed(1) + " Mbps";
+    if (kbps >= 1) return kbps.toFixed(0) + " Kbps";
+    return bitsPerSecond.toFixed(0) + " bps";
+}
+
+async function runSpeedTest() {
+    const elSpeed = $('sysSpeed');
+    if (!elSpeed) return;
+    
+    elSpeed.textContent = "Testing...";
+    const size = 1000000; // 1MB test file size
+    const testFile = "https://raw.githubusercontent.com/sindresorhus/awesome-fake-data/master/data/1mb.json"; // Use a stable public file
+    
+    // Download Speed Test
+    const start = performance.now();
+    try {
+        const res = await fetch(testFile, { method: 'GET', cache: 'no-store' });
+        if (!res.ok) throw new Error("File not found");
+        const blob = await res.blob();
+        
+        const duration = (performance.now() - start) / 1000; // seconds
+        const bytes = blob.size;
+        
+        // Convert to Mbps (Bytes * 8 / seconds / 1000000)
+        const downloadSpeed = (bytes * 8) / duration; 
+        
+        elSpeed.textContent = formatSpeed(downloadSpeed);
+
+    } catch (e) {
+        elSpeed.textContent = "N/A";
+    }
+    
+    // Note: Upload speed requires sending data, which is complex. Displaying the down speed is the most reliable client-side metric.
+    // For a simple single metric, the download speed is the most useful diagnostic.
+}
+
+
 async function runNetwork() {
   const ipv4 = $('ipv4'); const ipv6 = $('ipv6');
   const dot4 = $('dot4'); const dot6 = $('dot6');
@@ -248,7 +260,8 @@ async function runNetwork() {
   if(dot4) dot4.className = "status-dot scanning"; 
   if(dot6) dot6.className = "status-dot scanning";
 
-  const [v6, v4] = await Promise.allSettled([detectIPv6(), detectIPv4()]);
+  const networkTasks = [detectIPv6(), detectIPv4(), checkPing(), runSpeedTest()];
+  const [v6, v4] = await Promise.allSettled(networkTasks.slice(0, 2));
 
   // Update IPv6 UI
   if (v6.status === "fulfilled" && v6.value) {
@@ -267,8 +280,6 @@ async function runNetwork() {
     if(ipv4) ipv4.textContent = "Unavailable";
     if(dot4) dot4.className = "status-dot fail";
   }
-  
-  await checkPing();
 }
 
 // === HUD INTERACTION ===
