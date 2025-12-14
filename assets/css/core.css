@@ -158,7 +158,7 @@ a { text-decoration: none; color: inherit; }
   
   /* Interaction Styling */
   cursor: pointer;
-  user-select: none; /* Prevent text selection on rapid clicks */
+  user-select: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -166,19 +166,68 @@ a { text-decoration: none; color: inherit; }
   border-color: var(--accent);
 }
 
-/* When system group is hidden, ensure Brand and Time have breathing room */
-.hero-hud:not(.expanded) .hud-row-top {
-  justify-content: flex-start; /* Or space-around depending on preference */
-  gap: 4rem;
-}
-
 /* Top Row Container (Brand, Time, System) */
 .hud-row-top {
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
   width: 100%;
+  align-items: stretch;
+  gap: 0; /* Important for clean percentage sizing */
 }
+
+/* When system group is hidden, ensure Brand and Time have breathing room (original gap: 4rem) */
+.hero-hud:not(.expanded) .hud-row-top {
+  justify-content: space-between; 
+  gap: 4rem; 
+}
+
+
+/* =========================================
+   HUD LAYOUT SIZING (NEW LOGIC)
+   ========================================= */
+
+/* === STATE 1: HIDDEN (Default) === 
+   Group 1: 50%, Group 2: 50%, Group 3: Hidden */
+.hero-hud:not(.expanded) .brand-group {
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+.hero-hud:not(.expanded) .time-group {
+  flex: 0 0 60%;
+  max-width: 60%;
+  align-items: center; /* Center time when wide */
+  text-align: center;
+}
+
+.hero-hud:not(.expanded) .system-group {
+  display: none;
+}
+
+/* === STATE 2: EXPANDED (Shown) === 
+   Group 1: 30%, Group 2: 30%, Group 3: 40% */
+.hero-hud.expanded .brand-group {
+  flex: 0 0 10%;
+  max-width: 20%;
+}
+
+.hero-hud.expanded .time-group {
+  flex: 0 0 20em;
+  max-width: 20em;
+  /* Reverting to default alignment for consistency in expanded view */
+  align-items: center;
+  text-align: center;
+}
+
+.hero-hud.expanded .system-group {
+  flex: 0 1 40%;
+  max-width: 40%;
+  /* Ensures system group content is laid out correctly */
+  display: flex; 
+}
+
+/* =========================================
+   HUD ROWS & GROUPS
+   ========================================= */
 
 /* Bottom Row Container (New Text) */
 .hud-row-bottom {
@@ -217,7 +266,8 @@ a { text-decoration: none; color: inherit; }
 
 /* 2. Expanded State: Visible */
 .hero-hud.expanded .hud-toggle {
-  display: flex; /* Flex is safe for both div items and spans in flex containers */
+  /* This display is overridden by the layout section for .system-group */
+  display: flex; 
   opacity: 1;
   animation: fadeIn 0.3s ease forwards;
 }
@@ -256,7 +306,7 @@ body[data-theme="black"] .social-btn:hover { background: #fff; color: #000; }
 .social-btn:hover { transform: translateY(-3px); color: var(--accent); }
 
 /* TIME */
-.time-group { flex: 1; min-width: 200px; align-items: center; text-align: center; }
+.time-group { min-width: 200px; } /* Removed flex: 1; here as it's now controlled by layout rules */
 .clock-display { font-size: 3.5rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: var(--title-glow, none); }
 .date-display { font-size: 1.1rem; color: var(--fg-secondary); font-weight: 500; margin-top: 0.2rem; margin-bottom: 1rem; }
 .mini-meta { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
@@ -267,7 +317,7 @@ body[data-theme="black"] .social-btn:hover { background: #fff; color: #000; }
 body[data-theme="black"] .meta-pill { border-color: #333; }
 
 /* SYSTEM */
-.system-group { flex: 0 0 auto; min-width: 240px; gap: 0.45rem; justify-content: center; }
+.system-group { min-width: 240px; gap: 0.45rem; justify-content: center; }
 .sys-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .sys-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; color: var(--fg-secondary); text-transform: uppercase; }
 .sys-value { font-weight: 600; text-align: right; }
@@ -313,7 +363,7 @@ body[data-theme="black"] .icon-btn:hover { background: #fff; color: #000; }
 /* GRID */
 .main-content { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 1rem; }
 .section-header { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-secondary); margin-bottom: 1rem; padding-left: 4px; }
-.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-auto-rows: 110px; gap: 1.25rem; }
+.bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 2fr)); grid-auto-rows: 110px; gap: 1.25rem; }
 
 .tile {
   background: var(--tile-bg);
@@ -321,7 +371,7 @@ body[data-theme="black"] .icon-btn:hover { background: #fff; color: #000; }
   border-radius: var(--radius-m); padding: 1.5rem; display: flex; flex-direction: column; justify-content: center;
   position: relative; overflow: hidden; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-body[class*="cyberpunk"] .tile { border-color: rgba(255, 255, 255, 0.1); } /* Subtle default border for cyberpunk */
+body[class*="cyberpunk"] .tile { border-color: rgba(255, 255, 255, 0.1); } 
 
 .tile:hover { transform: translateY(-4px); background: var(--tile-hover); border-color: var(--accent); }
 body[data-theme="black"] .tile:hover { background: #fff; color: #000; }
@@ -339,20 +389,39 @@ body[data-theme="black"] .tile:hover .tile-sub { color: #000; }
 .tile.animate-enter { animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: var(--delay, 0s); }
 .tile.hidden { display: none; }
 
-/* RESPONSIVE */
+/* =========================================
+   RESPONSIVE (Updated)
+   ========================================= */
 @media (max-width: 900px) {
-  /* Update responsive behavior for new layout */
+  /* On Tablet/Mobile, stack all groups */
   .hud-row-top { flex-direction: column; gap: 2rem; }
   .hud-divider { display: none; }
   
-  .brand-group, .time-group, .system-group { 
-    width: 100%; align-items: flex-start; text-align: left; 
+  /* Override Flexbox sizing set above for desktop/expanded */
+  .brand-group, .time-group, .system-group,
+  .hero-hud:not(.expanded) .brand-group, 
+  .hero-hud:not(.expanded) .time-group,
+  .hero-hud.expanded .brand-group,
+  .hero-hud.expanded .time-group,
+  .hero-hud.expanded .system-group { 
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+    /* Reset text alignment from desktop rules */
+    align-items: flex-start !important; 
+    text-align: left !important;
   }
   
   .brand-title, .clock-display { font-size: 2.8rem; }
-  .time-group { align-items: flex-start; }
   .mini-meta { justify-content: flex-start; }
-  .system-group { padding-top: 1.5rem; border-top: 1px solid var(--hud-border);
+  
+  /* Restore separator line for the system-group when it appears */
+  .system-group { 
+    padding-top: 1.5rem; 
+    border-top: 1px solid var(--hud-border);
+  }
+  
+  /* Reduce gap when not expanded */
   .hero-hud:not(.expanded) .hud-row-top { gap: 2rem; }
 }
 
