@@ -1,11 +1,8 @@
 // ==========================================
 // CONFIGURATION: SPEED TEST FILES
 // ==========================================
-// File 1: Small (~2MB) for initial check. (Using Unsplash High-Res Image)
-const TEST_FILE_SMALL = "https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=2000&q=80";
-// File 2: Large (~10MB) for retry if connection is too fast. 
-// (Replace with your own 10MB file link if desired. Using a public test bin here)
-const TEST_FILE_LARGE = "https://proof.ovh.net/files/10Mb.dat"; 
+const TEST_FILE_SMALL = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_1mb";
+const TEST_FILE_LARGE = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_25mb";
 
 
 // ==========================================
@@ -67,7 +64,6 @@ async function detectSystem() {
   else if (ua.includes("Android")) os = "Android";
   else if (ua.includes("iPhone") || ua.includes("iPad")) os = "iOS";
   else if (ua.includes("Linux")) {
-    // Distro check
     if (ua.includes("Fedora")) os = "Fedora";
     else if (ua.includes("Ubuntu")) os = "Ubuntu";
     else if (ua.includes("Debian")) os = "Debian";
@@ -77,18 +73,14 @@ async function detectSystem() {
     else os = "Linux";
   }
 
-  // 2. BROWSER DETECTION (Brave, Chrome, Chromium, iOS)
-  // Brave Detection (Reliable check)
+  // 2. BROWSER DETECTION
   const isBrave = (navigator.brave && await navigator.brave.isBrave()) || false;
 
   if (isBrave) {
     browser = "Brave";
-    // Brave hides version in standard ways often, defaulting to Chrome version usually
     const match = ua.match(/Chrome\/(\d+\.\d+)/); 
     if (match) browserVersion = match[1];
-  } 
-  // iOS Browsers
-  else if (ua.includes("CriOS")) {
+  } else if (ua.includes("CriOS")) {
     browser = "Chrome iOS";
     const match = ua.match(/CriOS\/(\d+\.\d+)/);
     if (match) browserVersion = match[1];
@@ -96,9 +88,7 @@ async function detectSystem() {
     browser = "Firefox iOS";
     const match = ua.match(/FxiOS\/(\d+\.\d+)/);
     if (match) browserVersion = match[1];
-  }
-  // Standard Browsers
-  else if (ua.includes("Edg")) {
+  } else if (ua.includes("Edg")) {
     browser = "Edge";
     const match = ua.match(/Edg\/(\d+\.\d+)/);
     if (match) browserVersion = match[1];
@@ -120,15 +110,14 @@ async function detectSystem() {
     if (match) browserVersion = match[1];
   }
 
-  // 3. ARCHITECTURE DETECTION (Async)
+  // 3. ARCHITECTURE
   if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
     try {
       const uaData = await navigator.userAgentData.getHighEntropyValues(["architecture", "bitness"]);
       if (uaData.architecture) arch = ` ${uaData.architecture}`;
       if (uaData.bitness) arch += ` ${uaData.bitness}-bit`;
-    } catch(e) { /* Permission denied or not supported */ }
+    } catch(e) {}
   } else {
-    // Fallback: Crude string parsing
     if (ua.includes("WOW64") || ua.includes("Win64") || ua.includes("x86_64")) arch = " x64";
     else if (ua.includes("arm")) arch = " arm";
   }
@@ -140,13 +129,8 @@ async function detectSystem() {
   // 4. CPU CORES
   const elCPU = $('sysCPU');
   if(elCPU) {
-    // Brave often masks this or returns 'undefined' to prevent fingerprinting
     const cores = navigator.hardwareConcurrency;
-    if (cores) {
-      elCPU.textContent = `${cores} Logical Cores`;
-    } else {
-      elCPU.textContent = "Unknown (Masked)";
-    }
+    elCPU.textContent = cores ? `${cores} Logical Cores` : "Unknown (Masked)";
   }
 
   // 5. DISPLAY
@@ -158,7 +142,7 @@ async function detectSystem() {
     elScreen.textContent = `${w}x${h} (${dpr.toFixed(1)}x)`;
   }
 
-  // 6. GPU DETECTION, TYPE & TEXTURE SIZE
+  // 6. GPU
   const elGPU = $('sysGPU');
   if (elGPU) {
     try {
@@ -167,12 +151,11 @@ async function detectSystem() {
       
       if (gl) {
         const renderer = gl.getParameter(gl.RENDERER);
-        const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE); // e.g. 16384
+        const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE); 
         let cleanName = renderer;
         let angleBackend = "";
         let gpuType = "Unknown";
 
-        // GPU Type Logic
         if (renderer.includes("AMD") || renderer.includes("NVIDIA") || renderer.includes("GeForce") || renderer.includes("Radeon") || renderer.includes("RTX") || renderer.includes("GTX")) {
             gpuType = "Discrete";
         } else if (renderer.includes("Intel") || renderer.includes("Iris") || renderer.includes("Mali") || renderer.includes("Adreno") || renderer.includes("Apple")) {
@@ -181,7 +164,6 @@ async function detectSystem() {
             gpuType = "Software";
         }
 
-        // ANGLE Backend Parse
         if (renderer.includes("ANGLE (")) {
           const content = renderer.match(/ANGLE \((.*)\)/);
           if (content && content[1]) {
@@ -197,8 +179,6 @@ async function detectSystem() {
         
         cleanName = cleanName.replace(/\s(vs|ps|gs|ds|es|cs)_\d_\d/g, "");
 
-        // Format: Name 
-        //         [Type] Backend | MaxTex
         const subline = `<span style="font-size:0.75em; opacity:0.7; display:block; margin-top:2px;">[${gpuType}] ${angleBackend} | Tex: ${maxTex}</span>`;
         elGPU.innerHTML = `${cleanName}${subline}`;
         elGPU.style.lineHeight = "1.2"; 
@@ -275,42 +255,21 @@ async function detectIPs() {
   }
 }
 
-// === ADVANCED PING (DNS, TCP, TLS, TTFB) ===
+// === SIMPLE PING (Back to Basic) ===
 async function checkPing() {
-  // We use a unique query param to ensure we bypass some cache layers 
-  // and hopefully trigger a real network request for timing
-  const pingUrl = window.location.href.split('?')[0] + '?ping=' + Date.now();
+  const start = performance.now();
   const el = $('pingVal');
-  
   try {
-    await fetch(pingUrl, { method: 'HEAD', cache: 'no-store' });
-    
-    // Use Resource Timing API
-    const entries = performance.getEntriesByName(pingUrl);
-    if (entries.length > 0) {
-      const t = entries[entries.length - 1]; // Get latest
-      
-      // Calculate timings (in ms)
-      const rtt = (t.responseEnd - t.startTime).toFixed(0);
-      const dns = (t.domainLookupEnd - t.domainLookupStart).toFixed(0);
-      const tcp = (t.connectEnd - t.connectStart).toFixed(0);
-      // secureConnectionStart is 0 if no TLS, or timestamp if TLS used
-      const tls = (t.secureConnectionStart > 0) ? (t.connectEnd - t.secureConnectionStart).toFixed(0) : "0";
-      const ttfb = (t.responseStart - t.requestStart).toFixed(0);
-
-      // Display: RTT (main), then breakdown
-      // Note: If connection is reused (Keep-Alive), DNS/TCP/TLS will be 0.
-      el.innerHTML = `RTT: ${rtt}ms <span style="opacity:0.6; font-size:0.8em; margin-left:6px;">(DNS:${dns}, TCP:${tcp}, TLS:${tls}, TTFB:${ttfb})</span>`;
-    } else {
-      // Fallback if Timing API fails
-      el.textContent = "Refreshed (Timing API Unavailable)";
-    }
+    // Ping current page (reliable)
+    await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' }); 
+    const duration = Math.round(performance.now() - start);
+    if(el) el.textContent = duration + " ms";
   } catch (e) { 
-    el.textContent = "Timeout / Error"; 
+    if(el) el.textContent = "Timeout"; 
   }
 }
 
-// === SMART SPEED TEST (Retry Logic) ===
+// === SMART SPEED TEST ===
 function formatSpeed(bitsPerSecond) {
     const kbps = bitsPerSecond / 1000;
     const mbps = kbps / 1000;
@@ -333,28 +292,22 @@ async function runSpeedTest() {
     const elSpeed = $('sysSpeed');
     if (!elSpeed) return;
     
-    elSpeed.textContent = "Testing (Small)...";
+    elSpeed.textContent = "Testing...";
     
     try {
-        // Step 1: Try Small File
-        let result = await performDownload("https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_1mb");
+        let result = await performDownload(TEST_FILE_SMALL);
         
-        // Step 2: Check if too fast (< 0.5s)
         if (result.duration < 0.5) {
-            elSpeed.textContent = "Testing (Large)...";
-            console.log(`Small test took ${result.duration}s. Retrying with 10MB file.`);
-            result = await performDownload("https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_25mb");
+            elSpeed.textContent = "Boost Test...";
+            result = await performDownload(TEST_FILE_LARGE);
         }
 
-        // Calculate Speed
         if (result.duration <= 0) throw new Error("Instant");
         const bits = result.bytes * 8;
         const bps = bits / result.duration;
-        
         elSpeed.textContent = formatSpeed(bps);
 
     } catch (e) {
-        // Fallback to Connection API
         if (navigator.connection && navigator.connection.downlink) {
            elSpeed.textContent = "~" + navigator.connection.downlink + " Mbps (Est)";
         } else {
@@ -385,6 +338,5 @@ document.addEventListener("DOMContentLoaded", () => {
 const retryBtn = $('retryNetwork');
 if(retryBtn) retryBtn.addEventListener("click", runNetwork);
 
-// Run
 detectSystem(); 
 runNetwork();
