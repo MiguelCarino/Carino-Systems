@@ -114,15 +114,17 @@ function detectSystem() {
         const renderer = gl.getParameter(gl.RENDERER);
         let cleanName = renderer;
         let angleBackend = "";
-        let gpuType = ""; // New Classification
+        let gpuType = "";
 
         // Classification Logic
         if (renderer.includes("AMD") || renderer.includes("NVIDIA") || renderer.includes("GeForce") || renderer.includes("Radeon")) {
             gpuType = "Discrete";
-        } else if (renderer.includes("Intel") || renderer.includes("Iris") || renderer.includes("Mali") || renderer.includes("Adreno")) {
+        } else if (renderer.includes("Intel") || renderer.includes("Iris") || renderer.includes("Mali") || renderer.includes("Adreno") || renderer.includes("Apple")) {
             gpuType = "Integrated";
+        } else if (renderer.includes("SwiftShader") || renderer.includes("LLVM")) {
+            gpuType = "Software";
         } else {
-            gpuType = "CPU-Fallback";
+            gpuType = "Unknown Type";
         }
 
         // Parse ANGLE info
@@ -133,6 +135,7 @@ function detectSystem() {
             cleanName = parts[1] ? parts[1].trim() : parts[0]; 
             
             if (renderer.includes("Direct3D11")) angleBackend = "ANGLE (D3D 11)";
+            else if (renderer.includes("Direct3D9")) angleBackend = "ANGLE (D3D 9)";
             else if (renderer.includes("OpenGL")) angleBackend = "ANGLE (OpenGL)";
             else if (renderer.includes("Metal")) angleBackend = "ANGLE (Metal)";
             else if (renderer.includes("Vulkan")) angleBackend = "ANGLE (Vulkan)";
@@ -141,7 +144,7 @@ function detectSystem() {
         
         cleanName = cleanName.replace(/\s(vs|ps|gs|ds|es|cs)_\d_\d/g, "");
 
-        // Display: GPU Name + Type + Backend
+        // Display
         const subline = `<span style="font-size:0.75em; opacity:0.7; display:block; margin-top:2px;">[${gpuType}] ${angleBackend}</span>`;
         elGPU.innerHTML = `${cleanName}${subline}`;
         elGPU.style.lineHeight = "1.2"; 
@@ -158,7 +161,7 @@ function detectSystem() {
 }
 
 
-// === ROBUST NETWORK & BANDWIDTH TEST ===
+// === ROBUST NETWORK ===
 
 async function fetchJSON(url, { timeoutMs = 4000 } = {}) {
   const ctrl = new AbortController();
@@ -210,7 +213,7 @@ async function checkPing() {
   }
 }
 
-// === BROADBAND SPEED TEST ===
+// === BROADBAND SPEED TEST (Fixed) ===
 function formatSpeed(bitsPerSecond) {
     const kbps = bitsPerSecond / 1000;
     const mbps = kbps / 1000;
@@ -224,30 +227,36 @@ async function runSpeedTest() {
     if (!elSpeed) return;
     
     elSpeed.textContent = "Testing...";
-    const size = 1000000; // 1MB test file size
-    const testFile = "https://raw.githubusercontent.com/sindresorhus/awesome-fake-data/master/data/1mb.json"; // Use a stable public file
     
-    // Download Speed Test
+    // FIX: Use a ~2MB JPEG image. Images do not compress well, preventing false high-speed readings.
+    // Source: Unsplash (High performance CDN, CORS allowed)
+    const testFile = "https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=2000&q=80"; 
+    
     const start = performance.now();
     try {
         const res = await fetch(testFile, { method: 'GET', cache: 'no-store' });
-        if (!res.ok) throw new Error("File not found");
-        const blob = await res.blob();
+        if (!res.ok) throw new Error("Net Error");
         
+        const blob = await res.blob();
         const duration = (performance.now() - start) / 1000; // seconds
         const bytes = blob.size;
         
-        // Convert to Mbps (Bytes * 8 / seconds / 1000000)
-        const downloadSpeed = (bytes * 8) / duration; 
+        if (duration <= 0) throw new Error("Instant");
+
+        // Convert to Bits per Second
+        const bits = bytes * 8;
+        const bps = bits / duration;
         
-        elSpeed.textContent = formatSpeed(downloadSpeed);
+        elSpeed.textContent = formatSpeed(bps);
 
     } catch (e) {
-        elSpeed.textContent = "N/A";
+        // Fallback: Use browser API if available (Chromium only)
+        if (navigator.connection && navigator.connection.downlink) {
+           elSpeed.textContent = "~" + navigator.connection.downlink + " Mbps";
+        } else {
+           elSpeed.textContent = "Error";
+        }
     }
-    
-    // Note: Upload speed requires sending data, which is complex. Displaying the down speed is the most reliable client-side metric.
-    // For a simple single metric, the download speed is the most useful diagnostic.
 }
 
 
@@ -260,6 +269,7 @@ async function runNetwork() {
   if(dot4) dot4.className = "status-dot scanning"; 
   if(dot6) dot6.className = "status-dot scanning";
 
+  // Run all checks in parallel
   const networkTasks = [detectIPv6(), detectIPv4(), checkPing(), runSpeedTest()];
   const [v6, v4] = await Promise.allSettled(networkTasks.slice(0, 2));
 
