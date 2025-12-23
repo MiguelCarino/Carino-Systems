@@ -142,52 +142,163 @@ async function detectSystem() {
     elScreen.textContent = `${w}x${h} (${dpr.toFixed(1)}x)`;
   }
 
-  // 6. GPU
-  const elGPU = $('sysGPU');
-  if (elGPU) {
-    try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-      
-      if (gl) {
-        const renderer = gl.getParameter(gl.RENDERER);
-        const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE); 
-        let cleanName = renderer;
-        let angleBackend = "";
-        let gpuType = "Unknown";
+  // 6. GPUfunction detectGPUInfo() {
+  const elGPU = document.getElementById('sysGPU');
+  if (!elGPU) return;
 
-        if (renderer.includes("AMD") || renderer.includes("NVIDIA") || renderer.includes("GeForce") || renderer.includes("Radeon") || renderer.includes("RTX") || renderer.includes("GTX")) {
-            gpuType = "Discrete";
-        } else if (renderer.includes("Intel") || renderer.includes("Iris") || renderer.includes("Mali") || renderer.includes("Adreno") || renderer.includes("Apple")) {
-            gpuType = "Integrated";
-        } else if (renderer.includes("SwiftShader") || renderer.includes("LLVM") || renderer.includes("Software")) {
-            gpuType = "Software";
-        }
+  const safeSet = (main, sub, title) => {
+    elGPU.textContent = "";
+    elGPU.style.lineHeight = "1.2";
+    elGPU.style.textAlign = "right";
+    if (title) elGPU.title = title;
 
-        if (renderer.includes("ANGLE (")) {
-          const content = renderer.match(/ANGLE \((.*)\)/);
-          if (content && content[1]) {
-            const parts = content[1].split(', ');
-            cleanName = parts[1] ? parts[1].trim() : parts[0]; 
-            if (renderer.includes("Direct3D11")) angleBackend = "ANGLE (D3D11)";
-            else if (renderer.includes("Direct3D9")) angleBackend = "ANGLE (D3D9)";
-            else if (renderer.includes("OpenGL")) angleBackend = "ANGLE (OpenGL)";
-            else if (renderer.includes("Metal")) angleBackend = "ANGLE (Metal)";
-            else if (renderer.includes("Vulkan")) angleBackend = "ANGLE (Vulkan)";
-          }
-        }
-        
-        cleanName = cleanName.replace(/\s(vs|ps|gs|ds|es|cs)_\d_\d/g, "");
+    const mainSpan = document.createElement("span");
+    mainSpan.textContent = main || "Unknown GPU";
 
-        const subline = `<span style="font-size:0.75em; opacity:0.7; display:block; margin-top:2px;">[${gpuType}] ${angleBackend} | Tex: ${maxTex}</span>`;
-        elGPU.innerHTML = `${cleanName}${subline}`;
-        elGPU.style.lineHeight = "1.2"; 
-        elGPU.style.textAlign = "right"; 
-        elGPU.title = renderer;
-      } else {
-        elGPU.textContent = "WebGL Disabled";
-      }
-    } catch(e) { elGPU.textContent = "Error"; }
+    const subSpan = document.createElement("span");
+    subSpan.textContent = sub || "";
+    subSpan.style.fontSize = "0.75em";
+    subSpan.style.opacity = "0.7";
+    subSpan.style.display = "block";
+    subSpan.style.marginTop = "2px";
+
+    elGPU.appendChild(mainSpan);
+    if (sub) elGPU.appendChild(subSpan);
+  };
+
+  const tryGetGL = () => {
+    const canvas = document.createElement("canvas");
+    // Avoid huge canvases; we just need a context + parameters.
+    const opts = { powerPreference: "high-performance" };
+    return (
+      canvas.getContext("webgl2", opts) ||
+      canvas.getContext("webgl", opts) ||
+      canvas.getContext("experimental-webgl", opts) ||
+      null
+    );
+  };
+
+  const stripParens = (s) => {
+    // Remove parenthetical parts: "Foo (bar)" -> "Foo"
+    // Keeps you from getting long backend strings in the "clean" name.
+    let out = "", depth = 0;
+    for (const ch of s) {
+      if (ch === "(") depth++;
+      else if (ch === ")") depth = Math.max(0, depth - 1);
+      else if (depth === 0) out += ch;
+    }
+    return out.replace(/\s+/g, " ").trim();
+  };
+
+  const normalizeName = (s) => {
+    if (!s) return "";
+    return s
+      .replace(/\/PCIe\/SSE2/gi, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  };
+
+  const parseANGLE = (raw) => {
+    // Example patterns:
+    // "ANGLE (NVIDIA, NVIDIA GeForce RTX 4090 (0x2684) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    // "ANGLE (Apple, Apple M2, Metal)"
+    const m = raw.match(/^ANGLE\s*\((.+)\)\s*$/);
+    if (!m) return null;
+
+    const parts = m[1].split(/,\s*/g).map(p => p.trim()).filter(Boolean);
+    // Usually: vendor, renderer, api/backend...
+    const vendor = parts[0] || "";
+    let device = parts[1] || parts[0] || "";
+    let api = parts.slice(2).join(", ");
+
+    // Clean D3D shader suffixes if present
+    device = device.replace(/\s(vs|ps|gs|ds|es|cs)_\d_\d/gi, "").trim();
+
+    return { vendor, device, api };
+  };
+
+  const classifyGPU = (vendorRaw, rendererRaw) => {
+    const s = `${vendorRaw} ${rendererRaw}`.toLowerCase();
+
+    // Software-ish
+    if (s.includes("swiftshader") || s.includes("llvmpipe") || s.includes("soft") || s.includes("software"))
+      return "Software";
+
+    // Integrated-ish
+    if (
+      s.includes("intel") || s.includes("uhd") || s.includes("iris") ||
+      s.includes("apple") || s.includes("m1") || s.includes("m2") || s.includes("m3") ||
+      s.includes("adreno") || s.includes("mali") || s.includes("powervr") ||
+      s.includes("radeon graphics") // AMD iGPU branding on some systems
+    ) return "Integrated";
+
+    // Discrete-ish
+    if (
+      s.includes("nvidia") || s.includes("geforce") || s.includes("quadro") || s.includes("rtx") || s.includes("gtx") ||
+      s.includes("amd") || s.includes("radeon") || s.includes("rx ") || s.includes("vega") ||
+      s.includes("arc ") // Intel Arc (discrete)
+    ) return "Discrete";
+
+    return "Unknown";
+  };
+
+  try {
+    const gl = tryGetGL();
+    if (!gl) {
+      safeSet("WebGL Disabled", "", "");
+      return;
+    }
+
+    // 1) Prefer unmasked renderer/vendor (most specific)
+    let vendor = "";
+    let renderer = "";
+    const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+    if (dbg) {
+      vendor = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) || "";
+      renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "";
+    }
+
+    // 2) Fallback
+    const maskedRenderer = gl.getParameter(gl.RENDERER) || "";
+    const maskedVendor = gl.getParameter(gl.VENDOR) || "";
+    const raw = renderer || maskedRenderer || "Unknown";
+    const rawVendor = vendor || maskedVendor || "";
+
+    // 3) ANGLE parsing (if present)
+    let cleanName = raw;
+    let backend = "";
+    const angle = parseANGLE(raw);
+    if (angle) {
+      cleanName = angle.device || cleanName;
+      backend = angle.api ? `ANGLE (${angle.api})` : "ANGLE";
+    } else if (/swiftshader/i.test(raw)) {
+      backend = "Software rasterizer";
+    }
+
+    cleanName = normalizeName(stripParens(cleanName));
+
+    // 4) Limits
+    const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    //const maxRB = gl.getParameter(gl.MAX_RENDERBUFFER_SIZE);
+    //const maxVP = gl.getParameter(gl.MAX_VIEWPORT_DIMS); // Int32Array [w,h]
+
+    // 5) Type
+    const gpuType = classifyGPU(rawVendor, raw);
+
+    // 6) Render
+    const sub = [
+      `[${gpuType}]`,
+      backend || "",
+      `Tex: ${maxTex}`
+      //`RB: ${maxRB}`
+      //maxVP ? `VP: ${maxVP[0]}×${maxVP[1]}` : ""
+    ].filter(Boolean).join(" | ");
+
+    // Put the “full raw string” in title for hover inspection
+    const title = [rawVendor && `Vendor: ${rawVendor}`, `Renderer: ${raw}`].filter(Boolean).join("\n");
+    safeSet(cleanName || "Unknown GPU", sub, title);
+  } catch (e) {
+    safeSet("Error", "", "");
   }
 }
 
