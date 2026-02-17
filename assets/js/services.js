@@ -27,15 +27,37 @@
   }
 
   function updateFaviconAndTitle({ title, favicon }) {
-    const out = "?v=" + Math.random().toString(36).substr(2, 9);
+    // 1. Force a cache-bust with a timestamp
+    const cacheBuster = "?v=" + Date.now();
+    const fullPath = favicon + cacheBuster;
+
+    // 2. Safari is picky: Remove ALL existing icon-related tags first
+    const existingIcons = document.querySelectorAll("link[rel*='icon']");
+    existingIcons.forEach(el => el.parentNode.removeChild(el));
+
+    // 3. Create the standard 'icon' link
     const newLink = document.createElement("link");
     newLink.rel = "icon";
     newLink.type = "image/x-icon";
-    newLink.href = favicon + out;
+    newLink.href = fullPath;
 
-    const old = document.querySelector("link[rel='icon']");
-    if (old) old.remove();
-    document.head.appendChild(newLink);
+    // 4. Create the 'shortcut icon' link (Legacy/Safari favorite)
+    const shortcutLink = document.createElement("link");
+    shortcutLink.rel = "shortcut icon";
+    shortcutLink.href = fullPath;
+
+    // 5. Create the 'apple-touch-icon' for Safari "Top Sites" or Bookmarks
+    const appleLink = document.createElement("link");
+    appleLink.rel = "apple-touch-icon";
+    appleLink.href = fullPath;
+
+    // Append all to head
+    const head = document.getElementsByTagName('head')[0];
+    head.appendChild(newLink);
+    head.appendChild(shortcutLink);
+    head.appendChild(appleLink);
+
+    // Update title
     document.title = title;
   }
 
@@ -51,9 +73,9 @@
     updateTimeout = setTimeout(() => updateFaviconAndTitle(data), delay);
   }
 
-  const shortcut = document.querySelector("link[rel='shortcut icon']");
-  const icon = document.querySelector("link[rel='icon']");
-  const originalFavicon = shortcut?.href || icon?.href || "/favicon.ico";
+  // Initial Grab of current state
+  const currentIconTag = document.querySelector("link[rel*='icon']");
+  const originalFavicon = currentIconTag ? currentIconTag.href : "/favicon.ico";
   const originalTitle = document.title;
 
   function handleVisibilityChange() {
@@ -64,12 +86,10 @@
     }
   }
 
+  // Handle initial page load state
   if (!sessionStorage.getItem("isRefreshed")) {
-    // First load
     if (document.hidden) {
       queueUpdate(getRandomService());
-    } else {
-      queueUpdate({ title: originalTitle, favicon: originalFavicon }, 200);
     }
   }
 
