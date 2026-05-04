@@ -911,11 +911,11 @@
   }
 
   (function initTheme() {
-    const saved = localStorage.getItem('cs-theme');
-    if (saved && THEMES.includes(saved) && saved !== 'default') {
-      document.body.setAttribute('data-theme', saved);
-      document.getElementById('themeBtn').title = 'Theme: ' + THEME_LABELS[saved];
+    const random = THEMES[Math.floor(Math.random() * THEMES.length)];
+    if (random !== 'default') {
+      document.body.setAttribute('data-theme', random);
     }
+    document.getElementById('themeBtn').title = 'Theme: ' + THEME_LABELS[random];
   })();
 </script>
 <script src="./assets/js/clock-network.js"></script>
