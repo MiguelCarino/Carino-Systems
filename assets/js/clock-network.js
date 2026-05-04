@@ -272,20 +272,21 @@ async function detectSystem() {
       return;
     }
 
-    // 1) Prefer unmasked renderer/vendor (most specific)
+    // 1) Prefer unmasked renderer/vendor; fall back to standard RENDERER/VENDOR
     let vendor = "";
     let renderer = "";
-    const dbg = gl.getExtension("WEBGL_debug_renderer_info");
-    if (dbg) {
-      vendor = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) || "";
-      renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "";
-    }
-
-    // 2) Fallback
+    try {
+      const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+      if (dbg) {
+        vendor   = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL)   || "";
+        renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "";
+      }
+    } catch(e) {}
+    // Standard params always available (Firefox prefers these now)
     const maskedRenderer = gl.getParameter(gl.RENDERER) || "";
-    const maskedVendor = gl.getParameter(gl.VENDOR) || "";
-    const raw = renderer || maskedRenderer || "Unknown";
-    const rawVendor = vendor || maskedVendor || "";
+    const maskedVendor   = gl.getParameter(gl.VENDOR)   || "";
+    const raw      = renderer || maskedRenderer || "Unknown";
+    const rawVendor = vendor  || maskedVendor   || "";
 
     // 3) ANGLE parsing (if present)
     let cleanName = raw;
