@@ -283,7 +283,8 @@ a { text-decoration: none; color: inherit; }
   font-size: 3.5rem; font-weight: 900; line-height: 0.9; letter-spacing: -0.04em;
   color: var(--fg-primary); text-shadow: var(--title-glow, none); margin-bottom: 0.5rem;
 }
-.brand-sub { font-size: 0.95rem; color: var(--fg-secondary); margin-bottom: 1.2rem; font-weight: 500; }
+.brand-sub { font-size: 0.95rem; color: var(--fg-secondary); margin-bottom: 1.2rem; font-weight: 500; transition: opacity 0.5s ease; }
+.random-phrase { transition: opacity 0.5s ease; }
 .brand-links { display: flex; gap: 0.8rem; }
 
 .social-btn {
