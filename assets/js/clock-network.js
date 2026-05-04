@@ -1,16 +1,34 @@
-// ==========================================
 // CONFIGURATION: SPEED TEST FILES
-// ==========================================
 const TEST_FILE_SMALL = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_1mb";
 const TEST_FILE_LARGE = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_25mb";
 
 
-// ==========================================
 // MODULE: TIME & GREETING
-// ==========================================
+const GREETINGS = {
+  morning:   ["Good Morning, Operator.", "おはようございます、オペレーター。", "Buenos días, Operador.", "Доброе утро, Оператор."],
+  afternoon: ["Good Afternoon, Operator.", "こんにちは、オペレーター。",          "Buenas tardes, Operador.", "Добрый день, Оператор."],
+  evening:   ["Good Evening, Operator.", "こんばんは、オペレーター。",             "Buenas tardes, Operador.", "Добрый вечер, Оператор."],
+  night:     ["Good Night, Operator.",   "おやすみなさい、オペレーター。",         "Buenas noches, Operador.", "Спокойной ночи, Оператор."]
+};
+
+let greetLangIndex = 0;
+let greetPeriod = null;
+
+function getGreetPeriod(hrs) {
+  if (hrs >= 5 && hrs < 12) return 'morning';
+  if (hrs >= 12 && hrs < 18) return 'afternoon';
+  if (hrs >= 18 && hrs < 22) return 'evening';
+  return 'night';
+}
+
+function fadeSetText(el, text) {
+  el.style.opacity = '0';
+  setTimeout(() => { el.textContent = text; el.style.opacity = '1'; }, 500);
+}
+
 function updateTime() {
   const now = new Date();
-  
+
   const elLocal = document.getElementById('clockLocal');
   const elDate = document.getElementById('dateStr');
   const elUTC = document.getElementById('clockUTC');
@@ -24,7 +42,7 @@ function updateTime() {
   if(elUTC) elUTC.textContent = now.toISOString().substring(11, 19) + 'Z';
   if(elEpoch) elEpoch.textContent = Math.floor(now.getTime() / 1000);
   if(elLastCheck) elLastCheck.textContent = now.toLocaleTimeString('en-US', { hour12: false, second: 'numeric' });
-  
+
   if(elTZ) {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -33,22 +51,27 @@ function updateTime() {
   }
 
   if(elGreet) {
-    const hrs = now.getHours();
-    let greet = "System Ready.";
-    if (hrs >= 5 && hrs < 12) greet = "Good Morning, Operator.";
-    else if (hrs >= 12 && hrs < 18) greet = "Good Afternoon, Operator.";
-    else if (hrs >= 18 && hrs < 22) greet = "Good Evening, Operator.";
-    else greet = "Good Night, Operator.";
-    if (elGreet.textContent !== greet) elGreet.textContent = greet;
+    const period = getGreetPeriod(now.getHours());
+    if (period !== greetPeriod) {
+      greetPeriod = period;
+      greetLangIndex = 0;
+      elGreet.textContent = GREETINGS[period][0];
+      elGreet.style.opacity = '1';
+    }
   }
 }
 setInterval(updateTime, 1000);
 updateTime();
 
+setInterval(() => {
+  const elGreet = document.getElementById('greeting');
+  if (!elGreet || !greetPeriod) return;
+  greetLangIndex = (greetLangIndex + 1) % 4;
+  fadeSetText(elGreet, GREETINGS[greetPeriod][greetLangIndex]);
+}, 5000);
 
-// ==========================================
+
 // MODULE: SYSTEM & HARDWARE DETECTION
-// ==========================================
 const $ = (id) => document.getElementById(id);
 
 async function detectSystem() {
@@ -302,10 +325,7 @@ async function detectSystem() {
   }
 }
 
-
-// ==========================================
 // MODULE: NETWORK, PING & SPEED
-// ==========================================
 
 async function fetchJSON(url, { timeoutMs = 4000 } = {}) {
   const ctrl = new AbortController();
@@ -433,9 +453,7 @@ async function runNetwork() {
   await runSpeedTest();
 }
 
-// ==========================================
 // INIT
-// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
   const heroHud = document.getElementById('heroHud');
   if (heroHud) {

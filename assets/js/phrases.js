@@ -21,9 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
         "「 Automation doesn't guarantee optimization. 」"
     ];
 
-    const randomPhraseElement = document.getElementById("random-phrase");
-    if (randomPhraseElement) {
-        const randomIndex = Math.floor(Math.random() * phrases.length);
-        randomPhraseElement.textContent = phrases[randomIndex];
-    }
-    });
+    const el = document.getElementById("random-phrase");
+    if (!el) return;
+
+    let currentIndex = Math.floor(Math.random() * phrases.length);
+    el.textContent = phrases[currentIndex];
+
+    setInterval(() => {
+        el.style.opacity = '0';
+        setTimeout(() => {
+            currentIndex = (currentIndex + 1) % phrases.length;
+            el.textContent = phrases[currentIndex];
+            el.style.opacity = '1';
+        }, 500);
+    }, 30000);
+});
