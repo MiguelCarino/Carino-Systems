@@ -5,639 +5,335 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="logo.webp">
   <title>Carino Systems</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Red+Hat+Display:wght@700;900&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;700&family=Red+Hat+Display:wght@700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:             #0c1a3a;
-      --bg-sidebar:     #071022;
-      --bg-card:        #112248;
-      --accent:         #4f9cf9;
-      --accent-faint:   rgba(79,156,249,0.07);
-      --accent-glow:    rgba(79,156,249,0.13);
-      --accent-dim:     rgba(79,156,249,0.18);
-      --accent-hover:   rgba(79,156,249,0.25);
-      --border:         rgba(79,156,249,0.20);
-      --border-hv:      rgba(79,156,249,0.55);
-      --card-border:    rgba(79,156,249,0.13);
-      --section-border: rgba(79,156,249,0.10);
-      --text:           #e2eaf8;
-      --text-sec:       #93b5d4;
-      --text-muted:     #4d729a;
+      /* Palette */
+      --bg-header:      #050505;
+      --bg-card:        #111111;
+      --accent:         #eab308; /* Sharp Gold */
+      --accent-faint:   rgba(234, 179, 8, 0.05);
+      --accent-glow:    rgba(234, 179, 8, 0.15);
+      --accent-dim:     rgba(234, 179, 8, 0.3);
+      --border:         #262626;
+      --border-hv:      #eab308;
+      --text:           #ffffff;
+      --text-sec:       #a3a3a3;
+      --text-muted:     #666666;
+      
+      /* New Vibrant Body Colors */
+      --bg-stage-grad:  linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      --text-stage-title: #0a0a0a;
+      --text-stage-desc:  #333333;
     }
-
-    /* ── Default blue: colorful overrides ────────────── */
-    body:not([data-theme]) .app-frame {
-      border-color: rgba(79,156,249,0.28);
-      box-shadow: 0 8px 60px rgba(10,22,60,0.70), 0 0 40px rgba(79,156,249,0.12);
-    }
-    body:not([data-theme]) .sidebar {
-      background: linear-gradient(180deg, #0d1e45 0%, #060e22 100%);
-    }
-    body:not([data-theme]) .brand-name {
-      background: linear-gradient(130deg, #93c5fd 0%, #4f9cf9 50%, #818cf8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    body:not([data-theme]) .brand-name span { -webkit-text-fill-color: #4f9cf9; }
-    body:not([data-theme]) .stage {
-      background:
-        radial-gradient(ellipse at 75% 5%,  rgba(79,156,249,0.14) 0%, transparent 45%),
-        radial-gradient(ellipse at 15% 90%, rgba(99,102,241,0.10) 0%, transparent 40%),
-        #0c1a3a;
-    }
-    body:not([data-theme]) .card {
-      background: linear-gradient(145deg, #132550 0%, #0e1d42 100%);
-    }
-    body:not([data-theme]) .card:hover {
-      background: linear-gradient(145deg, #1a3060 0%, #132550 100%);
-      box-shadow: 0 6px 28px rgba(79,156,249,0.20);
-    }
-    body:not([data-theme]) .clock-time { color: #60a5fa; }
-    body:not([data-theme]) .pulse-dot  { box-shadow: 0 0 8px #4f9cf9; }
-
-    /* ── Sakura: moe / kawaii ─────────────────────────── */
-    body[data-theme="sakura"] {
-      --bg:             #fff0f6;
-      --bg-sidebar:     #ffe2ef;
-      --bg-card:        #ffffff;
-      --accent:         #e8366e;
-      --accent-faint:   rgba(232,54,110,0.06);
-      --accent-glow:    rgba(232,54,110,0.11);
-      --accent-dim:     rgba(232,54,110,0.16);
-      --accent-hover:   rgba(232,54,110,0.22);
-      --border:         rgba(232,54,110,0.18);
-      --border-hv:      rgba(232,54,110,0.50);
-      --card-border:    rgba(232,54,110,0.13);
-      --section-border: rgba(232,54,110,0.15);
-      --text:           #2a1020;
-      --text-sec:       #7a3a5a;
-      --text-muted:     #b878a0;
-    }
-    body[data-theme="sakura"] .app-frame {
-      border-radius: 20px;
-      border: 1px solid rgba(232,54,110,0.25);
-      box-shadow: 0 12px 60px rgba(232,54,110,0.16), 0 2px 10px rgba(0,0,0,0.07);
-    }
-    body[data-theme="sakura"] .sidebar {
-      background: linear-gradient(180deg, #fff4f9 0%, #ffd9ec 100%);
-    }
-    body[data-theme="sakura"] .brand { border-color: rgba(232,54,110,0.25); }
-    body[data-theme="sakura"] .brand-name {
-      font-family: 'M PLUS Rounded 1c', 'Red Hat Display', sans-serif;
-      font-weight: 800;
-      background: linear-gradient(135deg, #e8366e 0%, #ff6eb4 60%, #c2185b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    body[data-theme="sakura"] .brand-name::after { content: " 🌸"; font-size: 1.2rem; -webkit-text-fill-color: initial; }
-    body[data-theme="sakura"] .brand-tagline { color: #d4507a; }
-    body[data-theme="sakura"] .clock-time {
-      background: linear-gradient(135deg, #e8366e, #ff6eb4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
-    }
-    body[data-theme="sakura"] .clock-tz { background: rgba(232,54,110,0.15); color: #c41259; }
-    body[data-theme="sakura"] .nav-section-label { color: #e8366e; }
-    body[data-theme="sakura"] .nav-btn {
-      font-family: 'M PLUS Rounded 1c', sans-serif;
-      border-left: none;
-      border-radius: 20px;
-      padding-left: 16px;
-      margin-bottom: 2px;
-    }
-    body[data-theme="sakura"] .nav-btn:hover { background: rgba(232,54,110,0.07); color: #c41259; }
-    body[data-theme="sakura"] .nav-btn.active {
-      background: linear-gradient(90deg, rgba(232,54,110,0.14), rgba(255,110,180,0.18));
-      color: #c41259;
-      border-left: none;
-      box-shadow: 0 2px 12px rgba(232,54,110,0.20);
-    }
-    body[data-theme="sakura"] .ticker-row {
-      background: rgba(232,54,110,0.06);
-      border-color: rgba(232,54,110,0.25);
-      border-radius: 10px;
-      padding: 9px 12px;
-    }
-    body[data-theme="sakura"] .icon-btn   { border-radius: 10px; }
-    body[data-theme="sakura"] .icon-btn:hover { box-shadow: 0 0 14px rgba(232,54,110,0.35); }
-    body[data-theme="sakura"] .stage {
-      background: linear-gradient(160deg, #fff5f9 0%, #ffeaf3 50%, #ffd6e8 100%);
-    }
-    body[data-theme="sakura"] .panel-title {
-      font-family: 'M PLUS Rounded 1c', 'Red Hat Display', sans-serif;
-      font-weight: 800;
-      background: linear-gradient(135deg, #e8366e, #ff6eb4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    body[data-theme="sakura"] .panel-num  { color: rgba(232,54,110,0.10); }
-    body[data-theme="sakura"] .card       { border-radius: 14px; }
-    body[data-theme="sakura"] .card:hover { box-shadow: 0 6px 24px rgba(232,54,110,0.18); }
-    body[data-theme="sakura"] .retry-btn  { border-radius: 10px; }
-    body[data-theme="sakura"] .pulse-dot  { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-
-    /* ── Win95: classic Windows 95 desktop ────────────── */
-    body[data-theme="win95"] {
-      --bg:             #008080;
-      --bg-sidebar:     #c0c0c0;
-      --bg-card:        #d4d0c8;
-      --accent:         #000080;
-      --accent-faint:   rgba(0,0,128,0.06);
-      --accent-glow:    rgba(0,0,128,0.10);
-      --accent-dim:     rgba(0,0,128,0.16);
-      --accent-hover:   rgba(0,0,128,0.24);
-      --border:         rgba(0,0,0,0.22);
-      --border-hv:      rgba(0,0,128,0.55);
-      --card-border:    rgba(0,0,0,0.16);
-      --section-border: rgba(0,0,0,0.12);
-      --text:           #000000;
-      --text-sec:       #222244;
-      --text-muted:     #666680;
-    }
-    body[data-theme="win95"] .app-frame {
-      border: 2px solid #000000;
-      border-radius: 0;
-      box-shadow: 4px 4px 0 #000000;
-    }
-    body[data-theme="win95"] .sidebar {
-      background: #c0c0c0;
-      border-right: 2px solid #808080;
-    }
-    body[data-theme="win95"] .brand {
-      background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
-      margin: -28px -22px 14px;
-      padding: 10px 22px 12px;
-      border-bottom: 2px solid #808080;
-    }
-    body[data-theme="win95"] .brand-name {
-      font-family: 'VT323', monospace;
-      font-size: 2.3rem;
-      letter-spacing: 0.04em;
-      color: #ffffff;
-    }
-    body[data-theme="win95"] .brand-name span   { color: #ffffff; }
-    body[data-theme="win95"] .brand-tagline      { color: rgba(255,255,255,0.80); }
-    body[data-theme="win95"] .brand-greeting     { color: rgba(255,255,255,0.90); font-family: 'VT323', monospace; font-size: 1.1rem; }
-    body[data-theme="win95"] .clock-time         { font-family: 'VT323', monospace; font-size: 2.2rem; color: #ffffff; }
-    body[data-theme="win95"] .clock-tz           { background: rgba(0,0,128,0.40); color: #ffffff; }
-    body[data-theme="win95"] .clock-date         { color: rgba(255,255,255,0.75); }
-    body[data-theme="win95"] .nav-section-label  { font-family: 'VT323', monospace; font-size: 1rem; letter-spacing: 0.12em; }
-    body[data-theme="win95"] .nav-btn {
-      font-family: 'VT323', monospace;
-      font-size: 1.25rem;
-      letter-spacing: 0.03em;
-      border-left: none;
-      border-radius: 0;
-      background: #d4d0c8;
-      color: #000000;
-      box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-      margin-bottom: 3px;
-    }
-    body[data-theme="win95"] .nav-btn .nav-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.60rem; }
-    body[data-theme="win95"] .nav-btn:hover { background: #c8c4bc; color: #000080; }
-    body[data-theme="win95"] .nav-btn.active {
-      color: #000080;
-      background: #c8c4bc;
-      border-left: none;
-      box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf;
-    }
-    body[data-theme="win95"] .icon-btn {
-      border: none;
-      border-radius: 0;
-      background: #d4d0c8;
-      color: #000000;
-      box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-    }
-    body[data-theme="win95"] .icon-btn:hover {
-      transform: none;
-      background: #c0bdb4;
-      color: #000080;
-      box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf;
-    }
-    body[data-theme="win95"] .ticker-row {
-      border: none;
-      box-shadow: inset 1px 1px #808080, inset -1px -1px #ffffff;
-      background: #ffffff;
-      padding: 6px 10px;
-    }
-    body[data-theme="win95"] .ticker-lbl    { color: #000080; }
-    body[data-theme="win95"] .random-phrase { font-family: 'VT323', monospace; font-size: 1.05rem; color: #000000; }
-    body[data-theme="win95"] .stage         { background: #008080; }
-    body[data-theme="win95"] .panel-header {
-      background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
-      margin: -36px -40px 22px;
-      padding: 14px 40px;
-      border-bottom: 2px solid #808080;
-    }
-    body[data-theme="win95"] .panel-title { font-family: 'VT323', monospace; font-size: 2.6rem; letter-spacing: 0.02em; color: #ffffff; }
-    body[data-theme="win95"] .panel-desc  { color: rgba(255,255,255,0.80); }
-    body[data-theme="win95"] .panel-num   { color: rgba(255,255,255,0.18); font-family: 'VT323', monospace; }
-    body[data-theme="win95"] .card {
-      border-radius: 0;
-      border: none;
-      background: #d4d0c8;
-      box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-    }
-    body[data-theme="win95"] .card:hover {
-      transform: none;
-      background: #c8c4bc;
-      box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf;
-    }
-    body[data-theme="win95"] .retry-btn {
-      border: none;
-      border-radius: 0;
-      font-family: 'VT323', monospace;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      background: #d4d0c8;
-      color: #000080;
-      box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-    }
-    body[data-theme="win95"] .retry-btn:hover {
-      background: #c8c4bc;
-      box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #ffffff, inset 2px 2px #808080, inset -2px -2px #dfdfdf;
-    }
-    body[data-theme="win95"] .diag-container {
-      background: #d4d0c8;
-      padding: 8px;
-      border-top: none;
-      margin-top: 10px;
-      box-shadow: inset -1px -1px #ffffff, inset 1px 1px #808080;
-    }
-    body[data-theme="win95"] .diag-toggle { font-family: 'VT323', monospace; font-size: 1.1rem; color: #000080; letter-spacing: 0.05em; }
-    body[data-theme="win95"] .diag-val    { color: #000080; font-family: 'VT323', monospace; font-size: 1rem; }
-    body[data-theme="win95"] .diag-lbl    { color: #000000; }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      background: var(--bg);
+      background: var(--bg-header); /* Default back */
       color: var(--text);
       font-family: 'IBM Plex Sans', sans-serif;
       height: 100vh;
       overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ─── FRAME ──────────────────────────────────────── */
-    .app-frame {
-      display: grid;
-      grid-template-columns: 310px 1fr;
-      width: 96vw;
-      height: 92vh;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      box-shadow: 0 8px 60px rgba(0,0,0,0.50), 0 0 40px var(--accent-faint);
-      overflow: hidden;
-    }
-
-    /* ─── SIDEBAR ─────────────────────────────────────── */
-    .sidebar {
-      display: flex;
       flex-direction: column;
-      border-right: 1px solid var(--border);
-      background: var(--bg-sidebar);
-      overflow-y: auto;
-      overflow-x: hidden;
     }
-    .sidebar::-webkit-scrollbar { width: 2px; }
-    .sidebar::-webkit-scrollbar-thumb { background: var(--border); }
 
-    .sb-top { padding: 28px 22px 0; flex-shrink: 0; }
+    /* ─── TOP HEADER ─────────────────────────────────── */
+    .top-header {
+      height: 70px;
+      flex-shrink: 0;
+      background: linear-gradient(180deg, #0f0f0f 0%, #050505 100%);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      position: relative;
+      z-index: 100;
+    }
 
-    /* brand */
-    .brand { padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+    .header-left { display: flex; align-items: center; gap: 30px; }
+    
     .brand-name {
       font-family: 'Red Hat Display', sans-serif;
-      font-size: 2.2rem; font-weight: 900; color: var(--text); line-height: 1; margin-bottom: 2px;
+      font-size: 1.8rem; font-weight: 900; line-height: 1;
+      background: linear-gradient(130deg, #fef08a 0%, #eab308 50%, #b45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: pointer;
     }
-    .brand-name span { color: var(--accent); }
-    .brand-tagline {
-      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
-      margin-bottom: 10px;
-    }
-    .brand-greeting {
-      font-size: 0.85rem; color: var(--text-sec);
-      font-family: 'IBM Plex Mono', monospace;
-      transition: opacity 0.5s ease;
-      margin-bottom: 10px;
-      min-height: 1.1em;
-    }
-    .brand-clock { display: flex; align-items: baseline; gap: 8px; margin-bottom: 3px; }
-    .clock-time {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.55rem; color: var(--accent); font-weight: 700; letter-spacing: 0.04em;
-    }
-    .clock-tz {
-      font-size: 0.7rem; color: var(--text-muted);
-      background: var(--accent-dim); padding: 1px 6px; border-radius: 3px;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-    .clock-date {
-      font-size: 0.72rem; color: var(--text-muted);
-      font-family: 'IBM Plex Mono', monospace;
-    }
+    .brand-name span { -webkit-text-fill-color: #ffffff; }
 
-    /* social */
-    .social-row { display: flex; gap: 7px; margin-bottom: 14px; }
+    .header-clock { display: flex; align-items: baseline; gap: 10px; border-left: 1px solid var(--border); padding-left: 30px; }
+    .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: 1.2rem; color: var(--text); font-weight: 700; }
+    .clock-tz { font-size: 0.65rem; color: var(--bg-header); background: var(--accent); padding: 2px 6px; border-radius: 3px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+    .brand-greeting { font-size: 0.75rem; color: var(--text-sec); font-family: 'IBM Plex Mono', monospace; margin-left: 10px;}
+
+    .header-right { display: flex; align-items: center; gap: 15px; }
+    .social-row { display: flex; gap: 8px; }
     .icon-btn {
-      width: 30px; height: 30px;
-      border: 1px solid var(--card-border);
-      border-radius: 5px;
+      width: 32px; height: 32px;
+      border: 1px solid var(--border); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); transition: 0.22s; text-decoration: none;
-      background: transparent; cursor: pointer;
+      color: var(--text-muted); transition: 0.2s; text-decoration: none; background: transparent; cursor: pointer;
     }
-    .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); transform: translateY(-2px); }
-    .icon-btn svg { width: 14px; height: 14px; }
+    .icon-btn:hover { border-color: var(--accent); color: var(--bg-header); background: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-glow); }
+    .icon-btn svg { width: 15px; height: 15px; }
 
-    /* ticker — below social */
-    .ticker-row { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 9px 0; margin-bottom: 16px; }
-    .ticker-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; display: block; margin-bottom: 4px; }
-    .random-phrase { font-size: 0.78rem; color: var(--text-sec); line-height: 1.45; transition: opacity 0.5s ease; }
-
-    /* nav */
-    .sb-mid { padding: 0 22px; flex-grow: 1; }
-    .nav-section-label {
-      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--text-muted); margin-bottom: 6px;
-      font-family: 'IBM Plex Mono', monospace;
+    .status-toggle {
+      display: flex; align-items: center; gap: 8px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0 16px; height: 32px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
-    .nav-menu { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
-    .nav-btn {
-      background: transparent; border: none; text-align: left;
-      color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.96rem; font-weight: 500; cursor: pointer;
-      padding: 7px 10px; border-left: 2px solid transparent;
-      border-radius: 0 4px 4px 0; transition: 0.18s;
-      display: flex; flex-direction: column;
-    }
-    .nav-btn:hover { color: var(--text); background: var(--accent-faint); }
-    .nav-btn.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-glow); }
-    .nav-sub { font-size: 0.66rem; opacity: 0.4; letter-spacing: 0.07em; text-transform: uppercase; margin-top: 1px; font-family: 'IBM Plex Mono', monospace; }
-
-    /* bottom — diagnostics */
-    .sb-bottom { padding: 0 22px 18px; margin-top: auto; flex-shrink: 0; }
-
-    .diag-container { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 10px; }
-    .diag-toggle {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.7rem; color: var(--text-muted); cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em;
-    }
-    .diag-toggle:hover { color: var(--accent); }
-    .diag-toggle-right { display: flex; align-items: center; gap: 7px; }
-
+    .status-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-faint); }
+    
     .pulse-dot {
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent); box-shadow: 0 0 5px var(--accent);
+      background: var(--accent); box-shadow: 0 0 8px var(--accent);
       animation: pulse-glow 2s ease-in-out infinite;
     }
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--accent); }
-      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--accent); }
-    }
+    @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    .diag-details {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.4s ease;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem; color: var(--text-sec);
+    /* Diagnostics Dropdown */
+    .diag-dropdown {
+      position: absolute; top: 80px; right: 30px; width: 320px;
+      background: var(--bg-card); border: 1px solid var(--accent-dim);
+      padding: 20px; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      opacity: 0; pointer-events: none; transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1); z-index: 200;
     }
-    .diag-details.open { max-height: 320px; margin-top: 10px; }
-    .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+    .diag-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    
+    .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; }
     .diag-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .diag-val { color: var(--accent); }
-    .diag-val-group { display: flex; align-items: center; gap: 5px; }
+    .diag-val { color: var(--text); }
+    .diag-val-group { display: flex; align-items: center; gap: 6px; }
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-    .status-dot.success { background: #22c55e; box-shadow: 0 0 4px #22c55e; }
-    .status-dot.fail    { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-    .status-dot.unknown { background: #64748b; }
-    .status-dot.scanning { background: #fbbf24; animation: pulse 1s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
+    .status-dot.fail    { background: #dc2626; box-shadow: 0 0 4px #dc2626; }
+    .status-dot.unknown { background: #525252; }
+    .status-dot.scanning { background: #d4d4d4; animation: pulse 1s infinite; }
 
     .retry-btn {
       display: flex; align-items: center; justify-content: center; gap: 5px;
-      background: var(--accent-dim); border: 1px solid var(--border);
-      color: var(--accent); font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
-      padding: 5px 0; border-radius: 3px; cursor: pointer;
-      margin-top: 8px; width: 100%; transition: 0.2s;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 8px 0; border-radius: 4px; cursor: pointer; margin-top: 16px; width: 100%; transition: 0.2s;
     }
-    .retry-btn:hover { background: var(--accent-hover); }
-    .retry-btn svg { width: 10px; height: 10px; }
+    .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .retry-btn svg { width: 12px; height: 12px; }
 
-    /* ─── STAGE ───────────────────────────────────────── */
-    .stage {
-      position: relative;
+    /* ─── DYNAMIC LAYOUT AREA ────────────────────────── */
+    .workspace {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
       overflow: hidden;
-      background: radial-gradient(ellipse at 80% 10%, var(--accent-faint) 0%, transparent 55%), var(--bg);
+      position: relative;
     }
 
-    .panel {
-      position: absolute; inset: 0;
-      padding: 36px 40px;
-      opacity: 0; pointer-events: none;
-      transform: translateY(14px);
-      transition: opacity 0.4s cubic-bezier(0.2,0.8,0.2,1), transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
-      display: flex; flex-direction: column;
+    /* Content Stage */
+    .stage {
+      flex: 0 0 0px; 
+      opacity: 0;
       overflow-y: auto;
+      overflow-x: hidden;
+      background: var(--bg-stage-grad);
+      transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+      position: relative;
     }
-    .panel::-webkit-scrollbar { width: 2px; }
-    .panel::-webkit-scrollbar-thumb { background: var(--border); }
-    .panel.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .stage::-webkit-scrollbar { width: 6px; }
+    .stage::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.5); border-radius: 3px;}
 
-    .panel-header {
-      margin-bottom: 22px; padding-bottom: 16px;
-      border-bottom: 1px solid var(--section-border);
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-shrink: 0;
+    body.state-selected .stage {
+      flex: 1 1 auto;
+      opacity: 1;
+      padding: 40px 60px;
     }
-    .panel-title { font-family: 'Red Hat Display', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--text); line-height: 1; }
-    .panel-desc { font-size: 0.87rem; color: var(--text-muted); margin-top: 5px; }
-    .panel-num { font-size: 3.8rem; font-weight: 900; color: var(--accent-faint); font-family: 'Red Hat Display', sans-serif; line-height: 0.8; user-select: none; }
 
-    /* grids */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+    .panel { display: none; animation: fadeUp 0.5s ease forwards; }
+    .panel.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* cards */
+    .panel-header { margin-bottom: 30px; padding-bottom: 16px; border-bottom: 2px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: flex-end; }
+    .panel-title { font-family: 'Red Hat Display', sans-serif; font-size: 2.8rem; font-weight: 900; color: var(--text-stage-title); line-height: 1; text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0px rgba(255,255,255,0.25);}
+    .panel-desc { font-size: 0.95rem; color: var(--text-stage-desc); font-weight: 600; margin-top: 8px; font-family: 'IBM Plex Mono', monospace;}
+    .panel-num { font-size: 4rem; font-weight: 900; color: rgba(0,0,0,0.1); font-family: 'Red Hat Display', sans-serif; line-height: 0.8; user-select: none; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    /* The cards remain dark to contrast heavily with the orange body */
     .card {
-      background: var(--bg-card);
-      border: 1px solid var(--card-border);
-      padding: 18px 20px;
-      border-radius: 4px;
-      transition: border-color 0.22s, background 0.22s, transform 0.22s, box-shadow 0.22s;
-      display: flex; flex-direction: column; justify-content: space-between;
-      text-decoration: none; color: inherit;
-      min-height: 130px;
+      background: linear-gradient(145deg, #161616 0%, #0a0a0a 100%);
+      border: 1px solid #2a2a2a; padding: 24px; border-radius: 4px;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit; min-height: 150px;
     }
     .card:hover {
-      border-color: var(--border-hv);
-      background: var(--accent-faint);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px var(--accent-glow);
+      border-color: var(--accent); background: linear-gradient(145deg, #1f1f1f 0%, #0d0d0d 100%);
+      transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.3);
     }
     .card.disabled { opacity: 0.3; pointer-events: none; }
-    .c-icon { font-size: 1.3rem; margin-bottom: 7px; }
-    .c-title { font-size: 1.0rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .c-desc { font-size: 0.83rem; color: var(--text-sec); line-height: 1.5; flex: 1; }
-    .c-link { margin-top: 10px; font-size: 0.72rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+    .c-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .c-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .c-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; flex: 1; }
+    .c-link { margin-top: 16px; font-size: 0.75rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 1100px) {
-      .grid-3 { grid-template-columns: 1fr 1fr; }
+    /* ─── SLICE MENU (YAKUZA CHARACTER SELECT) ───────── */
+    .slice-menu {
+      display: flex;
+      flex: 1 1 auto; 
+      transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), height 0.6s;
+      background: var(--bg-header);
+      border-top: 1px solid transparent;
+      z-index: 10;
     }
-    @media (max-height: 640px) and (min-width: 801px) {
-      .app-frame { height: 98vh; }
-      .panel { padding: 22px 32px; }
-      .panel-title { font-size: 1.85rem; }
-      .panel-header { margin-bottom: 14px; padding-bottom: 12px; }
+    
+    body.state-selected .slice-menu {
+      flex: 0 0 80px; 
+      border-top: 1px solid var(--border);
     }
-    @media (max-width: 800px) {
-      body { height: auto; min-height: 100vh; overflow-y: auto; align-items: flex-start; }
-      .app-frame { grid-template-columns: 1fr; width: 100%; height: auto; border: none; border-radius: 0; }
-      .sidebar { height: auto; border-right: none; border-bottom: 1px solid var(--border); overflow-y: visible; }
-      .sb-top { padding: 20px 18px 0; }
-      .sb-mid { padding: 0 18px; }
-      .sb-bottom { padding: 0 18px 18px; margin-top: 0; }
-      .stage { height: auto; min-height: 60vh; }
-      .panel { position: relative; inset: auto; opacity: 1; transform: none; display: none; padding: 22px 16px; overflow-y: visible; }
-      .panel.active { display: flex; }
+
+    .slice {
+      flex: 1;
+      border-right: 1px solid var(--border);
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      background: #080808;
+    }
+    .slice:last-child { border-right: none; }
+    
+    body:not(.state-selected) .slice:hover { flex: 1.2; background: #111111; }
+    body:not(.state-selected) .slice:hover .slice-bg { opacity: 1; transform: scale(1.05); }
+
+    .slice-bg {
+      position: absolute; inset: 0; opacity: 0; transition: 0.5s ease;
+      background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Text Formatting */
+    .slice-large {
+      position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease;
+    }
+    .slice-num-lg {
+      font-family: 'Red Hat Display', sans-serif; font-size: 5rem; font-weight: 900;
+      color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.1); margin-bottom: 20px;
+    }
+    .slice-text-lg {
+      writing-mode: vertical-rl; font-family: 'IBM Plex Sans', sans-serif; font-size: 2.2rem; font-weight: 900;
+      color: var(--text); text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    }
+    .slice-small {
+      opacity: 0; pointer-events: none; position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; transition: opacity 0.3s ease;
+    }
+    .slice-text-sm { font-size: 0.85rem; font-weight: 700; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.08em; }
+    .slice-sub-sm { font-size: 0.6rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* SVG Icons (Hidden on Desktop) */
+    .slice-icon { display: none; }
+
+    /* Active states */
+    body.state-selected .slice.active { background: #111111; border-top: 3px solid var(--accent); }
+    body.state-selected .slice.active .slice-text-sm { color: var(--accent); }
+    body.state-selected .slice:hover { background: #151515; }
+    body.state-selected .slice-large { opacity: 0; pointer-events: none; }
+    body.state-selected .slice-small { opacity: 1; pointer-events: auto; }
+
+    /* ─── MOBILE OPTIMIZATION ───────────────────────── */
+    @media (max-width: 900px) {
+      .header-clock { display: none; }
+      body.state-selected .stage { padding: 30px 20px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      
+      /* Hide all Typography in slices */
+      .slice-text-lg, .slice-text-sm, .slice-sub-sm, .slice-num-lg { display: none !important; }
+      
+      /* Reveal SVG Icons instead */
+      .slice-icon { 
+        display: block; 
+        color: var(--text-muted); 
+        transition: 0.3s ease; 
+      }
+      
+      /* Huge icon when full screen */
+      body:not(.state-selected) .slice-large .slice-icon { width: 44px; height: 44px; }
+      body:not(.state-selected) .slice:hover .slice-icon { color: var(--text); transform: scale(1.1); }
+
+      /* Small icon when selected (bottom bar) */
+      body.state-selected .slice-small .slice-icon { width: 24px; height: 24px; }
+      body.state-selected .slice.active .slice-icon { color: var(--accent); }
+      body.state-selected .slice-menu { flex: 0 0 65px; } /* Thinner bottom bar for mobile */
     }
   </style>
 </head>
 <body>
 
-<div class="app-frame">
-
-  <!-- ═══ SIDEBAR ═══════════════════════════════════ -->
-  <aside class="sidebar">
-
-    <div class="sb-top">
-      <div class="brand">
-        <div class="brand-name">Carino<span>.</span></div>
-        <div class="brand-tagline">Open Source Infrastructure</div>
-        <div class="brand-greeting" id="greeting">System Ready.</div>
-        <div class="brand-clock">
-          <span class="clock-time" id="clockLocal">00:00:00</span>
-          <span class="clock-tz" id="tzName">UTC</span>
-        </div>
-        <div class="clock-date" id="dateStr"></div>
-      </div>
-
-      <div class="social-row">
-        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-btn" title="GitHub">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-btn" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-        </a>
-        <a href="/resume.pdf" target="_blank" class="icon-btn" title="Resume">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-        </a>
-        <a href="mailto:miguel@carino.systems" class="icon-btn" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </a>
-        <button class="icon-btn" onclick="cycleTheme()" id="themeBtn" title="Theme: Default">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8z"/><circle cx="6.5" cy="11.5" r="1" fill="currentColor" stroke="none"/><circle cx="9.5" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="17.5" cy="11.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </button>
-      </div>
-
-      <div class="ticker-row">
-        <span class="ticker-lbl">Random tip</span>
-        <p id="random-phrase" class="random-phrase"></p>
-      </div>
+<header class="top-header">
+  <div class="header-left">
+    <div class="brand-name" onclick="resetView()" title="Return to Overview">Carino<span>.</span></div>
+    <div class="header-clock">
+      <span class="clock-time" id="clockLocal">00:00:00</span>
+      <span class="clock-tz" id="tzName">UTC</span>
+      <span class="brand-greeting" id="greeting">System Ready.</span>
     </div>
+  </div>
 
-    <div class="sb-mid">
-      <div class="nav-section-label">Navigation</div>
-      <nav class="nav-menu">
-        <button class="nav-btn active" onclick="showPanel('medtech')">
-          MedTech &amp; Imaging
-          <span class="nav-sub">DICOM / PDF / Metadata</span>
-        </button>
-        <button class="nav-btn" onclick="showPanel('telecom')">
-          Telecom &amp; Infra
-          <span class="nav-sub">Network / Speed / DNS</span>
-        </button>
-        <button class="nav-btn" onclick="showPanel('security')">
-          Security &amp; Tools
-          <span class="nav-sub">Vault / CVE / Search</span>
-        </button>
-        <button class="nav-btn" onclick="showPanel('automation')">
-          Business &amp; Automation
-          <span class="nav-sub">Workflows / Support / Quotes</span>
-        </button>
-        <button class="nav-btn" onclick="showPanel('media')">
-          Media
-          <span class="nav-sub">Streaming / Music / Prompter</span>
-        </button>
-      </nav>
+  <div class="header-right">
+    <div class="social-row">
+      <a href="https://github.com/MiguelCarino" target="_blank" class="icon-btn" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-btn" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
     </div>
+    
+    <button class="status-toggle" onclick="toggleDiag()">
+      Sys. Status <div class="pulse-dot"></div>
+    </button>
+  </div>
+</header>
 
-    <div class="sb-bottom">
-      <div class="diag-container">
-        <div class="diag-toggle" onclick="toggleDiag()">
-          <span>System Status</span>
-          <div class="diag-toggle-right">
-            <span style="font-size:0.68rem;" id="lastCheck">--:--</span>
-            <div class="pulse-dot"></div>
-          </div>
-        </div>
-        <div class="diag-details" id="diagBox">
-          <div class="diag-row">
-            <span class="diag-lbl">IPv4</span>
-            <div class="diag-val-group">
-              <span class="diag-val" id="ipv4">...</span>
-              <span class="status-dot unknown" id="dot4"></span>
-            </div>
-          </div>
-          <div class="diag-row">
-            <span class="diag-lbl">IPv6</span>
-            <div class="diag-val-group">
-              <span class="diag-val" id="ipv6" style="font-size:0.65rem;max-width:136px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">...</span>
-              <span class="status-dot unknown" id="dot6"></span>
-            </div>
-          </div>
-          <div class="diag-row"><span class="diag-lbl">Ping</span><span class="diag-val" id="pingVal">--</span></div>
-          <div class="diag-row"><span class="diag-lbl">Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
-          <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
-          <div class="diag-row"><span class="diag-lbl">Screen</span><span class="diag-val" id="sysScreen">--</span></div>
-          <div class="diag-row">
-            <span class="diag-lbl">GPU</span>
-            <span class="diag-val" id="sysGPU" style="max-width:136px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span>
-          </div>
-          <div class="diag-row">
-            <span class="diag-lbl">Client</span>
-            <span class="diag-val" id="sysClient" style="font-size:0.65rem;max-width:136px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span>
-          </div>
-          <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
-          <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
-          <button class="retry-btn" id="retryNetwork">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-            Retry Network
-          </button>
-        </div>
-      </div>
-    </div>
-  </aside>
+<!-- Diagnostics Overlay -->
+<div class="diag-dropdown" id="diagBox">
+  <div class="diag-row" style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+    <span class="diag-lbl">Last Check</span>
+    <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
+  </div>
+  <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
+  <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val" id="ipv6" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
+  <div class="diag-row"><span class="diag-lbl">Ping</span><span class="diag-val" id="pingVal">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">Screen</span><span class="diag-val" id="sysScreen">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val" id="sysGPU" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">Client</span><span class="diag-val" id="sysClient" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
+  <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
+  <button class="retry-btn" id="retryNetwork">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    Retry Network
+  </button>
+</div>
 
+<div class="workspace">
   <!-- ═══ STAGE ═════════════════════════════════════ -->
   <main class="stage">
-
     <!-- 01 ─ MEDTECH & IMAGING -->
-    <section id="medtech" class="panel active">
+    <section id="medtech" class="panel">
       <div class="panel-header">
         <div>
           <div class="panel-title">MedTech &amp; Imaging</div>
@@ -685,7 +381,7 @@
     <section id="telecom" class="panel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Telecom &amp; Infrastructure</div>
+          <div class="panel-title">Telecom &amp; Infra</div>
           <div class="panel-desc">Network configuration, monitoring, and diagnostics.</div>
         </div>
         <div class="panel-num">02</div>
@@ -695,7 +391,7 @@
           <div>
             <div class="c-icon">🕸️</div>
             <div class="c-title">Netplan Configurator</div>
-            <div class="c-desc">GUI-driven YAML network config editor for Linux servers. Drastically reduces configuration errors.</div>
+            <div class="c-desc">GUI-driven YAML network config editor for Linux servers. Drastically reduces errors.</div>
           </div>
           <span class="c-link">Launch ↗</span>
         </a>
@@ -703,7 +399,7 @@
           <div>
             <div class="c-icon">✅</div>
             <div class="c-title">DNS Monitor</div>
-            <div class="c-desc">Real-time domain status tracking, DNS propagation checks, and server heartbeat monitoring.</div>
+            <div class="c-desc">Real-time domain status tracking, DNS propagation checks, and server heartbeats.</div>
           </div>
           <span class="c-link">Check Status ↗</span>
         </a>
@@ -748,7 +444,7 @@
           <div>
             <div class="c-icon">📰</div>
             <div class="c-title">CVE Database</div>
-            <div class="c-desc">Browse and search security vulnerabilities sourced from the NVD database with detail views.</div>
+            <div class="c-desc">Browse and search security vulnerabilities sourced from the NVD database.</div>
           </div>
           <span class="c-link">Search CVEs ↗</span>
         </a>
@@ -775,7 +471,7 @@
     <section id="automation" class="panel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Business &amp; Automation</div>
+          <div class="panel-title">Business &amp; Auto</div>
           <div class="panel-desc">Workflows, deployments, and operational tooling.</div>
         </div>
         <div class="panel-num">04</div>
@@ -836,7 +532,7 @@
     <section id="media" class="panel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Media</div>
+          <div class="panel-title">Media Tools</div>
           <div class="panel-desc">Streaming, audio, and presentation utilities.</div>
         </div>
         <div class="panel-num">05</div>
@@ -876,47 +572,118 @@
         </div>
       </div>
     </section>
-
   </main>
+
+  <!-- ═══ SLICE MENU ════════════════════════════════ -->
+  <nav class="slice-menu" id="sliceMenu">
+    
+    <div class="slice" data-target="medtech" onclick="selectSection('medtech')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">01</span>
+        <h2 class="slice-text-lg">MedTech &amp; Imaging</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">MedTech &amp; Imaging</span>
+        <span class="slice-sub-sm">DICOM / PDF / Data</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="telecom" onclick="selectSection('telecom')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">02</span>
+        <h2 class="slice-text-lg">Telecom &amp; Infra</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Telecom &amp; Infra</span>
+        <span class="slice-sub-sm">Network / Speed / DNS</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="security" onclick="selectSection('security')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">03</span>
+        <h2 class="slice-text-lg">Security &amp; Tools</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Security &amp; Tools</span>
+        <span class="slice-sub-sm">Vault / CVE / Links</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="automation" onclick="selectSection('automation')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">04</span>
+        <h2 class="slice-text-lg">Business &amp; Auto</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Business &amp; Auto</span>
+        <span class="slice-sub-sm">Workflows / Ops</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="media" onclick="selectSection('media')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">05</span>
+        <h2 class="slice-text-lg">Media Tools</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Media Tools</span>
+        <span class="slice-sub-sm">Stream / AV / Prompt</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      </div>
+    </div>
+
+  </nav>
 </div>
 
 <script>
-  function showPanel(id) {
+  function selectSection(id) {
+    document.body.classList.add('state-selected');
+    
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.getAttribute('onclick').includes(id));
+
+    document.querySelectorAll('.slice').forEach(s => {
+      if (s.getAttribute('data-target') === id) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
     });
+
+    document.querySelector('.stage').scrollTop = 0;
+  }
+
+  function resetView() {
+    document.body.classList.remove('state-selected');
+    document.querySelectorAll('.slice').forEach(s => s.classList.remove('active'));
   }
 
   function toggleDiag() {
     document.getElementById('diagBox').classList.toggle('open');
   }
 
-  const THEMES = ['default', 'sakura', 'win95'];
-  const THEME_LABELS = { default: 'Default', sakura: 'Sakura', win95: 'Win95' };
-
-  function cycleTheme() {
-    const current = document.body.getAttribute('data-theme') || 'default';
-    const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-    if (next === 'default') {
-      document.body.removeAttribute('data-theme');
-      localStorage.removeItem('cs-theme');
-    } else {
-      document.body.setAttribute('data-theme', next);
-      localStorage.setItem('cs-theme', next);
+  document.addEventListener('click', (e) => {
+    const diagBox = document.getElementById('diagBox');
+    const toggleBtn = document.querySelector('.status-toggle');
+    if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) {
+      diagBox.classList.remove('open');
     }
-    const label = THEME_LABELS[next] || 'Default';
-    document.getElementById('themeBtn').title = 'Theme: ' + label;
-  }
-
-  (function initTheme() {
-    const random = THEMES[Math.floor(Math.random() * THEMES.length)];
-    if (random !== 'default') {
-      document.body.setAttribute('data-theme', random);
-    }
-    document.getElementById('themeBtn').title = 'Theme: ' + THEME_LABELS[random];
-  })();
+  });
 </script>
 <script src="./assets/js/clock-network.js"></script>
 <script src="./assets/js/services.js"></script>
