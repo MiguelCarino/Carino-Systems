@@ -39,7 +39,6 @@
       flex-direction: column;
     }
 
-    /* ─── TOP HEADER ─────────────────────────────────── */
     .top-header {
       height: 70px;
       flex-shrink: 0;
@@ -98,7 +97,6 @@
     }
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* Diagnostics Dropdown */
     .diag-dropdown {
       position: absolute; top: 80px; right: 30px; width: 320px;
       background: var(--bg-card); border: 1px solid var(--accent-dim);
@@ -129,7 +127,6 @@
     .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
     .retry-btn svg { width: 12px; height: 12px; }
 
-    /* ─── DYNAMIC LAYOUT AREA ────────────────────────── */
     .workspace {
       display: flex;
       flex-direction: column;
@@ -138,7 +135,6 @@
       position: relative;
     }
 
-    /* Content Stage */
     .stage {
       flex: 0 0 0px; 
       opacity: 0;
@@ -186,7 +182,6 @@
     .c-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; flex: 1; }
     .c-link { margin-top: 16px; font-size: 0.75rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
 
-    /* ─── SLICE MENU (YAKUZA CHARACTER SELECT) ───────── */
     .slice-menu {
       display: flex;
       flex: 1 1 auto; 
@@ -211,7 +206,7 @@
       justify-content: center;
       overflow: hidden;
       transition: all 0.4s ease;
-      background: #080808;
+      background: rgb(4, 52, 95);
     }
     .slice:last-child { border-right: none; }
     
@@ -330,7 +325,81 @@
 </div>
 
 <div class="workspace">
-  <!-- ═══ STAGE ═════════════════════════════════════ -->
+  
+  <nav class="slice-menu" id="sliceMenu">
+    
+    <div class="slice" data-target="medtech" onclick="selectSection('medtech')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">01</span>
+        <h2 class="slice-text-lg">MedTech &amp; Imaging</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">MedTech &amp; Imaging</span>
+        <span class="slice-sub-sm">DICOM / PDF / Data</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="telecom" onclick="selectSection('telecom')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">02</span>
+        <h2 class="slice-text-lg">Telecom &amp; Infra</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Telecom &amp; Infra</span>
+        <span class="slice-sub-sm">Network / Speed / DNS</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="security" onclick="selectSection('security')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">03</span>
+        <h2 class="slice-text-lg">Security &amp; Tools</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Security &amp; Tools</span>
+        <span class="slice-sub-sm">Vault / CVE / Links</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="automation" onclick="selectSection('automation')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">04</span>
+        <h2 class="slice-text-lg">Business &amp; Auto</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Business &amp; Auto</span>
+        <span class="slice-sub-sm">Workflows / Ops</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      </div>
+    </div>
+
+    <div class="slice" data-target="media" onclick="selectSection('media')">
+      <div class="slice-bg"></div>
+      <div class="slice-large">
+        <span class="slice-num-lg">05</span>
+        <h2 class="slice-text-lg">Media Tools</h2>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      </div>
+      <div class="slice-small">
+        <span class="slice-text-sm">Media Tools</span>
+        <span class="slice-sub-sm">Stream / AV / Prompt</span>
+        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      </div>
+    </div>
+
+  </nav>
+  
   <main class="stage">
     <!-- 01 ─ MEDTECH & IMAGING -->
     <section id="medtech" class="panel">
@@ -573,81 +642,7 @@
       </div>
     </section>
   </main>
-
-  <!-- ═══ SLICE MENU ════════════════════════════════ -->
-  <nav class="slice-menu" id="sliceMenu">
-    
-    <div class="slice" data-target="medtech" onclick="selectSection('medtech')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">01</span>
-        <h2 class="slice-text-lg">MedTech &amp; Imaging</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm">MedTech &amp; Imaging</span>
-        <span class="slice-sub-sm">DICOM / PDF / Data</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-      </div>
-    </div>
-
-    <div class="slice" data-target="telecom" onclick="selectSection('telecom')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">02</span>
-        <h2 class="slice-text-lg">Telecom &amp; Infra</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm">Telecom &amp; Infra</span>
-        <span class="slice-sub-sm">Network / Speed / DNS</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </div>
-    </div>
-
-    <div class="slice" data-target="security" onclick="selectSection('security')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">03</span>
-        <h2 class="slice-text-lg">Security &amp; Tools</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm">Security &amp; Tools</span>
-        <span class="slice-sub-sm">Vault / CVE / Links</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-    </div>
-
-    <div class="slice" data-target="automation" onclick="selectSection('automation')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">04</span>
-        <h2 class="slice-text-lg">Business &amp; Auto</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm">Business &amp; Auto</span>
-        <span class="slice-sub-sm">Workflows / Ops</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-      </div>
-    </div>
-
-    <div class="slice" data-target="media" onclick="selectSection('media')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">05</span>
-        <h2 class="slice-text-lg">Media Tools</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm">Media Tools</span>
-        <span class="slice-sub-sm">Stream / AV / Prompt</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-      </div>
-    </div>
-
-  </nav>
+  
 </div>
 
 <script>
