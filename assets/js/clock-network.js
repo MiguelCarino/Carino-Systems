@@ -5,10 +5,65 @@ const TEST_FILE_LARGE = "https://raw.githubusercontent.com/MiguelCarino/Carino-S
 
 // MODULE: TIME & GREETING
 const GREETINGS = {
-  morning:   ["Good Morning, Operator.", "おはようございます、オペレーター。", "Buenos días, Operador.", "Доброе утро, Оператор."],
-  afternoon: ["Good Afternoon, Operator.", "こんにちは、オペレーター。",          "Buenas tardes, Operador.", "Добрый день, Оператор."],
-  evening:   ["Good Evening, Operator.", "こんばんは、オペレーター。",             "Buenas tardes, Operador.", "Добрый вечер, Оператор."],
-  night:     ["Good Night, Operator.",   "おやすみなさい、オペレーター。",         "Buenas noches, Operador.", "Спокойной ночи, Оператор."]
+  morning: [
+    "Good Morning, Boss.",
+    "おはようございます、組長。",
+    "Buenos días, Jefe.",
+    "Доброе утро, Босс.",
+    "좋은 아침입니다, 보스님.",
+    "早上好，老大。",
+    "Καλημέρα, Αρχηγέ.",
+    "ᐅᓪᓛᒃᑯᑦ, ᐊᖓᔪᖅᑳᖅ.",
+    "בוקר טוב, בוס.",
+    "Buongiorno, Capo.",
+    "Bonjour, Chef.",
+    "Bom dia, Chefe."
+  ],
+
+  afternoon: [
+    "Good Afternoon, Boss.",
+    "こんにちは、組長。",
+    "Buenas tardes, Jefe.",
+    "Добрый день, Босс.",
+    "좋은 오후입니다, 보스님.",
+    "下午好，老大。",
+    "Καλό απόγευμα, Αρχηγέ.",
+    "ᐅᓐᓄᓴᒃᑯᑦ, ᐊᖓᔪᖅᑳᖅ.",
+    "צהריים טובים, בוס.",
+    "Buon pomeriggio, Capo.",
+    "Bon après-midi, Chef.",
+    "Boa tarde, Chefe."
+  ],
+
+  evening: [
+    "Good Evening, Boss.",
+    "こんばんは、組長。",
+    "Buenas tardes, Jefe.",
+    "Добрый вечер, Босс.",
+    "좋은 저녁입니다, 보스님.",
+    "晚上好，老大。",
+    "Καλησπέρα, Αρχηγέ.",
+    "ᐅᓐᓄᒃᑯᑦ, ᐊᖓᔪᖅᑳᖅ.",
+    "ערב טוב, בוס.",
+    "Buonasera, Capo.",
+    "Bonsoir, Chef.",
+    "Boa noite, Chefe."
+  ],
+
+  night: [
+    "Good Night, Boss.",
+    "おやすみなさい、組長。",
+    "Buenas noches, Jefe.",
+    "Спокойной ночи, Босс.",
+    "안녕히 주무세요, 보스님.",
+    "晚安，老大。",
+    "Καληνύχτα, Αρχηγέ.",
+    "ᐅᓐᓄᐊᒃᑯᑦ, ᐊᖓᔪᖅᑳᖅ.",
+    "לילה טוב, בוס.",
+    "Buonanotte, Capo.",
+    "Bonne nuit, Chef.",
+    "Boa noite, Chefe."
+  ]
 };
 
 let greetLangIndex = 0;
@@ -66,7 +121,7 @@ updateTime();
 setInterval(() => {
   const elGreet = document.getElementById('greeting');
   if (!elGreet || !greetPeriod) return;
-  greetLangIndex = (greetLangIndex + 1) % 4;
+  greetLangIndex = (greetLangIndex + 1) % 12;
   fadeSetText(elGreet, GREETINGS[greetPeriod][greetLangIndex]);
 }, 5000);
 
