@@ -211,6 +211,13 @@ async function detectSystem() {
     elCPU.textContent = cores ? `${cores} Logical Cores` : "Unknown (Masked)";
   }
 
+  // 4b. RAM
+  const elRAM = $('sysRAM');
+  if(elRAM) {
+    const ram = navigator.deviceMemory;
+    elRAM.textContent = ram ? `~${ram} GB` : "Masked";
+  }
+
   // 5. DISPLAY
   const elScreen = $('sysScreen');
   if(elScreen) {
@@ -218,6 +225,32 @@ async function detectSystem() {
     const h = window.screen.height;
     const dpr = window.devicePixelRatio || 1;
     elScreen.textContent = `${w}x${h} (${dpr.toFixed(1)}x)`;
+  }
+
+  // 5b. BATTERY
+  const elBatt = $('sysBattery');
+  if(elBatt) {
+    if ('getBattery' in navigator) {
+      try {
+        const batt = await navigator.getBattery();
+        const fmt = (b) => `${Math.round(b.level * 100)}% — ${b.charging ? 'Charging' : 'On battery'}`;
+        elBatt.textContent = fmt(batt);
+        batt.addEventListener('levelchange',   () => { elBatt.textContent = fmt(batt); });
+        batt.addEventListener('chargingchange', () => { elBatt.textContent = fmt(batt); });
+      } catch(e) { elBatt.textContent = "N/A"; }
+    } else { elBatt.textContent = "N/A"; }
+  }
+
+  // 5c. CONNECTION TYPE
+  const elConn = $('sysConn');
+  if(elConn) {
+    const conn = navigator.connection;
+    if(conn) {
+      const type = (conn.type && conn.type !== 'unknown') ? conn.type : (conn.effectiveType || null);
+      elConn.textContent = type ? type.toUpperCase() : "Unknown";
+    } else {
+      elConn.textContent = "N/A";
+    }
   }
 
   // 6. GPUfunction detectGPUInfo() {
@@ -424,12 +457,13 @@ async function detectIPs() {
   ]);
 
   const [v6, v4] = await Promise.allSettled([v6Promise, v4Promise]);
+  const isFirefox = /Firefox\//.test(navigator.userAgent);
 
   if (v6.status === "fulfilled" && v6.value.includes(":")) {
     if(ipv6) ipv6.textContent = v6.value;
     if(dot6) dot6.className = "status-dot success";
   } else {
-    if(ipv6) ipv6.textContent = "Not detected";
+    if(ipv6) ipv6.textContent = isFirefox ? "Blocked by browser" : "Not detected";
     if(dot6) dot6.className = "status-dot unknown";
   }
 
@@ -437,8 +471,21 @@ async function detectIPs() {
     if(ipv4) ipv4.textContent = v4.value;
     if(dot4) dot4.className = "status-dot success";
   } else {
-    if(ipv4) ipv4.textContent = "Unavailable";
-    if(dot4) dot4.className = "status-dot fail";
+    if(ipv4) ipv4.textContent = isFirefox ? "Blocked by browser" : "Unavailable";
+    if(dot4) dot4.className = isFirefox ? "status-dot unknown" : "status-dot fail";
+  }
+}
+
+async function detectISP() {
+  const el = $('sysISP');
+  if (!el) return;
+  el.textContent = "...";
+  try {
+    const data = await fetchJSON("https://ipapi.co/json/", { timeoutMs: 5000 });
+    const org = (data.org || "").replace(/^AS\d+\s+/i, "").trim();
+    el.textContent = org || "Unknown";
+  } catch(e) {
+    el.textContent = /Firefox\//.test(navigator.userAgent) ? "Blocked by browser" : "Unavailable";
   }
 }
 
@@ -504,7 +551,7 @@ async function runSpeedTest() {
 }
 
 async function runNetwork() {
-  await detectIPs();
+  await Promise.all([detectIPs(), detectISP()]);
   await checkPing();
   await runSpeedTest();
 }

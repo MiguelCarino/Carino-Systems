@@ -98,18 +98,20 @@
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
     .diag-dropdown {
-      position: absolute; top: 80px; right: 30px; width: 320px;
+      position: absolute; top: 80px; right: 30px; width: 420px; max-width: calc(100vw - 40px);
       background: var(--bg-card); border: 1px solid var(--accent-dim);
       padding: 20px; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
       opacity: 0; pointer-events: none; transform: translateY(-10px);
       transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1); z-index: 200;
     }
     .diag-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    
+
     .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; }
-    .diag-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-    .diag-val { color: var(--text); }
+    .diag-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
+    .diag-val { color: var(--text); text-align: right; }
+    .diag-val-trunc { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
     .diag-val-group { display: flex; align-items: center; gap: 6px; }
+    .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
@@ -309,14 +311,21 @@
     <span class="diag-lbl">Last Check</span>
     <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
   </div>
+  <div class="diag-section">Network</div>
   <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val" id="ipv6" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
+  <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="ipv6">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
+  <div class="diag-row"><span class="diag-lbl">ISP</span><span class="diag-val diag-val-trunc" id="sysISP">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">Conn</span><span class="diag-val" id="sysConn">--</span></div>
   <div class="diag-row"><span class="diag-lbl">Ping</span><span class="diag-val" id="pingVal">--</span></div>
   <div class="diag-row"><span class="diag-lbl">Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
+  <div class="diag-section">Hardware</div>
   <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">RAM</span><span class="diag-val" id="sysRAM">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val diag-val-trunc" id="sysGPU">--</span></div>
   <div class="diag-row"><span class="diag-lbl">Screen</span><span class="diag-val" id="sysScreen">--</span></div>
-  <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val" id="sysGPU" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span></div>
-  <div class="diag-row"><span class="diag-lbl">Client</span><span class="diag-val" id="sysClient" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;">--</span></div>
+  <div class="diag-row"><span class="diag-lbl">Battery</span><span class="diag-val" id="sysBattery">--</span></div>
+  <div class="diag-section">System</div>
+  <div class="diag-row"><span class="diag-lbl">Client</span><span class="diag-val diag-val-trunc" id="sysClient">--</span></div>
   <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
   <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
   <button class="retry-btn" id="retryNetwork">
