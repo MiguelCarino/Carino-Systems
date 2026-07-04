@@ -21,10 +21,10 @@
       --text-sec:       #a3a3a3;
       --text-muted:     #666666;
       
-      /* New Vibrant Body Colors */
-      --bg-stage-grad:  linear-gradient(135deg, #b45309 0%, #9a3412 100%);
-      --text-stage-title: #0a0a0a;
-      --text-stage-desc:  #333333;
+      /* Stage (black & gold) */
+      --bg-stage-grad:  radial-gradient(1200px 520px at 50% -12%, rgba(234,179,8,0.08) 0%, transparent 60%), linear-gradient(180deg, #0b0b0b 0%, #050505 100%);
+      --text-stage-title: #ffffff;
+      --text-stage-desc:  #a3a3a3;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -159,24 +159,25 @@
     .panel.active { display: block; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    .panel-header { margin-bottom: 30px; padding-bottom: 16px; border-bottom: 2px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: flex-end; }
-    .panel-title { font-family: 'Red Hat Display', sans-serif; font-size: 2.8rem; font-weight: 900; color: var(--text-stage-title); line-height: 1; text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0px rgba(255,255,255,0.25);}
-    .panel-desc { font-size: 0.95rem; color: var(--text-stage-desc); font-weight: 600; margin-top: 8px; font-family: 'IBM Plex Mono', monospace;}
-    .panel-num { font-size: 4rem; font-weight: 900; color: rgba(0,0,0,0.1); font-family: 'Red Hat Display', sans-serif; line-height: 0.8; user-select: none; }
+    .panel-header { margin-bottom: 30px; padding-bottom: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+    .panel-title { font-family: 'Red Hat Display', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; text-transform: uppercase; letter-spacing: 1px;
+      background: linear-gradient(130deg, #fef08a 0%, #eab308 55%, #b45309 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .panel-desc { font-size: 0.95rem; color: var(--text-stage-desc); font-weight: 500; margin-top: 8px; font-family: 'IBM Plex Mono', monospace;}
+    .panel-num { font-size: 4rem; font-weight: 900; color: rgba(234,179,8,0.12); font-family: 'Red Hat Display', sans-serif; line-height: 0.8; user-select: none; }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
 
-    /* The cards remain dark to contrast heavily with the orange body */
+    /* Near-black cards on the black/gold stage */
     .card {
-      background: rgb(1, 45, 84);
-      border: 1px solid #2a2a2a; padding: 24px; border-radius: 4px;
+      background: #0d0d0d;
+      border: 1px solid var(--border); padding: 24px; border-radius: 12px;
       transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
       display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit; min-height: 150px;
     }
     .card:hover {
-      border-color: var(--accent); background: linear-gradient(145deg, #1f1f1f 0%, #0d0d0d 100%);
-      transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.3);
+      border-color: var(--accent); background: linear-gradient(145deg, #17120a 0%, #0b0b0b 100%);
+      transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 22px var(--accent-glow);
     }
     .card.disabled { opacity: 0.3; pointer-events: none; }
     .c-icon { font-size: 1.6rem; margin-bottom: 12px; }
@@ -209,11 +210,11 @@
       justify-content: center;
       overflow: hidden;
       transition: all 0.4s ease;
-      background: rgb(4, 52, 95);
+      background: #0a0a0a;
     }
     .slice:last-child { border-right: none; }
-    
-    body:not(.state-selected) .slice:hover { display: flex; flex: 1.2; background: rgb(5, 36, 68);; }
+
+    body:not(.state-selected) .slice:hover { display: flex; flex: 1.2; background: #131007; }
     body:not(.state-selected) .slice:hover .slice-bg { opacity: 1; transform: scale(1.05); }
 
     .slice-bg {
@@ -375,7 +376,7 @@
       </div>
       <div class="slice-small">
         <span class="slice-text-sm">Security &amp; Tools</span>
-        <span class="slice-sub-sm">Vault / CVE / Links</span>
+        <span class="slice-sub-sm">Vault / CVE / Learn</span>
         <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
       </div>
     </div>
@@ -403,7 +404,7 @@
       </div>
       <div class="slice-small">
         <span class="slice-text-sm">Media Tools</span>
-        <span class="slice-sub-sm">Stream / AV / Prompt</span>
+        <span class="slice-sub-sm">Stream / Games / AV</span>
         <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
       </div>
     </div>
@@ -551,6 +552,22 @@
           </div>
           <span class="c-link">Launch ↗</span>
         </a>
+        <a href="https://miguelcarino.github.io/AssemblyRoadmap/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">🎓</div>
+            <div class="c-title">Carino Learn</div>
+            <div class="c-desc">Hands-on roadmaps for the low-level Linux stack — x86-64 assembly, Bash, GNU tools and Red Hat administration.</div>
+          </div>
+          <span class="c-link">Start Learning ↗</span>
+        </a>
+        <a href="https://miguelcarino.github.io/ISO-27001/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">📋</div>
+            <div class="c-title">ISO 27001 Templates</div>
+            <div class="c-desc">Ready-to-use document templates to comply with the ISO 27000 / 27001 information-security standards.</div>
+          </div>
+          <span class="c-link">Browse ↗</span>
+        </a>
       </div>
     </section>
 
@@ -612,6 +629,22 @@
           </div>
           <span class="c-link">Open ↗</span>
         </a>
+        <a href="https://signature.carino.systems/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">✍️</div>
+            <div class="c-title">Signature Editor</div>
+            <div class="c-desc">OpenCV-based tool to clean up and edit scanned signatures for documents and contracts.</div>
+          </div>
+          <span class="c-link">Launch ↗</span>
+        </a>
+        <a href="https://miguelcarino.github.io/Graphy/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">🕸️</div>
+            <div class="c-title">Graphy</div>
+            <div class="c-desc">Render custom JSON as interactive node graphs with dynamic, toggleable nodes — load files via #name.</div>
+          </div>
+          <span class="c-link">Launch ↗</span>
+        </a>
       </div>
     </section>
 
@@ -624,7 +657,7 @@
         </div>
         <div class="panel-num">05</div>
       </div>
-      <div class="grid-2">
+      <div class="grid-3">
         <a href="https://tv.carino.systems/" class="card">
           <div>
             <div class="c-icon">📡</div>
@@ -649,14 +682,38 @@
           </div>
           <span class="c-link">Launch ↗</span>
         </a>
-        <div class="card disabled">
+        <a href="https://miguelcarino.github.io/Asobi/" target="_blank" class="card">
           <div>
-            <div class="c-icon">📸</div>
-            <div class="c-title">Coming Soon</div>
-            <div class="c-desc">Photo and multimedia asset tools in development.</div>
+            <div class="c-icon">🎴</div>
+            <div class="c-title">Asobi — Board Games</div>
+            <div class="c-desc">Play Shogi (将棋) and Hanafuda Koi-Koi (花札) in-browser — human vs human, vs AI, or AI vs AI.</div>
           </div>
-          <span class="c-link">—</span>
-        </div>
+          <span class="c-link">Play ↗</span>
+        </a>
+        <a href="https://miguelcarino.github.io/pentarch/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">🗺️</div>
+            <div class="c-title">PlanetDayum</div>
+            <div class="c-desc">Five-faction continent-war strategy game with a deterministic, online-safe auto-battler.</div>
+          </div>
+          <span class="c-link">Play ↗</span>
+        </a>
+        <a href="https://compass.carino.systems/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">🧭</div>
+            <div class="c-title">Political Compass</div>
+            <div class="c-desc">A 12-axis political compass measured by intention rather than numeric grading.</div>
+          </div>
+          <span class="c-link">Launch ↗</span>
+        </a>
+        <a href="https://countdown.carino.systems/" target="_blank" class="card">
+          <div>
+            <div class="c-icon">⏳</div>
+            <div class="c-title">Countdown</div>
+            <div class="c-desc">Front-end countdown timer for custom events, streams, and presentations.</div>
+          </div>
+          <span class="c-link">Launch ↗</span>
+        </a>
       </div>
     </section>
   </main>
