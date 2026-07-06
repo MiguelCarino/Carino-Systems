@@ -68,6 +68,7 @@ const GREETINGS = {
 
 let greetLangIndex = 0;
 let greetPeriod = null;
+let clockMode = 0; // 0 = local, 1 = UTC, 2 = epoch. Click the header clock to cycle.
 
 function getGreetPeriod(hrs) {
   if (hrs >= 5 && hrs < 12) return 'morning';
@@ -92,17 +93,25 @@ function updateTime() {
   const elGreet = document.getElementById('greeting');
   const elLastCheck = document.getElementById('lastCheck');
 
-  if(elLocal) elLocal.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+  // The dropdown always shows all three; the header clock shows whichever
+  // mode is active (click to cycle Local -> UTC -> Epoch).
   if(elDate) elDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric' });
   if(elUTC) elUTC.textContent = now.toISOString().substring(11, 19) + 'Z';
   if(elEpoch) elEpoch.textContent = Math.floor(now.getTime() / 1000);
   if(elLastCheck) elLastCheck.textContent = now.toLocaleTimeString('en-US', { hour12: false, second: 'numeric' });
 
-  if(elTZ) {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      elTZ.textContent = tz.split('/')[1] || tz;
-    } catch(e) { elTZ.textContent = "Timezone"; }
+  let localTz = "Timezone";
+  try { const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; localTz = tz.split('/')[1] || tz; } catch(e) { localTz = "Timezone"; }
+
+  if (clockMode === 1) {
+    if(elLocal) elLocal.textContent = now.toISOString().substring(11, 19);
+    if(elTZ) elTZ.textContent = "UTC";
+  } else if (clockMode === 2) {
+    if(elLocal) elLocal.textContent = Math.floor(now.getTime() / 1000);
+    if(elTZ) elTZ.textContent = "EPOCH";
+  } else {
+    if(elLocal) elLocal.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+    if(elTZ) elTZ.textContent = localTz;
   }
 
   if(elGreet) {
@@ -564,6 +573,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target.closest('a')) return;
       heroHud.classList.toggle('expanded');
     });
+  }
+  const clockBox = document.querySelector('.header-clock');
+  if (clockBox) {
+    clockBox.style.cursor = 'pointer';
+    clockBox.title = 'Click to toggle Local / UTC / Epoch';
+    clockBox.addEventListener('click', () => { clockMode = (clockMode + 1) % 3; updateTime(); });
   }
 });
 
