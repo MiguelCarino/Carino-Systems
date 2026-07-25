@@ -545,80 +545,216 @@ async function runNetwork() {
   await runSpeedTest();
 }
 
-// MODULE: FLEET STATUS
-// Reachability probe of every carino.systems site, straight from the visitor's
-// browser. no-cors fetches resolve opaquely when DNS+TLS+server are all good
-// and reject otherwise, so a red dot means unreachable (not merely a 404).
-const FLEET_SITES = ["asobi","branding","compass","cve","desk","dicom","distro",
-  "hardware","hash","kanban","learn","media","metadata","music","netplan","pacs",
-  "password","quote","retina","setup","software","subs","teleprompter","time",
-  "topo","tv","vitae"];
-let fleetLastRun = 0;
+// MODULE: REACHABILITY
+// A handful of well-known endpoints probed from the visitor's browser to help
+// tell apart "I'm offline", "my DNS is broken", "this site is blocked/geo-fenced
+// by my network or VPN", and "Carino's own infra is down". Chosen so the FAILURE
+// PATTERN is diagnostic:
+//   - Cloudflare (1.1.1.1) is a raw IP, so it succeeds even when DNS is broken:
+//     up here + domains down => DNS problem, not a dead link.
+//   - Google / GitHub / YouTube are the usual casualties of corporate filters,
+//     censorship and VPN geo-fencing.
+//   - carino.systems is our own infrastructure.
+// no-cors fetches resolve opaquely when reachable and reject otherwise, so we
+// only learn up/down + latency (never the HTTP status) — which is all we need.
+const REACH_TARGETS = [
+  { name: "Cloudflare",  hint: "IP · no DNS", url: "https://1.1.1.1/cdn-cgi/trace" },
+  { name: "Google",      hint: "web · DNS",   url: "https://www.google.com/generate_204" },
+  { name: "GitHub",      hint: "dev/CI",      url: "https://github.com/" },
+  { name: "YouTube",     hint: "geo/VPN",     url: "https://www.youtube.com/favicon.ico" },
+  { name: "Cloudflare DNS", hint: "DoH",      url: "https://cloudflare-dns.com/" },
+  { name: "carino.systems", hint: "own infra", url: "https://carino.systems/" },
+];
+let reachLastRun = 0;
 
-async function probeSite(sub, timeoutMs = 6000) {
+async function probeURL(url, timeoutMs = 6000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   const start = performance.now();
   try {
-    await fetch(`https://${sub}.carino.systems/`, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
+    await fetch(url, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
     return Math.round(performance.now() - start);
   } finally { clearTimeout(t); }
 }
 
-async function checkFleet(force = false) {
-  const grid = $('fleetGrid');
-  const count = $('fleetCount');
-  if (!grid) return;
-  if (!force && Date.now() - fleetLastRun < 60000) return;
-  fleetLastRun = Date.now();
-
-  if (!grid.childElementCount) {
-    for (const sub of FLEET_SITES) {
-      const a = document.createElement('a');
-      a.className = 'fleet-item';
-      a.href = `https://${sub}.carino.systems/`;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      const dot = document.createElement('span');
-      dot.className = 'status-dot scanning';
-      dot.id = `fdot-${sub}`;
-      const nm = document.createElement('span');
-      nm.className = 'nm';
-      nm.textContent = sub;
-      a.append(dot, nm);
-      grid.appendChild(a);
-    }
+function buildReachRows() {
+  const list = $('reachList');
+  if (!list || list.childElementCount) return;
+  for (let i = 0; i < REACH_TARGETS.length; i++) {
+    const tgt = REACH_TARGETS[i];
+    const row = document.createElement('div');
+    row.className = 'reach-item';
+    const name = document.createElement('span');
+    name.className = 'reach-name';
+    const dot = document.createElement('span');
+    dot.className = 'status-dot unknown';
+    dot.id = `rdot-${i}`;
+    const lbl = document.createElement('span');
+    lbl.className = 'lbl';
+    lbl.textContent = tgt.name;
+    const small = document.createElement('small');
+    small.textContent = tgt.hint;
+    name.append(dot, lbl, small);
+    const val = document.createElement('span');
+    val.className = 'reach-val';
+    val.id = `rval-${i}`;
+    val.textContent = '--';
+    row.append(name, val);
+    list.appendChild(row);
   }
+}
+
+async function checkReach(force = false) {
+  const list = $('reachList');
+  const count = $('reachCount');
+  if (!list) return;
+  if (!force && Date.now() - reachLastRun < 60000) return;
+  reachLastRun = Date.now();
+  buildReachRows();
 
   let up = 0, done = 0;
-  if (count) count.textContent = "0/" + FLEET_SITES.length;
-  await Promise.all(FLEET_SITES.map(async (sub) => {
-    const dot = $(`fdot-${sub}`);
+  if (count) count.textContent = "0/" + REACH_TARGETS.length;
+  await Promise.all(REACH_TARGETS.map(async (tgt, i) => {
+    const dot = $(`rdot-${i}`); const val = $(`rval-${i}`);
     if (dot) dot.className = 'status-dot scanning';
+    if (val) val.textContent = '...';
     try {
-      const ms = await probeSite(sub);
+      const ms = await probeURL(tgt.url);
       up++;
-      if (dot) { dot.className = 'status-dot success'; dot.parentElement.title = `${sub}.carino.systems — up (${ms} ms)`; }
+      if (dot) dot.className = 'status-dot success';
+      if (val) val.textContent = ms + ' ms';
     } catch (e) {
-      if (dot) { dot.className = 'status-dot fail'; dot.parentElement.title = `${sub}.carino.systems — unreachable (DNS/TLS/network)`; }
+      if (dot) dot.className = 'status-dot fail';
+      if (val) { val.textContent = 'blocked'; val.style.color = 'var(--err)'; }
     } finally {
       done++;
-      if (count) count.textContent = done < FLEET_SITES.length ? `${up}/${done}` : `${up}/${FLEET_SITES.length} up`;
+      if (count) count.textContent = done < REACH_TARGETS.length ? `${up}/${done}` : `${up}/${REACH_TARGETS.length} up`;
     }
   }));
 }
 
+// MODULE: EXPORT SYS-STATUS AS IMAGE
+// Renders the current dropdown contents to a canvas (no external libs) and
+// downloads a PNG, stamped with carino.systems at the bottom.
+function readDiagModel() {
+  const box = $('diagBox');
+  const out = [];
+  if (!box) return out;
+  for (const el of box.children) {
+    if (el.classList.contains('diag-actions')) continue;
+    if (el.classList.contains('diag-section')) {
+      out.push({ type: 'section', text: (el.firstChild && el.firstChild.textContent || el.textContent).trim(),
+                 extra: (el.querySelector('span') ? el.querySelector('span').textContent.trim() : '') });
+    } else if (el.classList.contains('diag-row')) {
+      const l = el.querySelector('.diag-lbl'), v = el.querySelector('.diag-val');
+      out.push({ type: 'row', label: l ? l.textContent.trim() : '', value: v ? v.textContent.trim() : '',
+                 dot: dotColorOf(el.querySelector('.status-dot')) });
+    } else if (el.id === 'reachList') {
+      for (const item of el.children) {
+        const l = item.querySelector('.lbl'), s = item.querySelector('small'), v = item.querySelector('.reach-val');
+        out.push({ type: 'row', label: (l ? l.textContent.trim() : '') + (s ? '  ' + s.textContent.trim() : ''),
+                   value: v ? v.textContent.trim() : '', dot: dotColorOf(item.querySelector('.status-dot')) });
+      }
+    }
+  }
+  return out;
+}
+
+function dotColorOf(dot) {
+  if (!dot) return null;
+  if (dot.classList.contains('success')) return '#eab308';
+  if (dot.classList.contains('fail')) return '#ef4444';
+  if (dot.classList.contains('scanning')) return '#a3a3a3';
+  return '#666666';
+}
+
+async function exportStatusImage() {
+  try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+  const rows = readDiagModel();
+  const scale = Math.min(window.devicePixelRatio || 1, 2);
+  const W = 460, padX = 24, padTop = 24, padBottom = 52;
+  const titleH = 44, sectionH = 26, rowH = 22;
+  let h = padTop + titleH;
+  for (const r of rows) h += (r.type === 'section' ? sectionH : rowH);
+  h += padBottom;
+
+  const cv = document.createElement('canvas');
+  cv.width = W * scale; cv.height = h * scale;
+  const ctx = cv.getContext('2d');
+  ctx.scale(scale, scale);
+  const mono = "'IBM Plex Mono', ui-monospace, monospace";
+  const disp = "'Red Hat Display', 'IBM Plex Sans', sans-serif";
+
+  // Background + gold frame
+  ctx.fillStyle = '#0b0b0b'; ctx.fillRect(0, 0, W, h);
+  ctx.strokeStyle = 'rgba(234,179,8,0.3)'; ctx.lineWidth = 1;
+  ctx.strokeRect(0.5, 0.5, W - 1, h - 1);
+
+  // Title
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#eab308'; ctx.font = '900 20px ' + disp;
+  ctx.fillText('SYSTEM STATUS', padX, padTop + 20);
+  ctx.fillStyle = '#a3a3a3'; ctx.font = '11px ' + mono;
+  ctx.textAlign = 'right';
+  ctx.fillText(new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC', W - padX, padTop + 19);
+  ctx.textAlign = 'left';
+
+  let y = padTop + titleH;
+  for (const r of rows) {
+    if (r.type === 'section') {
+      y += 4;
+      ctx.strokeStyle = '#262626'; ctx.beginPath(); ctx.moveTo(padX, y + sectionH - 8); ctx.lineTo(W - padX, y + sectionH - 8); ctx.stroke();
+      ctx.fillStyle = '#666666'; ctx.font = '700 10px ' + mono;
+      ctx.fillText(r.text.toUpperCase(), padX, y + 12);
+      if (r.extra) { ctx.textAlign = 'right'; ctx.fillStyle = '#a3a3a3'; ctx.fillText(r.extra, W - padX, y + 12); ctx.textAlign = 'left'; }
+      y += sectionH;
+    } else {
+      let vx = W - padX;
+      if (r.dot) {
+        ctx.fillStyle = r.dot; ctx.beginPath(); ctx.arc(vx - 3, y + 6, 3, 0, Math.PI * 2); ctx.fill();
+        vx -= 12;
+      }
+      ctx.fillStyle = '#666666'; ctx.font = '11px ' + mono;
+      ctx.fillText(r.label, padX, y + 10);
+      ctx.fillStyle = r.value === 'blocked' ? '#ef4444' : '#ffffff'; ctx.font = '11px ' + mono;
+      ctx.textAlign = 'right';
+      ctx.fillText(r.value, vx, y + 10);
+      ctx.textAlign = 'left';
+      y += rowH;
+    }
+  }
+
+  // Footer wordmark
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#eab308'; ctx.font = '900 15px ' + disp;
+  ctx.fillText('carino.systems', W / 2, h - 22);
+  ctx.textAlign = 'left';
+
+  cv.toBlob((blob) => {
+    if (!blob) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'carino-sysstatus-' + Math.floor(Date.now() / 1000) + '.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }, 'image/png');
+}
+
 // INIT
 const retryBtn = $('retryNetwork');
-if(retryBtn) retryBtn.addEventListener("click", () => { runNetwork(); checkFleet(true); });
+if(retryBtn) retryBtn.addEventListener("click", () => { runNetwork(); checkReach(true); });
 
-// Probe the fleet when the dropdown is opened (throttled to once a minute).
+const exportBtn = $('exportStatus');
+if(exportBtn) exportBtn.addEventListener("click", exportStatusImage);
+
+// Probe reachability when the dropdown is opened (throttled to once a minute).
 // The inline onclick=toggleDiag fires first, so the open state is current here.
 const statusToggleBtn = document.querySelector('.status-toggle');
 if (statusToggleBtn) statusToggleBtn.addEventListener("click", () => {
   const box = document.getElementById('diagBox');
-  if (box && box.classList.contains('open')) checkFleet();
+  if (box && box.classList.contains('open')) checkReach();
 });
 
-detectSystem(); 
+detectSystem();
 runNetwork();
+checkReach();

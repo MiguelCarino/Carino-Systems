@@ -112,10 +112,11 @@
     .diag-val-group { display: flex; align-items: center; gap: 6px; }
     .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
 
-    .fleet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; margin-bottom: 8px; }
-    .fleet-item { display: flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--text-sec); text-decoration: none; min-width: 0; }
-    .fleet-item .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .fleet-item:hover { color: var(--accent); }
+    .reach-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; }
+    .reach-item .reach-name { color: var(--text-sec); display: flex; align-items: center; gap: 7px; min-width: 0; }
+    .reach-item .reach-name .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .reach-item .reach-name small { color: var(--text-muted); font-size: 0.62rem; }
+    .reach-item .reach-val { color: var(--text); text-align: right; flex-shrink: 0; padding-left: 8px; }
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
@@ -133,6 +134,8 @@
     }
     .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
     .retry-btn svg { width: 12px; height: 12px; }
+    .diag-actions { display: flex; gap: 8px; }
+    .diag-actions .retry-btn { flex: 1; }
 
     .workspace {
       display: flex;
@@ -316,8 +319,8 @@
     <span class="diag-lbl">Last Check</span>
     <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
   </div>
-  <div class="diag-section">Fleet <span id="fleetCount" style="float:right;">--</span></div>
-  <div class="fleet-grid" id="fleetGrid"></div>
+  <div class="diag-section">Reachability <span id="reachCount" style="float:right;">--</span></div>
+  <div id="reachList"></div>
   <div class="diag-section">Network</div>
   <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
   <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="ipv6">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
@@ -335,10 +338,16 @@
   <div class="diag-row"><span class="diag-lbl">Client</span><span class="diag-val diag-val-trunc" id="sysClient">--</span></div>
   <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
   <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
-  <button class="retry-btn" id="retryNetwork">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-    Retry Network
-  </button>
+  <div class="diag-actions">
+    <button class="retry-btn" id="retryNetwork">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      Retry
+    </button>
+    <button class="retry-btn" id="exportStatus">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      Export
+    </button>
+  </div>
 </div>
 
 <div class="workspace">
