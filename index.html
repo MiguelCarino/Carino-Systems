@@ -16,14 +16,12 @@
       --accent-glow:    rgba(234, 179, 8, 0.15);
       --accent-dim:     rgba(234, 179, 8, 0.3);
       --border:         #262626;
-      --border-hv:      #eab308;
       --text:           #ffffff;
       --text-sec:       #a3a3a3;
       --text-muted:     #666666;
       
       /* Stage (black & gold) */
       --bg-stage-grad:  radial-gradient(1200px 520px at 50% -12%, rgba(234,179,8,0.08) 0%, transparent 60%), linear-gradient(180deg, #0b0b0b 0%, #050505 100%);
-      --text-stage-title: #ffffff;
       --text-stage-desc:  #a3a3a3;
     }
 
@@ -61,9 +59,10 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      cursor: pointer;
     }
-    .brand-name span { -webkit-text-fill-color: #ffffff; }
+    .brand-name a { color: inherit; text-decoration: none; }
+    .brand-name span { -webkit-text-fill-color: #ffffff; transition: text-shadow 0.2s; }
+    .brand-self:hover span { text-shadow: 0 0 14px var(--accent-dim); }
 
     .header-clock { display: flex; align-items: baseline; gap: 10px; border-left: 1px solid var(--border); padding-left: 30px; }
     .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: 1.2rem; color: var(--text); font-weight: 700; }
@@ -120,9 +119,10 @@
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
-    .status-dot.fail    { background: #dc2626; box-shadow: 0 0 4px #dc2626; }
-    .status-dot.unknown { background: #525252; }
-    .status-dot.scanning { background: #d4d4d4; animation: pulse 1s infinite; }
+    .status-dot.fail    { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+    .status-dot.unknown { background: #666666; }
+    .status-dot.scanning { background: #a3a3a3; animation: pulse 1s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
     .retry-btn {
       display: flex; align-items: center; justify-content: center; gap: 5px;
@@ -210,7 +210,6 @@
       position: relative;
       cursor: pointer;
       display: flex;
-      /*display: flex;*/
       align-items: center;
       justify-content: center;
       overflow: hidden;
@@ -287,7 +286,7 @@
 
 <header class="top-header">
   <div class="header-left">
-    <div class="brand-name" onclick="resetView()" title="Return to Overview">Carino<span></span></div>
+    <div class="brand-name"><a href="https://carino.systems/" title="Carino Systems — back to hub">Carino</a> <a class="brand-self" href="./" title="Carino Systems — reload"><span>Systems</span></a></div>
     <div class="header-clock">
       <span class="clock-time" id="clockLocal">00:00:00</span>
       <span class="clock-tz" id="tzName">UTC</span>
@@ -721,11 +720,6 @@
     document.querySelector('.stage').scrollTop = 0;
   }
 
-  function resetView() {
-    document.body.classList.remove('state-selected');
-    document.querySelectorAll('.slice').forEach(s => s.classList.remove('active'));
-  }
-
   function toggleDiag() {
     document.getElementById('diagBox').classList.toggle('open');
   }
@@ -741,6 +735,5 @@
 <script src="./carino-clock.js" defer></script>
 <script src="./assets/js/clock-network.js"></script>
 <script src="./assets/js/services.js"></script>
-<script src="./assets/js/phrases.js"></script>
 </body>
 </html>

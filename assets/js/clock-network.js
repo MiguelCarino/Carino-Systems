@@ -87,17 +87,13 @@ function fadeSetText(el, text) {
 function updateTime() {
   const now = new Date();
 
-  const elLocal = document.getElementById('clockLocal');
-  const elDate = document.getElementById('dateStr');
   const elUTC = document.getElementById('clockUTC');
   const elEpoch = document.getElementById('clockEpoch');
-  const elTZ = document.getElementById('tzName');
   const elGreet = document.getElementById('greeting');
   const elLastCheck = document.getElementById('lastCheck');
 
-  // elLocal / elTZ (the header clock) are owned by carino-clock.js — here we
+  // clockLocal / tzName (the header clock) are owned by carino-clock.js — here we
   // only refresh the diagnostics dropdown rows.
-  if(elDate) elDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric' });
   if(elUTC) elUTC.textContent = now.toISOString().substring(11, 19) + 'Z';
   if(elEpoch) elEpoch.textContent = Math.floor(now.getTime() / 1000);
   if(elLastCheck) elLastCheck.textContent = now.toLocaleTimeString('en-US', { hour12: false, second: 'numeric' });
@@ -250,7 +246,7 @@ async function detectSystem() {
     }
   }
 
-  // 6. GPUfunction detectGPUInfo() {
+  // 6. GPU
   const elGPU = document.getElementById('sysGPU');
   if (!elGPU) return;
 
@@ -388,8 +384,6 @@ async function detectSystem() {
 
     // 4) Limits
     const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-    //const maxRB = gl.getParameter(gl.MAX_RENDERBUFFER_SIZE);
-    //const maxVP = gl.getParameter(gl.MAX_VIEWPORT_DIMS); // Int32Array [w,h]
 
     // 5) Type
     const gpuType = classifyGPU(rawVendor, raw);
@@ -399,8 +393,6 @@ async function detectSystem() {
       `[${gpuType}]`,
       backend || "",
       `Tex: ${maxTex}`
-      //`RB: ${maxRB}`
-      //maxVP ? `VP: ${maxVP[0]}×${maxVP[1]}` : ""
     ].filter(Boolean).join(" | ");
 
     // Put the “full raw string” in title for hover inspection
@@ -617,16 +609,6 @@ async function checkFleet(force = false) {
 }
 
 // INIT
-document.addEventListener("DOMContentLoaded", () => {
-  const heroHud = document.getElementById('heroHud');
-  if (heroHud) {
-    heroHud.addEventListener('click', (e) => {
-      if (e.target.closest('a')) return;
-      heroHud.classList.toggle('expanded');
-    });
-  }
-});
-
 const retryBtn = $('retryNetwork');
 if(retryBtn) retryBtn.addEventListener("click", () => { runNetwork(); checkFleet(true); });
 
