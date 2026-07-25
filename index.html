@@ -115,14 +115,15 @@
     .diag-val-group { display: flex; align-items: center; gap: 6px; }
     .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
 
-    .reach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; margin-bottom: 8px; }
-    .reach-cell { border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px; min-width: 0; }
-    .reach-cell .reach-top { display: flex; align-items: center; gap: 6px; min-width: 0; }
-    .reach-cell .reach-top .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .reach-cell .reach-meta { display: flex; justify-content: space-between; gap: 6px; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; }
-    .reach-cell .reach-meta .ip { color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .reach-cell .reach-meta .ms { color: var(--text-sec); flex-shrink: 0; }
-    .reach-cell .reach-meta .ms.bad { color: var(--err); }
+    /* Compact single-line cells in a 3-up grid: dot + name (+ latency). The
+       resolved IP is kept in the DOM but hidden — revealed on hover (cell title)
+       and printed in full by the PNG export, so the panel stays short. */
+    .reach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 5px; margin-bottom: 8px; }
+    .reach-cell { display: flex; align-items: center; gap: 5px; border: 1px solid var(--border); border-radius: 3px; padding: 3px 6px; min-width: 0; cursor: default; }
+    .reach-cell .lbl { flex: 1 1 auto; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .reach-cell .ms { flex-shrink: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.54rem; color: var(--text-muted); }
+    .reach-cell .ms.bad { color: var(--err); }
+    .reach-cell .ip { display: none; }   /* export-only; hover shows it via the cell title */
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
@@ -330,6 +331,7 @@
   <div class="diag-section">Network</div>
   <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
   <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="ipv6">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
+  <div class="diag-row"><span class="diag-lbl">LAN</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="lanip">...</span><span class="status-dot unknown" id="dotLan"></span></div></div>
   <div class="diag-row"><span class="diag-lbl">ISP</span><span class="diag-val diag-val-trunc" id="sysISP">--</span></div>
   <div class="diag-row"><span class="diag-lbl">Conn</span><span class="diag-val" id="sysConn">--</span></div>
   <div class="diag-row"><span class="diag-lbl">Ping</span><span class="diag-val" id="pingVal">--</span></div>

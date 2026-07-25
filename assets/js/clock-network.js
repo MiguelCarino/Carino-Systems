@@ -539,8 +539,63 @@ async function runSpeedTest() {
     }
 }
 
+// MODULE: LOCAL IP + GATEWAY (best-effort)
+// The only way a browser can see the private LAN address is a WebRTC host ICE
+// candidate — and current browsers mask it behind a random <uuid>.local mDNS
+// name for privacy, so this usually resolves to nothing. We use no STUN server
+// (iceServers: []), so only host candidates appear — never the WAN address.
+let _localIP = { val: undefined, all: [], ts: 0 };
+function _pickPrivate(ips) {
+  const priv = ips.find(ip => /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip));
+  return priv || ips[0] || null;
+}
+async function getLocalIP(timeoutMs = 1500) {
+  if (_localIP.val !== undefined && Date.now() - _localIP.ts < 30000) return _localIP.val;
+  return new Promise((resolve) => {
+    let pc, done = false; const found = [];
+    const finish = (v) => {
+      if (done) return; done = true;
+      try { pc && pc.close(); } catch (e) {}
+      _localIP = { val: v, all: found.slice(), ts: Date.now() };
+      resolve(v);
+    };
+    try { pc = new RTCPeerConnection({ iceServers: [] }); }
+    catch (e) { return finish(null); }
+    try { pc.createDataChannel('d'); } catch (e) {}
+    pc.onicecandidate = (e) => {
+      if (!e || !e.candidate) return finish(_pickPrivate(found));
+      const m = (e.candidate.candidate || '').match(/(\d{1,3}(?:\.\d{1,3}){3})/);   // numeric host IP, not a .local name
+      if (m && !found.includes(m[1])) found.push(m[1]);
+    };
+    pc.createOffer().then(o => pc.setLocalDescription(o)).catch(() => finish(null));
+    setTimeout(() => finish(_pickPrivate(found)), timeoutMs);
+  });
+}
+// Conventional default gateway for a /24 — the router almost always sits on .1.
+function gatewayFromIP(ip) {
+  const p = (ip || '').split('.');
+  return p.length === 4 ? `${p[0]}.${p[1]}.${p[2]}.1` : null;
+}
+
+async function detectLAN() {
+  const el = $('lanip'), dot = $('dotLan');
+  if (!el) return;
+  el.textContent = '...'; if (dot) dot.className = 'status-dot scanning';
+  const ip = await getLocalIP();
+  if (ip) {
+    const extra = _localIP.all.length - 1;
+    el.textContent = extra > 0 ? `${ip} +${extra}` : ip;
+    el.title = _localIP.all.join(', ');
+    if (dot) dot.className = 'status-dot success';
+  } else {
+    el.textContent = 'mDNS masked';
+    el.title = 'Browsers hide the LAN IP behind a random .local mDNS name for privacy.';
+    if (dot) dot.className = 'status-dot unknown';
+  }
+}
+
 async function runNetwork() {
-  await Promise.all([detectIPs(), detectISP()]);
+  await Promise.all([detectIPs(), detectISP(), detectLAN()]);
   await checkPing();
   await runSpeedTest();
 }
@@ -563,6 +618,7 @@ async function runNetwork() {
 // latency + dot come from a separate no-cors reachability fetch. Public DNS
 // resolvers are included by hostname so their well-known IPs act as a sanity ref.
 const REACH_TARGETS = [
+  { name: "Gateway",        kind: "gateway" },   // LAN default gateway (WebRTC-derived, best-effort)
   { name: "Cloudflare",     host: "cloudflare.com" },
   { name: "Google",         host: "google.com" },
   { name: "GitHub",         host: "github.com" },
@@ -570,7 +626,6 @@ const REACH_TARGETS = [
   { name: "Wikipedia",      host: "wikipedia.org" },
   { name: "Microsoft",      host: "microsoft.com" },
   { name: "Amazon",         host: "amazon.com" },
-  { name: "Apple",          host: "apple.com" },
   { name: "Cloudflare DNS", host: "one.one.one.one" },
   { name: "Google DNS",     host: "dns.google" },
   { name: "Quad9 DNS",      host: "dns.quad9.net" },
@@ -615,24 +670,20 @@ function buildReachRows() {
     const tgt = REACH_TARGETS[i];
     const cell = document.createElement('div');
     cell.className = 'reach-cell';
-    const top = document.createElement('div');
-    top.className = 'reach-top';
+    cell.id = `rcell-${i}`;
+    cell.title = tgt.host || tgt.name;
     const dot = document.createElement('span');
     dot.className = 'status-dot unknown';
     dot.id = `rdot-${i}`;
     const lbl = document.createElement('span');
     lbl.className = 'lbl';
     lbl.textContent = tgt.name;
-    lbl.title = tgt.host;
-    top.append(dot, lbl);
-    const meta = document.createElement('div');
-    meta.className = 'reach-meta';
-    const ip = document.createElement('span');
-    ip.className = 'ip'; ip.id = `rip-${i}`; ip.textContent = '—';
     const ms = document.createElement('span');
     ms.className = 'ms'; ms.id = `rms-${i}`; ms.textContent = '—';
-    meta.append(ip, ms);
-    cell.append(top, meta);
+    // Hidden by CSS — retained only so the PNG export can print the full IP.
+    const ip = document.createElement('span');
+    ip.className = 'ip'; ip.id = `rip-${i}`; ip.textContent = '—';
+    cell.append(dot, lbl, ms, ip);
     list.appendChild(cell);
   }
 }
@@ -646,14 +697,47 @@ async function checkReach(force = false) {
   buildReachRows();
 
   let up = 0, done = 0;
+  const bump = () => {
+    done++;
+    if (count) count.textContent = done < REACH_TARGETS.length ? `${up}/${done}` : `${up}/${REACH_TARGETS.length} up`;
+  };
   if (count) count.textContent = "0/" + REACH_TARGETS.length;
   await Promise.all(REACH_TARGETS.map(async (tgt, i) => {
-    const dot = $(`rdot-${i}`), ipEl = $(`rip-${i}`), msEl = $(`rms-${i}`);
+    const cell = $(`rcell-${i}`), dot = $(`rdot-${i}`), ipEl = $(`rip-${i}`), msEl = $(`rms-${i}`);
     if (dot) dot.className = 'status-dot scanning';
     if (msEl) { msEl.textContent = '...'; msEl.classList.remove('bad'); }
     if (ipEl) ipEl.textContent = '…';
+
+    // Gateway is a special LAN target: infer it from the WebRTC local IP and
+    // probe best-effort. On the live HTTPS site a fetch to a http:// router is
+    // mixed-content-blocked, so this usually shows the IP but no latency.
+    if (tgt.kind === 'gateway') {
+      const lan = await getLocalIP();
+      const gw = gatewayFromIP(lan);
+      if (ipEl) ipEl.textContent = gw || 'unknown';
+      if (gw) {
+        try {
+          const ms = await probeHost(gw, 3000);
+          up++;
+          if (dot) dot.className = 'status-dot success';
+          if (msEl) msEl.textContent = ms + ' ms';
+        } catch (e) {
+          if (dot) dot.className = 'status-dot unknown';   // grey, not a red "fail" — we can't truly ping it
+          if (msEl) msEl.textContent = 'LAN';
+        }
+        if (cell) cell.title = `Gateway ${gw} · LAN ${lan}`;
+      } else {
+        if (dot) dot.className = 'status-dot unknown';
+        if (msEl) msEl.textContent = 'n/a';
+        if (cell) cell.title = 'LAN IP is mDNS-masked by the browser, so the gateway can’t be inferred.';
+      }
+      bump();
+      return;
+    }
+
     const [ipRes, msRes] = await Promise.allSettled([resolveIP(tgt.host), probeHost(tgt.host)]);
-    if (ipEl) ipEl.textContent = (ipRes.status === 'fulfilled' && ipRes.value) ? ipRes.value : 'no DNS';
+    const ipTxt = (ipRes.status === 'fulfilled' && ipRes.value) ? ipRes.value : 'no DNS';
+    if (ipEl) ipEl.textContent = ipTxt;
     if (msRes.status === 'fulfilled') {
       up++;
       if (dot) dot.className = 'status-dot success';
@@ -662,8 +746,9 @@ async function checkReach(force = false) {
       if (dot) dot.className = 'status-dot fail';
       if (msEl) { msEl.textContent = 'blocked'; msEl.classList.add('bad'); }
     }
-    done++;
-    if (count) count.textContent = done < REACH_TARGETS.length ? `${up}/${done}` : `${up}/${REACH_TARGETS.length} up`;
+    // Hover reveals the resolved IP without spending vertical space on it.
+    if (cell) cell.title = `${tgt.host} · ${ipTxt}`;
+    bump();
   }));
 }
 
