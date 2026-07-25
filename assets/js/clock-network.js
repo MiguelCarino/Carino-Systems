@@ -539,63 +539,125 @@ async function runSpeedTest() {
     }
 }
 
-// MODULE: LOCAL IP + GATEWAY (best-effort)
-// The only way a browser can see the private LAN address is a WebRTC host ICE
-// candidate — and current browsers mask it behind a random <uuid>.local mDNS
-// name for privacy, so this usually resolves to nothing. We use no STUN server
-// (iceServers: []), so only host candidates appear — never the WAN address.
-let _localIP = { val: undefined, all: [], ts: 0 };
-function _pickPrivate(ips) {
-  const priv = ips.find(ip => /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip));
-  return priv || ips[0] || null;
+// MODULE: WEBRTC NETWORK PROBE — local IP, NAT type, interfaces, VPN/route hints
+// A browser can't traceroute, can't ICMP-ping the gateway, and can't fetch an
+// http:// router from an https:// page (mixed-content). The one window into the
+// network's shape is WebRTC ICE candidates:
+//   host  candidates = local interface addresses. Modern browsers MASK these
+//                      behind a random <uuid>.local mDNS name, so a numeric LAN
+//                      IP is rare — but each distinct name is still one real
+//                      interface, so VPN/virtual adapters and multi-homing count
+//                      even when the address itself is hidden.
+//   srflx candidates = the public ip:port a STUN server sees us from — our WAN
+//                      address plus the NAT's port mapping. Comparing that mapping
+//                      across two STUN servers separates cone NAT (same external
+//                      port = endpoint-independent) from symmetric NAT.
+// Unlike the old iceServers:[] probe, adding STUN is what lets us read the WAN
+// mapping and NAT behaviour instead of only (masked) host candidates.
+const STUN_SERVERS = [
+  'stun:stun.l.google.com:19302',
+  'stun:stun.cloudflare.com:3478',
+];
+let _rtc = { ready: false, ts: 0, locals: [], mdns: 0, ifaces: 0, publics: [], ports: [] };
+function _isPrivate(ip) {
+  // RFC1918 + link-local + CGNAT (100.64/10, common on carrier/Starlink networks).
+  return /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.|100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.)/.test(ip);
 }
-async function getLocalIP(timeoutMs = 1500) {
-  if (_localIP.val !== undefined && Date.now() - _localIP.ts < 30000) return _localIP.val;
+
+async function probeWebRTC(timeoutMs = 2500) {
+  if (_rtc.ready && Date.now() - _rtc.ts < 60000) return _rtc;
   return new Promise((resolve) => {
-    let pc, done = false; const found = [];
-    const finish = (v) => {
-      if (done) return; done = true;
+    const locals = new Set(), mdns = new Set(), publics = new Set(), ports = new Set();
+    let pc, settled = false;
+    const finish = () => {
+      if (settled) return; settled = true;
       try { pc && pc.close(); } catch (e) {}
-      _localIP = { val: v, all: found.slice(), ts: Date.now() };
-      resolve(v);
+      _rtc = { ready: true, ts: Date.now(),
+               locals: [...locals], mdns: mdns.size, ifaces: locals.size + mdns.size,
+               publics: [...publics], ports: [...ports] };
+      resolve(_rtc);
     };
-    try { pc = new RTCPeerConnection({ iceServers: [] }); }
-    catch (e) { return finish(null); }
-    try { pc.createDataChannel('d'); } catch (e) {}
+    try { pc = new RTCPeerConnection({ iceServers: STUN_SERVERS.map(urls => ({ urls })) }); }
+    catch (e) { return finish(); }
+    try { pc.createDataChannel('probe'); } catch (e) {}
     pc.onicecandidate = (e) => {
-      if (!e || !e.candidate) return finish(_pickPrivate(found));
-      const m = (e.candidate.candidate || '').match(/(\d{1,3}(?:\.\d{1,3}){3})/);   // numeric host IP, not a .local name
-      if (m && !found.includes(m[1])) found.push(m[1]);
+      if (!e || !e.candidate) return finish();
+      // candidate:<foundation> <comp> <proto> <prio> <ADDR> <PORT> typ <type> ...
+      const parts = (e.candidate.candidate || '').split(' ');
+      const addr = parts[4] || '', port = +parts[5] || 0;
+      const ti = parts.indexOf('typ');
+      const typ = ti >= 0 ? parts[ti + 1] : '';
+      if (/\.local$/i.test(addr)) { mdns.add(addr.toLowerCase()); return; }  // masked interface
+      if (!/^\d{1,3}(\.\d{1,3}){3}$/.test(addr)) return;                     // ignore IPv6 for the topology math
+      if (typ === 'host') locals.add(addr);
+      else if (typ === 'srflx' || typ === 'prflx') { publics.add(addr); if (port) ports.add(port); }
     };
-    pc.createOffer().then(o => pc.setLocalDescription(o)).catch(() => finish(null));
-    setTimeout(() => finish(_pickPrivate(found)), timeoutMs);
+    pc.createOffer().then(o => pc.setLocalDescription(o)).catch(finish);
+    setTimeout(finish, timeoutMs);
   });
+}
+
+function classifyNAT(r) {
+  if (!r.publics.length) return { txt: r.ifaces ? 'UDP blocked' : 'Hidden', ok: false };
+  if (r.locals.some(ip => !_isPrivate(ip) && r.publics.includes(ip))) return { txt: 'Open — no NAT', ok: true };
+  if (r.publics.length > 1) return { txt: 'Symmetric (multi-WAN)', ok: true };
+  if (r.ports.length > 1) return { txt: 'Symmetric NAT', ok: true };   // mapping changed per STUN server
+  return { txt: 'Cone NAT', ok: true };                                // same external port = endpoint-independent
+}
+
+// The private LAN address, if the browser exposed a numeric one (usually masked).
+async function getLocalIP() {
+  const r = await probeWebRTC();
+  return r.locals.find(_isPrivate) || r.locals[0] || null;
 }
 // Conventional default gateway for a /24 — the router almost always sits on .1.
 function gatewayFromIP(ip) {
   const p = (ip || '').split('.');
-  return p.length === 4 ? `${p[0]}.${p[1]}.${p[2]}.1` : null;
+  return p.length === 4 && /^\d+$/.test(p[3]) ? `${p[0]}.${p[1]}.${p[2]}.1` : null;
 }
 
 async function detectLAN() {
-  const el = $('lanip'), dot = $('dotLan');
-  if (!el) return;
-  el.textContent = '...'; if (dot) dot.className = 'status-dot scanning';
-  const ip = await getLocalIP();
-  if (ip) {
-    const extra = _localIP.all.length - 1;
-    el.textContent = extra > 0 ? `${ip} +${extra}` : ip;
-    el.title = _localIP.all.join(', ');
-    if (dot) dot.className = 'status-dot success';
+  const r = await probeWebRTC();
+  const set = (id, dotId, text, cls, title) => {
+    const el = $(id), dot = $(dotId);
+    if (el) { el.textContent = text; if (title != null) el.title = title; }
+    if (dot) dot.className = 'status-dot ' + cls;
+  };
+
+  // LAN IP (numeric if the browser leaked one; otherwise flag the mDNS mask).
+  const lan = r.locals.find(_isPrivate) || r.locals[0] || null;
+  if (lan) set('lanip', 'dotLan', r.locals.length > 1 ? `${lan} +${r.locals.length - 1}` : lan, 'success', r.locals.join(', '));
+  else set('lanip', 'dotLan', 'mDNS masked', 'unknown', 'Browsers hide the LAN IP behind a random .local mDNS name for privacy.');
+
+  // NAT type, with a WebRTC-public-IP vs HTTP-WAN cross-check (VPN/proxy leak).
+  const nat = classifyNAT(r);
+  const wanEl = $('ipv4');
+  const wan = wanEl && /^\d{1,3}(\.\d{1,3}){3}$/.test(wanEl.textContent.trim()) ? wanEl.textContent.trim() : null;
+  const rtcPub = r.publics[0] || null;
+  let natTxt = nat.txt, natCls = nat.ok ? 'success' : 'unknown', natTitle;
+  if (rtcPub) {
+    if (wan && rtcPub !== wan) {
+      natTxt += ' ⚠'; natCls = 'fail';
+      natTitle = `WebRTC exposes ${rtcPub}, but the WAN address is ${wan} — VPN/proxy split-tunnel or a WebRTC leak.`;
+    } else {
+      natTitle = `Public via WebRTC: ${rtcPub}${wan ? ' — matches WAN' : ''}`;
+    }
   } else {
-    el.textContent = 'mDNS masked';
-    el.title = 'Browsers hide the LAN IP behind a random .local mDNS name for privacy.';
-    if (dot) dot.className = 'status-dot unknown';
+    natTitle = 'No STUN reflexive candidate — UDP is blocked or WebRTC is restricted by the browser.';
   }
+  set('natType', 'dotNat', natTxt, natCls, natTitle);
+
+  // Interface / path count — a topology signal that survives mDNS masking.
+  const n = r.ifaces;
+  const desc = [r.locals.length && `${r.locals.length} numeric`, r.mdns && `${r.mdns} masked`].filter(Boolean).join(' + ');
+  set('netPaths', 'dotPaths', n ? `${n} iface${n > 1 ? 's' : ''}` : '—', n ? 'success' : 'unknown',
+      n ? `${n} local interface path(s) seen by WebRTC${desc ? ` (${desc})` : ''}. More than one usually means a VPN/virtual adapter or multi-homing.`
+        : 'No interface candidates surfaced.');
 }
 
 async function runNetwork() {
-  await Promise.all([detectIPs(), detectISP(), detectLAN()]);
+  await Promise.all([detectIPs(), detectISP()]);
+  await detectLAN();   // runs after detectIPs so #ipv4 is populated for the WebRTC-vs-WAN leak check
   await checkPing();
   await runSpeedTest();
 }
