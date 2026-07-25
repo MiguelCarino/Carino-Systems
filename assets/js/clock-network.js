@@ -557,22 +557,53 @@ async function runNetwork() {
 //   - carino.systems is our own infrastructure.
 // no-cors fetches resolve opaquely when reachable and reject otherwise, so we
 // only learn up/down + latency (never the HTTP status) — which is all we need.
+// Twelve probes shown as name / resolved-IP / latency. IPs come from a DNS-over-
+// HTTPS lookup (Cloudflare DoH, Google DoH fallback) so a wrong/blank IP flags a
+// DNS problem or hijack independently of whether the site itself answers; the
+// latency + dot come from a separate no-cors reachability fetch. Public DNS
+// resolvers are included by hostname so their well-known IPs act as a sanity ref.
 const REACH_TARGETS = [
-  { name: "Cloudflare",  hint: "IP · no DNS", url: "https://1.1.1.1/cdn-cgi/trace" },
-  { name: "Google",      hint: "web · DNS",   url: "https://www.google.com/generate_204" },
-  { name: "GitHub",      hint: "dev/CI",      url: "https://github.com/" },
-  { name: "YouTube",     hint: "geo/VPN",     url: "https://www.youtube.com/favicon.ico" },
-  { name: "Cloudflare DNS", hint: "DoH",      url: "https://cloudflare-dns.com/" },
-  { name: "carino.systems", hint: "own infra", url: "https://carino.systems/" },
+  { name: "Cloudflare",     host: "cloudflare.com" },
+  { name: "Google",         host: "google.com" },
+  { name: "GitHub",         host: "github.com" },
+  { name: "YouTube",        host: "youtube.com" },
+  { name: "Wikipedia",      host: "wikipedia.org" },
+  { name: "Microsoft",      host: "microsoft.com" },
+  { name: "Amazon",         host: "amazon.com" },
+  { name: "Apple",          host: "apple.com" },
+  { name: "Cloudflare DNS", host: "one.one.one.one" },
+  { name: "Google DNS",     host: "dns.google" },
+  { name: "Quad9 DNS",      host: "dns.quad9.net" },
+  { name: "carino.systems", host: "carino.systems" },
 ];
 let reachLastRun = 0;
 
-async function probeURL(url, timeoutMs = 6000) {
+async function resolveIP(host, timeoutMs = 5000) {
+  const pick = (j) => {
+    const a = (j && j.Answer || []).find(x => x.type === 1); // A record
+    return a ? a.data : null;
+  };
+  for (const url of [
+    `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(host)}&type=A`,
+    `https://dns.google/resolve?name=${encodeURIComponent(host)}&type=A`,
+  ]) {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeoutMs);
+    try {
+      const r = await fetch(url, { headers: { accept: 'application/dns-json' }, cache: 'no-store', signal: ctrl.signal });
+      const ip = pick(await r.json());
+      if (ip) return ip;
+    } catch (e) { /* try next resolver */ } finally { clearTimeout(t); }
+  }
+  return null;
+}
+
+async function probeHost(host, timeoutMs = 6000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   const start = performance.now();
   try {
-    await fetch(url, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
+    await fetch(`https://${host}/favicon.ico`, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
     return Math.round(performance.now() - start);
   } finally { clearTimeout(t); }
 }
@@ -582,25 +613,27 @@ function buildReachRows() {
   if (!list || list.childElementCount) return;
   for (let i = 0; i < REACH_TARGETS.length; i++) {
     const tgt = REACH_TARGETS[i];
-    const row = document.createElement('div');
-    row.className = 'reach-item';
-    const name = document.createElement('span');
-    name.className = 'reach-name';
+    const cell = document.createElement('div');
+    cell.className = 'reach-cell';
+    const top = document.createElement('div');
+    top.className = 'reach-top';
     const dot = document.createElement('span');
     dot.className = 'status-dot unknown';
     dot.id = `rdot-${i}`;
     const lbl = document.createElement('span');
     lbl.className = 'lbl';
     lbl.textContent = tgt.name;
-    const small = document.createElement('small');
-    small.textContent = tgt.hint;
-    name.append(dot, lbl, small);
-    const val = document.createElement('span');
-    val.className = 'reach-val';
-    val.id = `rval-${i}`;
-    val.textContent = '--';
-    row.append(name, val);
-    list.appendChild(row);
+    lbl.title = tgt.host;
+    top.append(dot, lbl);
+    const meta = document.createElement('div');
+    meta.className = 'reach-meta';
+    const ip = document.createElement('span');
+    ip.className = 'ip'; ip.id = `rip-${i}`; ip.textContent = '—';
+    const ms = document.createElement('span');
+    ms.className = 'ms'; ms.id = `rms-${i}`; ms.textContent = '—';
+    meta.append(ip, ms);
+    cell.append(top, meta);
+    list.appendChild(cell);
   }
 }
 
@@ -615,21 +648,22 @@ async function checkReach(force = false) {
   let up = 0, done = 0;
   if (count) count.textContent = "0/" + REACH_TARGETS.length;
   await Promise.all(REACH_TARGETS.map(async (tgt, i) => {
-    const dot = $(`rdot-${i}`); const val = $(`rval-${i}`);
+    const dot = $(`rdot-${i}`), ipEl = $(`rip-${i}`), msEl = $(`rms-${i}`);
     if (dot) dot.className = 'status-dot scanning';
-    if (val) val.textContent = '...';
-    try {
-      const ms = await probeURL(tgt.url);
+    if (msEl) { msEl.textContent = '...'; msEl.classList.remove('bad'); }
+    if (ipEl) ipEl.textContent = '…';
+    const [ipRes, msRes] = await Promise.allSettled([resolveIP(tgt.host), probeHost(tgt.host)]);
+    if (ipEl) ipEl.textContent = (ipRes.status === 'fulfilled' && ipRes.value) ? ipRes.value : 'no DNS';
+    if (msRes.status === 'fulfilled') {
       up++;
       if (dot) dot.className = 'status-dot success';
-      if (val) val.textContent = ms + ' ms';
-    } catch (e) {
+      if (msEl) msEl.textContent = msRes.value + ' ms';
+    } else {
       if (dot) dot.className = 'status-dot fail';
-      if (val) { val.textContent = 'blocked'; val.style.color = 'var(--err)'; }
-    } finally {
-      done++;
-      if (count) count.textContent = done < REACH_TARGETS.length ? `${up}/${done}` : `${up}/${REACH_TARGETS.length} up`;
+      if (msEl) { msEl.textContent = 'blocked'; msEl.classList.add('bad'); }
     }
+    done++;
+    if (count) count.textContent = done < REACH_TARGETS.length ? `${up}/${done}` : `${up}/${REACH_TARGETS.length} up`;
   }));
 }
 
@@ -651,9 +685,10 @@ function readDiagModel() {
                  dot: dotColorOf(el.querySelector('.status-dot')) });
     } else if (el.id === 'reachList') {
       for (const item of el.children) {
-        const l = item.querySelector('.lbl'), s = item.querySelector('small'), v = item.querySelector('.reach-val');
-        out.push({ type: 'row', label: (l ? l.textContent.trim() : '') + (s ? '  ' + s.textContent.trim() : ''),
-                   value: v ? v.textContent.trim() : '', dot: dotColorOf(item.querySelector('.status-dot')) });
+        const l = item.querySelector('.lbl'), ip = item.querySelector('.ip'), ms = item.querySelector('.ms');
+        const parts = [ip ? ip.textContent.trim() : '', ms ? ms.textContent.trim() : ''].filter(Boolean);
+        out.push({ type: 'row', label: l ? l.textContent.trim() : '',
+                   value: parts.join('  ·  '), dot: dotColorOf(item.querySelector('.status-dot')) });
       }
     }
   }
