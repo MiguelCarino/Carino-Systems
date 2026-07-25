@@ -6,30 +6,29 @@
 #
 #   canonical carino-clock.js  = Carino-Systems/carino-clock.js  (this repo)
 #   canonical carino-navbar.js = ../CVE/carino-navbar.js
-#   canonical carino-diag.js   = ../NetworkTopology/carino-diag.js
+#   canonical carino-diag.js   = ../Topo/carino-diag.js
 set -euo pipefail
 cd "$(dirname "$0")/.."          # -> the folder holding all the sibling repos
 
 CLOCK_SRC="Carino-Systems/carino-clock.js"
 NAV_SRC="CVE/carino-navbar.js"
-DIAG_SRC="NetworkTopology/carino-diag.js"
+DIAG_SRC="Topo/carino-diag.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
-GROUPA="Branding CVE GeneralQuotation Graphy Hardware Hash ISO-27001 Metadata-editor \
-NetplanConfig NetworkTopology pdf2img-gui PlanetDayum PoliticalCompass SignatureEditor \
-SimpleCountdown SimpleDeskSupport SimpleOCR Simple-Kanban SimplePasswordGenerator \
-Simple-Resume SimpleSetup SoftwareCatalog SyncSubsStudio Time"
+GROUPA="Branding CVE Quote Hardware Hash Metadata \
+NetplanConfig Topo PlanetDayum Compass \
+SimpleCountdown Desk Kanban Password \
+Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
-BESPOKE="Asobi Carino-Ophthalmology DICOM-editor LearningTopics MultiWeb MusicGrid \
-StreamMultiviewer"
+BESPOKE="Asobi Retina DICOM-editor Learn MultiWeb MusicGrid TV"
 
 # Network-oriented sites that also carry the opt-in Sys. Status panel
 # (public IPv4/IPv6, ISP, connection type, RTT). This is the in-navbar
-# replacement for the retired ip.carino.systems, so a network tool no longer
+# replacement for the retired standalone IP-lookup site, so a network tool no longer
 # needs its own subdomain for it. Add a site here ONLY after adding
 # <script src="carino-diag.js" defer></script> after its navbar tag.
-DIAG="NetworkTopology NetplanConfig Hardware"
+DIAG="Topo NetplanConfig Hardware"
 
 echo "Propagating shared navbar assets (local copies, no CDN)…"
 # -ef guards skip copying a canonical file onto itself (CVE is the navbar source
