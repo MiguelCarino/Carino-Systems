@@ -605,17 +605,6 @@ function classifyNAT(r) {
   return { txt: 'Cone NAT', ok: true };                                // same external port = endpoint-independent
 }
 
-// The private LAN address, if the browser exposed a numeric one (usually masked).
-async function getLocalIP() {
-  const r = await probeWebRTC();
-  return r.locals.find(_isPrivate) || r.locals[0] || null;
-}
-// Conventional default gateway for a /24 — the router almost always sits on .1.
-function gatewayFromIP(ip) {
-  const p = (ip || '').split('.');
-  return p.length === 4 && /^\d+$/.test(p[3]) ? `${p[0]}.${p[1]}.${p[2]}.1` : null;
-}
-
 async function detectLAN() {
   const r = await probeWebRTC();
   const set = (id, dotId, text, cls, title) => {
@@ -663,36 +652,39 @@ async function runNetwork() {
 }
 
 // MODULE: REACHABILITY
-// A handful of well-known endpoints probed from the visitor's browser to help
-// tell apart "I'm offline", "my DNS is broken", "this site is blocked/geo-fenced
-// by my network or VPN", and "Carino's own infra is down". Chosen so the FAILURE
-// PATTERN is diagnostic:
-//   - Cloudflare (1.1.1.1) is a raw IP, so it succeeds even when DNS is broken:
-//     up here + domains down => DNS problem, not a dead link.
-//   - Google / GitHub / YouTube are the usual casualties of corporate filters,
-//     censorship and VPN geo-fencing.
+// Well-known endpoints probed from the visitor's browser to tell apart "I'm
+// offline", "my DNS is broken", "this site is blocked/geo-fenced by my network
+// or VPN", and "Carino's own infra is down". Chosen so the FAILURE PATTERN is
+// diagnostic:
+//   - The four public resolvers are raw IPs, so they answer even when DNS is
+//     broken: those up + the domains down => a DNS problem, not a dead link.
+//   - Google / GitHub / the cloud fronts are the usual casualties of corporate
+//     filters, censorship and VPN geo-fencing.
 //   - carino.systems is our own infrastructure.
 // no-cors fetches resolve opaquely when reachable and reject otherwise, so we
 // only learn up/down + latency (never the HTTP status) — which is all we need.
-// Twelve probes shown as name / resolved-IP / latency. IPs come from a DNS-over-
-// HTTPS lookup (Cloudflare DoH, Google DoH fallback) so a wrong/blank IP flags a
-// DNS problem or hijack independently of whether the site itself answers; the
-// latency + dot come from a separate no-cors reachability fetch. Public DNS
-// resolvers are included by hostname so their well-known IPs act as a sanity ref.
+// Each card shows just a status dot + name; the resolved IP + latency stay in the
+// DOM for the PNG export and the hover title. IPs for hostname targets come from
+// a DNS-over-HTTPS lookup (Cloudflare DoH, Google DoH fallback) so a wrong/blank
+// IP flags a DNS problem or hijack independently of whether the site answers.
+// NOTE: a few of these (Root DNS A, NTP Pool) serve their real protocol on non-
+// HTTP ports, so an HTTPS reachability probe may read them as "down" (grey) even
+// when the host is alive — the browser sandbox gives us no ICMP/UDP alternative.
 const REACH_TARGETS = [
-  { name: "Gateway",        kind: "gateway" },   // LAN default gateway (WebRTC-derived, best-effort)
-  { name: "Cloudflare",     host: "cloudflare.com" },
+  { name: "Cloudflare DNS", host: "1.1.1.1",             ip: "1.1.1.1" },
+  { name: "Google DNS",     host: "8.8.8.8",             ip: "8.8.8.8" },
+  { name: "Quad9 DNS",      host: "9.9.9.9",             ip: "9.9.9.9" },
+  { name: "OpenDNS",        host: "208.67.222.222",      ip: "208.67.222.222" },
   { name: "Google",         host: "google.com" },
+  { name: "Cloudflare",     host: "cloudflare.com" },
+  { name: "AWS Cloud",      host: "aws.amazon.com" },
+  { name: "Azure Cloud",    host: "azure.microsoft.com" },
+  { name: "Root DNS A",     host: "a.root-servers.net" },
+  { name: "NTP Pool",       host: "pool.ntp.org" },
   { name: "GitHub",         host: "github.com" },
-  { name: "YouTube",        host: "youtube.com" },
-  { name: "Wikipedia",      host: "wikipedia.org" },
-  { name: "Microsoft",      host: "microsoft.com" },
-  { name: "Amazon",         host: "amazon.com" },
-  { name: "Cloudflare DNS", host: "one.one.one.one" },
-  { name: "Google DNS",     host: "dns.google" },
-  { name: "Quad9 DNS",      host: "dns.quad9.net" },
-  { name: "carino.systems", host: "carino.systems" },
+  { name: "Carino.systems", host: "carino.systems" },
 ];
+const HIGH_MS = 500;   // above this a reachable target's dot goes white ("slow") instead of gold
 let reachLastRun = 0;
 
 async function resolveIP(host, timeoutMs = 5000) {
@@ -733,7 +725,7 @@ function buildReachRows() {
     const cell = document.createElement('div');
     cell.className = 'reach-cell';
     cell.id = `rcell-${i}`;
-    cell.title = tgt.host || tgt.name;
+    cell.title = tgt.name;
     const dot = document.createElement('span');
     dot.className = 'status-dot unknown';
     dot.id = `rdot-${i}`;
@@ -770,46 +762,26 @@ async function checkReach(force = false) {
     if (msEl) { msEl.textContent = '...'; msEl.classList.remove('bad'); }
     if (ipEl) ipEl.textContent = '…';
 
-    // Gateway is a special LAN target: infer it from the WebRTC local IP and
-    // probe best-effort. On the live HTTPS site a fetch to a http:// router is
-    // mixed-content-blocked, so this usually shows the IP but no latency.
-    if (tgt.kind === 'gateway') {
-      const lan = await getLocalIP();
-      const gw = gatewayFromIP(lan);
-      if (ipEl) ipEl.textContent = gw || 'unknown';
-      if (gw) {
-        try {
-          const ms = await probeHost(gw, 3000);
-          up++;
-          if (dot) dot.className = 'status-dot success';
-          if (msEl) msEl.textContent = ms + ' ms';
-        } catch (e) {
-          if (dot) dot.className = 'status-dot unknown';   // grey, not a red "fail" — we can't truly ping it
-          if (msEl) msEl.textContent = 'LAN';
-        }
-        if (cell) cell.title = `Gateway ${gw} · LAN ${lan}`;
-      } else {
-        if (dot) dot.className = 'status-dot unknown';
-        if (msEl) msEl.textContent = 'n/a';
-        if (cell) cell.title = 'LAN IP is mDNS-masked by the browser, so the gateway can’t be inferred.';
-      }
-      bump();
-      return;
-    }
-
-    const [ipRes, msRes] = await Promise.allSettled([resolveIP(tgt.host), probeHost(tgt.host)]);
+    // Literal-IP targets skip the DoH lookup; hostname targets resolve via DoH so
+    // a wrong/blank IP flags a DNS problem independently of reachability.
+    const ipP = tgt.ip ? Promise.resolve(tgt.ip) : resolveIP(tgt.host);
+    const [ipRes, msRes] = await Promise.allSettled([ipP, probeHost(tgt.host)]);
     const ipTxt = (ipRes.status === 'fulfilled' && ipRes.value) ? ipRes.value : 'no DNS';
     if (ipEl) ipEl.textContent = ipTxt;
+
     if (msRes.status === 'fulfilled') {
       up++;
-      if (dot) dot.className = 'status-dot success';
-      if (msEl) msEl.textContent = msRes.value + ' ms';
+      const ms = msRes.value;
+      // Dot encodes status: gold = reachable & responsive, white = reachable but slow.
+      if (dot) dot.className = 'status-dot ' + (ms > HIGH_MS ? 'slow' : 'success');
+      if (msEl) msEl.textContent = ms + ' ms';
     } else {
-      if (dot) dot.className = 'status-dot fail';
-      if (msEl) { msEl.textContent = 'blocked'; msEl.classList.add('bad'); }
+      // No connection → grey (not red): we only know it didn't answer, not why.
+      if (dot) dot.className = 'status-dot unknown';
+      if (msEl) msEl.textContent = 'down';
     }
-    // Hover reveals the resolved IP without spending vertical space on it.
-    if (cell) cell.title = `${tgt.host} · ${ipTxt}`;
+    // Hover reveals the full detail the compact card omits.
+    if (cell) cell.title = `${tgt.name} · ${ipTxt}` + (msRes.status === 'fulfilled' ? ` · ${msRes.value} ms` : ' · no connection');
     bump();
   }));
 }
@@ -844,6 +816,7 @@ function readDiagModel() {
 
 function dotColorOf(dot) {
   if (!dot) return null;
+  if (dot.classList.contains('slow')) return '#ffffff';
   if (dot.classList.contains('success')) return '#eab308';
   if (dot.classList.contains('fail')) return '#ef4444';
   if (dot.classList.contains('scanning')) return '#a3a3a3';
