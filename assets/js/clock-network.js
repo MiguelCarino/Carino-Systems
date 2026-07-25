@@ -553,6 +553,69 @@ async function runNetwork() {
   await runSpeedTest();
 }
 
+// MODULE: FLEET STATUS
+// Reachability probe of every carino.systems site, straight from the visitor's
+// browser. no-cors fetches resolve opaquely when DNS+TLS+server are all good
+// and reject otherwise, so a red dot means unreachable (not merely a 404).
+const FLEET_SITES = ["asobi","branding","compass","cve","desk","dicom","distro",
+  "hardware","hash","kanban","learn","media","metadata","music","netplan","pacs",
+  "password","quote","retina","setup","software","subs","teleprompter","time",
+  "topo","tv","vitae"];
+let fleetLastRun = 0;
+
+async function probeSite(sub, timeoutMs = 6000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  const start = performance.now();
+  try {
+    await fetch(`https://${sub}.carino.systems/`, { mode: "no-cors", cache: "no-store", signal: ctrl.signal });
+    return Math.round(performance.now() - start);
+  } finally { clearTimeout(t); }
+}
+
+async function checkFleet(force = false) {
+  const grid = $('fleetGrid');
+  const count = $('fleetCount');
+  if (!grid) return;
+  if (!force && Date.now() - fleetLastRun < 60000) return;
+  fleetLastRun = Date.now();
+
+  if (!grid.childElementCount) {
+    for (const sub of FLEET_SITES) {
+      const a = document.createElement('a');
+      a.className = 'fleet-item';
+      a.href = `https://${sub}.carino.systems/`;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const dot = document.createElement('span');
+      dot.className = 'status-dot scanning';
+      dot.id = `fdot-${sub}`;
+      const nm = document.createElement('span');
+      nm.className = 'nm';
+      nm.textContent = sub;
+      a.append(dot, nm);
+      grid.appendChild(a);
+    }
+  }
+
+  let up = 0, done = 0;
+  if (count) count.textContent = "0/" + FLEET_SITES.length;
+  await Promise.all(FLEET_SITES.map(async (sub) => {
+    const dot = $(`fdot-${sub}`);
+    if (dot) dot.className = 'status-dot scanning';
+    try {
+      const ms = await probeSite(sub);
+      up++;
+      if (dot) { dot.className = 'status-dot success'; dot.parentElement.title = `${sub}.carino.systems — up (${ms} ms)`; }
+    } catch (e) {
+      if (dot) { dot.className = 'status-dot fail'; dot.parentElement.title = `${sub}.carino.systems — unreachable (DNS/TLS/network)`; }
+    } finally {
+      done++;
+      if (count) count.textContent = done < FLEET_SITES.length ? `${up}/${done}` : `${up}/${FLEET_SITES.length} up`;
+    }
+  }));
+}
+
 // INIT
 document.addEventListener("DOMContentLoaded", () => {
   const heroHud = document.getElementById('heroHud');
@@ -565,7 +628,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const retryBtn = $('retryNetwork');
-if(retryBtn) retryBtn.addEventListener("click", runNetwork);
+if(retryBtn) retryBtn.addEventListener("click", () => { runNetwork(); checkFleet(true); });
+
+// Probe the fleet when the dropdown is opened (throttled to once a minute).
+// The inline onclick=toggleDiag fires first, so the open state is current here.
+const statusToggleBtn = document.querySelector('.status-toggle');
+if (statusToggleBtn) statusToggleBtn.addEventListener("click", () => {
+  const box = document.getElementById('diagBox');
+  if (box && box.classList.contains('open')) checkFleet();
+});
 
 detectSystem(); 
 runNetwork();
