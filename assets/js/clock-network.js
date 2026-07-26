@@ -667,11 +667,12 @@ async function runNetwork() {
 // DOM for the PNG export and the hover title. IPs for hostname targets come from
 // a DNS-over-HTTPS lookup (Cloudflare DoH, Google DoH fallback) so a wrong/blank
 // IP flags a DNS problem or hijack independently of whether the site answers.
-// The regional flagships (Baidu/Yandex/Naver/Wikipedia/Mercado Libre) double as
-// censorship canaries AND latency anchors: e.g. Baidu up while Google is down =>
-// behind the Great Firewall (Naver up + Baidu up but Google down sharpens that to
-// "specifically China", not just "East Asia reachable"). From far away they read
-// "slow" (white), so the colour spread reflects your routing/geography.
+// The regional flagships (Baidu/Yandex/Yahoo Japan/Wikipedia/Mercado Libre) double
+// as censorship canaries AND latency anchors: e.g. Baidu up while Google is down =>
+// behind the Great Firewall (Yahoo Japan up + Baidu up but Google down sharpens
+// that to "specifically China", not just "East Asia reachable"). From far away they
+// read "slow" (white), so the colour spread reflects your routing/geography.
+// For the full 50-site sweep and the extended diagnostics, see test.carino.systems.
 const REACH_TARGETS = [
   { name: "Cloudflare DNS", host: "1.1.1.1",             ip: "1.1.1.1" },
   { name: "Google DNS",     host: "8.8.8.8",             ip: "8.8.8.8" },
@@ -683,7 +684,7 @@ const REACH_TARGETS = [
   { name: "Azure Cloud",    host: "azure.microsoft.com" },
   { name: "Baidu",          host: "baidu.com" },           // China / Great-Firewall discriminator
   { name: "Yandex",         host: "yandex.com" },          // Russia sphere
-  { name: "Naver",          host: "naver.com" },           // South Korea flagship
+  { name: "Yahoo Japan",    host: "yahoo.co.jp" },         // Japan flagship
   { name: "Wikipedia",      host: "wikipedia.org" },       // regime-agnostic censorship canary
   { name: "Mercado Libre",  host: "mercadolibre.com.mx" }, // Latin America anchor
   { name: "GitHub",         host: "github.com" },

@@ -144,6 +144,8 @@
     .retry-btn svg { width: 12px; height: 12px; }
     .diag-actions { display: flex; gap: 8px; }
     .diag-actions .retry-btn { flex: 1; }
+    .complete-test-btn { text-decoration: none; margin-top: 8px; border-color: var(--accent-dim); color: var(--accent); background: var(--accent-faint); }
+    .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
 
     .workspace {
       display: flex;
@@ -359,6 +361,10 @@
       Export
     </button>
   </div>
+  <a class="retry-btn complete-test-btn" href="https://test.carino.systems" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    Complete test
+  </a>
 </div>
 
 <div class="workspace">
