@@ -1,3 +1,10 @@
+// i18n bridge — i18n.js is deferred and this file is not, so window.t does not
+// exist yet at parse time; resolve it lazily on each call. Falls back to the
+// English key, which is exactly what the dictionary is keyed on.
+// (Named `tt` because several functions below shadow `t` with a timeout id.)
+function tt(s) { return (typeof window.t === 'function') ? window.t(s) : s; }
+let battListenersBound = false;
+
 // CONFIGURATION: SPEED TEST FILES
 const TEST_FILE_SMALL = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_1mb";
 const TEST_FILE_LARGE = "https://raw.githubusercontent.com/MiguelCarino/Carino-Systems/refs/heads/main/assets/files/sample_25mb";
@@ -201,14 +208,14 @@ async function detectSystem() {
   const elCPU = $('sysCPU');
   if(elCPU) {
     const cores = navigator.hardwareConcurrency;
-    elCPU.textContent = cores ? `${cores} Logical Cores` : "Unknown (Masked)";
+    elCPU.textContent = cores ? `${cores} ` + tt("Logical Cores") : tt("Unknown (Masked)");
   }
 
   // 4b. RAM
   const elRAM = $('sysRAM');
   if(elRAM) {
     const ram = navigator.deviceMemory;
-    elRAM.textContent = ram ? `~${ram} GB` : "Masked";
+    elRAM.textContent = ram ? `~${ram} GB` : tt("Masked");
   }
 
   // 5. DISPLAY
@@ -226,12 +233,17 @@ async function detectSystem() {
     if ('getBattery' in navigator) {
       try {
         const batt = await navigator.getBattery();
-        const fmt = (b) => `${Math.round(b.level * 100)}% — ${b.charging ? 'Charging' : 'On battery'}`;
+        const fmt = (b) => `${Math.round(b.level * 100)}% — ${b.charging ? tt('Charging') : tt('On battery')}`;
         elBatt.textContent = fmt(batt);
-        batt.addEventListener('levelchange',   () => { elBatt.textContent = fmt(batt); });
-        batt.addEventListener('chargingchange', () => { elBatt.textContent = fmt(batt); });
-      } catch(e) { elBatt.textContent = "N/A"; }
-    } else { elBatt.textContent = "N/A"; }
+        // detectSystem() re-runs on a language switch; bind the battery events
+        // only on the first pass so switching languages never stacks listeners.
+        if (!battListenersBound) {
+          battListenersBound = true;
+          batt.addEventListener('levelchange',   () => { elBatt.textContent = fmt(batt); });
+          batt.addEventListener('chargingchange', () => { elBatt.textContent = fmt(batt); });
+        }
+      } catch(e) { elBatt.textContent = tt("N/A"); }
+    } else { elBatt.textContent = tt("N/A"); }
   }
 
   // 5c. CONNECTION TYPE
@@ -240,9 +252,9 @@ async function detectSystem() {
     const conn = navigator.connection;
     if(conn) {
       const type = (conn.type && conn.type !== 'unknown') ? conn.type : (conn.effectiveType || null);
-      elConn.textContent = type ? type.toUpperCase() : "Unknown";
+      elConn.textContent = type ? type.toUpperCase() : tt("Unknown");
     } else {
-      elConn.textContent = "N/A";
+      elConn.textContent = tt("N/A");
     }
   }
 
@@ -488,7 +500,7 @@ async function checkPing() {
     const duration = Math.round(performance.now() - start);
     if(el) el.textContent = duration + " ms";
   } catch (e) { 
-    if(el) el.textContent = "Timeout"; 
+    if(el) el.textContent = tt("Timeout"); 
   }
 }
 
@@ -515,13 +527,13 @@ async function runSpeedTest() {
     const elSpeed = $('sysSpeed');
     if (!elSpeed) return;
     
-    elSpeed.textContent = "Testing...";
+    elSpeed.textContent = tt("Testing...");
     
     try {
         let result = await performDownload(TEST_FILE_SMALL);
         
         if (result.duration < 0.5) {
-            elSpeed.textContent = "Boost Test...";
+            elSpeed.textContent = tt("Boost Test...");
             result = await performDownload(TEST_FILE_LARGE);
         }
 
@@ -534,7 +546,7 @@ async function runSpeedTest() {
         if (navigator.connection && navigator.connection.downlink) {
            elSpeed.textContent = "~" + navigator.connection.downlink + " Mbps (Est)";
         } else {
-           elSpeed.textContent = "Error";
+           elSpeed.textContent = tt("Error");
         }
     }
 }
@@ -784,10 +796,10 @@ async function checkReach(force = false) {
     } else {
       // No connection → grey (not red): we only know it didn't answer, not why.
       if (dot) dot.className = 'status-dot unknown';
-      if (msEl) msEl.textContent = 'down';
+      if (msEl) msEl.textContent = tt('down');
     }
     // Hover reveals the full detail the compact card omits.
-    if (cell) cell.title = `${tgt.name} · ${ipTxt}` + (msRes.status === 'fulfilled' ? ` · ${msRes.value} ms` : ' · no connection');
+    if (cell) cell.title = `${tgt.name} · ${ipTxt}` + (msRes.status === 'fulfilled' ? ` · ${msRes.value} ms` : ' · ' + tt('no connection'));
     bump();
   }));
 }
@@ -919,3 +931,9 @@ if (statusToggleBtn) statusToggleBtn.addEventListener("click", () => {
 detectSystem();
 runNetwork();
 checkReach();
+
+// The hardware rows are written once, at parse time — before carino-lang.js has
+// even defined window.CarinoLang — so re-detect on a language switch to pull
+// their values ("N/A", "Masked", "Charging"…) into the new locale. Purely local
+// detection: no network probe is repeated here.
+window.addEventListener('carino:langchange', () => { detectSystem(); });

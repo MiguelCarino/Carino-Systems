@@ -7,9 +7,10 @@
 
      <script src="carino-lang.js" defer></script>
 
-   It injects a compact language button (current code: EN / ES /
-   PT / 日本語 / RU) into the header's right cluster, left of the
-   Sys. Status control, with a dropdown of the five languages.
+   It injects a compact language button (a language glyph + AUTO,
+   or the picked code: EN / ES / PT / 日本語 / RU) into the header's
+   right cluster, left of the Sys. Status control. Clicking it opens
+   a dropdown: Auto (follow the browser) plus the five languages.
 
    AUTOMATIC: the language resolves without any user action —
      ?lang= in the URL  >  fleet-wide choice  >  browser language
@@ -48,7 +49,7 @@
   ];
 
   var CSS = ''
-    + '#cnLangBtn{display:flex;align-items:center;background:transparent;border:1px solid ' + BORDER + ';'
+    + '#cnLangBtn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid ' + BORDER + ';'
     + 'color:' + MUTED + ';font-family:' + MONO + ';font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;'
     + 'padding:0 10px;height:32px;border-radius:4px;cursor:pointer;transition:.2s;white-space:nowrap;}'
     + '#cnLangBtn:hover{border-color:' + A + ';color:' + A + ';background:rgba(234,179,8,.08);}'
@@ -97,21 +98,45 @@
     }
   }
 
+  function clearStore() {
+    if (onFleet) {
+      document.cookie = 'carino_lang=; Domain=.carino.systems; Path=/; Max-Age=0; SameSite=Lax';
+    } else {
+      try { localStorage.removeItem('carino_lang'); } catch (e) { /* private mode */ }
+    }
+  }
+
+  // AUTO is the default: no stored choice means "follow the browser". A
+  // manual pick stores it fleet-wide; picking Auto again clears it.
   var urlLang = resolve(new URLSearchParams(location.search).get('lang'));
   if (urlLang) store(urlLang);
-  var current = urlLang || readStored() || resolve(navigator.language) || 'en';
+  var stored = urlLang || readStored();
+  var manual = !!stored;
+  var current = stored || resolve(navigator.language) || 'en';
   document.documentElement.lang = current;
 
+  // The "language" glyph (A + 文) shown on the button in every state.
+  var ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">'
+    + '<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17'
+    + 'C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56'
+    + 'l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12z'
+    + 'm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>';
+
   function set(code) {
-    code = resolve(code) || 'en';
-    if (code === current) return;
-    current = code;
-    store(code);
-    document.documentElement.lang = code;
-    var btn = document.getElementById('cnLangBtn');
-    if (btn) btn.textContent = label(code);
+    if (code === 'auto') {
+      manual = false;
+      clearStore();
+      current = resolve(navigator.language) || 'en';
+    } else {
+      code = resolve(code) || 'en';
+      manual = true;
+      store(code);
+      current = code;
+    }
+    document.documentElement.lang = current;
+    updateBtn();
     renderRows();
-    window.dispatchEvent(new CustomEvent('carino:langchange', { detail: { lang: code } }));
+    window.dispatchEvent(new CustomEvent('carino:langchange', { detail: { lang: current } }));
   }
 
   function label(code) {
@@ -119,18 +144,38 @@
     return 'EN';
   }
 
-  window.CarinoLang = { get current() { return current; }, set: set, resolve: resolve };
+  window.CarinoLang = {
+    get current() { return current; },
+    get mode() { return manual ? 'manual' : 'auto'; },
+    set: set,
+    resolve: resolve,
+  };
 
   /* ---- UI ---- */
+
+  function updateBtn() {
+    var btn = document.getElementById('cnLangBtn');
+    if (btn) btn.innerHTML = ICON + '<span class="lbl">' + (manual ? label(current) : 'AUTO') + '</span>';
+  }
 
   function renderRows() {
     var box = document.getElementById('cnLangBox');
     if (!box) return;
     box.innerHTML = '';
+    var auto = document.createElement('button');
+    auto.type = 'button';
+    auto.className = manual ? '' : 'active';
+    auto.innerHTML = '<span>Auto</span><span class="code">' + label(resolve(navigator.language) || 'en') + '</span>';
+    auto.addEventListener('click', function (e) {
+      e.stopPropagation();
+      set('auto');
+      box.classList.remove('open');
+    });
+    box.appendChild(auto);
     LANGS.forEach(function (l) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = l[0] === current ? 'active' : '';
+      b.className = (manual && l[0] === current) ? 'active' : '';
       b.innerHTML = '<span>' + l[2] + '</span><span class="code">' + l[1] + '</span>';
       b.addEventListener('click', function (e) {
         e.stopPropagation();
@@ -152,11 +197,11 @@
     var btn = document.createElement('button');
     btn.id = 'cnLangBtn';
     btn.type = 'button';
-    btn.title = 'Language';
+    btn.title = 'Language — Auto follows your browser';
     btn.setAttribute('aria-haspopup', 'true');
-    btn.textContent = label(current);
 
     if (beforeEl) right.insertBefore(btn, beforeEl); else right.appendChild(btn);
+    updateBtn();
 
     var box = document.createElement('div');
     box.id = 'cnLangBox';
