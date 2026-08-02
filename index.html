@@ -773,6 +773,35 @@
       diagBox.classList.remove('open');
     }
   });
+
+  /* Slice titles run vertically (writing-mode: vertical-rl), so their length is
+     bounded by viewport HEIGHT, not width. English fits at the 2.2rem design
+     size; longer translations ("Seguridad y herramientas", "Безопасность и
+     инструменты") would run off the bottom. Shrink only those that overflow,
+     so the English rendering is untouched. i18n.js calls this after each
+     language switch; see window.fitSliceTitles. */
+  function fitSliceTitles() {
+    document.querySelectorAll('.slice-text-lg').forEach((el) => {
+      el.style.fontSize = '';
+      el.style.letterSpacing = '';
+      const slice = el.closest('.slice');
+      // Measure the whole stack (the big 01-05 numeral sits above the title),
+      // not just the text — otherwise the numeral's height pushes it off-screen.
+      const group = el.closest('.slice-large') || el;
+      if (!slice || !slice.clientHeight) return;
+      const avail = slice.clientHeight * 0.94;
+      let size = 2.2, spacing = 6;
+      while (group.getBoundingClientRect().height > avail && size > 0.9) {
+        size -= 0.1;
+        spacing = Math.max(1, spacing - 0.35);
+        el.style.fontSize = size.toFixed(2) + 'rem';
+        el.style.letterSpacing = spacing.toFixed(1) + 'px';
+      }
+    });
+  }
+  window.fitSliceTitles = fitSliceTitles;
+  document.addEventListener('DOMContentLoaded', () => setTimeout(fitSliceTitles, 0));
+  window.addEventListener('resize', fitSliceTitles);
 </script>
 <script src="./carino-clock.js" defer></script>
 <script src="carino-lang.js" defer></script>

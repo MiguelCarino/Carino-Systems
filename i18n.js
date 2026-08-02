@@ -8,6 +8,10 @@
 
 const I18N = {
     es: {
+        'Late shift.': 'Turno nocturno.',
+        'Good morning.': 'Buenos días.',
+        'Good afternoon.': 'Buenas tardes.',
+        'Good evening.': 'Buenas noches.',
         // Header / diagnostics chrome
         'Sys. Status': 'Estado del sist.',
         'Last Check': 'Última comprobación',
@@ -103,6 +107,10 @@ const I18N = {
         'Masked': 'Oculto',
     },
     'pt-BR': {
+        'Late shift.': 'Turno da noite.',
+        'Good morning.': 'Bom dia.',
+        'Good afternoon.': 'Boa tarde.',
+        'Good evening.': 'Boa noite.',
         'Sys. Status': 'Status do sist.',
         'Last Check': 'Última verificação',
         'Reachability': 'Conectividade',
@@ -191,6 +199,10 @@ const I18N = {
         'Masked': 'Oculto',
     },
     ja: {
+        'Late shift.': '夜勤お疲れさま。',
+        'Good morning.': 'おはようございます。',
+        'Good afternoon.': 'こんにちは。',
+        'Good evening.': 'こんばんは。',
         'Sys. Status': 'システム状態',
         'Last Check': '最終チェック',
         'Reachability': '到達性',
@@ -279,6 +291,10 @@ const I18N = {
         'Masked': 'マスク済み',
     },
     ru: {
+        'Late shift.': 'Ночная смена.',
+        'Good morning.': 'Доброе утро.',
+        'Good afternoon.': 'Добрый день.',
+        'Good evening.': 'Добрый вечер.',
         'Sys. Status': 'Статус сист.',
         'Last Check': 'Последняя проверка',
         'Reachability': 'Доступность',
@@ -410,6 +426,9 @@ function applyI18n() {
     setLocale(currentFleetLang());
     applyStaticI18n();
     applyTitleI18n();
+    // Slice titles are vertical, so a longer translation runs off the bottom
+    // of the viewport. index.html re-fits them once the new text is in place.
+    if (typeof window.fitSliceTitles === 'function') window.fitSliceTitles();
 }
 
 document.addEventListener('DOMContentLoaded', applyI18n);
