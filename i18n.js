@@ -1,4 +1,6 @@
-// i18n — hub chrome, section names, panel intros and tool-card copy.
+// i18n — hub chrome, tag labels, search UI and tool-card copy. The cards
+// themselves come from assets/json/tools.json and are translated at render
+// time by index.html, so a new tool needs one entry here and one there.
 // English strings ARE the keys, so a missing entry falls back to English.
 // App names (Carino PACS, Topo, Desk…) and terms of art (DICOM, PACS, CVE,
 // IPv4, NVD, YAML…) deliberately stay untranslated. The locale itself is
@@ -29,24 +31,6 @@ const I18N = {
         'Retry': 'Reintentar',
         'Export': 'Exportar',
         'Complete test': 'Prueba completa',
-        // Section names (slices + panel titles)
-        'MedTech & Imaging': 'MedTech e imagen',
-        'Telecom & Infra': 'Telecom e infra',
-        'Security & Tools': 'Seguridad y herramientas',
-        'Business & Auto': 'Negocios y automatización',
-        'Media Tools': 'Herramientas de medios',
-        // Slice subtitles
-        'DICOM / PDF / Data': 'DICOM / PDF / Datos',
-        'Network / Speed / DNS': 'Red / Velocidad / DNS',
-        'Vault / CVE / Learn': 'Bóveda / CVE / Learn',
-        'Workflows / Ops': 'Flujos / Operaciones',
-        'Stream / Games / AV': 'Streaming / Juegos / AV',
-        // Panel intros
-        'Medical data tools and imaging utilities.': 'Herramientas de datos médicos y utilidades de imagen.',
-        'Network configuration, monitoring, and diagnostics.': 'Configuración, monitoreo y diagnóstico de redes.',
-        'Privacy, vulnerability intelligence, and utility tools.': 'Privacidad, inteligencia de vulnerabilidades y utilidades.',
-        'Workflows, deployments, and operational tooling.': 'Flujos de trabajo, despliegues y herramientas operativas.',
-        'Streaming, audio, and presentation utilities.': 'Utilidades de streaming, audio y presentación.',
         // Card actions
         'Launch ↗': 'Iniciar ↗',
         'Open ↗': 'Abrir ↗',
@@ -91,6 +75,28 @@ const I18N = {
         // Title attributes (applied explicitly, not via data-i18n)
         'Carino Systems — back to hub': 'Carino Systems — volver al hub',
         'Carino Systems — reload': 'Carino Systems — recargar',
+        // Index chrome — search box, tag rail, result counts
+        'Workshop': 'Taller',
+        'Search tools…': 'Buscar herramientas…',
+        'All': 'Todo',
+        'Medical': 'Medicina',
+        'Files': 'Archivos',
+        'Security': 'Seguridad',
+        'Systems': 'Sistemas',
+        'Business': 'Negocios',
+        'Media': 'Medios',
+        'Learn': 'Aprender',
+        '{n} of {m} tools': '{n} de {m} herramientas',
+        '<b>{n} tools</b>, one index. Type to filter.': '<b>{n} herramientas</b>, un solo índice. Escribe para filtrar.',
+        'Press Enter to open': 'Pulsa Enter para abrir',
+        'Nothing matches': 'Nada coincide con',
+        'Show everything': 'Mostrar todo',
+        'Runs locally': 'Se ejecuta en local',
+        'Could not load the tool index': 'No se pudo cargar el índice de herramientas',
+        'View on GitHub ↗': 'Ver en GitHub ↗',
+        // Card descriptions — tools the old hub never listed
+        'Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.': 'Dibuja una tipografía glifo a glifo o con pluma vectorial, ajusta el kerning, previsualiza en vivo y exporta un TTF o WOFF funcional, todo en el navegador.',
+        'Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.': 'Observa todos los proyectos del taller a la vez: una cuadrícula de iframes en vivo que refresca cada mosaico cuando cambian sus archivos. Se ejecuta en tu propia máquina.',
         // Diagnostics panel values (written from clock-network.js via window.t)
         'Testing...': 'Probando...',
         'Boost Test...': 'Prueba ampliada...',
@@ -127,21 +133,6 @@ const I18N = {
         'Retry': 'Tentar novamente',
         'Export': 'Exportar',
         'Complete test': 'Teste completo',
-        'MedTech & Imaging': 'MedTech e imagem',
-        'Telecom & Infra': 'Telecom e infra',
-        'Security & Tools': 'Segurança e ferramentas',
-        'Business & Auto': 'Negócios e automação',
-        'Media Tools': 'Ferramentas de mídia',
-        'DICOM / PDF / Data': 'DICOM / PDF / Dados',
-        'Network / Speed / DNS': 'Rede / Velocidade / DNS',
-        'Vault / CVE / Learn': 'Cofre / CVE / Learn',
-        'Workflows / Ops': 'Fluxos / Operações',
-        'Stream / Games / AV': 'Streaming / Jogos / AV',
-        'Medical data tools and imaging utilities.': 'Ferramentas de dados médicos e utilitários de imagem.',
-        'Network configuration, monitoring, and diagnostics.': 'Configuração, monitoramento e diagnóstico de redes.',
-        'Privacy, vulnerability intelligence, and utility tools.': 'Privacidade, inteligência de vulnerabilidades e utilitários.',
-        'Workflows, deployments, and operational tooling.': 'Fluxos de trabalho, implantações e ferramentas operacionais.',
-        'Streaming, audio, and presentation utilities.': 'Utilitários de streaming, áudio e apresentação.',
         'Launch ↗': 'Iniciar ↗',
         'Open ↗': 'Abrir ↗',
         'Open Vault ↗': 'Abrir cofre ↗',
@@ -183,6 +174,28 @@ const I18N = {
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': 'Reajuste, alinhe e corrija trilhas de legendas de vídeo: desloque, estique e visualize no navegador.',
         'Carino Systems — back to hub': 'Carino Systems — voltar ao hub',
         'Carino Systems — reload': 'Carino Systems — recarregar',
+        // Index chrome — search box, tag rail, result counts
+        'Workshop': 'Oficina',
+        'Search tools…': 'Buscar ferramentas…',
+        'All': 'Tudo',
+        'Medical': 'Medicina',
+        'Files': 'Arquivos',
+        'Security': 'Segurança',
+        'Systems': 'Sistemas',
+        'Business': 'Negócios',
+        'Media': 'Mídia',
+        'Learn': 'Aprender',
+        '{n} of {m} tools': '{n} de {m} ferramentas',
+        '<b>{n} tools</b>, one index. Type to filter.': '<b>{n} ferramentas</b>, um só índice. Digite para filtrar.',
+        'Press Enter to open': 'Pressione Enter para abrir',
+        'Nothing matches': 'Nada corresponde a',
+        'Show everything': 'Mostrar tudo',
+        'Runs locally': 'Roda localmente',
+        'Could not load the tool index': 'Não foi possível carregar o índice de ferramentas',
+        'View on GitHub ↗': 'Ver no GitHub ↗',
+        // Card descriptions — tools the old hub never listed
+        'Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.': 'Desenhe uma fonte glifo a glifo ou com caneta vetorial, ajuste o kerning, visualize ao vivo e exporte um TTF ou WOFF funcional — tudo no navegador.',
+        'Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.': 'Veja todos os projetos da oficina de uma vez: uma grade de iframes ao vivo que atualiza cada bloco quando seus arquivos mudam. Roda na sua própria máquina.',
         // Diagnostics panel values (written from clock-network.js via window.t)
         'Testing...': 'Testando...',
         'Boost Test...': 'Teste ampliado...',
@@ -219,21 +232,6 @@ const I18N = {
         'Retry': '再試行',
         'Export': 'エクスポート',
         'Complete test': '完全テスト',
-        'MedTech & Imaging': '医療技術・画像',
-        'Telecom & Infra': '通信・インフラ',
-        'Security & Tools': 'セキュリティ・ツール',
-        'Business & Auto': 'ビジネス・自動化',
-        'Media Tools': 'メディアツール',
-        'DICOM / PDF / Data': 'DICOM / PDF / データ',
-        'Network / Speed / DNS': 'ネットワーク / 速度 / DNS',
-        'Vault / CVE / Learn': '保管庫 / CVE / Learn',
-        'Workflows / Ops': 'ワークフロー / 運用',
-        'Stream / Games / AV': '配信 / ゲーム / AV',
-        'Medical data tools and imaging utilities.': '医療データツールと画像ユーティリティ。',
-        'Network configuration, monitoring, and diagnostics.': 'ネットワークの設定・監視・診断。',
-        'Privacy, vulnerability intelligence, and utility tools.': 'プライバシー、脆弱性情報、ユーティリティ。',
-        'Workflows, deployments, and operational tooling.': 'ワークフロー、デプロイ、運用ツール。',
-        'Streaming, audio, and presentation utilities.': 'ストリーミング、音声、プレゼン用ユーティリティ。',
         'Launch ↗': '起動 ↗',
         'Open ↗': '開く ↗',
         'Open Vault ↗': '保管庫を開く ↗',
@@ -275,6 +273,28 @@ const I18N = {
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': '動画の字幕トラックをリタイミング・整列・修正。オフセット、伸縮、プレビューをブラウザーで。',
         'Carino Systems — back to hub': 'Carino Systems — ハブに戻る',
         'Carino Systems — reload': 'Carino Systems — 再読み込み',
+        // Index chrome — search box, tag rail, result counts
+        'Workshop': '工房',
+        'Search tools…': 'ツールを検索…',
+        'All': 'すべて',
+        'Medical': '医療',
+        'Files': 'ファイル',
+        'Security': 'セキュリティ',
+        'Systems': 'システム',
+        'Business': 'ビジネス',
+        'Media': 'メディア',
+        'Learn': '学習',
+        '{n} of {m} tools': '{m} 件中 {n} 件',
+        '<b>{n} tools</b>, one index. Type to filter.': '<b>{n} 件のツール</b>を一覧で。入力して絞り込み。',
+        'Press Enter to open': 'Enter で開く',
+        'Nothing matches': '一致するものがありません:',
+        'Show everything': 'すべて表示',
+        'Runs locally': 'ローカル実行',
+        'Could not load the tool index': 'ツール一覧を読み込めませんでした',
+        'View on GitHub ↗': 'GitHub で見る ↗',
+        // Card descriptions — tools the old hub never listed
+        'Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.': 'ブラウザだけでフォントを作成 — グリフを1文字ずつ、またはベクターペンで描き、カーニングを調整し、リアルタイムでプレビューして TTF / WOFF を書き出せます。',
+        'Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.': '工房のすべてのプロジェクトを一度に表示 — ライブ iframe のグリッドで、ファイルが変わるたびにタイルが自動更新されます。自分のPCで実行します。',
         // Diagnostics panel values (written from clock-network.js via window.t)
         'Testing...': 'テスト中...',
         'Boost Test...': '追加テスト中...',
@@ -311,21 +331,6 @@ const I18N = {
         'Retry': 'Повторить',
         'Export': 'Экспорт',
         'Complete test': 'Полный тест',
-        'MedTech & Imaging': 'Медтех и визуализация',
-        'Telecom & Infra': 'Телеком и инфра',
-        'Security & Tools': 'Безопасность и инструменты',
-        'Business & Auto': 'Бизнес и автоматизация',
-        'Media Tools': 'Медиаинструменты',
-        'DICOM / PDF / Data': 'DICOM / PDF / Данные',
-        'Network / Speed / DNS': 'Сеть / Скорость / DNS',
-        'Vault / CVE / Learn': 'Сейф / CVE / Learn',
-        'Workflows / Ops': 'Процессы / Операции',
-        'Stream / Games / AV': 'Стриминг / Игры / AV',
-        'Medical data tools and imaging utilities.': 'Инструменты для медицинских данных и визуализации.',
-        'Network configuration, monitoring, and diagnostics.': 'Настройка, мониторинг и диагностика сети.',
-        'Privacy, vulnerability intelligence, and utility tools.': 'Приватность, данные об уязвимостях и утилиты.',
-        'Workflows, deployments, and operational tooling.': 'Рабочие процессы, развёртывание и операционные инструменты.',
-        'Streaming, audio, and presentation utilities.': 'Утилиты для стриминга, аудио и презентаций.',
         'Launch ↗': 'Запустить ↗',
         'Open ↗': 'Открыть ↗',
         'Open Vault ↗': 'Открыть сейф ↗',
@@ -367,6 +372,28 @@ const I18N = {
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': 'Перетайминг, выравнивание и исправление субтитров к видео: сдвиг, растяжение и предпросмотр в браузере.',
         'Carino Systems — back to hub': 'Carino Systems — вернуться в хаб',
         'Carino Systems — reload': 'Carino Systems — перезагрузить',
+        // Index chrome — search box, tag rail, result counts
+        'Workshop': 'Мастерская',
+        'Search tools…': 'Поиск инструментов…',
+        'All': 'Все',
+        'Medical': 'Медицина',
+        'Files': 'Файлы',
+        'Security': 'Безопасность',
+        'Systems': 'Системы',
+        'Business': 'Бизнес',
+        'Media': 'Медиа',
+        'Learn': 'Обучение',
+        '{n} of {m} tools': '{n} из {m} инструментов',
+        '<b>{n} tools</b>, one index. Type to filter.': '<b>{n} инструментов</b>, один указатель. Введите запрос для фильтрации.',
+        'Press Enter to open': 'Нажмите Enter, чтобы открыть',
+        'Nothing matches': 'Ничего не найдено по запросу',
+        'Show everything': 'Показать всё',
+        'Runs locally': 'Работает локально',
+        'Could not load the tool index': 'Не удалось загрузить список инструментов',
+        'View on GitHub ↗': 'Открыть на GitHub ↗',
+        // Card descriptions — tools the old hub never listed
+        'Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.': 'Рисуйте шрифт глиф за глифом или векторным пером, настраивайте кернинг, смотрите живой предпросмотр и экспортируйте готовый TTF или WOFF — полностью в браузере.',
+        'Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.': 'Следите за всеми проектами мастерской сразу — сетка живых iframe, каждая плитка обновляется сама при изменении файлов. Запускается на вашей машине.',
         // Diagnostics panel values (written from clock-network.js via window.t)
         'Testing...': 'Проверка...',
         'Boost Test...': 'Расширенный тест...',
@@ -426,9 +453,9 @@ function applyI18n() {
     setLocale(currentFleetLang());
     applyStaticI18n();
     applyTitleI18n();
-    // Slice titles are vertical, so a longer translation runs off the bottom
-    // of the viewport. index.html re-fits them once the new text is in place.
-    if (typeof window.fitSliceTitles === 'function') window.fitSliceTitles();
+    // The tool cards are built from JSON, not markup, so data-i18n never
+    // sees them — index.html re-renders the grid with the new locale.
+    if (typeof window.renderTools === 'function') window.renderTools();
 }
 
 document.addEventListener('DOMContentLoaded', applyI18n);

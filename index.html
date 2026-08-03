@@ -147,151 +147,182 @@
     .complete-test-btn { text-decoration: none; margin-top: 8px; border-color: var(--accent-dim); color: var(--accent); background: var(--accent-faint); }
     .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
 
-    .workspace {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      overflow: hidden;
-      position: relative;
-    }
+    /* ─────────────────────────────────────────────────────────────
+       WORKSHOP INDEX
 
-    .stage {
-      flex: 0 0 0px; 
-      opacity: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
+       Every tool on the page at once, filtered by typing. The hub used
+       to open on five full-height category slices and nothing else, so
+       the first tool was two clicks away and which slice held it was a
+       guess — Metadata under MedTech, Compass under Media, and a "&
+       Tools" section that had quietly become the drawer for whatever
+       fit nowhere.
+
+       Tags replaced the sections because the sections were exclusive
+       and the tools are not: Metadata is a file tool AND a medical one,
+       and had to lose that argument to be filed at all. Nothing is
+       filed now — everything is listed, and the search box is the
+       primary way in. The rail narrows; it does not hide.
+       ───────────────────────────────────────────────────────────── */
+
+    .shell { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 30px; }
+
+    /* ── hero ── */
+    .hero {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap; padding: 46px 0 30px;
       background: var(--bg-stage-grad);
-      transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
-      position: relative;
     }
-    .stage::-webkit-scrollbar { width: 6px; }
-    .stage::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.5); border-radius: 3px;}
+    .hero-title {
+      font-family: 'Red Hat Display', sans-serif; font-size: 3.4rem; font-weight: 900;
+      line-height: 0.95; text-transform: uppercase; letter-spacing: 2px;
+      background: linear-gradient(130deg, #fef08a 0%, #eab308 55%, #b45309 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--text-sec); margin-top: 10px; }
+    .hero-sub b { color: var(--accent); font-weight: 700; }
 
-    body.state-selected .stage {
-      flex: 1 1 auto;
-      opacity: 1;
-      padding: 40px 60px;
+    /* ── search ── */
+    .search-wrap {
+      position: relative; display: flex; align-items: center; gap: 12px;
+      flex: 1 1 380px; max-width: 560px;
+      background: #0d0d0d; border: 1px solid var(--border); border-radius: 8px;
+      padding: 0 14px; height: 54px; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint), 0 0 22px var(--accent-glow); }
+    .search-wrap svg { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
+    .search-wrap:focus-within svg { color: var(--accent); }
+    #q {
+      flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
+      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 1rem;
+    }
+    #q::placeholder { color: var(--text-muted); }
+    .kbd-hint {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 4px; padding: 3px 7px; flex-shrink: 0;
+    }
+    .search-wrap:focus-within .kbd-hint, .search-wrap.has-text .kbd-hint { display: none; }
+    .q-clear {
+      display: none; background: transparent; border: 0; cursor: pointer; flex-shrink: 0;
+      color: var(--text-muted); font-size: 1.3rem; line-height: 1; padding: 0 2px;
+    }
+    .q-clear:hover { color: var(--accent); }
+    .search-wrap.has-text .q-clear { display: block; }
+
+    /* ── tag rail — the slice bar, laid flat ── */
+    .rail-outer {
+      position: sticky; top: 0; z-index: 60;
+      background: var(--bg-header); border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .rail { display: flex; overflow-x: auto; scrollbar-width: none; }
+    .rail::-webkit-scrollbar { display: none; }
+    .rail-btn {
+      flex: 1 0 auto; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 62px; padding: 0 20px; cursor: pointer;
+      background: #0a0a0a; border: 0; border-right: 1px solid var(--border);
+      border-top: 3px solid transparent;
+      color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      transition: color 0.25s, background 0.25s, border-color 0.25s;
+    }
+    .rail-btn:last-child { border-right: 0; }
+    .rail-btn::before {
+      content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s;
+      background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .rail-btn:hover { background: #131007; color: var(--text); }
+    .rail-btn:hover::before { opacity: 1; }
+    .rail-btn.active { background: #111111; color: var(--accent); border-top-color: var(--accent); }
+    /* Not ".empty" — that class is the no-results panel below, and a bare
+       .empty rule would win on source order and give this button its 70px
+       padding and dashed border. */
+    .rail-btn.zero { opacity: 0.3; }
+    .rail-i { font-size: 1rem; line-height: 1; }
+    .rail-n {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 700;
+      color: var(--text-muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px;
+    }
+    .rail-btn.active .rail-n { color: var(--accent); border-color: var(--accent-dim); }
+
+    /* ── results ── */
+    .results {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+      padding: 24px 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .results b { color: var(--accent); font-weight: 700; }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 18px; padding: 18px 0 70px;
     }
 
-    .panel { display: none; animation: fadeUp 0.5s ease forwards; }
-    .panel.active { display: block; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-    .panel-header { margin-bottom: 30px; padding-bottom: 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
-    .panel-title { font-family: 'Red Hat Display', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; text-transform: uppercase; letter-spacing: 1px;
-      background: linear-gradient(130deg, #fef08a 0%, #eab308 55%, #b45309 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .panel-desc { font-size: 0.95rem; color: var(--text-stage-desc); font-weight: 500; margin-top: 8px; font-family: 'IBM Plex Mono', monospace;}
-    .panel-num { font-size: 4rem; font-weight: 900; color: rgba(234,179,8,0.12); font-family: 'Red Hat Display', sans-serif; line-height: 0.8; user-select: none; }
-
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-
-    /* Near-black cards on the black/gold stage */
     .card {
       background: #0d0d0d;
-      border: 1px solid var(--border); padding: 24px; border-radius: 12px;
+      border: 1px solid var(--border); padding: 22px; border-radius: 12px;
       transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
-      display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit; min-height: 150px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      text-decoration: none; color: inherit; min-height: 168px;
+      animation: fadeUp 0.35s ease backwards;
     }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .card:hover {
       border-color: var(--accent); background: linear-gradient(145deg, #17120a 0%, #0b0b0b 100%);
       transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 22px var(--accent-glow);
     }
-    .card.disabled { opacity: 0.3; pointer-events: none; }
-    .c-icon { font-size: 1.6rem; margin-bottom: 12px; }
-    .c-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .c-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; flex: 1; }
-    .c-link { margin-top: 16px; font-size: 0.75rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
-
-    .slice-menu {
-      display: flex;
-      flex: 1 1 auto; 
-      transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), height 0.6s;
-      background: var(--bg-header);
-      border-top: 1px solid transparent;
-      z-index: 10;
+    .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .c-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .c-icon { font-size: 1.35rem; line-height: 1; }
+    .c-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .c-desc { font-size: 0.82rem; color: var(--text-sec); line-height: 1.6; }
+    .c-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
+    .c-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .c-tag {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 3px; padding: 2px 6px;
     }
-    
-    body.state-selected .slice-menu {
-      flex: 0 0 80px; 
-      border-top: 1px solid var(--border);
+    .c-tag.local { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-faint); }
+    .c-link {
+      font-size: 0.7rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; white-space: nowrap;
     }
+    /* The matched run inside a title or description — colour only, so the
+       text never reflows as you type. */
+    mark { background: transparent; color: var(--accent); font-weight: 700; }
 
-    .slice {
-      flex: 1;
-      border-right: 1px solid var(--border);
-      position: relative;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      background: #0a0a0a;
+    .empty {
+      grid-column: 1 / -1; text-align: center; padding: 70px 20px; color: var(--text-muted);
+      border: 1px dashed var(--border); border-radius: 12px;
     }
-    .slice:last-child { border-right: none; }
-
-    body:not(.state-selected) .slice:hover { display: flex; flex: 1.2; background: #131007; }
-    body:not(.state-selected) .slice:hover .slice-bg { opacity: 1; transform: scale(1.05); }
-
-    .slice-bg {
-      position: absolute; inset: 0; opacity: 0; transition: 0.5s ease;
-      background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
-      pointer-events: none;
+    .empty-big { font-size: 2rem; margin-bottom: 14px; opacity: 0.5; }
+    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; margin-bottom: 18px; }
+    .empty button {
+      background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.1em; padding: 9px 18px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
+    .empty button:hover { background: var(--accent-faint); border-color: var(--accent); }
 
-    /* Text Formatting */
-    .slice-large {
-      position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease;
-    }
-    .slice-num-lg {
-      font-family: 'Red Hat Display', sans-serif; font-size: 5rem; font-weight: 900;
-      color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.1); margin-bottom: 20px;
-    }
-    .slice-text-lg {
-      writing-mode: vertical-rl; font-family: 'IBM Plex Sans', sans-serif; font-size: 2.2rem; font-weight: 900;
-      color: var(--text); text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 5px 15px rgba(0,0,0,0.8);
-    }
-    .slice-small {
-      opacity: 0; pointer-events: none; position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; transition: opacity 0.3s ease;
-    }
-    .slice-text-sm { font-size: 0.85rem; font-weight: 700; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.08em; }
-    .slice-sub-sm { font-size: 0.6rem; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
-
-    /* SVG Icons (Hidden on Desktop) */
-    .slice-icon { display: none; }
-
-    /* Active states */
-    body.state-selected .slice.active { background: #111111; border-top: 3px solid var(--accent); }
-    body.state-selected .slice.active .slice-text-sm { color: var(--accent); }
-    body.state-selected .slice:hover { background: #151515; }
-    body.state-selected .slice-large { opacity: 0; pointer-events: none; }
-    body.state-selected .slice-small { opacity: 1; pointer-events: auto; }
-
-    /* ─── MOBILE OPTIMIZATION ───────────────────────── */
+    /* ─── MOBILE ─────────────────────────────────────
+       The old layout hid every text class on narrow screens and left five
+       unlabelled icons on the landing page. Labels survive here; the rail
+       scrolls sideways instead of dropping its words. */
     @media (max-width: 900px) {
       .header-clock { display: none; }
-      body.state-selected .stage { padding: 30px 20px; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      
-      /* Hide all Typography in slices */
-      .slice-text-lg, .slice-text-sm, .slice-sub-sm, .slice-num-lg { display: none !important; }
-      
-      /* Reveal SVG Icons instead */
-      .slice-icon { 
-        display: block; 
-        color: var(--text-muted); 
-        transition: 0.3s ease; 
-      }
-      
-      /* Huge icon when full screen */
-      body:not(.state-selected) .slice-large .slice-icon { width: 44px; height: 44px; }
-      body:not(.state-selected) .slice:hover .slice-icon { color: var(--text); transform: scale(1.1); }
-
-      /* Small icon when selected (bottom bar) */
-      body.state-selected .slice-small .slice-icon { width: 24px; height: 24px; }
-      body.state-selected .slice.active .slice-icon { color: var(--accent); }
-      body.state-selected .slice-menu { flex: 0 0 65px; } /* Thinner bottom bar for mobile */
+      .shell { padding: 0 18px; }
+      .hero { padding: 32px 0 22px; }
+      .hero-title { font-size: 2.4rem; }
+      .search-wrap { flex-basis: 100%; height: 50px; }
+      .rail-btn { flex: 0 0 auto; min-height: 54px; padding: 0 16px; font-size: 0.72rem; }
+      .rail-n { display: none; }
+      .grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+    @media (max-width: 560px) {
+      .top-header { padding: 0 18px; }
+      .hero-title { font-size: 2rem; }
     }
   </style>
 </head>
@@ -367,441 +398,247 @@
   </a>
 </div>
 
-<div class="workspace">
-  
-  <nav class="slice-menu" id="sliceMenu">
-    
-    <div class="slice" data-target="medtech" onclick="selectSection('medtech')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">01</span>
-        <h2 class="slice-text-lg" data-i18n>MedTech &amp; Imaging</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm" data-i18n>MedTech &amp; Imaging</span>
-        <span class="slice-sub-sm" data-i18n>DICOM / PDF / Data</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-      </div>
+
+<main class="shell">
+
+  <section class="hero">
+    <div>
+      <h1 class="hero-title" data-i18n>Workshop</h1>
+      <p class="hero-sub" id="heroSub">&nbsp;</p>
     </div>
 
-    <div class="slice" data-target="telecom" onclick="selectSection('telecom')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">02</span>
-        <h2 class="slice-text-lg" data-i18n>Telecom &amp; Infra</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm" data-i18n>Telecom &amp; Infra</span>
-        <span class="slice-sub-sm" data-i18n>Network / Speed / DNS</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </div>
+    <div class="search-wrap" id="searchWrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
+      <span class="kbd-hint">/</span>
+      <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
     </div>
+  </section>
 
-    <div class="slice" data-target="security" onclick="selectSection('security')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">03</span>
-        <h2 class="slice-text-lg" data-i18n>Security &amp; Tools</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm" data-i18n>Security &amp; Tools</span>
-        <span class="slice-sub-sm" data-i18n>Vault / CVE / Learn</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-    </div>
+</main>
 
-    <div class="slice" data-target="automation" onclick="selectSection('automation')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">04</span>
-        <h2 class="slice-text-lg" data-i18n>Business &amp; Auto</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm" data-i18n>Business &amp; Auto</span>
-        <span class="slice-sub-sm" data-i18n>Workflows / Ops</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-      </div>
-    </div>
-
-    <div class="slice" data-target="media" onclick="selectSection('media')">
-      <div class="slice-bg"></div>
-      <div class="slice-large">
-        <span class="slice-num-lg">05</span>
-        <h2 class="slice-text-lg" data-i18n>Media Tools</h2>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-      </div>
-      <div class="slice-small">
-        <span class="slice-text-sm" data-i18n>Media Tools</span>
-        <span class="slice-sub-sm" data-i18n>Stream / Games / AV</span>
-        <svg class="slice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-      </div>
-    </div>
-
-  </nav>
-  
-  <main class="stage">
-    <!-- 01 ─ MEDTECH & IMAGING -->
-    <section id="medtech" class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title" data-i18n>MedTech &amp; Imaging</div>
-          <div class="panel-desc" data-i18n>Medical data tools and imaging utilities.</div>
-        </div>
-        <div class="panel-num">01</div>
-      </div>
-      <div class="grid-3">
-        <a href="https://pacs.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🩻</div>
-            <div class="c-title">Carino PACS</div>
-            <div class="c-desc" data-i18n>A deliberately simple, cross-platform DICOM store — receive images or auto-forward a folder to other systems. Not an enterprise PACS.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://dicom.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🏥</div>
-            <div class="c-title">DICOM Tag Editor</div>
-            <div class="c-desc" data-i18n>Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://retina.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">👁</div>
-            <div class="c-title">Carino Retina</div>
-            <div class="c-desc" data-i18n>Eye examination, refraction &amp; dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://metadata.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📂</div>
-            <div class="c-title">Metadata</div>
-            <div class="c-desc" data-i18n>Extract and display file metadata — EXIF data, document properties, and hidden fields.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 02 ─ TELECOM & INFRA -->
-    <section id="telecom" class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title" data-i18n>Telecom &amp; Infra</div>
-          <div class="panel-desc" data-i18n>Network configuration, monitoring, and diagnostics.</div>
-        </div>
-        <div class="panel-num">02</div>
-      </div>
-      <div class="grid-3">
-        <a href="https://topo.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🕸️</div>
-            <div class="c-title">Topo</div>
-            <div class="c-desc" data-i18n>Draw network topologies in the browser — devices, links and addressing on an interactive canvas.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://netplan.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🕸️</div>
-            <div class="c-title">Netplan Configurator</div>
-            <div class="c-desc" data-i18n>GUI-driven YAML network config editor for Linux servers. Drastically reduces errors.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://time.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">⏰</div>
-            <div class="c-title">Time</div>
-            <div class="c-desc" data-i18n>Local time, UTC, epoch and ISO, a searchable world-clock with pinned zones, plus live countdowns you can add and share.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 03 ─ SECURITY & TOOLS -->
-    <section id="security" class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title" data-i18n>Security &amp; Tools</div>
-          <div class="panel-desc" data-i18n>Privacy, vulnerability intelligence, and utility tools.</div>
-        </div>
-        <div class="panel-num">03</div>
-      </div>
-      <div class="grid-3">
-        <a href="https://password.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🔐</div>
-            <div class="c-title">Password</div>
-            <div class="c-desc" data-i18n>Client-side password generator and local vault. Zero server contact — entirely in-browser.</div>
-          </div>
-          <span class="c-link" data-i18n>Open Vault ↗</span>
-        </a>
-        <a href="https://cve.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📰</div>
-            <div class="c-title">CVE Database</div>
-            <div class="c-desc" data-i18n>Browse and search security vulnerabilities sourced from the NVD database.</div>
-          </div>
-          <span class="c-link" data-i18n>Search CVEs ↗</span>
-        </a>
-        <a href="https://hash.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">#️⃣</div>
-            <div class="c-title">Hash</div>
-            <div class="c-desc" data-i18n>Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://learn.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🎓</div>
-            <div class="c-title">Carino Learn</div>
-            <div class="c-desc" data-i18n>Hands-on courses with interactive labs — x86-64 assembly, Bash, Linux, Git, networking, crypto, DICOM &amp; HL7, and ISO 27001.</div>
-          </div>
-          <span class="c-link" data-i18n>Start Learning ↗</span>
-        </a>
-        <a href="https://distro.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🐧</div>
-            <div class="c-title">Find Me a Distro</div>
-            <div class="c-desc" data-i18n>Answer a few questions and get a Linux distribution matched to your needs and experience level.</div>
-          </div>
-          <span class="c-link" data-i18n>Find a Distro ↗</span>
-        </a>
-        <a href="https://hardware.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🖥️</div>
-            <div class="c-title">Hardware</div>
-            <div class="c-desc" data-i18n>Decode a MAC address to its vendor and bits, jump to any brand's warranty &amp; driver pages, and size a build by the features that matter.</div>
-          </div>
-          <span class="c-link" data-i18n>Open ↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 04 ─ BUSINESS & AUTOMATION -->
-    <section id="automation" class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title" data-i18n>Business &amp; Auto</div>
-          <div class="panel-desc" data-i18n>Workflows, deployments, and operational tooling.</div>
-        </div>
-        <div class="panel-num">04</div>
-      </div>
-      <div class="grid-3">
-        <a href="https://software.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📚</div>
-            <div class="c-title">Software Catalogue</div>
-            <div class="c-desc" data-i18n>System-agnostic app repository for fleet-wide deployments.</div>
-          </div>
-          <span class="c-link" data-i18n>Browse ↗</span>
-        </a>
-        <a href="https://setup.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">⚙️</div>
-            <div class="c-title">SimpleSetup</div>
-            <div class="c-desc" data-i18n>Automated system configuration for Linux, Windows, and macOS.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://kanban.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📅</div>
-            <div class="c-title">Kanban</div>
-            <div class="c-desc" data-i18n>Serverless Kanban board for lightweight project and task tracking.</div>
-          </div>
-          <span class="c-link" data-i18n>Open Board ↗</span>
-        </a>
-        <a href="https://quote.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">💰</div>
-            <div class="c-title">Quote</div>
-            <div class="c-desc" data-i18n>Build and send custom service and product quotes to clients.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://desk.carino.systems" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🙋</div>
-            <div class="c-title">Desk</div>
-            <div class="c-desc" data-i18n>Support snippet workspace — search, fill and copy canned responses for client requests.</div>
-          </div>
-          <span class="c-link" data-i18n>Open ↗</span>
-        </a>
-        <a href="https://vitae.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📄</div>
-            <div class="c-title">Vitae</div>
-            <div class="c-desc" data-i18n>Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser.</div>
-          </div>
-          <span class="c-link" data-i18n>Build Resume ↗</span>
-        </a>
-        <a href="https://branding.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🎨</div>
-            <div class="c-title">Carino Branding</div>
-            <div class="c-desc" data-i18n>The living design-system reference — tokens, components and copy-ready snippets for every Carino project.</div>
-          </div>
-          <span class="c-link" data-i18n>Open ↗</span>
-        </a>
-        <a href="https://stocks.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📈</div>
-            <div class="c-title">Stocks</div>
-            <div class="c-desc" data-i18n>Markets watchlist, alerts and portfolio monitoring — client-side, with pluggable data providers.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://images.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">💿</div>
-            <div class="c-title">Carino Images</div>
-            <div class="c-desc" data-i18n>Purpose-built Fedora bootc images and installer ISOs — gaming, imagenology, server — from one declarative config.</div>
-          </div>
-          <span class="c-link" data-i18n>Browse ↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 05 ─ MEDIA -->
-    <section id="media" class="panel">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title" data-i18n>Media Tools</div>
-          <div class="panel-desc" data-i18n>Streaming, audio, and presentation utilities.</div>
-        </div>
-        <div class="panel-num">05</div>
-      </div>
-      <div class="grid-3">
-        <a href="https://tv.carino.systems/" class="card">
-          <div>
-            <div class="c-icon">📡</div>
-            <div class="c-title">TV</div>
-            <div class="c-desc" data-i18n>Multi-source stream monitoring layout for live broadcast operations.</div>
-          </div>
-          <span class="c-link" data-i18n>Open ↗</span>
-        </a>
-        <a href="https://music.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🎵</div>
-            <div class="c-title">Music Wall</div>
-            <div class="c-desc" data-i18n>Curated music collection displayed as an interactive album wall.</div>
-          </div>
-          <span class="c-link" data-i18n>Open ↗</span>
-        </a>
-        <a href="https://teleprompter.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">📺</div>
-            <div class="c-title">TelePrompter</div>
-            <div class="c-desc" data-i18n>Clean, speed-controlled script reader for presentations and recordings.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://asobi.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🎴</div>
-            <div class="c-title">Asobi — Board Games</div>
-            <div class="c-desc" data-i18n>Play Shogi (将棋) and Hanafuda Koi-Koi (花札) in-browser — human vs human, vs AI, or AI vs AI.</div>
-          </div>
-          <span class="c-link" data-i18n>Play ↗</span>
-        </a>
-        <a href="https://media.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🎬</div>
-            <div class="c-title">Media Suite</div>
-            <div class="c-desc" data-i18n>PDF→image, OCR, signature cleanup, image &amp; audio converters and an ffmpeg command builder — all in-browser.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://compass.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">🧭</div>
-            <div class="c-title">Compass</div>
-            <div class="c-desc" data-i18n>A 12-axis political compass measured by intention rather than numeric grading.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-        <a href="https://subs.carino.systems/" target="_blank" class="card">
-          <div>
-            <div class="c-icon">💬</div>
-            <div class="c-title">Sync Studio</div>
-            <div class="c-desc" data-i18n>Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.</div>
-          </div>
-          <span class="c-link" data-i18n>Launch ↗</span>
-        </a>
-      </div>
-    </section>
-  </main>
-  
+<div class="rail-outer">
+  <div class="shell">
+    <nav class="rail" id="rail" aria-label="Filter by tag"></nav>
+  </div>
 </div>
 
+<main class="shell">
+  <div class="results">
+    <span id="resultCount">&nbsp;</span>
+    <span id="resultHint"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
 <script>
-  function selectSection(id) {
-    document.body.classList.add('state-selected');
-    
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+/* ─────────────────────────────────────────────────────────────────────
+   The index is data, not markup: assets/json/tools.json. The hub used to
+   be the only thing that knew the fleet's shape, and it knew it as 29
+   hand-written <a> blocks — so a new subdomain meant editing a category
+   that may not have had room for it. font.carino.systems had been live
+   and unlisted for exactly that reason.
 
-    document.querySelectorAll('.slice').forEach(s => {
-      if (s.getAttribute('data-target') === id) {
-        s.classList.add('active');
-      } else {
-        s.classList.remove('active');
-      }
-    });
+   Everything below renders from that file. Adding a tool is one object.
+   ───────────────────────────────────────────────────────────────────── */
 
-    document.querySelector('.stage').scrollTop = 0;
+const REGISTRY = 'assets/json/tools.json';
+let TOOLS = [], TAGS = [], tag = 'all', query = '';
+
+/* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
+   Fall through to the English key until it does — which is exactly what
+   t() itself does for a missing entry. */
+const T = (s) => (typeof t === 'function' ? t(s) : s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ── matching ──
+   Space-separated terms, all of which must appear somewhere in the card:
+   its name, its description, its tag labels, or its keywords — the
+   unshown aliases in the registry, so "anonymize" finds the tag editor
+   and "srt" finds Sync Studio without either word being on screen. */
+function haystack(tool) {
+  const labels = tool.tags.map((id) => tagLabel(id));
+  return [tool.name, T(tool.desc), tool.keywords || '', labels.join(' '), T(labels.join(' '))]
+    .join(' ').toLowerCase();
+}
+function terms(q) { return q.toLowerCase().split(/\s+/).filter(Boolean); }
+function matches(tool, q) {
+  if (!q) return true;
+  const hay = haystack(tool);
+  return terms(q).every((term) => hay.includes(term));
+}
+
+/* Highlight every matched run in a rendered string. Escapes first, then
+   inserts <mark>, so a tool description can never smuggle in markup. */
+function mark(text, q) {
+  const out = esc(text);
+  const ts = terms(q).filter((x) => x.length > 1);
+  if (!ts.length) return out;
+  const re = new RegExp('(' + ts.map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'gi');
+  return out.replace(re, '<mark>$1</mark>');
+}
+
+function tagLabel(id) {
+  const found = TAGS.find((x) => x.id === id);
+  return found ? found.label : id;
+}
+
+/* ── rendering ── */
+function visible() { return TOOLS.filter((x) => (tag === 'all' || x.tags.includes(tag)) && matches(x, query)); }
+
+function renderRail() {
+  const rail = document.getElementById('rail');
+  // Counts respect the search but not the tag, so the rail always shows
+  // where the rest of your matches are rather than going all-zero.
+  const pool = TOOLS.filter((x) => matches(x, query));
+  const btn = (id, icon, label, n, on) =>
+    `<button class="rail-btn${on ? ' active' : ''}${n ? '' : ' zero'}" data-tag="${esc(id)}" type="button">` +
+    `<span class="rail-i">${icon}</span><span>${esc(label)}</span><span class="rail-n">${n}</span></button>`;
+  rail.innerHTML =
+    btn('all', '✦', T('All'), pool.length, tag === 'all') +
+    TAGS.map((g) => btn(g.id, g.icon, T(g.label), pool.filter((x) => x.tags.includes(g.id)).length, tag === g.id)).join('');
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const list = visible();
+
+  document.getElementById('resultCount').innerHTML =
+    T('{n} of {m} tools').replace('{n}', `<b>${list.length}</b>`).replace('{m}', TOOLS.length);
+  document.getElementById('resultHint').textContent =
+    list.length === 1 && query ? T('Press Enter to open') : '';
+
+  if (!list.length) {
+    grid.innerHTML =
+      `<div class="empty"><div class="empty-big">⌀</div>` +
+      `<p>${T('Nothing matches')} “${esc(query)}”</p>` +
+      `<button type="button" id="resetBtn">${T('Show everything')}</button></div>`;
+    document.getElementById('resetBtn').onclick = () => { setQuery(''); setTag('all'); };
+    return;
   }
 
-  function toggleDiag() {
-    document.getElementById('diagBox').classList.toggle('open');
-  }
+  grid.innerHTML = list.map((x, i) => {
+    const chips = x.tags.map((id) => `<span class="c-tag">${esc(T(tagLabel(id)))}</span>`).join('') +
+      (x.local ? `<span class="c-tag local">${esc(T('Runs locally'))}</span>` : '');
+    // Only cross-origin links get a new tab, which is all of them today —
+    // but the registry is meant to outlive that assumption.
+    const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
+    return `<a class="card" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''} style="animation-delay:${Math.min(i, 14) * 18}ms">
+      <div>
+        <div class="c-head"><span class="c-icon">${esc(x.icon)}</span><span class="c-title">${mark(x.name, query)}</span></div>
+        <div class="c-desc">${mark(T(x.desc), query)}</div>
+      </div>
+      <div class="c-foot"><span class="c-tags">${chips}</span><span class="c-link">${esc(T(x.cta))}</span></div>
+    </a>`;
+  }).join('');
+}
 
-  document.addEventListener('click', (e) => {
-    const diagBox = document.getElementById('diagBox');
-    const toggleBtn = document.querySelector('.status-toggle');
-    if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) {
-      diagBox.classList.remove('open');
+function render() {
+  document.getElementById('heroSub').innerHTML =
+    T('<b>{n} tools</b>, one index. Type to filter.').replace('{n}', TOOLS.length);
+  document.getElementById('q').placeholder = T('Search tools…');
+  renderRail();
+  renderGrid();
+}
+// i18n.js re-runs this after a fleet-wide language switch.
+window.renderTools = () => { if (TOOLS.length) render(); };
+
+/* ── state, mirrored in the hash ──
+   #medical            a tag
+   #all/dicom          a search, with or without a tag ahead of it
+   Tag changes push a history entry (the back button should undo a click);
+   keystrokes replace it, so one search is not fifteen entries deep. */
+function writeHash(push) {
+  const h = '#' + tag + (query ? '/' + encodeURIComponent(query) : '');
+  if (location.hash === h) return;
+  if (push) location.hash = h;
+  else history.replaceState(null, '', location.pathname + location.search + h);
+}
+function readHash() {
+  const raw = decodeURIComponent(location.hash.replace(/^#/, ''));
+  const cut = raw.indexOf('/');
+  const wantTag = cut < 0 ? raw : raw.slice(0, cut);
+  const wantQ = cut < 0 ? '' : raw.slice(cut + 1);
+  tag = (wantTag === 'all' || TAGS.some((g) => g.id === wantTag)) ? wantTag : 'all';
+  query = wantQ;
+  const q = document.getElementById('q');
+  if (q.value !== query) q.value = query;
+  document.getElementById('searchWrap').classList.toggle('has-text', !!query);
+}
+
+function setTag(next) { tag = next; writeHash(true); render(); }
+function setQuery(next) {
+  query = next;
+  document.getElementById('q').value = next;
+  document.getElementById('searchWrap').classList.toggle('has-text', !!next);
+  writeHash(false);
+  render();
+}
+
+/* ── wiring ── */
+function boot(data) {
+  TAGS = data.tags || [];
+  TOOLS = data.tools || [];
+  readHash();
+  render();
+
+  document.getElementById('rail').addEventListener('click', (e) => {
+    const b = e.target.closest('.rail-btn');
+    if (b) setTag(b.dataset.tag);
+  });
+
+  const q = document.getElementById('q');
+  q.addEventListener('input', () => setQuery(q.value));
+  document.getElementById('qClear').addEventListener('click', () => { setQuery(''); q.focus(); });
+
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { if (q.value) setQuery(''); else q.blur(); }
+    else if (e.key === 'Enter') {
+      // One result left is an unambiguous answer — take it.
+      const only = visible();
+      if (only.length === 1) document.querySelector('.card')?.click();
     }
   });
 
-  /* Slice titles run vertically (writing-mode: vertical-rl), so their length is
-     bounded by viewport HEIGHT, not width. English fits at the 2.2rem design
-     size; longer translations ("Seguridad y herramientas", "Безопасность и
-     инструменты") would run off the bottom. Shrink only those that overflow,
-     so the English rendering is untouched. i18n.js calls this after each
-     language switch; see window.fitSliceTitles. */
-  function fitSliceTitles() {
-    document.querySelectorAll('.slice-text-lg').forEach((el) => {
-      el.style.fontSize = '';
-      el.style.letterSpacing = '';
-      const slice = el.closest('.slice');
-      // Measure the whole stack (the big 01-05 numeral sits above the title),
-      // not just the text — otherwise the numeral's height pushes it off-screen.
-      const group = el.closest('.slice-large') || el;
-      if (!slice || !slice.clientHeight) return;
-      const avail = slice.clientHeight * 0.94;
-      let size = 2.2, spacing = 6;
-      while (group.getBoundingClientRect().height > avail && size > 0.9) {
-        size -= 0.1;
-        spacing = Math.max(1, spacing - 0.35);
-        el.style.fontSize = size.toFixed(2) + 'rem';
-        el.style.letterSpacing = spacing.toFixed(1) + 'px';
-      }
+  // "/" anywhere puts the cursor in the box, the way every tool with a lot
+  // of things in it does. Ctrl/⌘-K for the people who expect that instead.
+  window.addEventListener('keydown', (e) => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '');
+    if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+      e.preventDefault();
+      q.focus(); q.select();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  window.addEventListener('hashchange', () => { readHash(); render(); });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch(REGISTRY)
+    .then((r) => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.json(); })
+    .then(boot)
+    .catch((err) => {
+      // Without the registry there is no page, so say which file is missing
+      // rather than leaving an empty grid that looks like a filter result.
+      document.getElementById('grid').innerHTML =
+        `<div class="empty"><div class="empty-big">⚠</div><p>${esc(T('Could not load the tool index'))} — ` +
+        `<code>${REGISTRY}</code><br>${esc(err.message)}</p></div>`;
+      document.getElementById('resultCount').textContent = '';
     });
+});
+
+function toggleDiag() {
+  document.getElementById('diagBox').classList.toggle('open');
+}
+
+document.addEventListener('click', (e) => {
+  const diagBox = document.getElementById('diagBox');
+  const toggleBtn = document.querySelector('.status-toggle');
+  if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) {
+    diagBox.classList.remove('open');
   }
-  window.fitSliceTitles = fitSliceTitles;
-  document.addEventListener('DOMContentLoaded', () => setTimeout(fitSliceTitles, 0));
-  window.addEventListener('resize', fitSliceTitles);
+});
 </script>
 <script src="./carino-clock.js" defer></script>
 <script src="carino-lang.js" defer></script>

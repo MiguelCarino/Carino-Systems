@@ -1,0 +1,404 @@
+{
+  "tags": [
+    {
+      "id": "medical",
+      "label": "Medical",
+      "icon": "🩻"
+    },
+    {
+      "id": "files",
+      "label": "Files",
+      "icon": "📂"
+    },
+    {
+      "id": "network",
+      "label": "Network",
+      "icon": "🕸"
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "icon": "🔐"
+    },
+    {
+      "id": "systems",
+      "label": "Systems",
+      "icon": "💿"
+    },
+    {
+      "id": "business",
+      "label": "Business",
+      "icon": "💼"
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "icon": "🎬"
+    },
+    {
+      "id": "learn",
+      "label": "Learn",
+      "icon": "🎓"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Asobi — Board Games",
+      "icon": "🎴",
+      "url": "https://asobi.carino.systems/",
+      "desc": "Play Shogi (将棋) and Hanafuda Koi-Koi (花札) in-browser — human vs human, vs AI, or AI vs AI.",
+      "cta": "Play ↗",
+      "tags": [
+        "media"
+      ],
+      "keywords": "shogi hanafuda koikoi japanese chess cards game"
+    },
+    {
+      "name": "Carino Branding",
+      "icon": "🎨",
+      "url": "https://branding.carino.systems/",
+      "desc": "The living design-system reference — tokens, components and copy-ready snippets for every Carino project.",
+      "cta": "Open ↗",
+      "tags": [
+        "business",
+        "media"
+      ],
+      "keywords": "design system tokens colors components style guide css"
+    },
+    {
+      "name": "Carino Fonts",
+      "icon": "🔤",
+      "url": "https://font.carino.systems/",
+      "desc": "Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.",
+      "cta": "Launch ↗",
+      "tags": [
+        "files",
+        "media"
+      ],
+      "keywords": "font glyph ttf woff kerning typeface type editor subset"
+    },
+    {
+      "name": "Carino Images",
+      "icon": "💿",
+      "url": "https://images.carino.systems/",
+      "desc": "Purpose-built Fedora bootc images and installer ISOs — gaming, imagenology, server — from one declarative config.",
+      "cta": "Browse ↗",
+      "tags": [
+        "systems"
+      ],
+      "keywords": "fedora bootc iso installer atomic ostree image os build"
+    },
+    {
+      "name": "Carino Learn",
+      "icon": "🎓",
+      "url": "https://learn.carino.systems/",
+      "desc": "Hands-on courses with interactive labs — x86-64 assembly, Bash, Linux, Git, networking, crypto, DICOM & HL7, and ISO 27001.",
+      "cta": "Start Learning ↗",
+      "tags": [
+        "learn",
+        "security"
+      ],
+      "keywords": "course tutorial lab assembly bash git iso27001 training"
+    },
+    {
+      "name": "Carino PACS",
+      "icon": "🩻",
+      "url": "https://pacs.carino.systems/",
+      "desc": "A deliberately simple, cross-platform DICOM store — receive images or auto-forward a folder to other systems. Not an enterprise PACS.",
+      "cta": "Launch ↗",
+      "tags": [
+        "medical",
+        "systems"
+      ],
+      "keywords": "dicom pacs store scp dimse modality worklist mwl hl7 ris"
+    },
+    {
+      "name": "Carino Retina",
+      "icon": "👁",
+      "url": "https://retina.carino.systems/",
+      "desc": "Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.",
+      "cta": "Launch ↗",
+      "tags": [
+        "medical"
+      ],
+      "keywords": "eye fundus ophthalmology optometry refraction cup-to-disc glaucoma"
+    },
+    {
+      "name": "Compass",
+      "icon": "🧭",
+      "url": "https://compass.carino.systems/",
+      "desc": "A 12-axis political compass measured by intention rather than numeric grading.",
+      "cta": "Launch ↗",
+      "tags": [
+        "learn",
+        "media"
+      ],
+      "keywords": "political quiz axes ideology survey"
+    },
+    {
+      "name": "CVE Database",
+      "icon": "📰",
+      "url": "https://cve.carino.systems/",
+      "desc": "Browse and search security vulnerabilities sourced from the NVD database.",
+      "cta": "Search CVEs ↗",
+      "tags": [
+        "security",
+        "learn"
+      ],
+      "keywords": "vulnerability nvd cvss advisory exploit"
+    },
+    {
+      "name": "Desk",
+      "icon": "🙋",
+      "url": "https://desk.carino.systems",
+      "desc": "Support snippet workspace — search, fill and copy canned responses for client requests.",
+      "cta": "Open ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "helpdesk support snippets canned responses templates ticket"
+    },
+    {
+      "name": "DICOM Tag Editor",
+      "icon": "🏥",
+      "url": "https://dicom.carino.systems/",
+      "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.",
+      "cta": "Launch ↗",
+      "tags": [
+        "medical",
+        "files"
+      ],
+      "keywords": "dicom tags anonymize de-identify deidentify phi dcm"
+    },
+    {
+      "name": "Find Me a Distro",
+      "icon": "🐧",
+      "url": "https://distro.carino.systems/",
+      "desc": "Answer a few questions and get a Linux distribution matched to your needs and experience level.",
+      "cta": "Find a Distro ↗",
+      "tags": [
+        "systems",
+        "learn"
+      ],
+      "keywords": "linux distribution quiz ubuntu fedora debian arch recommend"
+    },
+    {
+      "name": "Hardware",
+      "icon": "🖥️",
+      "url": "https://hardware.carino.systems/",
+      "desc": "Decode a MAC address to its vendor and bits, jump to any brand's warranty & driver pages, and size a build by the features that matter.",
+      "cta": "Open ↗",
+      "tags": [
+        "systems",
+        "network"
+      ],
+      "keywords": "mac address oui vendor dell service tag warranty drivers specs"
+    },
+    {
+      "name": "Hash",
+      "icon": "#️⃣",
+      "url": "https://hash.carino.systems/",
+      "desc": "Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo.",
+      "cta": "Launch ↗",
+      "tags": [
+        "security",
+        "learn"
+      ],
+      "keywords": "sha256 md5 checksum digest lamport signature crypto"
+    },
+    {
+      "name": "Kanban",
+      "icon": "📅",
+      "url": "https://kanban.carino.systems/",
+      "desc": "Serverless Kanban board for lightweight project and task tracking.",
+      "cta": "Open Board ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "board tasks todo project tracking sprint"
+    },
+    {
+      "name": "Media Suite",
+      "icon": "🎬",
+      "url": "https://media.carino.systems/",
+      "desc": "PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.",
+      "cta": "Launch ↗",
+      "tags": [
+        "media",
+        "files"
+      ],
+      "keywords": "pdf ocr convert image audio ffmpeg signature scan"
+    },
+    {
+      "name": "Metadata",
+      "icon": "📂",
+      "url": "https://metadata.carino.systems",
+      "desc": "Extract and display file metadata — EXIF data, document properties, and hidden fields.",
+      "cta": "Launch ↗",
+      "tags": [
+        "files",
+        "medical"
+      ],
+      "keywords": "exif file magic bytes strip properties"
+    },
+    {
+      "name": "MultiWeb",
+      "icon": "🧱",
+      "url": "https://github.com/MiguelCarino/MultiWeb",
+      "desc": "Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.",
+      "cta": "View on GitHub ↗",
+      "tags": [
+        "systems"
+      ],
+      "keywords": "preview iframe grid wall local dev live reload sites",
+      "local": true
+    },
+    {
+      "name": "Music Wall",
+      "icon": "🎵",
+      "url": "https://music.carino.systems/",
+      "desc": "Curated music collection displayed as an interactive album wall.",
+      "cta": "Open ↗",
+      "tags": [
+        "media"
+      ],
+      "keywords": "albums covers youtube collection discography"
+    },
+    {
+      "name": "Netplan Configurator",
+      "icon": "🕸️",
+      "url": "https://netplan.carino.systems",
+      "desc": "GUI-driven YAML network config editor for Linux servers. Drastically reduces errors.",
+      "cta": "Launch ↗",
+      "tags": [
+        "network",
+        "systems"
+      ],
+      "keywords": "yaml netplan ubuntu ip static dhcp bond vlan"
+    },
+    {
+      "name": "Password",
+      "icon": "🔐",
+      "url": "https://password.carino.systems/",
+      "desc": "Client-side password generator and local vault. Zero server contact — entirely in-browser.",
+      "cta": "Open Vault ↗",
+      "tags": [
+        "security"
+      ],
+      "keywords": "passphrase vault generator credentials"
+    },
+    {
+      "name": "Quote",
+      "icon": "💰",
+      "url": "https://quote.carino.systems",
+      "desc": "Build and send custom service and product quotes to clients.",
+      "cta": "Launch ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "quotation invoice estimate pricing proposal client"
+    },
+    {
+      "name": "SimpleSetup",
+      "icon": "⚙️",
+      "url": "https://setup.carino.systems",
+      "desc": "Automated system configuration for Linux, Windows, and macOS.",
+      "cta": "Launch ↗",
+      "tags": [
+        "systems"
+      ],
+      "keywords": "provisioning bootstrap dotfiles postinstall automation"
+    },
+    {
+      "name": "Software Catalogue",
+      "icon": "📚",
+      "url": "https://software.carino.systems",
+      "desc": "System-agnostic app repository for fleet-wide deployments.",
+      "cta": "Browse ↗",
+      "tags": [
+        "systems",
+        "business"
+      ],
+      "keywords": "apps packages deployment catalog inventory os"
+    },
+    {
+      "name": "Stocks",
+      "icon": "📈",
+      "url": "https://stocks.carino.systems/",
+      "desc": "Markets watchlist, alerts and portfolio monitoring — client-side, with pluggable data providers.",
+      "cta": "Launch ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "markets ticker watchlist portfolio alerts finance"
+    },
+    {
+      "name": "Sync Studio",
+      "icon": "💬",
+      "url": "https://subs.carino.systems/",
+      "desc": "Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.",
+      "cta": "Launch ↗",
+      "tags": [
+        "media",
+        "files"
+      ],
+      "keywords": "subtitles srt ass vtt timing offset resync captions"
+    },
+    {
+      "name": "TelePrompter",
+      "icon": "📺",
+      "url": "https://teleprompter.carino.systems/",
+      "desc": "Clean, speed-controlled script reader for presentations and recordings.",
+      "cta": "Launch ↗",
+      "tags": [
+        "media"
+      ],
+      "keywords": "script reader autocue speech presentation"
+    },
+    {
+      "name": "Time",
+      "icon": "⏰",
+      "url": "https://time.carino.systems",
+      "desc": "Local time, UTC, epoch and ISO, a searchable world-clock with pinned zones, plus live countdowns you can add and share.",
+      "cta": "Launch ↗",
+      "tags": [
+        "network"
+      ],
+      "keywords": "clock timezone utc epoch iso countdown world"
+    },
+    {
+      "name": "Topo",
+      "icon": "🕸️",
+      "url": "https://topo.carino.systems",
+      "desc": "Draw network topologies in the browser — devices, links and addressing on an interactive canvas.",
+      "cta": "Launch ↗",
+      "tags": [
+        "network"
+      ],
+      "keywords": "topology diagram network map documentation"
+    },
+    {
+      "name": "TV",
+      "icon": "📡",
+      "url": "https://tv.carino.systems/",
+      "desc": "Multi-source stream monitoring layout for live broadcast operations.",
+      "cta": "Open ↗",
+      "tags": [
+        "media"
+      ],
+      "keywords": "multiviewer streams broadcast monitoring wall video"
+    },
+    {
+      "name": "Vitae",
+      "icon": "📄",
+      "url": "https://vitae.carino.systems/",
+      "desc": "Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser.",
+      "cta": "Build Resume ↗",
+      "tags": [
+        "business",
+        "files"
+      ],
+      "keywords": "cv resume curriculum pdf print job"
+    }
+  ]
+}
