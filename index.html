@@ -64,7 +64,7 @@
          degraded one. Currency's layout doctrine declares both; so does this. */
       height: 100vh; min-height: 100vh;
       height: 100dvh; min-height: 100dvh; overflow: hidden;
-      display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto;
+      display: grid; grid-template-rows: auto auto minmax(0, 1fr);
       /* minmax(0,1fr), not the implicit `auto`: an auto column grows to the
          widest row's max-content, and the facet strip's max-content is every
          chip laid end to end — which dragged the whole page 30px past the
@@ -91,9 +91,13 @@
       border-bottom: 1px solid var(--border);
       position: relative; z-index: 100;
     }
+    /* Full-bleed, NOT a .shell: the hub's header has to span the screen the way
+       the shared carino-navbar.js does on every other site. Only the content
+       rows below it box into the 1560px column. */
     .header-inner {
       height: 100%; position: relative;
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 0 var(--pad-r) 0 var(--pad-l);
     }
     .header-left { display: flex; align-items: center; gap: 22px; min-width: 0; }
 
@@ -117,6 +121,14 @@
     }
 
     .header-right { display: flex; align-items: center; gap: 12px; }
+    /* Right-cluster slot order, fleet convention, read right-to-left:
+       GitHub + LinkedIn last, language beside them, then status, then
+       this app's own controls furthest from the edge. Set with `order`
+       because carino-lang.js injects itself asynchronously. */
+    .header-right > * { order: 1; }
+    .header-right > .status-toggle { order: 2; }
+    .header-right > #cnLangBtn { order: 3; }
+    .header-right > .social-row { order: 4; }
     .social-row { display: flex; gap: 7px; }
     .icon-btn {
       width: 30px; height: 30px;
@@ -143,7 +155,8 @@
     }
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* Anchored to .header-inner, so it tracks the same right edge as the tiles. */
+    /* Anchored to .header-inner, so it drops from the button that opens it —
+       now the screen's right gutter, since the header is full-bleed. */
     .diag-dropdown {
       position: absolute; top: calc(100% + 9px); right: var(--pad-r); width: 440px; max-width: calc(100vw - 32px);
       max-height: calc(100vh - 86px); max-height: calc(100dvh - 86px); overflow-y: auto;
@@ -356,41 +369,13 @@
        never reflows as you type. */
     mark { background: transparent; color: var(--accent); font-weight: 700; }
 
-    /* ── row 4: the status line ──
-       Where the description went. The claim sits here until you point at
-       something, then the line becomes that tool: what it is, and where it
-       goes. One row, so the tiles keep the height. */
-    .status-outer { border-top: 1px solid var(--border); background: linear-gradient(0deg, #0b0b0b 0%, #070707 100%); }
-    .statusline {
-      height: 40px; display: flex; align-items: center; gap: 18px; min-width: 0;
-      font-size: 0.78rem;
-    }
-    .sl-main { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 10px; }
-    .sl-lede {
-      font-family: 'Red Hat Display', sans-serif; font-weight: 900; font-size: 0.86rem;
-      letter-spacing: 0.01em; white-space: nowrap; flex-shrink: 0;
-      background: linear-gradient(120deg, #fef08a 0%, #eab308 55%, #b45309 100%);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .sl-text { color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-    .sl-text b { color: var(--text); font-weight: 600; }
-    .sl-meta {
-      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
-      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.09em;
-    }
-    .sl-meta b { color: var(--accent); font-weight: 700; }
-    .sl-hints { display: flex; align-items: center; gap: 10px; }
-    .sl-hints span { display: inline-flex; align-items: center; gap: 5px; }
-
     /* ─── NARROW ─────────────────────────────────────────────────
        Nine facets and a search box need ~1400px to sit still. Below that the
-       per-facet counts go first — the status line already reports how many
-       tools the current filter is showing, so nothing is actually lost. */
+       per-facet counts go first: they are the least load-bearing thing in the
+       strip, and the tiles themselves show what the filter kept. */
     @media (max-width: 1400px) { .facet .n { display: none; } }
     @media (max-width: 1080px) {
       .brand-greeting { display: none; }
-      .sl-lede { display: none; }
     }
     @media (max-width: 860px) {
       :root { --shell-pad: 16px; }
@@ -399,7 +384,6 @@
       .search-wrap { flex: 0 0 auto; }
       /* Own row now, so the strip starts at "All" instead of ending at it. */
       .facets { padding: 8px 2px 2px; justify-content: flex-start; }
-      .sl-hints { display: none; }
     }
     @media (max-width: 560px) {
       .brand-name { font-size: 1.15rem; }
@@ -407,7 +391,6 @@
       .header-right { gap: 8px; }
       .status-toggle { padding: 0 10px; }
       .status-toggle span { display: none; }
-      .sl-meta .sl-count { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       .tile, .t-go, .facet { transition: none; }
@@ -417,24 +400,24 @@
     /* ─── SAFE AREAS ──────────────────────────────────────────────
        A notched phone in landscape puts a cutout over the gutter and a home
        indicator over the last row. That matters more here than on a page that
-       scrolls: the status line is pinned to the bottom by construction, so if
-       it sits under the indicator there is no scrolling it back into view. */
+       scrolls: the board is pinned to the bottom by construction, so a tile
+       under the indicator cannot be scrolled back into view. */
     @supports (padding: env(safe-area-inset-left)) {
       :root {
         --pad-l: max(var(--shell-pad), env(safe-area-inset-left));
         --pad-r: max(var(--shell-pad), env(safe-area-inset-right));
       }
-      /* On the row, not the .shell inside it, so the inset colours in as part
-         of the bar rather than leaving a bare strip under it. The board is the
-         1fr row, so what this row takes it gives up. */
-      .status-outer { padding-bottom: env(safe-area-inset-bottom); }
+      /* The board is the last row now, so it carries the bottom inset. It is
+         also the 1fr row, so the space comes out of the tiles' own height —
+         fit() reads the shrunken clientHeight and lays out to match. */
+      .board > .shell { padding-bottom: max(var(--tile-gap), env(safe-area-inset-bottom)); }
     }
   </style>
 </head>
 <body>
 
 <header class="top-header">
-  <div class="shell header-inner">
+  <div class="header-inner">
     <div class="header-left">
       <div class="brand-name"><a href="https://carino.systems/" title="Carino Systems — back to hub">Carino</a> <a class="brand-self" href="./" title="Carino Systems — reload"><span>Systems</span></a></div>
       <div class="header-clock">
@@ -446,7 +429,7 @@
 
     <div class="header-right">
       <div class="social-row">
-        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-btn" title="GitHub">
+        <a href="https://github.com/MiguelCarino/Carino-Systems" target="_blank" class="icon-btn" title="Carino-Systems on GitHub" aria-label="GitHub">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
         </a>
         <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-btn" title="LinkedIn">
@@ -524,20 +507,6 @@
     <div id="grid" role="list"></div>
   </div>
 </main>
-
-<footer class="status-outer">
-  <div class="shell statusline">
-    <div class="sl-main" id="slMain" aria-live="polite"></div>
-    <div class="sl-meta">
-      <span class="sl-count" id="slCount"></span>
-      <span class="sl-hints">
-        <span><b class="kbd">/</b> <span data-i18n>find</span></span>
-        <span><b class="kbd">&uarr;&darr;</b> <span data-i18n>move</span></span>
-        <span><b class="kbd">&crarr;</b> <span data-i18n>open</span></span>
-      </span>
-    </div>
-  </div>
-</footer>
 
 <script>
 /* ─────────────────────────────────────────────────────────────────────
@@ -725,26 +694,6 @@ function applyDensity(ch) {
   grid.classList.toggle('tiny', ch < 56);
 }
 
-/* ── the status line ──
-   The claim, until you point at a tool; then that tool. */
-function statusDefault() {
-  $('slMain').innerHTML =
-    `<span class="sl-lede">${esc(T('Open solutions for everyone.'))}</span>` +
-    `<span class="sl-text">${esc(T('Tailored support for anyone'))}</span>`;
-}
-function statusFor(x) {
-  const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
-  $('slMain').innerHTML =
-    `<span class="sl-lede">${esc(x.name)}</span>` +
-    `<span class="sl-text"><b>${esc(cats)}${x.local ? ' · ' + esc(T('Runs locally')) : ''}</b> — ${esc(T(x.desc))}</span>`;
-}
-function renderCount() {
-  const n = shown.length;
-  $('slCount').innerHTML = (n === TOOLS.length)
-    ? T('<b>{n} tools</b> in {c} categories').replace('{n}', TOOLS.length).replace('{c}', TAGS.length)
-    : T('{n} of {m} tools').replace('{n}', `<b>${n}</b>`).replace('{m}', TOOLS.length);
-}
-
 /* ── state ──
    #medical is a facet, #/dicom is a query, #medical/dicom is both. */
 const unesc = (s) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -772,8 +721,6 @@ function render() {
   $('searchWrap').classList.toggle('has-text', !!query);
   renderFacets();
   renderGrid();
-  renderCount();
-  statusDefault();
 }
 // i18n.js re-runs this after a fleet-wide language switch.
 window.renderTools = () => { if (TOOLS.length) render(); };
@@ -811,17 +758,6 @@ function boot(data) {
   });
 
   const grid = $('grid');
-  grid.addEventListener('pointerover', (e) => {
-    const el = e.target.closest('.tile');
-    if (el) statusFor(shown[+el.dataset.i]);
-  });
-  grid.addEventListener('pointerleave', statusDefault);
-  grid.addEventListener('focusin', (e) => {
-    const el = e.target.closest('.tile');
-    if (el) statusFor(shown[+el.dataset.i]);
-  });
-  grid.addEventListener('focusout', statusDefault);
-
   const q = $('q');
   q.addEventListener('input', () => setState(tag, q.value));
   $('qClear').addEventListener('click', () => { setState(tag, ''); q.focus(); });

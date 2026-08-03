@@ -34,8 +34,10 @@ file. Both the label and the blurb are translated the same way.
 
 ## Layout
 
-One screen. The page is a four-row grid the height of the viewport — header,
-command bar, tiles, status line — and nothing outside a tile ever scrolls.
+One screen. The page is a three-row grid the height of the viewport — header,
+command bar, tiles — and nothing outside a tile ever scrolls. The header is
+full-bleed like the shared navbar on every other site in the fleet; only the two
+rows below it box into the content column.
 
 The tile grid sizes itself. Given the box the tiles have and how many there are,
 `fit()` tries every column count and keeps the one whose cells land closest to a
@@ -53,8 +55,8 @@ name, the name wrapping to two lines. Only when nothing legible fits at all does
 the grid scroll inside itself; the page still does not.
 
 Categories are filters on that one board, not a place you navigate to, so there is
-no second view to come back from. Descriptions live in the status line: it carries
-the claim until you point at a tool, then it becomes that tool.
+no second view to come back from. Each tile carries its own description, so there
+is nothing to read anywhere else.
 
 State lives in the hash: `#medical` is a facet, `#/dicom` is a query,
 `#medical/dicom` is both.

@@ -18,7 +18,13 @@ DIAG_SRC="Topo/carino-diag.js"
 GROUPA="Branding CVE Quote Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
-Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency"
+Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
+Media Fonts"
+
+# Project pages that live in a subfolder of a non-web repo but still run the
+# shared navbar. Same treatment as GROUPA — they were drifting because nothing
+# copied to them.
+SUBSITES="Carino-PACS/docs Custom-Images/docs"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 BESPOKE="Asobi Retina DICOM-editor Learn MultiWeb MusicGrid TV"
@@ -33,7 +39,7 @@ DIAG="Topo NetplanConfig Hardware"
 echo "Propagating shared navbar assets (local copies, no CDN)…"
 # -ef guards skip copying a canonical file onto itself (CVE is the navbar source
 # but also carries the shared navbar; a plain cp of a file onto itself errors).
-for d in $GROUPA; do
+for d in $GROUPA $SUBSITES; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }
   [ "$d/carino-navbar.js" -ef "$NAV_SRC" ] || cp "$NAV_SRC" "$d/carino-navbar.js"
   [ "$d/carino-clock.js" -ef "$CLOCK_SRC" ] || cp "$CLOCK_SRC" "$d/carino-clock.js"
@@ -53,9 +59,10 @@ done
 # Carino-Systems (this repo) already holds the canonical carino-clock.js, and
 # its navbar is inline (it owns the full Sys. Status dropdown, hardware rows
 # included — carino-diag.js is the trimmed network-only port of it).
-# Carino-PACS ships a deliberately self-contained inline navbar — left untouched.
+# Carino-PACS/pacs/web ships a deliberately self-contained navbar (it runs
+# offline, so the clock is inlined) — hand-maintained, left untouched here.
 #
 # Retired, deliberately absent: pentarch, AssemblyRoadmap and MetadataViewer
 # never existed under those names; ip, Multisearch-index, ProcessFlow and
 # SimpleTranscoding were removed from GitHub.
-echo "Done. ($(echo $GROUPA | wc -w) group-A + $(echo $BESPOKE | wc -w) bespoke + $(echo $DIAG | wc -w) diag)"
+echo "Done. ($(echo $GROUPA $SUBSITES | wc -w) group-A + $(echo $BESPOKE | wc -w) bespoke + $(echo $DIAG | wc -w) diag)"
