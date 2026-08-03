@@ -34,24 +34,34 @@ file. Both the label and the blurb are translated the same way.
 
 ## Layout
 
-A line about why any of this exists with the search box beside it, then the
-browser: every category down one side, the tools of whichever one is open along
-the other. Whatever does not fit on a row wraps onto the next one.
+One screen. The page is a four-row grid the height of the viewport — header,
+command bar, tiles, status line — and nothing outside a tile ever scrolls.
 
-Both columns share one height, computed from the category that needs the most
-rows at the current width — so the rows do not resize under the pointer as the
-rotation walks, and the page does not grow and shrink at the bottom. The eight
-category rows divide that height between them, which is what makes them tall.
+The tile grid sizes itself. Given the box the tiles have and how many there are,
+`fit()` tries every column count and keeps the one whose cells land closest to a
+readable proportion, nudged toward layouts that leave few empty cells in the last
+row and away from ones that waste horizontal space. Cells are capped in both
+directions — past a point a bigger card is not a better one, it is a card with a
+hole in it — so the tracks are `minmax(0, MAX)`: they fill the space when there is
+little and stop growing when there is plenty, and the board centres itself in the
+leftovers.
 
-The selection walks to the next category every five seconds, so standing still
-still shows you the whole fleet. The rule under the category name fills as it
-counts down — an unannounced rotation reads as the page glitching. It pauses
-under the pointer, while the search box is in use, when the tab is hidden, and
-for `prefers-reduced-motion`; picking a category by hand stops it for good.
+As a cell gets shorter it drops the least useful thing it carries — the call to
+action, then a line of description at a time, then the description — rather than
+clipping text. At phone density the whole fleet still fits: 3 columns of icon +
+name, the name wrapping to two lines. Only when nothing legible fits at all does
+the grid scroll inside itself; the page still does not.
 
-State lives in the hash: `#medical` for a category, `#/dicom` for a search. The
-rotation never writes to the URL — it is ambient, and history should record what
-you chose.
+Categories are filters on that one board, not a place you navigate to, so there is
+no second view to come back from. Descriptions live in the status line: it carries
+the claim until you point at a tool, then it becomes that tool.
+
+State lives in the hash: `#medical` is a facet, `#/dicom` is a query,
+`#medical/dicom` is both.
+
+Keyboard: `/` or `Ctrl`/`⌘-K` for the search box, arrows to walk the grid (up and
+down jump a row, which is only knowable after the fit), `Enter` to open, `Esc` to
+clear.
 
 ## License
 

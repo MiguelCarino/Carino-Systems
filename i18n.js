@@ -78,6 +78,11 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Herramientas',
         'Search tools…': 'Buscar herramientas…',
+        // Facet rail + status line
+        'All': 'Todo',
+        'find': 'buscar',
+        'move': 'mover',
+        'open': 'abrir',
         'Medical': 'Medicina',
         'Files': 'Archivos',
         'Security': 'Seguridad',
@@ -187,6 +192,11 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Ferramentas',
         'Search tools…': 'Buscar ferramentas…',
+        // Facet rail + status line
+        'All': 'Tudo',
+        'find': 'buscar',
+        'move': 'mover',
+        'open': 'abrir',
         'Medical': 'Medicina',
         'Files': 'Arquivos',
         'Security': 'Segurança',
@@ -296,6 +306,11 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'ツール',
         'Search tools…': 'ツールを検索…',
+        // Facet rail + status line
+        'All': 'すべて',
+        'find': '検索',
+        'move': '移動',
+        'open': '開く',
         'Medical': '医療',
         'Files': 'ファイル',
         'Security': 'セキュリティ',
@@ -405,6 +420,11 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Инструменты',
         'Search tools…': 'Поиск инструментов…',
+        // Facet rail + status line
+        'All': 'Все',
+        'find': 'поиск',
+        'move': 'выбор',
+        'open': 'открыть',
         'Medical': 'Медицина',
         'Files': 'Файлы',
         'Security': 'Безопасность',

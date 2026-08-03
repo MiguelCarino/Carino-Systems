@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="icon" href="logo.webp">
   <title>Carino Systems</title>
   <link rel="stylesheet" href="fonts/carino-fonts.css">
   <style>
     :root {
-      /* Palette */
+      /* Palette — mirrors branding.carino.systems */
       --bg-header:      #050505;
       --bg-card:        #050505;
       --accent:         #eab308; /* Sharp Gold */
@@ -19,84 +19,123 @@
       --text:           #ffffff;
       --text-sec:       #a3a3a3;
       --text-muted:     #666666;
-      
-      /* Stage (black & gold) */
-      --bg-stage-grad:  radial-gradient(1200px 520px at 50% -12%, rgba(234,179,8,0.08) 0%, transparent 60%), linear-gradient(180deg, #0b0b0b 0%, #050505 100%);
-      --text-stage-desc:  #a3a3a3;
 
       /* One gutter for the whole page: the shell, and anything that has to
          line up with its right edge from outside it (the diagnostics panel). */
-      --shell-pad:      30px;
+      --shell-pad:      26px;
+      /* Every row of the page is a .shell, so the notch inset is folded into
+         the gutter once, here, rather than per row. --shell-pad is re-declared
+         in the narrow media queries and custom properties resolve at use time,
+         so these follow it down without being restated. */
+      --pad-l:          var(--shell-pad);
+      --pad-r:          var(--shell-pad);
 
-      /* Card rows are a fixed height so the shared column height is arithmetic
-         rather than a measurement that changes with the longest description. */
-      --card-h:         214px;
-      --card-gap:       18px;
+      --tile-gap:       10px;
+      --desc-lines:     2;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root { scrollbar-width: thin; scrollbar-color: #3a3a3a transparent; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 6px; }
 
+    /* ─────────────────────────────────────────────────────────────
+       ONE SCREEN
+
+       The hub is a way in, not a document. It used to be a hero, a
+       search band, and a category carousel that walked itself every
+       five seconds — three screens of chrome to reach a link, and a
+       page that moved the thing you were reading.
+
+       Now the whole fleet is on the glass at once. The page is a
+       four-row grid the height of the viewport — header, command bar,
+       tiles, status line — and nothing outside a tile ever scrolls.
+       The tile grid sizes itself: JS picks the column/row count whose
+       cells land closest to a readable proportion and fills the space
+       exactly, so filtering to four tools makes four big cards rather
+       than four cards and a hole.
+       ───────────────────────────────────────────────────────────── */
+
+    html { height: 100%; }
     body {
-      background: var(--bg-header); /* Default back */
+      /* 100vh first: on an engine that does not know dvh the height would go
+         unset while overflow:hidden still applied — a clipped page, not a
+         degraded one. Currency's layout doctrine declares both; so does this. */
+      height: 100vh; min-height: 100vh;
+      height: 100dvh; min-height: 100dvh; overflow: hidden;
+      display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto;
+      /* minmax(0,1fr), not the implicit `auto`: an auto column grows to the
+         widest row's max-content, and the facet strip's max-content is every
+         chip laid end to end — which dragged the whole page 30px past the
+         viewport and clipped the last tile column. */
+      grid-template-columns: minmax(0, 1fr);
+      background: var(--bg-header);
       color: var(--text);
       font-family: 'IBM Plex Sans', sans-serif;
-      min-height: 100vh;
+      /* A single wash of gold behind everything, so the black is not flat. */
+      background-image: radial-gradient(1100px 420px at 50% -18%, rgba(234,179,8,0.07) 0%, transparent 62%);
+      background-repeat: no-repeat;
     }
 
-    /* The bar is full-bleed; its contents sit in the same .shell as the cards,
-       so the brand lines up with the first column instead of hanging 30px off
-       the edge of a 2560px screen while the grid stays centred. */
+    .shell { width: 100%; max-width: 1560px; margin: 0 auto; padding: 0 var(--pad-r) 0 var(--pad-l); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+
+    /* ── row 1: the fleet header (brand · clock · social · diagnostics) ── */
     .top-header {
-      height: 70px;
-      background: linear-gradient(180deg, #0f0f0f 0%, #050505 100%);
+      height: 60px;                       /* the shared carino-navbar.js height */
+      background: linear-gradient(180deg, #0f0f0f 0%, #070707 100%);
       border-bottom: 1px solid var(--border);
-      position: relative;
-      z-index: 100;
+      position: relative; z-index: 100;
     }
     .header-inner {
       height: 100%; position: relative;
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
+    .header-left { display: flex; align-items: center; gap: 22px; min-width: 0; }
 
-    .header-left { display: flex; align-items: center; gap: 30px; }
-    
     .brand-name {
       font-family: 'Red Hat Display', sans-serif;
-      font-size: 1.8rem; font-weight: 900; line-height: 1;
+      font-size: 1.45rem; font-weight: 900; line-height: 1; white-space: nowrap;
       background: linear-gradient(130deg, #fef08a 0%, #eab308 50%, #b45309 100%);
-      -webkit-background-clip: text;
+      -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
     .brand-name a { color: inherit; text-decoration: none; }
     .brand-name span { -webkit-text-fill-color: #ffffff; transition: text-shadow 0.2s; }
     .brand-self:hover span { text-shadow: 0 0 14px var(--accent-dim); }
 
-    .header-clock { display: flex; align-items: baseline; gap: 10px; border-left: 1px solid var(--border); padding-left: 30px; }
-    .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: 1.2rem; color: var(--text); font-weight: 700; }
-    .clock-tz { font-size: 0.65rem; color: var(--bg-header); background: var(--accent); padding: 2px 6px; border-radius: 3px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
-    .brand-greeting { font-size: 0.75rem; color: var(--text-sec); font-family: 'IBM Plex Mono', monospace; margin-left: 10px;}
+    .header-clock { display: flex; align-items: baseline; gap: 10px; border-left: 1px solid var(--border); padding-left: 22px; min-width: 0; }
+    .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: 1.05rem; color: var(--text); font-weight: 700; }
+    .clock-tz { font-size: 0.62rem; color: var(--bg-header); background: var(--accent); padding: 2px 6px; border-radius: 3px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+    .brand-greeting {
+      font-size: 0.72rem; color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
+      margin-left: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
 
-    .header-right { display: flex; align-items: center; gap: 15px; }
-    .social-row { display: flex; gap: 8px; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .social-row { display: flex; gap: 7px; }
     .icon-btn {
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       border: 1px solid var(--border); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       color: var(--text-muted); transition: 0.2s; text-decoration: none; background: transparent; cursor: pointer;
     }
     .icon-btn:hover { border-color: var(--accent); color: var(--bg-header); background: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px var(--accent-glow); }
-    .icon-btn svg { width: 15px; height: 15px; }
+    .icon-btn svg { width: 14px; height: 14px; }
 
     .status-toggle {
       display: flex; align-items: center; gap: 8px;
       background: transparent; border: 1px solid var(--border);
       color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
-      padding: 0 16px; height: 32px; border-radius: 4px; cursor: pointer; transition: 0.2s;
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0 14px; height: 30px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
     .status-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-faint); }
-    
+
     .pulse-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--accent); box-shadow: 0 0 8px var(--accent);
@@ -104,10 +143,10 @@
     }
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    /* Anchored to .header-inner, so it tracks the same right edge as the grid. */
+    /* Anchored to .header-inner, so it tracks the same right edge as the tiles. */
     .diag-dropdown {
-      position: absolute; top: calc(100% + 10px); right: var(--shell-pad); width: 440px; max-width: calc(100vw - 40px);
-      max-height: calc(100vh - 100px); overflow-y: auto;
+      position: absolute; top: calc(100% + 9px); right: var(--pad-r); width: 440px; max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 86px); max-height: calc(100dvh - 86px); overflow-y: auto;
       background: var(--bg-card); border: 1px solid var(--accent-dim);
       padding: 20px; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
       opacity: 0; pointer-events: none; transform: translateY(-10px);
@@ -130,15 +169,14 @@
     .reach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 4px; margin-bottom: 8px; }
     .reach-cell { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 3px; padding: 3px 5px; min-width: 0; cursor: default; }
     .reach-cell .lbl { flex: 1 1 auto; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    /* Latency + resolved IP stay in the DOM — the PNG export prints them full-size — but the on-screen card shows only the dot + name. */
     .reach-cell .ms, .reach-cell .ip { display: none; }
     @media (max-width: 480px) { .reach-grid { grid-template-columns: repeat(3, 1fr); } .reach-cell { padding: 4px 5px; } .reach-cell .lbl { font-size: 0.6rem; } }
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-    .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }          /* reachable & responsive */
-    .status-dot.slow    { background: #ffffff; box-shadow: 0 0 4px rgba(255,255,255,0.6); } /* reachable but high latency */
+    .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
+    .status-dot.slow    { background: #ffffff; box-shadow: 0 0 4px rgba(255,255,255,0.6); }
     .status-dot.fail    { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
-    .status-dot.unknown { background: #666666; }                                       /* no connection */
+    .status-dot.unknown { background: #666666; }
     .status-dot.scanning { background: #a3a3a3; animation: pulse 1s infinite; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
@@ -156,201 +194,157 @@
     .complete-test-btn { text-decoration: none; margin-top: 8px; border-color: var(--accent-dim); color: var(--accent); background: var(--accent-faint); }
     .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
 
-    /* ─────────────────────────────────────────────────────────────
-       INDEX
-
-       A line about why any of this exists, a search box, and then a
-       browser: the categories down one side, the tools of whichever
-       one is open along the other. What does not fit on a row wraps to
-       the next one, and the selection walks to the next category on its
-       own every five seconds — announced by the rule under the category
-       name filling as it counts down — so standing still on the page
-       still shows you the whole fleet.
-
-       Tags, not sections. A tool that is honestly two things gets two
-       and appears under both — Metadata is a file tool and a medical
-       one, and an exclusive split made it lose that argument.
-       ───────────────────────────────────────────────────────────── */
-
-    .shell { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 var(--shell-pad); }
-    .sr-only {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    /* ── row 2: the command bar ──
+       The only two controls on the page — type, or pick a facet — on one
+       line. Categories are filters here, not a place you navigate to, so
+       there is no second view to come back from. */
+    .bar-outer { border-bottom: 1px solid var(--border); background: rgba(9,9,9,0.6); }
+    .bar {
+      height: 54px; display: flex; align-items: center; gap: 14px; min-width: 0;
     }
-    .hidden { display: none !important; }
 
-    /* ── the reason, before the machinery ── */
-    .lede-outer { background: var(--bg-stage-grad); border-bottom: 1px solid var(--border); }
-    /* The claim and the way in, on one line: the search box was a band of
-       its own below, which put a horizontal rule between the reason someone
-       is here and the only control that acts on it. */
-    .lede {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 28px 56px; flex-wrap: wrap; padding: 52px var(--shell-pad) 48px;
-    }
-    .lede-copy { flex: 1 1 460px; }
-    .lede-find { flex: 0 1 440px; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
-    .lede h2 {
-      font-family: 'Red Hat Display', sans-serif; font-size: 2.2rem; font-weight: 900;
-      line-height: 1.28; letter-spacing: -0.01em;
-      background: linear-gradient(130deg, #fef08a 0%, #eab308 55%, #b45309 100%);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    /* The second line answers the first, so it steps out of the gold. */
-    .lede .lede-2 { -webkit-text-fill-color: var(--text); color: var(--text); }
-
-    /* ── search ── */
     .search-wrap {
-      position: relative; display: flex; align-items: center; gap: 12px;
-      background: #0d0d0d; border: 1px solid var(--border); border-radius: 8px;
-      padding: 0 14px; height: 50px; transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative; display: flex; align-items: center; gap: 10px; flex: 0 1 300px;
+      background: #0d0d0d; border: 1px solid var(--border); border-radius: 7px;
+      padding: 0 12px; height: 34px; transition: border-color 0.2s, box-shadow 0.2s;
     }
     .search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint); }
-    .search-wrap > svg { width: 17px; height: 17px; color: var(--text-muted); flex-shrink: 0; }
+    .search-wrap > svg { width: 15px; height: 15px; color: var(--text-muted); flex-shrink: 0; }
     .search-wrap:focus-within > svg { color: var(--accent); }
     #q {
       flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
-      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 0.95rem;
+      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 0.86rem;
     }
     #q::placeholder { color: var(--text-muted); }
-    .kbd-hint {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--text-muted);
-      border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; flex-shrink: 0;
+    #q::-webkit-search-cancel-button { display: none; }
+    .kbd {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; flex-shrink: 0; line-height: 1.5;
     }
-    .search-wrap:focus-within .kbd-hint, .search-wrap.has-text .kbd-hint { display: none; }
+    .search-wrap:focus-within .kbd, .search-wrap.has-text .kbd { display: none; }
     .q-clear {
       display: none; background: transparent; border: 0; cursor: pointer; flex-shrink: 0;
-      color: var(--text-muted); font-size: 1.25rem; line-height: 1; padding: 0 2px;
+      color: var(--text-muted); font-size: 1.2rem; line-height: 1; padding: 0 2px;
     }
     .q-clear:hover { color: var(--accent); }
     .search-wrap.has-text .q-clear { display: block; }
-    .toolbar-meta {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
-      text-transform: uppercase; letter-spacing: 0.1em; padding-left: 2px;
-    }
-    .toolbar-meta b { color: var(--text-sec); font-weight: 700; }
 
-    /* ── the browser: categories beside their tools ── */
-    /* Both columns are one height — the height the fullest category needs,
-       measured once and held — so the rows do not resize under the pointer
-       every five seconds and the page does not grow and shrink at the bottom
-       as the rotation moves between a four-tool and a nine-tool category. */
-    .browse { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 26px; padding: 26px 0 70px; }
-    /* On the columns themselves: .browse is padded, and a min-height there is
-       a border-box figure, so the columns would come out 96px short. */
-    .cat-list, .stage-col { min-height: var(--browse-h, 0); }
+    /* The facets scroll sideways inside their own strip when they run out of
+       room. The page itself never does. */
+    .facets {
+      display: flex; align-items: center; justify-content: flex-end; gap: 5px;
+      flex: 1 1 auto; min-width: 0;
+      overflow-x: auto; scrollbar-width: none; padding: 4px 2px;
+    }
+    .facets::-webkit-scrollbar { display: none; }
+    .facet {
+      display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
+      background: transparent; border: 1px solid var(--border); border-radius: 999px;
+      color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
+      padding: 0 10px; height: 30px; cursor: pointer; transition: 0.16s; white-space: nowrap;
+    }
+    .facet:hover { color: var(--text); border-color: #3d3d3d; background: #101010; }
+    .facet svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .facet .n {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--text-muted);
+      transition: color 0.16s;
+    }
+    .facet.on {
+      color: var(--bg-header); background: var(--accent); border-color: var(--accent);
+      box-shadow: 0 2px 14px var(--accent-glow);
+    }
+    .facet.on .n { color: rgba(5,5,5,0.65); }
+    .facet:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* The rows share the column: eight of them divide whatever height the
-       cards asked for, which is what makes them tall. */
-    .cat-list { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--border); }
-    .cat-list .cat-item { flex: 1 1 0; min-height: 52px; }
-    .cat-item {
-      position: relative; display: flex; align-items: center; gap: 11px;
-      background: transparent; border: 0; border-left: 2px solid transparent;
-      margin-left: -1px; padding: 16px 15px; cursor: pointer; text-align: left;
-      color: var(--text-muted); font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.87rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    /* ── row 3: every tool, at once ── */
+    .board { min-height: 0; display: flex; }
+    /* The vertical breathing room lives on the wrapper, never on #grid: the
+       fit reads grid.clientHeight, and padding there would silently inflate it. */
+    .board > .shell { display: flex; min-width: 0; padding: var(--tile-gap) var(--pad-r) var(--tile-gap) var(--pad-l); }
+    #grid {
+      flex: 1 1 auto; min-width: 0; min-height: 0;
+      display: grid; gap: var(--tile-gap);
+      /* Tracks are capped, not free — see fit(). When a filter leaves four
+         tools on a 27" screen the block centres itself instead of inflating
+         four cards to the height of the window. */
+      justify-content: center; align-content: center; overflow: hidden;
     }
-    .cat-item:hover { color: var(--text); background: #0d0d0d; }
-    .cat-item.on { color: var(--accent); border-left-color: var(--accent); background: #0f0d07; }
-    .cat-item svg { width: 15px; height: 15px; flex-shrink: 0; }
-    .cat-item .n {
-      margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
-      color: var(--text-muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px;
-    }
-    .cat-item.on .n { color: var(--accent); border-color: var(--accent-dim); }
-    /* Drains over the dwell time, so the jump to the next category is
-       something the page announced rather than something that happened to you. */
-    .cat-item .tick {
-      position: absolute; left: -2px; top: 0; width: 2px; background: var(--accent);
-      box-shadow: 0 0 6px var(--accent-glow);
-    }
-    .cat-item.on.timing .tick { animation: tick var(--dwell) linear forwards; }
-    @keyframes tick { from { height: 0; } to { height: 100%; } }
+    /* Only ever reached when the viewport is too small for 31 legible cells
+       — a phone in landscape, say. The grid scrolls; the page still does not. */
+    #grid.overflowing { overflow-y: auto; align-content: start; }
 
-    .stage-head {
-      position: relative; display: flex; align-items: baseline; justify-content: space-between;
-      gap: 16px; padding: 10px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+    .tile {
+      position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0;
+      background: #0c0c0c; border: 1px solid var(--border); border-radius: 10px;
+      padding: 11px 13px; overflow: hidden; text-decoration: none; color: inherit;
+      transition: border-color 0.18s, background 0.18s, transform 0.18s, box-shadow 0.18s;
     }
-    /* The countdown to the next category, drawn along the rule under its name.
-       A rotation that arrives unannounced reads as the page glitching; this is
-       the page saying it is about to move, with enough warning to stop it. */
-    .stage-head::after {
-      content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0;
-      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
-      box-shadow: 0 0 8px var(--accent-glow);
+    .tile::after {
+      /* The gold edge only exists when you are on the tile. */
+      content: ''; position: absolute; inset: 0 auto 0 0; width: 2px;
+      background: var(--accent); opacity: 0; transition: opacity 0.18s;
     }
-    .stage-head.timing::after { animation: countdown var(--dwell) linear forwards; }
-    @keyframes countdown { from { width: 0; } to { width: 100%; } }
-    /* The blurb yields on a narrow row, and never wraps the heading. */
-    .stage-title { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
-    .stage-title h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); white-space: nowrap; }
-    .stage-title span {
-      font-size: 0.85rem; color: var(--text-sec);
+    .tile:hover, .tile:focus-visible {
+      border-color: var(--accent-dim); background: linear-gradient(150deg, #17120a 0%, #0a0a0a 70%);
+      transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.55), 0 0 18px var(--accent-glow);
+      outline: none;
+    }
+    .tile:hover::after, .tile:focus-visible::after { opacity: 1; }
+
+    .t-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .t-icon { font-size: 1.05rem; line-height: 1.2; flex-shrink: 0; }
+    .t-name {
+      font-size: 0.86rem; font-weight: 700; color: var(--text); line-height: 1.25;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+    }
+    .t-local {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 6px var(--accent); flex-shrink: 0; margin-left: auto;
+    }
+    .t-desc {
+      margin-top: 5px; font-size: 0.73rem; color: var(--text-sec); line-height: 1.45;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--desc-lines);
+      overflow: hidden; min-height: 0;
+    }
+    .t-foot {
+      margin-top: auto; padding-top: 7px; display: flex; align-items: center;
+      justify-content: space-between; gap: 8px; min-width: 0;
+    }
+    .t-cat {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; text-transform: uppercase;
+      letter-spacing: 0.09em; color: var(--text-muted);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    .t-go {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: var(--accent);
+      opacity: 0; transform: translateX(-3px); transition: 0.18s; flex-shrink: 0;
+    }
+    .tile:hover .t-go, .tile:focus-visible .t-go { opacity: 1; transform: none; }
 
-    /* Whatever does not fit on the first row wraps onto the next one. Rows,
-       not a slider: the tools of a category are a set, not a queue, and a
-       card half off the right edge is a card nobody clicks. */
-    .stage-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      grid-auto-rows: var(--card-h); gap: var(--card-gap); animation: swap 0.22s ease;
+    /* Cells get shorter as the fleet gets denser or the window gets smaller.
+       Rather than let text spill, each step drops the least useful thing. */
+    #grid.no-foot .t-foot { display: none; }
+    #grid.no-desc .t-desc { display: none; }
+    /* At phone density a 31-tool wall gives each name about 100px. An ellipsis
+       after "Software Cat…" is not a label, so down here the name wraps to two
+       lines instead of being cut. */
+    #grid.tiny .tile { padding: 8px 9px; justify-content: center; }
+    #grid.tiny .t-head { align-items: flex-start; gap: 6px; }
+    #grid.tiny .t-icon { font-size: 0.9rem; }
+    #grid.tiny .t-name {
+      font-size: 0.66rem; line-height: 1.22; white-space: normal;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
     }
-    @keyframes swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-    /* ── cards ── */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; padding: 4px 0 64px; }
-    .card {
-      background: #0d0d0d;
-      border: 1px solid var(--border); padding: 24px; border-radius: 12px;
-      transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
-      display: flex; flex-direction: column; justify-content: space-between;
-      text-decoration: none; color: inherit; overflow: hidden;
-    }
-    .card:hover {
-      border-color: var(--accent); background: linear-gradient(145deg, #17120a 0%, #0b0b0b 100%);
-      transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 22px var(--accent-glow);
-    }
-    .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .c-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .c-icon { font-size: 1.3rem; line-height: 1; }
-    .c-title { font-size: 1.02rem; font-weight: 700; color: var(--text); }
-    /* Clamped, because the rows are uniform: one forty-word description must
-       not set the height of every card in the grid. */
-    .c-desc {
-      font-size: 0.82rem; color: var(--text-sec); line-height: 1.6;
-      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
-    }
-    .c-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
-    .c-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .c-tag {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--text-muted);
-      border: 1px solid var(--border); border-radius: 3px; padding: 2px 6px;
-    }
-    .c-tag.local { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-faint); }
-    .c-link {
-      font-size: 0.7rem; color: var(--accent); font-family: 'IBM Plex Mono', monospace;
-      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; white-space: nowrap;
-    }
-    /* The matched run inside a title or description — colour only, so the
-       text never reflows as you type. */
-    mark { background: transparent; color: var(--accent); font-weight: 700; }
-
-    .results-head {
-      padding: 6px 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
-      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
-    }
-    .results-head b { color: var(--accent); font-weight: 700; }
 
     .empty {
-      grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted);
-      border: 1px dashed var(--border); border-radius: 12px;
+      grid-column: 1 / -1; grid-row: 1 / -1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px; text-align: center;
+      color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px; padding: 24px;
     }
-    .empty-big { font-size: 1.7rem; margin-bottom: 12px; opacity: 0.5; }
-    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; margin-bottom: 18px; }
+    .empty-big { font-size: 1.9rem; opacity: 0.45; }
+    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+    .empty code { font-family: 'IBM Plex Mono', monospace; color: var(--accent); }
     .empty button {
       background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
       font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase;
@@ -358,54 +352,82 @@
     }
     .empty button:hover { background: var(--accent-faint); border-color: var(--accent); }
 
-    /* ─── NARROW ─────────────────────────────────────
-       The categories stop being a column and become a strip of their own
-       above the tools. The old layout hid every text class under 900px and
-       left five unlabelled icons; labels survive here. */
-    @media (max-width: 980px) {
+    /* The matched run inside a name or description — colour only, so the text
+       never reflows as you type. */
+    mark { background: transparent; color: var(--accent); font-weight: 700; }
+
+    /* ── row 4: the status line ──
+       Where the description went. The claim sits here until you point at
+       something, then the line becomes that tool: what it is, and where it
+       goes. One row, so the tiles keep the height. */
+    .status-outer { border-top: 1px solid var(--border); background: linear-gradient(0deg, #0b0b0b 0%, #070707 100%); }
+    .statusline {
+      height: 40px; display: flex; align-items: center; gap: 18px; min-width: 0;
+      font-size: 0.78rem;
+    }
+    .sl-main { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 10px; }
+    .sl-lede {
+      font-family: 'Red Hat Display', sans-serif; font-weight: 900; font-size: 0.86rem;
+      letter-spacing: 0.01em; white-space: nowrap; flex-shrink: 0;
+      background: linear-gradient(120deg, #fef08a 0%, #eab308 55%, #b45309 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sl-text { color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .sl-text b { color: var(--text); font-weight: 600; }
+    .sl-meta {
+      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.09em;
+    }
+    .sl-meta b { color: var(--accent); font-weight: 700; }
+    .sl-hints { display: flex; align-items: center; gap: 10px; }
+    .sl-hints span { display: inline-flex; align-items: center; gap: 5px; }
+
+    /* ─── NARROW ─────────────────────────────────────────────────
+       Nine facets and a search box need ~1400px to sit still. Below that the
+       per-facet counts go first — the status line already reports how many
+       tools the current filter is showing, so nothing is actually lost. */
+    @media (max-width: 1400px) { .facet .n { display: none; } }
+    @media (max-width: 1080px) {
+      .brand-greeting { display: none; }
+      .sl-lede { display: none; }
+    }
+    @media (max-width: 860px) {
+      :root { --shell-pad: 16px; }
       .header-clock { display: none; }
-      :root { --shell-pad: 18px; }
-      .lede { padding: 38px var(--shell-pad) 34px; gap: 22px; }
-      .lede h2 { font-size: 1.5rem; }
-      .lede-copy, .lede-find { flex: 1 1 100%; min-width: 0; }
-      /* Stacked: nothing to match heights with, so the shared height is off. */
-      .browse { grid-template-columns: 1fr; gap: 18px; }
-      .cat-list, .stage-col { min-height: 0; }
-      .stage-grid { grid-auto-rows: auto; }
-      .cat-list .cat-item { flex: 0 0 auto; min-height: 0; }
-      .cat-list {
-        flex-direction: row; overflow-x: auto; border-left: 0; border-bottom: 1px solid var(--border);
-        scrollbar-width: none; padding-bottom: 1px;
-      }
-      .cat-list::-webkit-scrollbar { display: none; }
-      .cat-item {
-        flex: 0 0 auto; margin-left: 0; border-left: 0; border-bottom: 2px solid transparent;
-        margin-bottom: -1px; padding: 11px 14px;
-      }
-      .cat-item.on { border-left-color: transparent; border-bottom-color: var(--accent); }
-      .cat-item .n { margin-left: 8px; }
-      .cat-item .tick { left: 0; top: auto; bottom: -2px; width: 0; height: 2px; }
-      .cat-item.on.timing .tick { animation: tickx var(--dwell) linear forwards; }
-      @keyframes tickx { from { width: 0; } to { width: 100%; } }
-      .stage-grid, .grid { grid-template-columns: 1fr; }
-      .browse { padding-top: 18px; }
+      .bar { height: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0; }
+      .search-wrap { flex: 0 0 auto; }
+      /* Own row now, so the strip starts at "All" instead of ending at it. */
+      .facets { padding: 8px 2px 2px; justify-content: flex-start; }
+      .sl-hints { display: none; }
     }
     @media (max-width: 560px) {
-      /* The brand wrapped to two lines inside a 70px bar. Everything on the
-         right gives up what it can spare first — the status button keeps its
-         pulsing dot and drops the word — before the wordmark shrinks. */
-      .brand-name { font-size: 1.15rem; white-space: nowrap; }
+      .brand-name { font-size: 1.15rem; }
       .header-left { gap: 12px; }
       .header-right { gap: 8px; }
       .status-toggle { padding: 0 10px; }
       .status-toggle span { display: none; }
-      .toolbar-meta { display: none; }
-      .lede h2 { font-size: 1.3rem; }
-      .lede p { font-size: 0.92rem; }
+      .sl-meta .sl-count { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .cat-item.on.timing .tick, .stage-head.timing::after { animation: none; }
-      .stage-grid { animation: none; }
+      .tile, .t-go, .facet { transition: none; }
+      .tile:hover, .tile:focus-visible { transform: none; }
+    }
+
+    /* ─── SAFE AREAS ──────────────────────────────────────────────
+       A notched phone in landscape puts a cutout over the gutter and a home
+       indicator over the last row. That matters more here than on a page that
+       scrolls: the status line is pinned to the bottom by construction, so if
+       it sits under the indicator there is no scrolling it back into view. */
+    @supports (padding: env(safe-area-inset-left)) {
+      :root {
+        --pad-l: max(var(--shell-pad), env(safe-area-inset-left));
+        --pad-r: max(var(--shell-pad), env(safe-area-inset-right));
+      }
+      /* On the row, not the .shell inside it, so the inset colours in as part
+         of the bar rather than leaving a bare strip under it. The board is the
+         1fr row, so what this row takes it gives up. */
+      .status-outer { padding-bottom: env(safe-area-inset-bottom); }
     }
   </style>
 </head>
@@ -431,7 +453,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
         </a>
       </div>
-    
+
       <button class="status-toggle" onclick="toggleDiag()">
         <span data-i18n>Sys. Status</span> <div class="pulse-dot"></div>
       </button>
@@ -485,60 +507,56 @@
 
 <h1 class="sr-only" data-i18n>Tools</h1>
 
-<div class="lede-outer">
-  <div class="shell lede">
-    <h2 class="lede-copy">
-      <span data-i18n>Open solutions for everyone.</span><br>
-      <span class="lede-2" data-i18n>Tailored support for anyone</span>
-    </h2>
-    <div class="lede-find">
-      <div class="search-wrap" id="searchWrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
-        <span class="kbd-hint">/</span>
-        <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
-      </div>
-      <span class="toolbar-meta" id="toolbarMeta"></span>
+<div class="bar-outer">
+  <div class="shell bar">
+    <div class="search-wrap" id="searchWrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
+      <span class="kbd">/</span>
+      <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
     </div>
+    <nav class="facets" id="facets" aria-label="Categories"></nav>
   </div>
 </div>
 
-<main class="shell">
-  <!-- browsing: every category, and the tools of the open one -->
-  <section class="browse" id="browse">
-    <nav class="cat-list" id="catList" aria-label="Categories"></nav>
-
-    <div class="stage-col">
-      <div class="stage-head" id="stageHead">
-        <div class="stage-title"><h3 id="stageName"></h3><span id="stageBlurb"></span></div>
-      </div>
-      <div class="stage-grid" id="stage"></div>
-    </div>
-  </section>
-
-  <!-- searching: everything that matches, from every category -->
-  <section id="found" class="hidden">
-    <div class="results-head" id="foundHead"></div>
-    <div class="grid" id="foundGrid"></div>
-  </section>
+<main class="board">
+  <div class="shell">
+    <div id="grid" role="list"></div>
+  </div>
 </main>
+
+<footer class="status-outer">
+  <div class="shell statusline">
+    <div class="sl-main" id="slMain" aria-live="polite"></div>
+    <div class="sl-meta">
+      <span class="sl-count" id="slCount"></span>
+      <span class="sl-hints">
+        <span><b class="kbd">/</b> <span data-i18n>find</span></span>
+        <span><b class="kbd">&uarr;&darr;</b> <span data-i18n>move</span></span>
+        <span><b class="kbd">&crarr;</b> <span data-i18n>open</span></span>
+      </span>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* ─────────────────────────────────────────────────────────────────────
-   The index is data, not markup: assets/json/tools.json. The hub used to
-   be the only thing that knew the fleet's shape, and it knew it as 29
-   hand-written <a> blocks — so a new subdomain meant editing a category
-   that may not have had room for it. font.carino.systems had been live
-   and unlisted for exactly that reason.
+   Everything here lives inside one closure. clock-network.js is a classic
+   script loaded after this one and it declares its own top-level `const $`
+   — two of those in the shared global scope is a SyntaxError that killed
+   the whole diagnostics file before it ran a line. Only the two names the
+   page is called back on get published.
 
-   Everything below renders from that file. Adding a tool is one object.
+   The index is data, not markup: assets/json/tools.json. Adding a tool is
+   one object there and one description in i18n.js — the hub itself never
+   learns the fleet's shape.
    ───────────────────────────────────────────────────────────────────── */
 
-const REGISTRY = 'assets/json/tools.json';
-const DWELL = 5000;                       // how long a category holds the stage
+(function () {
 
-let TOOLS = [], TAGS = [], tag = null, query = '';
-let timer = null, held = false;           // held: the rotation is paused, not stopped
+const REGISTRY = 'assets/json/tools.json';
+
+let TOOLS = [], TAGS = [], tag = null, query = '', shown = [];
 
 /* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
    Fall through to the English key until it does — which is exactly what
@@ -546,7 +564,6 @@ let timer = null, held = false;           // held: the rotation is paused, not s
 const T = (s) => (typeof t === 'function' ? t(s) : s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
-const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── matching ──
    Space-separated terms, all of which must appear somewhere in the card:
@@ -559,10 +576,7 @@ function haystack(tool) {
     .join(' ').toLowerCase();
 }
 const terms = (q) => q.toLowerCase().split(/\s+/).filter(Boolean);
-function matches(tool, q) {
-  const hay = haystack(tool);
-  return terms(q).every((term) => hay.includes(term));
-}
+const matches = (tool, q) => { const hay = haystack(tool); return terms(q).every((x) => hay.includes(x)); };
 
 /* Highlight every matched run. Escapes first, then inserts <mark>, so a
    tool description can never smuggle in markup. */
@@ -577,152 +591,207 @@ function mark(text, q) {
 const cat = (id) => TAGS.find((x) => x.id === id);
 const tagLabel = (id) => (cat(id) || {}).label || id;
 const toolsIn = (id) => TOOLS.filter((x) => x.tags.includes(id));
-function svg(d, extra) {
+function svg(d) {
   // `d` is raw SVG geometry from our own registry, not user input.
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ` +
-         `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra || ''}>${d}</svg>`;
+         `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 }
 
-function cardHTML(x, q) {
-  const chips = x.tags.map((id) => `<span class="c-tag">${esc(T(tagLabel(id)))}</span>`).join('') +
-    (x.local ? `<span class="c-tag local">${esc(T('Runs locally'))}</span>` : '');
+/* ── the board ──
+   Everything that survives the current facet and the current query, and
+   nothing else. The tiles are the whole page, so the list is never paged,
+   sliced or rotated: if it does not fit, the cells get smaller. */
+const visible = () => TOOLS.filter((x) => (!tag || x.tags.includes(tag)) && (!query || matches(x, query)));
+
+function tileHTML(x, i) {
   // Only cross-origin links get a new tab, which is all of them today —
   // but the registry is meant to outlive that assumption.
   const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
-  return `<a class="card" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>
-    <div>
-      <div class="c-head"><span class="c-icon">${esc(x.icon)}</span><span class="c-title">${mark(x.name, q)}</span></div>
-      <div class="c-desc">${mark(T(x.desc), q)}</div>
-    </div>
-    <div class="c-foot"><span class="c-tags">${chips}</span><span class="c-link">${esc(T(x.cta))}</span></div>
+  const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
+  const local = x.local ? `<span class="t-local" title="${esc(T('Runs locally'))}"></span>` : '';
+  return `<a class="tile" role="listitem" href="${esc(x.url)}" data-i="${i}"${ext ? ' target="_blank" rel="noopener"' : ''}>
+    <span class="t-head"><span class="t-icon">${esc(x.icon)}</span><span class="t-name">${mark(x.name, query)}</span>${local}</span>
+    <span class="t-desc">${mark(T(x.desc), query)}</span>
+    <span class="t-foot"><span class="t-cat">${esc(cats)}</span><span class="t-go">${esc(T(x.cta))}</span></span>
   </a>`;
 }
 
-/* ── browsing ── */
-
-/* One height for the whole browser, taken from the category that needs the
-   most rows at the current width. Reading it off the widest category rather
-   than the open one is the point: the columns stop resizing as the rotation
-   walks, and the eight rows on the left get the leftover height, which is
-   what makes them tall. */
-function fitBrowse() {
-  const grid = document.querySelector('.stage-grid');
-  const wide = window.matchMedia('(min-width: 981px)').matches;
-  if (!grid || !wide) { document.documentElement.style.removeProperty('--browse-h'); return; }
-  const px = (n) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n));
-  const gap = px('--card-gap'), h = px('--card-h');
-  const cols = Math.max(1, Math.floor((grid.clientWidth + gap) / (300 + gap)));   // 300px = the minmax floor
-  const most = Math.max(...TAGS.map((g) => toolsIn(g.id).length));
-  const rows = Math.ceil(most / cols);
-  const head = document.querySelector('.stage-head');
-  const headH = head ? head.offsetHeight + parseFloat(getComputedStyle(head).marginBottom) : 0;
-  document.documentElement.style.setProperty('--browse-h', rows * h + (rows - 1) * gap + headH + 'px');
-}
-
-function renderCatList() {
-  $('catList').innerHTML = TAGS.map((g) => `
-    <button class="cat-item${g.id === tag ? ' on' : ''}" data-tag="${esc(g.id)}" type="button"
-            aria-current="${g.id === tag}">
-      <span class="tick"></span>${svg(g.path)}<span>${esc(T(g.label))}</span><span class="n">${toolsIn(g.id).length}</span>
+function renderFacets() {
+  const all = `<button class="facet${tag ? '' : ' on'}" data-tag="" type="button" aria-pressed="${!tag}">
+      <span>${esc(T('All'))}</span><span class="n">${TOOLS.length}</span></button>`;
+  $('facets').innerHTML = all + TAGS.map((g) => `
+    <button class="facet${g.id === tag ? ' on' : ''}" data-tag="${esc(g.id)}" type="button"
+            aria-pressed="${g.id === tag}" title="${esc(T(g.blurb))}">
+      ${svg(g.path)}<span>${esc(T(g.label))}</span><span class="n">${toolsIn(g.id).length}</span>
     </button>`).join('');
 }
 
-function renderStage() {
-  const g = cat(tag);
-  if (!g) return;
-  $('stageName').textContent = T(g.label);
-  $('stageBlurb').textContent = T(g.blurb);
-  // Replacing the node rather than its innerHTML restarts the swap animation,
-  // so a category change is visible even between two four-tool categories.
-  const next = $('stage').cloneNode(false);
-  next.innerHTML = toolsIn(tag).map((x) => cardHTML(x, '')).join('');
-  $('stage').replaceWith(next);
-  fitBrowse();
+function renderGrid() {
+  const grid = $('grid');
+  shown = visible();
+  if (!shown.length) {
+    grid.className = '';
+    grid.style.gridTemplateColumns = grid.style.gridTemplateRows = '1fr';
+    grid.innerHTML = `<div class="empty"><div class="empty-big">&empty;</div>` +
+      `<p>${esc(T('Nothing matches'))} &ldquo;${esc(query || T(tagLabel(tag)))}&rdquo;</p>` +
+      `<button type="button" id="resetBtn">${esc(T('Show everything'))}</button></div>`;
+    $('resetBtn').onclick = () => { setState(null, ''); $('q').focus(); };
+    return;
+  }
+  grid.innerHTML = shown.map(tileHTML).join('');
+  fit(true);
 }
 
-/* ── the rotation ──
-   Walks to the next category on its own. It pauses under the pointer and
-   while the search box is in use, because moving the thing someone is
-   reading is worse than showing them one category fewer. */
-function stopTimer() {
-  clearTimeout(timer); timer = null;
-  document.querySelector('.cat-item.on')?.classList.remove('timing');
-  $('stageHead').classList.remove('timing');
-}
-function armTimer() {
-  stopTimer();
-  if (held || query || reduced() || TAGS.length < 2) return;
-  // void offsetWidth forces a reflow between removing and re-adding the class,
-  // or the browser coalesces both and the animation never restarts.
-  for (const el of [document.querySelector('.cat-item.on'), $('stageHead')]) {
-    if (el) { void el.offsetWidth; el.classList.add('timing'); }
+/* ── the fit ──
+   The one piece of arithmetic the design rests on. Given the box the tiles
+   have and how many there are, try every column count and keep the one
+   whose cells land closest to a readable proportion — with a small nudge
+   toward layouts that leave few empty cells in the last row. Then the grid
+   is told exactly how many rows to draw, so `1fr` divides the height and
+   the board fills the screen without ever exceeding it.
+
+   A cell is capped in both directions — past a point a bigger card is not a
+   better one, it is a card with a hole in it — so the tracks are written as
+   minmax(0, MAX), which fills the space when there is little and stops
+   growing when there is plenty. The leftovers become margin, and the board
+   centres itself.
+
+   Below a floor (cells too small to read) nothing is chosen and the grid is
+   allowed to scroll inside itself — a 31-tool wall does not fit a phone in
+   landscape at any legible size, and pretending otherwise is worse. */
+const AR    = 2.05;  // width : height a cell reads best at
+const MIN_H = 44;    // a name and nothing else
+const MAX_H = 156;   // past this a card is mostly empty
+const MAX_W = 340;
+let lastFit = '';
+function fit(force) {
+  const grid = $('grid');
+  const n = shown.length;
+  if (!n) return;
+  const gap = parseFloat(getComputedStyle(grid).gap) || 10;
+  const W = grid.clientWidth, H = grid.clientHeight;
+  if (W < 2 || H < 2) return;
+  // Same box, same tiles, same answer. Observers fire more often than the
+  // layout actually changes, and re-writing the tracks is what would make
+  // them fire again.
+  const key = W + 'x' + H + 'x' + n;
+  if (!force && key === lastFit) return;
+  lastFit = key;
+  const MIN_W = W < 620 ? 92 : 150;
+
+  let best = null;
+  for (let cols = 1; cols <= n; cols++) {
+    const rows = Math.ceil(n / cols);
+    const cw = Math.min(MAX_W, (W - gap * (cols - 1)) / cols);
+    const ch = Math.min(MAX_H, (H - gap * (rows - 1)) / rows);
+    if (cw < MIN_W || ch < MIN_H) continue;
+    const score =
+      Math.abs(Math.log((cw / ch) / AR)) +                    // how far from a readable proportion
+      0.5 * (cols * rows - n) / n +                           // how ragged the last row is
+      (1 - (cols * cw + gap * (cols - 1)) / W);               // how much of the width goes unused
+    if (!best || score < best.score) best = { cols, rows, ch, score };
   }
-  timer = setTimeout(() => {
-    const i = TAGS.findIndex((g) => g.id === tag);
-    select(TAGS[(i + 1) % TAGS.length].id, false);
-  }, DWELL);
+
+  if (!best) {                                   // nothing legible fits — let it scroll
+    const cols = Math.max(1, Math.floor((W + gap) / MIN_W));
+    grid.classList.add('overflowing');
+    grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+    grid.style.gridTemplateRows = 'none';
+    grid.style.gridAutoRows = '68px';
+    applyDensity(68);
+    return;
+  }
+  grid.classList.remove('overflowing');
+  grid.style.gridTemplateColumns = `repeat(${best.cols}, minmax(0, ${MAX_W}px))`;
+  grid.style.gridTemplateRows = `repeat(${best.rows}, minmax(0, ${MAX_H}px))`;
+  grid.style.gridAutoRows = '';
+  applyDensity(best.ch);
 }
-function hold(on) { held = on; armTimer(); }
+
+/* As a cell gets shorter it drops the least useful thing it is carrying —
+   the call to action, then the description — rather than clipping text. The
+   line count is budgeted from what is actually left after the name, the
+   padding and (if it is still there) the footer, so the clamp and the box
+   agree instead of the box hiding a fifth line nobody asked for. */
+const PAD = 22, HEAD = 20, FOOT = 21, LINE = 17, LEAD = 5;   // measured, not guessed
+const FIXED = PAD + HEAD + LEAD;
+function applyDensity(ch) {
+  const grid = $('grid');
+  const foot = ch >= FIXED + LINE + FOOT;                    // keep it only if a line survives too
+  const lines = Math.max(0, Math.min(5, Math.floor((ch - FIXED - (foot ? FOOT : 0)) / LINE)));
+  grid.style.setProperty('--desc-lines', Math.max(1, lines));
+  grid.classList.toggle('no-foot', !foot);
+  grid.classList.toggle('no-desc', lines === 0);
+  grid.classList.toggle('tiny', ch < 56);
+}
+
+/* ── the status line ──
+   The claim, until you point at a tool; then that tool. */
+function statusDefault() {
+  $('slMain').innerHTML =
+    `<span class="sl-lede">${esc(T('Open solutions for everyone.'))}</span>` +
+    `<span class="sl-text">${esc(T('Tailored support for anyone'))}</span>`;
+}
+function statusFor(x) {
+  const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
+  $('slMain').innerHTML =
+    `<span class="sl-lede">${esc(x.name)}</span>` +
+    `<span class="sl-text"><b>${esc(cats)}${x.local ? ' · ' + esc(T('Runs locally')) : ''}</b> — ${esc(T(x.desc))}</span>`;
+}
+function renderCount() {
+  const n = shown.length;
+  $('slCount').innerHTML = (n === TOOLS.length)
+    ? T('<b>{n} tools</b> in {c} categories').replace('{n}', TOOLS.length).replace('{c}', TAGS.length)
+    : T('{n} of {m} tools').replace('{n}', `<b>${n}</b>`).replace('{m}', TOOLS.length);
+}
 
 /* ── state ──
-   #medical selects a category and, because it was asked for by name,
-   leaves the rotation off. #/dicom is a search. Rotation never writes to
-   the URL: it is ambient, and history should record what you chose. */
-function select(id, manual) {
-  tag = id;
-  renderCatList();
-  renderStage();
-  if (manual) {
-    held = false;
-    history.replaceState(null, '', '#' + id);
-    stopTimer();                                   // a deliberate choice stays put
-  } else armTimer();
+   #medical is a facet, #/dicom is a query, #medical/dicom is both. */
+const unesc = (s) => { try { return decodeURIComponent(s); } catch { return s; } };
+function readHash() {
+  const raw = location.hash.replace(/^#/, '');
+  const i = raw.indexOf('/');
+  const asked = unesc(i < 0 ? raw : raw.slice(0, i));
+  tag = TAGS.some((g) => g.id === asked) ? asked : null;
+  query = i < 0 ? '' : unesc(raw.slice(i + 1));
 }
-
-function showSearch() {
-  const list = TOOLS.filter((x) => matches(x, query));
-  $('browse').classList.add('hidden');
-  $('found').classList.remove('hidden');
-  $('foundHead').innerHTML = T('{n} of {m} tools').replace('{n}', `<b>${list.length}</b>`).replace('{m}', TOOLS.length);
-  $('foundGrid').innerHTML = list.length
-    ? list.map((x) => cardHTML(x, query)).join('')
-    : `<div class="empty"><div class="empty-big">&empty;</div>` +
-      `<p>${T('Nothing matches')} &ldquo;${esc(query)}&rdquo;</p>` +
-      `<button type="button" id="resetBtn">${T('Show everything')}</button></div>`;
-  const r = $('resetBtn'); if (r) r.onclick = () => setQuery('');
+function writeHash() {
+  const h = (tag || '') + (query ? '/' + encodeURIComponent(query) : '');
+  history.replaceState(null, '', h ? '#' + h : location.pathname + location.search);
 }
-function showBrowse() {
-  $('found').classList.add('hidden');
-  $('browse').classList.remove('hidden');
-  renderCatList();
-  renderStage();
-  armTimer();
+function setState(nextTag, nextQuery) {
+  tag = nextTag;
+  query = nextQuery;
+  writeHash();
+  render();
 }
 
 function render() {
   $('q').placeholder = T('Search tools…');
-  $('toolbarMeta').innerHTML =
-    T('<b>{n} tools</b> in {c} categories').replace('{n}', TOOLS.length).replace('{c}', TAGS.length);
-  if (query) { stopTimer(); showSearch(); } else showBrowse();
+  $('q').value = query;
+  $('searchWrap').classList.toggle('has-text', !!query);
+  renderFacets();
+  renderGrid();
+  renderCount();
+  statusDefault();
 }
 // i18n.js re-runs this after a fleet-wide language switch.
 window.renderTools = () => { if (TOOLS.length) render(); };
 
-function setQuery(next) {
-  query = next;
-  $('q').value = next;
-  $('searchWrap').classList.toggle('has-text', !!next);
-  history.replaceState(null, '', next ? '#/' + encodeURIComponent(next) : location.pathname + location.search);
-  render();
+/* ── keyboard ──
+   The grid is a grid, so the arrows are two-dimensional: left/right walk
+   the list, up/down jump a row — which is only knowable after the fit. */
+function columns() {
+  const cs = getComputedStyle($('grid')).gridTemplateColumns;
+  return Math.max(1, cs.split(' ').filter(Boolean).length);
 }
-
-function readHash() {
-  const raw = decodeURIComponent(location.hash.replace(/^#/, ''));
-  if (raw.startsWith('/')) { query = raw.slice(1); tag = TAGS[0].id; return false; }
-  query = '';
-  const asked = TAGS.some((g) => g.id === raw);
-  tag = asked ? raw : TAGS[0].id;
-  return !asked;                                   // rotate only if nobody named a category
+function moveFocus(delta) {
+  const tiles = [...$('grid').querySelectorAll('.tile')];
+  if (!tiles.length) return;
+  const at = tiles.indexOf(document.activeElement);
+  let next = at < 0 ? (delta > 0 ? 0 : tiles.length - 1) : at + delta;
+  next = Math.max(0, Math.min(tiles.length - 1, next));
+  tiles[next].focus();
 }
 
 /* ── wiring ── */
@@ -730,52 +799,63 @@ function boot(data) {
   TAGS = data.tags || [];
   TOOLS = data.tools || [];
   if (!TAGS.length || !TOOLS.length) throw new Error('empty registry');
-  document.documentElement.style.setProperty('--dwell', DWELL + 'ms');
 
-  const rotate = readHash();
-  $('q').value = query;
-  $('searchWrap').classList.toggle('has-text', !!query);
+  readHash();
   render();
-  if (!rotate) stopTimer();
 
-  $('catList').addEventListener('click', (e) => {
-    const b = e.target.closest('.cat-item');
-    if (b) select(b.dataset.tag, true);
+  $('facets').addEventListener('click', (e) => {
+    const b = e.target.closest('.facet');
+    if (!b) return;
+    const next = b.dataset.tag || null;
+    setState(next === tag ? null : next, query);      // clicking the open facet clears it
   });
 
-  // Reading is not idling: pause while the pointer or keyboard is in here.
-  const browse = $('browse');
-  browse.addEventListener('pointerenter', () => hold(true));
-  browse.addEventListener('pointerleave', () => hold(false));
-  browse.addEventListener('focusin', () => hold(true));
-  browse.addEventListener('focusout', () => hold(false));
-  window.addEventListener('resize', fitBrowse);
+  const grid = $('grid');
+  grid.addEventListener('pointerover', (e) => {
+    const el = e.target.closest('.tile');
+    if (el) statusFor(shown[+el.dataset.i]);
+  });
+  grid.addEventListener('pointerleave', statusDefault);
+  grid.addEventListener('focusin', (e) => {
+    const el = e.target.closest('.tile');
+    if (el) statusFor(shown[+el.dataset.i]);
+  });
+  grid.addEventListener('focusout', statusDefault);
 
   const q = $('q');
-  q.addEventListener('input', () => setQuery(q.value));
-  $('qClear').addEventListener('click', () => { setQuery(''); q.focus(); });
+  q.addEventListener('input', () => setState(tag, q.value));
+  $('qClear').addEventListener('click', () => { setState(tag, ''); q.focus(); });
   q.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { if (q.value) setQuery(''); else q.blur(); }
-    else if (e.key === 'Enter' && query) {
-      // One result left is an unambiguous answer — take it.
-      const only = $('foundGrid').querySelectorAll('.card');
-      if (only.length === 1) only[0].click();
-    }
+    if (e.key === 'Escape') { if (q.value) setState(tag, ''); else q.blur(); }
+    else if (e.key === 'Enter' && shown.length === 1) grid.querySelector('.tile').click();
+    else if (e.key === 'ArrowDown') { e.preventDefault(); moveFocus(1); }
   });
 
-  // "/" anywhere puts the cursor in the box, the way every tool with a lot
-  // of things in it does. Ctrl/⌘-K for the people who expect that instead.
+  // "/" anywhere puts the cursor in the box, the way every tool with a lot of
+  // things in it does. Ctrl/⌘-K for the people who expect that instead.
   window.addEventListener('keydown', (e) => {
     const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '');
     if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
-      e.preventDefault();
-      q.focus(); q.select();
+      e.preventDefault(); q.focus(); q.select(); return;
     }
+    if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+    const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns(), ArrowUp: -columns() }[e.key];
+    if (step) { e.preventDefault(); moveFocus(step); }
+    else if (e.key === 'Escape' && (tag || query)) setState(null, '');
   });
 
-  // A backgrounded tab should not burn through eight categories unwatched.
-  document.addEventListener('visibilitychange', () => hold(document.hidden));
-  window.addEventListener('hashchange', () => { const r = readHash(); $('q').value = query; render(); if (!r) stopTimer(); });
+  // The fit is a function of the box, so it is recomputed whenever the box
+  // changes — window resize, mobile URL bar, the facet strip wrapping.
+  let raf = 0;
+  const refit = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => fit()); };
+  window.addEventListener('resize', refit);
+  if (window.ResizeObserver) new ResizeObserver(refit).observe(grid);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+  // A hidden tab gets no animation frames, so a resize that happens while the
+  // window is behind another one lands here instead of never landing at all.
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refit(); });
+
+  window.addEventListener('hashchange', () => { readHash(); render(); });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -784,24 +864,23 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(boot)
     .catch((err) => {
       // Without the registry there is no page, so say which file is missing
-      // rather than leaving an empty stage that looks like a filter result.
-      $('browse').classList.add('hidden');
-      $('found').classList.remove('hidden');
-      $('foundGrid').innerHTML =
+      // rather than leaving an empty board that looks like a filter result.
+      $('grid').innerHTML =
         `<div class="empty"><div class="empty-big">&#9888;</div><p>${esc(T('Could not load the tool index'))} — ` +
         `<code>${REGISTRY}</code><br>${esc(err.message)}</p></div>`;
+      $('grid').style.gridTemplateColumns = $('grid').style.gridTemplateRows = '1fr';
     });
 });
 
-function toggleDiag() { $('diagBox').classList.toggle('open'); }
+window.toggleDiag = () => $('diagBox').classList.toggle('open');
 
 document.addEventListener('click', (e) => {
   const diagBox = $('diagBox');
   const toggleBtn = document.querySelector('.status-toggle');
-  if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) {
-    diagBox.classList.remove('open');
-  }
+  if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) diagBox.classList.remove('open');
 });
+
+})();
 </script>
 <script src="./carino-clock.js" defer></script>
 <script src="carino-lang.js" defer></script>
