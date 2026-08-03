@@ -18,7 +18,7 @@ DIAG_SRC="Topo/carino-diag.js"
 GROUPA="Branding CVE Quote Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
-Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time"
+Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 BESPOKE="Asobi Retina DICOM-editor Learn MultiWeb MusicGrid TV"
