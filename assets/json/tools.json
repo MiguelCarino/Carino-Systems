@@ -74,6 +74,17 @@
       "keywords": "design system tokens colors components style guide css"
     },
     {
+      "name": "Carino Currency",
+      "icon": "💱",
+      "url": "https://currency.carino.systems/",
+      "desc": "FX trends and movers against any base currency, a finance news feed, and national export/import balances — keyless and in-browser.",
+      "cta": "Launch ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "fx forex exchange rate currency ecb frankfurter gdelt world bank trade exports imports balance news"
+    },
+    {
       "name": "Carino Fonts",
       "icon": "🔤",
       "url": "https://font.carino.systems/",
