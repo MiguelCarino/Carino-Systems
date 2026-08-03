@@ -1,7 +1,7 @@
 # Carino-Systems
 
-The hub at [carino.systems](https://carino.systems/) — an index of every tool in
-the workshop, searchable from the box at the top.
+The hub at [carino.systems](https://carino.systems/) — the index of every tool in
+the fleet.
 
 ## Adding a tool
 
@@ -29,12 +29,29 @@ Adding one is a single object:
 `desc` and `cta` are translated the fleet way — the English string **is** the
 key, so add it to each locale in [`i18n.js`](i18n.js) or it falls back to English.
 
+Categories carry a `label`, a one-line `blurb` and an SVG `path`, all in the same
+file. Both the label and the blurb are translated the same way.
+
 ## Layout
 
-Search and the tag rail are the whole navigation; there are no sections. The
-five fixed slices this replaced could not hold 31 tools without keeping a drawer
-for whatever fit nowhere, and forced tools that were two things to be filed as
-one.
+A line about why any of this exists with the search box beside it, then the
+browser: every category down one side, the tools of whichever one is open along
+the other. Whatever does not fit on a row wraps onto the next one.
+
+Both columns share one height, computed from the category that needs the most
+rows at the current width — so the rows do not resize under the pointer as the
+rotation walks, and the page does not grow and shrink at the bottom. The eight
+category rows divide that height between them, which is what makes them tall.
+
+The selection walks to the next category every five seconds, so standing still
+still shows you the whole fleet. The rule under the category name fills as it
+counts down — an unannounced rotation reads as the page glitching. It pauses
+under the pointer, while the search box is in use, when the tab is hidden, and
+for `prefers-reduced-motion`; picking a category by hand stops it for good.
+
+State lives in the hash: `#medical` for a category, `#/dicom` for a search. The
+rotation never writes to the URL — it is ambient, and history should record what
+you chose.
 
 ## License
 

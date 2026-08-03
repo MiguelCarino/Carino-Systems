@@ -3,42 +3,50 @@
     {
       "id": "medical",
       "label": "Medical",
-      "icon": "🩻"
+      "blurb": "Imaging, studies and clinical records.",
+      "path": "<polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"></polyline>"
     },
     {
       "id": "files",
       "label": "Files",
-      "icon": "📂"
+      "blurb": "Inspect, convert and repair file formats.",
+      "path": "<path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\"></path>"
     },
     {
       "id": "network",
       "label": "Network",
-      "icon": "🕸"
+      "blurb": "Topology, addressing and time.",
+      "path": "<circle cx=\"12\" cy=\"12\" r=\"10\"></circle><line x1=\"2\" y1=\"12\" x2=\"22\" y2=\"12\"></line><path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"></path>"
     },
     {
       "id": "security",
       "label": "Security",
-      "icon": "🔐"
+      "blurb": "Credentials, vulnerabilities and cryptography.",
+      "path": "<path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path>"
     },
     {
       "id": "systems",
       "label": "Systems",
-      "icon": "💿"
+      "blurb": "Operating systems, deployment and hardware.",
+      "path": "<rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\"></rect><rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\"></rect><line x1=\"6\" y1=\"6\" x2=\"6.01\" y2=\"6\"></line><line x1=\"6\" y1=\"18\" x2=\"6.01\" y2=\"18\"></line>"
     },
     {
       "id": "business",
       "label": "Business",
-      "icon": "💼"
+      "blurb": "Quotes, boards, documents and markets.",
+      "path": "<rect x=\"2\" y=\"7\" width=\"20\" height=\"14\" rx=\"2\"></rect><path d=\"M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"></path>"
     },
     {
       "id": "media",
       "label": "Media",
-      "icon": "🎬"
+      "blurb": "Video, audio, subtitles and type.",
+      "path": "<rect x=\"2\" y=\"3\" width=\"20\" height=\"14\" rx=\"2\"></rect><line x1=\"8\" y1=\"21\" x2=\"16\" y2=\"21\"></line><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"21\"></line>"
     },
     {
       "id": "learn",
       "label": "Learn",
-      "icon": "🎓"
+      "blurb": "Courses, labs and reference material.",
+      "path": "<path d=\"M22 10L12 5 2 10l10 5 10-5z\"></path><path d=\"M6 12v5c3 3 9 3 12 0v-5\"></path>"
     }
   ],
   "tools": [

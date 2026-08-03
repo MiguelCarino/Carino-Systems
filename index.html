@@ -23,6 +23,15 @@
       /* Stage (black & gold) */
       --bg-stage-grad:  radial-gradient(1200px 520px at 50% -12%, rgba(234,179,8,0.08) 0%, transparent 60%), linear-gradient(180deg, #0b0b0b 0%, #050505 100%);
       --text-stage-desc:  #a3a3a3;
+
+      /* One gutter for the whole page: the shell, and anything that has to
+         line up with its right edge from outside it (the diagnostics panel). */
+      --shell-pad:      30px;
+
+      /* Card rows are a fixed height so the shared column height is arithmetic
+         rather than a measurement that changes with the longest description. */
+      --card-h:         214px;
+      --card-gap:       18px;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -31,23 +40,22 @@
       background: var(--bg-header); /* Default back */
       color: var(--text);
       font-family: 'IBM Plex Sans', sans-serif;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* The bar is full-bleed; its contents sit in the same .shell as the cards,
+       so the brand lines up with the first column instead of hanging 30px off
+       the edge of a 2560px screen while the grid stays centred. */
     .top-header {
       height: 70px;
-      flex-shrink: 0;
       background: linear-gradient(180deg, #0f0f0f 0%, #050505 100%);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 30px;
       position: relative;
       z-index: 100;
+    }
+    .header-inner {
+      height: 100%; position: relative;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
 
     .header-left { display: flex; align-items: center; gap: 30px; }
@@ -96,8 +104,9 @@
     }
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+    /* Anchored to .header-inner, so it tracks the same right edge as the grid. */
     .diag-dropdown {
-      position: absolute; top: 80px; right: 30px; width: 440px; max-width: calc(100vw - 40px);
+      position: absolute; top: calc(100% + 10px); right: var(--shell-pad); width: 440px; max-width: calc(100vw - 40px);
       max-height: calc(100vh - 100px); overflow-y: auto;
       background: var(--bg-card); border: 1px solid var(--accent-dim);
       padding: 20px; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
@@ -148,135 +157,172 @@
     .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
 
     /* ─────────────────────────────────────────────────────────────
-       WORKSHOP INDEX
+       INDEX
 
-       Every tool on the page at once, filtered by typing. The hub used
-       to open on five full-height category slices and nothing else, so
-       the first tool was two clicks away and which slice held it was a
-       guess — Metadata under MedTech, Compass under Media, and a "&
-       Tools" section that had quietly become the drawer for whatever
-       fit nowhere.
+       A line about why any of this exists, a search box, and then a
+       browser: the categories down one side, the tools of whichever
+       one is open along the other. What does not fit on a row wraps to
+       the next one, and the selection walks to the next category on its
+       own every five seconds — announced by the rule under the category
+       name filling as it counts down — so standing still on the page
+       still shows you the whole fleet.
 
-       Tags replaced the sections because the sections were exclusive
-       and the tools are not: Metadata is a file tool AND a medical one,
-       and had to lose that argument to be filed at all. Nothing is
-       filed now — everything is listed, and the search box is the
-       primary way in. The rail narrows; it does not hide.
+       Tags, not sections. A tool that is honestly two things gets two
+       and appears under both — Metadata is a file tool and a medical
+       one, and an exclusive split made it lose that argument.
        ───────────────────────────────────────────────────────────── */
 
-    .shell { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 30px; }
-
-    /* ── hero ── */
-    .hero {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 40px; flex-wrap: wrap; padding: 46px 0 30px;
-      background: var(--bg-stage-grad);
+    .shell { width: 100%; max-width: 1500px; margin: 0 auto; padding: 0 var(--shell-pad); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
-    .hero-title {
-      font-family: 'Red Hat Display', sans-serif; font-size: 3.4rem; font-weight: 900;
-      line-height: 0.95; text-transform: uppercase; letter-spacing: 2px;
+    .hidden { display: none !important; }
+
+    /* ── the reason, before the machinery ── */
+    .lede-outer { background: var(--bg-stage-grad); border-bottom: 1px solid var(--border); }
+    /* The claim and the way in, on one line: the search box was a band of
+       its own below, which put a horizontal rule between the reason someone
+       is here and the only control that acts on it. */
+    .lede {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 28px 56px; flex-wrap: wrap; padding: 52px var(--shell-pad) 48px;
+    }
+    .lede-copy { flex: 1 1 460px; }
+    .lede-find { flex: 0 1 440px; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
+    .lede h2 {
+      font-family: 'Red Hat Display', sans-serif; font-size: 2.2rem; font-weight: 900;
+      line-height: 1.28; letter-spacing: -0.01em;
       background: linear-gradient(130deg, #fef08a 0%, #eab308 55%, #b45309 100%);
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .hero-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--text-sec); margin-top: 10px; }
-    .hero-sub b { color: var(--accent); font-weight: 700; }
+    /* The second line answers the first, so it steps out of the gold. */
+    .lede .lede-2 { -webkit-text-fill-color: var(--text); color: var(--text); }
 
     /* ── search ── */
     .search-wrap {
       position: relative; display: flex; align-items: center; gap: 12px;
-      flex: 1 1 380px; max-width: 560px;
       background: #0d0d0d; border: 1px solid var(--border); border-radius: 8px;
-      padding: 0 14px; height: 54px; transition: border-color 0.2s, box-shadow 0.2s;
+      padding: 0 14px; height: 50px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint), 0 0 22px var(--accent-glow); }
-    .search-wrap svg { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
-    .search-wrap:focus-within svg { color: var(--accent); }
+    .search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint); }
+    .search-wrap > svg { width: 17px; height: 17px; color: var(--text-muted); flex-shrink: 0; }
+    .search-wrap:focus-within > svg { color: var(--accent); }
     #q {
       flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
-      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 1rem;
+      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 0.95rem;
     }
     #q::placeholder { color: var(--text-muted); }
     .kbd-hint {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
-      border: 1px solid var(--border); border-radius: 4px; padding: 3px 7px; flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--text-muted);
+      border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; flex-shrink: 0;
     }
     .search-wrap:focus-within .kbd-hint, .search-wrap.has-text .kbd-hint { display: none; }
     .q-clear {
       display: none; background: transparent; border: 0; cursor: pointer; flex-shrink: 0;
-      color: var(--text-muted); font-size: 1.3rem; line-height: 1; padding: 0 2px;
+      color: var(--text-muted); font-size: 1.25rem; line-height: 1; padding: 0 2px;
     }
     .q-clear:hover { color: var(--accent); }
     .search-wrap.has-text .q-clear { display: block; }
+    .toolbar-meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.1em; padding-left: 2px;
+    }
+    .toolbar-meta b { color: var(--text-sec); font-weight: 700; }
 
-    /* ── tag rail — the slice bar, laid flat ── */
-    .rail-outer {
-      position: sticky; top: 0; z-index: 60;
-      background: var(--bg-header); border-bottom: 1px solid var(--border);
-      border-top: 1px solid var(--border);
+    /* ── the browser: categories beside their tools ── */
+    /* Both columns are one height — the height the fullest category needs,
+       measured once and held — so the rows do not resize under the pointer
+       every five seconds and the page does not grow and shrink at the bottom
+       as the rotation moves between a four-tool and a nine-tool category. */
+    .browse { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 26px; padding: 26px 0 70px; }
+    /* On the columns themselves: .browse is padded, and a min-height there is
+       a border-box figure, so the columns would come out 96px short. */
+    .cat-list, .stage-col { min-height: var(--browse-h, 0); }
+
+    /* The rows share the column: eight of them divide whatever height the
+       cards asked for, which is what makes them tall. */
+    .cat-list { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--border); }
+    .cat-list .cat-item { flex: 1 1 0; min-height: 52px; }
+    .cat-item {
+      position: relative; display: flex; align-items: center; gap: 11px;
+      background: transparent; border: 0; border-left: 2px solid transparent;
+      margin-left: -1px; padding: 16px 15px; cursor: pointer; text-align: left;
+      color: var(--text-muted); font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.87rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
     }
-    .rail { display: flex; overflow-x: auto; scrollbar-width: none; }
-    .rail::-webkit-scrollbar { display: none; }
-    .rail-btn {
-      flex: 1 0 auto; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      min-height: 62px; padding: 0 20px; cursor: pointer;
-      background: #0a0a0a; border: 0; border-right: 1px solid var(--border);
-      border-top: 3px solid transparent;
-      color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-      transition: color 0.25s, background 0.25s, border-color 0.25s;
-    }
-    .rail-btn:last-child { border-right: 0; }
-    .rail-btn::before {
-      content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s;
-      background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .rail-btn:hover { background: #131007; color: var(--text); }
-    .rail-btn:hover::before { opacity: 1; }
-    .rail-btn.active { background: #111111; color: var(--accent); border-top-color: var(--accent); }
-    /* Not ".empty" — that class is the no-results panel below, and a bare
-       .empty rule would win on source order and give this button its 70px
-       padding and dashed border. */
-    .rail-btn.zero { opacity: 0.3; }
-    .rail-i { font-size: 1rem; line-height: 1; }
-    .rail-n {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; font-weight: 700;
+    .cat-item:hover { color: var(--text); background: #0d0d0d; }
+    .cat-item.on { color: var(--accent); border-left-color: var(--accent); background: #0f0d07; }
+    .cat-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .cat-item .n {
+      margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem;
       color: var(--text-muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px;
     }
-    .rail-btn.active .rail-n { color: var(--accent); border-color: var(--accent-dim); }
-
-    /* ── results ── */
-    .results {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
-      padding: 24px 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
-      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+    .cat-item.on .n { color: var(--accent); border-color: var(--accent-dim); }
+    /* Drains over the dwell time, so the jump to the next category is
+       something the page announced rather than something that happened to you. */
+    .cat-item .tick {
+      position: absolute; left: -2px; top: 0; width: 2px; background: var(--accent);
+      box-shadow: 0 0 6px var(--accent-glow);
     }
-    .results b { color: var(--accent); font-weight: 700; }
+    .cat-item.on.timing .tick { animation: tick var(--dwell) linear forwards; }
+    @keyframes tick { from { height: 0; } to { height: 100%; } }
 
-    .grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 18px; padding: 18px 0 70px;
+    .stage-head {
+      position: relative; display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; padding: 10px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 20px;
+    }
+    /* The countdown to the next category, drawn along the rule under its name.
+       A rotation that arrives unannounced reads as the page glitching; this is
+       the page saying it is about to move, with enough warning to stop it. */
+    .stage-head::after {
+      content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+    .stage-head.timing::after { animation: countdown var(--dwell) linear forwards; }
+    @keyframes countdown { from { width: 0; } to { width: 100%; } }
+    /* The blurb yields on a narrow row, and never wraps the heading. */
+    .stage-title { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+    .stage-title h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+    .stage-title span {
+      font-size: 0.85rem; color: var(--text-sec);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
+    /* Whatever does not fit on the first row wraps onto the next one. Rows,
+       not a slider: the tools of a category are a set, not a queue, and a
+       card half off the right edge is a card nobody clicks. */
+    .stage-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-auto-rows: var(--card-h); gap: var(--card-gap); animation: swap 0.22s ease;
+    }
+    @keyframes swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* ── cards ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; padding: 4px 0 64px; }
     .card {
       background: #0d0d0d;
-      border: 1px solid var(--border); padding: 22px; border-radius: 12px;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+      border: 1px solid var(--border); padding: 24px; border-radius: 12px;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
       display: flex; flex-direction: column; justify-content: space-between;
-      text-decoration: none; color: inherit; min-height: 168px;
-      animation: fadeUp 0.35s ease backwards;
+      text-decoration: none; color: inherit; overflow: hidden;
     }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .card:hover {
       border-color: var(--accent); background: linear-gradient(145deg, #17120a 0%, #0b0b0b 100%);
-      transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 22px var(--accent-glow);
+      transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 0 22px var(--accent-glow);
     }
     .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     .c-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .c-icon { font-size: 1.35rem; line-height: 1; }
-    .c-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
-    .c-desc { font-size: 0.82rem; color: var(--text-sec); line-height: 1.6; }
+    .c-icon { font-size: 1.3rem; line-height: 1; }
+    .c-title { font-size: 1.02rem; font-weight: 700; color: var(--text); }
+    /* Clamped, because the rows are uniform: one forty-word description must
+       not set the height of every card in the grid. */
+    .c-desc {
+      font-size: 0.82rem; color: var(--text-sec); line-height: 1.6;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+    }
     .c-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
     .c-tags { display: flex; flex-wrap: wrap; gap: 5px; }
     .c-tag {
@@ -293,142 +339,188 @@
        text never reflows as you type. */
     mark { background: transparent; color: var(--accent); font-weight: 700; }
 
+    .results-head {
+      padding: 6px 0 14px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .results-head b { color: var(--accent); font-weight: 700; }
+
     .empty {
-      grid-column: 1 / -1; text-align: center; padding: 70px 20px; color: var(--text-muted);
+      grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted);
       border: 1px dashed var(--border); border-radius: 12px;
     }
-    .empty-big { font-size: 2rem; margin-bottom: 14px; opacity: 0.5; }
-    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; margin-bottom: 18px; }
+    .empty-big { font-size: 1.7rem; margin-bottom: 12px; opacity: 0.5; }
+    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; margin-bottom: 18px; }
     .empty button {
       background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase;
       letter-spacing: 0.1em; padding: 9px 18px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
     .empty button:hover { background: var(--accent-faint); border-color: var(--accent); }
 
-    /* ─── MOBILE ─────────────────────────────────────
-       The old layout hid every text class on narrow screens and left five
-       unlabelled icons on the landing page. Labels survive here; the rail
-       scrolls sideways instead of dropping its words. */
-    @media (max-width: 900px) {
+    /* ─── NARROW ─────────────────────────────────────
+       The categories stop being a column and become a strip of their own
+       above the tools. The old layout hid every text class under 900px and
+       left five unlabelled icons; labels survive here. */
+    @media (max-width: 980px) {
       .header-clock { display: none; }
-      .shell { padding: 0 18px; }
-      .hero { padding: 32px 0 22px; }
-      .hero-title { font-size: 2.4rem; }
-      .search-wrap { flex-basis: 100%; height: 50px; }
-      .rail-btn { flex: 0 0 auto; min-height: 54px; padding: 0 16px; font-size: 0.72rem; }
-      .rail-n { display: none; }
-      .grid { grid-template-columns: 1fr; gap: 14px; }
+      :root { --shell-pad: 18px; }
+      .lede { padding: 38px var(--shell-pad) 34px; gap: 22px; }
+      .lede h2 { font-size: 1.5rem; }
+      .lede-copy, .lede-find { flex: 1 1 100%; min-width: 0; }
+      /* Stacked: nothing to match heights with, so the shared height is off. */
+      .browse { grid-template-columns: 1fr; gap: 18px; }
+      .cat-list, .stage-col { min-height: 0; }
+      .stage-grid { grid-auto-rows: auto; }
+      .cat-list .cat-item { flex: 0 0 auto; min-height: 0; }
+      .cat-list {
+        flex-direction: row; overflow-x: auto; border-left: 0; border-bottom: 1px solid var(--border);
+        scrollbar-width: none; padding-bottom: 1px;
+      }
+      .cat-list::-webkit-scrollbar { display: none; }
+      .cat-item {
+        flex: 0 0 auto; margin-left: 0; border-left: 0; border-bottom: 2px solid transparent;
+        margin-bottom: -1px; padding: 11px 14px;
+      }
+      .cat-item.on { border-left-color: transparent; border-bottom-color: var(--accent); }
+      .cat-item .n { margin-left: 8px; }
+      .cat-item .tick { left: 0; top: auto; bottom: -2px; width: 0; height: 2px; }
+      .cat-item.on.timing .tick { animation: tickx var(--dwell) linear forwards; }
+      @keyframes tickx { from { width: 0; } to { width: 100%; } }
+      .stage-grid, .grid { grid-template-columns: 1fr; }
+      .browse { padding-top: 18px; }
     }
     @media (max-width: 560px) {
-      .top-header { padding: 0 18px; }
-      .hero-title { font-size: 2rem; }
+      /* The brand wrapped to two lines inside a 70px bar. Everything on the
+         right gives up what it can spare first — the status button keeps its
+         pulsing dot and drops the word — before the wordmark shrinks. */
+      .brand-name { font-size: 1.15rem; white-space: nowrap; }
+      .header-left { gap: 12px; }
+      .header-right { gap: 8px; }
+      .status-toggle { padding: 0 10px; }
+      .status-toggle span { display: none; }
+      .toolbar-meta { display: none; }
+      .lede h2 { font-size: 1.3rem; }
+      .lede p { font-size: 0.92rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cat-item.on.timing .tick, .stage-head.timing::after { animation: none; }
+      .stage-grid { animation: none; }
     }
   </style>
 </head>
 <body>
 
 <header class="top-header">
-  <div class="header-left">
-    <div class="brand-name"><a href="https://carino.systems/" title="Carino Systems — back to hub">Carino</a> <a class="brand-self" href="./" title="Carino Systems — reload"><span>Systems</span></a></div>
-    <div class="header-clock">
-      <span class="clock-time" id="clockLocal">00:00:00</span>
-      <span class="clock-tz" id="tzName">UTC</span>
-      <span class="brand-greeting" id="greeting">System Ready.</span>
+  <div class="shell header-inner">
+    <div class="header-left">
+      <div class="brand-name"><a href="https://carino.systems/" title="Carino Systems — back to hub">Carino</a> <a class="brand-self" href="./" title="Carino Systems — reload"><span>Systems</span></a></div>
+      <div class="header-clock">
+        <span class="clock-time" id="clockLocal">00:00:00</span>
+        <span class="clock-tz" id="tzName">UTC</span>
+        <span class="brand-greeting" id="greeting">System Ready.</span>
+      </div>
     </div>
-  </div>
 
-  <div class="header-right">
-    <div class="social-row">
-      <a href="https://github.com/MiguelCarino" target="_blank" class="icon-btn" title="GitHub">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-btn" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    <div class="header-right">
+      <div class="social-row">
+        <a href="https://github.com/MiguelCarino" target="_blank" class="icon-btn" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" class="icon-btn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+      </div>
+    
+      <button class="status-toggle" onclick="toggleDiag()">
+        <span data-i18n>Sys. Status</span> <div class="pulse-dot"></div>
+      </button>
+    </div>
+
+    <!-- Diagnostics overlay — anchored to the header row it drops from. -->
+    <div class="diag-dropdown" id="diagBox">
+      <div class="diag-row" style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+        <span class="diag-lbl" data-i18n>Last Check</span>
+        <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
+      </div>
+      <div class="diag-section"><span data-i18n>Reachability</span> <span id="reachCount" style="float:right;">--</span></div>
+      <div class="reach-grid" id="reachList"></div>
+      <div class="diag-section" data-i18n>Network</div>
+      <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
+      <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="ipv6">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
+      <div class="diag-row"><span class="diag-lbl">LAN</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="lanip">...</span><span class="status-dot unknown" id="dotLan"></span></div></div>
+      <div class="diag-row"><span class="diag-lbl">NAT</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="natType">...</span><span class="status-dot unknown" id="dotNat"></span></div></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Paths</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="netPaths">...</span><span class="status-dot unknown" id="dotPaths"></span></div></div>
+      <div class="diag-row"><span class="diag-lbl">ISP</span><span class="diag-val diag-val-trunc" id="sysISP">--</span></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Conn</span><span class="diag-val" id="sysConn">--</span></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Ping</span><span class="diag-val" id="pingVal">--</span></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
+      <div class="diag-section" data-i18n>Hardware</div>
+      <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
+      <div class="diag-row"><span class="diag-lbl">RAM</span><span class="diag-val" id="sysRAM">--</span></div>
+      <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val diag-val-trunc" id="sysGPU">--</span></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Screen</span><span class="diag-val" id="sysScreen">--</span></div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Battery</span><span class="diag-val" id="sysBattery">--</span></div>
+      <div class="diag-section" data-i18n>System</div>
+      <div class="diag-row"><span class="diag-lbl" data-i18n>Client</span><span class="diag-val diag-val-trunc" id="sysClient">--</span></div>
+      <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
+      <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
+      <div class="diag-actions">
+        <button class="retry-btn" id="retryNetwork">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          <span data-i18n>Retry</span>
+        </button>
+        <button class="retry-btn" id="exportStatus">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span data-i18n>Export</span>
+        </button>
+      </div>
+      <a class="retry-btn complete-test-btn" href="https://test.carino.systems" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span data-i18n>Complete test</span>
       </a>
     </div>
-    
-    <button class="status-toggle" onclick="toggleDiag()">
-      <span data-i18n>Sys. Status</span> <div class="pulse-dot"></div>
-    </button>
   </div>
 </header>
 
-<!-- Diagnostics Overlay -->
-<div class="diag-dropdown" id="diagBox">
-  <div class="diag-row" style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
-    <span class="diag-lbl" data-i18n>Last Check</span>
-    <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
+<h1 class="sr-only" data-i18n>Tools</h1>
+
+<div class="lede-outer">
+  <div class="shell lede">
+    <h2 class="lede-copy">
+      <span data-i18n>Open solutions for everyone.</span><br>
+      <span class="lede-2" data-i18n>Tailored support for anyone</span>
+    </h2>
+    <div class="lede-find">
+      <div class="search-wrap" id="searchWrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
+        <span class="kbd-hint">/</span>
+        <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
+      </div>
+      <span class="toolbar-meta" id="toolbarMeta"></span>
+    </div>
   </div>
-  <div class="diag-section"><span data-i18n>Reachability</span> <span id="reachCount" style="float:right;">--</span></div>
-  <div class="reach-grid" id="reachList"></div>
-  <div class="diag-section" data-i18n>Network</div>
-  <div class="diag-row"><span class="diag-lbl">IPv4</span><div class="diag-val-group"><span class="diag-val" id="ipv4">...</span><span class="status-dot unknown" id="dot4"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl">IPv6</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="ipv6">...</span><span class="status-dot unknown" id="dot6"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl">LAN</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="lanip">...</span><span class="status-dot unknown" id="dotLan"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl">NAT</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="natType">...</span><span class="status-dot unknown" id="dotNat"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Paths</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="netPaths">...</span><span class="status-dot unknown" id="dotPaths"></span></div></div>
-  <div class="diag-row"><span class="diag-lbl">ISP</span><span class="diag-val diag-val-trunc" id="sysISP">--</span></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Conn</span><span class="diag-val" id="sysConn">--</span></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Ping</span><span class="diag-val" id="pingVal">--</span></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
-  <div class="diag-section" data-i18n>Hardware</div>
-  <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
-  <div class="diag-row"><span class="diag-lbl">RAM</span><span class="diag-val" id="sysRAM">--</span></div>
-  <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val diag-val-trunc" id="sysGPU">--</span></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Screen</span><span class="diag-val" id="sysScreen">--</span></div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Battery</span><span class="diag-val" id="sysBattery">--</span></div>
-  <div class="diag-section" data-i18n>System</div>
-  <div class="diag-row"><span class="diag-lbl" data-i18n>Client</span><span class="diag-val diag-val-trunc" id="sysClient">--</span></div>
-  <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
-  <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
-  <div class="diag-actions">
-    <button class="retry-btn" id="retryNetwork">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-      <span data-i18n>Retry</span>
-    </button>
-    <button class="retry-btn" id="exportStatus">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-      <span data-i18n>Export</span>
-    </button>
-  </div>
-  <a class="retry-btn complete-test-btn" href="https://test.carino.systems" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-    <span data-i18n>Complete test</span>
-  </a>
 </div>
 
-
 <main class="shell">
+  <!-- browsing: every category, and the tools of the open one -->
+  <section class="browse" id="browse">
+    <nav class="cat-list" id="catList" aria-label="Categories"></nav>
 
-  <section class="hero">
-    <div>
-      <h1 class="hero-title" data-i18n>Workshop</h1>
-      <p class="hero-sub" id="heroSub">&nbsp;</p>
-    </div>
-
-    <div class="search-wrap" id="searchWrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
-      <span class="kbd-hint">/</span>
-      <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
+    <div class="stage-col">
+      <div class="stage-head" id="stageHead">
+        <div class="stage-title"><h3 id="stageName"></h3><span id="stageBlurb"></span></div>
+      </div>
+      <div class="stage-grid" id="stage"></div>
     </div>
   </section>
 
-</main>
-
-<div class="rail-outer">
-  <div class="shell">
-    <nav class="rail" id="rail" aria-label="Filter by tag"></nav>
-  </div>
-</div>
-
-<main class="shell">
-  <div class="results">
-    <span id="resultCount">&nbsp;</span>
-    <span id="resultHint"></span>
-  </div>
-  <div class="grid" id="grid"></div>
+  <!-- searching: everything that matches, from every category -->
+  <section id="found" class="hidden">
+    <div class="results-head" id="foundHead"></div>
+    <div class="grid" id="foundGrid"></div>
+  </section>
 </main>
 
 <script>
@@ -443,33 +535,37 @@
    ───────────────────────────────────────────────────────────────────── */
 
 const REGISTRY = 'assets/json/tools.json';
-let TOOLS = [], TAGS = [], tag = 'all', query = '';
+const DWELL = 5000;                       // how long a category holds the stage
+
+let TOOLS = [], TAGS = [], tag = null, query = '';
+let timer = null, held = false;           // held: the rotation is paused, not stopped
 
 /* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
    Fall through to the English key until it does — which is exactly what
    t() itself does for a missing entry. */
 const T = (s) => (typeof t === 'function' ? t(s) : s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const $ = (id) => document.getElementById(id);
+const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ── matching ──
    Space-separated terms, all of which must appear somewhere in the card:
-   its name, its description, its tag labels, or its keywords — the
+   its name, its description, its category labels, or its keywords — the
    unshown aliases in the registry, so "anonymize" finds the tag editor
    and "srt" finds Sync Studio without either word being on screen. */
 function haystack(tool) {
-  const labels = tool.tags.map((id) => tagLabel(id));
+  const labels = tool.tags.map(tagLabel);
   return [tool.name, T(tool.desc), tool.keywords || '', labels.join(' '), T(labels.join(' '))]
     .join(' ').toLowerCase();
 }
-function terms(q) { return q.toLowerCase().split(/\s+/).filter(Boolean); }
+const terms = (q) => q.toLowerCase().split(/\s+/).filter(Boolean);
 function matches(tool, q) {
-  if (!q) return true;
   const hay = haystack(tool);
   return terms(q).every((term) => hay.includes(term));
 }
 
-/* Highlight every matched run in a rendered string. Escapes first, then
-   inserts <mark>, so a tool description can never smuggle in markup. */
+/* Highlight every matched run. Escapes first, then inserts <mark>, so a
+   tool description can never smuggle in markup. */
 function mark(text, q) {
   const out = esc(text);
   const ts = terms(q).filter((x) => x.length > 1);
@@ -478,125 +574,192 @@ function mark(text, q) {
   return out.replace(re, '<mark>$1</mark>');
 }
 
-function tagLabel(id) {
-  const found = TAGS.find((x) => x.id === id);
-  return found ? found.label : id;
+const cat = (id) => TAGS.find((x) => x.id === id);
+const tagLabel = (id) => (cat(id) || {}).label || id;
+const toolsIn = (id) => TOOLS.filter((x) => x.tags.includes(id));
+function svg(d, extra) {
+  // `d` is raw SVG geometry from our own registry, not user input.
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ` +
+         `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra || ''}>${d}</svg>`;
 }
 
-/* ── rendering ── */
-function visible() { return TOOLS.filter((x) => (tag === 'all' || x.tags.includes(tag)) && matches(x, query)); }
-
-function renderRail() {
-  const rail = document.getElementById('rail');
-  // Counts respect the search but not the tag, so the rail always shows
-  // where the rest of your matches are rather than going all-zero.
-  const pool = TOOLS.filter((x) => matches(x, query));
-  const btn = (id, icon, label, n, on) =>
-    `<button class="rail-btn${on ? ' active' : ''}${n ? '' : ' zero'}" data-tag="${esc(id)}" type="button">` +
-    `<span class="rail-i">${icon}</span><span>${esc(label)}</span><span class="rail-n">${n}</span></button>`;
-  rail.innerHTML =
-    btn('all', '✦', T('All'), pool.length, tag === 'all') +
-    TAGS.map((g) => btn(g.id, g.icon, T(g.label), pool.filter((x) => x.tags.includes(g.id)).length, tag === g.id)).join('');
+function cardHTML(x, q) {
+  const chips = x.tags.map((id) => `<span class="c-tag">${esc(T(tagLabel(id)))}</span>`).join('') +
+    (x.local ? `<span class="c-tag local">${esc(T('Runs locally'))}</span>` : '');
+  // Only cross-origin links get a new tab, which is all of them today —
+  // but the registry is meant to outlive that assumption.
+  const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
+  return `<a class="card" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>
+    <div>
+      <div class="c-head"><span class="c-icon">${esc(x.icon)}</span><span class="c-title">${mark(x.name, q)}</span></div>
+      <div class="c-desc">${mark(T(x.desc), q)}</div>
+    </div>
+    <div class="c-foot"><span class="c-tags">${chips}</span><span class="c-link">${esc(T(x.cta))}</span></div>
+  </a>`;
 }
 
-function renderGrid() {
-  const grid = document.getElementById('grid');
-  const list = visible();
+/* ── browsing ── */
 
-  document.getElementById('resultCount').innerHTML =
-    T('{n} of {m} tools').replace('{n}', `<b>${list.length}</b>`).replace('{m}', TOOLS.length);
-  document.getElementById('resultHint').textContent =
-    list.length === 1 && query ? T('Press Enter to open') : '';
+/* One height for the whole browser, taken from the category that needs the
+   most rows at the current width. Reading it off the widest category rather
+   than the open one is the point: the columns stop resizing as the rotation
+   walks, and the eight rows on the left get the leftover height, which is
+   what makes them tall. */
+function fitBrowse() {
+  const grid = document.querySelector('.stage-grid');
+  const wide = window.matchMedia('(min-width: 981px)').matches;
+  if (!grid || !wide) { document.documentElement.style.removeProperty('--browse-h'); return; }
+  const px = (n) => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n));
+  const gap = px('--card-gap'), h = px('--card-h');
+  const cols = Math.max(1, Math.floor((grid.clientWidth + gap) / (300 + gap)));   // 300px = the minmax floor
+  const most = Math.max(...TAGS.map((g) => toolsIn(g.id).length));
+  const rows = Math.ceil(most / cols);
+  const head = document.querySelector('.stage-head');
+  const headH = head ? head.offsetHeight + parseFloat(getComputedStyle(head).marginBottom) : 0;
+  document.documentElement.style.setProperty('--browse-h', rows * h + (rows - 1) * gap + headH + 'px');
+}
 
-  if (!list.length) {
-    grid.innerHTML =
-      `<div class="empty"><div class="empty-big">⌀</div>` +
-      `<p>${T('Nothing matches')} “${esc(query)}”</p>` +
-      `<button type="button" id="resetBtn">${T('Show everything')}</button></div>`;
-    document.getElementById('resetBtn').onclick = () => { setQuery(''); setTag('all'); };
-    return;
+function renderCatList() {
+  $('catList').innerHTML = TAGS.map((g) => `
+    <button class="cat-item${g.id === tag ? ' on' : ''}" data-tag="${esc(g.id)}" type="button"
+            aria-current="${g.id === tag}">
+      <span class="tick"></span>${svg(g.path)}<span>${esc(T(g.label))}</span><span class="n">${toolsIn(g.id).length}</span>
+    </button>`).join('');
+}
+
+function renderStage() {
+  const g = cat(tag);
+  if (!g) return;
+  $('stageName').textContent = T(g.label);
+  $('stageBlurb').textContent = T(g.blurb);
+  // Replacing the node rather than its innerHTML restarts the swap animation,
+  // so a category change is visible even between two four-tool categories.
+  const next = $('stage').cloneNode(false);
+  next.innerHTML = toolsIn(tag).map((x) => cardHTML(x, '')).join('');
+  $('stage').replaceWith(next);
+  fitBrowse();
+}
+
+/* ── the rotation ──
+   Walks to the next category on its own. It pauses under the pointer and
+   while the search box is in use, because moving the thing someone is
+   reading is worse than showing them one category fewer. */
+function stopTimer() {
+  clearTimeout(timer); timer = null;
+  document.querySelector('.cat-item.on')?.classList.remove('timing');
+  $('stageHead').classList.remove('timing');
+}
+function armTimer() {
+  stopTimer();
+  if (held || query || reduced() || TAGS.length < 2) return;
+  // void offsetWidth forces a reflow between removing and re-adding the class,
+  // or the browser coalesces both and the animation never restarts.
+  for (const el of [document.querySelector('.cat-item.on'), $('stageHead')]) {
+    if (el) { void el.offsetWidth; el.classList.add('timing'); }
   }
+  timer = setTimeout(() => {
+    const i = TAGS.findIndex((g) => g.id === tag);
+    select(TAGS[(i + 1) % TAGS.length].id, false);
+  }, DWELL);
+}
+function hold(on) { held = on; armTimer(); }
 
-  grid.innerHTML = list.map((x, i) => {
-    const chips = x.tags.map((id) => `<span class="c-tag">${esc(T(tagLabel(id)))}</span>`).join('') +
-      (x.local ? `<span class="c-tag local">${esc(T('Runs locally'))}</span>` : '');
-    // Only cross-origin links get a new tab, which is all of them today —
-    // but the registry is meant to outlive that assumption.
-    const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
-    return `<a class="card" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''} style="animation-delay:${Math.min(i, 14) * 18}ms">
-      <div>
-        <div class="c-head"><span class="c-icon">${esc(x.icon)}</span><span class="c-title">${mark(x.name, query)}</span></div>
-        <div class="c-desc">${mark(T(x.desc), query)}</div>
-      </div>
-      <div class="c-foot"><span class="c-tags">${chips}</span><span class="c-link">${esc(T(x.cta))}</span></div>
-    </a>`;
-  }).join('');
+/* ── state ──
+   #medical selects a category and, because it was asked for by name,
+   leaves the rotation off. #/dicom is a search. Rotation never writes to
+   the URL: it is ambient, and history should record what you chose. */
+function select(id, manual) {
+  tag = id;
+  renderCatList();
+  renderStage();
+  if (manual) {
+    held = false;
+    history.replaceState(null, '', '#' + id);
+    stopTimer();                                   // a deliberate choice stays put
+  } else armTimer();
+}
+
+function showSearch() {
+  const list = TOOLS.filter((x) => matches(x, query));
+  $('browse').classList.add('hidden');
+  $('found').classList.remove('hidden');
+  $('foundHead').innerHTML = T('{n} of {m} tools').replace('{n}', `<b>${list.length}</b>`).replace('{m}', TOOLS.length);
+  $('foundGrid').innerHTML = list.length
+    ? list.map((x) => cardHTML(x, query)).join('')
+    : `<div class="empty"><div class="empty-big">&empty;</div>` +
+      `<p>${T('Nothing matches')} &ldquo;${esc(query)}&rdquo;</p>` +
+      `<button type="button" id="resetBtn">${T('Show everything')}</button></div>`;
+  const r = $('resetBtn'); if (r) r.onclick = () => setQuery('');
+}
+function showBrowse() {
+  $('found').classList.add('hidden');
+  $('browse').classList.remove('hidden');
+  renderCatList();
+  renderStage();
+  armTimer();
 }
 
 function render() {
-  document.getElementById('heroSub').innerHTML =
-    T('<b>{n} tools</b>, one index. Type to filter.').replace('{n}', TOOLS.length);
-  document.getElementById('q').placeholder = T('Search tools…');
-  renderRail();
-  renderGrid();
+  $('q').placeholder = T('Search tools…');
+  $('toolbarMeta').innerHTML =
+    T('<b>{n} tools</b> in {c} categories').replace('{n}', TOOLS.length).replace('{c}', TAGS.length);
+  if (query) { stopTimer(); showSearch(); } else showBrowse();
 }
 // i18n.js re-runs this after a fleet-wide language switch.
 window.renderTools = () => { if (TOOLS.length) render(); };
 
-/* ── state, mirrored in the hash ──
-   #medical            a tag
-   #all/dicom          a search, with or without a tag ahead of it
-   Tag changes push a history entry (the back button should undo a click);
-   keystrokes replace it, so one search is not fifteen entries deep. */
-function writeHash(push) {
-  const h = '#' + tag + (query ? '/' + encodeURIComponent(query) : '');
-  if (location.hash === h) return;
-  if (push) location.hash = h;
-  else history.replaceState(null, '', location.pathname + location.search + h);
-}
-function readHash() {
-  const raw = decodeURIComponent(location.hash.replace(/^#/, ''));
-  const cut = raw.indexOf('/');
-  const wantTag = cut < 0 ? raw : raw.slice(0, cut);
-  const wantQ = cut < 0 ? '' : raw.slice(cut + 1);
-  tag = (wantTag === 'all' || TAGS.some((g) => g.id === wantTag)) ? wantTag : 'all';
-  query = wantQ;
-  const q = document.getElementById('q');
-  if (q.value !== query) q.value = query;
-  document.getElementById('searchWrap').classList.toggle('has-text', !!query);
-}
-
-function setTag(next) { tag = next; writeHash(true); render(); }
 function setQuery(next) {
   query = next;
-  document.getElementById('q').value = next;
-  document.getElementById('searchWrap').classList.toggle('has-text', !!next);
-  writeHash(false);
+  $('q').value = next;
+  $('searchWrap').classList.toggle('has-text', !!next);
+  history.replaceState(null, '', next ? '#/' + encodeURIComponent(next) : location.pathname + location.search);
   render();
+}
+
+function readHash() {
+  const raw = decodeURIComponent(location.hash.replace(/^#/, ''));
+  if (raw.startsWith('/')) { query = raw.slice(1); tag = TAGS[0].id; return false; }
+  query = '';
+  const asked = TAGS.some((g) => g.id === raw);
+  tag = asked ? raw : TAGS[0].id;
+  return !asked;                                   // rotate only if nobody named a category
 }
 
 /* ── wiring ── */
 function boot(data) {
   TAGS = data.tags || [];
   TOOLS = data.tools || [];
-  readHash();
-  render();
+  if (!TAGS.length || !TOOLS.length) throw new Error('empty registry');
+  document.documentElement.style.setProperty('--dwell', DWELL + 'ms');
 
-  document.getElementById('rail').addEventListener('click', (e) => {
-    const b = e.target.closest('.rail-btn');
-    if (b) setTag(b.dataset.tag);
+  const rotate = readHash();
+  $('q').value = query;
+  $('searchWrap').classList.toggle('has-text', !!query);
+  render();
+  if (!rotate) stopTimer();
+
+  $('catList').addEventListener('click', (e) => {
+    const b = e.target.closest('.cat-item');
+    if (b) select(b.dataset.tag, true);
   });
 
-  const q = document.getElementById('q');
-  q.addEventListener('input', () => setQuery(q.value));
-  document.getElementById('qClear').addEventListener('click', () => { setQuery(''); q.focus(); });
+  // Reading is not idling: pause while the pointer or keyboard is in here.
+  const browse = $('browse');
+  browse.addEventListener('pointerenter', () => hold(true));
+  browse.addEventListener('pointerleave', () => hold(false));
+  browse.addEventListener('focusin', () => hold(true));
+  browse.addEventListener('focusout', () => hold(false));
+  window.addEventListener('resize', fitBrowse);
 
+  const q = $('q');
+  q.addEventListener('input', () => setQuery(q.value));
+  $('qClear').addEventListener('click', () => { setQuery(''); q.focus(); });
   q.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { if (q.value) setQuery(''); else q.blur(); }
-    else if (e.key === 'Enter') {
+    else if (e.key === 'Enter' && query) {
       // One result left is an unambiguous answer — take it.
-      const only = visible();
-      if (only.length === 1) document.querySelector('.card')?.click();
+      const only = $('foundGrid').querySelectorAll('.card');
+      if (only.length === 1) only[0].click();
     }
   });
 
@@ -607,11 +770,12 @@ function boot(data) {
     if ((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
       e.preventDefault();
       q.focus(); q.select();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
-  window.addEventListener('hashchange', () => { readHash(); render(); });
+  // A backgrounded tab should not burn through eight categories unwatched.
+  document.addEventListener('visibilitychange', () => hold(document.hidden));
+  window.addEventListener('hashchange', () => { const r = readHash(); $('q').value = query; render(); if (!r) stopTimer(); });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -620,20 +784,19 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(boot)
     .catch((err) => {
       // Without the registry there is no page, so say which file is missing
-      // rather than leaving an empty grid that looks like a filter result.
-      document.getElementById('grid').innerHTML =
-        `<div class="empty"><div class="empty-big">⚠</div><p>${esc(T('Could not load the tool index'))} — ` +
+      // rather than leaving an empty stage that looks like a filter result.
+      $('browse').classList.add('hidden');
+      $('found').classList.remove('hidden');
+      $('foundGrid').innerHTML =
+        `<div class="empty"><div class="empty-big">&#9888;</div><p>${esc(T('Could not load the tool index'))} — ` +
         `<code>${REGISTRY}</code><br>${esc(err.message)}</p></div>`;
-      document.getElementById('resultCount').textContent = '';
     });
 });
 
-function toggleDiag() {
-  document.getElementById('diagBox').classList.toggle('open');
-}
+function toggleDiag() { $('diagBox').classList.toggle('open'); }
 
 document.addEventListener('click', (e) => {
-  const diagBox = document.getElementById('diagBox');
+  const diagBox = $('diagBox');
   const toggleBtn = document.querySelector('.status-toggle');
   if (!diagBox.contains(e.target) && !toggleBtn.contains(e.target)) {
     diagBox.classList.remove('open');
