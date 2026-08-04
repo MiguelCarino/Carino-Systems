@@ -81,6 +81,7 @@ const I18N = {
         'Search tools…': 'Buscar herramientas…',
         // Facet rail + status line
         'All': 'Todo',
+        'next': 'siguiente',
         'Medical': 'Medicina',
         'Files': 'Archivos',
         'Security': 'Seguridad',
@@ -189,6 +190,7 @@ const I18N = {
         'Search tools…': 'Buscar ferramentas…',
         // Facet rail + status line
         'All': 'Tudo',
+        'next': 'próxima',
         'Medical': 'Medicina',
         'Files': 'Arquivos',
         'Security': 'Segurança',
@@ -297,6 +299,7 @@ const I18N = {
         'Search tools…': 'ツールを検索…',
         // Facet rail + status line
         'All': 'すべて',
+        'next': '次へ',
         'Medical': '医療',
         'Files': 'ファイル',
         'Security': 'セキュリティ',
@@ -405,6 +408,7 @@ const I18N = {
         'Search tools…': 'Поиск инструментов…',
         // Facet rail + status line
         'All': 'Все',
+        'next': 'далее',
         'Medical': 'Медицина',
         'Files': 'Файлы',
         'Security': 'Безопасность',

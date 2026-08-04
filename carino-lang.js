@@ -50,7 +50,7 @@
 
   var CSS = ''
     + '#cnLangBtn{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid ' + BORDER + ';'
-    + 'color:' + MUTED + ';font-family:' + MONO + ';font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;'
+    + 'color:' + MUTED + ';font-family:' + MONO + ';font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;'
     + 'padding:0 10px;height:32px;border-radius:4px;cursor:pointer;transition:.2s;white-space:nowrap;}'
     + '#cnLangBtn:hover{border-color:' + A + ';color:' + A + ';background:rgba(234,179,8,.08);}'
     + '#cnLangBox{position:fixed;top:56px;right:12px;width:180px;background:' + BG + ';'
@@ -61,7 +61,7 @@
     + 'background:transparent;border:0;border-radius:5px;padding:7px 10px;cursor:pointer;text-align:left;'
     + 'color:' + TEXT + ';font-size:.8rem;}'
     + '#cnLangBox button:hover{background:rgba(234,179,8,.08);color:' + A + ';}'
-    + '#cnLangBox button .code{font-family:' + MONO + ';font-size:.62rem;letter-spacing:.1em;color:' + MUTED + ';}'
+    + '#cnLangBox button .code{font-family:' + MONO + ';font-size:.65rem;letter-spacing:.1em;color:' + MUTED + ';}'
     + '#cnLangBox button.active{color:' + A + ';}'
     + '#cnLangBox button.active .code{color:' + A + ';}';
 

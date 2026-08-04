@@ -6,6 +6,9 @@
   <link rel="icon" href="logo.webp">
   <title>Carino Systems</title>
   <link rel="stylesheet" href="fonts/carino-fonts.css">
+  <!-- Section animations: motion here, geometry in carino-anim.js. Local
+       copies of the canonical pair on branding.carino.systems. -->
+  <link rel="stylesheet" href="carino-anim.css">
   <style>
     :root {
       /* Palette — mirrors branding.carino.systems */
@@ -30,8 +33,34 @@
       --pad-l:          var(--shell-pad);
       --pad-r:          var(--shell-pad);
 
+      /* The type scale, from branding.carino.systems §02. Thirteen steps and
+         nothing in between: every size on this page is one of these tokens.
+         --fs-micro is the floor — no UI text below it, ever. The wordmark is
+         the one exception the brand allows, being a display glyph. */
+      --fs-micro:   0.6rem;
+      --fs-label:   0.65rem;
+      --fs-btn:     0.7rem;
+      --fs-sm:      0.8rem;
+      --fs-mono:    0.85rem;
+      --fs-sec:     0.9rem;
+      --fs-body:    1rem;
+      --fs-lg:      1.05rem;
+      --fs-h3:      1.2rem;
+      --fs-h2:      1.5rem;
+      --fs-h1:      1.9rem;
+      --fs-display: 2.4rem;
+
       --tile-gap:       10px;
       --desc-lines:     2;
+
+      /* Card material. A surface is a gradient plus two hairlines: one bright
+         along the top edge where the light would land, one dark along the
+         bottom. Both are inset shadows on the same element as the border, so a
+         tile is still one box — no wrapper, nothing extra for fit() to measure. */
+      --card:           linear-gradient(180deg, #141414 0%, #0b0b0b 58%, #090909 100%);
+      --card-lit:       linear-gradient(180deg, #1b1712 0%, #0d0b09 58%, #090909 100%);
+      --edge-light:     inset 0 1px 0 rgba(255,255,255,0.055);
+      --edge-dark:      inset 0 -1px 0 rgba(0,0,0,0.5);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -49,12 +78,20 @@
        page that moved the thing you were reading.
 
        Now the whole fleet is on the glass at once. The page is a
-       four-row grid the height of the viewport — header, command bar,
-       tiles, status line — and nothing outside a tile ever scrolls.
-       The tile grid sizes itself: JS picks the column/row count whose
-       cells land closest to a readable proportion and fills the space
-       exactly, so filtering to four tools makes four big cards rather
-       than four cards and a hole.
+       three-row grid the height of the viewport — header, command bar,
+       tiles — and nothing outside a tile ever scrolls. The tile grid
+       sizes itself: JS picks the column/row count whose cells land
+       closest to a readable proportion and fills the space exactly, so
+       filtering to four tools makes four big cards rather than four
+       cards and a hole.
+
+       Because the board IS the page, the cards have to carry the whole
+       impression on their own. So they are treated as a material rather
+       than as boxes: a lit top edge, a ruled field behind them, a gold
+       pool that follows the cursor, and an entrance that plays when you
+       change facet but never while you type. All of it is transform,
+       opacity and colour — nothing an effect does can feed back into
+       the fit, which measures the cell and budgets the content in it.
        ───────────────────────────────────────────────────────────── */
 
     html { height: 100%; }
@@ -73,9 +110,18 @@
       background: var(--bg-header);
       color: var(--text);
       font-family: 'IBM Plex Sans', sans-serif;
-      /* A single wash of gold behind everything, so the black is not flat. */
-      background-image: radial-gradient(1100px 420px at 50% -18%, rgba(234,179,8,0.07) 0%, transparent 62%);
-      background-repeat: no-repeat;
+      /* Four layers, listed front to back. A ruled 48px field gives the black
+         a sense of scale — you read it as a surface rather than as absence —
+         and the two offset gold pools keep the wash from looking like one lamp
+         aimed at the middle. Every layer is fixed and non-repeating, so none of
+         it moves or tiles when the grid inside re-lays out. */
+      background-image:
+        repeating-linear-gradient(0deg,   rgba(255,255,255,0.016) 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(90deg,  rgba(255,255,255,0.016) 0 1px, transparent 1px 48px),
+        radial-gradient(1200px 460px at 22% -14%, rgba(234,179,8,0.085) 0%, transparent 64%),
+        radial-gradient(900px 420px at 88% 6%,   rgba(234,179,8,0.045) 0%, transparent 60%);
+      background-repeat: repeat, repeat, no-repeat, no-repeat;
+      background-attachment: fixed;
     }
 
     .shell { width: 100%; max-width: 1560px; margin: 0 auto; padding: 0 var(--pad-r) 0 var(--pad-l); }
@@ -103,7 +149,7 @@
 
     .brand-name {
       font-family: 'Red Hat Display', sans-serif;
-      font-size: 1.45rem; font-weight: 900; line-height: 1; white-space: nowrap;
+      font-size: var(--fs-h2); font-weight: 900; line-height: 1; white-space: nowrap;
       background: linear-gradient(130deg, #fef08a 0%, #eab308 50%, #b45309 100%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -113,10 +159,10 @@
     .brand-self:hover span { text-shadow: 0 0 14px var(--accent-dim); }
 
     .header-clock { display: flex; align-items: baseline; gap: 10px; border-left: 1px solid var(--border); padding-left: 22px; min-width: 0; }
-    .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: 1.05rem; color: var(--text); font-weight: 700; }
-    .clock-tz { font-size: 0.62rem; color: var(--bg-header); background: var(--accent); padding: 2px 6px; border-radius: 3px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
+    .clock-time { font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-lg); color: var(--text); font-weight: 700; }
+    .clock-tz { font-size: var(--fs-label); color: var(--bg-header); background: var(--accent); padding: 2px 6px; border-radius: 3px; font-weight: 700; font-family: 'IBM Plex Mono', monospace; }
     .brand-greeting {
-      font-size: 0.72rem; color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
+      font-size: var(--fs-sm); color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
       margin-left: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
@@ -143,7 +189,7 @@
       display: flex; align-items: center; gap: 8px;
       background: transparent; border: 1px solid var(--border);
       color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+      font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 0.1em;
       padding: 0 14px; height: 30px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
     .status-toggle:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-faint); }
@@ -169,21 +215,21 @@
     .diag-dropdown::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     .diag-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-    .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; }
+    .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); }
     .diag-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
     .diag-val { color: var(--text); text-align: right; }
     .diag-val-trunc { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
     .diag-val-group { display: flex; align-items: center; gap: 6px; }
-    .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
+    .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
 
     /* Compact single-line cells in a 3-up grid: dot + name (+ latency). The
        resolved IP is kept in the DOM but hidden — revealed on hover (cell title)
        and printed in full by the PNG export, so the panel stays short. */
     .reach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 4px; margin-bottom: 8px; }
     .reach-cell { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 3px; padding: 3px 5px; min-width: 0; cursor: default; }
-    .reach-cell .lbl { flex: 1 1 auto; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .reach-cell .lbl { flex: 1 1 auto; min-width: 0; font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); color: var(--text-sec); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .reach-cell .ms, .reach-cell .ip { display: none; }
-    @media (max-width: 480px) { .reach-grid { grid-template-columns: repeat(3, 1fr); } .reach-cell { padding: 4px 5px; } .reach-cell .lbl { font-size: 0.6rem; } }
+    @media (max-width: 480px) { .reach-grid { grid-template-columns: repeat(3, 1fr); } .reach-cell { padding: 4px 5px; } .reach-cell .lbl { font-size: var(--fs-micro); } }
 
     .status-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .status-dot.success { background: #eab308; box-shadow: 0 0 4px #eab308; }
@@ -197,7 +243,7 @@
       display: flex; align-items: center; justify-content: center; gap: 5px;
       background: transparent; border: 1px solid var(--border);
       color: var(--text-sec); font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+      font-size: var(--fs-btn); text-transform: uppercase; letter-spacing: 0.1em;
       padding: 8px 0; border-radius: 4px; cursor: pointer; margin-top: 16px; width: 100%; transition: 0.2s;
     }
     .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -211,33 +257,43 @@
        The only two controls on the page — type, or pick a facet — on one
        line. Categories are filters here, not a place you navigate to, so
        there is no second view to come back from. */
-    .bar-outer { border-bottom: 1px solid var(--border); background: rgba(9,9,9,0.6); }
+    .bar-outer {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(16,16,16,0.72) 0%, rgba(8,8,8,0.72) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
     .bar {
       height: 54px; display: flex; align-items: center; gap: 14px; min-width: 0;
     }
 
     .search-wrap {
-      position: relative; display: flex; align-items: center; gap: 10px; flex: 0 1 300px;
-      background: #0d0d0d; border: 1px solid var(--border); border-radius: 7px;
-      padding: 0 12px; height: 34px; transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative; display: flex; align-items: center; gap: 10px; flex: 0 1 320px;
+      background: linear-gradient(180deg, #131313 0%, #0b0b0b 100%);
+      border: 1px solid var(--border); border-radius: 999px;
+      box-shadow: var(--edge-light);
+      padding: 0 14px; height: 36px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .search-wrap:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint); }
+    .search-wrap:focus-within {
+      border-color: var(--accent-dim);
+      box-shadow: var(--edge-light), 0 0 0 3px rgba(234,179,8,0.09), 0 0 22px rgba(234,179,8,0.12);
+    }
     .search-wrap > svg { width: 15px; height: 15px; color: var(--text-muted); flex-shrink: 0; }
     .search-wrap:focus-within > svg { color: var(--accent); }
     #q {
       flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
-      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: 0.86rem;
+      color: var(--text); font-family: 'IBM Plex Sans', sans-serif; font-size: var(--fs-sec);
     }
     #q::placeholder { color: var(--text-muted); }
     #q::-webkit-search-cancel-button { display: none; }
     .kbd {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); color: var(--text-muted);
       border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; flex-shrink: 0; line-height: 1.5;
     }
     .search-wrap:focus-within .kbd, .search-wrap.has-text .kbd { display: none; }
     .q-clear {
       display: none; background: transparent; border: 0; cursor: pointer; flex-shrink: 0;
-      color: var(--text-muted); font-size: 1.2rem; line-height: 1; padding: 0 2px;
+      color: var(--text-muted); font-size: var(--fs-h3); line-height: 1; padding: 0 2px;
     }
     .q-clear:hover { color: var(--accent); }
     .search-wrap.has-text .q-clear { display: block; }
@@ -252,31 +308,51 @@
     .facets::-webkit-scrollbar { display: none; }
     .facet {
       display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
-      background: transparent; border: 1px solid var(--border); border-radius: 999px;
+      background: linear-gradient(180deg, #131313 0%, #0c0c0c 100%);
+      border: 1px solid var(--border); border-radius: 999px;
+      box-shadow: var(--edge-light);
       color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
-      padding: 0 10px; height: 30px; cursor: pointer; transition: 0.16s; white-space: nowrap;
+      font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.02em;
+      padding: 0 11px; height: 31px; cursor: pointer; white-space: nowrap;
+      transition: color 0.18s, border-color 0.18s, background 0.18s, box-shadow 0.18s, transform 0.18s;
     }
-    .facet:hover { color: var(--text); border-color: #3d3d3d; background: #101010; }
-    .facet svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .facet:hover {
+      color: var(--text); border-color: #454545; transform: translateY(-1px);
+      box-shadow: var(--edge-light), 0 4px 12px rgba(0,0,0,0.45);
+    }
+    .facet svg { width: 13px; height: 13px; flex-shrink: 0; transition: color 0.18s; }
+    .facet:hover svg { color: var(--accent); }
     .facet .n {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--text-muted);
-      transition: color 0.16s;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); color: var(--text-muted);
+      transition: color 0.18s;
     }
+    /* The selected facet is the one lit thing in the strip: gold fill, a warm
+       halo under it, and the top hairline flipped to white-over-gold so it still
+       reads as the same material rather than a pasted-on swatch. */
     .facet.on {
-      color: var(--bg-header); background: var(--accent); border-color: var(--accent);
-      box-shadow: 0 2px 14px var(--accent-glow);
+      color: #050505;
+      background: linear-gradient(180deg, #f7d64a 0%, var(--accent) 55%, #c99206 100%);
+      border-color: #f0cb3e;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 3px 16px rgba(234,179,8,0.28);
     }
-    .facet.on .n { color: rgba(5,5,5,0.65); }
+    .facet.on:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 5px 20px rgba(234,179,8,0.34); }
+    .facet.on svg, .facet.on:hover svg { color: rgba(5,5,5,0.8); }
+    .facet.on .n { color: rgba(5,5,5,0.62); }
     .facet:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ── row 3: every tool, at once ── */
     .board { min-height: 0; display: flex; }
     /* The vertical breathing room lives on the wrapper, never on #grid: the
-       fit reads grid.clientHeight, and padding there would silently inflate it. */
-    .board > .shell { display: flex; min-width: 0; padding: var(--tile-gap) var(--pad-r) var(--tile-gap) var(--pad-l); }
+       fit reads grid.clientHeight, and padding there would silently inflate it.
+       Column, so the section head and mark take their own height off the top
+       and bottom and #grid is left with exactly what remains. */
+    .board > .shell {
+      display: flex; flex-direction: column; justify-content: flex-start;
+      min-width: 0; min-height: 0;
+      padding: var(--tile-gap) var(--pad-r) var(--tile-gap) var(--pad-l);
+    }
     #grid {
-      flex: 1 1 auto; min-width: 0; min-height: 0;
+      flex: 0 0 auto; min-width: 0; min-height: 0;
       display: grid; gap: var(--tile-gap);
       /* Tracks are capped, not free — see fit(). When a filter leaves four
          tools on a 27" screen the block centres itself instead of inflating
@@ -287,28 +363,152 @@
        — a phone in landscape, say. The grid scrolls; the page still does not. */
     #grid.overflowing { overflow-y: auto; align-content: start; }
 
+    /* [hidden] is `display:none` from the UA sheet, which a class rule setting
+       `display:flex` outranks — so off the section view these three rows kept
+       their padding and quietly took ~36px off the grid. */
+    .sec-head[hidden], .sec-anim[hidden], .sec-foot[hidden] { display: none; }
+
+    /* ── the section frame ────────────────────────────────────────
+       One category on the glass at a time: its name above the cards, its
+       animation below them. Both rows are `auto` inside the board's column,
+       so whatever they take, #grid gives up — and fit() sees the smaller box
+       without being told about it. */
+    .sec-head {
+      flex: none; display: flex; align-items: baseline; gap: 12px;
+      padding: 2px 2px 8px; min-width: 0;
+    }
+    .sec-head .s-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 9px var(--accent); flex: none; align-self: center;
+    }
+    .sec-head .s-name {
+      font-family: 'Red Hat Display', sans-serif; font-weight: 900;
+      font-size: var(--fs-lg); letter-spacing: 0.02em; text-transform: uppercase;
+      color: var(--text); white-space: nowrap;
+    }
+    .sec-head .s-blurb {
+      font-size: var(--fs-sm); color: var(--text-muted); min-width: 0;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .sec-head .s-count {
+      margin-left: auto; flex: none;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-btn);
+      letter-spacing: 0.12em; color: var(--text-muted);
+    }
+    .sec-head .s-count b { color: var(--accent); font-weight: 700; }
+
+    /* The mark sits between the section's name and its tools — you meet it on
+       the way in, rather than finding it after you have already read the cards. */
+    .sec-anim {
+      flex: none; display: flex; justify-content: center; align-items: center;
+      padding: 2px 2px 10px; min-width: 0;
+    }
+    .sec-anim .canim { max-width: 300px; }
+
+    .sec-foot {
+      flex: none; display: flex; align-items: center; justify-content: flex-end;
+      gap: 18px; padding: 12px 2px 2px; min-width: 0;
+    }
+
+    .s-next {
+      flex: none; display: inline-flex; align-items: center; gap: 7px;
+      background: transparent; border: 1px solid var(--border); border-radius: 999px;
+      box-shadow: var(--edge-light);
+      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
+      font-size: var(--fs-btn); text-transform: uppercase; letter-spacing: 0.11em;
+      padding: 0 12px; height: 28px; cursor: pointer; white-space: nowrap;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .s-next:hover { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-faint); }
+    .s-next b { color: var(--text-sec); font-weight: 600; }
+    .s-next:hover b { color: var(--accent); }
+    .s-next .arr { transition: transform 0.18s; }
+    .s-next:hover .arr { transform: translateY(2px); }
+
+    /* Moving between sections is a step, not a scroll: the outgoing set is not
+       animated out (it is replaced), the incoming one uses the tile entrance.
+       This is only the band and the heading catching up with it. */
+    @keyframes sec-in { from { opacity: 0; transform: translateY(6px); } }
+    .board.stepping .sec-head, .board.stepping .sec-anim {
+      animation: sec-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    @media (max-width: 860px) {
+      .sec-head .s-blurb { display: none; }
+      .sec-anim .canim { max-width: 200px; }
+      .sec-foot { gap: 12px; }
+    }
+    @media (max-width: 560px) {
+      .sec-anim { display: none; }
+      .s-next { flex: 1 1 auto; justify-content: center; }
+    }
+
     .tile {
       position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0;
-      background: #0c0c0c; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 11px;
+      box-shadow: var(--edge-light), var(--edge-dark);
       padding: 11px 13px; overflow: hidden; text-decoration: none; color: inherit;
-      transition: border-color 0.18s, background 0.18s, transform 0.18s, box-shadow 0.18s;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+      isolation: isolate;
+    }
+    /* The highlight. A gold pool centred on the pointer — JS writes --mx/--my as
+       percentages on the hovered tile, so the light tracks the cursor across the
+       card instead of the whole card just turning on. Sits under the content
+       (z-index -1 inside the tile's own stacking context) and is painted only
+       while hovered, so nothing composites on the other thirty-one tiles. */
+    .tile::before {
+      content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+      background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
+                  rgba(234,179,8,0.16) 0%, rgba(234,179,8,0.05) 38%, transparent 72%);
+      opacity: 0; transition: opacity 0.22s;
     }
     .tile::after {
-      /* The gold edge only exists when you are on the tile. */
-      content: ''; position: absolute; inset: 0 auto 0 0; width: 2px;
-      background: var(--accent); opacity: 0; transition: opacity 0.18s;
+      /* The gold edge only exists when you are on the tile, and it grows out of
+         the middle rather than switching on flat. */
+      content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 0;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, transparent, var(--accent) 18%, var(--accent) 82%, transparent);
+      transition: height 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .tile:hover, .tile:focus-visible {
-      border-color: var(--accent-dim); background: linear-gradient(150deg, #17120a 0%, #0a0a0a 70%);
-      transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.55), 0 0 18px var(--accent-glow);
+      border-color: var(--accent-dim); background: var(--card-lit);
+      transform: translateY(-3px);
+      box-shadow: var(--edge-light), 0 14px 30px rgba(0,0,0,0.6), 0 0 0 1px rgba(234,179,8,0.08);
       outline: none;
     }
-    .tile:hover::after, .tile:focus-visible::after { opacity: 1; }
+    .tile:hover::before, .tile:focus-visible::before { opacity: 1; }
+    .tile:hover::after, .tile:focus-visible::after { height: 100%; }
 
-    .t-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
-    .t-icon { font-size: 1.05rem; line-height: 1.2; flex-shrink: 0; }
+    /* Tiles arrive rather than appear. The stagger is index-driven and capped in
+       JS, so a 32-tool board settles in about a fifth of a second and a filtered
+       four-tool board is effectively instant. Transform and opacity only — this
+       runs after fit() has sized the tracks and cannot feed back into layout. */
+    @keyframes tile-in { from { opacity: 0; transform: translateY(9px) scale(0.985); } }
+    #grid.entering .tile {
+      animation: tile-in 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: var(--d, 0ms);
+    }
+
+    .t-head { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    /* The icon gets a chip. Without it the card is a paragraph with a glyph in
+       front; with it there is something to land on before you read anything. */
+    .t-icon {
+      flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--fs-body); line-height: 1;
+      background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+      border: 1px solid #2e2e2e;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .tile:hover .t-icon, .tile:focus-visible .t-icon {
+      border-color: var(--accent-dim);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 12px rgba(234,179,8,0.18);
+    }
     .t-name {
-      font-size: 0.86rem; font-weight: 700; color: var(--text); line-height: 1.25;
+      font-family: 'Red Hat Display', 'IBM Plex Sans', sans-serif;
+      font-size: var(--fs-lg); font-weight: 800; color: var(--text); line-height: 1.2;
+      letter-spacing: -0.005em;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
     }
     .t-local {
@@ -316,7 +516,7 @@
       box-shadow: 0 0 6px var(--accent); flex-shrink: 0; margin-left: auto;
     }
     .t-desc {
-      margin-top: 5px; font-size: 0.73rem; color: var(--text-sec); line-height: 1.45;
+      margin-top: 5px; font-size: var(--fs-sm); color: var(--text-sec); line-height: 1.45;
       display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--desc-lines);
       overflow: hidden; min-height: 0;
     }
@@ -325,13 +525,16 @@
       justify-content: space-between; gap: 8px; min-width: 0;
     }
     .t-cat {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.58rem; text-transform: uppercase;
-      letter-spacing: 0.09em; color: var(--text-muted);
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); text-transform: uppercase;
+      letter-spacing: 0.13em; color: #5c5c5c;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      transition: color 0.2s;
     }
+    .tile:hover .t-cat, .tile:focus-visible .t-cat { color: #8a8a8a; }
     .t-go {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: var(--accent);
-      opacity: 0; transform: translateX(-3px); transition: 0.18s; flex-shrink: 0;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-btn); font-weight: 600;
+      letter-spacing: 0.04em; color: var(--accent);
+      opacity: 0; transform: translateX(-4px); transition: 0.2s; flex-shrink: 0;
     }
     .tile:hover .t-go, .tile:focus-visible .t-go { opacity: 1; transform: none; }
 
@@ -343,10 +546,12 @@
        after "Software Cat…" is not a label, so down here the name wraps to two
        lines instead of being cut. */
     #grid.tiny .tile { padding: 8px 9px; justify-content: center; }
-    #grid.tiny .t-head { align-items: flex-start; gap: 6px; }
-    #grid.tiny .t-icon { font-size: 0.9rem; }
+    #grid.tiny .t-head { align-items: center; gap: 7px; }
+    /* The chip shrinks rather than disappearing — at this density it is the only
+       thing distinguishing one cell from the next at a glance. */
+    #grid.tiny .t-icon { width: 20px; height: 20px; border-radius: 6px; font-size: var(--fs-sm); }
     #grid.tiny .t-name {
-      font-size: 0.66rem; line-height: 1.22; white-space: normal;
+      font-size: var(--fs-btn); font-weight: 700; line-height: 1.22; white-space: normal;
       display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
     }
 
@@ -355,12 +560,12 @@
       align-items: center; justify-content: center; gap: 14px; text-align: center;
       color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px; padding: 24px;
     }
-    .empty-big { font-size: 1.9rem; opacity: 0.45; }
-    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+    .empty-big { font-size: var(--fs-h1); opacity: 0.45; }
+    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-mono); }
     .empty code { font-family: 'IBM Plex Mono', monospace; color: var(--accent); }
     .empty button {
       background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); text-transform: uppercase;
       letter-spacing: 0.1em; padding: 9px 18px; border-radius: 4px; cursor: pointer; transition: 0.2s;
     }
     .empty button:hover { background: var(--accent-faint); border-color: var(--accent); }
@@ -386,15 +591,22 @@
       .facets { padding: 8px 2px 2px; justify-content: flex-start; }
     }
     @media (max-width: 560px) {
-      .brand-name { font-size: 1.15rem; }
+      .brand-name { font-size: var(--fs-h3); }
       .header-left { gap: 12px; }
       .header-right { gap: 8px; }
       .status-toggle { padding: 0 10px; }
       .status-toggle span { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .tile, .t-go, .facet { transition: none; }
-      .tile:hover, .tile:focus-visible { transform: none; }
+      .board.stepping .sec-head, .board.stepping .sec-anim { animation: none; }
+      .s-next:hover .arr { transform: none; }
+      .tile, .t-go, .facet, .t-icon, .tile::before, .tile::after { transition: none; }
+      .tile:hover, .tile:focus-visible, .facet:hover, .facet.on:hover { transform: none; }
+      /* The pointer-tracked pool and the growing edge are motion, not colour —
+         hovering still lights the tile, it just does not animate or follow. */
+      .tile:hover::before, .tile:focus-visible::before { opacity: 1; }
+      .tile:hover::after, .tile:focus-visible::after { height: 100%; }
+      #grid.entering .tile { animation: none; }
     }
 
     /* ─── SAFE AREAS ──────────────────────────────────────────────
@@ -504,7 +716,12 @@
 
 <main class="board">
   <div class="shell">
+    <!-- Three rows: the section's name, its tools, and its mark. Only the
+         middle one flexes, so #grid.clientHeight is what fit() budgets. -->
+    <div class="sec-head" id="secHead" hidden></div>
+    <div class="sec-anim" id="secAnim" hidden></div>
     <div id="grid" role="list"></div>
+    <div class="sec-foot" id="secFoot" hidden></div>
   </div>
 </main>
 
@@ -526,6 +743,10 @@
 const REGISTRY = 'assets/json/tools.json';
 
 let TOOLS = [], TAGS = [], tag = null, query = '', shown = [];
+
+/* Live handle, not a one-off read: the CSS honours the preference through a
+   media query, and the JS-driven motion has to honour a mid-session change too. */
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)');
 
 /* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
    Fall through to the English key until it does — which is exactly what
@@ -578,7 +799,10 @@ function tileHTML(x, i) {
   const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
   const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
   const local = x.local ? `<span class="t-local" title="${esc(T('Runs locally'))}"></span>` : '';
-  return `<a class="tile" role="listitem" href="${esc(x.url)}" data-i="${i}"${ext ? ' target="_blank" rel="noopener"' : ''}>
+  // --d is the entrance stagger. Capped so a 32-tool board still settles fast,
+  // and so a long fleet never ends with tiles arriving after you have read them.
+  const d = Math.min(i * 13, 220);
+  return `<a class="tile" role="listitem" href="${esc(x.url)}" data-i="${i}" style="--d:${d}ms"${ext ? ' target="_blank" rel="noopener"' : ''}>
     <span class="t-head"><span class="t-icon">${esc(x.icon)}</span><span class="t-name">${mark(x.name, query)}</span>${local}</span>
     <span class="t-desc">${mark(T(x.desc), query)}</span>
     <span class="t-foot"><span class="t-cat">${esc(cats)}</span><span class="t-go">${esc(T(x.cta))}</span></span>
@@ -595,9 +819,12 @@ function renderFacets() {
     </button>`).join('');
 }
 
-function renderGrid() {
+let enterTimer = 0;
+function renderGrid(animate) {
   const grid = $('grid');
   shown = visible();
+  clearTimeout(enterTimer);
+  grid.classList.remove('entering');
   if (!shown.length) {
     grid.className = '';
     grid.style.gridTemplateColumns = grid.style.gridTemplateRows = '1fr';
@@ -608,14 +835,23 @@ function renderGrid() {
     return;
   }
   grid.innerHTML = shown.map(tileHTML).join('');
+  if (animate && !REDUCED.matches) {
+    grid.classList.add('entering');
+    // The class has to come off, or a tile that finishes its animation keeps
+    // `both` fill and the next hover has an animation still claiming opacity.
+    // Longest delay (220ms) + duration (340ms), with a little slack.
+    enterTimer = setTimeout(() => grid.classList.remove('entering'), 620);
+  }
   fit(true);
 }
 
 /* ── the fit ──
    The one piece of arithmetic the design rests on. Given the box the tiles
    have and how many there are, try every column count and keep the one
-   whose cells land closest to a readable proportion — with a small nudge
-   toward layouts that leave few empty cells in the last row. Then the grid
+   whose cells land closest to a readable proportion — weighted hard against
+   layouts that leave a ragged last row. Raggedness used to be a small nudge and
+   it was not enough: nine tools came out 4x3, which is one card sitting alone
+   under eight, and that reads as a mistake rather than as a grid. Then the grid
    is told exactly how many rows to draw, so `1fr` divides the height and
    the board fills the screen without ever exceeding it.
 
@@ -630,6 +866,12 @@ function renderGrid() {
    landscape at any legible size, and pretending otherwise is worse. */
 const AR    = 2.05;  // width : height a cell reads best at
 const MIN_H = 44;    // a name and nothing else
+/* Both caps are flat, and deliberately so. Letting them grow for a small
+   section was tried and is worse in both directions: extra height becomes a
+   hole between a two-line description and the footer, and extra width lets a
+   narrower column count win the score, which put nine cards into 4x3 and left
+   one alone on the last row. The space a section cannot use belongs at the
+   bottom of the board as whitespace, not inside the cards. */
 const MAX_H = 156;   // past this a card is mostly empty
 const MAX_W = 340;
 let lastFit = '';
@@ -638,7 +880,14 @@ function fit(force) {
   const n = shown.length;
   if (!n) return;
   const gap = parseFloat(getComputedStyle(grid).gap) || 10;
-  const W = grid.clientWidth, H = grid.clientHeight;
+  // Measured off the ROW, not off the grid: the grid is sized by this function,
+  // so reading its own height back would be circular the moment it stops
+  // filling the row. What is left after the section's name and its mark is
+  // what the tiles get.
+  const shell = grid.parentElement, scs = getComputedStyle(shell);
+  const W = grid.clientWidth;
+  const H = shell.clientHeight - parseFloat(scs.paddingTop) - parseFloat(scs.paddingBottom)
+          - $('secHead').offsetHeight - $('secAnim').offsetHeight - $('secFoot').offsetHeight;
   if (W < 2 || H < 2) return;
   // Same box, same tiles, same answer. Observers fire more often than the
   // layout actually changes, and re-writing the tracks is what would make
@@ -656,7 +905,7 @@ function fit(force) {
     if (cw < MIN_W || ch < MIN_H) continue;
     const score =
       Math.abs(Math.log((cw / ch) / AR)) +                    // how far from a readable proportion
-      0.5 * (cols * rows - n) / n +                           // how ragged the last row is
+      1.0 * (cols * rows - n) / n +                           // how ragged the last row is
       (1 - (cols * cw + gap * (cols - 1)) / W);               // how much of the width goes unused
     if (!best || score < best.score) best = { cols, rows, ch, score };
   }
@@ -664,6 +913,7 @@ function fit(force) {
   if (!best) {                                   // nothing legible fits — let it scroll
     const cols = Math.max(1, Math.floor((W + gap) / MIN_W));
     grid.classList.add('overflowing');
+    grid.style.height = H + 'px';              // it scrolls, so it takes the lot
     grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
     grid.style.gridTemplateRows = 'none';
     grid.style.gridAutoRows = '68px';
@@ -671,8 +921,14 @@ function fit(force) {
     return;
   }
   grid.classList.remove('overflowing');
+  // Exactly the height the chosen layout needs, so the leftover space belongs
+  // to the ROW and can be shared with the heading and the animation instead of
+  // being swallowed as slack inside the grid. Four tools in a tall band left
+  // the mark stranded at the bottom of the screen; now the section is one
+  // block, centred, with its mark directly under its cards.
+  grid.style.height = (best.rows * best.ch + gap * (best.rows - 1)) + 'px';
   grid.style.gridTemplateColumns = `repeat(${best.cols}, minmax(0, ${MAX_W}px))`;
-  grid.style.gridTemplateRows = `repeat(${best.rows}, minmax(0, ${MAX_H}px))`;
+  grid.style.gridTemplateRows = `repeat(${best.rows}, 1fr)`;
   grid.style.gridAutoRows = '';
   applyDensity(best.ch);
 }
@@ -682,7 +938,11 @@ function fit(force) {
    line count is budgeted from what is actually left after the name, the
    padding and (if it is still there) the footer, so the clamp and the box
    agree instead of the box hiding a fifth line nobody asked for. */
-const PAD = 22, HEAD = 20, FOOT = 21, LINE = 17, LEAD = 5;   // measured, not guessed
+/* Measured off the rendered card, not guessed — and re-measured whenever the
+   card changes shape. PAD is the vertical padding plus both borders; HEAD is the
+   icon chip, which is taller than the name it sits beside and therefore sets the
+   row; FOOT already includes its own padding-top. */
+const PAD = 24, HEAD = 26, FOOT = 21, LINE = 19, LEAD = 5;
 const FIXED = PAD + HEAD + LEAD;
 function applyDensity(ch) {
   const grid = $('grid');
@@ -694,6 +954,59 @@ function applyDensity(ch) {
   grid.classList.toggle('tiny', ch < 56);
 }
 
+
+/* ── the section frame ──
+   A section is a facet you are standing in rather than one you applied: it
+   names itself, it says where it sits in the set, and it carries its own
+   animation. Searching leaves the frame — a query is not a place. */
+const secIndex = () => TAGS.findIndex((g) => g.id === tag);
+const inSection = () => !query && tag !== null;
+
+let stepTimer = 0;
+function renderFrame(animate) {
+  const head = $('secHead'), anim = $('secAnim'), foot = $('secFoot');
+  if (!inSection()) {
+    head.hidden = anim.hidden = foot.hidden = true;
+    head.innerHTML = anim.innerHTML = foot.innerHTML = '';
+    return;
+  }
+  const at = secIndex(), g = TAGS[at], next = TAGS[(at + 1) % TAGS.length];
+  head.hidden = anim.hidden = foot.hidden = false;
+  head.innerHTML =
+    `<span class="s-dot"></span><span class="s-name">${esc(T(g.label))}</span>` +
+    `<span class="s-blurb">${esc(T(g.blurb))}</span>` +
+    `<span class="s-count"><b>${at + 1}</b> / ${TAGS.length}</span>`;
+  // carino-anim.js is deferred; if it has not landed the band is simply empty,
+  // which costs the section its mark and nothing else.
+  anim.innerHTML = window.CarinoAnim ? CarinoAnim.svg(g.id, T(g.label)) : '';
+  // No dot rail: the facet strip above already lists every section, carries the
+  // counts and lights the current one. This is only the "there is a next one"
+  // affordance, which the strip does not give you.
+  foot.innerHTML =
+    `<button type="button" class="s-next" data-go="${esc(next.id)}">` +
+      `${esc(T('next'))} <b>${esc(T(next.label))}</b> <span class="arr">&darr;</span></button>`;
+  if (animate && !REDUCED.matches) {
+    const b = document.querySelector('.board');
+    clearTimeout(stepTimer);
+    b.classList.remove('stepping');
+    void b.offsetWidth;                    // restart the animation, do not queue it
+    b.classList.add('stepping');
+    // And take it off again. `both` means the animation keeps owning transform
+    // for as long as the class is there, which held the heading and the mark
+    // 6px low — the `from` offset — instead of letting them settle.
+    stepTimer = setTimeout(() => b.classList.remove('stepping'), 400);
+  }
+}
+
+/* Step by whole sections, and wrap: the set is a ring, so the last one is not
+   a dead end. A query is dropped on the way — you asked to go somewhere. */
+function step(delta) {
+  const at = inSection() ? secIndex() : -1;
+  const to = at < 0 ? (delta > 0 ? 0 : TAGS.length - 1)
+                    : (at + delta + TAGS.length) % TAGS.length;
+  setState(TAGS[to].id, '');
+}
+
 /* ── state ──
    #medical is a facet, #/dicom is a query, #medical/dicom is both. */
 const unesc = (s) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -701,14 +1014,23 @@ function readHash() {
   const raw = location.hash.replace(/^#/, '');
   const i = raw.indexOf('/');
   const asked = unesc(i < 0 ? raw : raw.slice(0, i));
-  tag = TAGS.some((g) => g.id === asked) ? asked : null;
   query = i < 0 ? '' : unesc(raw.slice(i + 1));
+  if (TAGS.some((g) => g.id === asked)) tag = asked;
+  // `#all` is the whole wall, explicitly. A bare URL is not "no section", it
+  // is the first one — the hub opens somewhere rather than on everything.
+  else if (asked === 'all') tag = null;
+  else tag = query ? null : TAGS[0].id;
 }
 function writeHash() {
-  const h = (tag || '') + (query ? '/' + encodeURIComponent(query) : '');
-  history.replaceState(null, '', h ? '#' + h : location.pathname + location.search);
+  const h = (tag || 'all') + (query ? '/' + encodeURIComponent(query) : '');
+  history.replaceState(null, '', '#' + h);
 }
+/* The entrance plays on first paint and when you change facet — a deliberate
+   act with a new set of tools behind it. It deliberately does NOT play while
+   you type: re-running it per keystroke turns a narrowing list into a strobe. */
+let animateNext = true;
 function setState(nextTag, nextQuery) {
+  animateNext = nextTag !== tag;
   tag = nextTag;
   query = nextQuery;
   writeHash();
@@ -720,7 +1042,9 @@ function render() {
   $('q').value = query;
   $('searchWrap').classList.toggle('has-text', !!query);
   renderFacets();
-  renderGrid();
+  renderFrame(animateNext);
+  renderGrid(animateNext);
+  animateNext = false;
 }
 // i18n.js re-runs this after a fleet-wide language switch.
 window.renderTools = () => { if (TOOLS.length) render(); };
@@ -758,6 +1082,82 @@ function boot(data) {
   });
 
   const grid = $('grid');
+
+  /* The pointer-tracked highlight. One delegated listener for the whole board,
+     coalesced into a frame — a mousemove can fire far more often than the
+     compositor paints, and writing two custom properties per event is the kind
+     of thing that quietly costs a frame on a 32-cell wall. Only the tile under
+     the cursor is ever written to; the pool itself is painted by CSS. */
+  if (!REDUCED.matches && matchMedia('(hover: hover)').matches) {
+    let pending = null, queued = false;
+    grid.addEventListener('pointermove', (e) => {
+      const el = e.target.closest('.tile');
+      if (!el) return;
+      pending = { el, x: e.clientX, y: e.clientY };
+      if (queued) return;                       // one write per frame, not per event
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        if (!pending) return;
+        const { el: t, x, y } = pending;
+        const b = t.getBoundingClientRect();
+        t.style.setProperty('--mx', ((x - b.left) / b.width * 100).toFixed(1) + '%');
+        t.style.setProperty('--my', ((y - b.top) / b.height * 100).toFixed(1) + '%');
+        pending = null;
+      });
+    }, { passive: true });
+    // Keyboard focus has no cursor, so centre the pool on the card instead of
+    // leaving it wherever the mouse last was.
+    grid.addEventListener('focusin', (e) => {
+      const el = e.target.closest('.tile');
+      if (el) { el.style.setProperty('--mx', '50%'); el.style.setProperty('--my', '50%'); }
+    });
+  }
+
+
+  /* ── moving between sections ──
+     The rail and the next chip both carry a target id, so one listener on the
+     row handles either. Delegated, because the row is re-rendered every step. */
+  $('secFoot').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (b) setState(b.dataset.go, '');
+  });
+
+  /* A wheel is the obvious way to ask for the next one, but a trackpad sends a
+     long tail of small deltas per flick. So: ignore anything under a threshold,
+     then refuse to move again until the gesture has actually stopped. Without
+     the cooldown one flick walks the whole ring. */
+  const board = document.querySelector('.board');
+  let wheelLock = 0, wheelAcc = 0, wheelIdle = 0;
+  board.addEventListener('wheel', (e) => {
+    if (!inSection()) return;
+    // The grid scrolls inside itself when a section will not fit; that scroll
+    // belongs to the grid, not to us.
+    if ($('grid').classList.contains('overflowing')) return;
+    e.preventDefault();
+    const now = performance.now();
+    if (now < wheelLock) return;
+    wheelAcc += e.deltaY;
+    clearTimeout(wheelIdle);
+    wheelIdle = setTimeout(() => { wheelAcc = 0; }, 180);
+    if (Math.abs(wheelAcc) < 40) return;
+    step(wheelAcc > 0 ? 1 : -1);
+    wheelAcc = 0;
+    wheelLock = now + 520;
+  }, { passive: false });
+
+  // Touch: a vertical flick of more than 55px, with the same "not sideways"
+  // check a carousel needs so a scrolled facet strip does not trigger it.
+  let ty = 0, tx = 0;
+  board.addEventListener('touchstart', (e) => {
+    ty = e.touches[0].clientY; tx = e.touches[0].clientX;
+  }, { passive: true });
+  board.addEventListener('touchend', (e) => {
+    if (!inSection() || !e.changedTouches.length) return;
+    const dy = ty - e.changedTouches[0].clientY, dx = tx - e.changedTouches[0].clientX;
+    if (Math.abs(dy) > 55 && Math.abs(dy) > Math.abs(dx)) step(dy > 0 ? 1 : -1);
+  }, { passive: true });
+
   const q = $('q');
   q.addEventListener('input', () => setState(tag, q.value));
   $('qClear').addEventListener('click', () => { setState(tag, ''); q.focus(); });
@@ -775,8 +1175,15 @@ function boot(data) {
       e.preventDefault(); q.focus(); q.select(); return;
     }
     if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
-    const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns(), ArrowUp: -columns() }[e.key];
-    if (step) { e.preventDefault(); moveFocus(step); }
+    // Named `move`, not `step`: step() walks whole sections and is shadowed
+    // by a local of that name.
+    const move = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns(), ArrowUp: -columns() }[e.key];
+    if (move) { e.preventDefault(); moveFocus(move); return; }
+    // Pages move between sections — the arrows already belong to the grid.
+    if (e.key === 'PageDown') { e.preventDefault(); step(1); }
+    else if (e.key === 'PageUp') { e.preventDefault(); step(-1); }
+    else if (e.key === 'Home' && inSection()) { e.preventDefault(); setState(TAGS[0].id, ''); }
+    else if (e.key === 'End' && inSection()) { e.preventDefault(); setState(TAGS[TAGS.length - 1].id, ''); }
     else if (e.key === 'Escape' && (tag || query)) setState(null, '');
   });
 
@@ -785,7 +1192,9 @@ function boot(data) {
   let raf = 0;
   const refit = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => fit()); };
   window.addEventListener('resize', refit);
-  if (window.ResizeObserver) new ResizeObserver(refit).observe(grid);
+  // Observe the ROW, not the grid: fit() writes the grid's height, so watching
+  // the grid would mean watching our own output.
+  if (window.ResizeObserver) new ResizeObserver(refit).observe(grid.parentElement);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
   // A hidden tab gets no animation frames, so a resize that happens while the
   // window is behind another one lands here instead of never landing at all.
@@ -819,6 +1228,7 @@ document.addEventListener('click', (e) => {
 })();
 </script>
 <script src="./carino-clock.js" defer></script>
+<script src="carino-anim.js" defer></script>
 <script src="carino-lang.js" defer></script>
 <script src="i18n.js" defer></script>
 <script src="./assets/js/clock-network.js"></script>

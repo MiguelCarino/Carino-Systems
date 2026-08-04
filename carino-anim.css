@@ -1,0 +1,208 @@
+/* ============================================================
+   carino-anim.css — the section animations.
+   ------------------------------------------------------------
+   One idle animation per category in the Carino registry. They are
+   ambient, not interactive: a band that sits under a section's cards
+   and tells you which part of the workshop you are standing in
+   without adding another label to read.
+
+   Canonical copy lives here (Branding). Every site that uses one
+   ships its OWN local copy — no CDN, no cross-site dependency:
+
+     <link rel="stylesheet" href="carino-anim.css">
+     <svg class="canim canim-medical" viewBox="0 0 240 48" …>…</svg>
+
+   Markup for each is in the Animations section of
+   branding.carino.systems — copy it from there rather than
+   retyping the geometry.
+
+   RULES, so a new one still belongs to the set:
+     · Gold on near-black. One accent, no second hue.
+     · Stroke, not fill. 1.6–2.6 units, round caps.
+     · Loop seamlessly, 1.5–4s, no beginning and no end.
+     · Animate stroke-dashoffset, transform and opacity ONLY.
+       Nothing that triggers layout — these run behind a grid that
+       measures itself.
+     · Every one of them stops under prefers-reduced-motion and
+       stays legible as a still image.
+   ============================================================ */
+
+.canim {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  overflow: visible;
+  color: #eab308;                       /* the one accent; strokes inherit it */
+}
+.canim polyline, .canim path, .canim line, .canim rect, .canim circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+/* The dim layer every animation is drawn over: the whole shape, always
+   present, so the bright part reads as a pass across something that exists
+   rather than as a line appearing out of nothing. */
+.canim .dim { opacity: 0.14; stroke-width: 1.6; }
+/* Keyword and percentage transform origins mean nothing on an SVG shape
+   until it is told which box to measure — without this every scale runs
+   from the viewBox origin and the bars fly off the top. */
+.canim .sheet, .canim .scan, .canim .bar, .canim .wb, .canim .die { transform-box: fill-box; }
+.canim .lit { stroke-width: 2.2; filter: drop-shadow(0 0 5px rgba(234,179,8,0.55)); }
+
+/* ── medical · the EKG sweep ──────────────────────────────────
+   From the Carino PACS splash. A bright pulse travels the trace and
+   leaves it as it found it. */
+.canim-medical .lit {
+  stroke-dasharray: 26 300;
+  animation: canim-ekg 1.9s linear infinite;
+}
+@keyframes canim-ekg { from { stroke-dashoffset: 326; } to { stroke-dashoffset: 0; } }
+
+/* ── files · the scan pass ────────────────────────────────────
+   Five sheets under a bar that sweeps left to right; each sheet lifts
+   as the bar reaches it. */
+.canim-files .sheet { opacity: 0.14; transform-origin: center bottom;
+  animation: canim-lift 2.8s ease-in-out infinite; }
+.canim-files .sheet:nth-of-type(1) { animation-delay: 0s; }
+.canim-files .sheet:nth-of-type(2) { animation-delay: 0.16s; }
+.canim-files .sheet:nth-of-type(3) { animation-delay: 0.32s; }
+.canim-files .sheet:nth-of-type(4) { animation-delay: 0.48s; }
+.canim-files .sheet:nth-of-type(5) { animation-delay: 0.64s; }
+.canim-files .scan { animation: canim-scan 2.8s ease-in-out infinite; }
+@keyframes canim-lift {
+  0%, 62%, 100% { transform: translateY(0);    opacity: 0.14; }
+  14%           { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes canim-scan {
+  0%   { transform: translateX(0);     opacity: 0; }
+  8%   { opacity: 1; }
+  70%  { transform: translateX(196px); opacity: 1; }
+  78%, 100% { transform: translateX(196px); opacity: 0; }
+}
+
+/* ── network · the packet ─────────────────────────────────────
+   A payload running the links while the nodes it passes acknowledge. */
+.canim-network .lit {
+  stroke-dasharray: 18 400;
+  animation: canim-packet 2.6s linear infinite;
+}
+@keyframes canim-packet { from { stroke-dashoffset: 418; } to { stroke-dashoffset: 0; } }
+.canim-network .node { fill: #050505; stroke-width: 2; opacity: 0.3; animation: canim-ack 2.6s ease-in-out infinite; }
+.canim-network .node:nth-of-type(1) { animation-delay: 0.1s; }
+.canim-network .node:nth-of-type(2) { animation-delay: 0.55s; }
+.canim-network .node:nth-of-type(3) { animation-delay: 1.0s; }
+.canim-network .node:nth-of-type(4) { animation-delay: 1.45s; }
+.canim-network .node:nth-of-type(5) { animation-delay: 1.9s; }
+@keyframes canim-ack {
+  0%, 22%, 100% { opacity: 0.3; }
+  8%            { opacity: 1; filter: drop-shadow(0 0 6px rgba(234,179,8,0.8)); }
+}
+
+/* ── security · the shield closing ────────────────────────────
+   The perimeter draws inward from both edges, the shield closes, the
+   check lands, and all of it lets go — a check that keeps being made
+   rather than one that was made once. */
+.canim-security .perim { stroke-dasharray: 80; animation: canim-perim 3.2s ease-in-out infinite; }
+@keyframes canim-perim {
+  0%       { stroke-dashoffset: 80; }
+  38%, 80% { stroke-dashoffset: 0; }
+  100%     { stroke-dashoffset: 80; }
+}
+.canim-security .lit {
+  stroke-dasharray: 200;
+  animation: canim-shield 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes canim-shield {
+  0%        { stroke-dashoffset: 200; }
+  45%, 78%  { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: -200; }
+}
+.canim-security .tick { stroke-dasharray: 26; stroke-dashoffset: 26; animation: canim-tick 3.2s ease-out infinite; }
+@keyframes canim-tick {
+  0%, 46%   { stroke-dashoffset: 26; opacity: 0; }
+  58%, 78%  { stroke-dashoffset: 0;  opacity: 1; }
+  90%, 100% { stroke-dashoffset: 0;  opacity: 0; }
+}
+
+/* ── systems · the bus ────────────────────────────────────────
+   A die with four traces leaving it, each carrying a pulse on its own
+   schedule, so the part never looks synchronised. */
+.canim-systems .trace { stroke-dasharray: 12 90; stroke-width: 2; animation: canim-bus 2.2s linear infinite; }
+.canim-systems .trace:nth-of-type(1) { animation-delay: 0s; }
+.canim-systems .trace:nth-of-type(2) { animation-delay: 0.5s; }
+.canim-systems .trace:nth-of-type(3) { animation-delay: 1.0s; }
+.canim-systems .trace:nth-of-type(4) { animation-delay: 1.5s; }
+@keyframes canim-bus { from { stroke-dashoffset: 102; } to { stroke-dashoffset: 0; } }
+.canim-systems .die { animation: canim-die 2.2s ease-in-out infinite; }
+@keyframes canim-die {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; filter: drop-shadow(0 0 7px rgba(234,179,8,0.5)); }
+}
+
+/* ── business · the trend ─────────────────────────────────────
+   Bars settle to their value, then the line is drawn through them. */
+.canim-business .bar { transform-origin: center bottom; animation: canim-bar 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
+.canim-business .bar:nth-of-type(1) { animation-delay: 0s; }
+.canim-business .bar:nth-of-type(2) { animation-delay: 0.12s; }
+.canim-business .bar:nth-of-type(3) { animation-delay: 0.24s; }
+.canim-business .bar:nth-of-type(4) { animation-delay: 0.36s; }
+.canim-business .bar:nth-of-type(5) { animation-delay: 0.48s; }
+.canim-business .bar:nth-of-type(6) { animation-delay: 0.60s; }
+@keyframes canim-bar {
+  0%        { transform: scaleY(0.15); opacity: 0.25; }
+  30%, 72%  { transform: scaleY(1);    opacity: 0.8; }
+  100%      { transform: scaleY(0.15); opacity: 0.25; }
+}
+.canim-business .lit { stroke-dasharray: 220; animation: canim-trend 3s ease-in-out infinite; }
+@keyframes canim-trend {
+  0%, 18%   { stroke-dashoffset: 220; }
+  55%, 74%  { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: -220; }
+}
+
+/* ── media · the waveform ─────────────────────────────────────
+   Twenty-one bars on a travelling sine, so it reads as playing rather
+   than as twenty-one bars each doing their own thing. */
+.canim-media .wb { transform-origin: center center; stroke-width: 3; animation: canim-wave 1.5s ease-in-out infinite; }
+.canim-media .wb:nth-of-type(3n+1) { animation-duration: 1.5s; }
+.canim-media .wb:nth-of-type(3n+2) { animation-duration: 1.9s; }
+.canim-media .wb:nth-of-type(3n)   { animation-duration: 1.2s; }
+@keyframes canim-wave {
+  0%, 100% { transform: scaleY(0.22); opacity: 0.45; }
+  50%      { transform: scaleY(1);    opacity: 1; }
+}
+
+/* ── learn · the path ─────────────────────────────────────────
+   Four stops filling one after another, then a clean restart — a
+   course you can take again rather than a bar that finishes. */
+.canim-learn .lit { stroke-dasharray: 190; animation: canim-path 4s ease-in-out infinite; }
+@keyframes canim-path {
+  0%, 6%    { stroke-dashoffset: 190; }
+  70%, 88%  { stroke-dashoffset: 0; }
+  100%      { stroke-dashoffset: 190; }
+}
+.canim-learn .stop { fill: #050505; stroke-width: 2; opacity: 0.3; animation: canim-stop 4s ease-out infinite; }
+.canim-learn .stop:nth-of-type(1) { animation-delay: 0.15s; }
+.canim-learn .stop:nth-of-type(2) { animation-delay: 0.85s; }
+.canim-learn .stop:nth-of-type(3) { animation-delay: 1.55s; }
+.canim-learn .stop:nth-of-type(4) { animation-delay: 2.25s; }
+@keyframes canim-stop {
+  0%        { opacity: 0.3; }
+  6%, 88%   { opacity: 1; filter: drop-shadow(0 0 6px rgba(234,179,8,0.75)); }
+  96%, 100% { opacity: 0.3; filter: none; }
+}
+
+/* Every animation is ambient. With motion reduced it holds a legible
+   still — the shape complete, the bright layer at rest — rather than
+   disappearing and leaving the section without its mark. */
+@media (prefers-reduced-motion: reduce) {
+  .canim *, .canim *::before, .canim *::after { animation: none !important; }
+  .canim .lit, .canim .trace, .canim .tick, .canim .perim { stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1; }
+  .canim .node, .canim .stop, .canim .sheet, .canim .bar, .canim .wb, .canim .die { opacity: 0.8; transform: none; }
+  .canim-media .wb { transform: scaleY(0.7); }
+  .canim-business .bar { transform: scaleY(1); }
+  .canim-files .scan { opacity: 0; }
+}

@@ -35,18 +35,39 @@ file. Both the label and the blurb are translated the same way.
 ## Layout
 
 One screen. The page is a three-row grid the height of the viewport — header,
-command bar, tiles — and nothing outside a tile ever scrolls. The header is
+command bar, board — and nothing outside a tile ever scrolls. The board is itself
+a column: the section's name, its animation, then its tiles, anchored to the top.
+The header is
 full-bleed like the shared navbar on every other site in the fleet; only the two
 rows below it box into the content column.
 
-The tile grid sizes itself. Given the box the tiles have and how many there are,
-`fit()` tries every column count and keeps the one whose cells land closest to a
-readable proportion, nudged toward layouts that leave few empty cells in the last
-row and away from ones that waste horizontal space. Cells are capped in both
-directions — past a point a bigger card is not a better one, it is a card with a
-hole in it — so the tracks are `minmax(0, MAX)`: they fill the space when there is
-little and stop growing when there is plenty, and the board centres itself in the
-leftovers.
+The tile grid sizes itself. The box is the board row minus the heading and the
+animation — measured there rather than on the grid, because the grid is what
+`fit()` writes to and reading its own output back would be circular. Given that
+box and how many tiles there are, `fit()` tries every column count and keeps the
+one whose cells land closest to a readable proportion, weighted hard against a
+ragged last row and away from layouts that waste horizontal space. Raggedness
+used to be a gentle nudge, which was not enough: nine tools came out 4×3, one
+card sitting alone under eight. Cells are capped in both directions — past a point a bigger card is not a
+better one, it is a card with a hole in it. `fit()` then sets the grid to exactly
+the height its answer needs, so the slack belongs to the row and is shared with
+the heading and the animation instead of being swallowed inside the grid: four
+tools in a tall band come out as one centred block, not four cards adrift with the
+animation stranded at the bottom of the screen.
+
+Every size on the page is one of the thirteen `--fs-*` steps from
+[the type scale](https://branding.carino.systems/#type), declared in `:root` and
+used by token — no raw rem values anywhere, and nothing below the `--fs-micro`
+floor. The wordmark is `--fs-h2`, which is also what the shared navbar uses, so
+the hub's brand matches every other site in the fleet.
+
+Cards are treated as a material, not as boxes: a top edge catching light, a ruled
+field behind the board so the black reads as a surface, an icon chip to land on
+before you read anything, and a gold pool that follows the cursor across the card
+rather than the whole card switching on. Tiles arrive with a short index-staggered
+entrance when you change facet — never while you type, where re-running it per
+keystroke turns a narrowing list into a strobe. Every effect is transform, opacity
+or colour, so none of it can feed back into the fit.
 
 As a cell gets shorter it drops the least useful thing it carries — the call to
 action, then a line of description at a time, then the description — rather than
@@ -54,9 +75,23 @@ clipping text. At phone density the whole fleet still fits: 3 columns of icon +
 name, the name wrapping to two lines. Only when nothing legible fits at all does
 the grid scroll inside itself; the page still does not.
 
-Categories are filters on that one board, not a place you navigate to, so there is
-no second view to come back from. Each tile carries its own description, so there
-is nothing to read anywhere else.
+A category is a place you stand rather than a filter you applied. The board shows
+one section at a time — its name, then its animation, then its cards, all anchored
+to the top of the board so the mark sits high and whatever a small section cannot
+fill falls to the bottom as whitespace. Centring the block instead put a void
+above it and a void below, which reads as broken rather than as breathing room.
+You step with the wheel, a swipe, `PageUp`/`PageDown` or the **next** chip; there
+is no dot rail, because the facet strip above already lists every section, carries
+the counts and lights the current one. The set is a ring, so the last section is not a dead
+end. `#all` is the whole wall, and searching leaves the frame entirely: a query is
+not a place. Each tile carries its own description, so there is nothing to read
+anywhere else.
+
+The animations come from `carino-anim.css` (motion) and `carino-anim.js`
+(geometry), local copies of the pair documented in §24 of
+[branding.carino.systems](https://branding.carino.systems/#anim). Ids match the
+tag ids in `assets/json/tools.json`, so a section finds its animation by name and
+a new category without one simply gets no band.
 
 State lives in the hash: `#medical` is a facet, `#/dicom` is a query,
 `#medical/dicom` is both.
