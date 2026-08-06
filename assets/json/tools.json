@@ -123,13 +123,14 @@
       "name": "Carino PACS",
       "icon": "🩻",
       "url": "https://pacs.carino.systems/",
-      "desc": "A deliberately simple, cross-platform DICOM store — receive images or auto-forward a folder to other systems. Not an enterprise PACS.",
+      "desc": "A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.",
       "cta": "Launch ↗",
       "tags": [
         "medical",
-        "systems"
+        "systems",
+        "network"
       ],
-      "keywords": "dicom pacs store scp dimse modality worklist mwl hl7 ris"
+      "keywords": "dicom pacs gateway store forward scp scu dimse c-store c-echo c-find c-move c-get query retrieve qr dicomweb qido wado stow routing route de-identify deidentify anonymize modality worklist mwl hl7 mllp ris print failover docker self-hosted offline"
     },
     {
       "name": "Carino Retina",
