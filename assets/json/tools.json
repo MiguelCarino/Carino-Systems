@@ -130,7 +130,7 @@
         "systems",
         "network"
       ],
-      "keywords": "dicom pacs gateway store forward scp scu dimse c-store c-echo c-find c-move c-get query retrieve qr dicomweb qido wado stow routing route de-identify deidentify anonymize modality worklist mwl hl7 mllp ris print failover docker self-hosted offline"
+      "keywords": "dicom pacs gateway store forward scp scu dimse c-store c-echo c-find c-move c-get query retrieve qr dicomweb qido wado stow routing route de-identify deidentify anonymize modality worklist mwl hl7 mllp ris print failover docker self-hosted offline users profiles roles permissions rbac access-control login audit audit-trail accountability hipaa phi redaction webhook smtp notification alerting"
     },
     {
       "name": "Carino Retina",
