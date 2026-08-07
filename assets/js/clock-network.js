@@ -490,17 +490,62 @@ async function detectISP() {
   }
 }
 
-// === SIMPLE PING (Back to Basic) ===
+// === PING & JITTER ===
+// A browser can't ICMP-ping, so we time HEAD requests to our own page: the RTT
+// includes the HTTP stack, but it is the same overhead on every sample, so the
+// *variation* between samples is still a fair jitter reading.
+//   - The first sample is discarded: it pays for DNS + TCP + TLS setup and would
+//     otherwise show up as one huge outlier and inflate jitter.
+//   - Ping = median of the remaining samples (robust against a single stall).
+//   - Jitter = mean absolute difference between CONSECUTIVE samples (the IPDV
+//     mean of RFC 3550), which is what speed tests report — not the stddev.
+// Requests are sequential and cache-busted so each one is a real round trip.
+const PING_SAMPLES = 6;   // 1 warm-up + 5 measured
+
 async function checkPing() {
-  const start = performance.now();
   const el = $('pingVal');
-  try {
-    // Ping current page (reliable)
-    await fetch(window.location.href, { method: 'HEAD', cache: 'no-store' }); 
-    const duration = Math.round(performance.now() - start);
-    if(el) el.textContent = duration + " ms";
-  } catch (e) { 
-    if(el) el.textContent = tt("Timeout"); 
+  const elJit = $('jitterVal');
+  if (el) el.textContent = tt("Testing...");
+  if (elJit) elJit.textContent = "...";
+
+  // origin+pathname, so a #hash route or existing query can't break the buster
+  const base = window.location.origin + window.location.pathname;
+  const samples = [];
+
+  for (let i = 0; i < PING_SAMPLES; i++) {
+    const start = performance.now();
+    try {
+      await fetch(`${base}?_p=${start}`, { method: 'HEAD', cache: 'no-store' });
+      samples.push(performance.now() - start);
+    } catch (e) { /* a dropped sample just shrinks the set */ }
+  }
+
+  const measured = samples.slice(1);   // drop the warm-up (connection setup)
+  if (!measured.length) {
+    if (el) el.textContent = tt("Timeout");
+    if (elJit) elJit.textContent = "--";
+    return;
+  }
+
+  const sorted = [...measured].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+
+  if (el) {
+    el.textContent = Math.round(median) + " ms";
+    el.title = `Median of ${measured.length} HTTP HEAD round trips (warm-up discarded).\n` +
+               `Samples: ${measured.map(v => Math.round(v)).join(', ')} ms`;
+  }
+
+  if (elJit) {
+    if (measured.length < 2) { elJit.textContent = "--"; return; }
+    let sum = 0;
+    for (let i = 1; i < measured.length; i++) sum += Math.abs(measured[i] - measured[i - 1]);
+    const jitter = sum / (measured.length - 1);
+    elJit.textContent = (jitter < 10 ? jitter.toFixed(1) : Math.round(jitter)) + " ms";
+    elJit.title = 'Mean deviation between consecutive round trips (RFC 3550 IPDV).\n' +
+                  'Under ~30 ms is comfortable for calls and remote desktop; ' +
+                  'high jitter with a low ping still means a choppy connection.';
   }
 }
 
