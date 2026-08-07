@@ -224,12 +224,11 @@
 
     /* Two short readings share one line (Ping/Jitter, CPU/RAM…). Only for values
        that stay a few characters wide — long ones (IPs, GPU) keep a full row.
-       Each half truncates rather than wrapping, so a long translation can never
-       push the panel out of alignment; under 460px the pair stacks again. */
-    .diag-pair { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
-    .diag-pair .diag-row { min-width: 0; }
-    .diag-pair .diag-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    @media (max-width: 460px) { .diag-pair { grid-template-columns: 1fr; } }
+       Each half keeps its natural width and the slack sits between them, so a
+       long translation wraps the pair back into full-width rows rather than
+       truncating. Same rule fleet-wide, where panels are half this width. */
+    .diag-pair { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 20px; }
+    .diag-pair > .diag-row { flex: 0 1 auto; min-width: max-content; gap: 8px; }
 
     /* Compact single-line cells in a 3-up grid: dot + name (+ latency). The
        resolved IP is kept in the DOM but hidden — revealed on hover (cell title)
