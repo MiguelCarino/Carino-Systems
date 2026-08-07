@@ -852,6 +852,12 @@ async function checkReach(force = false) {
 // MODULE: EXPORT SYS-STATUS AS IMAGE
 // Renders the current dropdown contents to a canvas (no external libs) and
 // downloads a PNG, stamped with carino.systems at the bottom.
+function rowModelOf(el) {
+  const l = el.querySelector('.diag-lbl'), v = el.querySelector('.diag-val');
+  return { type: 'row', label: l ? l.textContent.trim() : '', value: v ? v.textContent.trim() : '',
+           dot: dotColorOf(el.querySelector('.status-dot')) };
+}
+
 function readDiagModel() {
   const box = $('diagBox');
   const out = [];
@@ -862,9 +868,11 @@ function readDiagModel() {
       out.push({ type: 'section', text: (el.firstChild && el.firstChild.textContent || el.textContent).trim(),
                  extra: (el.querySelector('span') ? el.querySelector('span').textContent.trim() : '') });
     } else if (el.classList.contains('diag-row')) {
-      const l = el.querySelector('.diag-lbl'), v = el.querySelector('.diag-val');
-      out.push({ type: 'row', label: l ? l.textContent.trim() : '', value: v ? v.textContent.trim() : '',
-                 dot: dotColorOf(el.querySelector('.status-dot')) });
+      out.push(rowModelOf(el));
+    } else if (el.classList.contains('diag-pair')) {
+      // Side-by-side on screen; the PNG is a narrow single column, so unfold
+      // the pair back into one row per line rather than cramming both in.
+      for (const sub of el.children) out.push(rowModelOf(sub));
     } else if (el.id === 'reachList') {
       for (const item of el.children) {
         const l = item.querySelector('.lbl'), ip = item.querySelector('.ip'), ms = item.querySelector('.ms');

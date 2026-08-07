@@ -215,12 +215,21 @@
     .diag-dropdown::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     .diag-dropdown.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-    .diag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); }
+    .diag-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); }
     .diag-lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
     .diag-val { color: var(--text); text-align: right; }
     .diag-val-trunc { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
     .diag-val-group { display: flex; align-items: center; gap: 6px; }
-    .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.1em; margin: 12px 0 6px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
+    .diag-section { color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: 0.1em; margin: 10px 0 5px; opacity: 0.45; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
+
+    /* Two short readings share one line (Ping/Jitter, CPU/RAM…). Only for values
+       that stay a few characters wide — long ones (IPs, GPU) keep a full row.
+       Each half truncates rather than wrapping, so a long translation can never
+       push the panel out of alignment; under 460px the pair stacks again. */
+    .diag-pair { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
+    .diag-pair .diag-row { min-width: 0; }
+    .diag-pair .diag-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    @media (max-width: 460px) { .diag-pair { grid-template-columns: 1fr; } }
 
     /* Compact single-line cells in a 3-up grid: dot + name (+ latency). The
        resolved IP is kept in the DOM but hidden — revealed on hover (cell title)
@@ -656,7 +665,7 @@
 
     <!-- Diagnostics overlay — anchored to the header row it drops from. -->
     <div class="diag-dropdown" id="diagBox">
-      <div class="diag-row" style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+      <div class="diag-row" style="margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
         <span class="diag-lbl" data-i18n>Last Check</span>
         <span class="diag-val" id="lastCheck" style="color: var(--accent);">--:--</span>
       </div>
@@ -669,20 +678,28 @@
       <div class="diag-row"><span class="diag-lbl">NAT</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="natType">...</span><span class="status-dot unknown" id="dotNat"></span></div></div>
       <div class="diag-row"><span class="diag-lbl" data-i18n>Paths</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="netPaths">...</span><span class="status-dot unknown" id="dotPaths"></span></div></div>
       <div class="diag-row"><span class="diag-lbl">ISP</span><span class="diag-val diag-val-trunc" id="sysISP">--</span></div>
-      <div class="diag-row"><span class="diag-lbl" data-i18n>Conn</span><span class="diag-val" id="sysConn">--</span></div>
-      <div class="diag-row"><span class="diag-lbl" data-i18n>Ping</span><span class="diag-val" id="pingVal">--</span></div>
-      <div class="diag-row"><span class="diag-lbl" data-i18n>Jitter</span><span class="diag-val" id="jitterVal">--</span></div>
-      <div class="diag-row"><span class="diag-lbl" data-i18n>Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
+      <div class="diag-pair">
+        <div class="diag-row"><span class="diag-lbl" data-i18n>Ping</span><span class="diag-val" id="pingVal">--</span></div>
+        <div class="diag-row"><span class="diag-lbl" data-i18n>Jitter</span><span class="diag-val" id="jitterVal">--</span></div>
+      </div>
+      <div class="diag-pair">
+        <div class="diag-row"><span class="diag-lbl" data-i18n>Conn</span><span class="diag-val" id="sysConn">--</span></div>
+        <div class="diag-row"><span class="diag-lbl" data-i18n>Speed</span><span class="diag-val" id="sysSpeed">--</span></div>
+      </div>
       <div class="diag-section" data-i18n>Hardware</div>
-      <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
-      <div class="diag-row"><span class="diag-lbl">RAM</span><span class="diag-val" id="sysRAM">--</span></div>
+      <div class="diag-pair">
+        <div class="diag-row"><span class="diag-lbl">CPU</span><span class="diag-val" id="sysCPU">--</span></div>
+        <div class="diag-row"><span class="diag-lbl">RAM</span><span class="diag-val" id="sysRAM">--</span></div>
+      </div>
       <div class="diag-row"><span class="diag-lbl">GPU</span><span class="diag-val diag-val-trunc" id="sysGPU">--</span></div>
       <div class="diag-row"><span class="diag-lbl" data-i18n>Screen</span><span class="diag-val" id="sysScreen">--</span></div>
       <div class="diag-row"><span class="diag-lbl" data-i18n>Battery</span><span class="diag-val" id="sysBattery">--</span></div>
       <div class="diag-section" data-i18n>System</div>
       <div class="diag-row"><span class="diag-lbl" data-i18n>Client</span><span class="diag-val diag-val-trunc" id="sysClient">--</span></div>
-      <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
-      <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
+      <div class="diag-pair">
+        <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
+        <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
+      </div>
       <div class="diag-actions">
         <button class="retry-btn" id="retryNetwork">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
