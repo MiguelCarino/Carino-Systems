@@ -74,6 +74,7 @@ const I18N = {
         'PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.': 'PDF→imagen, OCR, limpieza de firmas, conversores de imagen y audio y un constructor de comandos ffmpeg: todo en el navegador.',
         'A 12-axis political compass measured by intention rather than numeric grading.': 'Una brújula política de 12 ejes medida por intención en lugar de calificación numérica.',
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': 'Reajusta, alinea y corrige pistas de subtítulos de video: desplaza, estira y previsualiza en el navegador.',
+        'Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.': 'Planea una intranet offline: prioriza qué descargar antes de perder el internet y luego elige el software, el hardware y el sneakernet para operar sin él.',
         // Title attributes (applied explicitly, not via data-i18n)
         'Carino Systems — back to hub': 'Carino Systems — volver al hub',
         'Carino Systems — reload': 'Carino Systems — recargar',
@@ -185,6 +186,7 @@ const I18N = {
         'PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.': 'PDF→imagem, OCR, limpeza de assinaturas, conversores de imagem e áudio e um construtor de comandos ffmpeg: tudo no navegador.',
         'A 12-axis political compass measured by intention rather than numeric grading.': 'Uma bússola política de 12 eixos medida por intenção, e não por nota numérica.',
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': 'Reajuste, alinhe e corrija trilhas de legendas de vídeo: desloque, estique e visualize no navegador.',
+        'Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.': 'Planeje uma intranet offline: priorize o que baixar antes de perder a internet e depois escolha o software, o hardware e o sneakernet para operar sem ela.',
         'Carino Systems — back to hub': 'Carino Systems — voltar ao hub',
         'Carino Systems — reload': 'Carino Systems — recarregar',
         // Index chrome — search box, tag rail, result counts
@@ -295,6 +297,7 @@ const I18N = {
         'PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.': 'PDF→画像、OCR、署名のクリーンアップ、画像・音声コンバーター、ffmpegコマンドビルダー。すべてブラウザー内で。',
         'A 12-axis political compass measured by intention rather than numeric grading.': '数値評価ではなく意図で測る12軸の政治コンパス。',
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': '動画の字幕トラックをリタイミング・整列・修正。オフセット、伸縮、プレビューをブラウザーで。',
+        'Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.': 'オフライン前提のイントラネットを設計。インターネットを失う前に何をダウンロードすべきか優先順位を付け、それなしで運用するためのソフトウェア・ハードウェア・スニーカーネットを選ぶ。',
         'Carino Systems — back to hub': 'Carino Systems — ハブに戻る',
         'Carino Systems — reload': 'Carino Systems — 再読み込み',
         // Index chrome — search box, tag rail, result counts
@@ -405,6 +408,7 @@ const I18N = {
         'PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.': 'PDF→изображение, OCR, очистка подписей, конвертеры изображений и аудио и конструктор команд ffmpeg — всё в браузере.',
         'A 12-axis political compass measured by intention rather than numeric grading.': 'Политический компас с 12 осями, где оценка строится на намерениях, а не на числовых баллах.',
         'Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.': 'Перетайминг, выравнивание и исправление субтитров к видео: сдвиг, растяжение и предпросмотр в браузере.',
+        'Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.': 'Планирование интранета с расчётом на офлайн: расставьте приоритеты, что скачать до потери интернета, а затем выберите софт, железо и sneakernet, чтобы работать без него.',
         'Carino Systems — back to hub': 'Carino Systems — вернуться в хаб',
         'Carino Systems — reload': 'Carino Systems — перезагрузить',
         // Index chrome — search box, tag rail, result counts

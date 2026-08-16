@@ -120,6 +120,19 @@
       "keywords": "course tutorial lab assembly bash git iso27001 training"
     },
     {
+      "name": "Carino Offline",
+      "icon": "📴",
+      "url": "https://offline.carino.systems/",
+      "desc": "Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.",
+      "cta": "Plan ↗",
+      "tags": [
+        "systems",
+        "network",
+        "learn"
+      ],
+      "keywords": "offline intranet censorship dns blockage sneakernet mirror kiwix lancache selfhosted blackout preparedness nfc 3d printing optical bd-r m-disc archive grab list"
+    },
+    {
       "name": "Carino PACS",
       "icon": "🩻",
       "url": "https://pacs.carino.systems/",
