@@ -251,6 +251,18 @@
       "keywords": "board tasks todo project tracking sprint"
     },
     {
+      "name": "Law — Official Sources",
+      "icon": "⚖️",
+      "url": "https://law.carino.systems/",
+      "desc": "Where law is officially published in sixteen countries: the gazette of record, the constitution, the consolidated statute databases and the courts.",
+      "cta": "Open ↗",
+      "tags": [
+        "learn",
+        "business"
+      ],
+      "keywords": "law legal gazette constitution statute legislation courts jurisprudence diario oficial journal officiel kanpo legifrance dof scjn"
+    },
+    {
       "name": "Media Suite",
       "icon": "🎬",
       "url": "https://media.carino.systems/",
