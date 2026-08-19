@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="icon" href="logo.webp">
   <title>Carino Systems</title>
+  <meta name="description" content="Carino Systems — focused tools for medical imaging, networks, systems, security and the documents around them. Most of them run entirely in your browser." />
   <link rel="stylesheet" href="fonts/carino-fonts.css">
   <!-- Section animations: motion here, geometry in carino-anim.js. Local
        copies of the canonical pair on branding.carino.systems. -->
@@ -56,7 +57,7 @@
       /* Card material. A surface is a gradient plus two hairlines: one bright
          along the top edge where the light would land, one dark along the
          bottom. Both are inset shadows on the same element as the border, so a
-         tile is still one box — no wrapper, nothing extra for fit() to measure. */
+         tile is still one box: one border, one pair of hairlines, no wrapper. */
       --card:           linear-gradient(180deg, #141414 0%, #0b0b0b 58%, #090909 100%);
       --card-lit:       linear-gradient(180deg, #1b1712 0%, #0d0b09 58%, #090909 100%);
       --edge-light:     inset 0 1px 0 rgba(255,255,255,0.055);
@@ -69,29 +70,41 @@
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 6px; }
 
+    :root {
+      --gap:        10px;
+      --rail:       clamp(290px, 23vw, 380px);
+      --row-h:      26px;   /* one tool in a panel's directory list */
+    }
+
     /* ─────────────────────────────────────────────────────────────
-       ONE SCREEN
+       THE CONSOLE
 
-       The hub is a way in, not a document. It used to be a hero, a
-       search band, and a category carousel that walked itself every
-       five seconds — three screens of chrome to reach a link, and a
-       page that moved the thing you were reading.
+       Two designs came before this one and each gave up something.
+       The wall put all thirty-four tools on the glass at once, which
+       answered "which tool" and never answered "what is this place";
+       it also had to compute its own cell size to make the fleet fit.
+       The scrolling page answered "what is this place" and buried the
+       tools three screens down.
 
-       Now the whole fleet is on the glass at once. The page is a
-       three-row grid the height of the viewport — header, command bar,
-       tiles — and nothing outside a tile ever scrolls. The tile grid
-       sizes itself: JS picks the column/row count whose cells land
-       closest to a readable proportion and fills the space exactly, so
-       filtering to four tools makes four big cards rather than four
-       cards and a hole.
+       So: one screen again, but the fleet is GROUPED rather than
+       flattened. The page is a header, a hero rail that never leaves,
+       and a mosaic of eight industry panels — each one its animated
+       mark, its name, its count, and every tool it holds listed by
+       name. Nothing is sampled, nothing is paged, and nothing anywhere
+       on this page scrolls.
 
-       Because the board IS the page, the cards have to carry the whole
-       impression on their own. So they are treated as a material rather
-       than as boxes: a lit top edge, a ruled field behind them, a gold
-       pool that follows the cursor, and an entrance that plays when you
-       change facet but never while you type. All of it is transform,
-       opacity and colour — nothing an effect does can feed back into
-       the fit, which measures the cell and budgets the content in it.
+       It reads as a lobby directory, which is what it is: eight
+       departments and what is behind each door. Pressing a panel's
+       head does not navigate — the panel takes the mosaic and its
+       tools open out into cards with their descriptions, while the
+       other seven fold into a rail down the right side. Pressing it
+       again, or Escape, folds it back.
+
+       The arithmetic is gone. Nothing measures a cell or picks a
+       column count: the mosaic is 4 x 2 and a panel holds at most
+       nine rows, both of which are known here rather than discovered
+       at runtime. What a panel cannot show is not lost — its count
+       is on its head, and opening it shows everything.
        ───────────────────────────────────────────────────────────── */
 
     html { height: 100%; }
@@ -101,11 +114,10 @@
          degraded one. Currency's layout doctrine declares both; so does this. */
       height: 100vh; min-height: 100vh;
       height: 100dvh; min-height: 100dvh; overflow: hidden;
-      display: grid; grid-template-rows: auto auto minmax(0, 1fr);
+      display: grid; grid-template-rows: auto minmax(0, 1fr);
       /* minmax(0,1fr), not the implicit `auto`: an auto column grows to the
-         widest row's max-content, and the facet strip's max-content is every
-         chip laid end to end — which dragged the whole page 30px past the
-         viewport and clipped the last tile column. */
+         widest row's max-content, which for a directory column is every tool
+         name laid end to end — enough to drag the whole page off screen. */
       grid-template-columns: minmax(0, 1fr);
       background: var(--bg-header);
       color: var(--text);
@@ -114,7 +126,7 @@
          a sense of scale — you read it as a surface rather than as absence —
          and the two offset gold pools keep the wash from looking like one lamp
          aimed at the middle. Every layer is fixed and non-repeating, so none of
-         it moves or tiles when the grid inside re-lays out. */
+         it moves or tiles when the mosaic re-lays out. */
       background-image:
         repeating-linear-gradient(0deg,   rgba(255,255,255,0.016) 0 1px, transparent 1px 48px),
         repeating-linear-gradient(90deg,  rgba(255,255,255,0.016) 0 1px, transparent 1px 48px),
@@ -123,13 +135,10 @@
       background-repeat: repeat, repeat, no-repeat, no-repeat;
       background-attachment: fixed;
     }
-
-    .shell { width: 100%; max-width: 1560px; margin: 0 auto; padding: 0 var(--pad-r) 0 var(--pad-l); }
     .sr-only {
       position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
-
     /* ── row 1: the fleet header (brand · clock · social · diagnostics) ── */
     .top-header {
       height: 60px;                       /* the shared carino-navbar.js height */
@@ -261,26 +270,453 @@
     .complete-test-btn { text-decoration: none; margin-top: 8px; border-color: var(--accent-dim); color: var(--accent); background: var(--accent-faint); }
     .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
 
-    /* ── row 2: the command bar ──
-       The only two controls on the page — type, or pick a facet — on one
-       line. Categories are filters here, not a place you navigate to, so
-       there is no second view to come back from. */
-    .bar-outer {
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(16,16,16,0.72) 0%, rgba(8,8,8,0.72) 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    }
-    .bar {
-      height: 54px; display: flex; align-items: center; gap: 14px; min-width: 0;
+    /* ── row 2: the console ──
+       A rail that never changes beside a mosaic that is the whole page's
+       state. Both are minmax(0, …) so neither can be pushed wider than its
+       share by something long inside it. */
+    .console {
+      display: grid; gap: var(--gap);
+      grid-template-columns: var(--rail) minmax(0, 1fr);
+      min-width: 0; min-height: 0;
+      padding: var(--gap) var(--pad-r) var(--gap) var(--pad-l);
     }
 
+    /* ── the hero rail ──
+       Everything the old hero band said, standing up instead of lying down:
+       the claim, the paragraph, the one control, the readings, the colophon.
+       It is the only part of the page that never changes, which is what makes
+       it a place to come back to rather than a banner to scroll past. */
+    .rail {
+      display: flex; flex-direction: column; min-width: 0; min-height: 0;
+      padding: 20px 20px 16px; overflow: hidden;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--edge-light), var(--edge-dark);
+      position: relative; isolation: isolate;
+    }
+    /* The gold is spent here, in one pool behind the claim, rather than spread
+       over eight panels that each want to be the brightest thing on screen. */
+    .rail::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: radial-gradient(120% 42% at 0% 0%, rgba(234,179,8,0.10) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: flex; align-items: center; gap: 9px; flex: none;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label);
+      text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--accent-dim); flex: none; }
+    .claim {
+      flex: none; margin-top: 14px;
+      font-family: 'Red Hat Display', sans-serif; font-weight: 900;
+      font-size: clamp(1.5rem, 2.1vw, 2.1rem); line-height: 1.0; letter-spacing: -0.025em;
+      background: linear-gradient(120deg, #ffffff 0%, #ffffff 38%, #fde68a 74%, var(--accent) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lede {
+      flex: 0 1 auto; margin-top: 14px; min-height: 0; overflow: hidden;
+      font-size: var(--fs-sm); line-height: 1.55; color: var(--text-sec);
+    }
+    /* The rail is the one box on this page whose height is the window's, so the
+       paragraph is what gives when the window is short — a line at a time,
+       never a scrollbar. Below the shortest step the claim carries it alone. */
+    @media (max-height: 780px) { .lede { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; } }
+    @media (max-height: 680px) { .lede { display: none; } }
+
+    .rail .search-wrap { flex: none; margin-top: 18px; height: 40px; }
+
+    /* The keys, because the mosaic is a fixed set in a fixed order and that is
+       exactly what number keys are good for. Also the only honest thing to put
+       in the middle of the rail: everything else there would be filler. */
+    .legend { flex: none; margin-top: 20px; display: grid; gap: 5px; }
+    .legend-t {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
+      text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted);
+      opacity: 0.6; margin-bottom: 2px;
+    }
+    .legend div { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .legend kbd {
+      flex: none; min-width: 44px; text-align: center;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
+      color: var(--text-sec); background: linear-gradient(180deg, #161616 0%, #0d0d0d 100%);
+      border: 1px solid var(--border); border-radius: 4px; padding: 3px 6px;
+      box-shadow: var(--edge-light);
+    }
+    .legend span {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label);
+      text-transform: uppercase; letter-spacing: 0.11em; color: var(--text-muted);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    @media (max-height: 760px) { .legend { display: none; } }
+
+    .stats {
+      flex: none; margin-top: auto; padding-top: 18px;
+      display: flex; flex-wrap: wrap; gap: 2px 26px;
+    }
+    .stat { display: flex; flex-direction: column; gap: 2px; padding: 5px 0; }
+    .stat b {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-h3); font-weight: 700;
+      color: var(--accent); line-height: 1;
+    }
+    .stat span {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
+      text-transform: uppercase; letter-spacing: 0.13em; color: var(--text-muted);
+    }
+    .colophon {
+      flex: none; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .colophon a {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
+      text-transform: uppercase; letter-spacing: 0.11em;
+      color: var(--text-muted); text-decoration: none; transition: color 0.18s;
+    }
+    .colophon a:hover { color: var(--accent); }
+    .colophon .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex: none; }
+    @media (max-height: 620px) { .stats { padding-top: 10px; } .colophon { display: none; } }
+
+    /* ── the mosaic ──
+       Eight panels, four across and two down, and one of them may take the
+       floor. Both states are the same grid with different tracks, so a panel
+       moving between them is a layout change and not a different component. */
+    .board { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; min-height: 0; }
+
+    /* The one line of chrome the mosaic gets: what you are looking at, how much
+       of it there is, and the way out of wherever you have gone. */
+    .board-top {
+      flex: none; display: flex; align-items: center; gap: 12px; min-width: 0;
+      padding: 0 2px;
+    }
+    .board-label {
+      display: flex; align-items: baseline; gap: 9px; min-width: 0;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-btn);
+      text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted);
+    }
+    .board-label b { color: var(--text); font-weight: 700; letter-spacing: 0.1em; }
+    .board-label .sep { color: var(--border); }
+    .board-label .n { color: var(--accent); }
+    .board-act { margin-left: auto; display: flex; align-items: center; gap: 7px; flex: none; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: transparent; border: 1px solid var(--border); border-radius: 999px;
+      box-shadow: var(--edge-light);
+      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
+      font-size: var(--fs-btn); text-transform: uppercase; letter-spacing: 0.11em;
+      padding: 0 12px; height: 27px; cursor: pointer; white-space: nowrap;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .pill:hover { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-faint); }
+    .pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .pill[hidden] { display: none; }
+
+    /* Two shelves, four panels each. A shelf is a flex row and not a pair of
+       grid tracks for one reason: grid columns are shared down the whole
+       board, so widening the panel you are on would widen the one under it
+       too. A row that owns its own widths can give way on its own. */
+    .mosaic {
+      flex: 1 1 auto; min-width: 0; min-height: 0;
+      display: flex; flex-direction: column; gap: var(--gap);
+    }
+    .shelf { flex: 1 1 0; min-width: 0; min-height: 0; display: flex; gap: var(--gap); }
+
+    /* ── the give ──
+       Hovering a panel widens it and its shelf-mates step back to make room.
+       The grow factors add up to the same total either way (2.2 + 3 x 0.6 = 4),
+       so the row never changes width — only how it is divided. flex-grow is an
+       animatable number, which is the whole trick: no width is ever computed,
+       and nothing outside the shelf moves. */
+    .shelf:hover > .panel, .shelf:focus-within > .panel { flex-grow: 0.6; }
+    .shelf > .panel:hover, .shelf > .panel:focus-within { flex-grow: 2.2; }
+    /* A touch screen has nothing to hover with — and worse, a tap can leave
+       :hover stuck on whatever was tapped — so hover stops meaning anything
+       here. Focus still does: a tablet with a keyboard gets the same board a
+       desktop does, which is why these two are restated rather than left to
+       the rules above (same specificity, so the later one wins). */
+    @media (hover: none) {
+      .shelf:hover > .panel { flex-grow: 1; }
+      .shelf > .panel:hover { flex-grow: 1; }
+      .shelf:focus-within > .panel { flex-grow: 0.6; }
+      .shelf > .panel:focus-within { flex-grow: 2.2; }
+    }
+
+    /* Opened, the shelves stop existing — `display: contents` hands their
+       panels straight to the mosaic — and the mosaic is a grid again: the
+       chosen panel takes the floor and the other seven stack down the right
+       edge, one per row. Nothing is placed by hand except the open one;
+       auto-placement puts the rest in the only column left, in order. */
+    .mosaic.open {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(150px, 14vw, 210px);
+      grid-template-rows: repeat(7, minmax(0, 1fr));
+    }
+    .mosaic.open .shelf { display: contents; }
+    .mosaic.open .panel.on { grid-column: 1; grid-row: 1 / -1; }
+
+    .panel {
+      position: relative; display: flex; flex-direction: column;
+      flex: 1 1 0; min-width: 0; min-height: 0;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      box-shadow: var(--edge-light), var(--edge-dark);
+      overflow: hidden; isolation: isolate;
+      transition: flex-grow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .mosaic:not(.open) .panel:hover, .mosaic:not(.open) .panel:focus-within {
+      border-color: var(--accent-dim); background: var(--card-lit);
+      box-shadow: var(--edge-light), 0 12px 26px rgba(0,0,0,0.55), 0 0 0 1px rgba(234,179,8,0.07);
+    }
+    .panel.on { border-color: var(--accent-dim); background: var(--card-lit); }
+    /* The open panel keeps a lit left edge, the same mark every design in this
+       repo has used for the thing you are standing in. */
+    .panel.on::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; z-index: 2;
+      background: linear-gradient(180deg, transparent, var(--accent) 14%, var(--accent) 86%, transparent);
+    }
+    /* A panel that survived the query with nothing in it stays on the board —
+       eight panels are the shape of the fleet, and hiding one would say the
+       category had gone away rather than that it holds no match. */
+    .panel.void { opacity: 0.4; }
+
+    /* The head is the only text a closed panel shows: its name, and how many
+       tools live in it. Everything else waits to be asked for. */
+    .p-head {
+      flex: none; display: flex; align-items: baseline; gap: 8px; min-width: 0;
+      background: transparent; border: 0; border-bottom: 1px solid var(--border);
+      padding: 11px 13px 10px; text-align: left; cursor: pointer; color: inherit; font: inherit;
+      transition: background 0.2s;
+    }
+    .p-head:hover { background: rgba(234,179,8,0.045); }
+    .p-head:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .p-name {
+      font-family: 'Red Hat Display', 'IBM Plex Sans', sans-serif;
+      font-size: var(--fs-lg); font-weight: 800; letter-spacing: -0.01em; color: var(--text);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+    }
+    .p-n {
+      margin-left: auto; flex: none;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label);
+      color: var(--text-muted); letter-spacing: 0.1em;
+    }
+    .p-n b { color: var(--accent); font-weight: 700; font-size: var(--fs-sm); }
+    .p-n .of { color: var(--text-muted); opacity: 0.7; }
+
+    /* ── the body: two states in one box ──
+       A closed panel is its mark, alone and large — the industry as a picture.
+       Hovering it (or tabbing into it) trades the mark for the list of what is
+       inside. They are stacked in the same box rather than laid out one after
+       the other, so the swap is a cross-fade and never a reflow: the board does
+       not twitch when the pointer crosses it. */
+    .p-body { position: relative; flex: 1 1 auto; min-width: 0; min-height: 0; }
+    .mosaic:not(.open) .panel, .mosaic.open .panel:not(.on) { cursor: pointer; }
+    .mosaic.open .panel.on { cursor: default; }
+    /* Both states are absolutely positioned over the same body, so the swap
+       moves two edges rather than reflowing anything: the mark's box gives up
+       the bottom of the panel and the list's box claims it. Percentages
+       against a body that has a definite height, so both are animatable. */
+    .p-face {
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px 14px; pointer-events: none;
+      transition: bottom 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), padding 0.3s ease;
+    }
+    /* .p-face is inset:0 on a sized body, so both of these have a definite
+       height to measure against — which is what lets the mark grow with the
+       panel and still be guaranteed to fit inside it. */
+    .p-mark { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+    .p-mark .canim { height: clamp(38px, 11vh, 84px); max-height: 100%; max-width: 100%; margin: 0; }
+
+    .p-list {
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+      overflow: hidden; padding: 6px 6px 7px;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: top 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease;
+    }
+    /* The trade. :focus-within as well as :hover, or the list would be a thing
+       only a mouse could reach — and the rows inside it are links. */
+    .mosaic:not(.open) .panel:hover .p-face,
+    .mosaic:not(.open) .panel:focus-within .p-face { bottom: 66%; padding: 10px 14px 2px; }
+    .mosaic:not(.open) .panel:hover .p-list,
+    .mosaic:not(.open) .panel:focus-within .p-list { top: 34%; opacity: 1; pointer-events: auto; }
+    /* A touch screen has no hover, so there is nothing to reveal on the way
+       past: the mark stays whole, and a tap opens the panel properly. */
+    @media (hover: none) {
+      .mosaic:not(.open) .panel:hover .p-face { bottom: 0; padding: 12px 14px; }
+      .mosaic:not(.open) .panel:hover .p-list { top: 0; opacity: 0; pointer-events: none; }
+    }
+    /* If a very short window cannot show every line, the last one fades rather
+       than being cut mid-stroke — and the count on the head is still true. */
+    .p-list::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22px;
+      background: linear-gradient(180deg, rgba(11,11,11,0) 0%, rgba(11,11,11,0.85) 55%, #0b0b0b 100%);
+      pointer-events: none;
+    }
+    .row {
+      display: flex; align-items: center; gap: 8px; min-width: 0;
+      flex: 1 1 var(--row-h); min-height: 21px; max-height: 36px;
+      padding: 0 7px; border-radius: 6px;
+      text-decoration: none; color: inherit;
+      transition: background 0.15s, color 0.15s;
+    }
+    .row:hover, .row:focus-visible { background: rgba(234,179,8,0.09); outline: none; }
+    .row .ic { flex: none; font-size: var(--fs-sm); line-height: 1; width: 15px; text-align: center; }
+    .row .nm {
+      flex: 1 1 auto; min-width: 0; font-size: var(--fs-sm); color: var(--text-sec);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      transition: color 0.15s;
+    }
+    .row:hover .nm, .row:focus-visible .nm { color: var(--text); }
+    .row .go {
+      flex: none; font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
+      color: var(--accent); opacity: 0; transform: translateX(-3px); transition: 0.15s;
+    }
+    .row:hover .go, .row:focus-visible .go { opacity: 1; transform: none; }
+    .row .lo { flex: none; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+    .p-none {
+      display: flex; align-items: center; justify-content: center; height: 100%;
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-mono); color: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    /* ── a panel open: the cards ──
+       The column count comes from the panel's own size — see COLS in the
+       script — and is spent here as a track minimum rather than as a track
+       count, so a pane too narrow for that many columns quietly takes fewer
+       instead of overflowing. auto-fit lays exactly --cols tracks while there
+       is room for them and falls back to as many --card-min ones as fit. */
+    .p-grid {
+      display: none;
+      flex: 1 1 auto; min-height: 0; overflow: hidden; padding: 11px 12px 12px;
+      gap: var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(
+        max(var(--card-min, 190px), calc((100% - (var(--cols, 3) - 1) * var(--gap)) / var(--cols, 3))), 1fr));
+      grid-auto-rows: minmax(0, 200px); align-content: center;
+    }
+    .p-blurb { display: none; }
+    /* Open, the body stops being a stack of states and becomes a column: the
+       mark and the sentence at the top, the cards under them. */
+    .mosaic.open .panel.on .p-body { display: flex; flex-direction: column; }
+    .mosaic.open .panel.on .p-face {
+      position: static; flex: none; display: block; padding: 13px 14px 0; pointer-events: auto;
+    }
+    .mosaic.open .panel.on .p-mark { justify-content: flex-start; height: auto; }
+    .mosaic.open .panel.on .p-mark .canim { height: 36px; max-width: 300px; margin: 0; }
+    .mosaic.open .panel.on .p-blurb {
+      display: block; margin-top: 8px; font-size: var(--fs-sec);
+      color: var(--text-sec); line-height: 1.45;
+    }
+    .mosaic.open .panel.on .p-grid { display: grid; }
+    .mosaic.open .panel.on .p-list { display: none; }
+    .mosaic.open .panel.on .p-head { padding: 14px 16px 13px; cursor: default; }
+    .mosaic.open .panel.on .p-name { font-size: var(--fs-h2); }
+
+    /* The seven that folded away: name and count only, and a whole column of
+       them is a table of contents you can move through without closing. */
+    .mosaic.open .panel:not(.on) .p-body { display: none; }
+    .mosaic.open .panel:not(.on) .p-head {
+      flex: 1 1 auto; align-items: center; border-bottom: 0; padding: 8px 12px;
+    }
+    .mosaic.open .panel:not(.on) .p-name { font-size: var(--fs-sec); }
+
+    .card {
+      position: relative; display: flex; flex-direction: column; min-width: 0;
+      background: linear-gradient(180deg, #171717 0%, #0d0d0d 58%, #0a0a0a 100%);
+      border: 1px solid var(--border); border-radius: 10px;
+      box-shadow: var(--edge-light), var(--edge-dark);
+      padding: 11px 12px; overflow: hidden; text-decoration: none; color: inherit;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+      isolation: isolate;
+    }
+    /* The pointer-tracked pool, kept from the wall: JS writes --mx/--my on the
+       card under the cursor and CSS paints the light. Only ever one card. */
+    .card::before {
+      content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 0%),
+                  rgba(234,179,8,0.16) 0%, rgba(234,179,8,0.05) 38%, transparent 72%);
+      opacity: 0; transition: opacity 0.22s;
+    }
+    .card:hover, .card:focus-visible {
+      border-color: var(--accent-dim); background: var(--card-lit);
+      transform: translateY(-2px);
+      box-shadow: var(--edge-light), 0 12px 26px rgba(0,0,0,0.6), 0 0 0 1px rgba(234,179,8,0.08);
+      outline: none;
+    }
+    .card:hover::before, .card:focus-visible::before { opacity: 1; }
+    .c-head { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .c-icon {
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--fs-sec); line-height: 1;
+      background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+      border: 1px solid #2e2e2e; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover .c-icon, .card:focus-visible .c-icon {
+      border-color: var(--accent-dim);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 12px rgba(234,179,8,0.18);
+    }
+    .c-name {
+      font-family: 'Red Hat Display', 'IBM Plex Sans', sans-serif;
+      font-size: var(--fs-body); font-weight: 800; color: var(--text); line-height: 1.2;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+    }
+    .c-local { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); flex: none; margin-left: auto; }
+    .c-desc {
+      margin-top: 6px; font-size: var(--fs-sm); color: var(--text-sec); line-height: 1.45;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+    }
+    .c-foot { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; }
+    .c-cat {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); text-transform: uppercase;
+      letter-spacing: 0.12em; color: #5c5c5c;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color 0.2s;
+    }
+    .card:hover .c-cat, .card:focus-visible .c-cat { color: #8a8a8a; }
+    .c-go {
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro); font-weight: 600;
+      letter-spacing: 0.04em; color: var(--accent);
+      opacity: 0; transform: translateX(-4px); transition: 0.2s; flex: none;
+    }
+    .card:hover .c-go, .card:focus-visible .c-go { opacity: 1; transform: none; }
+
+    /* Cards arrive when a panel opens. The stagger is index-driven and capped,
+       so nine cards settle in about a sixth of a second. */
+    @keyframes card-in { from { opacity: 0; transform: translateY(8px) scale(0.99); } }
+    .p-grid.entering .card { animation: card-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: var(--d, 0ms); }
+
+    /* Nothing matched anywhere. It covers the mosaic rather than emptying the
+       eight panels, which would read as the fleet having disappeared. */
+    .void-all {
+      grid-column: 1 / -1; grid-row: 1 / -1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px; text-align: center;
+      color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px; padding: 24px;
+    }
+    .void-all .big { font-size: var(--fs-h1); opacity: 0.45; }
+    .void-all p { font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-mono); }
+    .void-all code { font-family: 'IBM Plex Mono', monospace; color: var(--accent); }
+    .void-all button {
+      background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); text-transform: uppercase;
+      letter-spacing: 0.1em; padding: 9px 18px; border-radius: 4px; cursor: pointer; transition: 0.2s;
+    }
+    .void-all button:hover { background: var(--accent-faint); border-color: var(--accent); }
+    .mosaic.dead .shelf { display: none; }
+    .mosaic.dead .void-all { flex: 1 1 auto; }
+
+    mark { background: transparent; color: var(--accent); font-weight: 700; }
+
+    /* ── the search box ──
+       One control, in the rail, where it is always reachable — there is no
+       second place on this page for it to be. */
     .search-wrap {
-      position: relative; display: flex; align-items: center; gap: 10px; flex: 0 1 320px;
+      position: relative; display: flex; align-items: center; gap: 10px; min-width: 0;
       background: linear-gradient(180deg, #131313 0%, #0b0b0b 100%);
       border: 1px solid var(--border); border-radius: 999px;
       box-shadow: var(--edge-light);
-      padding: 0 14px; height: 36px; transition: border-color 0.2s, box-shadow 0.2s;
+      padding: 0 15px; height: 36px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .search-wrap:focus-within {
       border-color: var(--accent-dim);
@@ -306,297 +742,66 @@
     .q-clear:hover { color: var(--accent); }
     .search-wrap.has-text .q-clear { display: block; }
 
-    /* The facets scroll sideways inside their own strip when they run out of
-       room. The page itself never does. */
-    .facets {
-      display: flex; align-items: center; justify-content: flex-end; gap: 5px;
-      flex: 1 1 auto; min-width: 0;
-      overflow-x: auto; scrollbar-width: none; padding: 4px 2px;
-    }
-    .facets::-webkit-scrollbar { display: none; }
-    .facet {
-      display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
-      background: linear-gradient(180deg, #131313 0%, #0c0c0c 100%);
-      border: 1px solid var(--border); border-radius: 999px;
-      box-shadow: var(--edge-light);
-      color: var(--text-sec); font-family: 'IBM Plex Sans', sans-serif;
-      font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.02em;
-      padding: 0 11px; height: 31px; cursor: pointer; white-space: nowrap;
-      transition: color 0.18s, border-color 0.18s, background 0.18s, box-shadow 0.18s, transform 0.18s;
-    }
-    .facet:hover {
-      color: var(--text); border-color: #454545; transform: translateY(-1px);
-      box-shadow: var(--edge-light), 0 4px 12px rgba(0,0,0,0.45);
-    }
-    .facet svg { width: 13px; height: 13px; flex-shrink: 0; transition: color 0.18s; }
-    .facet:hover svg { color: var(--accent); }
-    .facet .n {
-      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); color: var(--text-muted);
-      transition: color 0.18s;
-    }
-    /* The selected facet is the one lit thing in the strip: gold fill, a warm
-       halo under it, and the top hairline flipped to white-over-gold so it still
-       reads as the same material rather than a pasted-on swatch. */
-    .facet.on {
-      color: #050505;
-      background: linear-gradient(180deg, #f7d64a 0%, var(--accent) 55%, #c99206 100%);
-      border-color: #f0cb3e;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 3px 16px rgba(234,179,8,0.28);
-    }
-    .facet.on:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 5px 20px rgba(234,179,8,0.34); }
-    .facet.on svg, .facet.on:hover svg { color: rgba(5,5,5,0.8); }
-    .facet.on .n { color: rgba(5,5,5,0.62); }
-    .facet:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-    /* ── row 3: every tool, at once ── */
-    .board { min-height: 0; display: flex; }
-    /* The vertical breathing room lives on the wrapper, never on #grid: the
-       fit reads grid.clientHeight, and padding there would silently inflate it.
-       Column, so the section head and mark take their own height off the top
-       and bottom and #grid is left with exactly what remains. */
-    .board > .shell {
-      display: flex; flex-direction: column; justify-content: flex-start;
-      min-width: 0; min-height: 0;
-      padding: var(--tile-gap) var(--pad-r) var(--tile-gap) var(--pad-l);
-    }
-    #grid {
-      flex: 0 0 auto; min-width: 0; min-height: 0;
-      display: grid; gap: var(--tile-gap);
-      /* Tracks are capped, not free — see fit(). When a filter leaves four
-         tools on a 27" screen the block centres itself instead of inflating
-         four cards to the height of the window. */
-      justify-content: center; align-content: center; overflow: hidden;
-    }
-    /* Only ever reached when the viewport is too small for 31 legible cells
-       — a phone in landscape, say. The grid scrolls; the page still does not. */
-    #grid.overflowing { overflow-y: auto; align-content: start; }
-
-    /* [hidden] is `display:none` from the UA sheet, which a class rule setting
-       `display:flex` outranks — so off the section view these three rows kept
-       their padding and quietly took ~36px off the grid. */
-    .sec-head[hidden], .sec-anim[hidden], .sec-foot[hidden] { display: none; }
-
-    /* ── the section frame ────────────────────────────────────────
-       One category on the glass at a time: its name above the cards, its
-       animation below them. Both rows are `auto` inside the board's column,
-       so whatever they take, #grid gives up — and fit() sees the smaller box
-       without being told about it. */
-    .sec-head {
-      flex: none; display: flex; align-items: baseline; gap: 12px;
-      padding: 2px 2px 8px; min-width: 0;
-    }
-    .sec-head .s-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 9px var(--accent); flex: none; align-self: center;
-    }
-    .sec-head .s-name {
-      font-family: 'Red Hat Display', sans-serif; font-weight: 900;
-      font-size: var(--fs-lg); letter-spacing: 0.02em; text-transform: uppercase;
-      color: var(--text); white-space: nowrap;
-    }
-    .sec-head .s-blurb {
-      font-size: var(--fs-sm); color: var(--text-muted); min-width: 0;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
-    .sec-head .s-count {
-      margin-left: auto; flex: none;
-      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-btn);
-      letter-spacing: 0.12em; color: var(--text-muted);
-    }
-    .sec-head .s-count b { color: var(--accent); font-weight: 700; }
-
-    /* The mark sits between the section's name and its tools — you meet it on
-       the way in, rather than finding it after you have already read the cards. */
-    .sec-anim {
-      flex: none; display: flex; justify-content: center; align-items: center;
-      padding: 2px 2px 10px; min-width: 0;
-    }
-    .sec-anim .canim { max-width: 300px; }
-
-    .sec-foot {
-      flex: none; display: flex; align-items: center; justify-content: flex-end;
-      gap: 18px; padding: 12px 2px 2px; min-width: 0;
-    }
-
-    .s-next {
-      flex: none; display: inline-flex; align-items: center; gap: 7px;
-      background: transparent; border: 1px solid var(--border); border-radius: 999px;
-      box-shadow: var(--edge-light);
-      color: var(--text-muted); font-family: 'IBM Plex Mono', monospace;
-      font-size: var(--fs-btn); text-transform: uppercase; letter-spacing: 0.11em;
-      padding: 0 12px; height: 28px; cursor: pointer; white-space: nowrap;
-      transition: color 0.18s, border-color 0.18s, background 0.18s;
-    }
-    .s-next:hover { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-faint); }
-    .s-next b { color: var(--text-sec); font-weight: 600; }
-    .s-next:hover b { color: var(--accent); }
-    .s-next .arr { transition: transform 0.18s; }
-    .s-next:hover .arr { transform: translateY(2px); }
-
-    /* Moving between sections is a step, not a scroll: the outgoing set is not
-       animated out (it is replaced), the incoming one uses the tile entrance.
-       This is only the band and the heading catching up with it. */
-    @keyframes sec-in { from { opacity: 0; transform: translateY(6px); } }
-    .board.stepping .sec-head, .board.stepping .sec-anim {
-      animation: sec-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    }
-
-    @media (max-width: 860px) {
-      .sec-head .s-blurb { display: none; }
-      .sec-anim .canim { max-width: 200px; }
-      .sec-foot { gap: 12px; }
-    }
-    @media (max-width: 560px) {
-      .sec-anim { display: none; }
-      .s-next { flex: 1 1 auto; justify-content: center; }
-    }
-
-    .tile {
-      position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0;
-      background: var(--card); border: 1px solid var(--border); border-radius: 11px;
-      box-shadow: var(--edge-light), var(--edge-dark);
-      padding: 11px 13px; overflow: hidden; text-decoration: none; color: inherit;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
-      isolation: isolate;
-    }
-    /* The highlight. A gold pool centred on the pointer — JS writes --mx/--my as
-       percentages on the hovered tile, so the light tracks the cursor across the
-       card instead of the whole card just turning on. Sits under the content
-       (z-index -1 inside the tile's own stacking context) and is painted only
-       while hovered, so nothing composites on the other thirty-one tiles. */
-    .tile::before {
-      content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit;
-      background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
-                  rgba(234,179,8,0.16) 0%, rgba(234,179,8,0.05) 38%, transparent 72%);
-      opacity: 0; transition: opacity 0.22s;
-    }
-    .tile::after {
-      /* The gold edge only exists when you are on the tile, and it grows out of
-         the middle rather than switching on flat. */
-      content: ''; position: absolute; left: 0; top: 50%; width: 2px; height: 0;
-      transform: translateY(-50%);
-      background: linear-gradient(180deg, transparent, var(--accent) 18%, var(--accent) 82%, transparent);
-      transition: height 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .tile:hover, .tile:focus-visible {
-      border-color: var(--accent-dim); background: var(--card-lit);
-      transform: translateY(-3px);
-      box-shadow: var(--edge-light), 0 14px 30px rgba(0,0,0,0.6), 0 0 0 1px rgba(234,179,8,0.08);
-      outline: none;
-    }
-    .tile:hover::before, .tile:focus-visible::before { opacity: 1; }
-    .tile:hover::after, .tile:focus-visible::after { height: 100%; }
-
-    /* Tiles arrive rather than appear. The stagger is index-driven and capped in
-       JS, so a 32-tool board settles in about a fifth of a second and a filtered
-       four-tool board is effectively instant. Transform and opacity only — this
-       runs after fit() has sized the tracks and cannot feed back into layout. */
-    @keyframes tile-in { from { opacity: 0; transform: translateY(9px) scale(0.985); } }
-    #grid.entering .tile {
-      animation: tile-in 0.34s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-      animation-delay: var(--d, 0ms);
-    }
-
-    .t-head { display: flex; align-items: center; gap: 9px; min-width: 0; }
-    /* The icon gets a chip. Without it the card is a paragraph with a glyph in
-       front; with it there is something to land on before you read anything. */
-    .t-icon {
-      flex-shrink: 0; width: 26px; height: 26px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: var(--fs-body); line-height: 1;
-      background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
-      border: 1px solid #2e2e2e;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .tile:hover .t-icon, .tile:focus-visible .t-icon {
-      border-color: var(--accent-dim);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 12px rgba(234,179,8,0.18);
-    }
-    .t-name {
-      font-family: 'Red Hat Display', 'IBM Plex Sans', sans-serif;
-      font-size: var(--fs-lg); font-weight: 800; color: var(--text); line-height: 1.2;
-      letter-spacing: -0.005em;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
-    }
-    .t-local {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 6px var(--accent); flex-shrink: 0; margin-left: auto;
-    }
-    .t-desc {
-      margin-top: 5px; font-size: var(--fs-sm); color: var(--text-sec); line-height: 1.45;
-      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: var(--desc-lines);
-      overflow: hidden; min-height: 0;
-    }
-    .t-foot {
-      margin-top: auto; padding-top: 7px; display: flex; align-items: center;
-      justify-content: space-between; gap: 8px; min-width: 0;
-    }
-    .t-cat {
-      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-label); text-transform: uppercase;
-      letter-spacing: 0.13em; color: #5c5c5c;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      transition: color 0.2s;
-    }
-    .tile:hover .t-cat, .tile:focus-visible .t-cat { color: #8a8a8a; }
-    .t-go {
-      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-btn); font-weight: 600;
-      letter-spacing: 0.04em; color: var(--accent);
-      opacity: 0; transform: translateX(-4px); transition: 0.2s; flex-shrink: 0;
-    }
-    .tile:hover .t-go, .tile:focus-visible .t-go { opacity: 1; transform: none; }
-
-    /* Cells get shorter as the fleet gets denser or the window gets smaller.
-       Rather than let text spill, each step drops the least useful thing. */
-    #grid.no-foot .t-foot { display: none; }
-    #grid.no-desc .t-desc { display: none; }
-    /* At phone density a 31-tool wall gives each name about 100px. An ellipsis
-       after "Software Cat…" is not a label, so down here the name wraps to two
-       lines instead of being cut. */
-    #grid.tiny .tile { padding: 8px 9px; justify-content: center; }
-    #grid.tiny .t-head { align-items: center; gap: 7px; }
-    /* The chip shrinks rather than disappearing — at this density it is the only
-       thing distinguishing one cell from the next at a glance. */
-    #grid.tiny .t-icon { width: 20px; height: 20px; border-radius: 6px; font-size: var(--fs-sm); }
-    #grid.tiny .t-name {
-      font-size: var(--fs-btn); font-weight: 700; line-height: 1.22; white-space: normal;
-      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
-    }
-
-    .empty {
-      grid-column: 1 / -1; grid-row: 1 / -1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px; text-align: center;
-      color: var(--text-muted); border: 1px dashed var(--border); border-radius: 12px; padding: 24px;
-    }
-    .empty-big { font-size: var(--fs-h1); opacity: 0.45; }
-    .empty p { font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-mono); }
-    .empty code { font-family: 'IBM Plex Mono', monospace; color: var(--accent); }
-    .empty button {
-      background: transparent; border: 1px solid var(--accent-dim); color: var(--accent);
-      font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-sm); text-transform: uppercase;
-      letter-spacing: 0.1em; padding: 9px 18px; border-radius: 4px; cursor: pointer; transition: 0.2s;
-    }
-    .empty button:hover { background: var(--accent-faint); border-color: var(--accent); }
-
-    /* The matched run inside a name or description — colour only, so the text
-       never reflows as you type. */
-    mark { background: transparent; color: var(--accent); font-weight: 700; }
-
     /* ─── NARROW ─────────────────────────────────────────────────
-       Nine facets and a search box need ~1400px to sit still. Below that the
-       per-facet counts go first: they are the least load-bearing thing in the
-       strip, and the tiles themselves show what the filter kept. */
-    @media (max-width: 1400px) { .facet .n { display: none; } }
-    @media (max-width: 1080px) {
-      .brand-greeting { display: none; }
+       The rail standing up beside four columns needs about 1140px. Below that
+       it lies down into a band. Below 860px the board goes to two columns and
+       the panels stop being wide enough for a list — which costs nothing here,
+       because a touch screen was never going to hover one open anyway. The
+       whole board still fits a phone without scrolling: eight marks and eight
+       names is a small thing to show, and the tools are one tap away. */
+    @media (max-width: 1140px) {
+      .console { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+      /* Lying down, the rail is a band: the claim on the left, the control and
+         the readings on the right, and the paragraph only if there is room. */
+      .rail { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 22px; padding: 14px 18px; }
+      .eyebrow { grid-column: 1; }
+      .claim { grid-column: 1; grid-row: 2; margin-top: 4px; font-size: clamp(1.3rem, 3vw, 1.8rem); }
+      .lede { grid-column: 1; grid-row: 3; margin-top: 6px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+      .rail .search-wrap { grid-column: 2; grid-row: 1 / 3; margin-top: 0; width: clamp(220px, 30vw, 320px); }
+      .stats { grid-column: 2; grid-row: 3; margin-top: 0; padding-top: 0; justify-content: flex-end; gap: 2px 20px; }
+      .colophon, .legend { display: none; }
     }
+    @media (max-width: 1140px) and (max-height: 700px) { .lede { display: none; } }
+    @media (max-width: 1000px) {
+      .mosaic.open { grid-template-columns: minmax(0, 1fr) clamp(128px, 20vw, 170px); }
+    }
+    @media (max-width: 1080px) { .brand-greeting { display: none; } }
+
+    /* ── the phone ──
+       Two columns of four. The band gives up everything but the claim and the
+       box; the panels give up their lists, which no touch screen could have
+       revealed. What is left — a mark, a name and a number, eight times — fits
+       a 390 x 844 screen with room to spare, and nothing scrolls. */
     @media (max-width: 860px) {
-      :root { --shell-pad: 16px; }
+      :root { --shell-pad: 12px; --gap: 8px; }
       .header-clock { display: none; }
-      .bar { height: auto; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0; }
-      .search-wrap { flex: 0 0 auto; }
-      /* Own row now, so the strip starts at "All" instead of ending at it. */
-      .facets { padding: 8px 2px 2px; justify-content: flex-start; }
+      .rail { grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 12px 14px; }
+      .rail .search-wrap { grid-column: 1; grid-row: 3; width: auto; margin-top: 10px; }
+      .lede, .stats { display: none; }
+      .claim { font-size: clamp(1.15rem, 5.2vw, 1.5rem); }
+      .board-top { padding: 0 1px; }
+
+      /* No hover to give way to, so a shelf stops being a row that divides
+         itself and becomes a plain 2 x 2 — two shelves stacked make the 2 x 4
+         board that fits a phone whole. */
+      .shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); }
+      .p-head { padding: 9px 11px 8px; }
+      .p-name { font-size: var(--fs-sec); }
+      .p-mark .canim { height: clamp(26px, 5vh, 40px); }
+
+      .mosaic.open { grid-template-columns: minmax(0, 1fr) clamp(112px, 18vw, 150px); }
+      .mosaic.open .shelf { display: contents; }
+      .mosaic.open .panel.on .p-name { font-size: var(--fs-h3); }
+      .mosaic.open .panel.on .p-mark .canim { height: 30px; }
+      .mosaic.open .panel.on .p-blurb { font-size: var(--fs-sm); }
+      /* `safe center` and not `center`: centred content that overflows its box
+         has its top pushed out of reach, and this is the one grid that is
+         allowed to scroll. Safe alignment falls back to start when it would. */
+      .p-grid {
+        grid-auto-rows: minmax(0, 172px); align-content: safe center;
+        overflow-y: auto; padding: 9px 10px 10px;
+      }
+      .c-desc { -webkit-line-clamp: 2; }
     }
     @media (max-width: 560px) {
       .brand-name { font-size: var(--fs-h3); }
@@ -604,38 +809,52 @@
       .header-right { gap: 8px; }
       .status-toggle { padding: 0 10px; }
       .status-toggle span { display: none; }
+      /* Seven folded names down the side of a 360px screen would be four
+         characters each. Open, the panel IS the board; the way back is the
+         close pill, which is where it has been the whole time. */
+      .mosaic.open { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+      .mosaic.open .panel:not(.on) { display: none; }
+      .mosaic.open .panel.on { grid-column: 1; grid-row: 1; }
+      /* Two narrow cards beat one wide one at this width. */
+      .p-grid { --card-min: 142px; grid-auto-rows: minmax(0, 156px); }
     }
+    /* A phone on its side has no vertical room for a band and a board. The
+       claim goes; the search box and the eight panels are the whole page. */
+    @media (max-width: 900px) and (max-height: 560px) {
+      .claim, .eyebrow { display: none; }
+      .rail { padding: 8px 12px; }
+      .rail .search-wrap { grid-row: 1; margin-top: 0; }
+      /* Back to two shelves of four: a phone on its side is wide, not tall. */
+      .shelf { display: flex; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .board.stepping .sec-head, .board.stepping .sec-anim { animation: none; }
-      .s-next:hover .arr { transform: none; }
-      .tile, .t-go, .facet, .t-icon, .tile::before, .tile::after { transition: none; }
-      .tile:hover, .tile:focus-visible, .facet:hover, .facet.on:hover { transform: none; }
-      /* The pointer-tracked pool and the growing edge are motion, not colour —
-         hovering still lights the tile, it just does not animate or follow. */
-      .tile:hover::before, .tile:focus-visible::before { opacity: 1; }
-      .tile:hover::after, .tile:focus-visible::after { height: 100%; }
-      #grid.entering .tile { animation: none; }
+      .card, .row, .panel, .p-head, .pill, .c-go, .c-icon, .card::before,
+      .p-face, .p-list { transition: none; }
+      /* Both the widening and the swap still happen — they are how you read a
+         panel — they just happen at once instead of easing. `transition: none`
+         on .panel covers flex-grow, which is the whole of the accordion. */
+      .card:hover, .card:focus-visible { transform: none; }
+      /* The pool is light, not motion — hovering still lights the card, it
+         just does not animate or follow. */
+      .card:hover::before, .card:focus-visible::before { opacity: 1; }
+      .p-grid.entering .card { animation: none; }
     }
 
     /* ─── SAFE AREAS ──────────────────────────────────────────────
        A notched phone in landscape puts a cutout over the gutter and a home
-       indicator over the last row. That matters more here than on a page that
-       scrolls: the board is pinned to the bottom by construction, so a tile
-       under the indicator cannot be scrolled back into view. */
+       indicator over the bottom edge. The console is pinned to both by
+       construction, so neither can be scrolled back into view. */
     @supports (padding: env(safe-area-inset-left)) {
       :root {
         --pad-l: max(var(--shell-pad), env(safe-area-inset-left));
         --pad-r: max(var(--shell-pad), env(safe-area-inset-right));
       }
-      /* The board is the last row now, so it carries the bottom inset. It is
-         also the 1fr row, so the space comes out of the tiles' own height —
-         fit() reads the shrunken clientHeight and lays out to match. */
-      .board > .shell { padding-bottom: max(var(--tile-gap), env(safe-area-inset-bottom)); }
+      .console { padding-bottom: max(var(--gap), env(safe-area-inset-bottom)); }
     }
   </style>
 </head>
 <body>
-
 <header class="top-header">
   <div class="header-inner">
     <div class="header-left">
@@ -717,29 +936,57 @@
   </div>
 </header>
 
-<h1 class="sr-only" data-i18n>Tools</h1>
+<h1 class="sr-only">Carino Systems</h1>
 
-<div class="bar-outer">
-  <div class="shell bar">
+<main class="console">
+
+  <!-- ── the hero rail: the one part of the page that never changes ── -->
+  <aside class="rail">
+    <p class="eyebrow"><span data-i18n>Independent systems work</span> &middot; MX</p>
+    <p class="claim" data-i18n>Software that keeps the work moving.</p>
+    <p class="lede" data-i18n>Tools for medical imaging, networks, systems and the documents around them. Most of them run entirely in your browser — nothing to install, nothing uploaded, no account to make.</p>
+
     <div class="search-wrap" id="searchWrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input id="q" type="search" autocomplete="off" spellcheck="false" aria-label="Search tools" />
       <span class="kbd">/</span>
       <button class="q-clear" id="qClear" type="button" aria-label="Clear search">&times;</button>
     </div>
-    <nav class="facets" id="facets" aria-label="Categories"></nav>
-  </div>
-</div>
 
-<main class="board">
-  <div class="shell">
-    <!-- Three rows: the section's name, its tools, and its mark. Only the
-         middle one flexes, so #grid.clientHeight is what fit() budgets. -->
-    <div class="sec-head" id="secHead" hidden></div>
-    <div class="sec-anim" id="secAnim" hidden></div>
-    <div id="grid" role="list"></div>
-    <div class="sec-foot" id="secFoot" hidden></div>
-  </div>
+    <div class="legend">
+      <p class="legend-t" data-i18n>Keys</p>
+      <div><kbd>/</kbd><span data-i18n>Search</span></div>
+      <div><kbd>1&ndash;8</kbd><span data-i18n>Industries</span></div>
+      <div><kbd>ESC</kbd><span data-i18n>Close</span></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b id="statTools">--</b><span data-i18n>tools</span></div>
+      <div class="stat"><b id="statInds">--</b><span data-i18n>industries</span></div>
+      <div class="stat"><b>100%</b><span data-i18n>free and open source</span></div>
+    </div>
+
+    <div class="colophon">
+      <a href="https://github.com/MiguelCarino" target="_blank" rel="noopener" data-i18n>Source on GitHub</a>
+      <span class="dot"></span>
+      <a href="https://branding.carino.systems/" target="_blank" rel="noopener">Branding</a>
+      <span class="dot"></span>
+      <a href="https://test.carino.systems" target="_blank" rel="noopener" data-i18n>Complete test</a>
+    </div>
+  </aside>
+
+  <!-- ── the mosaic: eight industries, and one of them may take the floor ── -->
+  <section class="board">
+    <div class="board-top">
+      <div class="board-label" id="boardLabel"></div>
+      <div class="board-act">
+        <button type="button" class="pill" id="clearBtn" hidden>&times; <span data-i18n>Clear filter</span></button>
+        <button type="button" class="pill" id="closeBtn" hidden>&times; <span data-i18n>Close</span></button>
+      </div>
+    </div>
+    <div class="mosaic" id="mosaic"></div>
+  </section>
+
 </main>
 
 <script>
@@ -751,15 +998,17 @@
    page is called back on get published.
 
    The index is data, not markup: assets/json/tools.json. Adding a tool is
-   one object there and one description in i18n.js — the hub itself never
-   learns the fleet's shape.
+   one object there and one description in i18n.js; adding a category is one
+   object there and a mark in carino-anim.js. The page never learns the
+   fleet's shape — it renders eight panels because the registry has eight
+   tags, and would render nine if it had nine.
    ───────────────────────────────────────────────────────────────────── */
 
 (function () {
 
 const REGISTRY = 'assets/json/tools.json';
 
-let TOOLS = [], TAGS = [], tag = null, query = '', shown = [];
+let TOOLS = [], TAGS = [], open = null, query = '';
 
 /* Live handle, not a one-off read: the CSS honours the preference through a
    media query, and the JS-driven motion has to honour a mid-session change too. */
@@ -773,7 +1022,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 const $ = (id) => document.getElementById(id);
 
 /* ── matching ──
-   Space-separated terms, all of which must appear somewhere in the card:
+   Space-separated terms, all of which must appear somewhere in the tool:
    its name, its description, its category labels, or its keywords — the
    unshown aliases in the registry, so "anonymize" finds the tag editor
    and "srt" finds Sync Studio without either word being on screen. */
@@ -783,13 +1032,13 @@ function haystack(tool) {
     .join(' ').toLowerCase();
 }
 const terms = (q) => q.toLowerCase().split(/\s+/).filter(Boolean);
-const matches = (tool, q) => { const hay = haystack(tool); return terms(q).every((x) => hay.includes(x)); };
+const matches = (tool) => { const hay = haystack(tool); return terms(query).every((x) => hay.includes(x)); };
 
 /* Highlight every matched run. Escapes first, then inserts <mark>, so a
    tool description can never smuggle in markup. */
-function mark(text, q) {
+function mark(text) {
   const out = esc(text);
-  const ts = terms(q).filter((x) => x.length > 1);
+  const ts = terms(query).filter((x) => x.length > 1);
   if (!ts.length) return out;
   const re = new RegExp('(' + ts.map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'gi');
   return out.replace(re, '<mark>$1</mark>');
@@ -797,289 +1046,205 @@ function mark(text, q) {
 
 const cat = (id) => TAGS.find((x) => x.id === id);
 const tagLabel = (id) => (cat(id) || {}).label || id;
-const toolsIn = (id) => TOOLS.filter((x) => x.tags.includes(id));
-function svg(d) {
-  // `d` is raw SVG geometry from our own registry, not user input.
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ` +
-         `stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+
+/* ── one home each ──
+   A tool still carries every tag that is true of it — Carino PACS is medical,
+   systems AND network, its card says so, and searching any of those three
+   finds it. But it LIVES in exactly one panel, so the board is a partition of
+   the fleet and not a set of overlapping lists: thirty-four tools, thirty-four
+   rows, and a count you can add up.
+
+   Home is the tool's FIRST tag, which makes the registry the place that
+   decides it — moving a tool between panels is reordering its `tags` array in
+   assets/json/tools.json, not a new field and not an edit here. The fallback
+   only fires for a tool whose tags are all unknown to the registry, which is a
+   broken entry; it goes to the first category rather than off the board. */
+const homeOf = (x) => x.tags.find((id) => cat(id)) || (TAGS[0] || {}).id;
+const toolsIn = (id) => TOOLS.filter((x) => homeOf(x) === id);
+const shownIn = (id) => toolsIn(id).filter(matches);
+const total = () => TOOLS.filter(matches).length;
+
+/* How many columns a set of N cards wants. A table, not a search: the fleet's
+   largest category is nine and the answer for every count up to it is known —
+   four goes 2x2 rather than 3+1, six goes 3x2, nine goes 3x3. This is all that
+   is left of the old design's fit(), and it is nine numbers. */
+const COLS = [1, 1, 2, 3, 2, 3, 3, 4, 4, 3];
+const colsFor = (n) => COLS[n] || 4;
+
+/* The stagger, capped: nine cards settle in about a sixth of a second, and a
+   panel never finishes arriving after you have read it. */
+const stagger = (i) => Math.min(i * 22, 200);
+
+/* ── the panels ──
+   Built once. The marks are looping CSS animations and the heads carry them,
+   so only the lists and the card grids are ever re-rendered — rebuilding a
+   panel per keystroke would restart all eight animations. A language switch
+   is the one thing that redraws the whole mosaic. */
+function buildMosaic() {
+  // Two shelves, split down the middle of whatever the registry holds — eight
+  // tags make two rows of four, nine would make five and four. The split is
+  // here rather than in the CSS because the CSS cannot count them.
+  const per = Math.ceil(TAGS.length / 2);
+  const shelves = [TAGS.slice(0, per), TAGS.slice(per)];
+  $('mosaic').innerHTML = shelves
+    .map((row) => `<div class="shelf">${row.map(panelHTML).join('')}</div>`)
+    .join('');
 }
 
-/* ── the board ──
-   Everything that survives the current facet and the current query, and
-   nothing else. The tiles are the whole page, so the list is never paged,
-   sliced or rotated: if it does not fit, the cells get smaller. */
-const visible = () => TOOLS.filter((x) => (!tag || x.tags.includes(tag)) && (!query || matches(x, query)));
+function panelHTML(g) {
+  // carino-anim.js is deferred; if it has not landed the band is simply
+  // empty, which costs the panel its mark and nothing else.
+  const anim = window.CarinoAnim ? CarinoAnim.svg(g.id, T(g.label)) : '';
+  return `<article class="panel" data-tag="${esc(g.id)}">
+    <button type="button" class="p-head" aria-expanded="false">
+      <span class="p-name">${esc(T(g.label))}</span>
+      <span class="p-n"><b>${toolsIn(g.id).length}</b></span>
+    </button>
+    <div class="p-body">
+      <div class="p-face">
+        <span class="p-mark">${anim}</span>
+        <span class="p-blurb">${esc(T(g.blurb))}</span>
+      </div>
+      <div class="p-list"></div>
+      <div class="p-grid"></div>
+    </div>
+  </article>`;
+}
 
-function tileHTML(x, i) {
+function rowHTML(x) {
   // Only cross-origin links get a new tab, which is all of them today —
   // but the registry is meant to outlive that assumption.
   const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
-  const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
-  const local = x.local ? `<span class="t-local" title="${esc(T('Runs locally'))}"></span>` : '';
-  // --d is the entrance stagger. Capped so a 32-tool board still settles fast,
-  // and so a long fleet never ends with tiles arriving after you have read them.
-  const d = Math.min(i * 13, 220);
-  return `<a class="tile" role="listitem" href="${esc(x.url)}" data-i="${i}" style="--d:${d}ms"${ext ? ' target="_blank" rel="noopener"' : ''}>
-    <span class="t-head"><span class="t-icon">${esc(x.icon)}</span><span class="t-name">${mark(x.name, query)}</span>${local}</span>
-    <span class="t-desc">${mark(T(x.desc), query)}</span>
-    <span class="t-foot"><span class="t-cat">${esc(cats)}</span><span class="t-go">${esc(T(x.cta))}</span></span>
+  const local = x.local ? `<span class="lo" title="${esc(T('Runs locally'))}"></span>` : '';
+  return `<a class="row" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>
+    <span class="ic">${esc(x.icon)}</span><span class="nm">${mark(x.name)}</span>${local}<span class="go">&#8599;</span>
   </a>`;
 }
 
-function renderFacets() {
-  const all = `<button class="facet${tag ? '' : ' on'}" data-tag="" type="button" aria-pressed="${!tag}">
-      <span>${esc(T('All'))}</span><span class="n">${TOOLS.length}</span></button>`;
-  $('facets').innerHTML = all + TAGS.map((g) => `
-    <button class="facet${g.id === tag ? ' on' : ''}" data-tag="${esc(g.id)}" type="button"
-            aria-pressed="${g.id === tag}" title="${esc(T(g.blurb))}">
-      ${svg(g.path)}<span>${esc(T(g.label))}</span><span class="n">${toolsIn(g.id).length}</span>
-    </button>`).join('');
+function cardHTML(x, i) {
+  const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
+  const cats = x.tags.map((id) => T(tagLabel(id))).join(' · ');
+  const local = x.local ? `<span class="c-local" title="${esc(T('Runs locally'))}"></span>` : '';
+  return `<a class="card" href="${esc(x.url)}" style="--d:${stagger(i)}ms"${ext ? ' target="_blank" rel="noopener"' : ''}>
+    <span class="c-head"><span class="c-icon">${esc(x.icon)}</span><span class="c-name">${mark(x.name)}</span>${local}</span>
+    <span class="c-desc">${mark(T(x.desc))}</span>
+    <span class="c-foot"><span class="c-cat">${esc(cats)}</span><span class="c-go">${esc(T(x.cta))}</span></span>
+  </a>`;
 }
 
+/* Only the contents move. The head, and the animation inside it, are left
+   exactly where they were — see buildMosaic. */
 let enterTimer = 0;
-function renderGrid(animate) {
-  const grid = $('grid');
-  shown = visible();
+function fillPanels(animate) {
   clearTimeout(enterTimer);
-  grid.classList.remove('entering');
-  if (!shown.length) {
-    grid.className = '';
-    grid.style.gridTemplateColumns = grid.style.gridTemplateRows = '1fr';
-    grid.innerHTML = `<div class="empty"><div class="empty-big">&empty;</div>` +
-      `<p>${esc(T('Nothing matches'))} &ldquo;${esc(query || T(tagLabel(tag)))}&rdquo;</p>` +
-      `<button type="button" id="resetBtn">${esc(T('Show everything'))}</button></div>`;
-    $('resetBtn').onclick = () => { setState(null, ''); $('q').focus(); };
-    return;
-  }
-  grid.innerHTML = shown.map(tileHTML).join('');
-  if (animate && !REDUCED.matches) {
-    grid.classList.add('entering');
-    // The class has to come off, or a tile that finishes its animation keeps
-    // `both` fill and the next hover has an animation still claiming opacity.
-    // Longest delay (220ms) + duration (340ms), with a little slack.
-    enterTimer = setTimeout(() => grid.classList.remove('entering'), 620);
-  }
-  fit(true);
-}
-
-/* ── the fit ──
-   The one piece of arithmetic the design rests on. Given the box the tiles
-   have and how many there are, try every column count and keep the one
-   whose cells land closest to a readable proportion — weighted hard against
-   layouts that leave a ragged last row. Raggedness used to be a small nudge and
-   it was not enough: nine tools came out 4x3, which is one card sitting alone
-   under eight, and that reads as a mistake rather than as a grid. Then the grid
-   is told exactly how many rows to draw, so `1fr` divides the height and
-   the board fills the screen without ever exceeding it.
-
-   A cell is capped in both directions — past a point a bigger card is not a
-   better one, it is a card with a hole in it — so the tracks are written as
-   minmax(0, MAX), which fills the space when there is little and stops
-   growing when there is plenty. The leftovers become margin, and the board
-   centres itself.
-
-   Below a floor (cells too small to read) nothing is chosen and the grid is
-   allowed to scroll inside itself — a 31-tool wall does not fit a phone in
-   landscape at any legible size, and pretending otherwise is worse. */
-const AR    = 2.05;  // width : height a cell reads best at
-const MIN_H = 44;    // a name and nothing else
-/* Both caps are flat, and deliberately so. Letting them grow for a small
-   section was tried and is worse in both directions: extra height becomes a
-   hole between a two-line description and the footer, and extra width lets a
-   narrower column count win the score, which put nine cards into 4x3 and left
-   one alone on the last row. The space a section cannot use belongs at the
-   bottom of the board as whitespace, not inside the cards. */
-const MAX_H = 156;   // past this a card is mostly empty
-const MAX_W = 340;
-let lastFit = '';
-function fit(force) {
-  const grid = $('grid');
-  const n = shown.length;
-  if (!n) return;
-  const gap = parseFloat(getComputedStyle(grid).gap) || 10;
-  // Measured off the ROW, not off the grid: the grid is sized by this function,
-  // so reading its own height back would be circular the moment it stops
-  // filling the row. What is left after the section's name and its mark is
-  // what the tiles get.
-  const shell = grid.parentElement, scs = getComputedStyle(shell);
-  const W = grid.clientWidth;
-  const H = shell.clientHeight - parseFloat(scs.paddingTop) - parseFloat(scs.paddingBottom)
-          - $('secHead').offsetHeight - $('secAnim').offsetHeight - $('secFoot').offsetHeight;
-  if (W < 2 || H < 2) return;
-  // Same box, same tiles, same answer. Observers fire more often than the
-  // layout actually changes, and re-writing the tracks is what would make
-  // them fire again.
-  const key = W + 'x' + H + 'x' + n;
-  if (!force && key === lastFit) return;
-  lastFit = key;
-  const MIN_W = W < 620 ? 92 : 150;
-
-  let best = null;
-  for (let cols = 1; cols <= n; cols++) {
-    const rows = Math.ceil(n / cols);
-    const cw = Math.min(MAX_W, (W - gap * (cols - 1)) / cols);
-    const ch = Math.min(MAX_H, (H - gap * (rows - 1)) / rows);
-    if (cw < MIN_W || ch < MIN_H) continue;
-    const score =
-      Math.abs(Math.log((cw / ch) / AR)) +                    // how far from a readable proportion
-      1.0 * (cols * rows - n) / n +                           // how ragged the last row is
-      (1 - (cols * cw + gap * (cols - 1)) / W);               // how much of the width goes unused
-    if (!best || score < best.score) best = { cols, rows, ch, score };
-  }
-
-  if (!best) {                                   // nothing legible fits — let it scroll
-    const cols = Math.max(1, Math.floor((W + gap) / MIN_W));
-    grid.classList.add('overflowing');
-    grid.style.height = H + 'px';              // it scrolls, so it takes the lot
-    grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
-    grid.style.gridTemplateRows = 'none';
-    grid.style.gridAutoRows = '68px';
-    applyDensity(68);
-    return;
-  }
-  grid.classList.remove('overflowing');
-  // Exactly the height the chosen layout needs, so the leftover space belongs
-  // to the ROW and can be shared with the heading and the animation instead of
-  // being swallowed as slack inside the grid. Four tools in a tall band left
-  // the mark stranded at the bottom of the screen; now the section is one
-  // block, centred, with its mark directly under its cards.
-  grid.style.height = (best.rows * best.ch + gap * (best.rows - 1)) + 'px';
-  grid.style.gridTemplateColumns = `repeat(${best.cols}, minmax(0, ${MAX_W}px))`;
-  grid.style.gridTemplateRows = `repeat(${best.rows}, 1fr)`;
-  grid.style.gridAutoRows = '';
-  applyDensity(best.ch);
-}
-
-/* As a cell gets shorter it drops the least useful thing it is carrying —
-   the call to action, then the description — rather than clipping text. The
-   line count is budgeted from what is actually left after the name, the
-   padding and (if it is still there) the footer, so the clamp and the box
-   agree instead of the box hiding a fifth line nobody asked for. */
-/* Measured off the rendered card, not guessed — and re-measured whenever the
-   card changes shape. PAD is the vertical padding plus both borders; HEAD is the
-   icon chip, which is taller than the name it sits beside and therefore sets the
-   row; FOOT already includes its own padding-top. */
-const PAD = 24, HEAD = 26, FOOT = 21, LINE = 19, LEAD = 5;
-const FIXED = PAD + HEAD + LEAD;
-function applyDensity(ch) {
-  const grid = $('grid');
-  const foot = ch >= FIXED + LINE + FOOT;                    // keep it only if a line survives too
-  const lines = Math.max(0, Math.min(5, Math.floor((ch - FIXED - (foot ? FOOT : 0)) / LINE)));
-  grid.style.setProperty('--desc-lines', Math.max(1, lines));
-  grid.classList.toggle('no-foot', !foot);
-  grid.classList.toggle('no-desc', lines === 0);
-  grid.classList.toggle('tiny', ch < 56);
-}
-
-
-/* ── the section frame ──
-   A section is a facet you are standing in rather than one you applied: it
-   names itself, it says where it sits in the set, and it carries its own
-   animation. Searching leaves the frame — a query is not a place. */
-const secIndex = () => TAGS.findIndex((g) => g.id === tag);
-const inSection = () => !query && tag !== null;
-
-let stepTimer = 0;
-function renderFrame(animate) {
-  const head = $('secHead'), anim = $('secAnim'), foot = $('secFoot');
-  if (!inSection()) {
-    head.hidden = anim.hidden = foot.hidden = true;
-    head.innerHTML = anim.innerHTML = foot.innerHTML = '';
-    return;
-  }
-  const at = secIndex(), g = TAGS[at], next = TAGS[(at + 1) % TAGS.length];
-  head.hidden = anim.hidden = foot.hidden = false;
-  head.innerHTML =
-    `<span class="s-dot"></span><span class="s-name">${esc(T(g.label))}</span>` +
-    `<span class="s-blurb">${esc(T(g.blurb))}</span>` +
-    `<span class="s-count"><b>${at + 1}</b> / ${TAGS.length}</span>`;
-  // carino-anim.js is deferred; if it has not landed the band is simply empty,
-  // which costs the section its mark and nothing else.
-  anim.innerHTML = window.CarinoAnim ? CarinoAnim.svg(g.id, T(g.label)) : '';
-  // No dot rail: the facet strip above already lists every section, carries the
-  // counts and lights the current one. This is only the "there is a next one"
-  // affordance, which the strip does not give you.
-  foot.innerHTML =
-    `<button type="button" class="s-next" data-go="${esc(next.id)}">` +
-      `${esc(T('next'))} <b>${esc(T(next.label))}</b> <span class="arr">&darr;</span></button>`;
-  if (animate && !REDUCED.matches) {
-    const b = document.querySelector('.board');
-    clearTimeout(stepTimer);
-    b.classList.remove('stepping');
-    void b.offsetWidth;                    // restart the animation, do not queue it
-    b.classList.add('stepping');
-    // And take it off again. `both` means the animation keeps owning transform
-    // for as long as the class is there, which held the heading and the mark
-    // 6px low — the `from` offset — instead of letting them settle.
-    stepTimer = setTimeout(() => b.classList.remove('stepping'), 400);
+  TAGS.forEach((g) => {
+    const panel = $('mosaic').querySelector(`.panel[data-tag="${g.id}"]`);
+    const inside = shownIn(g.id);
+    panel.classList.toggle('on', g.id === open);
+    panel.classList.toggle('void', inside.length === 0);
+    panel.querySelector('.p-head').setAttribute('aria-expanded', g.id === open);
+    // With a query up, the head says how much of the category survived it —
+    // "1/9" is a more useful number than either half of it alone.
+    panel.querySelector('.p-n').innerHTML = query
+      ? `<b>${inside.length}</b><span class="of">/${toolsIn(g.id).length}</span>`
+      : `<b>${toolsIn(g.id).length}</b>`;
+    panel.querySelector('.p-list').innerHTML =
+      inside.length ? inside.map(rowHTML).join('') : `<div class="p-none">&empty;</div>`;
+    // The card grid is only ever read on the open panel, so the other seven
+    // are left empty rather than built and hidden.
+    const grid = panel.querySelector('.p-grid');
+    grid.classList.remove('entering');
+    grid.style.setProperty('--cols', colsFor(inside.length));
+    grid.innerHTML = g.id === open ? inside.map(cardHTML).join('') : '';
+  });
+  if (open && animate && !REDUCED.matches) {
+    const grid = $('mosaic').querySelector('.panel.on .p-grid');
+    if (grid) {
+      void grid.offsetWidth;                     // restart the animation, do not queue it
+      grid.classList.add('entering');
+      // The class has to come off, or a card that finishes its animation keeps
+      // `both` fill and the next hover has an animation still claiming opacity.
+      enterTimer = setTimeout(() => grid.classList.remove('entering'), 560);
+    }
   }
 }
 
-/* Step by whole sections, and wrap: the set is a ring, so the last one is not
-   a dead end. A query is dropped on the way — you asked to go somewhere. */
-function step(delta) {
-  const at = inSection() ? secIndex() : -1;
-  const to = at < 0 ? (delta > 0 ? 0 : TAGS.length - 1)
-                    : (at + delta + TAGS.length) % TAGS.length;
-  setState(TAGS[to].id, '');
+/* The one line of chrome: where you are, how much of it there is, and — only
+   when there is somewhere to go back to — the way out. */
+function renderTop() {
+  const g = open ? cat(open) : null;
+  const n = g ? shownIn(open).length : total();
+  // Label then value, never "N things": Spanish, Portuguese and Russian all
+  // decline a counted noun and Russian declines it three ways. A field name
+  // and a number beside it is correct in every language and reads as console
+  // chrome rather than as a sentence.
+  const field = (name, val) => `${esc(name)} <span class="sep">/</span> <span class="n">${val}</span>`;
+  $('boardLabel').innerHTML = g
+    ? `<b>${esc(T(g.label))}</b> <span class="sep">&middot;</span> ${field(T('Tools'), n)}`
+    : `${field(T('Industries'), TAGS.length)} <span class="sep">&middot;</span> ${field(T('Tools'), n)}`;
+  $('clearBtn').hidden = !query;
+  $('closeBtn').hidden = !open;
+  // Nothing matched anywhere: the mosaic gives way rather than showing eight
+  // empty boxes, which would read as the fleet having gone.
+  const dead = total() === 0;
+  $('mosaic').classList.toggle('dead', dead);
+  const had = $('mosaic').querySelector('.void-all');
+  if (dead && !had) {
+    const el = document.createElement('div');
+    el.className = 'void-all';
+    el.innerHTML = `<div class="big">&empty;</div><p>${esc(T('Nothing matches'))} &ldquo;${esc(query)}&rdquo;</p>` +
+      `<button type="button" id="resetBtn">${esc(T('Show everything'))}</button>`;
+    $('mosaic').appendChild(el);
+    $('resetBtn').onclick = () => { setState(open, ''); $('q').focus(); };
+  } else if (!dead && had) { had.remove(); }
 }
 
 /* ── state ──
-   #medical is a facet, #/dicom is a query, #medical/dicom is both. */
+   #medical is an open panel, #/dicom is a query, #medical/dicom is both. */
 const unesc = (s) => { try { return decodeURIComponent(s); } catch { return s; } };
 function readHash() {
   const raw = location.hash.replace(/^#/, '');
   const i = raw.indexOf('/');
   const asked = unesc(i < 0 ? raw : raw.slice(0, i));
   query = i < 0 ? '' : unesc(raw.slice(i + 1));
-  if (TAGS.some((g) => g.id === asked)) tag = asked;
-  // `#all` is the whole wall, explicitly. A bare URL is not "no section", it
-  // is the first one — the hub opens somewhere rather than on everything.
-  else if (asked === 'all') tag = null;
-  else tag = query ? null : TAGS[0].id;
+  open = TAGS.some((g) => g.id === asked) ? asked : null;
 }
 function writeHash() {
-  const h = (tag || 'all') + (query ? '/' + encodeURIComponent(query) : '');
+  const h = (open || 'all') + (query ? '/' + encodeURIComponent(query) : '');
+  // replaceState, not a hash assignment: writing location.hash would push a
+  // history entry per keystroke and make Back walk the query letter by letter.
   history.replaceState(null, '', '#' + h);
 }
-/* The entrance plays on first paint and when you change facet — a deliberate
-   act with a new set of tools behind it. It deliberately does NOT play while
-   you type: re-running it per keystroke turns a narrowing list into a strobe. */
-let animateNext = true;
-function setState(nextTag, nextQuery) {
-  animateNext = nextTag !== tag;
-  tag = nextTag;
+
+/* The card entrance plays when a panel opens — a deliberate act with a new set
+   of tools behind it — and deliberately not while you type, where re-running it
+   per keystroke turns a narrowing list into a strobe. */
+function setState(nextOpen, nextQuery) {
+  const opened = nextOpen !== open;
+  open = nextOpen;
   query = nextQuery;
   writeHash();
-  render();
+  render(opened);
 }
 
-function render() {
+function render(animate) {
   $('q').placeholder = T('Search tools…');
-  $('q').value = query;
+  if ($('q').value !== query) $('q').value = query;
   $('searchWrap').classList.toggle('has-text', !!query);
-  renderFacets();
-  renderFrame(animateNext);
-  renderGrid(animateNext);
-  animateNext = false;
+  $('mosaic').classList.toggle('open', !!open);
+  fillPanels(animate);
+  renderTop();
 }
-// i18n.js re-runs this after a fleet-wide language switch.
-window.renderTools = () => { if (TOOLS.length) render(); };
+// i18n.js re-runs this after a fleet-wide language switch. The marks live in
+// the heads, so this is the one path that rebuilds them.
+window.renderTools = () => { if (!TOOLS.length) return; buildMosaic(); render(false); };
 
-/* ── keyboard ──
-   The grid is a grid, so the arrows are two-dimensional: left/right walk
-   the list, up/down jump a row — which is only knowable after the fit. */
-function columns() {
-  const cs = getComputedStyle($('grid')).gridTemplateColumns;
-  return Math.max(1, cs.split(' ').filter(Boolean).length);
-}
-function moveFocus(delta) {
-  const tiles = [...$('grid').querySelectorAll('.tile')];
-  if (!tiles.length) return;
-  const at = tiles.indexOf(document.activeElement);
-  let next = at < 0 ? (delta > 0 ? 0 : tiles.length - 1) : at + delta;
-  next = Math.max(0, Math.min(tiles.length - 1, next));
-  tiles[next].focus();
+/* Walking the ring of industries. Only meaningful with a panel open — closed,
+   every panel is already on the glass and there is nothing to step to. */
+function step(delta) {
+  if (!open) return;
+  const at = TAGS.findIndex((g) => g.id === open);
+  setState(TAGS[(at + delta + TAGS.length) % TAGS.length].id, query);
 }
 
 /* ── wiring ── */
@@ -1088,27 +1253,41 @@ function boot(data) {
   TOOLS = data.tools || [];
   if (!TAGS.length || !TOOLS.length) throw new Error('empty registry');
 
-  readHash();
-  render();
+  $('statTools').textContent = TOOLS.length;
+  $('statInds').textContent = TAGS.length;
 
-  $('facets').addEventListener('click', (e) => {
-    const b = e.target.closest('.facet');
-    if (!b) return;
-    const next = b.dataset.tag || null;
-    setState(next === tag ? null : next, query);      // clicking the open facet clears it
+  readHash();
+  buildMosaic();
+  render(true);
+
+  const mosaic = $('mosaic');
+
+  /* Any part of a closed panel opens it — on a touch screen the mark is most
+     of what there is to aim at, and aiming at it did nothing before. Rows and
+     cards are anchors and are left alone: clicking a tool opens the tool. */
+  mosaic.addEventListener('click', (e) => {
+    if (e.target.closest('.row, .card')) return;
+    const panel = e.target.closest('.panel');
+    if (!panel) return;
+    const id = panel.dataset.tag;
+    if (id !== open) { setState(id, query); return; }
+    // Only its head folds an open panel back. A stray click in the body would
+    // otherwise close the very thing you are reading.
+    if (e.target.closest('.p-head')) setState(null, query);
   });
 
-  const grid = $('grid');
+  $('closeBtn').addEventListener('click', () => setState(null, query));
+  $('clearBtn').addEventListener('click', () => setState(open, ''));
 
-  /* The pointer-tracked highlight. One delegated listener for the whole board,
+  /* The pointer-tracked highlight. One delegated listener for the whole mosaic,
      coalesced into a frame — a mousemove can fire far more often than the
      compositor paints, and writing two custom properties per event is the kind
-     of thing that quietly costs a frame on a 32-cell wall. Only the tile under
-     the cursor is ever written to; the pool itself is painted by CSS. */
+     of thing that quietly costs a frame. Only the card under the cursor is ever
+     written to; the pool itself is painted by CSS. */
   if (!REDUCED.matches && matchMedia('(hover: hover)').matches) {
     let pending = null, queued = false;
-    grid.addEventListener('pointermove', (e) => {
-      const el = e.target.closest('.tile');
+    mosaic.addEventListener('pointermove', (e) => {
+      const el = e.target.closest('.card');
       if (!el) return;
       pending = { el, x: e.clientX, y: e.clientY };
       if (queued) return;                       // one write per frame, not per event
@@ -1116,72 +1295,31 @@ function boot(data) {
       requestAnimationFrame(() => {
         queued = false;
         if (!pending) return;
-        const { el: t, x, y } = pending;
-        const b = t.getBoundingClientRect();
-        t.style.setProperty('--mx', ((x - b.left) / b.width * 100).toFixed(1) + '%');
-        t.style.setProperty('--my', ((y - b.top) / b.height * 100).toFixed(1) + '%');
+        const { el: c, x, y } = pending;
+        const b = c.getBoundingClientRect();
+        c.style.setProperty('--mx', ((x - b.left) / b.width * 100).toFixed(1) + '%');
+        c.style.setProperty('--my', ((y - b.top) / b.height * 100).toFixed(1) + '%');
         pending = null;
       });
     }, { passive: true });
     // Keyboard focus has no cursor, so centre the pool on the card instead of
     // leaving it wherever the mouse last was.
-    grid.addEventListener('focusin', (e) => {
-      const el = e.target.closest('.tile');
+    mosaic.addEventListener('focusin', (e) => {
+      const el = e.target.closest('.card');
       if (el) { el.style.setProperty('--mx', '50%'); el.style.setProperty('--my', '50%'); }
     });
   }
 
-
-  /* ── moving between sections ──
-     The rail and the next chip both carry a target id, so one listener on the
-     row handles either. Delegated, because the row is re-rendered every step. */
-  $('secFoot').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-go]');
-    if (b) setState(b.dataset.go, '');
-  });
-
-  /* A wheel is the obvious way to ask for the next one, but a trackpad sends a
-     long tail of small deltas per flick. So: ignore anything under a threshold,
-     then refuse to move again until the gesture has actually stopped. Without
-     the cooldown one flick walks the whole ring. */
-  const board = document.querySelector('.board');
-  let wheelLock = 0, wheelAcc = 0, wheelIdle = 0;
-  board.addEventListener('wheel', (e) => {
-    if (!inSection()) return;
-    // The grid scrolls inside itself when a section will not fit; that scroll
-    // belongs to the grid, not to us.
-    if ($('grid').classList.contains('overflowing')) return;
-    e.preventDefault();
-    const now = performance.now();
-    if (now < wheelLock) return;
-    wheelAcc += e.deltaY;
-    clearTimeout(wheelIdle);
-    wheelIdle = setTimeout(() => { wheelAcc = 0; }, 180);
-    if (Math.abs(wheelAcc) < 40) return;
-    step(wheelAcc > 0 ? 1 : -1);
-    wheelAcc = 0;
-    wheelLock = now + 520;
-  }, { passive: false });
-
-  // Touch: a vertical flick of more than 55px, with the same "not sideways"
-  // check a carousel needs so a scrolled facet strip does not trigger it.
-  let ty = 0, tx = 0;
-  board.addEventListener('touchstart', (e) => {
-    ty = e.touches[0].clientY; tx = e.touches[0].clientX;
-  }, { passive: true });
-  board.addEventListener('touchend', (e) => {
-    if (!inSection() || !e.changedTouches.length) return;
-    const dy = ty - e.changedTouches[0].clientY, dx = tx - e.changedTouches[0].clientX;
-    if (Math.abs(dy) > 55 && Math.abs(dy) > Math.abs(dx)) step(dy > 0 ? 1 : -1);
-  }, { passive: true });
-
   const q = $('q');
-  q.addEventListener('input', () => setState(tag, q.value));
-  $('qClear').addEventListener('click', () => { setState(tag, ''); q.focus(); });
+  q.addEventListener('input', () => setState(open, q.value));
+  $('qClear').addEventListener('click', () => { setState(open, ''); q.focus(); });
   q.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { if (q.value) setState(tag, ''); else q.blur(); }
-    else if (e.key === 'Enter' && shown.length === 1) grid.querySelector('.tile').click();
-    else if (e.key === 'ArrowDown') { e.preventDefault(); moveFocus(1); }
+    if (e.key === 'Escape') { if (q.value) setState(open, ''); else q.blur(); }
+    else if (e.key === 'Enter') {
+      // One survivor anywhere on the board is what you meant.
+      const rows = mosaic.querySelectorAll('.panel:not(.on) .row, .panel.on .card');
+      if (total() === 1 && rows.length) rows[0].click();
+    }
   });
 
   // "/" anywhere puts the cursor in the box, the way every tool with a lot of
@@ -1192,32 +1330,17 @@ function boot(data) {
       e.preventDefault(); q.focus(); q.select(); return;
     }
     if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
-    // Named `move`, not `step`: step() walks whole sections and is shadowed
-    // by a local of that name.
-    const move = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: columns(), ArrowUp: -columns() }[e.key];
-    if (move) { e.preventDefault(); moveFocus(move); return; }
-    // Pages move between sections — the arrows already belong to the grid.
-    if (e.key === 'PageDown') { e.preventDefault(); step(1); }
-    else if (e.key === 'PageUp') { e.preventDefault(); step(-1); }
-    else if (e.key === 'Home' && inSection()) { e.preventDefault(); setState(TAGS[0].id, ''); }
-    else if (e.key === 'End' && inSection()) { e.preventDefault(); setState(TAGS[TAGS.length - 1].id, ''); }
-    else if (e.key === 'Escape' && (tag || query)) setState(null, '');
+    // 1-8 open an industry by its place on the board — the mosaic is a fixed
+    // set in a fixed order, which is exactly what a number key is good for.
+    if (/^[1-9]$/.test(e.key) && TAGS[+e.key - 1]) {
+      e.preventDefault(); setState(TAGS[+e.key - 1].id, query); return;
+    }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (open) { e.preventDefault(); step(1); } }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { if (open) { e.preventDefault(); step(-1); } }
+    else if (e.key === 'Escape' && (open || query)) setState(null, '');
   });
 
-  // The fit is a function of the box, so it is recomputed whenever the box
-  // changes — window resize, mobile URL bar, the facet strip wrapping.
-  let raf = 0;
-  const refit = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => fit()); };
-  window.addEventListener('resize', refit);
-  // Observe the ROW, not the grid: fit() writes the grid's height, so watching
-  // the grid would mean watching our own output.
-  if (window.ResizeObserver) new ResizeObserver(refit).observe(grid.parentElement);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
-  // A hidden tab gets no animation frames, so a resize that happens while the
-  // window is behind another one lands here instead of never landing at all.
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) refit(); });
-
-  window.addEventListener('hashchange', () => { readHash(); render(); });
+  window.addEventListener('hashchange', () => { readHash(); render(true); });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1227,10 +1350,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((err) => {
       // Without the registry there is no page, so say which file is missing
       // rather than leaving an empty board that looks like a filter result.
-      $('grid').innerHTML =
-        `<div class="empty"><div class="empty-big">&#9888;</div><p>${esc(T('Could not load the tool index'))} — ` +
+      $('mosaic').innerHTML =
+        `<div class="void-all"><div class="big">&#9888;</div><p>${esc(T('Could not load the tool index'))} — ` +
         `<code>${REGISTRY}</code><br>${esc(err.message)}</p></div>`;
-      $('grid').style.gridTemplateColumns = $('grid').style.gridTemplateRows = '1fr';
+      $('mosaic').classList.add('dead');
     });
 });
 

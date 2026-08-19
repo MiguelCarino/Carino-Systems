@@ -83,9 +83,21 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Herramientas',
         'Search tools…': 'Buscar herramientas…',
-        // Facet rail + status line
+        // The console — hero rail, mosaic chrome
+        'Keys': 'Teclas',
+        'Search': 'Buscar',
+        'Close': 'Cerrar',
+        'Independent systems work': 'Trabajo independiente de sistemas',
+        'Software that keeps the work moving.': 'Software que mantiene el trabajo en marcha.',
+        'Tools for medical imaging, networks, systems and the documents around them. Most of them run entirely in your browser — nothing to install, nothing uploaded, no account to make.': 'Herramientas para imagenología médica, redes, sistemas y los documentos que los rodean. La mayoría funciona por completo en tu navegador: nada que instalar, nada que subir, ninguna cuenta que crear.',
+        'tools': 'herramientas',
+        'industries': 'industrias',
+        'free and open source': 'libre y de código abierto',
+        'Industries': 'Industrias',
+        'Clear filter': 'Quitar filtro',
+        'Source on GitHub': 'Código en GitHub',
+        // Facet rail + industry labels
         'All': 'Todo',
-        'next': 'siguiente',
         'Medical': 'Medicina',
         'Files': 'Archivos',
         'Security': 'Seguridad',
@@ -196,9 +208,21 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Ferramentas',
         'Search tools…': 'Buscar ferramentas…',
-        // Facet rail + status line
+        // The console — hero rail, mosaic chrome
+        'Keys': 'Teclas',
+        'Search': 'Buscar',
+        'Close': 'Fechar',
+        'Independent systems work': 'Trabalho independente de sistemas',
+        'Software that keeps the work moving.': 'Software que mantém o trabalho em movimento.',
+        'Tools for medical imaging, networks, systems and the documents around them. Most of them run entirely in your browser — nothing to install, nothing uploaded, no account to make.': 'Ferramentas para imagem médica, redes, sistemas e os documentos ao redor deles. A maioria roda inteiramente no seu navegador — nada para instalar, nada enviado, nenhuma conta para criar.',
+        'tools': 'ferramentas',
+        'industries': 'setores',
+        'free and open source': 'livre e de código aberto',
+        'Industries': 'Setores',
+        'Clear filter': 'Limpar filtro',
+        'Source on GitHub': 'Código no GitHub',
+        // Facet rail + industry labels
         'All': 'Tudo',
-        'next': 'próxima',
         'Medical': 'Medicina',
         'Files': 'Arquivos',
         'Security': 'Segurança',
@@ -309,9 +333,21 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'ツール',
         'Search tools…': 'ツールを検索…',
-        // Facet rail + status line
+        // The console — hero rail, mosaic chrome
+        'Keys': 'キー',
+        'Search': '検索',
+        'Close': '閉じる',
+        'Independent systems work': '独立系システムの仕事',
+        'Software that keeps the work moving.': '仕事を止めないためのソフトウェア。',
+        'Tools for medical imaging, networks, systems and the documents around them. Most of them run entirely in your browser — nothing to install, nothing uploaded, no account to make.': '医療画像、ネットワーク、システム、そしてそれらを取り巻く文書のためのツール。ほとんどがブラウザだけで動きます — インストール不要、アップロードなし、アカウント登録もありません。',
+        'tools': 'ツール',
+        'industries': '分野',
+        'free and open source': '無料・オープンソース',
+        'Industries': '分野',
+        'Clear filter': 'フィルターを解除',
+        'Source on GitHub': 'GitHub のソース',
+        // Facet rail + industry labels
         'All': 'すべて',
-        'next': '次へ',
         'Medical': '医療',
         'Files': 'ファイル',
         'Security': 'セキュリティ',
@@ -422,9 +458,21 @@ const I18N = {
         // Index chrome — search box, tag rail, result counts
         'Tools': 'Инструменты',
         'Search tools…': 'Поиск инструментов…',
-        // Facet rail + status line
+        // The console — hero rail, mosaic chrome
+        'Keys': 'Клавиши',
+        'Search': 'Поиск',
+        'Close': 'Закрыть',
+        'Independent systems work': 'Независимая работа с системами',
+        'Software that keeps the work moving.': 'Программы, которые не дают работе остановиться.',
+        'Tools for medical imaging, networks, systems and the documents around them. Most of them run entirely in your browser — nothing to install, nothing uploaded, no account to make.': 'Инструменты для медицинской визуализации, сетей, систем и связанных с ними документов. Большинство работает прямо в браузере — ничего не нужно устанавливать, ничего не отправляется, регистрация не требуется.',
+        'tools': 'инструментов',
+        'industries': 'отраслей',
+        'free and open source': 'свободно и с открытым кодом',
+        'Industries': 'Отрасли',
+        'Clear filter': 'Сбросить фильтр',
+        'Source on GitHub': 'Исходный код на GitHub',
+        // Facet rail + industry labels
         'All': 'Все',
-        'next': 'далее',
         'Medical': 'Медицина',
         'Files': 'Файлы',
         'Security': 'Безопасность',
