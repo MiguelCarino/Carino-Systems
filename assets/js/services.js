@@ -16,6 +16,17 @@
     steamps2: () => createService("PlanetSide 2 on Steam", "https://store.steampowered.com/favicon.ico")
   };
 
+  // Safari with "Block all cookies" and Firefox with site cookies disabled do
+  // not return null from sessionStorage — merely touching the object throws a
+  // SecurityError. An unguarded throw at top level would abort the rest of this
+  // IIFE and the visibilitychange listener would never bind, killing the gag
+  // silently. Every access goes through this shim instead.
+  const store = {
+    get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* storage blocked */ } },
+    del: function (k) { try { sessionStorage.removeItem(k); } catch (e) { /* storage blocked */ } }
+  };
+
   function createService(baseTitle, favicon, isDynamic = false) {
     let title = baseTitle;
     if (isDynamic) {
@@ -38,7 +49,9 @@
     // 3. Create the standard 'icon' link
     const newLink = document.createElement("link");
     newLink.rel = "icon";
-    newLink.type = "image/x-icon";
+    // No `type` hint: eleven of the fourteen icons below are PNGs, and Firefox
+    // treats `type` as a selection hint — declaring image/x-icon on a PNG makes
+    // it skip the link. Let the browser sniff the bytes.
     newLink.href = fullPath;
 
     // 4. Create the 'shortcut icon' link (Legacy/Safari favorite)
@@ -87,15 +100,19 @@
   }
 
   // Handle initial page load state
-  if (!sessionStorage.getItem("isRefreshed")) {
+  if (!store.get("isRefreshed")) {
     if (document.hidden) {
       queueUpdate(getRandomService());
     }
   }
 
-  sessionStorage.removeItem("isRefreshed");
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.setItem("isRefreshed", "true");
+  store.del("isRefreshed");
+  // Not beforeunload: registering one disqualifies the page from the
+  // back/forward cache in Gecko and WebKit, and iOS Safari never fires it at
+  // all, so the flag it wrote was dead there. pagehide fires on every engine
+  // including iOS and leaves the bfcache intact.
+  window.addEventListener("pagehide", () => {
+    store.set("isRefreshed", "true");
   });
 
   document.addEventListener("visibilitychange", handleVisibilityChange);

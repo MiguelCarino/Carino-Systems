@@ -1,0 +1,248 @@
+{
+  "_readme": [
+    "The hub's running order. Same fleet as tools.json, grouped by the job",
+    "someone came to do rather than by industry, and written for someone who",
+    "does not already know what DICOM or a distro is.",
+    "",
+    "Every tool in tools.json belongs in exactly one group here — this is the",
+    "hub, and a tool it does not list is a tool nobody can find. The order of",
+    "the groups is the order of the page, and the ones that genuinely need a",
+    "technical reader go last and say so.",
+    "",
+    "'ref' is the tool's exact name in tools.json — that is where the url, the icon",
+    "and the local flag come from, so a moved subdomain is still one edit in one",
+    "file. A ref that matches nothing is skipped rather than rendered broken.",
+    "",
+    "'plain' is what the tool DOES, in the words of someone who does not know what",
+    "it is called. 'line' is one sentence under it. Both are English keys — add",
+    "each to the four locales in i18n.js or the page falls back to English.",
+    "",
+    "'shot' is optional: a screenshot at assets/shots/<file>.webp, shown instead of",
+    "the icon plate. A real picture of the tool beats any glyph for a first-time",
+    "visitor, so fill these in as they are captured."
+  ],
+
+  "featured": ["Media Suite", "Password", "Vitae", "Carino Retina"],
+
+  "groups": [
+    {
+      "id": "clinic",
+      "title": "Medical images and eye care",
+      "blurb": "For clinics and consulting rooms.",
+      "tools": [
+        {
+          "ref": "Carino Retina",
+          "plain": "Eye examinations",
+          "line": "Mark up a photo of the eye, work out the prescription, print the sheet."
+        },
+        {
+          "ref": "DICOM Tag Editor",
+          "plain": "Clean a study before you share it",
+          "line": "Open a scan and edit or remove the patient details stored inside it."
+        },
+        {
+          "ref": "Carino PACS",
+          "plain": "Keep studies moving",
+          "line": "Receives studies from your imaging machine and passes them on."
+        }
+      ]
+    },
+    {
+      "id": "documents",
+      "title": "Documents, photos and video",
+      "blurb": "The everyday file jobs, done in the page.",
+      "tools": [
+        {
+          "ref": "Media Suite",
+          "plain": "Convert and read documents",
+          "line": "Turn a PDF into images, pull the text out of a photo, convert audio and video."
+        },
+        {
+          "ref": "Metadata",
+          "plain": "See what a file is hiding",
+          "line": "Where a photo was taken, who wrote a document, what a file really is."
+        },
+        {
+          "ref": "Sync Studio",
+          "plain": "Fix subtitles that are out of step",
+          "line": "Shift or stretch a subtitle track until it matches the video."
+        },
+        {
+          "ref": "Carino Fonts",
+          "plain": "Draw your own lettering",
+          "line": "Design a typeface letter by letter and export it as a font."
+        }
+      ]
+    },
+    {
+      "id": "computer",
+      "title": "Your computer",
+      "blurb": "Setting one up, or working out what it is.",
+      "tools": [
+        {
+          "ref": "Find Me a Distro",
+          "plain": "Which Linux is right for me?",
+          "line": "Answer a few questions and get one that fits how you work."
+        },
+        {
+          "ref": "SimpleSetup",
+          "plain": "Set up a new computer",
+          "line": "Pick what you need and follow the steps, without typing commands."
+        },
+        {
+          "ref": "Hardware",
+          "plain": "What is this device?",
+          "line": "Look up a network address, a service tag, a warranty or a driver page."
+        },
+        {
+          "ref": "Time",
+          "plain": "Time around the world",
+          "line": "Local time, other time zones, and countdowns you can share."
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "Passwords and safety",
+      "blurb": "Small habits that protect everything else.",
+      "tools": [
+        {
+          "ref": "Password",
+          "plain": "Make a strong password",
+          "line": "Generate one, and keep your list on your own device."
+        },
+        {
+          "ref": "Hash",
+          "plain": "How a password is protected",
+          "line": "Watch, step by step, what happens to a password when it is stored."
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "The business side",
+      "blurb": "Quotes, tasks and the paperwork around them.",
+      "tools": [
+        {
+          "ref": "Quote",
+          "plain": "Send a quote to a client",
+          "line": "Build it, price it, and send it as a document."
+        },
+        {
+          "ref": "Kanban",
+          "plain": "Keep track of the work",
+          "line": "A board of cards: to do, doing, done."
+        },
+        {
+          "ref": "Vitae",
+          "plain": "Build a résumé",
+          "line": "Type it, see it as you go, and export a clean PDF."
+        },
+        {
+          "ref": "Desk",
+          "plain": "Answer the same question faster",
+          "line": "Keep your standard replies and fill them in as you send them."
+        },
+        {
+          "ref": "Carino Currency",
+          "plain": "How much is that in your money?",
+          "line": "Exchange rates, what is moving today, and the news behind it."
+        },
+        {
+          "ref": "Law — Official Sources",
+          "plain": "Where the law is actually published",
+          "line": "The official gazette, the constitution and the courts of twenty-eight countries."
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "title": "For the technical side",
+      "blurb": "Servers, networks and the workshop. These ones assume you know the words.",
+      "tools": [
+        {
+          "ref": "Topo",
+          "plain": "Draw a map of your network",
+          "line": "Devices, links and addressing on a canvas you can share."
+        },
+        {
+          "ref": "Netplan Configurator",
+          "plain": "Set a Linux server's network",
+          "line": "Fill in the fields and get the configuration file, without the syntax."
+        },
+        {
+          "ref": "Carino Images",
+          "plain": "Custom installation images",
+          "line": "Ready-made Fedora images and ISOs for a workshop, a clinic or a server."
+        },
+        {
+          "ref": "Carino Offline",
+          "plain": "Plan for no internet",
+          "line": "Decide what to download before the line goes, and what to run without it."
+        },
+        {
+          "ref": "Software Catalogue",
+          "plain": "One catalogue of software",
+          "line": "The same applications, installed the same way, across every machine."
+        },
+        {
+          "ref": "CVE Database",
+          "plain": "Look up a security flaw",
+          "line": "Search reported vulnerabilities by product, severity or number."
+        },
+        {
+          "ref": "MultiWeb",
+          "plain": "Watch every project at once",
+          "line": "A grid of live pages that refreshes itself."
+        },
+        {
+          "ref": "TV",
+          "plain": "Watch several streams at once",
+          "line": "A wall of live sources for a control room."
+        },
+        {
+          "ref": "Stocks",
+          "plain": "Follow the markets",
+          "line": "A watchlist, alerts and a portfolio kept in your own browser."
+        },
+        {
+          "ref": "Carino Branding",
+          "plain": "The design system",
+          "line": "The colours, type and components shared by every page here."
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "title": "Learning, and time off",
+      "blurb": "Free courses, and a few things for the end of the day.",
+      "tools": [
+        {
+          "ref": "Carino Learn",
+          "plain": "Learn something new",
+          "line": "Free courses with exercises you do inside the page."
+        },
+        {
+          "ref": "TelePrompter",
+          "plain": "Read a script while you present",
+          "line": "Your words scroll at the speed you set."
+        },
+        {
+          "ref": "Music Wall",
+          "plain": "A wall of albums",
+          "line": "Pick a cover and listen."
+        },
+        {
+          "ref": "Asobi — Board Games",
+          "plain": "Japanese board games",
+          "line": "Shogi and Hanafuda, against a friend or against the computer."
+        },
+        {
+          "ref": "Compass",
+          "plain": "Where do you stand?",
+          "line": "A political compass measured by what you intend, not by a score."
+        }
+      ]
+    }
+  ]
+}

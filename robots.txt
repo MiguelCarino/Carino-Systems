@@ -1,6 +1,16 @@
-# Allow only index.html to be indexed
+# Allow the page itself to be indexed, and nothing else.
+# `/` needs its own Allow: the page's real address is the bare domain, and
+# Disallow: / was keeping it out of search while only /index.html got through.
 User-agent: *
+Allow: /$
 Allow: /index.html
+# The page builds itself from these at render time — a crawler that cannot read
+# them indexes the "could not be loaded" box instead of thirty-four tools.
+Allow: /*.js
+Allow: /*.json
+Allow: /*.css
+Allow: /*.woff2
+Allow: /*.webp
 Disallow: /
 
 # Sitemap location (if you have a sitemap)

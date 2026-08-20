@@ -71,6 +71,10 @@
     clocks.push(c);
     box.style.cursor = 'pointer';
     box.style.userSelect = 'none';
+    // Unprefixed user-select only landed in Safari 17; without the prefixed
+    // partner, double-tapping the clock to cycle modes selects the digits on
+    // any slightly older iPhone or Mac.
+    box.style.webkitUserSelect = 'none';
     box.setAttribute('title', 'Click to toggle Local / UTC / Epoch / TAI / .beats');
     if (!box.hasAttribute('role')) box.setAttribute('role', 'button');
     if (!box.hasAttribute('tabindex')) box.setAttribute('tabindex', '0');
@@ -92,6 +96,14 @@
   function boot() {
     scan();
     setInterval(tickAll, 1000);
+    // Every engine throttles background setInterval and iOS suspends timers
+    // outright, so the first frame after returning to a hidden tab still shows
+    // the old time; after a bfcache restore the interval may not resume at all
+    // and it would stay wrong indefinitely. Repaint on the way back in.
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) tickAll();
+    });
+    window.addEventListener('pageshow', tickAll);
     // The shared navbar injects its header shortly after load, so re-scan a
     // few times to catch a `.header-clock` that appears just after we boot.
     var tries = 0;

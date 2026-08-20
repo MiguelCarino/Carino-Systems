@@ -18,8 +18,10 @@
    The fleet-wide choice is a cookie on .carino.systems, so one
    pick on any subdomain applies to every site in the fleet
    (subdomains do NOT share localStorage — the cookie is the only
-   thing that makes the preference travel). Off-domain (local
-   dev, forks) it falls back to per-site localStorage.
+   thing that makes the preference travel). The same choice is
+   mirrored into per-site localStorage, which is what off-domain
+   copies (local dev, forks) read, and what keeps the pick alive
+   on Safari — ITP caps a JS-set cookie at seven days.
 
    The file owns only the preference. Each app owns its own
    dictionary and reacts via:
@@ -80,30 +82,46 @@
 
   var onFleet = /(^|\.)carino\.systems$/.test(location.hostname);
 
-  function readStored() {
-    if (onFleet) {
+  /* Storage is a MIRROR, not an either/or. The parent-domain cookie is the
+     only thing that carries the choice across subdomains, but Safari's ITP
+     caps the lifetime of any cookie written from JS at seven days — so on
+     Safari the fleet-wide pick silently reverted to Auto about once a week,
+     while Gecko and Chromium honoured the full Max-Age=31536000. localStorage
+     is not capped that way, so we write both: the cookie for travel, the
+     localStorage copy as a same-origin backstop. Reads prefer the cookie (it
+     is the one another subdomain can have just updated) and fall through to
+     the mirror when it is gone. */
+
+  function readCookie() {
+    try {
       var m = document.cookie.match(/(?:^|;\s*)carino_lang=([^;]+)/);
       return m ? resolve(decodeURIComponent(m[1])) : null;
-    }
+    } catch (e) { return null; }
+  }
+
+  function readStored() {
+    var c = onFleet ? readCookie() : null;
+    if (c) return c;
     try { return resolve(localStorage.getItem('carino_lang')); } catch (e) { return null; }
   }
 
   function store(code) {
     if (onFleet) {
-      // The parent-domain cookie is what makes the choice fleet-wide.
-      document.cookie = 'carino_lang=' + encodeURIComponent(code)
-        + '; Domain=.carino.systems; Path=/; Max-Age=31536000; SameSite=Lax';
-    } else {
-      try { localStorage.setItem('carino_lang', code); } catch (e) { /* private mode */ }
+      try {
+        document.cookie = 'carino_lang=' + encodeURIComponent(code)
+          + '; Domain=.carino.systems; Path=/; Max-Age=31536000; SameSite=Lax';
+      } catch (e) { /* cookies blocked */ }
     }
+    try { localStorage.setItem('carino_lang', code); } catch (e) { /* private mode */ }
   }
 
   function clearStore() {
     if (onFleet) {
-      document.cookie = 'carino_lang=; Domain=.carino.systems; Path=/; Max-Age=0; SameSite=Lax';
-    } else {
-      try { localStorage.removeItem('carino_lang'); } catch (e) { /* private mode */ }
+      try {
+        document.cookie = 'carino_lang=; Domain=.carino.systems; Path=/; Max-Age=0; SameSite=Lax';
+      } catch (e) { /* cookies blocked */ }
     }
+    try { localStorage.removeItem('carino_lang'); } catch (e) { /* private mode */ }
   }
 
   // AUTO is the default: no stored choice means "follow the browser". A
@@ -213,7 +231,19 @@
       box.classList.toggle('open');
     });
     box.addEventListener('click', function (e) { e.stopPropagation(); });
-    document.addEventListener('click', function () { box.classList.remove('open'); });
+
+    // Tap-outside-to-dismiss: WebKit does not bubble a click to document from
+    // a non-interactive element, so on iOS the document 'click' below never
+    // fires and the menu stays stuck open. touchend always bubbles, so it is
+    // the iOS path. Both handlers only ever REMOVE the class, so a desktop
+    // browser that emits touchend and then click cannot double-fire into a
+    // reopen. The button and the box stop touchend too, so a tap inside is
+    // handled by the click handlers rather than closing the menu first.
+    function dismiss() { box.classList.remove('open'); }
+    btn.addEventListener('touchend', function (e) { e.stopPropagation(); });
+    box.addEventListener('touchend', function (e) { e.stopPropagation(); });
+    document.addEventListener('touchend', dismiss);
+    document.addEventListener('click', dismiss);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') box.classList.remove('open');
     });

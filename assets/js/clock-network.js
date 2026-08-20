@@ -3,6 +3,7 @@
 // English key, which is exactly what the dictionary is keyed on.
 // (Named `tt` because several functions below shadow `t` with a timeout id.)
 function tt(s) { return (typeof window.t === 'function') ? window.t(s) : s; }
+function pad2(n) { return String(n).padStart(2, '0'); }
 let battListenersBound = false;
 
 // CONFIGURATION: SPEED TEST FILES
@@ -97,13 +98,11 @@ function updateTime() {
   const elUTC = document.getElementById('clockUTC');
   const elEpoch = document.getElementById('clockEpoch');
   const elGreet = document.getElementById('greeting');
-  const elLastCheck = document.getElementById('lastCheck');
 
   // clockLocal / tzName (the header clock) are owned by carino-clock.js — here we
   // only refresh the diagnostics dropdown rows.
   if(elUTC) elUTC.textContent = now.toISOString().substring(11, 19) + 'Z';
   if(elEpoch) elEpoch.textContent = Math.floor(now.getTime() / 1000);
-  if(elLastCheck) elLastCheck.textContent = now.toLocaleTimeString('en-US', { hour12: false, second: 'numeric' });
 
   if(elGreet) {
     const period = getGreetPeriod(now.getHours());
@@ -128,6 +127,55 @@ setInterval(() => {
 
 // MODULE: SYSTEM & HARDWARE DETECTION
 const $ = (id) => document.getElementById(id);
+
+// "Last Check" names a check, so it is stamped when one finishes rather than
+// ticked from the clock every second. Nothing probes until the panel is opened
+// now, so a wall clock there would have claimed a check that never happened —
+// and the PNG export would have carried that claim out of the page. Formatted by
+// hand like every other clock row in this file: toLocaleTimeString with only
+// `second` requested returns exactly that one field, and hour12:false is what
+// makes V8 print midnight as "24:00" where WebKit and Gecko print "00:00".
+function stampLastCheck() {
+  const el = $('lastCheck');
+  if (!el) return;
+  const n = new Date();
+  el.textContent = pad2(n.getHours()) + ':' + pad2(n.getMinutes()) + ':' + pad2(n.getSeconds());
+}
+
+// Several rows are backed by APIs that only Chromium ships (deviceMemory,
+// getBattery, connection) or that Gecko and WebKit mask outright
+// (WEBGL_debug_renderer_info). Printing "Masked"/"N/A" there reads to a visitor
+// like a privacy switch they could flip, when the truth is their browser simply
+// has no such API — so when the API is ABSENT we hide the row entirely. A row
+// whose API exists but returned nothing still prints its value.
+// Returns false when there is no .diag-row to hide, so callers can fall back to
+// writing text instead of leaving a stale placeholder on screen.
+function hideRow(id) {
+  const el = $(id);
+  if (!el) return true;                       // nothing to show either way
+  const row = el.closest('.diag-row');
+  if (!row) return false;
+  row.style.display = 'none';
+  row.classList.add('diag-hidden');           // read back by the PNG exporter
+  const pair = row.parentElement;
+  if (!pair || !pair.classList.contains('diag-pair')) return true;
+  // A .diag-pair carries two rows side by side (Ping/Jitter, Conn/Speed,
+  // CPU/RAM, UTC/Epoch). With one half gone the survivor takes the full width —
+  // the flex and grid declarations below are each ignored by the layout that
+  // isn't in use — and with both gone the pair itself would leave a blank gap.
+  const alive = [];
+  for (const child of pair.children) if (!child.classList.contains('diag-hidden')) alive.push(child);
+  if (!alive.length) { pair.style.display = 'none'; return true; }
+  if (alive.length === 1) { alive[0].style.flex = '1 1 100%'; alive[0].style.gridColumn = '1 / -1'; }
+  return true;
+}
+
+// GPU identity is resolved once and cached: detectSystem() re-runs on every
+// carino:langchange, and a fresh WebGL context per pass accumulates until the
+// engine's live-context cap (lowest in WebKit) is hit, after which every probe
+// fails and the row sticks on the disabled state forever. undefined = not yet
+// probed, null = no WebGL context at all.
+let _gpuInfo;
 
 async function detectSystem() {
   const ua = navigator.userAgent;
@@ -211,11 +259,15 @@ async function detectSystem() {
     elCPU.textContent = cores ? `${cores} ` + tt("Logical Cores") : tt("Unknown (Masked)");
   }
 
-  // 4b. RAM
+  // 4b. RAM — navigator.deviceMemory is Chromium-only; hide the row elsewhere.
   const elRAM = $('sysRAM');
   if(elRAM) {
-    const ram = navigator.deviceMemory;
-    elRAM.textContent = ram ? `~${ram} GB` : tt("Masked");
+    if (!('deviceMemory' in navigator)) {
+      if (!hideRow('sysRAM')) elRAM.textContent = tt("Masked");
+    } else {
+      const ram = navigator.deviceMemory;
+      elRAM.textContent = ram ? `~${ram} GB` : tt("Masked");
+    }
   }
 
   // 5. DISPLAY
@@ -242,18 +294,20 @@ async function detectSystem() {
           batt.addEventListener('levelchange',   () => { elBatt.textContent = fmt(batt); });
           batt.addEventListener('chargingchange', () => { elBatt.textContent = fmt(batt); });
         }
+      // The API is there and answered badly — that IS a value, so keep the row.
       } catch(e) { elBatt.textContent = tt("N/A"); }
-    } else { elBatt.textContent = tt("N/A"); }
+    } else if (!hideRow('sysBattery')) { elBatt.textContent = tt("N/A"); }
   }
 
-  // 5c. CONNECTION TYPE
+  // 5c. CONNECTION TYPE — navigator.connection is Chromium-only. The Speed row
+  // shares this pair but is a real measurement everywhere, so only Conn goes.
   const elConn = $('sysConn');
   if(elConn) {
     const conn = navigator.connection;
     if(conn) {
       const type = (conn.type && conn.type !== 'unknown') ? conn.type : (conn.effectiveType || null);
       elConn.textContent = type ? type.toUpperCase() : tt("Unknown");
-    } else {
+    } else if (!hideRow('sysConn')) {
       elConn.textContent = tt("N/A");
     }
   }
@@ -269,7 +323,7 @@ async function detectSystem() {
     if (title) elGPU.title = title;
 
     const mainSpan = document.createElement("span");
-    mainSpan.textContent = main || "Unknown GPU";
+    mainSpan.textContent = main || tt("Unknown GPU");
 
     const subSpan = document.createElement("span");
     subSpan.textContent = sub || "";
@@ -284,8 +338,10 @@ async function detectSystem() {
 
   const tryGetGL = () => {
     const canvas = document.createElement("canvas");
-    // Avoid huge canvases; we just need a context + parameters.
-    const opts = { powerPreference: "high-performance" };
+    // Avoid huge canvases; we just need a context + parameters. low-power on
+    // purpose: asking macOS to spin up the discrete GPU to read a name string
+    // costs real battery for no extra information.
+    const opts = { powerPreference: "low-power" };
     return (
       canvas.getContext("webgl2", opts) ||
       canvas.getContext("webgl", opts) ||
@@ -358,10 +414,24 @@ async function detectSystem() {
     return "Unknown";
   };
 
+  // Repaint from the cache instead of re-probing: the strings below are
+  // translated, so a language switch still refreshes the row, but no second
+  // WebGL context is ever created.
+  const paintGPU = (g) => {
+    // No WebGL context at all: the API is absent, so the row goes rather than
+    // printing a disabled state a visitor would read as their own setting.
+    if (g === null) { if (!hideRow('sysGPU')) safeSet(tt("N/A"), "", ""); return; }
+    if (g.error) { safeSet(tt("Error"), "", ""); return; }
+    const sub = [`[${tt(g.type)}]`, g.backend || "", `Tex: ${g.maxTex}`].filter(Boolean).join(" | ");
+    safeSet(g.name || tt("Unknown GPU"), sub, g.title);
+  };
+  if (_gpuInfo !== undefined) { paintGPU(_gpuInfo); return; }
+
   try {
     const gl = tryGetGL();
     if (!gl) {
-      safeSet("WebGL Disabled", "", "");
+      _gpuInfo = null;
+      paintGPU(_gpuInfo);
       return;
     }
 
@@ -400,18 +470,21 @@ async function detectSystem() {
     // 5) Type
     const gpuType = classifyGPU(rawVendor, raw);
 
-    // 6) Render
-    const sub = [
-      `[${gpuType}]`,
-      backend || "",
-      `Tex: ${maxTex}`
-    ].filter(Boolean).join(" | ");
+    // Everything we need has been read, so hand the context back to the driver
+    // right away instead of waiting for GC — live contexts are capped per engine
+    // and this page may sit open for hours.
+    const lose = gl.getExtension('WEBGL_lose_context');
+    if (lose) lose.loseContext();
 
-    // Put the “full raw string” in title for hover inspection
+    // 6) Render. The raw parts are cached, not the finished strings, so a later
+    // repaint re-translates the type label.
+    // The “full raw string” goes in title for hover inspection.
     const title = [rawVendor && `Vendor: ${rawVendor}`, `Renderer: ${raw}`].filter(Boolean).join("\n");
-    safeSet(cleanName || "Unknown GPU", sub, title);
+    _gpuInfo = { name: cleanName, type: gpuType, backend: backend, maxTex: maxTex, title: title };
+    paintGPU(_gpuInfo);
   } catch (e) {
-    safeSet("Error", "", "");
+    _gpuInfo = { error: true };
+    paintGPU(_gpuInfo);
   }
 }
 
@@ -458,13 +531,18 @@ async function detectIPs() {
   ]);
 
   const [v6, v4] = await Promise.allSettled([v6Promise, v4Promise]);
-  const isFirefox = /Firefox\//.test(navigator.userAgent);
 
+  // A probe that failed is a probe that failed: an ad blocker, a content
+  // blocker, a captive portal and a genuinely unreachable provider are
+  // indistinguishable from here, in every engine — so one honest wording and a
+  // neutral dot for all of them. The old UA sniff also missed Firefox on iOS
+  // (which reports FxiOS) and painted Safari/Brave/ad-blocked Chromium red for
+  // a fault that does not exist.
   if (v6.status === "fulfilled" && v6.value.includes(":")) {
     if(ipv6) ipv6.textContent = v6.value;
     if(dot6) dot6.className = "status-dot success";
   } else {
-    if(ipv6) ipv6.textContent = isFirefox ? "Blocked by browser" : "Not detected";
+    if(ipv6) ipv6.textContent = tt("Blocked or unreachable");
     if(dot6) dot6.className = "status-dot unknown";
   }
 
@@ -472,8 +550,8 @@ async function detectIPs() {
     if(ipv4) ipv4.textContent = v4.value;
     if(dot4) dot4.className = "status-dot success";
   } else {
-    if(ipv4) ipv4.textContent = isFirefox ? "Blocked by browser" : "Unavailable";
-    if(dot4) dot4.className = isFirefox ? "status-dot unknown" : "status-dot fail";
+    if(ipv4) ipv4.textContent = tt("Blocked or unreachable");
+    if(dot4) dot4.className = "status-dot unknown";
   }
 }
 
@@ -484,9 +562,14 @@ async function detectISP() {
   try {
     const data = await fetchJSON("https://ipapi.co/json/", { timeoutMs: 5000 });
     const org = (data.org || "").replace(/^AS\d+\s+/i, "").trim();
-    el.textContent = org || "Unknown";
+    el.textContent = org || tt("Unknown");
   } catch(e) {
-    el.textContent = /Firefox\//.test(navigator.userAgent) ? "Blocked by browser" : "Unavailable";
+    // Same reasoning as detectIPs: blocked and unreachable look identical from
+    // inside the page, so say so and leave the dot neutral rather than red.
+    el.textContent = tt("Blocked or unreachable");
+    const row = el.closest('.diag-row');
+    const dot = row && row.querySelector('.status-dot');
+    if (dot) dot.className = "status-dot unknown";
   }
 }
 
@@ -655,11 +738,11 @@ async function probeWebRTC(timeoutMs = 2500) {
 }
 
 function classifyNAT(r) {
-  if (!r.publics.length) return { txt: r.ifaces ? 'UDP blocked' : 'Hidden', ok: false };
-  if (r.locals.some(ip => !_isPrivate(ip) && r.publics.includes(ip))) return { txt: 'Open — no NAT', ok: true };
-  if (r.publics.length > 1) return { txt: 'Symmetric (multi-WAN)', ok: true };
-  if (r.ports.length > 1) return { txt: 'Symmetric NAT', ok: true };   // mapping changed per STUN server
-  return { txt: 'Cone NAT', ok: true };                                // same external port = endpoint-independent
+  if (!r.publics.length) return { txt: tt(r.ifaces ? 'UDP blocked' : 'Hidden'), ok: false };
+  if (r.locals.some(ip => !_isPrivate(ip) && r.publics.includes(ip))) return { txt: tt('Open — no NAT'), ok: true };
+  if (r.publics.length > 1) return { txt: tt('Symmetric (multi-WAN)'), ok: true };
+  if (r.ports.length > 1) return { txt: tt('Symmetric NAT'), ok: true };   // mapping changed per STUN server
+  return { txt: tt('Cone NAT'), ok: true };                                // same external port = endpoint-independent
 }
 
 async function detectLAN() {
@@ -673,7 +756,7 @@ async function detectLAN() {
   // LAN IP (numeric if the browser leaked one; otherwise flag the mDNS mask).
   const lan = r.locals.find(_isPrivate) || r.locals[0] || null;
   if (lan) set('lanip', 'dotLan', r.locals.length > 1 ? `${lan} +${r.locals.length - 1}` : lan, 'success', r.locals.join(', '));
-  else set('lanip', 'dotLan', 'mDNS masked', 'unknown', 'Browsers hide the LAN IP behind a random .local mDNS name for privacy.');
+  else set('lanip', 'dotLan', tt('mDNS masked'), 'unknown', 'Browsers hide the LAN IP behind a random .local mDNS name for privacy.');
 
   // NAT type, with a WebRTC-public-IP vs HTTP-WAN cross-check (VPN/proxy leak).
   const nat = classifyNAT(r);
@@ -706,6 +789,7 @@ async function runNetwork() {
   await detectLAN();   // runs after detectIPs so #ipv4 is populated for the WebRTC-vs-WAN leak check
   await checkPing();
   await runSpeedTest();
+  stampLastCheck();
 }
 
 // MODULE: REACHABILITY
@@ -847,6 +931,7 @@ async function checkReach(force = false) {
     if (cell) cell.title = `${tgt.name} · ${ipTxt}` + (msRes.status === 'fulfilled' ? ` · ${msRes.value} ms` : ' · ' + tt('no connection'));
     bump();
   }));
+  stampLastCheck();
 }
 
 // MODULE: EXPORT SYS-STATUS AS IMAGE
@@ -854,8 +939,21 @@ async function checkReach(force = false) {
 // downloads a PNG, stamped with carino.systems at the bottom.
 function rowModelOf(el) {
   const l = el.querySelector('.diag-lbl'), v = el.querySelector('.diag-val');
-  return { type: 'row', label: l ? l.textContent.trim() : '', value: v ? v.textContent.trim() : '',
+  // The GPU row is the one value built from two stacked spans (name, then the
+  // bracketed detail). Flattening its textContent ran them together into one
+  // unreadable string, so join the children where there are children.
+  const value = v ? (v.children.length
+    ? Array.from(v.children).map((n) => n.textContent.trim()).filter(Boolean).join(' · ')
+    : v.textContent.trim()) : '';
+  return { type: 'row', label: l ? l.textContent.trim() : '', value: value,
            dot: dotColorOf(el.querySelector('.status-dot')) };
+}
+
+// Rows hidden by hideRow() (no such API in this engine) must not show up in the
+// PNG either — the marker class is checked first because offsetParent is null
+// for every child while the dropdown is closed, not only for hidden rows.
+function isHiddenRow(el) {
+  return el.classList.contains('diag-hidden') || el.offsetParent === null;
 }
 
 function readDiagModel() {
@@ -864,15 +962,22 @@ function readDiagModel() {
   if (!box) return out;
   for (const el of box.children) {
     if (el.classList.contains('diag-actions')) continue;
+    if (isHiddenRow(el)) continue;
     if (el.classList.contains('diag-section')) {
-      out.push({ type: 'section', text: (el.firstChild && el.firstChild.textContent || el.textContent).trim(),
-                 extra: (el.querySelector('span') ? el.querySelector('span').textContent.trim() : '') });
+      // Positional, not first-match: the Reachability heading is two spans — the
+      // translated label and the up/total count — and querySelector('span')
+      // returned the label, so the export printed the heading twice and dropped
+      // the count it was there to carry.
+      const spans = el.querySelectorAll(':scope > span');
+      out.push({ type: 'section',
+                 text: (spans.length ? spans[0].textContent : el.textContent).trim(),
+                 extra: spans.length > 1 ? spans[spans.length - 1].textContent.trim() : '' });
     } else if (el.classList.contains('diag-row')) {
       out.push(rowModelOf(el));
     } else if (el.classList.contains('diag-pair')) {
       // Side-by-side on screen; the PNG is a narrow single column, so unfold
       // the pair back into one row per line rather than cramming both in.
-      for (const sub of el.children) out.push(rowModelOf(sub));
+      for (const sub of el.children) { if (!isHiddenRow(sub)) out.push(rowModelOf(sub)); }
     } else if (el.id === 'reachList') {
       for (const item of el.children) {
         const l = item.querySelector('.lbl'), ip = item.querySelector('.ip'), ms = item.querySelector('.ms');
@@ -894,8 +999,12 @@ function dotColorOf(dot) {
   return '#666666';
 }
 
-async function exportStatusImage() {
-  try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+// Deliberately synchronous from the click down to a.click(): WebKit only honours
+// a download that is still attached to the user gesture, so the old
+// `await document.fonts.ready` plus the toBlob callback put the anchor several
+// async turns away and Safari dropped the file with no error. toDataURL is
+// synchronous; the fonts used here all have local fallbacks in the stack.
+function exportStatusImage() {
   const rows = readDiagModel();
   const scale = Math.min(window.devicePixelRatio || 1, 2);
   const W = 460, padX = 24, padTop = 24, padBottom = 52;
@@ -956,34 +1065,48 @@ async function exportStatusImage() {
   ctx.fillText('carino.systems', W / 2, h - 22);
   ctx.textAlign = 'left';
 
-  cv.toBlob((blob) => {
-    if (!blob) return;
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'carino-sysstatus-' + Math.floor(Date.now() / 1000) + '.png';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  }, 'image/png');
+  const a = document.createElement('a');
+  a.href = cv.toDataURL('image/png');
+  a.download = 'carino-sysstatus-' + Math.floor(Date.now() / 1000) + '.png';
+  document.body.appendChild(a); a.click(); a.remove();
 }
 
 // INIT
+// The network sweep is roughly 26 cross-origin requests plus a bandwidth test
+// that pulls 1 MB — 25 MB on a fast link — into a Blob in memory. This page is
+// the hub's front door and most visitors arrive on a phone and never open the
+// panel, so none of that fires until they do. Only detectSystem() runs eagerly:
+// it is local, cheap and touches no network.
+let netSwept = false;
+
 const retryBtn = $('retryNetwork');
-if(retryBtn) retryBtn.addEventListener("click", () => { runNetwork(); checkReach(true); });
+if(retryBtn) retryBtn.addEventListener("click", () => { netSwept = true; runNetwork(); checkReach(true); });
 
 const exportBtn = $('exportStatus');
 if(exportBtn) exportBtn.addEventListener("click", exportStatusImage);
 
-// Probe reachability when the dropdown is opened (throttled to once a minute).
-// The inline onclick=toggleDiag fires first, so the open state is current here.
+// First open runs the full sweep; every later open only re-probes reachability,
+// which checkReach() throttles to once a minute on its own. Closed panel = no
+// traffic at all. The inline onclick=toggleDiag fires first, so the open state
+// is already current here.
 const statusToggleBtn = document.querySelector('.status-toggle');
 if (statusToggleBtn) statusToggleBtn.addEventListener("click", () => {
-  const box = document.getElementById('diagBox');
-  if (box && box.classList.contains('open')) checkReach();
+  const box = $('diagBox');
+  if (!box || !box.classList.contains('open')) return;
+  if (!netSwept) { netSwept = true; runNetwork(); }
+  checkReach();
 });
 
 detectSystem();
-runNetwork();
-checkReach();
+
+// …and again once the deferred scripts have run. The pass above happens at parse
+// time, before carino-lang.js has resolved the locale or i18n.js has defined t(),
+// so every value it writes ("Logical Cores", "Charging", "Masked", the GPU class)
+// lands in English — and for a visitor whose language was auto-detected rather
+// than switched by hand, no carino:langchange event ever fires to correct it.
+// detectSystem() is idempotent: the GPU probe is cached and the battery listeners
+// are bound once.
+document.addEventListener('DOMContentLoaded', () => { detectSystem(); });
 
 // The hardware rows are written once, at parse time — before carino-lang.js has
 // even defined window.CarinoLang — so re-detect on a language switch to pull
