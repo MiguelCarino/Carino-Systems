@@ -36,12 +36,12 @@
           "line": "Mark up a photo of the eye, work out the prescription, print the sheet."
         },
         {
-          "ref": "DICOM Tag Editor",
+          "ref": "Carino DICOM Editor",
           "plain": "Clean a study before you share it",
           "line": "Open a scan and edit or remove the patient details stored inside it."
         },
         {
-          "ref": "Carino PACS",
+          "ref": "Carino DICOM",
           "plain": "Keep studies moving",
           "line": "Receives studies from your imaging machine and passes them on."
         }

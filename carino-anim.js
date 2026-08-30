@@ -26,7 +26,7 @@
 
   var VB = 'viewBox="0 0 240 48" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"';
 
-  // The EKG trace from the Carino PACS splash: flat line, a small
+  // The EKG trace from the Carino DICOM splash: flat line, a small
   // deflection, then the spike. Drawn twice — dim underneath, bright on top.
   var EKG = '0,24 68,24 76,24 82,17 88,24 98,24 105,7 113,42 120,24 132,24 142,19 152,24 240,24';
 

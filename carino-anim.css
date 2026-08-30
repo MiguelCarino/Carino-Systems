@@ -53,7 +53,7 @@
 .canim .lit { stroke-width: 2.2; filter: drop-shadow(0 0 5px rgba(234,179,8,0.55)); }
 
 /* ── medical · the EKG sweep ──────────────────────────────────
-   From the Carino PACS splash. A bright pulse travels the trace and
+   From the Carino DICOM splash. A bright pulse travels the trace and
    leaves it as it found it. */
 .canim-medical .lit {
   stroke-dasharray: 26 300;

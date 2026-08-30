@@ -5,7 +5,7 @@
 // translated at render time by the page, so a new tool needs one entry there
 // and one here.
 // English strings ARE the keys, so a missing entry falls back to English.
-// App names (Carino PACS, Topo, Desk…) and terms of art (DICOM, PACS, CVE,
+// App names (Carino DICOM, Topo, Desk…) and terms of art (DICOM, PACS, CVE,
 // IPv4, NAT, UDP, mDNS, GPU, NVD, YAML…) deliberately stay untranslated in
 // every locale, Japanese and Russian included. The locale itself is
 // owned by carino-lang.js (?lang > fleet cookie > browser language > en);

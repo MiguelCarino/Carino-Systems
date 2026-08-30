@@ -62,8 +62,8 @@ Four rules hold it together:
 - **Nothing is hidden behind a hover.** A first-time visitor on a tablet never
   finds it and would not think to look, so every tool is on the glass at rest.
 - **Every tool is named twice** — once in plain words, large (*"Clean a study
-  before you share it"*), once by its real name, small (*DICOM Tag Editor*). The
-  page teaches the fleet's vocabulary instead of assuming it.
+  before you share it"*), once by its real name, small (*Carino DICOM Editor*).
+  The page teaches the fleet's vocabulary instead of assuming it.
 - **One tap target per tool**: the whole card. Never a small arrow at the end of
   a row, which on a phone is a miss.
 - **The privacy claim is the second thing on the page**, as a badge rather than
