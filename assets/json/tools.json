@@ -87,7 +87,7 @@
     {
       "name": "Carino DICOM",
       "icon": "🩻",
-      "url": "https://pacs.carino.systems/",
+      "url": "https://dicom.carino.systems/",
       "desc": "A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.",
       "cta": "Launch ↗",
       "tags": [
@@ -100,7 +100,7 @@
     {
       "name": "Carino DICOM Editor",
       "icon": "🏥",
-      "url": "https://dicom.carino.systems/",
+      "url": "https://dcm.carino.systems/",
       "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.",
       "cta": "Launch ↗",
       "tags": [
