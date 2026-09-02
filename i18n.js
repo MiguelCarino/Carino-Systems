@@ -98,6 +98,8 @@ const I18N = {
         'How a password is protected': 'Cómo se protege una contraseña',
         'Watch, step by step, what happens to a password when it is stored.': 'Mira, paso a paso, qué le pasa a una contraseña cuando se guarda.',
         'Send a quote to a client': 'Envía una cotización a un cliente',
+        "Hand over your tax details": "Entrega tus datos fiscales",
+        "Keeps your tax numbers for every country, checks them for typos, and shows them big enough to read out at the counter.": "Guarda tus números fiscales de cada país, revisa que no tengan erratas y los muestra lo bastante grandes para dictarlos en el mostrador.",
         'Build it, price it, and send it as a document.': 'Ármala, ponle precio y mándala como documento.',
         'Keep track of the work': 'Lleva el control del trabajo',
         'A board of cards: to do, doing, done.': 'Un tablero de tarjetas: por hacer, haciendo, hecho.',
@@ -143,6 +145,7 @@ const I18N = {
         // from start.json instead. They are content the registry owns, not
         // chrome this layout happens to use, so they stay — do not delete them
         // because the page stopped asking for them.
+        "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.": "Tu identidad fiscal para cada país en el que declaras: personal y de empresa, con los dígitos verificadores validados en el dispositivo, deletreados para el mostrador, y sin enviarse a ningún lado.",
         'A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.': 'Una pasarela DICOM autoalojada que mantiene la imagenología en marcha cuando un sistema se cae: recibe, enruta y reenvía estudios, y los sirve por Q/R o DICOMweb. No es un PACS empresarial.',
         'Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.': 'Inspecciona y modifica etiquetas de metadatos de radiografías para el cumplimiento de HIPAA y la interoperabilidad con PACS.',
         'Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.': 'Suite de examen ocular, refracción y dispensación: anota un fondo de ojo para obtener la relación copa-disco automática, refracciona, prepara una dispensación de gafas o lentes de contacto y exporta un PDF del estudio, DICOM, receta o pedido de lentes.',
@@ -299,6 +302,8 @@ const I18N = {
         'How a password is protected': 'Como uma senha é protegida',
         'Watch, step by step, what happens to a password when it is stored.': 'Veja, passo a passo, o que acontece com uma senha quando ela é guardada.',
         'Send a quote to a client': 'Envie um orçamento ao cliente',
+        "Hand over your tax details": "Passe seus dados fiscais",
+        "Keeps your tax numbers for every country, checks them for typos, and shows them big enough to read out at the counter.": "Guarda seus números fiscais de cada país, confere se não há erro de digitação e mostra grande o bastante para ditar no balcão.",
         'Build it, price it, and send it as a document.': 'Monte, coloque o preço e envie como documento.',
         'Keep track of the work': 'Acompanhe o trabalho',
         'A board of cards: to do, doing, done.': 'Um quadro de cartões: a fazer, fazendo, feito.',
@@ -344,6 +349,7 @@ const I18N = {
         // from start.json instead. They are content the registry owns, not
         // chrome this layout happens to use, so they stay — do not delete them
         // because the page stopped asking for them.
+        "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.": "Sua identidade fiscal para cada país em que você declara: pessoal e da empresa, com os dígitos verificadores validados no aparelho, soletrados para o balcão, e sem enviar nada a lugar nenhum.",
         'A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.': 'Um gateway DICOM auto-hospedado que mantém a imagem em movimento quando um sistema cai: recebe, roteia e encaminha estudos, e os disponibiliza por Q/R ou DICOMweb. Não é um PACS corporativo.',
         'Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.': 'Inspecione e modifique tags de metadados de radiografias para conformidade com a HIPAA e interoperabilidade com PACS.',
         'Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.': 'Suíte de exame ocular, refração e dispensação: anote um fundo de olho para obter a relação escavação-disco automática, faça a refração, prepare a dispensação de óculos ou lentes de contato e exporte PDF do estudo, DICOM, receita ou pedido de lentes.',
@@ -500,6 +506,8 @@ const I18N = {
         'How a password is protected': 'パスワードはどう守られるか',
         'Watch, step by step, what happens to a password when it is stored.': '保存されるときパスワードに何が起きるのか、一段ずつ見てみる。',
         'Send a quote to a client': '見積りを送る',
+        "Hand over your tax details": "窓口で税務情報を伝える",
+        "Keeps your tax numbers for every country, checks them for typos, and shows them big enough to read out at the counter.": "国ごとの税務番号を保管し、入力ミスを検査して、窓口で読み上げられる大きさで表示します。",
         'Build it, price it, and send it as a document.': '内容を組み立て、価格を入れ、書類として送ります。',
         'Keep track of the work': '仕事の進みを追う',
         'A board of cards: to do, doing, done.': 'カードのボード。未着手、進行中、完了。',
@@ -545,6 +553,7 @@ const I18N = {
         // from start.json instead. They are content the registry owns, not
         // chrome this layout happens to use, so they stay — do not delete them
         // because the page stopped asking for them.
+        "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.": "申告するすべての国の税務情報を、個人と法人まとめて。チェックディジットは端末内で検証し、窓口で読み上げやすい形に展開し、データはどこにも送信しません。",
         'A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.': 'システム障害時も画像のやり取りを止めない、セルフホスト型のDICOMゲートウェイ。検査の受信・振り分け・転送に加え、Q/RやDICOMwebでの提供にも対応。エンタープライズPACSではありません。',
         'Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.': 'X線画像のメタデータタグを確認・編集。HIPAA準拠とPACS相互運用性のために。',
         'Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.': '眼科検査・屈折・調製スイート。眼底に注釈を付けてC/D比を自動算出、屈折検査、眼鏡・CLの調製作業、検査PDF・DICOM・処方箋・レンズ発注書の出力に対応。',
@@ -701,6 +710,8 @@ const I18N = {
         'How a password is protected': 'Как защищают пароль',
         'Watch, step by step, what happens to a password when it is stored.': 'Посмотрите шаг за шагом, что происходит с паролем при сохранении.',
         'Send a quote to a client': 'Отправьте смету клиенту',
+        "Hand over your tax details": "Передайте свои налоговые данные",
+        "Keeps your tax numbers for every country, checks them for typos, and shows them big enough to read out at the counter.": "Хранит ваши налоговые номера по каждой стране, проверяет их на опечатки и показывает достаточно крупно, чтобы продиктовать на стойке.",
         'Build it, price it, and send it as a document.': 'Соберите, посчитайте и отправьте документом.',
         'Keep track of the work': 'Держите работу под контролем',
         'A board of cards: to do, doing, done.': 'Доска с карточками: сделать, в работе, готово.',
@@ -746,6 +757,7 @@ const I18N = {
         // from start.json instead. They are content the registry owns, not
         // chrome this layout happens to use, so they stay — do not delete them
         // because the page stopped asking for them.
+        "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.": "Ваши налоговые данные для каждой страны, где вы отчитываетесь: личные и по компании, с проверкой контрольных цифр на устройстве, раскладкой номера по буквам для стойки и без отправки куда-либо.",
         'A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.': 'Самостоятельно размещаемый DICOM-шлюз, не дающий остановиться потоку исследований при отказе системы: приём, маршрутизация и пересылка, выдача по Q/R или DICOMweb. Это не корпоративный PACS.',
         'Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.': 'Просмотр и изменение тегов метаданных рентгеновских снимков для соответствия HIPAA и совместимости с PACS.',
         'Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.': 'Комплекс для офтальмологического осмотра, рефракции и подбора: разметьте глазное дно для автоматического расчёта отношения экскавации к диску, проведите рефракцию, оформите подбор очков или контактных линз и экспортируйте PDF исследования, DICOM, рецепт или заказ линз.',

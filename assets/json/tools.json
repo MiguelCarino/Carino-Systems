@@ -216,6 +216,17 @@
       "keywords": "linux distribution quiz ubuntu fedora debian arch recommend"
     },
     {
+      "name": "Fiscal",
+      "icon": "🪪",
+      "url": "https://fiscal.carino.systems/",
+      "desc": "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.",
+      "cta": "Launch ↗",
+      "tags": [
+        "business"
+      ],
+      "keywords": "rfc nit ein cuit cpf cnpj gstin rut ruc abn vat tax id number cfdi sat dian irs facturacion factura electronica invoice receipt regimen fiscal constancia cedula datos fiscales mostrador counter"
+    },
+    {
       "name": "Hardware",
       "icon": "🖥️",
       "url": "https://hardware.carino.systems/",

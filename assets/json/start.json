@@ -21,9 +21,12 @@
     "the icon plate. A real picture of the tool beats any glyph for a first-time",
     "visitor, so fill these in as they are captured."
   ],
-
-  "featured": ["Media Suite", "Password", "Vitae", "Carino Retina"],
-
+  "featured": [
+    "Media Suite",
+    "Password",
+    "Vitae",
+    "Carino Retina"
+  ],
   "groups": [
     {
       "id": "clinic",
@@ -127,6 +130,11 @@
           "ref": "Quote",
           "plain": "Send a quote to a client",
           "line": "Build it, price it, and send it as a document."
+        },
+        {
+          "ref": "Fiscal",
+          "plain": "Hand over your tax details",
+          "line": "Keeps your tax numbers for every country, checks them for typos, and shows them big enough to read out at the counter."
         },
         {
           "ref": "Kanban",
