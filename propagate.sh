@@ -9,6 +9,7 @@
 #   canonical carino-diag.js   = ../Topo/carino-diag.js
 #   canonical carino-anim.*    = ../Branding/carino-anim.{css,js}
 #   canonical carino-lang.js   = Carino-Systems/carino-lang.js  (this repo)
+#   canonical carino-bridge.js = ../Quote/carino-bridge.js
 set -euo pipefail
 cd "$(dirname "$0")/.."          # -> the folder holding all the sibling repos
 
@@ -18,9 +19,10 @@ DIAG_SRC="Topo/carino-diag.js"
 ANIM_CSS_SRC="Branding/carino-anim.css"
 ANIM_JS_SRC="Branding/carino-anim.js"
 LANG_SRC="Carino-Systems/carino-lang.js"
+BRIDGE_SRC="Quote/carino-bridge.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
-GROUPA="Branding CVE Quote Hardware Hash Metadata \
+GROUPA="Branding CVE Quote Fiscal Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
@@ -46,9 +48,12 @@ DIAG="Topo NetplanConfig Hardware"
 # each section's cards. Add a site here only once it actually renders one.
 ANIM="Branding Carino-Systems"
 
-# Sites carrying the language switcher. It was hand-copied until now, which is
-# why it is discovered rather than listed: any site that already has the file
-# gets the current one.
+# Sites carrying the language switcher, and sites carrying the file-handoff
+# bridge. Both were hand-copied until now, which is why they are discovered
+# rather than listed: any site that already has the file gets the current one.
+# The bridge especially — it carries tax identifiers between origins, and its
+# seven copies had already begun to drift. Two of those are Carino-PACS's, one
+# and two folders under pacs/web, which is how deep the bridge glob has to go.
 
 echo "Propagating shared navbar assets (local copies, no CDN)…"
 # -ef guards skip copying a canonical file onto itself (CVE is the navbar source
@@ -73,6 +78,11 @@ for f in */carino-lang.js */*/carino-lang.js; do
   [ -e "$f" ] || continue
   [ "$f" -ef "$LANG_SRC" ] || cp "$LANG_SRC" "$f"
   echo "  ${f%/carino-lang.js}  (lang)"
+done
+for f in */carino-bridge.js */*/carino-bridge.js */*/*/carino-bridge.js */*/*/*/carino-bridge.js; do
+  [ -e "$f" ] || continue
+  [ "$f" -ef "$BRIDGE_SRC" ] || cp "$BRIDGE_SRC" "$f"
+  echo "  ${f%/carino-bridge.js}  (bridge)"
 done
 for d in $ANIM; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }

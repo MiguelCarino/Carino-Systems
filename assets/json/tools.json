@@ -222,9 +222,10 @@
       "desc": "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.",
       "cta": "Launch ↗",
       "tags": [
-        "business"
+        "business",
+        "security"
       ],
-      "keywords": "rfc nit ein cuit cpf cnpj gstin rut ruc abn vat tax id number cfdi sat dian irs facturacion factura electronica invoice receipt regimen fiscal constancia cedula datos fiscales mostrador counter"
+      "keywords": "rfc nit ein cuit cpf cnpj gstin rut ruc abn vat tax id number cfdi sat dian irs facturacion factura electronica invoice receipt regimen fiscal constancia cedula datos fiscales mostrador counter offline on-device private"
     },
     {
       "name": "Hardware",
