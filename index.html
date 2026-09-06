@@ -368,21 +368,22 @@
     /* Centred, like every other front door in the fleet, and sized off viewport
        HEIGHT as well as width — height is the scarce dimension, and this hero
        has to leave the first row of tools visible under it. */
-    .hero { text-align: center; padding: min(64px, calc(clamp(20px, 3vh, 44px) + var(--tall) * 0.05)) 0
-                                        min(52px, calc(clamp(18px, 2.6vh, 38px) + var(--tall) * 0.035)); }
+    .hero { text-align: center;
+      padding: min(40px, calc(clamp(10px, 1.8vh, 26px) + var(--tall) * 0.03)) 0
+               min(34px, calc(clamp(8px, 1.4vh, 22px) + var(--tall) * 0.025)); }
     .hero-mark { display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: min(22px, calc(4px + var(--tall) * 0.035));
-      margin: 0 auto min(40px, calc(clamp(10px, 1.4vh, 20px) + var(--tall) * 0.055)); }
+      margin: 0 auto min(26px, calc(clamp(6px, 1vh, 14px) + var(--tall) * 0.035)); }
     .hero-mark img { width: auto; display: block;
-      height: min(112px, calc(clamp(34px, 4.4vh, 56px) + var(--tall) * 0.14)); }
+      height: min(88px, calc(clamp(28px, 3.4vh, 44px) + var(--tall) * 0.1)); }
     /* The tiles: a rail, six of them, and one sweep travelling the rail — the
        grid below the fold, said in one stroke. `width: auto` + the viewBox's own
        5:1 keeps it undistorted; overflow visible so the sweep's glow is not
        clipped. */
     .tiles { display: block; margin: 0; width: auto; aspect-ratio: 5 / 1; overflow: visible;
-      height: min(58px, calc(clamp(14px, 2.4vh, 30px) + var(--tall) * 0.07)); }
+      height: min(42px, calc(clamp(10px, 1.8vh, 22px) + var(--tall) * 0.05)); }
     .tiles line { stroke-linecap: round; }
-    .tiles .rail { stroke: var(--accent); stroke-width: 2; opacity: 0.14; }
+    .tiles .tile-rail { stroke: var(--accent); stroke-width: 2; opacity: 0.14; }
     .tiles .sweep { stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: 14 120;
       filter: drop-shadow(0 0 6px rgba(234,179,8,0.9)); animation: hub-sweep 2.4s linear infinite; }
     @keyframes hub-sweep { from { stroke-dashoffset: 134; } to { stroke-dashoffset: 0; } }
@@ -397,7 +398,7 @@
     .hero h1 {
       font-family: var(--font-display); font-weight: 900;
       line-height: 1.08; letter-spacing: -0.025em; color: var(--text);
-      font-size: min(3.4rem, calc(clamp(1.9rem, 3.4vw + .4vh, 2.6rem) + var(--tall) * 0.03));
+      font-size: min(2.7rem, calc(clamp(1.6rem, 2.8vw + .4vh, 2.2rem) + var(--tall) * 0.024));
       /* A claim of two sentences breaks badly on a width: one language leaves a
          line with two words on it and the next leaves five. The <br> splits them
          where the meaning does; `balance` evens out whatever each language then
@@ -408,19 +409,194 @@
        faded the end of the sentence to the dimmest thing on the line. */
     .hero h1 .gold { color: var(--accent); }
     .hero p {
-      margin: 20px auto 0; max-width: min(72ch, calc(62ch + var(--tall) * 0.02));
-      font-size: min(1.28rem, calc(clamp(1rem, .6rem + .5vh, 1.1rem) + var(--tall) * 0.01));
+      margin: clamp(8px, 1.4vh, 16px) auto 0; max-width: min(72ch, calc(62ch + var(--tall) * 0.02));
+      font-size: min(1.16rem, calc(clamp(.95rem, .6rem + .4vh, 1.05rem) + var(--tall) * 0.006));
       line-height: 1.6; color: var(--text-sec);
     }
     /* The one claim that is a badge rather than a sentence, because it is the
        one a visitor is looking for and should not have to find in a paragraph. */
     .promise {
-      display: inline-flex; align-items: center; gap: 11px; margin-top: 26px;
+      display: inline-flex; align-items: center; gap: 11px; margin-top: clamp(10px, 1.6vh, 20px);
       padding: 11px 18px 11px 15px; border-radius: 999px;
       border: 1px solid var(--accent-dim); background: var(--accent-faint);
       color: var(--text); font-size: var(--fs-lg); font-weight: 600;
     }
     .promise svg { width: 19px; height: 19px; color: var(--accent); flex: none; }
+
+    /* ══ THE BOARD ══════════════════════════════════════════════════════
+       One screen. body is a column: navbar, then main, and main gives the
+       board whatever the hero leaves. min-height:0 on both is what lets a
+       flex child be SHORTER than its content instead of pushing the page
+       taller — without it the board grows and the page scrolls again, which
+       is the whole thing this is trying not to do. */
+    body { height: 100dvh; display: flex; flex-direction: column; }
+    /* Wider than --shell, which is a reading measure for a page of sentences.
+       A board is not read top to bottom, and the extra width is what buys the
+       columns: at 1180 the widest section took four rows and overflowed, at
+       1560 it takes two. */
+    main.shell { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
+                 max-width: min(1560px, 94vw);
+                 padding-bottom: clamp(10px, 2vh, 22px) !important; }
+    .board { flex: 1 1 auto; min-height: 0; display: flex; gap: clamp(14px, 1.6vw, 26px); }
+
+    /* ── the rail: every section, always, and the current one's pages ── */
+    .rail { flex: 0 0 clamp(210px, 19vw, 290px); min-height: 0; display: flex; flex-direction: column;
+            gap: 4px; overflow: hidden; }
+    .rail-item {
+      position: relative; display: block; width: 100%; text-align: left; cursor: pointer;
+      background: transparent; border: 1px solid transparent; border-radius: 10px;
+      padding: clamp(6px, 0.9vh, 11px) 12px; color: var(--text-sec);
+      font-family: inherit; font-size: var(--fs-lg); transition: 0.15s;
+    }
+    .rail-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+    .rail-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .rail-item[aria-selected="true"] {
+      color: var(--text); background: var(--accent-faint); border-color: var(--accent-dim);
+    }
+    .rail-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .rail-name { font-weight: 600; }
+    .rail-count { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-muted); flex: none; }
+    /* The pages inside the current section. aria-hidden because they are a
+       preview: the real, reachable copies are the cards in the pane, and a
+       screen reader that read both would hear the fleet twice. */
+    .rail-sub { margin: 6px 0 2px; padding: 0; list-style: none; display: grid; gap: 2px; }
+    .rail-sub li {
+      font-size: var(--fs-sm); color: var(--text-muted); padding-left: 11px; position: relative;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .rail-sub li::before { content: ""; position: absolute; left: 0; top: 0.62em;
+      width: 4px; height: 4px; border-radius: 50%; background: var(--accent-dim); }
+    /* The pages inside a section are the first thing to go when the rail is
+       short: nine section names must always fit, because clipping the
+       navigation is worse than any amount of it. Ten sub-lines are 190px, which
+       a 720px screen does not have to give. */
+    @media (max-height: 900px) {
+      .rail-sub { display: none; }
+      /* Nine names, two of which wrap to a second line at this width. Tightened
+         rather than truncated: a section whose name is cut is a section nobody
+         can tell apart from its neighbour. */
+      .rail-item { padding: 5px 10px; font-size: var(--fs-base); }
+      .rail { gap: 3px; }
+    }
+    /* The floor, so that "one screen" never becomes "the rest is clipped". The
+       page itself does not scroll; on a short screen one pane can, inside its
+       own box. Every desktop size measured fits without this — it is here for
+       the ones that were not measured. */
+    .pane .grid, #paneSafe:not([hidden]) { overflow-y: auto; scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent; }
+    /* How long this one has left, if the board is still advancing on its own.
+       Zero-width and no animation the moment it stops, so a stopped board shows
+       no countdown to a deadline that is not coming. */
+    .rail-bar { position: absolute; left: 12px; right: 12px; bottom: 5px; height: 2px;
+      border-radius: 2px; background: var(--accent); opacity: 0.55; transform-origin: left center;
+      transform: scaleX(0); }
+    .board { --dwell: 7000ms; }   /* matched to DWELL in the script below */
+    .board.running .rail-item[aria-selected="true"] .rail-bar { animation: rail-run var(--dwell) linear forwards; }
+    @keyframes rail-run { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* ── the pane ── */
+    .pane { flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+    .pane:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 12px; }
+    .pane-head { margin-bottom: clamp(8px, 1.4vh, 16px); }
+    .pane-head h2 {
+      font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+      font-size: min(1.9rem, calc(1.2rem + var(--tall) * 0.012));
+    }
+    .pane-head p { margin-top: 5px; color: var(--text-sec); font-size: var(--fs-lg); }
+    /* Columns follow the room, not a fixed count: the widest section holds ten
+       tools and the narrowest two, and both have to land in the same box
+       without scrolling. */
+    /* max-content, explicitly: the rows were coming out equal and exactly
+       filling the box, which meant a card needing 183px was given 151 and its
+       Open button rendered outside its own border. A row must be as tall as
+       what is in it; if that overflows, the grid scrolls (see the floor rule
+       below) rather than cutting a card in half. */
+    .pane .grid { flex: 1 1 auto; min-height: 0; align-content: start; grid-auto-rows: max-content;
+      gap: clamp(8px, 1.1vh, 14px);
+      /* Wider, not narrower. Squeezing the columns to 178px made every card
+         WRAP more and grow taller, so the section needed more height, not less:
+         the widest one went from 4 rows to 5. Short and wide beats narrow and
+         tall when the box is fixed. */
+      grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 13vw, 250px), 1fr)); }
+    .pane .tool { min-height: 0; }
+    /* The description is the first thing to go when the box is short — the two
+       names are the rule ("named twice"), the sentence is the luxury. */
+    /* 940, not 780. Ten cards with a sentence each need roughly 600px of a
+       485px box on a 900-tall laptop, and no column count fixes that — the area
+       is simply larger than the space. The two names are the rule; the sentence
+       is what a short screen cannot afford. A tall screen keeps it. */
+    /* The card loses its sentence and its big plate at the same height, because
+       they are the same decision: below this the box is smaller than ten cards
+       carrying prose, whatever the column count. */
+    @media (max-height: 940px) {
+      .pane .tool-line { display: none; }
+      .pane .tool { padding: 11px 12px; gap: 10px; }
+      .pane .plate { width: 40px; height: 40px; font-size: 1.35rem; }
+      .pane .tool-plain { font-size: var(--fs-base); }
+    }
+    /* Below this the hero and the pane's own preamble give ground, in that
+       order — the tools are the page, and the sentence introducing a section a
+       visitor has just chosen is the most expendable thing on it. */
+    @media (max-height: 800px) {
+      .pane-head { margin-bottom: 8px; }
+      .pane-head p { display: none; }
+      .pane .grid { gap: 7px; }
+      .hero p { font-size: var(--fs-base); margin-top: 8px; }
+      .promise { margin-top: 10px; padding: 8px 14px 8px 12px; font-size: var(--fs-base); }
+    }
+    /* The last thing the hero gives up, and only under 760px of screen: the
+       elaboration. What stays is the mark, the claim and the privacy pill —
+       and the pill staying is the point, because the page's own rule is that
+       the privacy claim comes second, before anything else. */
+    @media (max-height: 760px) {
+      .hero p { display: none; }
+      .hero h1 { margin-bottom: 0; }
+    }
+
+    /* :not([hidden]) is load-bearing. An author `display` beats the UA's
+       `[hidden] { display: none }`, so the plain rule left the safety answers
+       and the contact band laid out — and overflowing the screen — while the
+       attribute said they were hidden. */
+    #paneSafe:not([hidden]) { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
+      gap: clamp(10px, 1.6vh, 22px); }
+    #paneSafe .answers { margin: 0; }
+    #paneSafe .band { margin: 0; }
+    /* Three claims and a contact band are 465px of content in a 325px box on a
+       720p laptop. Compacted rather than cut: the paragraphs are the reason the
+       section exists — for a clinic the privacy answer is the whole decision —
+       so what gives is leading and padding, not sentences. */
+    @media (max-height: 900px) {
+      #paneSafe .answer { padding: 10px 13px; }
+      #paneSafe .answer h3 { font-size: var(--fs-lg); }
+      #paneSafe .answer p { font-size: var(--fs-sm); line-height: 1.45; margin-top: 4px; }
+      #paneSafe .answer svg { width: 18px; height: 18px; }
+      #paneSafe .band { padding: 12px 16px; gap: 12px; }
+      #paneSafe .band h2 { font-size: 1.15rem; }
+      #paneSafe .band p { font-size: var(--fs-sm); line-height: 1.45; }
+    }
+
+    /* ── narrow: the rail lies down as a strip of chips above the pane ── */
+    @media (max-width: 900px) {
+      .board { flex-direction: column; gap: 12px; }
+      .rail { flex: 0 0 auto; flex-direction: row; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+              scrollbar-width: none; }
+      .rail::-webkit-scrollbar { display: none; }
+      .rail-item { width: auto; flex: 0 0 auto; padding: 7px 12px; }
+      /* The pages inside a section are the pane's job once the rail is a strip;
+         repeating them in a chip would make the strip unreadable. */
+      .rail-sub { display: none; }
+      .rail-count { display: none; }
+    }
+    /* A phone is the one place this scrolls, and it always did: nine sections of
+       cards cannot be one screen at 390px without hiding something, and hiding
+       things is what this design exists not to do. */
+    @media (max-width: 640px) {
+      body { height: auto; min-height: 100dvh; }
+      main.shell { display: block; }
+      .board { display: block; }
+      .pane .grid { grid-template-columns: 1fr; }
+      .pane .tool-line { display: flex; }
+    }
 
     /* ── sections ── */
     section { padding: 30px 0; }
@@ -711,7 +887,7 @@
     <div class="hero-mark" aria-hidden="true">
       <img src="logo.svg" alt="" width="120" height="120" decoding="async">
       <svg class="tiles" viewBox="0 0 200 40" preserveAspectRatio="xMidYMid meet">
-        <line class="rail" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
+        <line class="tile-rail" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
         <line class="sweep" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
         <g class="tile">
           <rect x="16" y="14" width="12" height="12" rx="2" /><rect x="44" y="14" width="12" height="12" rx="2" />
@@ -728,31 +904,30 @@
     </p>
   </div>
 
-  <section id="first">
-    <div class="sec-head">
-      <h2 data-i18n>Not sure where to start?</h2>
-      <p data-i18n>These four are the ones most people need first.</p>
-    </div>
-    <div class="grid first" id="featured"></div>
-  </section>
+  <!-- The board. Nine sections down the left, the one that is current on the
+       right, and nothing on this page scrolls.
 
-  <div class="rule"></div>
+       The rail names every section and, for the current one, the pages inside
+       it — so the fleet's shape is legible without touching anything. That is
+       what pays for a disclosure: the console this replaces hid twenty-eight of
+       thirty-five tools behind a hover, and the page that replaced THAT scrolled
+       four screens to avoid hiding anything. This advances on its own, so a
+       visitor who does nothing is still shown every section in turn; the moment
+       they touch it, it stops and stays where they put it. -->
+  <div class="board" id="board">
+    <nav class="rail" id="rail" role="tablist" aria-orientation="vertical" aria-label="Sections"></nav>
 
-  <section id="groups">
-    <div class="sec-head">
-      <h2 data-i18n>What do you need to do?</h2>
-      <p data-i18n>Everything below opens in a new tab and works the same on a phone, a tablet or a computer.</p>
-    </div>
-    <div id="groupList"></div>
-  </section>
+    <div class="pane" id="pane" role="tabpanel" tabindex="0">
+      <div class="pane-head">
+        <h2 id="paneTitle"></h2>
+        <p id="paneBlurb"></p>
+      </div>
+      <div class="grid" id="paneGrid"></div>
 
-  <div class="rule"></div>
-
-  <section id="safe">
-    <div class="sec-head">
-      <h2 data-i18n>Is this safe to use?</h2>
-    </div>
-    <div class="answers">
+      <!-- Not built from JSON: three claims and a way to write to me, kept as
+           markup so the i18n pass still walks them. -->
+      <div id="paneSafe" hidden>
+        <div class="answers">
       <div class="answer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         <h3 data-i18n>Your file is opened by the page itself.</h3>
@@ -769,9 +944,7 @@
         <p data-i18n>Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.</p>
       </div>
     </div>
-  </section>
-
-  <div class="band lit">
+        <div class="band lit">
     <div>
       <h2 data-i18n>Would you like a hand?</h2>
       <p data-i18n>If you would like one of these set up properly for your clinic or office — or something built for the way you actually work — write to me and we will talk it through.</p>
@@ -781,6 +954,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
         <span data-i18n>Get in touch</span>
       </a>
+    </div>
+  </div>
+      </div>
     </div>
   </div>
 
@@ -841,28 +1017,149 @@ function card(entry) {
   </a>`;
 }
 
+/* ── The board ───────────────────────────────────────────────────────
+   Nine sections: "Start here" (the four named in start.json), the seven
+   groups, and the safety answers. Everything the scrolling page carried is
+   still here; only one of them is on screen at a time.
+
+   The board advances on its own so that disclosure costs nothing: a visitor
+   who touches nothing is still shown every section in turn, which is the
+   objection that sank the hover console. It stops for good the moment anyone
+   acts — a page that keeps moving under a reader who has started reading is
+   worse than one that never moved. It never starts at all for a reader who
+   asked their system for less motion.                                     */
+const DWELL = 7000;
+let SECTIONS = [], active = 0, timer = null, stopped = false;
+
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function buildSections() {
+  const all = DATA.groups.flatMap((g) => g.tools);
+  const featured = (DATA.featured || []).map((ref) => all.find((x) => x.ref === ref)).filter(Boolean);
+  return [
+    { id: 'start', title: 'Not sure where to start?', blurb: 'These four are the ones most people need first.', tools: featured },
+    ...DATA.groups.map((g) => ({ id: g.id, title: g.title, blurb: g.blurb, tools: g.tools })),
+    { id: 'safe', title: 'Is this safe to use?', blurb: 'Three answers, and a way to reach me.', tools: null },
+  ];
+}
+
+function renderRail() {
+  $('rail').innerHTML = SECTIONS.map((sec, i) => `
+    <button class="rail-item" role="tab" type="button" id="tab-${esc(sec.id)}"
+            aria-selected="${i === active}" tabindex="${i === active ? 0 : -1}"
+            aria-controls="pane" data-i="${i}">
+      <span class="rail-top">
+        <span class="rail-name">${esc(T(sec.title))}</span>
+        ${sec.tools ? `<span class="rail-count">${sec.tools.length}</span>` : ''}
+      </span>
+      ${i === active && sec.tools ? `<ul class="rail-sub" aria-hidden="true">${
+        sec.tools.map((e) => `<li>${esc(T(e.plain))}</li>`).join('')}</ul>` : ''}
+      <span class="rail-bar"></span>
+    </button>`).join('');
+}
+
+/* How many columns. Not a CSS guess, because the answer is not monotonic: more
+   columns means fewer rows but narrower — and therefore TALLER — cards, so both
+   "wider" and "narrower" made different sections overflow. Every count is tried
+   and the shortest one that fits is kept; if none fits, the shortest overall is
+   kept and the grid scrolls inside its own box rather than clipping a card.
+   Costs a handful of layout passes, and only when the section changes. */
+function fitGrid() {
+  const g = $('paneGrid');
+  if (g.hidden || !g.firstElementChild) return;
+  const n = g.children.length;
+  const gap = parseFloat(getComputedStyle(g).gap) || 12;
+  const maxCols = Math.min(n, Math.max(1, Math.floor((g.clientWidth + gap) / (170 + gap))));
+  let best = null;
+  for (let c = 1; c <= maxCols; c++) {
+    g.style.gridTemplateColumns = `repeat(${c}, minmax(0, 1fr))`;
+    const need = g.scrollHeight;
+    if (!best || need < best.need) best = { c, need };
+    if (need <= g.clientHeight + 1) break;   // the first that fits is also the widest that fits
+  }
+  g.style.gridTemplateColumns = `repeat(${best.c}, minmax(0, 1fr))`;
+}
+
+function renderPane() {
+  const sec = SECTIONS[active];
+  $('paneTitle').textContent = T(sec.title);
+  $('paneBlurb').textContent = T(sec.blurb);
+  const safe = sec.tools === null;
+  $('paneSafe').hidden = !safe;
+  $('paneGrid').hidden = safe;
+  $('paneGrid').innerHTML = safe ? '' : sec.tools.map(card).join('');
+  $('pane').setAttribute('aria-labelledby', 'tab-' + sec.id);
+  fitGrid();
+}
+
+/* The timer is restarted from here rather than left running, so the dwell is
+   measured from the moment a section appears however it was chosen. */
+function select(i, opts = {}) {
+  active = (i + SECTIONS.length) % SECTIONS.length;
+  renderRail();
+  renderPane();
+  if (opts.focus) $('rail').querySelector('[aria-selected="true"]').focus();
+  restart();
+}
+
+function restart() {
+  clearTimeout(timer);
+  const board = $('board');
+  board.classList.toggle('running', !stopped);
+  if (stopped) return;
+  // Re-arm the progress line: an animation on an element that was just
+  // rewritten starts fresh, which is exactly what is wanted here.
+  timer = setTimeout(() => select(active + 1), DWELL);
+}
+
+/* Anything deliberate stops it for the session. Hover only pauses: a pointer
+   crossing the board on its way elsewhere is not a decision. */
+function stop() {
+  if (stopped) return;
+  stopped = true;
+  clearTimeout(timer);
+  $('board').classList.remove('running');
+}
+
+let fitPending = null;
+function refit() { clearTimeout(fitPending); fitPending = setTimeout(fitGrid, 90); }
+
+function wireBoard() {
+  const board = $('board'), rail = $('rail');
+  window.addEventListener('resize', refit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitGrid);
+  rail.addEventListener('click', (e) => {
+    const item = e.target.closest('.rail-item');
+    if (!item) return;
+    stop();
+    select(+item.dataset.i);
+  });
+  rail.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (step === undefined && e.key !== 'Home' && e.key !== 'End') return;
+    e.preventDefault();
+    stop();
+    select(e.key === 'Home' ? 0 : e.key === 'End' ? SECTIONS.length - 1 : active + step, { focus: true });
+  });
+  // A click or a key anywhere on the board is a decision, including on a card.
+  board.addEventListener('pointerdown', stop);
+  board.addEventListener('focusin', stop);
+  board.addEventListener('mouseenter', () => { if (!stopped) { clearTimeout(timer); board.classList.remove('running'); } });
+  board.addEventListener('mouseleave', () => { if (!stopped) restart(); });
+}
+
 function render() {
   if (!DATA) return;
-
-  // The four on top are named in start.json by ref, and are cards from the
-  // groups below rather than a separate list — one place to edit either way.
-  const all = DATA.groups.flatMap((g) => g.tools);
-  $('featured').innerHTML = (DATA.featured || [])
-    .map((ref) => all.find((x) => x.ref === ref))
-    .filter(Boolean).map(card).join('');
-
-  $('groupList').innerHTML = DATA.groups.map((g) => `
-    <div class="group">
-      <h3>${esc(T(g.title))}</h3>
-      <p>${esc(T(g.blurb))}</p>
-      <div class="grid">${g.tools.map(card).join('')}</div>
-    </div>`).join('');
+  SECTIONS = buildSections();
+  if (active >= SECTIONS.length) active = 0;
+  renderRail();
+  renderPane();
 
   // Every tool in tools.json should be on the page somewhere — this is the hub,
   // and a tool the hub does not list is a tool nobody can find. Missing ones are
   // named in the console rather than shown, because the person reading the page
   // cannot act on it and the person maintaining it can.
-  const shown = new Set(all.map((x) => x.ref));
+  const shown = new Set(DATA.groups.flatMap((g) => g.tools).map((x) => x.ref));
   const missing = [...INDEX.keys()].filter((n) => !shown.has(n));
   if (missing.length) console.warn('[hub] not listed in start.json:', missing.join(', '));
 }
@@ -871,8 +1168,9 @@ function render() {
 window.renderTools = render;
 
 function broken(err) {
-  $('featured').innerHTML = '';
-  $('groupList').innerHTML =
+  stop();
+  $('rail').innerHTML = '';
+  $('paneGrid').innerHTML =
     `<div class="broken"><p>${esc(T('The list of tools could not be loaded.'))}</p>` +
     `<p><code>${esc(err.message)}</code></p></div>`;
 }
@@ -891,6 +1189,10 @@ document.addEventListener('DOMContentLoaded', () => {
       TOTAL = (tools.tools || []).length;
       (tools.tools || []).forEach((x) => INDEX.set(x.name, x));
       render();
+      wireBoard();
+      // A reader who has asked their system for less motion gets a board that
+      // simply sits on the first section until they choose another one.
+      if (reduceMotion()) stop(); else restart();
     })
     .catch(broken);
 });
