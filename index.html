@@ -40,6 +40,17 @@
        ───────────────────────────────────────────────────────────── */
 
     :root {
+      /* Surplus height: how much taller this viewport is than the point where
+         the hero stops being short of room. Every size that uses it is written
+         `base + --tall × rate`, so it is exactly `base` under 900px and grows
+         into the slack above — a calc rather than a breakpoint, because a
+         breakpoint steps. From dicom.carino.systems.
+
+         Bounded harder here than on the one-screen pages: this page scrolls by
+         design, and a hero that ate the fold would push the first tools off it.
+         The rates are about half of theirs for that reason. */
+      --tall: max(0px, 100vh - 900px);
+
       /* Palette — mirrors branding.carino.systems, same tokens as the hub. */
       --bg:             #050505;
       --accent:         #eab308;
@@ -354,21 +365,52 @@
     /* ── the hero ──
        A sentence about what this is, a sentence about who it is for, and the
        promise that decides it for a clinic. Nothing else above the fold. */
-    .hero { padding: 62px 0 46px; }
+    /* Centred, like every other front door in the fleet, and sized off viewport
+       HEIGHT as well as width — height is the scarce dimension, and this hero
+       has to leave the first row of tools visible under it. */
+    .hero { text-align: center; padding: min(64px, calc(clamp(20px, 3vh, 44px) + var(--tall) * 0.05)) 0
+                                        min(52px, calc(clamp(18px, 2.6vh, 38px) + var(--tall) * 0.035)); }
+    .hero-mark { display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: min(22px, calc(4px + var(--tall) * 0.035));
+      margin: 0 auto min(40px, calc(clamp(10px, 1.4vh, 20px) + var(--tall) * 0.055)); }
+    .hero-mark img { width: auto; display: block;
+      height: min(112px, calc(clamp(34px, 4.4vh, 56px) + var(--tall) * 0.14)); }
+    /* The tiles: a rail, six of them, and one sweep travelling the rail — the
+       grid below the fold, said in one stroke. `width: auto` + the viewBox's own
+       5:1 keeps it undistorted; overflow visible so the sweep's glow is not
+       clipped. */
+    .tiles { display: block; margin: 0; width: auto; aspect-ratio: 5 / 1; overflow: visible;
+      height: min(58px, calc(clamp(14px, 2.4vh, 30px) + var(--tall) * 0.07)); }
+    .tiles line { stroke-linecap: round; }
+    .tiles .rail { stroke: var(--accent); stroke-width: 2; opacity: 0.14; }
+    .tiles .sweep { stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: 14 120;
+      filter: drop-shadow(0 0 6px rgba(234,179,8,0.9)); animation: hub-sweep 2.4s linear infinite; }
+    @keyframes hub-sweep { from { stroke-dashoffset: 134; } to { stroke-dashoffset: 0; } }
+    .tiles .tile rect { fill: var(--bg); stroke: var(--accent); stroke-width: 1.6; opacity: 0.5; }
+    /* Motion is decoration: a reader who asked their system for less of it keeps
+       the shape and loses the travel. */
+    @media (prefers-reduced-motion: reduce) { .tiles .sweep { animation: none; stroke-dasharray: none; opacity: 0.45; } }
+    /* No trace on a phone. At 5:1 it is either hairline-thin or it sets the
+       width of everything above it; the mark takes the space instead. */
+    @media (max-width: 640px) { .tiles { display: none; } .hero-mark img { height: clamp(52px, 15vw, 84px); } }
+
     .hero h1 {
       font-family: var(--font-display); font-weight: 900;
-      font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.08; letter-spacing: -0.025em;
+      line-height: 1.08; letter-spacing: -0.025em; color: var(--text);
+      font-size: min(3.4rem, calc(clamp(1.9rem, 3.4vw + .4vh, 2.6rem) + var(--tall) * 0.03));
       /* A claim of two sentences breaks badly on a width: one language leaves a
-         line with two words on it and the next leaves five. `balance` evens the
-         lines out per language instead of per guess, and the max-width is only
-         there to stop it running the full column on a wide screen. */
-      max-width: 13em; text-wrap: balance;
-      background: linear-gradient(120deg, #ffffff 0%, #ffffff 44%, #fde68a 78%, var(--accent) 100%);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+         line with two words on it and the next leaves five. The <br> splits them
+         where the meaning does; `balance` evens out whatever each language then
+         wraps to, and the max-width stops it running the full column. */
+      max-width: min(1040px, 100%); margin-inline: auto; text-wrap: balance;
     }
+    /* White claim, gold answer — the fleet's split, replacing a gradient that
+       faded the end of the sentence to the dimmest thing on the line. */
+    .hero h1 .gold { color: var(--accent); }
     .hero p {
-      margin-top: 20px; max-width: 62ch;
-      font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.65; color: var(--text-sec);
+      margin: 20px auto 0; max-width: min(72ch, calc(62ch + var(--tall) * 0.02));
+      font-size: min(1.28rem, calc(clamp(1rem, .6rem + .5vh, 1.1rem) + var(--tall) * 0.01));
+      line-height: 1.6; color: var(--text-sec);
     }
     /* The one claim that is a badge rather than a sentence, because it is the
        one a visitor is looking for and should not have to find in a paragraph. */
@@ -530,7 +572,7 @@
 
     @media (max-width: 720px) {
       :root { --pad: 16px; }
-      .hero { padding: 42px 0 32px; }
+      .hero { padding: 34px 0 26px; }
       .promise { font-size: var(--fs-body); align-items: flex-start; }
       .grid, .grid.first { grid-template-columns: minmax(0, 1fr); }
       .grid.first .tool { flex-direction: row; min-height: 118px; }
@@ -662,7 +704,23 @@
 <main class="shell">
 
   <div class="hero">
-    <h1 data-i18n>Open solutions made for everyone. Free for anyone.</h1>
+    <!-- The mark, and the fleet's motif under it. Every Carino front door is a
+         gold letter over a moving line; this is the hub, so it is the plain C,
+         and the line it sits on is a row of tiles — the grid below, in one
+         stroke. aria-hidden: the navbar already says "Carino Systems" in text. -->
+    <div class="hero-mark" aria-hidden="true">
+      <img src="logo.svg" alt="" width="120" height="120" decoding="async">
+      <svg class="tiles" viewBox="0 0 200 40" preserveAspectRatio="xMidYMid meet">
+        <line class="rail" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
+        <line class="sweep" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
+        <g class="tile">
+          <rect x="16" y="14" width="12" height="12" rx="2" /><rect x="44" y="14" width="12" height="12" rx="2" />
+          <rect x="72" y="14" width="12" height="12" rx="2" /><rect x="100" y="14" width="12" height="12" rx="2" />
+          <rect x="128" y="14" width="12" height="12" rx="2" /><rect x="156" y="14" width="12" height="12" rx="2" />
+        </g>
+      </svg>
+    </div>
+    <h1><span data-i18n>Open solutions made for everyone.</span><br><span class="gold" data-i18n>Free for anyone.</span></h1>
     <p data-i18n>Open a medical image, fix a document, build a résumé, set up a computer. There is nothing to install, no account to make, and nothing to pay.</p>
     <p class="promise">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
