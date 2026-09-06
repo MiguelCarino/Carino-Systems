@@ -369,19 +369,19 @@
        HEIGHT as well as width — height is the scarce dimension, and this hero
        has to leave the first row of tools visible under it. */
     .hero { text-align: center;
-      padding: min(40px, calc(clamp(10px, 1.8vh, 26px) + var(--tall) * 0.03)) 0
-               min(34px, calc(clamp(8px, 1.4vh, 22px) + var(--tall) * 0.025)); }
+      padding: min(28px, calc(clamp(8px, 1.4vh, 20px) + var(--tall) * 0.02)) 0
+               min(24px, calc(clamp(6px, 1.1vh, 16px) + var(--tall) * 0.016)); }
     .hero-mark { display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: min(22px, calc(4px + var(--tall) * 0.035));
-      margin: 0 auto min(26px, calc(clamp(6px, 1vh, 14px) + var(--tall) * 0.035)); }
+      margin: 0 auto min(18px, calc(clamp(5px, 0.8vh, 11px) + var(--tall) * 0.02)); }
     .hero-mark img { width: auto; display: block;
-      height: min(88px, calc(clamp(28px, 3.4vh, 44px) + var(--tall) * 0.1)); }
+      height: min(64px, calc(clamp(26px, 3vh, 38px) + var(--tall) * 0.06)); }
     /* The tiles: a rail, six of them, and one sweep travelling the rail — the
        grid below the fold, said in one stroke. `width: auto` + the viewBox's own
        5:1 keeps it undistorted; overflow visible so the sweep's glow is not
        clipped. */
     .tiles { display: block; margin: 0; width: auto; aspect-ratio: 5 / 1; overflow: visible;
-      height: min(42px, calc(clamp(10px, 1.8vh, 22px) + var(--tall) * 0.05)); }
+      height: min(30px, calc(clamp(9px, 1.5vh, 18px) + var(--tall) * 0.03)); }
     .tiles line { stroke-linecap: round; }
     .tiles .tile-rail { stroke: var(--accent); stroke-width: 2; opacity: 0.14; }
     .tiles .sweep { stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: 14 120;
@@ -398,7 +398,7 @@
     .hero h1 {
       font-family: var(--font-display); font-weight: 900;
       line-height: 1.08; letter-spacing: -0.025em; color: var(--text);
-      font-size: min(2.7rem, calc(clamp(1.6rem, 2.8vw + .4vh, 2.2rem) + var(--tall) * 0.024));
+      font-size: min(2.35rem, calc(clamp(1.5rem, 2.5vw + .35vh, 2rem) + var(--tall) * 0.018));
       /* A claim of two sentences breaks badly on a width: one language leaves a
          line with two words on it and the next leaves five. The <br> splits them
          where the meaning does; `balance` evens out whatever each language then
@@ -497,6 +497,12 @@
     /* ── the pane ── */
     .pane { flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
     .pane:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 12px; }
+    /* Everything about this box has to size to CONTENT, or it reports back the
+       height it was told. .pane .grid sets grid-auto-rows from --card-h, which
+       stretched the rows here and made the measurement circular twice over —
+       once through the card and once through the row. */
+    #measure { position: absolute; left: -99999px; top: 0; visibility: hidden; pointer-events: none;
+      flex: none; height: auto; overflow: visible; grid-auto-rows: max-content; }
     .pane-head { margin-bottom: clamp(8px, 1.4vh, 16px); }
     .pane-head h2 {
       font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
@@ -511,14 +517,49 @@
        Open button rendered outside its own border. A row must be as tall as
        what is in it; if that overflows, the grid scrolls (see the floor rule
        below) rather than cutting a card in half. */
-    .pane .grid { flex: 1 1 auto; min-height: 0; align-content: start; grid-auto-rows: max-content;
+    /* auto-fill at a FIXED width, not 1fr: a row holds as many cards as fit and
+       then stops, so a two-tool section shows two normal cards rather than two
+       stretched across the pane. --card-w is set once by fitBoard(). */
+    .pane .grid { flex: 1 1 auto; min-height: 0; align-content: start;
+      grid-auto-rows: var(--card-h, max-content);
+      justify-content: start;
       gap: clamp(8px, 1.1vh, 14px);
       /* Wider, not narrower. Squeezing the columns to 178px made every card
          WRAP more and grow taller, so the section needed more height, not less:
          the widest one went from 4 rows to 5. Short and wide beats narrow and
          tall when the box is fixed. */
-      grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 13vw, 250px), 1fr)); }
+      grid-template-columns: repeat(auto-fill, var(--card-w, clamp(200px, 13vw, 250px))); }
     .pane .tool { min-height: 0; }
+    /* Every card the same height, by reserving the same room in each rather
+       than by forcing a row height — a reserved box is the difference between
+       a card that is uniform and a card that is cut off. Two lines for the
+       plain name (the longest is 35 characters) and two for the sentence.
+       Three lines of reserve made every card 276px tall, which no longer fit
+       three columns and pushed the board to five narrow ones — the reserve has
+       to be small enough that the layout it is meant to stabilise survives.
+       A sentence longer than two lines is clamped rather than allowed to change
+       the card's size, which is the whole point. */
+    /* The card is given its height and fits itself into it, rather than the
+       other way round — that is what makes every card in every section the same
+       size. What yields inside it is the sentence: the plain name is clamped at
+       two lines and always reserved, the foot is pinned to the bottom, and the
+       description takes whatever is left and stops there. */
+    /* #paneGrid, not .pane: the hidden measuring box is also inside .pane, and
+       giving IT the fixed height made the measurement circular — it reported
+       back the height it had just been told, which collapsed to 86px and cut
+       eleven cards. The measuring box always sizes to content. */
+    #paneGrid .tool { height: var(--card-h, auto); overflow: hidden; }
+    #measure .tool { height: auto; overflow: visible; }
+    .pane .tool-body { min-height: 0; }
+    .pane .tool-plain {
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+      overflow: hidden; flex: none;
+    }
+    .pane .tool-line {
+      flex: 1 1 auto; min-height: 0; overflow: hidden; line-height: 1.45;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4;
+    }
+    .pane .tool-foot { margin-top: auto; flex: none; }
     /* The description is the first thing to go when the box is short — the two
        names are the rule ("named twice"), the sentence is the luxury. */
     /* 940, not 780. Ten cards with a sentence each need roughly 600px of a
@@ -530,6 +571,11 @@
        carrying prose, whatever the column count. */
     @media (max-height: 940px) {
       .pane .tool-line { display: none; }
+      /* Three columns missed by SIX pixels at 1440x900 and fell back to two
+         cards the width of the pane. A tighter gap and a tighter preamble are
+         cheaper than that. */
+      .pane .grid { gap: 8px; }
+      .pane-head { margin-bottom: 8px; }
       .pane .tool { padding: 11px 12px; gap: 10px; }
       .pane .plate { width: 40px; height: 40px; font-size: 1.35rem; }
       .pane .tool-plain { font-size: var(--fs-base); }
@@ -923,6 +969,10 @@
         <p id="paneBlurb"></p>
       </div>
       <div class="grid" id="paneGrid"></div>
+      <!-- Off-screen, the pane's exact width: the column search lays the widest
+           section out here so the visible pane never flickers through the
+           candidates it rejected. -->
+      <div class="grid" id="measure" aria-hidden="true"></div>
 
       <!-- Not built from JSON: three claims and a way to write to me, kept as
            markup so the i18n pass still walks them. -->
@@ -1058,26 +1108,80 @@ function renderRail() {
     </button>`).join('');
 }
 
-/* How many columns. Not a CSS guess, because the answer is not monotonic: more
-   columns means fewer rows but narrower — and therefore TALLER — cards, so both
-   "wider" and "narrower" made different sections overflow. Every count is tried
-   and the shortest one that fits is kept; if none fits, the shortest overall is
-   kept and the grid scrolls inside its own box rather than clipping a card.
-   Costs a handful of layout passes, and only when the section changes. */
-function fitGrid() {
-  const g = $('paneGrid');
-  if (g.hidden || !g.firstElementChild) return;
-  const n = g.children.length;
+/* One card size for the whole board.
+   ------------------------------------
+   A card is the same size in every section, so moving between them does not
+   resize the thing you are reading — two tools do not become two enormous
+   cards, and ten do not become ten small ones. Sections with fewer tools simply
+   use fewer columns and stop; they never stretch to fill the row.
+
+   The size is chosen ONCE, from the section with the most tools, because that
+   is the only section that can fail to fit: whatever width lets ten cards land
+   inside the pane will let three. The search is a measurement rather than a
+   guess, because card height is not monotonic in column count — more columns
+   means fewer rows but narrower and therefore TALLER cards, so widening and
+   narrowing each fixed one section and broke another.
+
+   Measured in a hidden box of the pane's exact width, so nothing flashes in the
+   pane while the candidates are tried. */
+function fitBoard() {
+  const g = $('paneGrid'), m = $('measure');
+  const W = g.clientWidth, H = g.clientHeight;
+  if (!W || !H) return;
+  const biggest = SECTIONS.reduce((a, x) => ((x.tools || []).length > (a.tools || []).length ? x : a), SECTIONS[0]);
+  if (!biggest || !biggest.tools || !biggest.tools.length) return;
+
   const gap = parseFloat(getComputedStyle(g).gap) || 12;
-  const maxCols = Math.min(n, Math.max(1, Math.floor((g.clientWidth + gap) / (170 + gap))));
-  let best = null;
-  for (let c = 1; c <= maxCols; c++) {
-    g.style.gridTemplateColumns = `repeat(${c}, minmax(0, 1fr))`;
-    const need = g.scrollHeight;
-    if (!best || need < best.need) best = { c, need };
-    if (need <= g.clientHeight + 1) break;   // the first that fits is also the widest that fits
+  const n = biggest.tools.length;
+  const MIN_W = 170;
+  const maxCols = Math.max(1, Math.floor((W + gap) / (MIN_W + gap)));
+
+  // Three first, then outward: three columns is the size this board is designed
+  // around, and the others exist so a screen that cannot afford it still works.
+  const order = [];
+  for (let d = 0; d <= maxCols; d++) {
+    if (3 + d <= maxCols) order.push(3 + d);
+    if (d && 3 - d >= 1) order.push(3 - d);
   }
-  g.style.gridTemplateColumns = `repeat(${best.c}, minmax(0, 1fr))`;
+
+  /* At each candidate width, ask the cards how tall they actually need to be,
+     rather than assuming. One card carries a "Runs on your own computer" badge
+     that wraps the foot onto a second line, and a height picked from a constant
+     cut the bottom off exactly that card at two of three sizes. Measured in a
+     hidden box of the pane's width, so nothing flickers in the pane. */
+  m.style.width = W + 'px';
+  m.innerHTML = biggest.tools.map(card).join('');
+  // Belt and braces on the same trap: whatever the last run decided must not be
+  // an input to this one.
+  $('board').style.removeProperty('--card-h');
+  let pick = null;
+  for (const c of order) {
+    m.style.gridTemplateColumns = `repeat(${c}, minmax(0, 1fr))`;
+    let tall = 0;
+    m.querySelectorAll('.tool').forEach((el) => { tall = Math.max(tall, el.getBoundingClientRect().height); });
+    const rows = Math.ceil(n / c);
+    const fits = rows * tall + (rows - 1) * gap <= H + 1;
+    if (!pick || (fits && !pick.fits)) pick = { c, tall, rows, fits };
+    if (fits) break;
+  }
+  // One width and one height, for every card in every section. The height is
+  // the tallest card ANY section produces at that width — measuring only the
+  // biggest section set it from ten cards and then clipped twenty-one others,
+  // because the longest name is not in the longest section. Same width, same
+  // height, every section, by construction.
+  const board = $('board');
+  const w = Math.floor((W - (pick.c - 1) * gap) / pick.c);
+  m.style.gridTemplateColumns = `repeat(${pick.c}, minmax(0, 1fr))`;
+  let tallest = 0;
+  SECTIONS.forEach((sec) => {
+    if (!sec.tools || !sec.tools.length) return;
+    m.innerHTML = sec.tools.map(card).join('');
+    m.querySelectorAll('.tool').forEach((el) => { tallest = Math.max(tallest, el.getBoundingClientRect().height); });
+  });
+  m.innerHTML = '';
+
+  board.style.setProperty('--card-w', w + 'px');
+  board.style.setProperty('--card-h', Math.ceil(tallest || pick.tall) + 'px');
 }
 
 function renderPane() {
@@ -1089,7 +1193,6 @@ function renderPane() {
   $('paneGrid').hidden = safe;
   $('paneGrid').innerHTML = safe ? '' : sec.tools.map(card).join('');
   $('pane').setAttribute('aria-labelledby', 'tab-' + sec.id);
-  fitGrid();
 }
 
 /* The timer is restarted from here rather than left running, so the dwell is
@@ -1122,12 +1225,12 @@ function stop() {
 }
 
 let fitPending = null;
-function refit() { clearTimeout(fitPending); fitPending = setTimeout(fitGrid, 90); }
+function refit() { clearTimeout(fitPending); fitPending = setTimeout(fitBoard, 90); }
 
 function wireBoard() {
   const board = $('board'), rail = $('rail');
   window.addEventListener('resize', refit);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitGrid);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBoard);
   rail.addEventListener('click', (e) => {
     const item = e.target.closest('.rail-item');
     if (!item) return;
@@ -1190,6 +1293,7 @@ document.addEventListener('DOMContentLoaded', () => {
       (tools.tools || []).forEach((x) => INDEX.set(x.name, x));
       render();
       wireBoard();
+      fitBoard();
       // A reader who has asked their system for less motion gets a board that
       // simply sits on the first section until they choose another one.
       if (reduceMotion()) stop(); else restart();
