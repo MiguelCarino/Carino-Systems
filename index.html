@@ -172,7 +172,7 @@
     /* A long unbroken token in a translation would otherwise spill straight out
        past a card's rounded border. `break-word` and not `anywhere`: the latter
        is Safari 15.4+ only and buys nothing here. */
-    .hero h1, .sec-head h2, .group h3, .band h2, .tool-body, .tool-real, .answer h3 { overflow-wrap: break-word; }
+    .hero h1, .sec-head h2, .why-card h3, .band h2, .spot-body, .spot-real { overflow-wrap: break-word; }
 
     /* ── the fleet header ──
        The full one: brand, live clock, language, social, and the Sys. Status
@@ -501,62 +501,6 @@
     .why-card h3 { margin: 12px 0 6px; font-size: var(--fs-h3, 1.05rem); font-weight: 700; line-height: 1.3; }
     .why-card p { color: var(--text-sec); font-size: var(--fs-base); line-height: 1.55; }
 
-    /* ── the short list ── */
-    .does-list { list-style: none; padding: 0; margin: 0;
-      display: grid; gap: 10px 34px; grid-template-columns: 1fr; }
-    /* Two columns, never three: the second half of each line is a sentence, and
-       at three columns it broke to three lines while the bold half stayed on
-       one — a list that reads as a table with a ragged column. */
-    @media (min-width: 1000px) { .does-list { grid-template-columns: 1fr 1fr; } }
-    .does-list li { display: flex; gap: 12px; align-items: baseline; padding: 9px 0;
-      border-bottom: 1px solid var(--border); }
-    .does-list li b { color: var(--text); font-weight: 700; white-space: nowrap; }
-    .does-list li span { color: var(--text-muted); font-size: var(--fs-base); }
-    .does-list li::before { content: "→"; color: var(--accent); flex: none; font-family: var(--font-mono); }
-    /* On one column the sentence has nowhere to go beside the bold half and
-       broke into a three-line stub; below the fold it takes its own line. */
-    @media (max-width: 999px) {
-      .does-list li { display: grid; grid-template-columns: auto 1fr;
-        column-gap: 12px; row-gap: 2px; align-items: baseline; }
-      .does-list li b { white-space: normal; }
-      .does-list li span { grid-column: 2; }
-    }
-
-    /* ── two named first, four beside them ── */
-    .picks-primary { display: grid; gap: clamp(12px, 1.4vw, 20px); grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
-    /* Explicit counts, not auto-fit: at a tablet width auto-fit gave three
-       across and left the fourth alone on a row of its own. Four beside the
-       two, or a 2x2 the way openSUSE sets its specialised editions. */
-    .picks-also { display: grid; gap: clamp(12px, 1.4vw, 20px); margin-top: clamp(12px, 1.4vw, 20px);
-      grid-template-columns: 1fr; }
-    @media (min-width: 560px)  { .picks-also { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 1100px) { .picks-also { grid-template-columns: repeat(4, 1fr); } }
-    /* The two get the weight openSUSE gives its two distributions: the plate
-       above the words rather than beside them, and room around both. */
-    .tool-big { flex-direction: column; align-items: flex-start; padding: 26px 24px 22px; gap: 16px; }
-    .tool-big .plate { width: 64px; height: 64px; font-size: 2rem; }
-    .tool-big .tool-plain { font-size: 1.45rem; line-height: 1.2; }
-    .tool-big .tool-line { font-size: var(--fs-lg); }
-
-    /* ── every link, in columns ── */
-    .ends { margin-top: clamp(34px, 6vh, 70px); padding-top: clamp(22px, 3vh, 34px);
-      border-top: 1px solid var(--border); }
-    /* Multi-column rather than grid: seven groups of very different lengths in
-       a five-track grid left one long column beside four empty ones. Columns
-       balance the height instead, and `210px 4` picks the count from the width
-       without a breakpoint. */
-    .ends-cols { columns: 210px 4; column-gap: clamp(16px, 2vw, 34px); }
-    .ends-col { break-inside: avoid; margin-bottom: clamp(20px, 2.4vw, 30px); }
-    .ends-col h4 { font-family: var(--font-mono); font-size: var(--fs-sm); text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 10px; }
-    .ends-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
-    .ends-col a { display: block; color: var(--text-sec); text-decoration: none; font-size: var(--fs-base);
-      line-height: 1.35; }
-    .ends-col a span { display: block; color: var(--text-muted); font-size: var(--fs-sm);
-      font-family: var(--font-mono); }
-    .ends-col a:hover, .ends-col a:focus-visible { color: var(--accent); }
-    .ends-col a:hover span, .ends-col a:focus-visible span { color: var(--accent-dim); }
-    .ends-note { margin-top: clamp(20px, 3vh, 32px); color: var(--text-muted); font-size: var(--fs-sm); }
 
     /* ── sections ── */
     section { padding: 30px 0; }
@@ -567,99 +511,63 @@
     }
     .sec-head p { margin-top: 7px; color: var(--text-sec); font-size: var(--fs-lg); }
 
-    /* A hairline between groups, so the page has joints without every group
-       having to be a box. */
-    .rule { height: 1px; background: var(--border); margin: 16px 0; }
-
-    /* ── the cards ──
-       The whole card is the link. A first-time visitor should not have to find
-       a small arrow at the end of a row, and on a phone that arrow is a miss. */
-    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(285px, 1fr)); }
-    .tool {
-      /* stretch, not flex-start: the body has to fill the card's height or
-         `margin-top:auto` on the foot has nothing to push against, and the
-         Open buttons in a row end up at three different heights. */
-      display: flex; gap: 15px; align-items: stretch;
-      padding: 18px 18px 16px; min-height: 118px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      box-shadow: var(--edge-light), var(--edge-dark);
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .tool:hover, .tool:focus-visible {
-      border-color: var(--accent-dim); background: var(--card-lit); transform: translateY(-2px);
-      box-shadow: var(--edge-light), 0 14px 30px rgba(0,0,0,0.6);
-      outline: none;
-    }
-    .tool:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    /* The plate is a stand-in. `shot` in start.json swaps it for a screenshot of
-       the tool, which is worth more to a first-time visitor than any glyph. */
+    /* ── the plate ──
+       A tool's icon at card size. `shot` in start.json swaps it for a
+       screenshot of the tool, which is worth more to a first-time visitor than
+       any glyph. */
     .plate {
-      flex: none; align-self: flex-start; width: 52px; height: 52px; border-radius: 12px;
+      flex: none; align-self: flex-start; width: 56px; height: 56px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-emoji);
-      font-size: 1.6rem; line-height: 1;
+      font-size: 1.75rem; line-height: 1;
       background: linear-gradient(180deg, #1f1f1f 0%, #131313 100%);
       border: 1px solid #303030; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
       transition: border-color 0.2s, box-shadow 0.2s;
       overflow: hidden;
     }
     /* The image rounds itself rather than relying on the parent's overflow clip,
-       which WebKit drops for the duration of an ancestor transform — and the card
-       lifts on hover. A -webkit-mask-image would also have fixed the clip, but a
-       mask painting area ends at the border box, so it silently deleted the
-       plate's own outer glow below. */
+       which WebKit drops for the duration of an ancestor transform — and the
+       card lifts on hover. A -webkit-mask-image would also have fixed the clip,
+       but a mask painting area ends at the border box, so it silently deleted
+       the plate's own outer glow below. */
     .plate img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-    .tool:hover .plate { border-color: var(--accent-dim); box-shadow: inset 0 1px 0 rgba(255,255,255,0.09), 0 0 14px rgba(234,179,8,0.16); }
-    .tool-body { min-width: 0; display: flex; flex-direction: column; flex: 1 1 auto; }
-    .tool-plain {
-      font-family: var(--font-display); font-weight: 800;
+
+    /* ── the spotlight ──
+       The wall says how much there is; this says what one of them is. It sits
+       above the wall, is the same link as the plate it points at, and its
+       height is set in JS to the tallest tool's worth of words so the wall
+       below it does not jump every four seconds. */
+    .spot { max-width: 620px; margin: 0 auto clamp(14px, 2vh, 20px); position: relative; }
+    .spot-card {
+      display: flex; gap: 16px; align-items: flex-start; text-align: left;
+      padding: 16px 18px; border-radius: 14px;
+      border: 1px solid var(--accent-dim); background: var(--card-lit);
+      box-shadow: var(--edge-light), var(--edge-dark);
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .spot-card:hover { border-color: var(--accent); }
+    .spot-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .spot-card:hover .plate { border-color: var(--accent-dim); box-shadow: inset 0 1px 0 rgba(255,255,255,0.09), 0 0 14px rgba(234,179,8,0.16); }
+    .spot-body { min-width: 0; }
+    .spot-plain {
+      display: block; font-family: var(--font-display); font-weight: 800;
       font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -0.01em;
     }
-    .tool-line { margin-top: 5px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
-    .tool-foot { margin-top: auto; padding-top: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    /* The real name, kept small and kept there: someone who uses this page for a
-       month should end up knowing what the tool is actually called. */
-    .tool-real { color: var(--text-muted); font-size: var(--fs-sm); }
-    .tool-open {
-      margin-left: auto; flex: none;
-      display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 14px;
-      border-radius: 999px; border: 1px solid var(--accent-dim); color: var(--accent);
-      background: transparent; font-size: var(--fs-sec); font-weight: 600;
-      transition: background 0.2s, color 0.2s;
+    .spot-line { display: block; margin-top: 5px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
+    .spot-real { display: block; margin-top: 7px; color: var(--text-muted); font-size: var(--fs-sm); font-family: var(--font-mono); }
+    @media (max-width: 520px) {
+      .spot-card { gap: 13px; padding: 14px; }
+      .plate { width: 46px; height: 46px; font-size: 1.45rem; }
     }
-    .tool:hover .tool-open, .tool:focus-visible .tool-open { background: var(--accent); color: #050505; }
-    .tool-local {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--text-muted); font-size: var(--fs-sm);
-    }
-    .tool-local::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
 
-    /* The four that answer "where do I even start". Same card, more room. */
-    .grid.first { grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
-    .grid.first .tool { flex-direction: column; min-height: 210px; }
-    .grid.first .tool-body { min-height: 0; }
-    .grid.first .plate { width: 62px; height: 62px; font-size: 2rem; }
-    .grid.first .tool-plain { font-size: var(--fs-h2); }
-
-    .group { padding: 26px 0 6px; }
-    .group h3 {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(1.2rem, 2vw, 1.45rem); letter-spacing: -0.015em;
+    /* The plate the spotlight is on. Gold, and a shade brighter than hover, so
+       that on a touch screen — where there is no hover at all — the wall still
+       shows which plate the words belong to. */
+    .wall-tile.is-on {
+      border-color: var(--accent); background: rgba(234,179,8,0.16);
+      box-shadow: 0 0 0 1px var(--accent-dim), 0 0 16px rgba(234,179,8,0.22);
     }
-    .group h3 + p { margin: 4px 0 16px; color: var(--text-sec); font-size: var(--fs-lg); }
-
-    /* ── the three answers ──
-       Is it safe, do I have to install anything, what does it cost. Every
-       visitor asks these three and most of them will not write to ask. */
-    .answers { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .answer {
-      padding: 22px 20px; border-radius: 14px;
-      border: 1px solid var(--border); background: var(--card); box-shadow: var(--edge-light);
-    }
-    .answer svg { width: 22px; height: 22px; color: var(--accent); }
-    .answer h3 { margin-top: 13px; font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h3); }
-    .answer p { margin-top: 7px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.55; }
 
     /* ── the two ways out: a person, or the full index ── */
     .band {
@@ -710,10 +618,6 @@
       :root { --pad: 16px; }
       .hero { padding: 34px 0 26px; }
       .promise { font-size: var(--fs-body); align-items: flex-start; }
-      .grid, .grid.first { grid-template-columns: minmax(0, 1fr); }
-      .grid.first .tool { flex-direction: row; min-height: 118px; }
-      .grid.first .plate { width: 52px; height: 52px; font-size: 1.6rem; }
-      .grid.first .tool-plain { font-size: var(--fs-h3); }
       .band { padding: 26px 20px; }
       .band-act { width: 100%; }
       .btn { width: 100%; justify-content: center; }
@@ -747,7 +651,7 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      .tool:hover, .btn:hover, .icon-btn:hover { transform: none; }
+      .btn:hover, .icon-btn:hover, .wall-tile:hover { transform: none; }
     }
   </style>
 </head>
@@ -874,6 +778,12 @@
          holds, at a glance. It is built from the registry, so it can never show
          a tool the hub does not have. -->
     <figure class="wall">
+      <!-- One tool at a time, named and described, over the wall it belongs to.
+           A wall of 35 emoji is a rebus otherwise: you can see there is a lot
+           here, but not what any of it is. It advances on its own and stops the
+           moment a pointer or the keyboard reaches a plate, because someone
+           reading is someone who has already chosen. -->
+      <div class="spot" id="spot"></div>
       <div class="wall-grid" id="wall"></div>
       <figcaption><b id="wallCount">—</b> <span data-i18n>tools, all of them free, none of them asking for an account.</span></figcaption>
     </figure>
@@ -917,22 +827,9 @@
     </div>
   </section>
 
-  <section class="does">
-    <div class="sec-head">
-      <h2 data-i18n>What do you need to do?</h2>
-      <p data-i18n>Everything below opens in a new tab and works the same on a phone, a tablet or a computer.</p>
-    </div>
-    <ul class="does-list" id="doesList"></ul>
-  </section>
 
-  <section class="picks">
-    <div class="sec-head">
-      <h2 data-i18n>Not sure where to start?</h2>
-      <p data-i18n>These are the ones most people need first.</p>
-    </div>
-    <div class="picks-primary" id="picksPrimary"></div>
-    <div class="picks-also" id="picksAlso"></div>
-  </section>
+
+
 
   <div class="band lit">
     <div>
@@ -947,14 +844,7 @@
     </div>
   </div>
 
-  <!-- Every tool, in columns, the way openSUSE ends on its link columns. This
-       is where "nothing is left out" is paid for: the six above are a doorway,
-       and this is the whole fleet, one column per group, nothing behind a
-       hover or a tap. -->
-  <footer class="ends">
-    <div class="ends-cols" id="endsCols"></div>
-    <p class="ends-note" data-i18n>Everything here runs in your browser and is free to use. The code is public.</p>
-  </footer>
+
 
 </main>
 
@@ -985,96 +875,143 @@ const T = (s) => (typeof t === 'function' ? t(s) : s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
 
-/* A card. The whole thing is the anchor — one target, and on a phone the
-   only one that can be hit reliably. The plate is the tool's icon until a
-   screenshot exists for it, and then it is the screenshot. */
-function card(entry, size) {
-  const tool = INDEX.get(entry.ref);
-  if (!tool) return '';                       // a ref nothing matches is skipped
-  const plate = entry.shot
-    ? `<span class="plate"><img src="${esc(entry.shot)}" alt="" loading="lazy" decoding="async"></span>`
-    : `<span class="plate">${esc(tool.icon)}</span>`;
-  // Every tool in the fleet is on its own subdomain, so every link is a new
-  // tab — but the test is the URL, not the assumption.
-  const ext = /^https?:/i.test(tool.url) && !tool.url.startsWith(location.origin);
-  const local = tool.local
-    ? `<span class="tool-local">${esc(T('Runs on your own computer'))}</span>` : '';
-  return `<a class="tool${size === 'big' ? ' tool-big' : ''}" href="${esc(tool.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>
+/* Every tool the wall shows, and the words for it. The address and the icon
+   come from the registry; the plain name and the one-line description come from
+   start.json, which is where the fleet's plain wording lives. A tool that is in
+   the registry but in no group still gets a plate — it falls back to its own
+   name and the registry's description rather than dropping off the wall. */
+function spotItems() {
+  const entries = new Map(DATA.groups.flatMap((g) => g.tools).map((e) => [e.ref, e]));
+  return [...INDEX.values()].map((tool) => {
+    const e = entries.get(tool.name) || {};
+    return {
+      tool,
+      plain: T(e.plain || tool.name),
+      line: T(e.line || tool.desc || ''),
+      shot: e.shot || '',
+    };
+  });
+}
+
+/* Every tool in the fleet is on its own subdomain, so every link is a new tab
+   — but the test is the URL, not the assumption. */
+const offsite = (url) => /^https?:/i.test(url) && !url.startsWith(location.origin);
+const newTab = (url) => (offsite(url) ? ' target="_blank" rel="noopener"' : '');
+
+/* The spotlight: the tool the wall is pointing at, said in words. The plate is
+   the tool's icon until a screenshot exists for it, and then it is the shot. */
+function spotHtml(it) {
+  const plate = it.shot
+    ? `<span class="plate"><img src="${esc(it.shot)}" alt="" loading="lazy" decoding="async"></span>`
+    : `<span class="plate">${esc(it.tool.icon)}</span>`;
+  return `<a class="spot-card" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
     ${plate}
-    <span class="tool-body">
-      <span class="tool-plain">${esc(T(entry.plain))}</span>
-      <span class="tool-line">${esc(T(entry.line))}</span>
-      <span class="tool-foot">
-        <span class="tool-real">${esc(tool.name)}</span>
-        ${local}
-        <span class="tool-open">${esc(T('Open'))} &#8599;&#xFE0E;</span>
-      </span>
+    <span class="spot-body">
+      <span class="spot-plain">${esc(it.plain)}</span>
+      <span class="spot-line">${esc(it.line)}</span>
+      <span class="spot-real">${esc(it.tool.name)}</span>
     </span>
   </a>`;
 }
 
-/* The wall: every tool in the registry as a plate. openSUSE shows a screenshot
-   of the desktop you get; this shows the fleet you get, and because it is built
-   from tools.json it can never show something the hub does not have. */
+/* The wall: every tool in the registry as a plate, and each plate a way in.
+   openSUSE shows a screenshot of the desktop you get; this shows the fleet you
+   get, and because it is built from the registry it can never show a tool the
+   hub does not have. The label carries both names, which is the page's rule. */
 function renderWall() {
-  // The plain name lives in start.json and the address in tools.json, so the
-  // label is joined here — a plate that says only its emoji is a rebus, and the
-  // page's own rule is that every tool is named twice.
-  const plain = new Map(DATA.groups.flatMap((g) => g.tools).map((e) => [e.ref, T(e.plain)]));
-  const tools = [...INDEX.values()];
-  $('wall').innerHTML = tools.map((x) => {
-    const label = plain.has(x.name) ? plain.get(x.name) + ' — ' + x.name : x.name;
-    const ext = /^https?:/i.test(x.url) && !x.url.startsWith(location.origin);
-    return `<a class="wall-tile" href="${esc(x.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}` +
-      ` title="${esc(label)}" aria-label="${esc(label)}"><span aria-hidden="true">${esc(x.icon)}</span></a>`;
+  $('wall').innerHTML = ITEMS.map((it) => {
+    const label = it.plain === it.tool.name ? it.tool.name : it.plain + ' — ' + it.tool.name;
+    return `<a class="wall-tile" href="${esc(it.tool.url)}"${newTab(it.tool.url)}` +
+      ` title="${esc(label)}" aria-label="${esc(label)}"><span aria-hidden="true">${esc(it.tool.icon)}</span></a>`;
   }).join('');
-  $('wallCount').textContent = tools.length;
+  $('wallCount').textContent = ITEMS.length;
 }
 
-/* The six things it does, taken from the groups rather than written again — the
-   first tool of each group is that group in one line, which is what the list is
-   for. openSUSE lists six installer capabilities here; this lists six jobs. */
-function renderDoes() {
-  $('doesList').innerHTML = DATA.groups.slice(0, 6).map((g) => {
-    const first = (g.tools || [])[0];
-    return `<li><b>${esc(T(g.title))}</b><span>${esc(T(first ? first.plain : g.blurb))}</span></li>`;
-  }).join('');
+/* ── the spotlight, one tool at a time ──
+   It advances on its own and stops the moment a pointer or the keyboard reaches
+   a plate: someone reading has already chosen, and moving the words out from
+   under them would be the site arguing with its own visitor. It also stops when
+   the tab is hidden, so a page left open in the background is not animating to
+   nobody, and it never starts under prefers-reduced-motion. */
+const SPOT_MS = 4200;
+let ITEMS = [], spotAt = 0, spotTimer = null, spotHeld = false;
+const stillPlease = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function showSpot(i, animate) {
+  if (!ITEMS.length) return;
+  spotAt = ((i % ITEMS.length) + ITEMS.length) % ITEMS.length;
+  const spot = $('spot');
+  spot.innerHTML = spotHtml(ITEMS[spotAt]);
+  const tiles = $('wall').children;
+  for (let n = 0; n < tiles.length; n++) tiles[n].classList.toggle('is-on', n === spotAt);
+  const card = spot.firstElementChild;
+  if (animate && !stillPlease.matches && card && card.animate) {
+    card.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 220, easing: 'ease-out' });
+  }
 }
 
-/* Two named first, four beside them — start.json's `picks`. Falls back to
-   `featured` so a registry without the key still renders something sensible
-   rather than an empty band. */
-function renderPicks() {
-  const all = DATA.groups.flatMap((g) => g.tools);
-  const byRef = (ref) => all.find((x) => x.ref === ref);
-  const picks = DATA.picks || {};
-  const primary = (picks.primary || (DATA.featured || []).slice(0, 2)).map(byRef).filter(Boolean);
-  const also = (picks.also || (DATA.featured || []).slice(2)).map(byRef).filter(Boolean);
-  $('picksPrimary').innerHTML = primary.map((e) => card(e, 'big')).join('');
-  $('picksAlso').innerHTML = also.map((e) => card(e)).join('');
+function spotStop() { clearInterval(spotTimer); spotTimer = null; }
+function spotStart() {
+  if (spotTimer || spotHeld || stillPlease.matches || document.hidden || ITEMS.length < 2) return;
+  spotTimer = setInterval(() => showSpot(spotAt + 1, true), SPOT_MS);
 }
 
-/* The whole fleet in columns, one per group. Plain name and real name on the
-   same line, because that is the rule the rest of the page keeps. */
-function renderEnds() {
-  $('endsCols').innerHTML = DATA.groups.map((g) => `
-    <div class="ends-col">
-      <h4>${esc(T(g.title))}</h4>
-      <ul>${g.tools.map((e) => {
-        const tool = INDEX.get(e.ref);
-        if (!tool) return '';
-        const ext = /^https?:/i.test(tool.url) && !tool.url.startsWith(location.origin);
-        return `<li><a href="${esc(tool.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>${esc(T(e.plain))}<span>${esc(tool.name)}</span></a></li>`;
-      }).join('')}</ul>
-    </div>`).join('');
+/* The card holds the tallest tool's worth of words, so the wall below it does
+   not move every time the spotlight changes. Measured, not guessed: the copy is
+   translated, and the longest line in Russian is not the longest in Japanese.
+   The measurer is absolutely positioned, so its own height never feeds back
+   into the height being measured. */
+function sizeSpot() {
+  const spot = $('spot');
+  if (!ITEMS.length) return;
+  const probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;visibility:hidden;left:0;right:0;pointer-events:none';
+  spot.appendChild(probe);
+  let tallest = 0;
+  for (const it of ITEMS) {
+    probe.innerHTML = spotHtml(it);
+    tallest = Math.max(tallest, probe.firstElementChild.getBoundingClientRect().height);
+  }
+  spot.removeChild(probe);
+  spot.style.minHeight = Math.ceil(tallest) + 'px';
 }
+
+function wireSpot() {
+  const wall = $('wall'), spot = $('spot');
+  const hold = (i) => { spotHeld = true; spotStop(); showSpot(i, true); };
+  const release = () => { spotHeld = false; spotStart(); };
+  const indexOf = (el) => [...wall.children].indexOf(el.closest('.wall-tile'));
+
+  wall.addEventListener('pointerover', (e) => {
+    const i = indexOf(e.target);
+    if (i >= 0 && i !== spotAt) hold(i); else if (i >= 0) { spotHeld = true; spotStop(); }
+  });
+  wall.addEventListener('focusin', (e) => { const i = indexOf(e.target); if (i >= 0) hold(i); });
+  wall.addEventListener('pointerleave', release);
+  wall.addEventListener('focusout', (e) => { if (!wall.contains(e.relatedTarget)) release(); });
+  // Reading the spotlight is the same as reading a plate: hold it still.
+  spot.addEventListener('pointerenter', () => { spotHeld = true; spotStop(); });
+  spot.addEventListener('pointerleave', release);
+  spot.addEventListener('focusin', () => { spotHeld = true; spotStop(); });
+  spot.addEventListener('focusout', (e) => { if (!spot.contains(e.relatedTarget)) release(); });
+
+  document.addEventListener('visibilitychange', () => (document.hidden ? spotStop() : spotStart()));
+  stillPlease.addEventListener('change', () => (stillPlease.matches ? spotStop() : spotStart()));
+  let resized;
+  window.addEventListener('resize', () => { clearTimeout(resized); resized = setTimeout(sizeSpot, 150); });
+}
+
+let wired = false;
 
 function render() {
   if (!DATA) return;
+  ITEMS = spotItems();
   renderWall();
-  renderDoes();
-  renderPicks();
-  renderEnds();
+  showSpot(spotAt, false);
+  sizeSpot();
+  if (!wired) { wireSpot(); wired = true; }
+  spotStart();
 
   // Every tool in tools.json should be on the page somewhere — this is the hub,
   // and a tool the hub does not list is a tool nobody can find. Missing ones are
@@ -1089,8 +1026,10 @@ function render() {
 window.renderTools = render;
 
 function broken(err) {
-  $('picksPrimary').innerHTML = '';
-  $('picksAlso').innerHTML =
+  spotStop();
+  $('wall').innerHTML = '';
+  $('spot').style.minHeight = '';
+  $('spot').innerHTML =
     `<div class="broken"><p>${esc(T('The list of tools could not be loaded.'))}</p>` +
     `<p><code>${esc(err.message)}</code></p></div>`;
 }

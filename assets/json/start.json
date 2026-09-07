@@ -252,17 +252,5 @@
         }
       ]
     }
-  ],
-  "picks": {
-    "primary": [
-      "Media Suite",
-      "Carino Retina"
-    ],
-    "also": [
-      "Password",
-      "Vitae",
-      "Topo",
-      "Carino Learn"
-    ]
-  }
+  ]
 }
