@@ -14,6 +14,10 @@
 
 const I18N = {
     es: {
+        // ---- CyberCity ----
+        'Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.': 'Cuatro mundos transitables dibujados enteramente con caracteres de texto —una ciudad bajo la lluvia de neón, un pueblo de frontera de 1880, la Luna y una ciudad con castillo al anochecer— con el sol dando vueltas.',
+        'Walk around a city made of text': 'Pasea por una ciudad hecha de texto',
+        'Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk.': 'Cuatro lugares construidos solo con caracteres: una ciudad bajo la lluvia, un pueblo de frontera, la Luna y una ciudad con castillo al anochecer.',
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Para el lado técnico',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Servidores, redes y el taller. Estas dan por hecho que conoces los términos.',
@@ -225,6 +229,10 @@ const I18N = {
         'Unknown GPU': 'GPU desconocida',
     },
     'pt-BR': {
+        // ---- CyberCity ----
+        'Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.': 'Quatro mundos caminháveis desenhados inteiramente com caracteres de texto — uma cidade sob a chuva de neon, uma vila de fronteira de 1880, a Lua e uma cidade-castelo ao anoitecer — com o sol dando voltas.',
+        'Walk around a city made of text': 'Passeie por uma cidade feita de texto',
+        'Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk.': 'Quatro lugares construídos só com caracteres: uma cidade na chuva, uma vila de fronteira, a Lua e uma cidade-castelo ao anoitecer.',
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Para o lado técnico',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Servidores, redes e a oficina. Estas presumem que você conhece os termos.',
@@ -436,6 +444,10 @@ const I18N = {
         'Unknown GPU': 'GPU desconhecida',
     },
     ja: {
+        // ---- CyberCity ----
+        'Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.': 'すべて文字だけで描かれた、歩き回れる 4 つの世界。ネオンと雨の街、1880 年代の開拓町、月面、そして夕暮れの城下町。太陽はその上をめぐり続けます。',
+        'Walk around a city made of text': '文字でできた街を歩く',
+        'Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk.': '文字だけでできた 4 つの場所 — 雨の街、開拓町、月面、そして夕暮れの城下町。',
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': '技術寄りの方へ',
         'Servers, networks and the workshop. These ones assume you know the words.': 'サーバー、ネットワーク、そして作業場。ここからは用語を知っている前提です。',
@@ -647,6 +659,10 @@ const I18N = {
         'Unknown GPU': 'GPU不明',
     },
     ru: {
+        // ---- CyberCity ----
+        'Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.': 'Четыре мира, по которым можно ходить, нарисованные одними текстовыми символами: город под неоновым дождём, приграничный городок 1880-х, Луна и замковый город в сумерках — и солнце, идущее по кругу.',
+        'Walk around a city made of text': 'Погулять по городу из текста',
+        'Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk.': 'Четыре места, собранные из одних символов: город под дождём, приграничный городок, Луна и замковый город в сумерках.',
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Для технической стороны',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Серверы, сети и мастерская. Здесь уже предполагается, что термины вам знакомы.',

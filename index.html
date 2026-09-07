@@ -531,6 +531,11 @@
        but a mask painting area ends at the border box, so it silently deleted
        the plate's own outer glow below. */
     .plate img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    /* The mark is a wide lockup — 86 by 62.7 in a 100 box — not a square
+       picture, so it is contained rather than covered: cover eats the character
+       before it eats the ring. The svg carries its own clear space, so it needs
+       no padding here, and no rounding because it never reaches an edge. */
+    .plate img.plate-mark { object-fit: contain; border-radius: 0; }
 
     /* ── the spotlight ──
        The wall says how much there is; this says what one of them is. It sits
@@ -875,8 +880,8 @@ const T = (s) => (typeof t === 'function' ? t(s) : s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
 
-/* Every tool the wall shows, and the words for it. The address and the icon
-   come from the registry; the plain name and the one-line description come from
+/* Every tool the wall shows, and the words for it. The address, the icon and
+   the mark come from the registry; the plain name and the one-line description come from
    start.json, which is where the fleet's plain wording lives. A tool that is in
    the registry but in no group still gets a plate — it falls back to its own
    name and the registry's description rather than dropping off the wall. */
@@ -898,12 +903,18 @@ function spotItems() {
 const offsite = (url) => /^https?:/i.test(url) && !url.startsWith(location.origin);
 const newTab = (url) => (offsite(url) ? ' target="_blank" rel="noopener"' : '');
 
-/* The spotlight: the tool the wall is pointing at, said in words. The plate is
-   the tool's icon until a screenshot exists for it, and then it is the shot. */
+/* The spotlight: the tool the wall is pointing at, said in words.
+   The plate, in order of preference: a screenshot if one has been captured,
+   then the tool's own mark — the gold C with its character, which is the thing
+   that actually appears in its tab and its dock — and the emoji only if the
+   registry names no mark. The emoji stays on the wall tile either way, so the
+   plate can carry the real identity without the wall losing its shorthand. */
 function spotHtml(it) {
   const plate = it.shot
     ? `<span class="plate"><img src="${esc(it.shot)}" alt="" loading="lazy" decoding="async"></span>`
-    : `<span class="plate">${esc(it.tool.icon)}</span>`;
+    : it.tool.mark
+      ? `<span class="plate"><img class="plate-mark" src="${esc(it.tool.mark)}" alt="" loading="lazy" decoding="async"></span>`
+      : `<span class="plate">${esc(it.tool.icon)}</span>`;
   return `<a class="spot-card" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
     ${plate}
     <span class="spot-body">

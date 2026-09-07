@@ -53,6 +53,7 @@
     {
       "name": "Aldis Lamp",
       "icon": "🔦",
+      "mark": "assets/marks/aldis.svg",
       "url": "https://aldis.carino.systems/",
       "desc": "Speak and a signal lamp flashes it in Morse — on screen, on the phone torch, or as a sidetone; point the camera at a lamp to read one back.",
       "cta": "Launch ↗",
@@ -65,6 +66,7 @@
     {
       "name": "Asobi — Board Games",
       "icon": "🎴",
+      "mark": "assets/marks/asobi.svg",
       "url": "https://asobi.carino.systems/",
       "desc": "Play Shogi (将棋) and Hanafuda Koi-Koi (花札) in-browser — human vs human, vs AI, or AI vs AI.",
       "cta": "Play ↗",
@@ -76,6 +78,7 @@
     {
       "name": "Carino Branding",
       "icon": "🎨",
+      "mark": "assets/marks/branding.svg",
       "url": "https://branding.carino.systems/",
       "desc": "The living design-system reference — tokens, components and copy-ready snippets for every Carino project.",
       "cta": "Open ↗",
@@ -88,6 +91,7 @@
     {
       "name": "Carino Currency",
       "icon": "💱",
+      "mark": "assets/marks/currency.svg",
       "url": "https://currency.carino.systems/",
       "desc": "FX trends and movers against any base currency, a finance news feed, and national export/import balances — keyless and in-browser.",
       "cta": "Launch ↗",
@@ -99,6 +103,7 @@
     {
       "name": "Carino DICOM",
       "icon": "🩻",
+      "mark": "assets/marks/dicom.svg",
       "url": "https://dicom.carino.systems/",
       "desc": "A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.",
       "cta": "Launch ↗",
@@ -112,6 +117,7 @@
     {
       "name": "Carino DICOM Editor",
       "icon": "🏥",
+      "mark": "assets/marks/dcm.svg",
       "url": "https://dcm.carino.systems/",
       "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.",
       "cta": "Launch ↗",
@@ -124,6 +130,7 @@
     {
       "name": "Carino Fonts",
       "icon": "🔤",
+      "mark": "assets/marks/font.svg",
       "url": "https://font.carino.systems/",
       "desc": "Draw a typeface glyph by glyph or with a vector pen, kern it, preview live and export a working TTF or WOFF — entirely in the browser.",
       "cta": "Launch ↗",
@@ -136,6 +143,7 @@
     {
       "name": "Carino Images",
       "icon": "💿",
+      "mark": "assets/marks/images.svg",
       "url": "https://images.carino.systems/",
       "desc": "Purpose-built Fedora bootc images and installer ISOs — gaming, imagenology, server — from one declarative config.",
       "cta": "Browse ↗",
@@ -147,6 +155,7 @@
     {
       "name": "Carino Learn",
       "icon": "🎓",
+      "mark": "assets/marks/learn.svg",
       "url": "https://learn.carino.systems/",
       "desc": "Hands-on courses with interactive labs — x86-64 assembly, Bash, Linux, Git, networking, crypto, DICOM & HL7, and ISO 27001.",
       "cta": "Start Learning ↗",
@@ -159,6 +168,7 @@
     {
       "name": "Carino Offline",
       "icon": "📴",
+      "mark": "assets/marks/offline.svg",
       "url": "https://offline.carino.systems/",
       "desc": "Plan an offline-first intranet: triage what to download before you lose the internet, then choose the software, hardware and sneakernet to run without it.",
       "cta": "Plan ↗",
@@ -172,6 +182,7 @@
     {
       "name": "Carino Retina",
       "icon": "👁",
+      "mark": "assets/marks/retina.svg",
       "url": "https://retina.carino.systems/",
       "desc": "Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.",
       "cta": "Launch ↗",
@@ -183,6 +194,7 @@
     {
       "name": "Compass",
       "icon": "🧭",
+      "mark": "assets/marks/compass.svg",
       "url": "https://compass.carino.systems/",
       "desc": "A 12-axis political compass measured by intention rather than numeric grading.",
       "cta": "Launch ↗",
@@ -195,6 +207,7 @@
     {
       "name": "CVE Database",
       "icon": "📰",
+      "mark": "assets/marks/cve.svg",
       "url": "https://cve.carino.systems/",
       "desc": "Browse and search security vulnerabilities sourced from the NVD database.",
       "cta": "Search CVEs ↗",
@@ -205,8 +218,22 @@
       "keywords": "vulnerability nvd cvss advisory exploit"
     },
     {
+      "name": "CyberCity",
+      "icon": "🌃",
+      "mark": "assets/marks/cybercity.svg",
+      "url": "https://cybercity.carino.systems/",
+      "desc": "Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.",
+      "cta": "Launch ↗",
+      "tags": [
+        "media",
+        "learn"
+      ],
+      "keywords": "cybercity ascii art text mode walkable world city frontier moon castle rain neon terminal toy demo"
+    },
+    {
       "name": "Desk",
       "icon": "🙋",
+      "mark": "assets/marks/desk.svg",
       "url": "https://desk.carino.systems",
       "desc": "Support snippet workspace — search, fill and copy canned responses for client requests.",
       "cta": "Open ↗",
@@ -218,6 +245,7 @@
     {
       "name": "Find Me a Distro",
       "icon": "🐧",
+      "mark": "assets/marks/distro.svg",
       "url": "https://distro.carino.systems/",
       "desc": "Answer a few questions and get a Linux distribution matched to your needs and experience level.",
       "cta": "Find a Distro ↗",
@@ -230,6 +258,7 @@
     {
       "name": "Fiscal",
       "icon": "🪪",
+      "mark": "assets/marks/fiscal.svg",
       "url": "https://fiscal.carino.systems/",
       "desc": "Your tax identity for every country you file in — personal and business, check digits validated on the device, spelled out for the counter, and never sent anywhere.",
       "cta": "Launch ↗",
@@ -242,6 +271,7 @@
     {
       "name": "Hardware",
       "icon": "🖥️",
+      "mark": "assets/marks/hardware.svg",
       "url": "https://hardware.carino.systems/",
       "desc": "Decode a MAC address to its vendor and bits, jump to any brand's warranty & driver pages, and size a build by the features that matter.",
       "cta": "Open ↗",
@@ -254,6 +284,7 @@
     {
       "name": "Hash",
       "icon": "#️⃣",
+      "mark": "assets/marks/hash.svg",
       "url": "https://hash.carino.systems/",
       "desc": "Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo.",
       "cta": "Launch ↗",
@@ -266,6 +297,7 @@
     {
       "name": "Kanban",
       "icon": "📅",
+      "mark": "assets/marks/kanban.svg",
       "url": "https://kanban.carino.systems/",
       "desc": "Serverless Kanban board for lightweight project and task tracking.",
       "cta": "Open Board ↗",
@@ -277,6 +309,7 @@
     {
       "name": "Law — Official Sources",
       "icon": "⚖️",
+      "mark": "assets/marks/law.svg",
       "url": "https://law.carino.systems/",
       "desc": "Where law is officially published in twenty-eight countries: the gazette of record, the constitution, the consolidated statute databases and the courts.",
       "cta": "Open ↗",
@@ -289,6 +322,7 @@
     {
       "name": "Media Suite",
       "icon": "🎬",
+      "mark": "assets/marks/media.svg",
       "url": "https://media.carino.systems/",
       "desc": "PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.",
       "cta": "Launch ↗",
@@ -301,6 +335,7 @@
     {
       "name": "Metadata",
       "icon": "📂",
+      "mark": "assets/marks/metadata.svg",
       "url": "https://metadata.carino.systems",
       "desc": "Extract and display file metadata — EXIF data, document properties, and hidden fields.",
       "cta": "Launch ↗",
@@ -313,6 +348,7 @@
     {
       "name": "MultiWeb",
       "icon": "🧱",
+      "mark": "assets/marks/multiweb.svg",
       "url": "https://github.com/MiguelCarino/MultiWeb",
       "desc": "Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.",
       "cta": "View on GitHub ↗",
@@ -325,6 +361,7 @@
     {
       "name": "Music Wall",
       "icon": "🎵",
+      "mark": "assets/marks/music.svg",
       "url": "https://music.carino.systems/",
       "desc": "Curated music collection displayed as an interactive album wall.",
       "cta": "Open ↗",
@@ -336,6 +373,7 @@
     {
       "name": "Netplan Configurator",
       "icon": "🕸️",
+      "mark": "assets/marks/netplan.svg",
       "url": "https://netplan.carino.systems",
       "desc": "GUI-driven YAML network config editor for Linux servers. Drastically reduces errors.",
       "cta": "Launch ↗",
@@ -348,6 +386,7 @@
     {
       "name": "Password",
       "icon": "🔐",
+      "mark": "assets/marks/password.svg",
       "url": "https://password.carino.systems/",
       "desc": "Client-side password generator and local vault. Zero server contact — entirely in-browser.",
       "cta": "Open Vault ↗",
@@ -359,6 +398,7 @@
     {
       "name": "Quote",
       "icon": "💰",
+      "mark": "assets/marks/quote.svg",
       "url": "https://quote.carino.systems",
       "desc": "Build and send custom service and product quotes to clients.",
       "cta": "Launch ↗",
@@ -370,6 +410,7 @@
     {
       "name": "SimpleSetup",
       "icon": "⚙️",
+      "mark": "assets/marks/setup.svg",
       "url": "https://setup.carino.systems",
       "desc": "Automated system configuration for Linux, Windows, and macOS.",
       "cta": "Launch ↗",
@@ -381,6 +422,7 @@
     {
       "name": "Software Catalogue",
       "icon": "📚",
+      "mark": "assets/marks/software.svg",
       "url": "https://software.carino.systems",
       "desc": "System-agnostic app repository for fleet-wide deployments.",
       "cta": "Browse ↗",
@@ -393,6 +435,7 @@
     {
       "name": "Stocks",
       "icon": "📈",
+      "mark": "assets/marks/stocks.svg",
       "url": "https://stocks.carino.systems/",
       "desc": "Markets watchlist, alerts and portfolio monitoring — client-side, with pluggable data providers.",
       "cta": "Launch ↗",
@@ -404,6 +447,7 @@
     {
       "name": "Sync Studio",
       "icon": "💬",
+      "mark": "assets/marks/subs.svg",
       "url": "https://subs.carino.systems/",
       "desc": "Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser.",
       "cta": "Launch ↗",
@@ -416,6 +460,7 @@
     {
       "name": "TelePrompter",
       "icon": "📺",
+      "mark": "assets/marks/teleprompter.svg",
       "url": "https://teleprompter.carino.systems/",
       "desc": "Clean, speed-controlled script reader for presentations and recordings.",
       "cta": "Launch ↗",
@@ -427,6 +472,7 @@
     {
       "name": "Time",
       "icon": "⏰",
+      "mark": "assets/marks/time.svg",
       "url": "https://time.carino.systems",
       "desc": "Local time, UTC, epoch and ISO, a searchable world-clock with pinned zones, plus live countdowns you can add and share.",
       "cta": "Launch ↗",
@@ -438,6 +484,7 @@
     {
       "name": "Topo",
       "icon": "🕸️",
+      "mark": "assets/marks/topo.svg",
       "url": "https://topo.carino.systems",
       "desc": "Draw network topologies in the browser — devices, links and addressing on an interactive canvas.",
       "cta": "Launch ↗",
@@ -449,6 +496,7 @@
     {
       "name": "TV",
       "icon": "📡",
+      "mark": "assets/marks/tv.svg",
       "url": "https://tv.carino.systems/",
       "desc": "Multi-source stream monitoring layout for live broadcast operations.",
       "cta": "Open ↗",
@@ -460,6 +508,7 @@
     {
       "name": "Vitae",
       "icon": "📄",
+      "mark": "assets/marks/vitae.svg",
       "url": "https://vitae.carino.systems/",
       "desc": "Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser.",
       "cta": "Build Resume ↗",

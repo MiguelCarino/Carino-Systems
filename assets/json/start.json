@@ -254,6 +254,11 @@
           "ref": "Aldis Lamp",
           "plain": "Send Morse with a light",
           "line": "Say something and a signal lamp flashes it — and the camera reads one back."
+        },
+        {
+          "ref": "CyberCity",
+          "plain": "Walk around a city made of text",
+          "line": "Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk."
         }
       ]
     }
