@@ -51,6 +51,18 @@
   ],
   "tools": [
     {
+      "name": "Aldis Lamp",
+      "icon": "🔦",
+      "url": "https://aldis.carino.systems/",
+      "desc": "Speak and a signal lamp flashes it in Morse — on screen, on the phone torch, or as a sidetone; point the camera at a lamp to read one back.",
+      "cta": "Launch ↗",
+      "tags": [
+        "learn",
+        "media"
+      ],
+      "keywords": "morse code signal lamp aldis signalling light flash torch strobe speech to morse wabun cyrillic prosign camera decoder"
+    },
+    {
       "name": "Asobi — Board Games",
       "icon": "🎴",
       "url": "https://asobi.carino.systems/",

@@ -22,7 +22,7 @@ LANG_SRC="Carino-Systems/carino-lang.js"
 BRIDGE_SRC="Quote/carino-bridge.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
-GROUPA="Branding CVE Quote Fiscal Hardware Hash Metadata \
+GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \

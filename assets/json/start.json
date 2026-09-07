@@ -249,6 +249,11 @@
           "ref": "Compass",
           "plain": "Where do you stand?",
           "line": "A political compass measured by what you intend, not by a score."
+        },
+        {
+          "ref": "Aldis Lamp",
+          "plain": "Send Morse with a light",
+          "line": "Say something and a signal lamp flashes it — and the camera reads one back."
         }
       ]
     }
