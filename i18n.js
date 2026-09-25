@@ -21,6 +21,8 @@ const I18N = {
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Para el lado técnico',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Servidores, redes y el taller. Estas dan por hecho que conoces los términos.',
+        'Is it slow, or is it just me?': '¿Va lento o soy yo?',
+        'Measure the round trip to a site, and see whether the delay is the network or the server.': 'Mide el viaje de ida y vuelta hasta un sitio y descubre si el retraso es la red o el servidor.',
         'Draw a map of your network': 'Dibuja el mapa de tu red',
         'Devices, links and addressing on a canvas you can share.': 'Dispositivos, enlaces y direccionamiento en un lienzo que puedes compartir.',
         "Set a Linux server's network": 'Configura la red de un servidor Linux',
@@ -236,6 +238,8 @@ const I18N = {
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Para o lado técnico',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Servidores, redes e a oficina. Estas presumem que você conhece os termos.',
+        'Is it slow, or is it just me?': 'Está lento ou é só impressão?',
+        'Measure the round trip to a site, and see whether the delay is the network or the server.': 'Meça a ida e volta até um site e veja se a demora é da rede ou do servidor.',
         'Draw a map of your network': 'Desenhe o mapa da sua rede',
         'Devices, links and addressing on a canvas you can share.': 'Dispositivos, links e endereçamento em uma tela que você pode compartilhar.',
         "Set a Linux server's network": 'Configure a rede de um servidor Linux',
@@ -451,6 +455,8 @@ const I18N = {
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': '技術寄りの方へ',
         'Servers, networks and the workshop. These ones assume you know the words.': 'サーバー、ネットワーク、そして作業場。ここからは用語を知っている前提です。',
+        'Is it slow, or is it just me?': '遅いのは回線？それとも気のせい？',
+        'Measure the round trip to a site, and see whether the delay is the network or the server.': 'サイトへの往復時間を測り、遅延の原因が回線かサーバーかを見分けます。',
         'Draw a map of your network': 'ネットワーク図を描く',
         'Devices, links and addressing on a canvas you can share.': '機器・接続・アドレスを、共有できるキャンバスの上に。',
         "Set a Linux server's network": 'Linuxサーバーのネットワーク設定',
@@ -666,6 +672,8 @@ const I18N = {
         // ── The hub itself: plain names, groups and page copy ──
         'For the technical side': 'Для технической стороны',
         'Servers, networks and the workshop. These ones assume you know the words.': 'Серверы, сети и мастерская. Здесь уже предполагается, что термины вам знакомы.',
+        'Is it slow, or is it just me?': 'Оно тормозит — или это только у меня?',
+        'Measure the round trip to a site, and see whether the delay is the network or the server.': 'Измерьте круговой путь до сайта и поймите, где задержка: в сети или на сервере.',
         'Draw a map of your network': 'Нарисуйте карту своей сети',
         'Devices, links and addressing on a canvas you can share.': 'Устройства, связи и адресация на холсте, которым можно поделиться.',
         "Set a Linux server's network": 'Настройте сеть на сервере Linux',

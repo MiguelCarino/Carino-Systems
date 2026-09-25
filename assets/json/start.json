@@ -169,6 +169,11 @@
       "blurb": "Servers, networks and the workshop. These ones assume you know the words.",
       "tools": [
         {
+          "ref": "Ping",
+          "plain": "Is it slow, or is it just me?",
+          "line": "Measure the round trip to a site, and see whether the delay is the network or the server."
+        },
+        {
           "ref": "Topo",
           "plain": "Draw a map of your network",
           "line": "Devices, links and addressing on a canvas you can share."

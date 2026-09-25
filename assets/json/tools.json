@@ -396,6 +396,18 @@
       "keywords": "passphrase vault generator credentials"
     },
     {
+      "name": "Ping",
+      "icon": "📡",
+      "mark": "assets/marks/ping.svg",
+      "url": "https://ping.carino.systems/",
+      "desc": "Round trip, jitter and packet loss to any website, measured from your own browser \u2014 with the DNS/TLS/TTFB split where the server allows it.",
+      "cta": "Launch \u2197",
+      "tags": [
+        "network"
+      ],
+      "keywords": "ping latency rtt jitter packet loss round trip connection speed slow website network test"
+    },
+    {
       "name": "Quote",
       "icon": "💰",
       "mark": "assets/marks/quote.svg",
