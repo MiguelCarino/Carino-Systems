@@ -64,6 +64,11 @@
     + 'color:' + TEXT + ';font-size:.8rem;}'
     + '#cnLangBox button:hover{background:rgba(234,179,8,.08);color:' + A + ';}'
     + '#cnLangBox button .code{font-family:' + MONO + ';font-size:.65rem;letter-spacing:.1em;color:' + MUTED + ';}'
+    // "Русский" is the only Cyrillic on an English page, and it is inside a
+    // menu nobody has opened yet — enough to pull a whole Cyrillic webfont
+    // subset down on every first visit in every language. A system face for
+    // that one label costs nothing and every other row keeps the site's font.
+    + '#cnLangBox button .nat[lang="ru"]{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}'
     + '#cnLangBox button.active{color:' + A + ';}'
     + '#cnLangBox button.active .code{color:' + A + ';}';
 
@@ -105,11 +110,16 @@
     try { return resolve(localStorage.getItem('carino_lang')); } catch (e) { return null; }
   }
 
+  // Secure is added only where it means something: a browser rejects a Secure
+  // cookie outright from a plain-http origin, so setting it unconditionally
+  // would throw the preference away on any fleet site still served over http.
+  var COOKIE = '; Domain=.carino.systems; Path=/; SameSite=Lax'
+    + (location.protocol === 'https:' ? '; Secure' : '');
+
   function store(code) {
     if (onFleet) {
       try {
-        document.cookie = 'carino_lang=' + encodeURIComponent(code)
-          + '; Domain=.carino.systems; Path=/; Max-Age=31536000; SameSite=Lax';
+        document.cookie = 'carino_lang=' + encodeURIComponent(code) + '; Max-Age=31536000' + COOKIE;
       } catch (e) { /* cookies blocked */ }
     }
     try { localStorage.setItem('carino_lang', code); } catch (e) { /* private mode */ }
@@ -118,7 +128,7 @@
   function clearStore() {
     if (onFleet) {
       try {
-        document.cookie = 'carino_lang=; Domain=.carino.systems; Path=/; Max-Age=0; SameSite=Lax';
+        document.cookie = 'carino_lang=; Max-Age=0' + COOKIE;
       } catch (e) { /* cookies blocked */ }
     }
     try { localStorage.removeItem('carino_lang'); } catch (e) { /* private mode */ }
@@ -171,9 +181,17 @@
 
   /* ---- UI ---- */
 
+  // The shield link to carino.systems/legal.html (#cnLegal) sits in every
+  // header, shared or bespoke. Its tooltip is translated here, the one script
+  // all of those headers load, rather than in each site's own dictionary.
+  var LEGAL = { en: 'Legal notice & privacy', es: 'Aviso legal y privacidad', 'pt-BR': 'Aviso legal e privacidade',
+                ja: '法的通知とプライバシー', ru: 'Правовая информация и конфиденциальность' };
+
   function updateBtn() {
     var btn = document.getElementById('cnLangBtn');
     if (btn) btn.innerHTML = ICON + '<span class="lbl">' + (manual ? label(current) : 'AUTO') + '</span>';
+    var legal = document.getElementById('cnLegal');
+    if (legal) { legal.title = LEGAL[current] || LEGAL.en; legal.setAttribute('aria-label', legal.title); }
   }
 
   function renderRows() {
@@ -194,7 +212,7 @@
       var b = document.createElement('button');
       b.type = 'button';
       b.className = (manual && l[0] === current) ? 'active' : '';
-      b.innerHTML = '<span>' + l[2] + '</span><span class="code">' + l[1] + '</span>';
+      b.innerHTML = '<span class="nat" lang="' + l[0] + '">' + l[2] + '</span><span class="code">' + l[1] + '</span>';
       b.addEventListener('click', function (e) {
         e.stopPropagation();
         set(l[0]);

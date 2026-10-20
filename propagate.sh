@@ -26,7 +26,10 @@ GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
-Media Fonts"
+Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems"
+# Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
+# being listed, so their copies had drifted; Carino-Systems carries it for
+# legal.html only (the hub page itself keeps its inline navbar).
 
 # Project pages that live in a subfolder of a non-web repo but still run the
 # shared navbar. Same treatment as GROUPA — they were drifting because nothing

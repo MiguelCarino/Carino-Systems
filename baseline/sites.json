@@ -1,0 +1,268 @@
+[
+  {
+    "domain": "aldis.carino.systems",
+    "dir": "Aldis-Lamp",
+    "name": "Aldis Lamp",
+    "desc": "Speak, and a signal lamp sends it in Morse — on screen, in fullscreen, on the phone torch and as a sidetone. Point the camera at a light to read a lamp back. Runs entirely in the browser."
+  },
+  {
+    "domain": "asobi.carino.systems",
+    "dir": "Asobi",
+    "name": "Asobi — Board Games",
+    "desc": "Play Shogi (将棋) — human vs human, human vs AI, or AI vs AI — Hanafuda Koi-Koi (花札) against the computer, and the Pentarch deterministic auto-battler. Runs entirely in your browser."
+  },
+  {
+    "domain": "branding.carino.systems",
+    "dir": "Branding",
+    "name": "Carino Branding",
+    "desc": "The living design-system reference — tokens, components and copy-ready snippets for every Carino project."
+  },
+  {
+    "domain": "butter.carino.systems",
+    "dir": "ButterEye",
+    "name": "ButterEye",
+    "desc": "ButterEye makes the videos you play in mpv smoother: new in-between frames, live or as a saved copy. Free software for Fedora Linux, Windows and macOS.",
+    "standalone": true,
+    "software": "Linux, Windows"
+  },
+  {
+    "domain": "carino.systems",
+    "dir": "Carino-Systems",
+    "name": "Carino Systems",
+    "desc": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. Nothing to install, no account, and your files never leave your computer.",
+    "hub": true
+  },
+  {
+    "domain": "compass.carino.systems",
+    "dir": "Compass",
+    "name": "Compass",
+    "desc": "A 12-axis political compass measured by intention — Mind, Suggest, Enforce — not number grading. Compare against leaders, thinkers and fictional characters, in 2D or 3D."
+  },
+  {
+    "domain": "currency.carino.systems",
+    "dir": "Currency",
+    "name": "Carino Currency",
+    "desc": "Carino Currency — a keyless, in-browser finance watcher: live FX trends and movers, finance news, and export/import trade value. Data from ECB/Frankfurter, GDELT and the World Bank; nothing is uploaded."
+  },
+  {
+    "domain": "cve.carino.systems",
+    "dir": "CVE",
+    "name": "CVE Database",
+    "desc": "Browse and search security vulnerabilities sourced from the NVD database.",
+    "pages": [
+      "stats.html"
+    ]
+  },
+  {
+    "domain": "cybercity.carino.systems",
+    "dir": "CyberCity",
+    "name": "CyberCity",
+    "desc": "Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round."
+  },
+  {
+    "domain": "desk.carino.systems",
+    "dir": "Desk",
+    "name": "Desk",
+    "desc": "Support snippet workspace — search, fill and copy canned responses for client requests."
+  },
+  {
+    "domain": "dcm.carino.systems",
+    "dir": "DICOM-editor",
+    "name": "Carino DICOM Editor",
+    "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability."
+  },
+  {
+    "domain": "distro.carino.systems",
+    "dir": "findmeadistro",
+    "name": "Find Me a Distro",
+    "desc": "Answer a few questions and get a Linux distribution matched to your needs and experience level."
+  },
+  {
+    "domain": "fiscal.carino.systems",
+    "dir": "Fiscal",
+    "name": "Fiscal",
+    "desc": "An offline card that holds your fiscal identity — personal and business — for every jurisdiction you file in. Check digits validated on device, spelled out phonetically for the counter, and never sent anywhere."
+  },
+  {
+    "domain": "font.carino.systems",
+    "dir": "Fonts",
+    "name": "Carino Fonts",
+    "desc": "Make fonts in your browser: pixel and vector glyph editing, kerning, live preview, TTF/WOFF export and subsetting. Everything stays on your machine."
+  },
+  {
+    "domain": "hardware.carino.systems",
+    "dir": "Hardware",
+    "name": "Hardware",
+    "desc": "Decode a MAC address to its vendor and bits, jump to any brand's warranty & driver pages, and get feature-first hardware build recommendations. Runs entirely in your browser."
+  },
+  {
+    "domain": "hash.carino.systems",
+    "dir": "Hash",
+    "name": "Hash",
+    "desc": "Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo."
+  },
+  {
+    "domain": "jellyfish.carino.systems",
+    "dir": "Jellyfish",
+    "name": "Jellyfish",
+    "desc": "A moon jelly, swimming. Ambient WebGL."
+  },
+  {
+    "domain": "kanban.carino.systems",
+    "dir": "Kanban",
+    "name": "Kanban",
+    "desc": "Serverless Kanban board for lightweight project and task tracking."
+  },
+  {
+    "domain": "law.carino.systems",
+    "dir": "Law",
+    "name": "Law — Official Sources",
+    "desc": "A directory of where law is officially published, country by country: the gazette of record, the constitution, the consolidated statutes, the courts and the treaties, each linked at the body that publishes it. The sources that are not official say so."
+  },
+  {
+    "domain": "learn.carino.systems",
+    "dir": "Learn",
+    "name": "Carino Learn",
+    "desc": "Carino Learn: hands-on, checkable learning modules with interactive visualizers — x86-64 assembly, PC architecture, Bash, GNU tools, Linux administration, Git & version control, networking, netplan declarative network configuration, web browsers, regex, cryptography, quantum computing, DICOM & HL7 healthcare interoperability, and ISO 27001 compliance."
+  },
+  {
+    "domain": "media.carino.systems",
+    "dir": "Media",
+    "name": "Media Suite",
+    "desc": "Client-side file & media suite: PDF to images, OCR, signature cleanup, image conversion, ffmpeg command builder and audio to WAV. Everything runs in your browser."
+  },
+  {
+    "domain": "metadata.carino.systems",
+    "dir": "Metadata",
+    "name": "Metadata",
+    "desc": "Extract and display file metadata — EXIF data, document properties, and hidden fields."
+  },
+  {
+    "domain": "music.carino.systems",
+    "dir": "MusicGrid",
+    "name": "Music Wall",
+    "desc": "A personal music wall and per-country collection. Click any cover to play, browse by country, queue songs and follow along with synced lyrics.",
+    "image": "assets/images/logo.webp"
+  },
+  {
+    "domain": "netplan.carino.systems",
+    "dir": "NetplanConfig",
+    "name": "Netplan Configurator",
+    "desc": "GUI-driven YAML network config editor for Linux servers. Drastically reduces errors."
+  },
+  {
+    "domain": "offline.carino.systems",
+    "dir": "Offline",
+    "name": "Carino Offline",
+    "desc": "What to download before you can't, which software still works with the WAN cable pulled, what the hardware costs in Mexico, and how physical media beats a blocked route. Runs entirely in your browser, offline."
+  },
+  {
+    "domain": "password.carino.systems",
+    "dir": "Password",
+    "name": "Password",
+    "desc": "Make a strong password, and send it to someone safely. Everything happens in your browser."
+  },
+  {
+    "domain": "ping.carino.systems",
+    "dir": "Ping",
+    "name": "Ping",
+    "desc": "Client-side latency measurement and ping log analysis: round trip, jitter, packet loss and the DNS/TLS/TTFB split from your browser, or any saved ping output read in the tab. Nothing leaves the page."
+  },
+  {
+    "domain": "quote.carino.systems",
+    "dir": "Quote",
+    "name": "Quote",
+    "desc": "Build and send custom service and product quotes to clients."
+  },
+  {
+    "domain": "dlss.carino.systems",
+    "dir": "renodx-dlss-installer",
+    "name": "DLSS 5 for Linux",
+    "desc": "DLSS 5 for Linux puts NVIDIA's DLSS 5 neural rendering into Steam games running under Proton, and runs the same model over your pictures and videos. Free software for Fedora and any recent Linux.",
+    "software": "Linux"
+  },
+  {
+    "domain": "retina.carino.systems",
+    "dir": "Retina",
+    "name": "Carino Retina",
+    "desc": "Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order."
+  },
+  {
+    "domain": "setup.carino.systems",
+    "dir": "SimpleSetup",
+    "name": "SimpleSetup",
+    "desc": "One command that configures Linux, Windows or macOS: hardware and distribution detection, drivers, and 15 purpose profiles. Nothing to install first."
+  },
+  {
+    "domain": "software.carino.systems",
+    "dir": "SoftwareCatalog",
+    "name": "Software Catalogue",
+    "desc": "System-agnostic app repository for fleet-wide deployments.",
+    "image": "assets/images/logo.webp"
+  },
+  {
+    "domain": "stocks.carino.systems",
+    "dir": "Stocks",
+    "name": "Stocks",
+    "desc": "Client-side markets watchlist, portfolio and alerts. Your keys, your device. Monitoring only, never advice.",
+    "pages": [
+      "popout.html"
+    ]
+  },
+  {
+    "domain": "subs.carino.systems",
+    "dir": "SyncSubsStudio",
+    "name": "Sync Studio",
+    "desc": "Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser."
+  },
+  {
+    "domain": "teleprompter.carino.systems",
+    "dir": "Teleprompter",
+    "name": "TelePrompter",
+    "desc": "Clean, speed-controlled script reader for presentations and recordings."
+  },
+  {
+    "domain": "test.carino.systems",
+    "dir": "Test",
+    "name": "Carino Test",
+    "desc": "Carino Test — a complete in-browser network and system diagnostics suite: WAN/LAN, NAT and WebRTC topology, DNS-over-HTTPS, latency, speed, and a live reachability sweep of the top 50 websites in the world."
+  },
+  {
+    "domain": "time.carino.systems",
+    "dir": "Time",
+    "name": "Time",
+    "desc": "Local time, UTC and Unix epoch — a searchable world-clock with pinned zones, live stock-market opening hours, plus countdowns you can add and share."
+  },
+  {
+    "domain": "topo.carino.systems",
+    "dir": "Topo",
+    "name": "Topo",
+    "desc": "Draw network topologies in the browser — devices, links and addressing on an interactive canvas."
+  },
+  {
+    "domain": "tv.carino.systems",
+    "dir": "TV",
+    "name": "TV",
+    "desc": "Watch many live news streams from around the world at once. Add YouTube or any embeddable stream, organize by country, and share your wall with a link."
+  },
+  {
+    "domain": "vitae.carino.systems",
+    "dir": "Vitae",
+    "name": "Vitae",
+    "desc": "Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser."
+  },
+  {
+    "domain": "dicom.carino.systems",
+    "dir": "Carino-PACS/docs",
+    "name": "Carino DICOM",
+    "desc": "A self-hosted DICOM gateway and continuity appliance: receives, routes, forwards and de-identifies studies, answers Query/Retrieve and DICOMweb, and serves an emergency worklist when the PACS is down. Not a medical device, not for primary diagnosis.",
+    "software": "Linux, Windows, macOS"
+  },
+  {
+    "domain": "images.carino.systems",
+    "dir": "Custom-Images/docs",
+    "name": "Carino Images",
+    "desc": "Purpose-built Fedora: six COSMIC + Hyprland desktops and two headless appliances — Asterisk/FreePBX telephony and an intranet keystone for a LAN with no working WAN — each shipping the integration one kind of work needs. Installer ISO or bootc container image.",
+    "software": "Linux (Fedora)"
+  }
+]
