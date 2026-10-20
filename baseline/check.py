@@ -173,6 +173,16 @@ def c_analytics(s):
     return not hits, ('tracker in ' + ', '.join(hits)) if hits else 'none, by decision'
 
 
+def c_fontlic(s):
+    """Font licences: every folder holding font files has their licence text
+    (OFL.txt, LICENSE...) beside it or in a folder above it, as the SIL OFL
+    requires it to travel with the files."""
+    lic = {str(Path(f).parent) for f in s.files if re.search(r'(ofl|licen[cs]e|copying)', Path(f).name, re.I)}
+    dirs = {Path(f).parent for f in s.files if f.lower().endswith(('.woff2', '.woff', '.ttf', '.otf'))}
+    bare = sorted(str(d) for d in dirs if not any(str(p) in lic for p in [d, *d.parents] if str(p) != '.'))
+    return not bare, ', '.join(bare)
+
+
 def c_shared(s):
     """Shared files match their canonical copy (propagate.sh keeps them in step)."""
     drift = [n for n, src in SHARED.items()
@@ -183,7 +193,8 @@ def c_shared(s):
 
 STATIC = [('legal', c_legal), ('meta', c_meta), ('jsonld', c_jsonld), ('robots', c_robots),
           ('favicon', c_favicon), ('alt', c_alt), ('images', c_images), ('404', c_404),
-          ('links', c_links), ('forms', c_forms), ('analytics', c_analytics), ('shared', c_shared)]
+          ('links', c_links), ('forms', c_forms), ('analytics', c_analytics), ('fontlic', c_fontlic),
+          ('shared', c_shared)]
 
 
 # ---- live checks (--live) ----
