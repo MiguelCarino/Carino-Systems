@@ -143,6 +143,39 @@
   var current = stored || resolve(navigator.language) || 'en';
   document.documentElement.lang = current;
 
+  // Translated <title> and description, written into the page by the fleet
+  // baseline as <script type="application/json" id="carino-head-i18n">. When
+  // the URL names the language (?lang=es), the canonical points at that URL
+  // too, so search engines index each language version as its own page.
+  var headI18n = null, headOrig = null;
+  try {
+    var hi = document.getElementById('carino-head-i18n');
+    if (hi) headI18n = JSON.parse(hi.textContent);
+  } catch (e) { headI18n = null; }
+
+  function headEl(sel) { return document.head && document.head.querySelector(sel); }
+
+  function applyHead() {
+    if (!headI18n) return;
+    var desc = headEl('meta[name="description"]'), canon = headEl('link[rel="canonical"]');
+    var ogt = headEl('meta[property="og:title"]'), ogd = headEl('meta[property="og:description"]');
+    if (!headOrig) {
+      headOrig = { title: document.title, desc: desc && desc.content, canon: canon && canon.href,
+                   ogt: ogt && ogt.content, ogd: ogd && ogd.content };
+    }
+    var t = headI18n[current];
+    document.title = t ? t.title : headOrig.title;
+    if (desc) desc.content = t ? t.desc : headOrig.desc;
+    if (ogt) ogt.content = t ? t.title : headOrig.ogt;
+    if (ogd) ogd.content = t ? t.desc : headOrig.ogd;
+    if (canon && headOrig.canon) {
+      var inUrl = resolve(new URLSearchParams(location.search).get('lang')) === current;
+      canon.href = (t && inUrl) ? headOrig.canon.split('?')[0] + '?lang=' + encodeURIComponent(current)
+                                : headOrig.canon;
+    }
+  }
+  applyHead();
+
   // The "language" glyph (A + 文) shown on the button in every state.
   var ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">'
     + '<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17'
@@ -162,6 +195,7 @@
       current = code;
     }
     document.documentElement.lang = current;
+    applyHead();
     updateBtn();
     renderRows();
     window.dispatchEvent(new CustomEvent('carino:langchange', { detail: { lang: current } }));

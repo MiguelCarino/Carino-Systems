@@ -77,18 +77,55 @@ def json_ld(site):
 
 
 def image_tag(site):
-    """og:image line, or nothing. sites.json "image" names the file; otherwise
-    the site's logo.webp if it has one. SVG-only sites get none: share
-    previews do not render SVG."""
+    """Share-preview lines, or nothing. A site's og.jpg (the 1200x630 card) wins
+    and gets the large-image card; otherwise sites.json "image", otherwise the
+    site's logo.webp. SVG-only sites get none: share previews do not render SVG."""
+    base = f'https://{site["domain"]}/'
+    if (REPOS / site['dir'] / 'og.jpg').exists():
+        alt = html.escape(site['name'], quote=True)
+        return (f'<meta property="og:image" content="{base}og.jpg">\n'
+                '<meta property="og:image:width" content="1200">\n'
+                '<meta property="og:image:height" content="630">\n'
+                f'<meta property="og:image:alt" content="{alt}">\n'
+                '<meta name="twitter:card" content="summary_large_image">\n')
     rel = site.get('image') or 'logo.webp'
     if not (REPOS / site['dir'] / rel).exists():
         return ''
-    return f'<meta property="og:image" content="https://{site["domain"]}/{rel}">\n'
+    return f'<meta property="og:image" content="{base}{rel}">\n'
+
+
+# Translated <title> and description per site and language, written by hand in
+# head-i18n.json. A site listed there is served in those languages at ?lang=xx:
+# the head block names each version (hreflang) and carries the strings, and
+# carino-lang.js swaps them in, with a self-referencing canonical, when ?lang=
+# is in the URL. Search engines render the script, so ?lang=es is indexed in
+# Spanish. Sites not listed stay English-only.
+HEAD_I18N = json.loads((HERE / 'head-i18n.json').read_text(encoding='utf-8')) \
+    if (HERE / 'head-i18n.json').exists() else {}
+
+
+def lang_urls(site):
+    """[(hreflang, url)] for every language version of the home page, English
+    first; just English when the site has no translations."""
+    base = f'https://{site["domain"]}/'
+    langs = list(HEAD_I18N.get(site['domain'], {}))
+    return [('en', base)] + [(l, f'{base}?lang={l}') for l in langs]
+
+
+def alternates(site):
+    urls = lang_urls(site)
+    if len(urls) == 1:
+        return ''
+    lines = [f'<link rel="alternate" hreflang="{l}" href="{u}">' for l, u in urls]
+    lines.append(f'<link rel="alternate" hreflang="x-default" href="{urls[0][1]}">')
+    data = json.dumps(HEAD_I18N[site['domain']], ensure_ascii=False).replace('</', '<\\/')
+    lines.append(f'<script type="application/json" id="carino-head-i18n">{data}</script>')
+    return '\n'.join(lines) + '\n'
 
 
 def head_block(site):
     esc = lambda s: html.escape(s, quote=True)
-    return fill(template('head.html').rstrip('\n'), image=image_tag(site),
+    return fill(template('head.html').rstrip('\n'), image=image_tag(site), alternates=alternates(site),
                 desc=esc(site['desc']), domain=site['domain'], name=esc(site['name']),
                 site_name=esc(site['name'] if site.get('standalone') else 'Carino Systems'),
                 jsonld=json_ld(site))
@@ -96,8 +133,15 @@ def head_block(site):
 
 def sitemap(site):
     base = 'https://' + site['domain'] + '/'
-    urls = [base] + [base + p for p in site.get('pages', [])]
-    return fill(template('sitemap.xml'), urls='\n'.join(f'  <url><loc>{u}</loc></url>' for u in urls))
+    langs = lang_urls(site)
+    if len(langs) == 1:
+        home = ['  <url><loc>' + base + '</loc></url>']
+    else:
+        links = ''.join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{html.escape(u)}"/>'
+                        for l, u in langs + [('x-default', base)])
+        home = [f'  <url><loc>{html.escape(u)}</loc>{links}\n  </url>' for _, u in langs]
+    pages = [f'  <url><loc>{base + p}</loc></url>' for p in site.get('pages', [])]
+    return fill(template('sitemap.xml'), urls='\n'.join(home + pages))
 
 
 def page_404(site):

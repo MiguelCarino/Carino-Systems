@@ -1,0 +1,578 @@
+{
+  "aldis.carino.systems": {
+    "es": {
+      "title": "Aldis Lamp — Lámpara de código Morse y decodificador con cámara",
+      "desc": "Habla y la lámpara lo envía en Morse: en pantalla, pantalla completa, linterna del teléfono o tono. Apunta la cámara a una luz para leerla. En tu navegador."
+    },
+    "pt-BR": {
+      "title": "Aldis Lamp — Lâmpada de código Morse e decodificador por câmera",
+      "desc": "Fale e a lâmpada transmite em Morse: na tela, em tela cheia, na lanterna do celular ou como tom. Aponte a câmera para uma luz e leia o sinal. No navegador."
+    },
+    "ja": {
+      "title": "Aldis Lamp — モールス信号ランプとカメラ解読",
+      "desc": "話すと信号ランプがモールス信号で送信。画面、全画面、スマホのライト、サイドトーンに対応。カメラを光に向ければ信号を読み取れる。すべてブラウザ内で動作。"
+    },
+    "ru": {
+      "title": "Aldis Lamp — сигнальная лампа азбуки Морзе и декодер с камеры",
+      "desc": "Говорите — лампа передаёт азбукой Морзе: на экране, во весь экран, фонариком телефона и звуком. Наведите камеру на свет, чтобы прочитать сигнал. Всё в браузере."
+    }
+  },
+  "asobi.carino.systems": {
+    "es": {
+      "title": "Jugar shogi y hanafuda en línea — Carino Asobi",
+      "desc": "Juega shogi (将棋): humano contra humano, contra la IA o IA contra IA; hanafuda Koi-Koi (花札) contra la computadora y el auto-battler Pentarch. En tu navegador."
+    },
+    "pt-BR": {
+      "title": "Jogar shogi e hanafuda online — Carino Asobi",
+      "desc": "Jogue shogi (将棋): humano contra humano, contra a IA ou IA contra IA; hanafuda Koi-Koi (花札) contra o computador e o auto-battler Pentarch. No navegador."
+    },
+    "ja": {
+      "title": "将棋・花札 オンライン対戦 — Carino Asobi",
+      "desc": "将棋は人対人、人対AI、AI対AIで対局。花札こいこいはコンピューター対戦、Pentarchの決定論的オートバトラーも。すべてブラウザ内で動作。"
+    },
+    "ru": {
+      "title": "Играть в сёги и ханафуду онлайн — Carino Asobi",
+      "desc": "Сёги (将棋): человек против человека, против ИИ или ИИ против ИИ; ханафуда Кои-Кои (花札) против компьютера и автобатлер Pentarch. Всё в браузере."
+    }
+  },
+  "branding.carino.systems": {
+    "es": {
+      "title": "Carino Branding — Referencia del sistema de diseño",
+      "desc": "La referencia viva del sistema de diseño: tokens, componentes y fragmentos listos para copiar para cada proyecto Carino."
+    },
+    "pt-BR": {
+      "title": "Carino Branding — Referência do design system",
+      "desc": "A referência viva do design system: tokens, componentes e trechos prontos para copiar para todos os projetos Carino."
+    },
+    "ja": {
+      "title": "Carino Branding — デザインシステム リファレンス",
+      "desc": "常に最新のデザインシステム リファレンス。すべてのCarinoプロジェクト向けのトークン、コンポーネント、コピー用スニペット。"
+    },
+    "ru": {
+      "title": "Carino Branding — справочник дизайн-системы",
+      "desc": "Живой справочник дизайн-системы: токены, компоненты и готовые к копированию фрагменты для всех проектов Carino."
+    }
+  },
+  "carino.systems": {
+    "es": {
+      "title": "Carino Systems",
+      "desc": "Soluciones abiertas y gratis para todos: abre una imagen médica, arregla un documento, crea tu currículum, configura tu computadora. Sin instalar ni cuenta."
+    },
+    "pt-BR": {
+      "title": "Carino Systems",
+      "desc": "Soluções abertas e grátis para todos: abra uma imagem médica, corrija um documento, crie um currículo, configure o computador. Sem instalar, sem conta."
+    },
+    "ja": {
+      "title": "Carino Systems",
+      "desc": "誰でも無料で使えるオープンなツール。医用画像を開く、文書を直す、履歴書を作る、PCを設定する。インストールもアカウントも不要、ファイルはPCから出ない。"
+    },
+    "ru": {
+      "title": "Carino Systems",
+      "desc": "Открытые бесплатные решения: откройте медснимок, исправьте документ, составьте резюме, настройте компьютер. Без установки и аккаунта, файлы остаются у вас."
+    }
+  },
+  "compass.carino.systems": {
+    "es": {
+      "title": "Compass — Brújula política de 12 ejes",
+      "desc": "Brújula política de 12 ejes según la intención (Mente, Sugerir, Imponer), no por puntajes. Compárate con líderes, pensadores y personajes ficticios en 2D o 3D."
+    },
+    "pt-BR": {
+      "title": "Compass — Bússola política de 12 eixos",
+      "desc": "Bússola política de 12 eixos medida pela intenção (Mente, Sugerir, Impor), não por notas. Compare-se a líderes, pensadores e personagens de ficção em 2D ou 3D."
+    },
+    "ja": {
+      "title": "Compass — 12軸の政治コンパス",
+      "desc": "点数ではなく意図（考える・促す・強いる）で測る12軸の政治コンパス。指導者、思想家、架空の人物と2D・3Dで比較。"
+    },
+    "ru": {
+      "title": "Compass — политический компас по 12 осям",
+      "desc": "Политический компас по 12 осям: мерило — намерение («Мысль», «Совет», «Принуждение»), а не баллы. Сравните себя с лидерами, мыслителями и героями в 2D или 3D."
+    }
+  },
+  "currency.carino.systems": {
+    "es": {
+      "title": "Carino Currency — Tipo de cambio, noticias y comercio exterior",
+      "desc": "Monitor financiero sin claves en tu navegador: tipo de cambio, noticias y comercio exterior. Datos de BCE/Frankfurter, GDELT y Banco Mundial; nada se sube."
+    },
+    "pt-BR": {
+      "title": "Carino Currency — Câmbio, notícias e comércio exterior",
+      "desc": "Monitor financeiro sem chaves no navegador: câmbio ao vivo, notícias e comércio exterior. Dados do BCE/Frankfurter, GDELT e Banco Mundial; nada é enviado."
+    },
+    "ja": {
+      "title": "Carino Currency — 為替・ニュース・貿易",
+      "desc": "APIキー不要のブラウザ型金融ウォッチャー。為替の推移と変動、金融ニュース、輸出入額。データはECB/Frankfurter・GDELT・世界銀行、送信なし。"
+    },
+    "ru": {
+      "title": "Carino Currency — курсы валют, новости и торговля",
+      "desc": "Финансовый монитор в браузере без ключей: курсы валют, новости, экспорт и импорт. Данные ЕЦБ/Frankfurter, GDELT и Всемирного банка; ничего не загружается."
+    }
+  },
+  "cve.carino.systems": {
+    "es": {
+      "title": "Buscar CVE — base de vulnerabilidades NVD | CVE Radar Pro",
+      "desc": "Busca vulnerabilidades de seguridad CVE en la NVD del NIST: puntuaciones CVSS, filtros y tendencias, rápido y con uso sin conexión, en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Buscar CVE — banco de vulnerabilidades NVD | CVE Radar Pro",
+      "desc": "Pesquise vulnerabilidades de segurança CVE na NVD do NIST: pontuações CVSS, filtros e tendências, rápido e com uso offline, no navegador."
+    },
+    "ja": {
+      "title": "CVE検索 — NVD脆弱性DB | CVE Radar Pro",
+      "desc": "NIST NVDのCVE脆弱性を検索。CVSSスコア、フィルター、傾向を高速表示、オフラインでも使えるブラウザツール。"
+    },
+    "ru": {
+      "title": "Поиск CVE — база уязвимостей NVD | CVE Radar Pro",
+      "desc": "Поиск уязвимостей CVE в базе NIST NVD: оценки CVSS, фильтры и тренды — быстро, с работой офлайн, прямо в браузере."
+    }
+  },
+  "desk.carino.systems": {
+    "es": {
+      "title": "Desk — Respuestas predefinidas para mesa de ayuda",
+      "desc": "Espacio de fragmentos para mesa de ayuda: busca, completa y copia respuestas predefinidas para tickets de soporte, en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Desk — Respostas prontas para help desk",
+      "desc": "Espaço de trechos para help desk: pesquise, preencha e copie respostas prontas para chamados de suporte, no navegador."
+    },
+    "ja": {
+      "title": "Desk — ヘルプデスク定型文テンプレート",
+      "desc": "ヘルプデスク用スニペット集。サポートチケット向けの定型返信を検索・入力・コピー。ブラウザで動作。"
+    },
+    "ru": {
+      "title": "Desk — шаблоны ответов для службы поддержки",
+      "desc": "Рабочее место со сниппетами для службы поддержки: ищите, заполняйте и копируйте готовые ответы на заявки прямо в браузере."
+    }
+  },
+  "fiscal.carino.systems": {
+    "es": {
+      "title": "Carino Fiscal — identidad fiscal sin conexión en cualquier país",
+      "desc": "Tu identidad fiscal, personal y de empresa, sin conexión para cada país donde declaras. Dígitos verificadores validados en tu equipo, deletreados y sin envíos."
+    },
+    "pt-BR": {
+      "title": "Carino Fiscal — sua identidade fiscal, offline, em qualquer país",
+      "desc": "Sua identidade fiscal, pessoal e empresarial, offline para cada país onde você declara. Dígitos verificadores validados no aparelho, soletrados, nunca enviados."
+    },
+    "ja": {
+      "title": "Carino Fiscal — 納税者情報をオフラインで、どの国でも",
+      "desc": "個人・事業の納税者情報を申告先の国ごとに保持するオフラインカード。チェックディジットは端末で検証、窓口用に読み方も表示、外部送信なし。"
+    },
+    "ru": {
+      "title": "Carino Fiscal — налоговые данные офлайн, в любой стране",
+      "desc": "Офлайн-карточка налоговых данных — личных и бизнеса — для каждой юрисдикции. Контрольные цифры проверяются на устройстве, читаются по буквам и не отправляются."
+    }
+  },
+  "font.carino.systems": {
+    "es": {
+      "title": "Editor de fuentes en línea: crea fuentes TTF/WOFF | Carino Fonts",
+      "desc": "Crea fuentes en tu navegador: glifos en píxeles y vectores, kerning, vista previa en vivo, exportación TTF/WOFF y subconjuntos. Todo se queda en tu computadora."
+    },
+    "pt-BR": {
+      "title": "Editor de fontes online: crie fontes TTF/WOFF | Carino Fonts",
+      "desc": "Crie fontes no navegador: edição de glifos em pixel e vetor, kerning, prévia ao vivo, exportação TTF/WOFF e subsetting. Tudo fica no seu computador."
+    },
+    "ja": {
+      "title": "フォント作成エディタ TTF/WOFF | Carino Fonts",
+      "desc": "ブラウザでフォント作成。ピクセル・ベクターのグリフ編集、カーニング、ライブプレビュー、TTF/WOFF書き出し、サブセット化。データは端末内に保持。"
+    },
+    "ru": {
+      "title": "Онлайн-редактор шрифтов: TTF/WOFF в браузере | Carino Fonts",
+      "desc": "Создавайте шрифты в браузере: пиксельные и векторные глифы, кернинг, живой предпросмотр, экспорт TTF/WOFF и подмножества. Всё остаётся на вашем компьютере."
+    }
+  },
+  "hardware.carino.systems": {
+    "es": {
+      "title": "Buscar fabricante por MAC y Service Tag Dell — Carino Hardware",
+      "desc": "Decodifica una dirección MAC (fabricante y bits), abre la garantía y los controladores de cualquier marca y obtén recomendaciones de hardware. En tu navegador."
+    },
+    "pt-BR": {
+      "title": "Consultar fabricante por MAC e Service Tag Dell — Carino Hardware",
+      "desc": "Decodifique um endereço MAC (fabricante e bits), acesse garantia e drivers de qualquer marca e receba recomendações de hardware por recurso. Tudo no navegador."
+    },
+    "ja": {
+      "title": "MACアドレス ベンダー検索 — Carino Hardware",
+      "desc": "MACアドレスからベンダーとビットを解析、各ブランドの保証・ドライバーページへ移動、機能重視のハードウェア構成提案も。すべてブラウザ内で動作。"
+    },
+    "ru": {
+      "title": "Поиск производителя по MAC-адресу — Carino Hardware",
+      "desc": "Расшифруйте MAC-адрес (производитель и биты), откройте гарантию и драйверы любого бренда и получите рекомендации по сборке с упором на функции. Всё в браузере."
+    }
+  },
+  "hash.carino.systems": {
+    "es": {
+      "title": "SHA-256 paso a paso y generador de hash — Carino Hash",
+      "desc": "Laboratorio para aprender hashing: visualizador de SHA-256 paso a paso en vivo, resúmenes con varios algoritmos y una demo de firma Lamport poscuántica."
+    },
+    "pt-BR": {
+      "title": "SHA-256 passo a passo e gerador de hash — Carino Hash",
+      "desc": "Laboratório para aprender hashing: visualizador do SHA-256 passo a passo ao vivo, digests com vários algoritmos e demo de assinatura Lamport pós-quântica."
+    },
+    "ja": {
+      "title": "SHA-256 ステップ解説・ハッシュ生成 — Carino Hash",
+      "desc": "ハッシュ学習ラボ。SHA-256の処理をライブで段階表示、複数アルゴリズムのダイジェスト、耐量子Lamport署名のデモ。"
+    },
+    "ru": {
+      "title": "SHA-256 по шагам и генератор хешей — Carino Hash",
+      "desc": "Учебная лаборатория хеширования: пошаговая визуализация SHA-256 в реальном времени, хеши разных алгоритмов и демо постквантовой подписи Лэмпорта."
+    }
+  },
+  "kanban.carino.systems": {
+    "es": {
+      "title": "Tablero Kanban gratis, sin cuenta, guardado en el enlace",
+      "desc": "Un tablero Kanban gratis, sin cuenta ni servidor: todo el tablero vive en su enlace, para que lo guardes en favoritos o lo compartas."
+    },
+    "pt-BR": {
+      "title": "Quadro Kanban grátis, sem conta, salvo no link",
+      "desc": "Um quadro Kanban grátis, sem conta e sem servidor: o quadro inteiro fica no link, para você salvar nos favoritos ou compartilhar."
+    },
+    "ja": {
+      "title": "Kanbanボード 無料・登録不要・リンクに保存",
+      "desc": "アカウントもサーバーも不要の無料Kanbanボード。ボード全体がリンクに収まるので、ブックマークや共有が簡単。"
+    },
+    "ru": {
+      "title": "Kanban-доска бесплатно, без регистрации, хранится в ссылке",
+      "desc": "Бесплатная Kanban-доска без аккаунта и сервера: вся доска хранится в ссылке, её можно добавить в закладки или отправить другим."
+    }
+  },
+  "law.carino.systems": {
+    "es": {
+      "title": "Carino Law — fuentes jurídicas oficiales, por país",
+      "desc": "Dónde se publica oficialmente la ley en cada país: diario oficial, constitución, leyes, tribunales y tratados, enlazados a su editor. Lo no oficial se indica."
+    },
+    "pt-BR": {
+      "title": "Carino Law — fontes jurídicas oficiais, por país",
+      "desc": "Onde a lei é publicada oficialmente em cada país: diário oficial, constituição, leis, tribunais e tratados, com link para quem publica. O não oficial é avisado."
+    },
+    "ja": {
+      "title": "Carino Law — 国別の公式法令情報源",
+      "desc": "法令の公式な公布先を国別に案内。官報、憲法、現行法令集、裁判所、条約を発行元へリンク。非公式の情報源はその旨を明記。"
+    },
+    "ru": {
+      "title": "Carino Law — официальные правовые источники по странам",
+      "desc": "Где официально публикуется право в каждой стране: вестник, конституция, сводные законы, суды и договоры — со ссылкой на издателя. Неофициальное помечено."
+    }
+  },
+  "learn.carino.systems": {
+    "es": {
+      "title": "Carino Learn — Aprende ensamblador, Linux, Git, redes y DICOM",
+      "desc": "Módulos prácticos con visualizadores: ensamblador x86-64, PC, Bash, Linux, Git, redes, netplan, regex, criptografía, cuántica, DICOM y HL7, ISO 27001."
+    },
+    "pt-BR": {
+      "title": "Carino Learn — Aprenda Assembly, Linux, Git, redes, DICOM e HL7",
+      "desc": "Módulos práticos com visualizadores: Assembly x86-64, arquitetura de PC, Bash, Linux, Git, redes, netplan, regex, criptografia, quântica, DICOM, HL7, ISO 27001."
+    },
+    "ja": {
+      "title": "Carino Learn — Linux・Git・DICOM等を学ぶ",
+      "desc": "実践モジュールと可視化。x86-64アセンブリ、PC構成、Bash、Linux、Git、ネットワーク、netplan、正規表現、暗号、量子、DICOM・HL7、ISO 27001"
+    },
+    "ru": {
+      "title": "Carino Learn — ассемблер, Linux, Git, сети, DICOM и HL7",
+      "desc": "Практические модули с визуализаторами: ассемблер x86-64, устройство ПК, Bash, Linux, Git, сети, netplan, regex, криптография, кванты, DICOM и HL7, ISO 27001."
+    }
+  },
+  "media.carino.systems": {
+    "es": {
+      "title": "Convertir PDF a imagen, OCR y multimedia — Carino Media",
+      "desc": "Suite de archivos y multimedia: PDF a imágenes, OCR, limpieza de firmas, conversión de imágenes, comandos ffmpeg y audio a WAV. Todo en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Converter PDF em imagem, OCR e mídia — Carino Media",
+      "desc": "Suíte de arquivos e mídia: PDF em imagens, OCR, limpeza de assinaturas, conversão de imagens, gerador de comandos ffmpeg e áudio para WAV. Tudo no navegador."
+    },
+    "ja": {
+      "title": "PDF 画像変換・OCR・メディア変換 — Carino Media",
+      "desc": "ブラウザ完結のファイル・メディアツール。PDFの画像化、OCR、署名画像の整形、画像変換、ffmpegコマンド作成、音声のWAV変換。"
+    },
+    "ru": {
+      "title": "PDF в картинку, OCR и конвертер медиа — Carino Media",
+      "desc": "Набор для файлов и медиа: PDF в изображения, OCR, очистка подписи, конвертация изображений, конструктор команд ffmpeg и аудио в WAV. Всё работает в браузере."
+    }
+  },
+  "metadata.carino.systems": {
+    "es": {
+      "title": "Ver y editar metadatos EXIF, GPS, PDF y MP3 — Carino Metadata",
+      "desc": "Mira todos los metadatos de casi cualquier archivo, edita etiquetas EXIF, PDF y MP3 y quita la ubicación GPS de tus fotos en tu navegador. Nada se sube."
+    },
+    "pt-BR": {
+      "title": "Ver e editar metadados EXIF, GPS, PDF e MP3 — Carino Metadata",
+      "desc": "Veja todos os metadados de quase qualquer arquivo, edite tags EXIF, PDF e MP3 e remova a localização GPS das fotos, no navegador. Nada é enviado."
+    },
+    "ja": {
+      "title": "メタデータ確認・編集 EXIF/GPS | Carino",
+      "desc": "ほぼすべてのファイルのメタデータを表示。EXIF・PDF・MP3タグを編集し、写真のGPS位置情報を削除。ブラウザ内で処理、アップロードなし。"
+    },
+    "ru": {
+      "title": "Просмотр и правка метаданных EXIF, GPS, PDF — Carino Metadata",
+      "desc": "Смотрите все метаданные почти любого файла, редактируйте теги EXIF, PDF и MP3 и удаляйте GPS-координаты из фото — в браузере. Файлы никуда не загружаются."
+    }
+  },
+  "music.carino.systems": {
+    "es": {
+      "title": "Carino Music Grid — música por país",
+      "desc": "Un muro musical personal y una colección por país. Haz clic en una portada para reproducir, explora por país, arma una cola y sigue la letra sincronizada."
+    },
+    "pt-BR": {
+      "title": "Carino Music Grid — música por país",
+      "desc": "Um mural musical pessoal e uma coleção por país. Clique em qualquer capa para tocar, navegue por país, monte uma fila e acompanhe a letra sincronizada."
+    },
+    "ja": {
+      "title": "Carino Music Grid — 国別の音楽",
+      "desc": "個人の音楽ウォールと国別コレクション。ジャケットをクリックして再生、国別に閲覧、曲をキューに追加、同期歌詞も表示。"
+    },
+    "ru": {
+      "title": "Carino Music Grid — музыка по странам",
+      "desc": "Личная музыкальная стена и коллекция по странам. Нажмите на обложку, чтобы слушать, выбирайте страну, ставьте песни в очередь и следите за синхронным текстом."
+    }
+  },
+  "netplan.carino.systems": {
+    "es": {
+      "title": "Configurar red en Linux — netplan · networkd · NetworkManager",
+      "desc": "Crea configuraciones de red de Linux sin errores de YAML: archivos de netplan, systemd-networkd y NetworkManager generados en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Configurar rede no Linux — netplan · networkd · NetworkManager",
+      "desc": "Crie configurações de rede Linux sem erros de YAML: arquivos de netplan, systemd-networkd e NetworkManager gerados no navegador."
+    },
+    "ja": {
+      "title": "Linuxネットワーク設定作成 netplan・networkd",
+      "desc": "YAMLのミスなしでLinuxのネットワーク設定を作成。netplan、systemd-networkd、NetworkManagerのファイルをブラウザで生成。"
+    },
+    "ru": {
+      "title": "Генератор настроек сети Linux — netplan · NetworkManager",
+      "desc": "Создавайте сетевые настройки Linux без ошибок в YAML: файлы netplan, systemd-networkd и NetworkManager генерируются в браузере."
+    }
+  },
+  "offline.carino.systems": {
+    "es": {
+      "title": "Carino Offline — intranet, sneakernet y el stack sin conexión",
+      "desc": "Qué descargar antes de que no puedas, qué software funciona sin WAN, cuánto cuesta el hardware en México y por qué el medio físico vence a una ruta bloqueada."
+    },
+    "pt-BR": {
+      "title": "Carino Offline — intranet, sneakernet e o stack offline",
+      "desc": "O que baixar enquanto dá, que software funciona sem WAN, quanto custa o hardware no México e como a mídia física vence uma rota bloqueada. Roda offline."
+    },
+    "ja": {
+      "title": "Carino Offline — イントラネットとオフライン環境",
+      "desc": "使えなくなる前に何を落とすか、WANなしで動くソフト、メキシコでのハードウェア価格、物理メディアが遮断経路に勝つ理由。ブラウザでオフライン動作。"
+    },
+    "ru": {
+      "title": "Carino Offline — интранет, sneakernet и офлайн-стек",
+      "desc": "Что скачать, пока не поздно, какой софт работает без WAN, сколько стоит оборудование в Мексике и почему носитель надёжнее блокировки. Работает офлайн."
+    }
+  },
+  "password.carino.systems": {
+    "es": {
+      "title": "Generador de contraseñas seguras y para compartir | Carino",
+      "desc": "Crea una contraseña segura y envíasela a alguien de forma segura. Todo ocurre en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Gerador de senhas fortes — compartilhe com segurança | Carino",
+      "desc": "Crie uma senha forte e envie para alguém com segurança. Tudo acontece no navegador."
+    },
+    "ja": {
+      "title": "強力なパスワード生成・安全に共有 | Carino",
+      "desc": "強力なパスワードを作成して、安全に相手へ送信。すべてブラウザ内で完結。"
+    },
+    "ru": {
+      "title": "Генератор надёжных паролей и безопасная передача | Carino",
+      "desc": "Создайте надёжный пароль и безопасно передайте его другому человеку. Всё происходит в браузере."
+    }
+  },
+  "ping.carino.systems": {
+    "es": {
+      "title": "Prueba de ping: latencia, jitter y análisis de logs | Carino",
+      "desc": "Mide latencia y analiza logs de ping: ida y vuelta, jitter, pérdida de paquetes y desglose DNS/TLS/TTFB, o lee una salida de ping guardada. Nada sale de aquí."
+    },
+    "pt-BR": {
+      "title": "Teste de ping online — latência, jitter e análise de log | Carino",
+      "desc": "Meça latência e analise logs de ping: ida e volta, jitter, perda de pacotes e divisão DNS/TLS/TTFB, ou leia uma saída de ping salva. Nada sai da página."
+    },
+    "ja": {
+      "title": "Pingテスト・遅延/ジッター・ログ解析 | Carino",
+      "desc": "ブラウザで遅延を測定しpingログを解析。往復時間、ジッター、パケットロス、DNS/TLS/TTFBの内訳、保存したping出力も読み込み。外部送信なし。"
+    },
+    "ru": {
+      "title": "Пинг-тест онлайн — задержка, джиттер и анализ логов | Carino",
+      "desc": "Замер задержки и анализ логов ping: время отклика, джиттер, потери пакетов, разбивка DNS/TLS/TTFB или разбор сохранённого вывода ping. Всё остаётся на странице."
+    }
+  },
+  "quote.carino.systems": {
+    "es": {
+      "title": "Hacer cotizaciones gratis — plantilla a PDF | Carino",
+      "desc": "Haz una cotización limpia de tus servicios o productos y expórtala a PDF: gratis, en tu navegador y sin cuenta."
+    },
+    "pt-BR": {
+      "title": "Gerador de orçamentos — modelo grátis em PDF | Carino",
+      "desc": "Faça um orçamento limpo dos seus serviços ou produtos e exporte em PDF — grátis, no navegador, sem conta."
+    },
+    "ja": {
+      "title": "見積書作成 無料テンプレート PDF出力 | Carino",
+      "desc": "サービスや商品のシンプルな見積書を作成してPDFで書き出し。無料、ブラウザで、アカウント不要。"
+    },
+    "ru": {
+      "title": "Коммерческое предложение — бесплатный шаблон в PDF | Carino",
+      "desc": "Составьте аккуратное коммерческое предложение на услуги или товары и сохраните его в PDF — бесплатно, в браузере, без регистрации."
+    }
+  },
+  "setup.carino.systems": {
+    "es": {
+      "title": "Carino Setup — Automatización universal de sistemas operativos",
+      "desc": "Un solo comando que configura Linux, Windows o macOS: detección de hardware y distribución, controladores y 15 perfiles por uso. Sin instalar nada antes."
+    },
+    "pt-BR": {
+      "title": "Carino Setup — Automação universal de sistemas operacionais",
+      "desc": "Um único comando que configura Linux, Windows ou macOS: detecção de hardware e distribuição, drivers e 15 perfis por finalidade. Nada para instalar antes."
+    },
+    "ja": {
+      "title": "Carino Setup — 汎用OSセットアップ自動化",
+      "desc": "1つのコマンドでLinux・Windows・macOSを設定。ハードウェアとディストリビューションの検出、ドライバー、15の用途別プロファイル。事前準備不要。"
+    },
+    "ru": {
+      "title": "Carino Setup — универсальная автоматизация настройки ОС",
+      "desc": "Одна команда настраивает Linux, Windows или macOS: определение оборудования и дистрибутива, драйверы и 15 профилей под задачи. Ничего не нужно ставить заранее."
+    }
+  },
+  "software.carino.systems": {
+    "es": {
+      "title": "Catálogo de software — descargas y comandos de instalación",
+      "desc": "Enlaces de descarga directa y comandos de instalación de software y sistemas operativos (Linux, Windows y macOS) en un solo catálogo con búsqueda."
+    },
+    "pt-BR": {
+      "title": "Catálogo de software — links de download e comandos de instalação",
+      "desc": "Links diretos de download e comandos de instalação de software e sistemas operacionais — Linux, Windows e macOS — em um só catálogo pesquisável."
+    },
+    "ja": {
+      "title": "ソフトウェアカタログ — ダウンロードとインストール",
+      "desc": "ソフトウェアとOS（Linux・Windows・macOS）の直接ダウンロードリンクとインストールコマンドを、検索できる1つのカタログに。"
+    },
+    "ru": {
+      "title": "Каталог программ — ссылки на скачивание и команды установки",
+      "desc": "Прямые ссылки на скачивание и команды установки программ и операционных систем — Linux, Windows и macOS — в одном каталоге с поиском."
+    }
+  },
+  "stocks.carino.systems": {
+    "es": {
+      "title": "Seguimiento de acciones, portafolio y alertas — Carino Stocks",
+      "desc": "Lista de seguimiento, portafolio y alertas de mercados en tu navegador. Tus claves, tu dispositivo. Solo monitoreo, nunca asesoría."
+    },
+    "pt-BR": {
+      "title": "Acompanhar ações, carteira e alertas de preço — Carino Stocks",
+      "desc": "Lista de acompanhamento, carteira e alertas de mercado no navegador. Suas chaves, seu dispositivo. Apenas monitoramento, nunca recomendação."
+    },
+    "ja": {
+      "title": "株価ウォッチリスト・アラート — Carino Stocks",
+      "desc": "ブラウザ完結の株式ウォッチリスト、ポートフォリオ、アラート。APIキーも端末も自分のもの。監視専用で投資助言はなし。"
+    },
+    "ru": {
+      "title": "Список акций, портфель и ценовые оповещения — Carino Stocks",
+      "desc": "Список наблюдения, портфель и оповещения по рынкам прямо в браузере. Ваши ключи, ваше устройство. Только мониторинг, никаких советов."
+    }
+  },
+  "subs.carino.systems": {
+    "es": {
+      "title": "Sincronizar subtítulos SRT, LRC y ASS | Sync Studio",
+      "desc": "Corrige subtítulos y letras desfasados: desplaza, estira y vuelve a sincronizar archivos .srt, .lrc y .ass y previsualízalos, en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Sincronizar legendas SRT, LRC e ASS | Sync Studio",
+      "desc": "Corrija legendas e letras fora de sincronia: desloque, estique e ressincronize arquivos .srt, .lrc e .ass e visualize o resultado, no navegador."
+    },
+    "ja": {
+      "title": "字幕タイミング調整 SRT・LRC・ASS | Sync Studio",
+      "desc": "ずれた字幕や歌詞を修正。.srt・.lrc・.assのずらし、伸縮、タイミング再設定、プレビューまでブラウザで。"
+    },
+    "ru": {
+      "title": "Синхронизация субтитров — сдвиг SRT, LRC и ASS | Sync Studio",
+      "desc": "Исправьте рассинхрон субтитров и текстов песен: сдвигайте, растягивайте и заново синхронизируйте .srt, .lrc и .ass с предпросмотром — в браузере."
+    }
+  },
+  "time.carino.systems": {
+    "es": {
+      "title": "Reloj mundial, UTC y convertidor de Unix epoch — Carino Time",
+      "desc": "Hora local, UTC y Unix epoch: reloj mundial con búsqueda y zonas fijadas, horario de las bolsas en vivo y cuentas regresivas que puedes crear y compartir."
+    },
+    "pt-BR": {
+      "title": "Relógio mundial, UTC e conversor de Unix epoch — Carino Time",
+      "desc": "Hora local, UTC e Unix epoch: relógio mundial com busca e fusos fixados, horário das bolsas ao vivo e contagens regressivas para criar e compartilhar."
+    },
+    "ja": {
+      "title": "世界時計・UTC・Unix時間変換 — Carino Time",
+      "desc": "現地時刻、UTC、Unix時間。検索できる世界時計とピン留めしたタイムゾーン、株式市場の取引時間をライブ表示、共有できるカウントダウンも。"
+    },
+    "ru": {
+      "title": "Мировые часы, UTC и конвертер Unix-времени — Carino Time",
+      "desc": "Местное время, UTC и Unix-время: мировые часы с поиском и закреплёнными поясами, часы работы бирж онлайн и обратные отсчёты, которыми можно поделиться."
+    }
+  },
+  "topo.carino.systems": {
+    "es": {
+      "title": "Hacer diagramas de red — dibuja topologías en línea | Topo",
+      "desc": "Dibuja diagramas de red en tu navegador: dispositivos, enlaces y direccionamiento IP en un lienzo interactivo, compartidos como enlace privado."
+    },
+    "pt-BR": {
+      "title": "Ferramenta de diagrama de rede — desenhe topologias online | Topo",
+      "desc": "Desenhe diagramas de rede no navegador — dispositivos, links e endereçamento IP em uma tela interativa, compartilhados por link privado."
+    },
+    "ja": {
+      "title": "ネットワーク構成図作成ツール オンライン | Topo",
+      "desc": "ブラウザでネットワーク構成図を作成。機器、接続、IPアドレスをインタラクティブなキャンバスに配置し、非公開リンクで共有。"
+    },
+    "ru": {
+      "title": "Схема сети онлайн — рисуйте топологию сети | Topo",
+      "desc": "Рисуйте схемы сети в браузере: устройства, связи и IP-адресация на интерактивном холсте, с отправкой по приватной ссылке."
+    }
+  },
+  "tv.carino.systems": {
+    "es": {
+      "title": "Carino TV — Muro de noticias en vivo",
+      "desc": "Mira muchas transmisiones de noticias en vivo de todo el mundo a la vez. Agrega YouTube o cualquier transmisión, ordénalas por país y comparte tu muro."
+    },
+    "pt-BR": {
+      "title": "Carino TV — Mural de notícias ao vivo",
+      "desc": "Assista a várias transmissões de notícias ao vivo do mundo todo ao mesmo tempo. Adicione YouTube ou qualquer stream, organize por país e compartilhe seu mural."
+    },
+    "ja": {
+      "title": "Carino TV — ライブニュースウォール",
+      "desc": "世界中のライブニュースを同時に視聴。YouTubeや埋め込み可能な配信を追加し、国別に整理して、リンクでウォールを共有。"
+    },
+    "ru": {
+      "title": "Carino TV — стена новостей в прямом эфире",
+      "desc": "Смотрите сразу много новостных трансляций со всего мира. Добавляйте YouTube или любой встраиваемый поток, группируйте по странам и делитесь стеной по ссылке."
+    }
+  },
+  "vitae.carino.systems": {
+    "es": {
+      "title": "Crear currículum gratis: PDF y sin cuenta | Carino Vitae",
+      "desc": "Crea un currículum limpio y listo para imprimir con edición en vivo y exportación a PDF. Tus datos se quedan en tu navegador."
+    },
+    "pt-BR": {
+      "title": "Criar currículo grátis — exporte em PDF, sem conta | Carino Vitae",
+      "desc": "Crie um currículo limpo e pronto para imprimir, com edição ao vivo e exportação em PDF. Seus dados ficam no navegador."
+    },
+    "ja": {
+      "title": "履歴書作成 無料・PDF出力・登録不要 | Carino Vitae",
+      "desc": "印刷に適したきれいな履歴書をライブ編集で作成し、PDFで書き出し。データはブラウザ内に保存。"
+    },
+    "ru": {
+      "title": "Конструктор резюме бесплатно — PDF без регистрации | Carino Vitae",
+      "desc": "Создайте аккуратное резюме, готовое к печати, с редактированием в реальном времени и экспортом в PDF. Данные остаются в вашем браузере."
+    }
+  },
+  "images.carino.systems": {
+    "es": {
+      "title": "Carino Custom Images — Fedora hecho a la medida",
+      "desc": "Fedora a la medida: seis escritorios COSMIC + Hyprland y dos appliances headless (telefonía Asterisk/FreePBX e intranet para LAN sin WAN). ISO o imagen bootc."
+    },
+    "pt-BR": {
+      "title": "Carino Custom Images — Fedora sob medida",
+      "desc": "Fedora sob medida: seis desktops COSMIC + Hyprland e dois appliances headless (telefonia Asterisk/FreePBX e intranet para LAN sem WAN). ISO ou imagem bootc."
+    },
+    "ja": {
+      "title": "Carino Custom Images — 用途特化型Fedora",
+      "desc": "用途特化型Fedora。COSMIC + Hyprlandのデスクトップ6種と、Asterisk/FreePBX電話・WANなしLAN用イントラネットの2種。ISOかbootc。"
+    },
+    "ru": {
+      "title": "Carino Custom Images — Fedora под конкретные задачи",
+      "desc": "Fedora под задачи: шесть десктопов COSMIC + Hyprland и два серверных образа — телефония Asterisk/FreePBX и интранет для LAN без WAN. ISO или образ bootc."
+    }
+  }
+}

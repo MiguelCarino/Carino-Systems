@@ -13,7 +13,18 @@
   <meta property="og:title" content="Carino Systems">
   <meta property="og:description" content="Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. Nothing to install, no account, and your files never leave your computer.">
   <meta property="og:url" content="https://carino.systems/">
-  <meta property="og:image" content="https://carino.systems/logo.webp">
+  <meta property="og:image" content="https://carino.systems/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Carino Systems">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="https://carino.systems/">
+  <link rel="alternate" hreflang="es" href="https://carino.systems/?lang=es">
+  <link rel="alternate" hreflang="pt-BR" href="https://carino.systems/?lang=pt-BR">
+  <link rel="alternate" hreflang="ja" href="https://carino.systems/?lang=ja">
+  <link rel="alternate" hreflang="ru" href="https://carino.systems/?lang=ru">
+  <link rel="alternate" hreflang="x-default" href="https://carino.systems/">
+  <script type="application/json" id="carino-head-i18n">{"es": {"title": "Carino Systems", "desc": "Soluciones abiertas y gratis para todos: abre una imagen médica, arregla un documento, crea tu currículum, configura tu computadora. Sin instalar ni cuenta."}, "pt-BR": {"title": "Carino Systems", "desc": "Soluções abertas e grátis para todos: abra uma imagem médica, corrija um documento, crie um currículo, configure o computador. Sem instalar, sem conta."}, "ja": {"title": "Carino Systems", "desc": "誰でも無料で使えるオープンなツール。医用画像を開く、文書を直す、履歴書を作る、PCを設定する。インストールもアカウントも不要、ファイルはPCから出ない。"}, "ru": {"title": "Carino Systems", "desc": "Открытые бесплатные решения: откройте медснимок, исправьте документ, составьте резюме, настройте компьютер. Без установки и аккаунта, файлы остаются у вас."}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Carino Systems", "url": "https://carino.systems/", "description": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. Nothing to install, no account, and your files never leave your computer.", "publisher": {"@type": "Person", "name": "Miguel Cariño", "url": "https://carino.systems/"}}</script>
   <!-- /carino:head -->
   <link rel="stylesheet" href="fonts/carino-fonts.css">
@@ -503,6 +514,13 @@
     .wall figcaption b { color: var(--accent); font-family: var(--font-mono); }
 
     /* ── six reasons, two rows of three ── */
+    .starts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+    .starts-list a { display: block; height: 100%; border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px 16px; color: var(--text-sec); text-decoration: none; line-height: 1.45;
+      transition: border-color .15s, color .15s; }
+    .starts-list a:hover, .starts-list a:focus-visible { border-color: var(--accent); color: var(--text); }
+    .starts-list b { display: block; color: var(--accent); font-weight: 700; margin-bottom: 2px; }
     .why-grid { display: grid; gap: clamp(12px, 1.4vw, 20px);
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .why-card { border: 1px solid var(--border); border-radius: 14px; padding: 20px 20px 22px;
@@ -805,6 +823,25 @@
       <div class="wall-grid" id="wall"></div>
       <figcaption><b id="wallCount">—</b> <span data-i18n>tools, all of them free, none of them asking for an account.</span></figcaption>
     </figure>
+  </section>
+
+  <!-- Plain links in the HTML itself. The wall above is drawn by script from the
+       registry; this list is what a search engine or a reader without script
+       sees first. Non-health tools only while §P.22 of the business plan holds. -->
+  <section class="starts">
+    <div class="sec-head">
+      <h2 data-i18n>A few to start with</h2>
+    </div>
+    <ul class="starts-list">
+      <li><a href="https://hardware.carino.systems/"><b>Hardware</b> <span data-i18n>Find who made a network card from its MAC address</span></a></li>
+      <li><a href="https://metadata.carino.systems/"><b>Metadata</b> <span data-i18n>See what a file says about you, and remove a photo's GPS location</span></a></li>
+      <li><a href="https://media.carino.systems/"><b>Media</b> <span data-i18n>Turn a PDF into images, or read the text in a scan</span></a></li>
+      <li><a href="https://netplan.carino.systems/"><b>Netplan</b> <span data-i18n>Write a Linux network config without YAML mistakes</span></a></li>
+      <li><a href="https://ping.carino.systems/"><b>Ping</b> <span data-i18n>Check how slow your connection really is, and read a ping log</span></a></li>
+      <li><a href="https://topo.carino.systems/"><b>Topo</b> <span data-i18n>Draw the network in your office</span></a></li>
+      <li><a href="https://vitae.carino.systems/"><b>Vitae</b> <span data-i18n>Make a résumé and save it as a PDF</span></a></li>
+      <li><a href="https://password.carino.systems/"><b>Password</b> <span data-i18n>Make a strong password and send it safely</span></a></li>
+    </ul>
   </section>
 
   <section class="why">
