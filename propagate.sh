@@ -34,7 +34,7 @@ Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems"
 # Project pages that live in a subfolder of a non-web repo but still run the
 # shared navbar. Same treatment as GROUPA — they were drifting because nothing
 # copied to them.
-SUBSITES="Carino-PACS/docs Custom-Images/docs"
+SUBSITES="Carino-DICOM/docs Custom-Images/docs"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 BESPOKE="Asobi Retina DICOM-editor Learn MultiWeb MusicGrid TV"
@@ -97,7 +97,7 @@ done
 # Carino-Systems (this repo) already holds the canonical carino-clock.js, and
 # its navbar is inline (it owns the full Sys. Status dropdown, hardware rows
 # included — carino-diag.js is the trimmed network-only port of it).
-# Carino-PACS/pacs/web ships a deliberately self-contained navbar (it runs
+# Carino-DICOM/pacs/web ships a deliberately self-contained navbar (it runs
 # offline, so the clock is inlined) — hand-maintained, left untouched here.
 #
 # Retired, deliberately absent: pentarch, AssemblyRoadmap and MetadataViewer

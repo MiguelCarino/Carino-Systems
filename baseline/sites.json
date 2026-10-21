@@ -48,7 +48,7 @@
     "domain": "cve.carino.systems",
     "dir": "CVE",
     "name": "CVE Database",
-    "desc": "Browse and search security vulnerabilities sourced from the NVD database.",
+    "desc": "Search CVE security vulnerabilities from the NIST NVD — CVSS scores, filters and trends, fast and offline-capable, in your browser.",
     "pages": [
       "stats.html"
     ]
@@ -63,7 +63,7 @@
     "domain": "desk.carino.systems",
     "dir": "Desk",
     "name": "Desk",
-    "desc": "Support snippet workspace — search, fill and copy canned responses for client requests."
+    "desc": "Help-desk snippet workspace — search, fill in and copy canned replies for support tickets, in your browser."
   },
   {
     "domain": "dcm.carino.systems",
@@ -111,7 +111,7 @@
     "domain": "kanban.carino.systems",
     "dir": "Kanban",
     "name": "Kanban",
-    "desc": "Serverless Kanban board for lightweight project and task tracking."
+    "desc": "A free Kanban board with no account and no server: the whole board lives in its link, so you can bookmark it or share it."
   },
   {
     "domain": "law.carino.systems",
@@ -135,7 +135,7 @@
     "domain": "metadata.carino.systems",
     "dir": "Metadata",
     "name": "Metadata",
-    "desc": "Extract and display file metadata — EXIF data, document properties, and hidden fields."
+    "desc": "See every piece of metadata in almost any file, edit EXIF, PDF and MP3 tags, and strip GPS location from photos — in your browser. Your files are never uploaded."
   },
   {
     "domain": "music.carino.systems",
@@ -148,7 +148,7 @@
     "domain": "netplan.carino.systems",
     "dir": "NetplanConfig",
     "name": "Netplan Configurator",
-    "desc": "GUI-driven YAML network config editor for Linux servers. Drastically reduces errors."
+    "desc": "Build Linux network configs without YAML mistakes — netplan, systemd-networkd and NetworkManager files generated in your browser."
   },
   {
     "domain": "offline.carino.systems",
@@ -172,7 +172,7 @@
     "domain": "quote.carino.systems",
     "dir": "Quote",
     "name": "Quote",
-    "desc": "Build and send custom service and product quotes to clients."
+    "desc": "Make a clean price quote for your services or products and export it to PDF — free, in your browser, no account."
   },
   {
     "domain": "dlss.carino.systems",
@@ -197,7 +197,7 @@
     "domain": "software.carino.systems",
     "dir": "SoftwareCatalog",
     "name": "Software Catalogue",
-    "desc": "System-agnostic app repository for fleet-wide deployments.",
+    "desc": "Straight download links and install commands for software and operating systems — Linux, Windows and macOS — in one searchable catalog.",
     "image": "assets/images/logo.webp"
   },
   {
@@ -213,13 +213,13 @@
     "domain": "subs.carino.systems",
     "dir": "SyncSubsStudio",
     "name": "Sync Studio",
-    "desc": "Re-time, align and correct subtitle tracks for video — offset, stretch and preview in-browser."
+    "desc": "Fix out-of-sync subtitles and lyrics: shift, stretch and re-time .srt, .lrc and .ass files and preview them, in your browser."
   },
   {
     "domain": "teleprompter.carino.systems",
     "dir": "Teleprompter",
     "name": "TelePrompter",
-    "desc": "Clean, speed-controlled script reader for presentations and recordings."
+    "desc": "A free online teleprompter: paste your script, set the speed and read, with mirror mode for teleprompter glass."
   },
   {
     "domain": "test.carino.systems",
@@ -237,7 +237,7 @@
     "domain": "topo.carino.systems",
     "dir": "Topo",
     "name": "Topo",
-    "desc": "Draw network topologies in the browser — devices, links and addressing on an interactive canvas."
+    "desc": "Draw network diagrams in your browser — devices, links and IP addressing on an interactive canvas, shared as a private link."
   },
   {
     "domain": "tv.carino.systems",
@@ -253,7 +253,7 @@
   },
   {
     "domain": "dicom.carino.systems",
-    "dir": "Carino-PACS/docs",
+    "dir": "Carino-DICOM/docs",
     "name": "Carino DICOM",
     "desc": "A self-hosted DICOM gateway and continuity appliance: receives, routes, forwards and de-identifies studies, answers Query/Retrieve and DICOMweb, and serves an emergency worklist when the PACS is down. Not a medical device, not for primary diagnosis.",
     "software": "Linux, Windows, macOS"
