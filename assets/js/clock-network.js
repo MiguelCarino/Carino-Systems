@@ -934,6 +934,49 @@ async function checkReach(force = false) {
   stampLastCheck();
 }
 
+// MODULE: CERTIFICATE
+// /certs.json is written by baseline/certwatch.py, which a daily GitHub Action
+// runs against every site: what each one serves, checked from outside. A page
+// cannot read the certificate its own connection used, so these rows say what
+// the browser SHOULD see; when the padlock disagrees, something on this device
+// or network re-signed the connection (the note under the rows says so).
+// Read once per session, same origin. If it cannot be read the section stays
+// hidden: the rows never show a value that was not in the file.
+let _certs;
+
+function paintCerts(data) {
+  const all = data && data.domains, hub = all && all['carino.systems'];
+  if (!hub || !hub.sha256) return;
+  const expected = data.expected_issuer || '';
+  const now = Date.now();
+  const names = Object.keys(all);
+  // The same tests certwatch.py alerts on (classify), so this row and the
+  // Certificate alert issue agree: issuer, a name that covers the site, 14+ days.
+  const named = (d, san) => (san || []).some((n) => n === d || (n.startsWith('*.') && n.slice(2) === d.split('.').slice(1).join('.')));
+  const off = names.filter((d) => {
+    const c = all[d];
+    return c.error || c.issuer_org !== expected || !(Date.parse(c.not_after) - now >= 14 * 864e5) || !named(d, c.san);
+  });
+  const ok = names.length - off.length;
+  const set = (id, text, title) => { const el = $(id); if (el) { el.textContent = text; if (title != null) el.title = title; } };
+  // After a failed check the file keeps the last certificate seen, plus the error.
+  const stale = hub.error ? `\n${tt('Last certificate seen; now failing:')} ${hub.error}` : '';
+  set('certIssuer', [hub.issuer_org, hub.issuer_cn].filter(Boolean).join(' '), hub.subject + stale);
+  set('certUntil', String(hub.not_after).slice(0, 10), hub.not_after + stale);
+  set('certSha', hub.sha256.split(':').slice(0, 8).join(':') + '…', hub.sha256 + stale);
+  set('certFleet', `${ok}/${names.length} ${tt('as expected')}`,
+      off.length ? off.join('\n') : `${expected}, ${tt('names the site, 14+ days left')}`);
+  const dot = $('dotCert');
+  if (dot) dot.className = 'status-dot ' + (off.length ? 'slow' : 'success');
+  document.querySelectorAll('#diagBox [data-cert]').forEach((el) => { el.hidden = false; });
+}
+
+function loadCerts() {
+  // A failed read is not cached, so the next open (or Retry) asks again.
+  if (!_certs) _certs = fetchJSON('/certs.json', { timeoutMs: 6000 }).catch(() => { _certs = undefined; return null; });
+  return _certs.then(paintCerts);
+}
+
 // MODULE: EXPORT SYS-STATUS AS IMAGE
 // Renders the current dropdown contents to a canvas (no external libs) and
 // downloads a PNG, stamped with carino.systems at the bottom.
@@ -1080,7 +1123,7 @@ function exportStatusImage() {
 let netSwept = false;
 
 const retryBtn = $('retryNetwork');
-if(retryBtn) retryBtn.addEventListener("click", () => { netSwept = true; runNetwork(); checkReach(true); });
+if(retryBtn) retryBtn.addEventListener("click", () => { netSwept = true; runNetwork(); checkReach(true); loadCerts(); });
 
 const exportBtn = $('exportStatus');
 if(exportBtn) exportBtn.addEventListener("click", exportStatusImage);
@@ -1095,6 +1138,7 @@ if (statusToggleBtn) statusToggleBtn.addEventListener("click", () => {
   if (!box || !box.classList.contains('open')) return;
   if (!netSwept) { netSwept = true; runNetwork(); }
   checkReach();
+  loadCerts();
 });
 
 detectSystem();
@@ -1112,4 +1156,5 @@ document.addEventListener('DOMContentLoaded', () => { detectSystem(); });
 // even defined window.CarinoLang — so re-detect on a language switch to pull
 // their values ("N/A", "Masked", "Charging"…) into the new locale. Purely local
 // detection: no network probe is repeated here.
-window.addEventListener('carino:langchange', () => { detectSystem(); });
+// The Fleet row's "as expected" is repainted from the cached file, if it was read.
+window.addEventListener('carino:langchange', () => { detectSystem(); if (_certs) loadCerts(); });

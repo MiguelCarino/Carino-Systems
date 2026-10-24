@@ -415,19 +415,19 @@
   },
   "setup.carino.systems": {
     "es": {
-      "title": "Carino Setup — Automatización universal de sistemas operativos",
+      "title": "Carino Setup — Cualquier computadora, un comando",
       "desc": "Un solo comando que configura Linux, Windows o macOS: detección de hardware y distribución, controladores y 15 perfiles por uso. Sin instalar nada antes."
     },
     "pt-BR": {
-      "title": "Carino Setup — Automação universal de sistemas operacionais",
+      "title": "Carino Setup — Qualquer computador, um comando",
       "desc": "Um único comando que configura Linux, Windows ou macOS: detecção de hardware e distribuição, drivers e 15 perfis por finalidade. Nada para instalar antes."
     },
     "ja": {
-      "title": "Carino Setup — 汎用OSセットアップ自動化",
+      "title": "Carino Setup — どのPCも、コマンド1つで",
       "desc": "1つのコマンドでLinux・Windows・macOSを設定。ハードウェアとディストリビューションの検出、ドライバー、15の用途別プロファイル。事前準備不要。"
     },
     "ru": {
-      "title": "Carino Setup — универсальная автоматизация настройки ОС",
+      "title": "Carino Setup — любой компьютер, одна команда",
       "desc": "Одна команда настраивает Linux, Windows или macOS: определение оборудования и дистрибутива, драйверы и 15 профилей под задачи. Ничего не нужно ставить заранее."
     }
   },

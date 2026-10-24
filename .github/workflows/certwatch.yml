@@ -1,0 +1,108 @@
+# Checks the TLS certificate of every Carino site once a day, with
+# baseline/certwatch.py (standard library only, no third-party actions).
+#
+# certs.json at the repository root holds the certificates last seen and no
+# timestamp, so this commits only when one of them changes: one commit per
+# renewal, not one per day. Anything wrong (a CA other than Let's Encrypt, a
+# certificate that does not name its site, a failed handshake, under 14 days
+# left, an unexpected CA in the Certificate Transparency logs) opens an issue
+# titled "Certificate alert", or comments on the one already open when the
+# alerts differ from its last post.
+#
+# The push is made with GITHUB_TOKEN, which does not start workflows, so the
+# commit never re-triggers this one; it does rebuild Pages, which is how the
+# Sys. Status panel on carino.systems gets the new file.
+
+name: certwatch
+
+on:
+  schedule:
+    # Off the hour: on-the-hour slots queue for hours on shared runners.
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: certwatch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  certwatch:
+    runs-on: ubuntu-latest
+    # 42 handshakes take under a minute; crt.sh can take two each way.
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Check certificates
+        id: check
+        run: python3 baseline/certwatch.py --write --alerts "$RUNNER_TEMP/alerts.md"
+
+      - name: Commit certs.json if a certificate changed
+        shell: bash
+        run: |
+          if git diff --quiet -- certs.json && git ls-files --error-unmatch certs.json >/dev/null 2>&1; then
+            echo "No certificate changed."
+            exit 0
+          fi
+          # Name the domains whose fingerprint (or error) differs from the committed file.
+          changed=$(python3 - <<'PY'
+          import json, subprocess
+          new = json.load(open('certs.json'))['domains']
+          try:
+              old = json.loads(subprocess.run(['git', 'show', 'HEAD:certs.json'], capture_output=True,
+                                              text=True, check=True).stdout)['domains']
+          except (subprocess.CalledProcessError, ValueError, KeyError):
+              old = {}
+          keys = lambda e: (e.get('sha256'), e.get('error'))
+          diff = sorted(d for d in set(new) | set(old) if keys(new.get(d, {})) != keys(old.get(d, {})))
+          print(', '.join(diff[:6]) + (f' and {len(diff) - 6} more' if len(diff) > 6 else '') or 'certs.json')
+          PY
+          )
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add certs.json
+          git commit -m "Certificates: $changed renewed/changed"
+          # main may have moved while this ran; the alert step runs either way.
+          git pull --rebase && git push
+
+      - name: Open or update the alert issue
+        # Also after a failed push: the run that commits is the one whose alert matters.
+        if: always() && steps.check.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$RUNNER_TEMP/alerts.md"
+          if [ ! -s "$body" ]; then
+            echo "No alerts."
+            exit 0
+          fi
+          # Exact title, open only: a closed issue means it was dealt with, and a
+          # new alert after that deserves a new issue.
+          num=$(gh issue list --state open --search 'in:title "Certificate alert"' --json number,title \
+                  --jq '[.[] | select(.title == "Certificate alert")][0].number // empty')
+          # The alerts, without Run: lines or blank lines, to compare one post with the next.
+          alerts_of() { tr -d '\r' | grep -v -e '^Run: ' -e '^$' || true; }
+          now=$(alerts_of < "$body")
+          printf '\nRun: %s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> "$body"
+          if [ -n "$num" ]; then
+            # Same alerts as the last post from this workflow (its last comment,
+            # else the issue body): say nothing, so a lasting alert is not a daily notification.
+            last=$(gh issue view "$num" --json body,comments \
+                     --jq '([.comments[] | select(.author.login | startswith("github-actions"))] | last | .body) // .body')
+            if [ "$(printf '%s\n' "$last" | alerts_of)" = "$now" ]; then
+              echo "Alerts unchanged since the last post on #$num."
+              exit 0
+            fi
+            gh issue comment "$num" --body-file "$body"
+          else
+            gh issue create --title 'Certificate alert' --body-file "$body"
+          fi

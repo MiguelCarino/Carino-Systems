@@ -226,6 +226,57 @@ leaving the pulsing dot as the button. `overflow-x: hidden` is deliberately not
 the shortcut — in both WebKit and Chromium it turns the root into a scroll
 container and the sticky header silently stops sticking.
 
+## Certificates
+
+Every site in the fleet is a GitHub Pages custom domain, and GitHub gets its
+certificates from Let's Encrypt. [`baseline/certwatch.py`](baseline/certwatch.py)
+checks that this stays true, once a day, from
+[`.github/workflows/certwatch.yml`](.github/workflows/certwatch.yml):
+
+- **What each site serves.** A verified TLS handshake to every `domain` in
+  [`baseline/sites.json`](baseline/sites.json): issuer, names, validity and the
+  SHA-256 fingerprint go into [`certs.json`](certs.json) at the root, served at
+  `https://carino.systems/certs.json`. The file has no "checked at" time, so it
+  only changes when a certificate does — the workflow commits one renewal at a
+  time, and its history is the renewal history.
+- **What any CA has issued.** Certificate Transparency, through crt.sh: every
+  unexpired certificate logged for `carino.systems` or a subdomain. This is the
+  one that sees a certificate issued but not served. crt.sh is often slow or
+  down; then the run prints a warning and alerts nothing. It also lags the logs
+  by days, so a certificate a few days old may not be in it yet.
+- **The apex CAA record**, over DNS-over-HTTPS. Information only, kept in
+  `certs.json` as `caa`.
+
+A renewal by Let's Encrypt that names the site is just a commit. Anything else
+is an alert: another issuer, a certificate that does not name its site, a
+handshake that fails or does not verify, fewer than 14 days left (GitHub renews
+at about 30), or an unexpired non–Let's Encrypt certificate in the CT logs.
+Alerts open an issue titled **Certificate alert**, or comment on the one
+already open when they differ from its last post. Run it by hand with `python3 baseline/certwatch.py` (prints, writes
+nothing), `--write` to update `certs.json`, `--alerts FILE` for the issue text.
+
+**Silencing a reviewed CT entry.** Add its crt.sh id (the number in the
+`https://crt.sh/?id=…` link of the alert) to `"ct_ignore"` in `certs.json` and
+commit. The workflow keeps the list on every rewrite.
+
+**CAA.** DNS is at Porkbun. The apex should carry
+
+```
+carino.systems.  CAA  0 issue "letsencrypt.org"
+carino.systems.  CAA  0 issuewild ";"
+```
+
+That covers `carino.systems` itself only. Every subdomain is a CNAME to
+`miguelcarino.github.io`, and a CA looking up CAA for a CNAME follows it to
+GitHub's own record (letsencrypt, digicert, sectigo), which only GitHub can
+change. The subdomains are covered by certwatch instead.
+
+The Sys. Status drawer reads `certs.json` too: issuer, expiry and fingerprint of
+`carino.systems`, and how many sites are as expected. A page cannot see the
+certificate its own connection used, so that is what the browser *should* see;
+when the padlock says otherwise, something on that device or network is
+re-signing HTTPS.
+
 ## Licensing
 
 **Mine — GNU Affero General Public License v3.0 or later.** Everything in this

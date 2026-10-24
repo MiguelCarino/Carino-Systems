@@ -160,6 +160,14 @@ const I18N = {
         'Retry': 'Reintentar',
         'Export': 'Exportar',
         'Complete test': 'Prueba completa',
+        'Certificate': 'Certificado',
+        'Issuer': 'Emisor',
+        'Valid until': 'Válido hasta',
+        'Fleet': 'Todos los sitios',
+        'as expected': 'como se espera',
+        'Last certificate seen; now failing:': 'Último certificado visto; ahora falla:',
+        'names the site, 14+ days left': 'nombra el sitio, quedan 14+ días',
+        'If your padlock shows a different issuer or fingerprint, your antivirus or network is inspecting HTTPS on this device.': 'Si tu candado muestra otro emisor u otra huella, tu antivirus o tu red está inspeccionando el HTTPS en este dispositivo.',
         // Tool descriptions — these translate the `desc` field of
         // assets/json/tools.json, which the README still documents as registry
         // data. Nothing on this hub renders them: the cards take their wording
@@ -386,6 +394,14 @@ const I18N = {
         'Retry': 'Tentar novamente',
         'Export': 'Exportar',
         'Complete test': 'Teste completo',
+        'Certificate': 'Certificado',
+        'Issuer': 'Emissor',
+        'Valid until': 'Válido até',
+        'Fleet': 'Todos os sites',
+        'as expected': 'conforme o esperado',
+        'Last certificate seen; now failing:': 'Último certificado visto; agora falha:',
+        'names the site, 14+ days left': 'nomeia o site, restam 14+ dias',
+        'If your padlock shows a different issuer or fingerprint, your antivirus or network is inspecting HTTPS on this device.': 'Se o seu cadeado mostra outro emissor ou outra impressão digital, seu antivírus ou sua rede está inspecionando o HTTPS neste dispositivo.',
         // Tool descriptions — these translate the `desc` field of
         // assets/json/tools.json, which the README still documents as registry
         // data. Nothing on this hub renders them: the cards take their wording
@@ -612,6 +628,14 @@ const I18N = {
         'Retry': '再試行',
         'Export': 'エクスポート',
         'Complete test': '完全テスト',
+        'Certificate': '証明書',
+        'Issuer': '発行者',
+        'Valid until': '有効期限',
+        'Fleet': '全サイト',
+        'as expected': '想定どおり',
+        'Last certificate seen; now failing:': '最後に確認した証明書。現在は失敗:',
+        'names the site, 14+ days left': 'サイト名が一致、残り14日以上',
+        'If your padlock shows a different issuer or fingerprint, your antivirus or network is inspecting HTTPS on this device.': '鍵マークに別の発行者やフィンガープリントが表示される場合は、このPCのウイルス対策ソフトかネットワークがHTTPSを検査しています。',
         // Tool descriptions — these translate the `desc` field of
         // assets/json/tools.json, which the README still documents as registry
         // data. Nothing on this hub renders them: the cards take their wording
@@ -838,6 +862,14 @@ const I18N = {
         'Retry': 'Повторить',
         'Export': 'Экспорт',
         'Complete test': 'Полный тест',
+        'Certificate': 'Сертификат',
+        'Issuer': 'Издатель',
+        'Valid until': 'Действителен до',
+        'Fleet': 'Все сайты',
+        'as expected': 'как ожидается',
+        'Last certificate seen; now failing:': 'Последний увиденный сертификат; сейчас ошибка:',
+        'names the site, 14+ days left': 'сайт указан, осталось 14+ дней',
+        'If your padlock shows a different issuer or fingerprint, your antivirus or network is inspecting HTTPS on this device.': 'Если замок в браузере показывает другого издателя или отпечаток, ваш антивирус или сеть проверяет HTTPS на этом устройстве.',
         // Tool descriptions — these translate the `desc` field of
         // assets/json/tools.json, which the README still documents as registry
         // data. Nothing on this hub renders them: the cards take their wording

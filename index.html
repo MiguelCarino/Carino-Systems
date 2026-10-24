@@ -350,6 +350,11 @@
        long translation wraps the pair back into full-width rows rather than
        truncating. Same rule fleet-wide, where panels are half this width. */
     .diag-pair { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 20px; }
+    /* The one line of prose in the panel (under Certificate). Not a row, so the
+       PNG export leaves it out. */
+    .diag-note { margin: 2px 0 6px; color: var(--text-muted); font-family: var(--font-mono); font-size: var(--fs-label); line-height: 1.5; }
+    /* .diag-row's display: flex outranks the browser's own [hidden] rule. */
+    [data-cert][hidden] { display: none; }
     .diag-pair > .diag-row { flex: 0 1 auto; min-width: max-content; gap: 8px; }
 
     /* Compact single-line cells in a 3-up grid: dot + name (+ latency). The
@@ -759,6 +764,14 @@
         <div class="diag-row"><span class="diag-lbl">UTC</span><span class="diag-val" id="clockUTC">--:--Z</span></div>
         <div class="diag-row"><span class="diag-lbl">Epoch</span><span class="diag-val" id="clockEpoch">--</span></div>
       </div>
+      <!-- Filled from /certs.json (baseline/certwatch.py) on first open; stays
+           hidden when that file cannot be read, so it never shows a guess. -->
+      <div class="diag-section" data-cert hidden data-i18n>Certificate</div>
+      <div class="diag-row" data-cert hidden><span class="diag-lbl" data-i18n>Issuer</span><span class="diag-val diag-val-trunc" id="certIssuer">--</span></div>
+      <div class="diag-row" data-cert hidden><span class="diag-lbl" data-i18n>Valid until</span><span class="diag-val" id="certUntil">--</span></div>
+      <div class="diag-row" data-cert hidden><span class="diag-lbl">SHA-256</span><span class="diag-val" id="certSha">--</span></div>
+      <div class="diag-row" data-cert hidden><span class="diag-lbl" data-i18n>Fleet</span><div class="diag-val-group"><span class="diag-val diag-val-trunc" id="certFleet">--</span><span class="status-dot unknown" id="dotCert"></span></div></div>
+      <p class="diag-note" data-cert hidden data-i18n>If your padlock shows a different issuer or fingerprint, your antivirus or network is inspecting HTTPS on this device.</p>
       <div class="diag-actions">
         <button class="retry-btn" id="retryNetwork">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>

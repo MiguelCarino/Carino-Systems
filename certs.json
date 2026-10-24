@@ -1,0 +1,471 @@
+{
+  "caa": [],
+  "ct_ignore": [],
+  "domains": {
+    "aldis.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-06T05:30:32Z",
+      "not_before": "2026-09-07T05:30:33Z",
+      "san": [
+        "aldis.carino.systems"
+      ],
+      "sha256": "0D:78:E0:18:E0:D2:70:26:7D:81:2C:42:9F:2B:44:7C:F6:82:02:E8:88:4D:05:14:32:FB:2E:66:51:53:BF:B6",
+      "subject": "aldis.carino.systems"
+    },
+    "asobi.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-08T20:28:19Z",
+      "not_before": "2026-09-09T20:28:20Z",
+      "san": [
+        "asobi.carino.systems"
+      ],
+      "sha256": "65:DD:2C:21:B9:9A:79:53:0F:6A:06:2F:0D:C8:65:3A:DB:9D:1A:B1:80:59:B5:B5:86:C4:E7:08:80:54:61:9A",
+      "subject": "asobi.carino.systems"
+    },
+    "branding.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-09T03:04:49Z",
+      "not_before": "2026-09-10T03:04:50Z",
+      "san": [
+        "branding.carino.systems"
+      ],
+      "sha256": "46:07:70:BF:0C:4C:4F:3C:02:13:70:BD:07:3C:05:CA:00:EA:8B:93:74:24:72:F1:D2:05:C0:50:10:DB:01:88",
+      "subject": "branding.carino.systems"
+    },
+    "butter.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-08T18:18:00Z",
+      "not_before": "2026-10-10T18:18:01Z",
+      "san": [
+        "butter.carino.systems"
+      ],
+      "sha256": "77:03:1A:C3:21:ED:D8:4F:F4:66:72:13:91:CD:A3:3C:FF:78:55:E7:18:09:19:78:37:3E:C7:97:4B:F6:0C:2E",
+      "subject": "butter.carino.systems"
+    },
+    "carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-21T10:20:56Z",
+      "not_before": "2026-09-22T10:20:57Z",
+      "san": [
+        "carino.systems",
+        "www.carino.systems"
+      ],
+      "sha256": "4E:51:2D:67:9E:75:5F:11:03:5C:A7:9A:E2:BF:D1:7B:7B:C0:6F:D1:15:B0:9B:34:64:0A:60:E8:7D:D2:69:82",
+      "subject": "carino.systems"
+    },
+    "compass.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-15T21:08:17Z",
+      "not_before": "2026-09-16T21:08:18Z",
+      "san": [
+        "compass.carino.systems"
+      ],
+      "sha256": "7A:D8:2D:7B:14:52:12:D1:FC:0E:9D:B7:E4:FF:9D:27:3C:C4:F7:FE:0D:BE:18:6B:FF:BB:BC:45:E3:AC:D7:7D",
+      "subject": "compass.carino.systems"
+    },
+    "currency.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-23T16:59:17Z",
+      "not_before": "2026-09-24T16:59:18Z",
+      "san": [
+        "currency.carino.systems"
+      ],
+      "sha256": "76:CE:3D:4C:4A:31:49:52:E6:EA:1C:3B:A7:35:6C:F6:8A:DA:AA:32:2B:85:DE:91:6A:54:1E:96:84:6B:8F:CA",
+      "subject": "currency.carino.systems"
+    },
+    "cve.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-01T13:57:51Z",
+      "not_before": "2026-10-03T13:57:52Z",
+      "san": [
+        "cve.carino.systems"
+      ],
+      "sha256": "27:23:3F:83:57:4A:54:C8:76:BA:94:49:B4:D5:7F:37:39:28:66:26:92:2A:99:E8:54:73:DE:25:F4:0E:B7:89",
+      "subject": "cve.carino.systems"
+    },
+    "cybercity.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-14T00:35:18Z",
+      "not_before": "2026-10-16T00:35:19Z",
+      "san": [
+        "cybercity.carino.systems"
+      ],
+      "sha256": "0A:57:3E:B1:E9:BC:55:9C:AC:33:6F:74:64:AA:8C:0C:22:C8:8E:7F:B8:57:93:DA:7F:05:B1:4C:4F:FE:B7:D2",
+      "subject": "cybercity.carino.systems"
+    },
+    "dcm.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-11-28T11:50:24Z",
+      "not_before": "2026-08-30T11:50:25Z",
+      "san": [
+        "dcm.carino.systems"
+      ],
+      "sha256": "84:04:02:50:FC:02:DD:F7:89:7E:D7:B1:20:A4:CD:7C:36:3A:D4:09:3B:3E:5F:DF:3A:2C:AD:7C:D6:D3:08:70",
+      "subject": "dcm.carino.systems"
+    },
+    "desk.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-23T02:27:49Z",
+      "not_before": "2026-09-24T02:27:50Z",
+      "san": [
+        "desk.carino.systems"
+      ],
+      "sha256": "95:4E:B0:84:A0:3F:C3:1A:A0:42:94:C1:B9:65:E6:AC:1F:A9:CA:E6:4C:A9:D2:5F:19:50:0A:9F:A0:1B:08:4F",
+      "subject": "desk.carino.systems"
+    },
+    "dicom.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-15T16:37:18Z",
+      "not_before": "2026-09-16T16:37:19Z",
+      "san": [
+        "dicom.carino.systems"
+      ],
+      "sha256": "FA:02:04:7E:5E:D6:5E:87:85:79:69:EB:D1:D8:38:34:D0:9D:3C:36:A0:B6:ED:EE:59:8A:D1:13:DD:A4:BE:D3",
+      "subject": "dicom.carino.systems"
+    },
+    "distro.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-06T11:57:18Z",
+      "not_before": "2026-09-07T11:57:19Z",
+      "san": [
+        "distro.carino.systems"
+      ],
+      "sha256": "1E:69:BE:EF:11:2F:15:92:41:46:F7:77:D0:74:C1:F8:50:62:92:AC:C5:10:0E:54:DC:E1:DD:D5:9A:A5:B0:32",
+      "subject": "distro.carino.systems"
+    },
+    "dlss.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-14T13:59:47Z",
+      "not_before": "2026-10-16T13:59:48Z",
+      "san": [
+        "dlss.carino.systems"
+      ],
+      "sha256": "84:23:DC:FE:7C:54:BE:7A:45:02:07:BC:8D:FE:D4:42:6B:4D:18:83:13:CE:8B:56:42:01:46:F7:01:19:79:98",
+      "subject": "dlss.carino.systems"
+    },
+    "fiscal.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-06T02:50:48Z",
+      "not_before": "2026-09-07T02:50:49Z",
+      "san": [
+        "fiscal.carino.systems"
+      ],
+      "sha256": "9E:3E:2C:F1:38:24:BD:75:69:00:A4:B5:F8:6B:EB:8F:6D:6B:6F:21:A3:46:3D:5D:85:E0:72:2D:FE:C3:A7:9C",
+      "subject": "fiscal.carino.systems"
+    },
+    "font.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-26T15:29:18Z",
+      "not_before": "2026-09-27T15:29:19Z",
+      "san": [
+        "font.carino.systems"
+      ],
+      "sha256": "CE:53:4E:2E:AA:A4:E1:56:6B:8E:D1:F4:79:DC:6B:21:AC:C2:BB:3B:CB:76:D8:36:8D:7E:40:26:10:BF:AD:49",
+      "subject": "font.carino.systems"
+    },
+    "hardware.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-18T06:00:32Z",
+      "not_before": "2026-10-20T06:00:33Z",
+      "san": [
+        "hardware.carino.systems"
+      ],
+      "sha256": "40:01:CA:59:C6:5D:31:ED:FF:69:A4:E3:C8:FE:83:C2:F1:77:9C:F0:E9:CD:74:C4:B8:7F:59:E8:24:8E:7C:98",
+      "subject": "hardware.carino.systems"
+    },
+    "hash.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-10T16:12:49Z",
+      "not_before": "2026-09-11T16:12:50Z",
+      "san": [
+        "hash.carino.systems"
+      ],
+      "sha256": "B3:BF:90:C8:D8:9C:4E:B2:70:BC:D7:AB:00:6F:07:90:35:52:A9:AD:79:2E:B5:17:DE:F9:D4:30:94:A7:D5:81",
+      "subject": "hash.carino.systems"
+    },
+    "images.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-26T00:39:49Z",
+      "not_before": "2026-09-27T00:39:50Z",
+      "san": [
+        "images.carino.systems"
+      ],
+      "sha256": "64:EF:24:CE:46:3A:D4:F1:4B:E9:A3:03:1D:31:38:D1:C9:4C:7D:F9:A9:54:78:D2:9D:82:B1:F1:C6:27:54:FE",
+      "subject": "images.carino.systems"
+    },
+    "jellyfish.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-18T06:00:21Z",
+      "not_before": "2026-10-20T06:00:22Z",
+      "san": [
+        "jellyfish.carino.systems"
+      ],
+      "sha256": "1E:CD:6B:25:6C:D9:75:65:06:7C:5F:E2:AE:95:72:3B:0F:BF:60:6A:78:F8:69:52:E1:30:A8:16:80:BA:E1:4C",
+      "subject": "jellyfish.carino.systems"
+    },
+    "kanban.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-22T13:19:19Z",
+      "not_before": "2026-09-23T13:19:20Z",
+      "san": [
+        "kanban.carino.systems"
+      ],
+      "sha256": "82:FD:F9:7D:60:EB:B9:D3:2B:D7:26:50:50:E9:54:A5:80:D3:3A:89:0A:BF:CA:92:6A:F4:10:21:E5:2F:AD:80",
+      "subject": "kanban.carino.systems"
+    },
+    "law.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-15T01:17:48Z",
+      "not_before": "2026-10-17T01:17:49Z",
+      "san": [
+        "law.carino.systems"
+      ],
+      "sha256": "7D:43:FA:6F:B3:2D:39:5B:F6:10:6A:27:1E:F2:70:1B:4C:D1:65:63:8F:F4:64:5E:83:25:4C:B4:B9:F5:48:E1",
+      "subject": "law.carino.systems"
+    },
+    "learn.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-18T06:00:39Z",
+      "not_before": "2026-10-20T06:00:40Z",
+      "san": [
+        "learn.carino.systems"
+      ],
+      "sha256": "85:E8:C1:82:3A:26:F7:5A:67:F9:34:CE:D6:65:85:4C:86:C2:E6:CD:C8:49:93:9B:70:D7:F4:F0:6E:34:C7:77",
+      "subject": "learn.carino.systems"
+    },
+    "media.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-31T04:48:55Z",
+      "not_before": "2026-10-02T04:48:56Z",
+      "san": [
+        "media.carino.systems"
+      ],
+      "sha256": "9F:C7:A9:FB:C7:D4:69:9F:8F:66:29:A4:C7:4F:33:04:D4:55:4E:85:4F:55:BB:AB:2C:DA:D3:49:31:52:D2:F5",
+      "subject": "media.carino.systems"
+    },
+    "metadata.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-01T10:01:18Z",
+      "not_before": "2026-09-02T10:01:19Z",
+      "san": [
+        "metadata.carino.systems"
+      ],
+      "sha256": "4E:7D:3B:08:45:87:21:F9:BC:A7:EF:9F:C4:01:E9:B6:74:A7:16:53:7E:8E:3D:14:BB:96:43:0F:4B:7E:86:6B",
+      "subject": "metadata.carino.systems"
+    },
+    "music.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-05T15:36:29Z",
+      "not_before": "2026-10-07T15:36:30Z",
+      "san": [
+        "music.carino.systems"
+      ],
+      "sha256": "18:C3:44:E1:10:03:E8:3B:16:F2:5B:AF:D6:C8:55:FE:61:F8:20:D9:CA:87:24:D4:5C:09:C7:7B:30:51:8C:A1",
+      "subject": "music.carino.systems"
+    },
+    "netplan.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-11-29T08:52:18Z",
+      "not_before": "2026-08-31T08:52:19Z",
+      "san": [
+        "netplan.carino.systems"
+      ],
+      "sha256": "26:DF:E7:B1:36:AB:2C:09:8C:F8:63:86:91:AD:7E:11:64:65:FC:CF:17:12:F5:8A:FB:B4:68:9E:F6:A9:93:86",
+      "subject": "netplan.carino.systems"
+    },
+    "offline.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-13T10:24:22Z",
+      "not_before": "2026-10-15T10:24:23Z",
+      "san": [
+        "offline.carino.systems"
+      ],
+      "sha256": "1B:95:27:2C:A4:67:18:02:3F:B7:5C:D7:B1:95:3D:C0:18:C0:94:49:24:A7:A6:BF:80:69:C1:01:FE:27:05:88",
+      "subject": "offline.carino.systems"
+    },
+    "password.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-07T09:24:50Z",
+      "not_before": "2026-09-08T09:24:51Z",
+      "san": [
+        "password.carino.systems"
+      ],
+      "sha256": "10:F0:E2:46:B8:3D:74:C8:2B:63:87:37:6B:6A:E0:90:E5:E5:6C:81:C9:98:4B:20:DF:4F:FC:32:E3:8D:17:A0",
+      "subject": "password.carino.systems"
+    },
+    "ping.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-23T23:00:16Z",
+      "not_before": "2026-09-24T23:00:17Z",
+      "san": [
+        "ping.carino.systems"
+      ],
+      "sha256": "94:F4:EE:09:EB:43:E7:8A:6B:20:75:6F:A0:88:63:7B:F2:E4:82:CE:15:B0:95:17:2B:3F:BF:2F:8B:E3:02:1D",
+      "subject": "ping.carino.systems"
+    },
+    "quote.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-03T07:34:18Z",
+      "not_before": "2026-09-04T07:34:19Z",
+      "san": [
+        "quote.carino.systems"
+      ],
+      "sha256": "42:B5:B3:B4:15:92:99:5F:88:0C:3B:70:19:FB:57:30:D1:6B:1C:72:6D:D8:A1:0B:0B:26:46:4B:A3:8C:EC:D2",
+      "subject": "quote.carino.systems"
+    },
+    "retina.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-09T10:24:47Z",
+      "not_before": "2026-09-10T10:24:48Z",
+      "san": [
+        "retina.carino.systems"
+      ],
+      "sha256": "5E:25:9B:B4:B4:32:E0:0B:DC:10:AC:AB:95:88:DF:A2:F9:D2:0E:C4:8F:AB:35:D3:96:31:0A:B9:82:97:6F:23",
+      "subject": "retina.carino.systems"
+    },
+    "setup.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-05T19:47:56Z",
+      "not_before": "2026-10-07T19:47:57Z",
+      "san": [
+        "setup.carino.systems"
+      ],
+      "sha256": "9C:16:25:32:EC:24:46:DF:9D:92:95:44:88:D3:CC:D0:29:B2:66:A3:EA:4A:FD:4E:C6:3E:93:70:2B:88:F5:44",
+      "subject": "setup.carino.systems"
+    },
+    "software.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-29T06:10:50Z",
+      "not_before": "2026-09-30T06:10:51Z",
+      "san": [
+        "software.carino.systems"
+      ],
+      "sha256": "67:38:27:99:D9:00:AA:E0:81:42:DE:FF:91:86:A8:B4:D3:65:92:6E:3C:1D:CA:8F:D7:0E:A2:3F:DA:D7:56:90",
+      "subject": "software.carino.systems"
+    },
+    "stocks.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-23T12:25:49Z",
+      "not_before": "2026-09-24T12:25:50Z",
+      "san": [
+        "stocks.carino.systems"
+      ],
+      "sha256": "48:D8:05:EE:5C:F7:DA:97:F3:53:B5:88:71:50:DB:34:1F:F2:ED:B0:03:D0:27:15:DB:9D:BC:73:BA:28:4B:0D",
+      "subject": "stocks.carino.systems"
+    },
+    "subs.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-08T22:21:17Z",
+      "not_before": "2026-10-10T22:21:18Z",
+      "san": [
+        "subs.carino.systems"
+      ],
+      "sha256": "0C:4B:5A:99:31:40:E7:0F:D6:3C:4C:90:78:35:5B:F5:AE:BC:61:DB:09:59:75:3C:BD:B2:0E:F6:49:43:E1:31",
+      "subject": "subs.carino.systems"
+    },
+    "teleprompter.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-28T03:36:49Z",
+      "not_before": "2026-09-29T03:36:50Z",
+      "san": [
+        "teleprompter.carino.systems"
+      ],
+      "sha256": "17:6C:9F:FF:96:CF:5C:4F:4B:05:11:51:ED:D8:48:D7:16:89:FE:53:43:5B:3B:82:04:2F:D1:98:CF:43:24:09",
+      "subject": "teleprompter.carino.systems"
+    },
+    "test.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-23T03:04:50Z",
+      "not_before": "2026-09-24T03:04:51Z",
+      "san": [
+        "test.carino.systems"
+      ],
+      "sha256": "1A:0A:11:67:6A:08:5D:1F:57:F7:28:67:3A:E2:13:81:F7:F6:EB:FC:26:8E:D2:5C:7F:80:8E:0E:50:72:D8:A5",
+      "subject": "test.carino.systems"
+    },
+    "time.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-30T04:41:48Z",
+      "not_before": "2026-10-01T04:41:49Z",
+      "san": [
+        "time.carino.systems"
+      ],
+      "sha256": "E4:CA:68:57:81:6C:98:3E:EE:9C:64:AF:3C:D5:F5:C9:7A:B6:9C:06:54:65:6D:C1:24:D9:C4:A8:2D:7C:0A:A8",
+      "subject": "time.carino.systems"
+    },
+    "topo.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-22T13:23:50Z",
+      "not_before": "2026-09-23T13:23:51Z",
+      "san": [
+        "topo.carino.systems"
+      ],
+      "sha256": "42:43:8D:1E:40:11:FB:34:56:97:1F:B1:57:C5:8E:5E:23:09:46:4D:99:8A:20:4D:1D:4C:01:0D:81:7C:80:54",
+      "subject": "topo.carino.systems"
+    },
+    "tv.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-15T23:32:49Z",
+      "not_before": "2026-10-17T23:32:50Z",
+      "san": [
+        "tv.carino.systems"
+      ],
+      "sha256": "8E:72:B7:63:B0:95:14:9B:43:4B:8B:E7:7A:BB:E0:97:1A:3B:D3:48:9A:42:2F:08:AB:3D:54:F5:54:60:1B:32",
+      "subject": "tv.carino.systems"
+    },
+    "vitae.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2026-12-22T12:27:20Z",
+      "not_before": "2026-09-23T12:27:21Z",
+      "san": [
+        "vitae.carino.systems"
+      ],
+      "sha256": "DA:2C:D1:0B:D1:6F:1D:A5:ED:6F:CD:54:D3:23:D5:60:A4:E4:FE:3C:07:21:0F:BB:79:4C:A7:3F:3D:69:A7:7E",
+      "subject": "vitae.carino.systems"
+    }
+  },
+  "expected_issuer": "Let's Encrypt",
+  "schema": 1
+}
