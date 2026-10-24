@@ -10,6 +10,7 @@
 #   canonical carino-anim.*    = ../Branding/carino-anim.{css,js}
 #   canonical carino-lang.js   = Carino-Systems/carino-lang.js  (this repo)
 #   canonical carino-bridge.js = ../Quote/carino-bridge.js
+#   canonical carino-ui.{css,js} = ../Branding/carino-ui.{css,js}
 set -euo pipefail
 cd "$(dirname "$0")/.."          # -> the folder holding all the sibling repos
 
@@ -20,6 +21,8 @@ ANIM_CSS_SRC="Branding/carino-anim.css"
 ANIM_JS_SRC="Branding/carino-anim.js"
 LANG_SRC="Carino-Systems/carino-lang.js"
 BRIDGE_SRC="Quote/carino-bridge.js"
+UI_CSS_SRC="Branding/carino-ui.css"
+UI_JS_SRC="Branding/carino-ui.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
 GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
@@ -86,6 +89,18 @@ for f in */carino-bridge.js */*/carino-bridge.js */*/*/carino-bridge.js */*/*/*/
   [ -e "$f" ] || continue
   [ "$f" -ef "$BRIDGE_SRC" ] || cp "$BRIDGE_SRC" "$f"
   echo "  ${f%/carino-bridge.js}  (bridge)"
+done
+# The shared UI (tokens + production components, and their behaviour). A site
+# opts in by carrying the file and linking it before its own stylesheet, so,
+# like lang and bridge, it is discovered: any site that has it gets the current
+# one. Adopting it is a per-site migration (its local :root and look-alike
+# classes have to go at the same time), never a blind copy into every repo.
+for f in */carino-ui.css */*/carino-ui.css; do
+  [ -e "$f" ] || continue
+  d="${f%/carino-ui.css}"
+  [ "$f" -ef "$UI_CSS_SRC" ] || cp "$UI_CSS_SRC" "$f"
+  [ "$d/carino-ui.js" -ef "$UI_JS_SRC" ] || cp "$UI_JS_SRC" "$d/carino-ui.js"
+  echo "  $d  (ui)"
 done
 for d in $ANIM; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }
