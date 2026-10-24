@@ -42,6 +42,29 @@
    The shield in that last group opens carino.systems/legal.html, the one
    legal notice, privacy and cookie page for every site. carino-lang.js
    translates its tooltip (it finds the link by its id, #cnLegal).
+   The legal page itself leaves the shield out.
+
+   Fitting. The brand must never be squeezed out and the clock must stay
+   readable, at any width. When the right cluster would do either, items
+   fold into a generated "⋯" menu, in this order: first the legal/GitHub/
+   LinkedIn row; then the clock steps aside (as it already does below
+   900px), because an app's controls matter more than the time; last, the
+   app's own controls. Controls marked
+   data-priority="1" stay in the bar (an app's one main action); without
+   any mark, the first .btn-primary / .primary control stays. The real
+   nodes move (never clones) and return when there is room again, and the
+   menu sits inside #carinoNav, so `#carinoNav .cn-actions …` rules still
+   apply. If an app has moved .cn-actions somewhere else itself (Topo's
+   drawer), it is left alone.
+
+   Immersive mode (Games and ambient pages). Opt in on the script tag:
+     <script src="carino-navbar.js" data-app="…" data-immersive defer>
+   (data-immersive="5000" sets the idle delay in ms; 3000 by default). In
+   fullscreen, or after that long without the pointer near the top, the bar
+   slides away; moving the pointer to the top edge, focusing into it or
+   pressing Esc brings it back. On touch screens it only hides in
+   fullscreen. Under reduced motion it hides and shows without sliding.
+   Each change fires `carino:navbar` with detail {hidden}.
    ============================================================ */
 (function () {
   'use strict';
@@ -93,7 +116,24 @@
     // :only-child covers the sites that ship neither language nor actions.
     + '#carinoNav .cn-right > .social-row:not(:only-child){border-left:1px solid var(--cn-border);padding-left:12px;}'
     + '@media(max-width:900px){#carinoNav .header-clock{display:none;}}'
-    + '@media(max-width:640px){#carinoNav .app-tag{display:none;}}';
+    + '@media(max-width:640px){#carinoNav .app-tag{display:none;}}'
+    // Fitting: the "⋯" button and the menu the folded items move into.
+    + '#carinoNav .cn-right > .cn-keep{order:1;display:flex;align-items:center;gap:8px;}'
+    + '#carinoNav .cn-right > .cn-more{order:5;}'
+    + '#carinoNav .cn-more[hidden],#carinoNav .cn-keep:empty{display:none;}'
+    + '#carinoNav.cn-noclock .header-clock{display:none;}'
+    + '#carinoNav .cn-more[aria-expanded="true"]:not(:hover){border-color:var(--cn-accent);color:var(--cn-accent);}'
+    + '#carinoNav .cn-more-menu{position:absolute;top:calc(100% + 6px);right:12px;z-index:3;display:flex;flex-direction:column;'
+    + 'align-items:stretch;gap:12px;min-width:220px;max-width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - 80px);overflow:auto;'
+    + 'padding:12px;background:#0b0b0b;border:1px solid rgba(234,179,8,.3);border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.7);}'
+    + '#carinoNav .cn-more-menu[hidden]{display:none;}'
+    + '#carinoNav .cn-more-menu .cn-actions{flex-wrap:wrap;overflow:visible;gap:8px;}'
+    + '#carinoNav .cn-more-menu .social-row{border:0;padding:0;margin:0;justify-content:flex-start;}'
+    + '#carinoNav .cn-more-menu .social-row:not(:first-child){border-top:1px solid var(--cn-border);padding-top:12px;}'
+    // Immersive: collapse the bar's own height so the stage below takes it.
+    + '#carinoNav{transition:margin-top .25s ease,opacity .25s ease;}'
+    + '#carinoNav.cn-immersed{margin-top:-60px;opacity:0;pointer-events:none;}'
+    + '@media(prefers-reduced-motion:reduce){#carinoNav{transition:none;}}';
 
   var GH = 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22';
   var LI = 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z';
@@ -170,6 +210,218 @@
     if (strip && strip !== actions && strip.parentNode) strip.remove();
   }
 
+  // ---- fitting ----------------------------------------------------------
+  // Stage 0: everything in the bar. Stage 1: the socials row folds into the
+  // menu. Stage 2: the clock steps aside. Stage 3: the app's controls fold
+  // too, except the kept ones. Each stage is tried from 0 upward and the
+  // first that fits wins.
+  var fitting = false, fitQueued = false, fitPending = false, fitObserver = null;
+
+  function moreLabel() { return (typeof window.t === 'function') ? window.t('More') : 'More'; }
+
+  function ensureMore(nav) {
+    var btn = nav.querySelector('.cn-more');
+    if (btn) return btn;
+    btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'icon-btn cn-more';
+    // An SVG like its neighbours, not a text glyph a site's font may lack.
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="5" cy="12" r="1.9"></circle><circle cx="12" cy="12" r="1.9"></circle><circle cx="19" cy="12" r="1.9"></circle></svg>';
+    btn.hidden = true;
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'cnMoreMenu');
+    var menu = document.createElement('div');
+    menu.className = 'cn-more-menu';
+    menu.id = 'cnMoreMenu';
+    menu.hidden = true;
+    var keep = document.createElement('div');
+    // .cn-actions too, so an app's `#carinoNav .cn-actions …` rules still reach a kept control
+    keep.className = 'cn-keep cn-actions';
+    var right = nav.querySelector('.cn-right');
+    right.appendChild(keep);
+    right.appendChild(btn);
+    nav.appendChild(menu);
+    function label() { var l = moreLabel(); btn.title = l; btn.setAttribute('aria-label', l); }
+    label();
+    window.addEventListener('carino:langchange', label);
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(label, 0); });
+    function open(on) {
+      menu.hidden = !on;
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); open(menu.hidden); });
+    document.addEventListener('click', function (e) {
+      if (menu.hidden || menu.contains(e.target)) return;
+      open(false);
+    });
+    // A button or link inside the menu does its job and closes it; form
+    // fields (selects, inputs) keep it open while they are in use.
+    menu.addEventListener('click', function (e) {
+      var hit = e.target.closest && e.target.closest('button,a');
+      if (hit && !hit.closest('select,label')) setTimeout(function () { open(false); }, 0);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) { open(false); btn.focus(); }
+    });
+    return btn;
+  }
+
+  // Each moved node leaves a comment behind, so it returns to its exact spot.
+  function park(node, dest) {
+    if (!node || node.__cnHome) return;
+    var mark = document.createComment('cn-home');
+    node.parentNode.insertBefore(mark, node);
+    node.__cnHome = mark;
+    dest.appendChild(node);
+  }
+  function unpark(node) {
+    var mark = node && node.__cnHome;
+    if (!mark) return;
+    if (mark.parentNode) mark.parentNode.insertBefore(node, mark), mark.remove();
+    node.__cnHome = null;
+  }
+
+  function keptControls(actions) {
+    var marked = actions.querySelectorAll('[data-priority="1"]');
+    if (marked.length) return Array.prototype.slice.call(marked);
+    var first = actions.querySelector('.btn-primary,.primary,.cs-btn.primary');
+    return first ? [first] : [];
+  }
+
+  function cramped(nav) {
+    // Positions, not widths: an app may put its own button before the brand.
+    var left = nav.querySelector('.cn-left').getBoundingClientRect();
+    var brand = nav.querySelector('.cn-brand').getBoundingClientRect();
+    if (brand.right > left.right + 1 || brand.right > window.innerWidth) return true;
+    if (nav.scrollWidth > nav.clientWidth + 1) return true;
+    var clock = nav.querySelector('.header-clock');
+    if (clock && clock.offsetParent !== null && clock.clientWidth + 1 < clock.scrollWidth) {
+      // the clock may give up its greeting, but never the time itself
+      var time = clock.querySelector('.clock-time'), tz = clock.querySelector('.clock-tz');
+      var need = (time ? time.offsetWidth : 0) + (tz ? tz.offsetWidth : 0) + 26;
+      if (clock.clientWidth < need) return true;
+    }
+    return false;
+  }
+
+  // Moving a field someone is typing in would drop the caret (and a phone's
+  // keyboard resizes the window), so wait until focus leaves it.
+  function typingInNav(nav) {
+    var a = document.activeElement;
+    return !!(a && nav.contains(a) && a.matches('input,select,textarea,[contenteditable="true"]'));
+  }
+
+  function fit() {
+    var nav = document.getElementById('carinoNav');
+    if (!nav || fitting) return;
+    if (typingInNav(nav)) { fitPending = true; return; }
+    fitting = true;
+    try {
+      var right = nav.querySelector('.cn-right');
+      var more = ensureMore(nav);
+      var menu = nav.querySelector('.cn-more-menu');
+      var keep = right.querySelector('.cn-keep');
+      var socials = nav.querySelector('.social-row');
+      var actions = nav.querySelector('.cn-actions:not(.cn-keep)');
+      // An app that moved its controls out of the bar owns them now.
+      var ownActions = actions && (actions.parentNode === right || actions.parentNode === menu);
+      // Back to stage 0.
+      Array.prototype.slice.call(keep.children).forEach(unpark);
+      if (ownActions) unpark(actions);
+      unpark(socials);
+      nav.classList.remove('cn-noclock');
+      more.hidden = true;
+      if (!cramped(nav)) { menu.hidden = true; more.setAttribute('aria-expanded', 'false'); return; }
+      // Stage 1.
+      more.hidden = false;
+      park(socials, menu);
+      if (!cramped(nav)) return;
+      // Stage 2.
+      nav.classList.add('cn-noclock');
+      if (!cramped(nav) || !ownActions) return;
+      // Stage 3: the whole controls block folds, the kept controls stay out.
+      keptControls(actions).forEach(function (el) { park(el, keep); });
+      menu.insertBefore(actions, menu.firstChild);
+      var mark = document.createComment('cn-home');
+      right.insertBefore(mark, keep);
+      actions.__cnHome = mark;
+    } finally {
+      // The moves above are this function's own; don't let them refit again.
+      if (fitObserver) fitObserver.takeRecords();
+      fitting = false;
+    }
+  }
+
+  function queueFit() {
+    if (fitQueued) return;
+    fitQueued = true;
+    requestAnimationFrame(function () { fitQueued = false; fit(); });
+  }
+
+  function watchFit(nav) {
+    window.addEventListener('resize', queueFit);
+    window.addEventListener('carino:langchange', queueFit);
+    // carino-lang.js, carino-diag.js and the app add to the bar after this
+    // runs, and apps show or hide their own controls; refit on any of it.
+    // Only the right cluster and the menu are watched (the clock ticks every
+    // second on the left), and text changes are ignored: a live readout in
+    // an app's controls would otherwise refit on every update.
+    if (window.MutationObserver) {
+      ensureMore(nav);
+      var menuEl = nav.querySelector('.cn-more-menu'), moreEl = nav.querySelector('.cn-more');
+      fitObserver = new MutationObserver(function (records) {
+        if (fitting) return;
+        // opening and closing the menu is not a change in what has to fit
+        for (var i = 0; i < records.length; i++) {
+          if (records[i].target !== menuEl && records[i].target !== moreEl) { queueFit(); return; }
+        }
+      });
+      var opts = { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden', 'style'] };
+      fitObserver.observe(nav.querySelector('.cn-right'), opts);
+      fitObserver.observe(nav.querySelector('.cn-more-menu'), opts);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
+    window.addEventListener('load', queueFit);
+    nav.addEventListener('focusout', function () {
+      if (fitPending) { fitPending = false; setTimeout(queueFit, 0); }
+    });
+    queueFit();
+  }
+
+  // ---- immersive -------------------------------------------------------
+  function immersive(nav) {
+    if (!SCRIPT || !SCRIPT.hasAttribute('data-immersive')) return;
+    var delay = parseInt(SCRIPT.getAttribute('data-immersive'), 10) || 3000;
+    var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    var timer = null, hidden = false;
+    function set(h) {
+      if (h === hidden) return;
+      hidden = h;
+      nav.classList.toggle('cn-immersed', h);
+      try { window.dispatchEvent(new CustomEvent('carino:navbar', { detail: { hidden: h } })); } catch (e) {}
+    }
+    function busy() {
+      var menu = nav.querySelector('.cn-more-menu');
+      return nav.contains(document.activeElement) || (menu && !menu.hidden) || nav.matches(':hover');
+    }
+    function arm() {
+      clearTimeout(timer);
+      if (coarse && !document.fullscreenElement) return;
+      timer = setTimeout(function () { if (!busy()) set(true); else arm(); }, document.fullscreenElement ? 1200 : delay);
+    }
+    function show() { set(false); arm(); }
+    document.addEventListener('mousemove', function (e) {
+      if (e.clientY < 70) show(); else if (!hidden) arm();
+    }, { passive: true });
+    nav.addEventListener('focusin', show);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') show(); });
+    document.addEventListener('fullscreenchange', function () {
+      if (document.fullscreenElement) arm(); else show();
+    });
+    arm();
+  }
+
   function inject() {
     if (document.getElementById('carinoNav')) return;
     var style = document.createElement('style');
@@ -181,7 +433,14 @@
     var nav = wrap.firstElementChild;
     document.body.insertBefore(nav, document.body.firstChild);
     if (TAG) { var t = nav.querySelector('.app-tag'); if (t) { t.textContent = TAG; t.title = TAG + ' — reload'; } }
+    // On the legal page itself the shield would only link back to this page.
+    if (/\/legal(\.html)?$/.test(location.pathname)) {
+      var legal = nav.querySelector('#cnLegal');
+      if (legal) legal.remove();
+    }
     relocateActions(nav);
+    watchFit(nav);
+    immersive(nav);
     greet();
     setInterval(greet, 60000);
     loadClockModule();
