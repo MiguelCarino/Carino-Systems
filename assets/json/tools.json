@@ -206,6 +206,7 @@
     {
       "name": "Carino Test",
       "icon": "📶",
+      "mark": "assets/marks/test.svg",
       "url": "https://test.carino.systems/",
       "desc": "A complete network and device check in the browser: WAN and LAN, NAT and WebRTC, DNS-over-HTTPS, latency, speed, and a reachability sweep of the 50 biggest websites.",
       "cta": "Launch ↗",

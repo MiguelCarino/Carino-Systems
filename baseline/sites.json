@@ -88,7 +88,7 @@
     "dir": "findmeadistro",
     "name": "Find Me a Distro",
     "type": "learn",
-    "desc": "Answer a few questions and get a Linux distribution matched to your needs and experience level."
+    "desc": "Pick a Linux or BSD family and get one of its distros at random, with a link to its site. A random pick, not a match; your choices stay in the link."
   },
   {
     "domain": "fiscal.carino.systems",
