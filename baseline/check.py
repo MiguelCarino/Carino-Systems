@@ -4,6 +4,7 @@
     python3 check.py                 # files on disk
     python3 check.py --live          # also ask the live sites (HTTPS, robots, sitemap, 404)
     python3 check.py --provenance    # AUDIT.md: reviewed / ai counts, stale reviews
+    python3 check.py --types         # page-type gate: does each site have its type's blocks?
     python3 check.py --report        # write REPORT.md with everything above
     python3 check.py ping.carino.systems ...   # only these sites
 
@@ -39,6 +40,8 @@ SHARED = {
     'carino-diag.js': 'Topo/carino-diag.js',
     'carino-anim.css': 'Branding/carino-anim.css',
     'carino-anim.js': 'Branding/carino-anim.js',
+    'carino-ui.css': 'Branding/carino-ui.css',
+    'carino-ui.js': 'Branding/carino-ui.js',
 }
 TRACKERS = re.compile(r'googletagmanager\.com|google-analytics\.com|gtag\(\s*[\'"]config|plausible\.io/js'
                       r'|umami\.is|goatcounter\.com/count|clarity\.ms/tag|static\.cloudflareinsights\.com'
@@ -49,7 +52,10 @@ SKIP = re.compile(r'(^|/)(vendor|node_modules|fonts|\.history)/|\.min\.(js|css)$
 
 
 def git_files(repo, sub=''):
-    out = subprocess.run(['git', '-C', str(REPOS / repo), 'ls-files'] + ([sub] if sub else []),
+    # Tracked files plus new ones not ignored, so a file added but not yet
+    # committed (a freshly copied shared file) counts as present.
+    out = subprocess.run(['git', '-C', str(REPOS / repo), 'ls-files', '--cached', '--others', '--exclude-standard']
+                         + ([sub] if sub else []),
                          capture_output=True, text=True).stdout.split()
     return [f[len(sub) + 1:] if sub else f for f in out]
 
@@ -197,6 +203,129 @@ STATIC = [('legal', c_legal), ('meta', c_meta), ('jsonld', c_jsonld), ('robots',
           ('shared', c_shared)]
 
 
+# ---- page types (--types) ----
+# What each page type must contain, as defined in Branding #pagetypes. The
+# method is static: a block counts when its production class from
+# carino-ui.css appears in the site's own HTML or JS (a class a script builds
+# counts). That proves the block is used, not that it looks right; the
+# browser pass checks the look.
+
+UI_TOKENS = re.findall(r'^\s*(--[\w-]+)\s*:', read(REPOS / 'Branding/carino-ui.css').split('}')[0], re.M)
+
+
+def own_files(s, exts):
+    # Wholly generated files (404.html, …) are not the site's own; index.html
+    # only carries a generated <head> block, so it always counts.
+    return [f for f in s.files if f.endswith(exts) and not SKIP.search(f) and Path(f).name not in SHARED
+            and (f == 'index.html' or MARK not in read(s.root / f)[:300])]
+
+
+HTML_COMMENTS = re.compile(r'<!--.*?-->', re.S)
+JS_COMMENTS = re.compile(r'/\*.*?\*/|^[ \t]*//[^\n]*', re.S | re.M)
+
+
+def own_text(s):
+    # Each language's own comments only: a "/*" inside HTML text is not a comment.
+    return '\n'.join((HTML_COMMENTS if f.endswith('.html') else JS_COMMENTS).sub('', read(s.root / f))
+                     for f in own_files(s, ('.html', '.js', '.mjs')))
+
+
+def uses(s, *classes):
+    text = getattr(s, '_own', None)
+    if text is None:
+        text = s._own = own_text(s)
+    return [c for c in classes if not re.search(r'(?<![\w-])' + re.escape(c) + r'(?![\w-])', text)]
+
+
+TYPE_BLOCKS = {
+    'hub':       [('landing-hero',), ('site-foot',)],
+    'tool':      [('short-hero',), ('privacy-line',), ('ws', 'col')],
+    'suite':     [('short-hero',), ('slice-menu',), ('privacy-line',), ('CarinoUI.slices',)],
+    'live':      [('live-chip',), ('fresh',), ('data-foot',)],
+    'reference': [('landing-hero',), ('fchips',), ('src-line',), ('site-foot',)],
+    'learn':     [('landing-hero', 'short-hero'), ('privacy-line',), ('site-foot',)],
+    'play':      [('play-stage',), ('prefers-reduced-motion',)],
+    'product':   [('landing-hero',), ('sys-line',), ('term-copy',), ('privacy-line',), ('site-foot',)],
+}
+
+
+def t_ui(s):
+    """Shared UI: index.html links carino-ui.css, and the copy matches Branding's."""
+    if s.e.get('standalone'):
+        return None, 'standalone product'
+    linked = re.search(r'<link[^>]+href="(?:\./)?carino-ui\.css"', s.head) or any(
+        re.search(r'@import\s+url\(["\']?(?:\./)?carino-ui\.css', read(s.root / h.lstrip('./')))
+        for h in re.findall(r'<link[^>]+rel="stylesheet"[^>]+href="([^":]+\.css)"', s.head))
+    if not linked:
+        return False, 'carino-ui.css not linked'
+    return read(s.root / 'carino-ui.css') == read(REPOS / 'Branding/carino-ui.css'), ''
+
+
+def strip_media(css, *queries):
+    """Remove whole @media blocks whose condition mentions any of `queries`."""
+    out, i = [], 0
+    for m in re.finditer(r'@media[^{]*\{', css):
+        if m.start() < i or not any(q in m.group(0) for q in queries):
+            continue
+        depth, j = 1, m.end()
+        while j < len(css) and depth:
+            depth += {'{': 1, '}': -1}.get(css[j], 0)
+            j += 1
+        out.append(css[i:m.start()])
+        i = j
+    return ''.join(out) + css[i:]
+
+
+def t_tokens(s):
+    """No token redefined: the site's own CSS (stylesheets and inline <style>)
+    declares none of the custom properties carino-ui.css declares. New names
+    are fine; Branding's names keep Branding's values. A print or
+    high-contrast palette (@media print, prefers-contrast) may override them."""
+    if s.e.get('standalone'):
+        return None, 'standalone product'
+    hits = set()
+    for f in own_files(s, ('.css', '.html')):
+        text = read(s.root / f)
+        if f.endswith('.html'):
+            text = '\n'.join(re.findall(r'<style[^>]*>(.*?)</style>', text, re.S | re.I))
+        text = strip_media(JS_COMMENTS.sub('', text), 'print', 'prefers-contrast')
+        for t in UI_TOKENS:
+            if re.search(r'(?<![\w-])' + re.escape(t) + r'\s*:', text):
+                hits.add(t)
+    return not hits, ', '.join(sorted(hits)[:6]) + (' …' if len(hits) > 6 else '')
+
+
+def t_blocks(s):
+    """The type's blocks: every required block's class is used (any one of the
+    alternatives in a group). Standalone products need only a footer and
+    copyable commands."""
+    kind = s.e.get('type')
+    if not kind:
+        return False, 'no type in sites.json'
+    if s.e.get('standalone'):
+        text = own_text(s)
+        miss = [n for n, rx in (('footer', r'<footer'), ('copy', r'copy')) if not re.search(rx, text, re.I)]
+        return not miss, 'missing: ' + ', '.join(miss) if miss else 'layout only'
+    miss = [' or '.join(g) for g in TYPE_BLOCKS.get(kind, []) if len(uses(s, *g)) == len(g)]
+    return not miss, 'missing: ' + ', '.join(miss) if miss else kind
+
+
+def t_priority(s):
+    """Main action: a page that puts controls in the navbar marks the one to
+    keep on phones (data-priority="1", or a primary button among them)."""
+    # The element itself, not a mention of the attribute in a comment or CSS.
+    m = re.search(r'<[a-z][\w-]*\b[^>]*\sdata-carino-actions\b', HTML_COMMENTS.sub('', s.index))
+    if not m:
+        return None, 'no navbar controls'
+    html = HTML_COMMENTS.sub('', s.index)
+    block = html[m.start():][:6000]
+    ok = re.search(r'data-priority="1"|btn-primary|cs-btn primary|class="[^"]*\bprimary\b', block) is not None
+    return ok, '' if ok else 'no data-priority="1" or primary'
+
+
+TYPES = [('ui', t_ui), ('tokens', t_tokens), ('blocks', t_blocks), ('priority', t_priority)]
+
+
 # ---- live checks (--live) ----
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -269,11 +398,12 @@ def provenance(repo):
 
 def main(argv):
     live, prov, report = '--live' in argv, '--provenance' in argv or '--report' in argv, '--report' in argv
+    types = '--types' in argv or report
     live = live or report
     only = {a for a in argv if not a.startswith('-')}
     sites = [Site(e) for e in json.loads((HERE / 'sites.json').read_text(encoding='utf-8'))
              if not only or e['domain'] in only]
-    checks = STATIC + (LIVE if live else [])
+    checks = (TYPES if '--types' in argv and not report else STATIC + (LIVE if live else []) + (TYPES if types else []))
     names = [n for n, _ in checks]
     fails, lines = 0, []
     lines.append('| Site | ' + ' | '.join(names) + ' |')

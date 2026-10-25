@@ -50,8 +50,10 @@
    LinkedIn row; then the clock steps aside (as it already does below
    900px), because an app's controls matter more than the time; last, the
    app's own controls. Controls marked
-   data-priority="1" stay in the bar (an app's one main action); without
-   any mark, the first .btn-primary / .primary control stays. The real
+   data-priority="1" stay in the bar (an app's one main action), and
+   data-priority="2" ones too while there is room (a Live page's source
+   badge); without any mark, the first .btn-primary / .primary control
+   stays. If even those squeeze the brand, priority 2 folds, then 1. The real
    nodes move (never clones) and return when there is room again, and the
    menu sits inside #carinoNav, so `#carinoNav .cn-actions …` rules still
    apply. If an app has moved .cn-actions somewhere else itself (Topo's
@@ -64,7 +66,10 @@
    slides away; moving the pointer to the top edge, focusing into it or
    pressing Esc brings it back. On touch screens it only hides in
    fullscreen. Under reduced motion it hides and shows without sliding.
-   Each change fires `carino:navbar` with detail {hidden}.
+   Each change fires `carino:navbar` with detail {hidden}. A page that
+   needs it only some of the time (Asobi: while a game is open, not on
+   its scrolling chooser) switches it at run time instead:
+   window.CarinoNav.immersive(true | false).
    ============================================================ */
 (function () {
   'use strict';
@@ -213,8 +218,9 @@
   // ---- fitting ----------------------------------------------------------
   // Stage 0: everything in the bar. Stage 1: the socials row folds into the
   // menu. Stage 2: the clock steps aside. Stage 3: the app's controls fold
-  // too, except the kept ones. Each stage is tried from 0 upward and the
-  // first that fits wins.
+  // too, except the kept ones. Stage 4: the kept ones fold as well, since
+  // the brand comes first. Each stage is tried from 0 upward and the first
+  // that fits wins.
   var fitting = false, fitQueued = false, fitPending = false, fitObserver = null;
 
   function moreLabel() { return (typeof window.t === 'function') ? window.t('More') : 'More'; }
@@ -259,7 +265,10 @@
     // fields (selects, inputs) keep it open while they are in use.
     menu.addEventListener('click', function (e) {
       var hit = e.target.closest && e.target.closest('button,a');
-      if (hit && !hit.closest('select,label')) setTimeout(function () { open(false); }, 0);
+      // a toggle for something nested (a dropdown, a disclosure) keeps it open
+      if (hit && !hit.closest('select,label') && !hit.hasAttribute('aria-haspopup') && !hit.hasAttribute('aria-expanded')) {
+        setTimeout(function () { open(false); }, 0);
+      }
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !menu.hidden) { open(false); btn.focus(); }
@@ -283,7 +292,7 @@
   }
 
   function keptControls(actions) {
-    var marked = actions.querySelectorAll('[data-priority="1"]');
+    var marked = actions.querySelectorAll('[data-priority="1"],[data-priority="2"]');
     if (marked.length) return Array.prototype.slice.call(marked);
     var first = actions.querySelector('.btn-primary,.primary,.cs-btn.primary');
     return first ? [first] : [];
@@ -346,6 +355,14 @@
       var mark = document.createComment('cn-home');
       right.insertBefore(mark, keep);
       actions.__cnHome = mark;
+      // Stage 4: the brand comes before even the kept controls: priority 2
+      // folds first, then priority 1.
+      ['2', '1'].forEach(function (rank) {
+        if (!cramped(nav)) return;
+        Array.prototype.slice.call(keep.children).forEach(function (el) {
+          if (el.getAttribute('data-priority') === rank || rank === '1') unpark(el);
+        });
+      });
     } finally {
       // The moves above are this function's own; don't let them refit again.
       if (fitObserver) fitObserver.takeRecords();
@@ -391,8 +408,8 @@
 
   // ---- immersive -------------------------------------------------------
   function immersive(nav) {
-    if (!SCRIPT || !SCRIPT.hasAttribute('data-immersive')) return;
-    var delay = parseInt(SCRIPT.getAttribute('data-immersive'), 10) || 3000;
+    var enabled = !!(SCRIPT && SCRIPT.hasAttribute('data-immersive'));
+    var delay = (SCRIPT && parseInt(SCRIPT.getAttribute('data-immersive'), 10)) || 3000;
     var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
     var timer = null, hidden = false;
     function set(h) {
@@ -407,16 +424,23 @@
     }
     function arm() {
       clearTimeout(timer);
-      if (coarse && !document.fullscreenElement) return;
+      if (!enabled || (coarse && !document.fullscreenElement)) return;
       timer = setTimeout(function () { if (!busy()) set(true); else arm(); }, document.fullscreenElement ? 1200 : delay);
     }
     function show() { set(false); arm(); }
+    window.CarinoNav = window.CarinoNav || {};
+    window.CarinoNav.immersive = function (on) {
+      enabled = !!on;
+      if (enabled) arm(); else { clearTimeout(timer); set(false); }
+    };
     document.addEventListener('mousemove', function (e) {
+      if (!enabled) return;
       if (e.clientY < 70) show(); else if (!hidden) arm();
     }, { passive: true });
-    nav.addEventListener('focusin', show);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') show(); });
+    nav.addEventListener('focusin', function () { if (enabled) show(); });
+    document.addEventListener('keydown', function (e) { if (enabled && e.key === 'Escape') show(); });
     document.addEventListener('fullscreenchange', function () {
+      if (!enabled) return;
       if (document.fullscreenElement) arm(); else show();
     });
     arm();

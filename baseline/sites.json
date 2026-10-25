@@ -28,14 +28,14 @@
     "type": "product",
     "desc": "ButterEye makes the videos you play in mpv smoother: new in-between frames, live or as a saved copy. Free software for Fedora Linux, Windows and macOS.",
     "standalone": true,
-    "software": "Linux, Windows"
+    "software": "Linux, Windows, macOS"
   },
   {
     "domain": "carino.systems",
     "dir": "Carino-Systems",
     "name": "Carino Systems",
     "type": "hub",
-    "desc": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. Nothing to install, no account, and your files never leave your computer.",
+    "desc": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. The web tools need no install and no account, and your files never leave your computer.",
     "hub": true
   },
   {
@@ -117,7 +117,7 @@
     "dir": "Hash",
     "name": "Hash",
     "type": "learn",
-    "desc": "Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo."
+    "desc": "A course in how hashing works: modules by hash family, step-by-step labs that walk through each round, and progress kept in your browser."
   },
   {
     "domain": "jellyfish.carino.systems",
@@ -211,6 +211,7 @@
     "name": "DLSS 5 for Linux",
     "type": "product",
     "desc": "DLSS 5 for Linux puts NVIDIA's DLSS 5 neural rendering into Steam games running under Proton, and runs the same model over your pictures and videos. Free software for Fedora and any recent Linux.",
+    "standalone": true,
     "software": "Linux"
   },
   {
@@ -223,9 +224,10 @@
   {
     "domain": "setup.carino.systems",
     "dir": "SimpleSetup",
-    "name": "SimpleSetup",
+    "name": "Carino Setup",
     "type": "product",
-    "desc": "One command that configures Linux, Windows or macOS: hardware and distribution detection, drivers, and 15 purpose profiles. Nothing to install first."
+    "desc": "One command that configures Linux, Windows or macOS: hardware and distribution detection, drivers, and 15 purpose profiles. Nothing to install first.",
+    "software": "Linux, Windows, macOS"
   },
   {
     "domain": "software.carino.systems",

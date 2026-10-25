@@ -192,6 +192,30 @@
       "keywords": "eye fundus ophthalmology optometry refraction cup-to-disc"
     },
     {
+      "name": "Carino Setup",
+      "icon": "⚙️",
+      "mark": "assets/marks/setup.svg",
+      "url": "https://setup.carino.systems/",
+      "desc": "One command that sets up Linux, Windows or macOS: drivers, codecs and 15 purpose profiles, with a dry run first.",
+      "cta": "Launch ↗",
+      "tags": [
+        "systems"
+      ],
+      "keywords": "provisioning bootstrap dotfiles postinstall automation"
+    },
+    {
+      "name": "Carino Test",
+      "icon": "📶",
+      "url": "https://test.carino.systems/",
+      "desc": "A complete network and device check in the browser: WAN and LAN, NAT and WebRTC, DNS-over-HTTPS, latency, speed, and a reachability sweep of the 50 biggest websites.",
+      "cta": "Launch ↗",
+      "tags": [
+        "network",
+        "systems"
+      ],
+      "keywords": "network test diagnostics speed latency jitter nat webrtc dns doh ipv6 reachability connection"
+    },
+    {
       "name": "Compass",
       "icon": "🧭",
       "mark": "assets/marks/compass.svg",
@@ -286,13 +310,25 @@
       "icon": "#️⃣",
       "mark": "assets/marks/hash.svg",
       "url": "https://hash.carino.systems/",
-      "desc": "Hashing teaching lab — live SHA-256 step visualizer, multi-algorithm digests and a post-quantum Lamport signature demo.",
+      "desc": "A course in how hashing works: modules by hash family, step-by-step labs and progress kept in your browser. Password making and sharing are now in Password.",
       "cta": "Launch ↗",
       "tags": [
         "security",
         "learn"
       ],
-      "keywords": "sha256 md5 checksum digest lamport signature crypto"
+      "keywords": "hash hashing course lesson sha256 sha-256 sha3 md5 blake2 checksum digest merkle step lab learn"
+    },
+    {
+      "name": "Jellyfish",
+      "icon": "🪼",
+      "mark": "assets/marks/jellyfish.svg",
+      "url": "https://jellyfish.carino.systems/",
+      "desc": "A moon jelly, swimming. Ambient WebGL.",
+      "cta": "Launch ↗",
+      "tags": [
+        "media"
+      ],
+      "keywords": "jellyfish moon jelly ambient webgl screensaver relax"
     },
     {
       "name": "Kanban",
@@ -400,8 +436,8 @@
       "icon": "📡",
       "mark": "assets/marks/ping.svg",
       "url": "https://ping.carino.systems/",
-      "desc": "Round trip, jitter and packet loss to any website, measured from your own browser \u2014 with the DNS/TLS/TTFB split where the server allows it.",
-      "cta": "Launch \u2197",
+      "desc": "Round trip, jitter and packet loss to any website, measured from your own browser — with the DNS/TLS/TTFB split where the server allows it.",
+      "cta": "Launch ↗",
       "tags": [
         "network"
       ],
@@ -418,18 +454,6 @@
         "business"
       ],
       "keywords": "quotation invoice estimate pricing proposal client"
-    },
-    {
-      "name": "SimpleSetup",
-      "icon": "⚙️",
-      "mark": "assets/marks/setup.svg",
-      "url": "https://setup.carino.systems",
-      "desc": "Automated system configuration for Linux, Windows, and macOS.",
-      "cta": "Launch ↗",
-      "tags": [
-        "systems"
-      ],
-      "keywords": "provisioning bootstrap dotfiles postinstall automation"
     },
     {
       "name": "Software Catalogue",

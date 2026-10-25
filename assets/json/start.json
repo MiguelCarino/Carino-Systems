@@ -88,9 +88,9 @@
           "line": "Answer a few questions and get one that fits how you work."
         },
         {
-          "ref": "SimpleSetup",
+          "ref": "Carino Setup",
           "plain": "Set up a new computer",
-          "line": "Pick what you need and follow the steps, without typing commands."
+          "line": "Copy one command and it installs the drivers and software your computer needs."
         },
         {
           "ref": "Hardware",
@@ -101,6 +101,11 @@
           "ref": "Time",
           "plain": "Time around the world",
           "line": "Local time, other time zones, and countdowns you can share."
+        },
+        {
+          "ref": "Carino Test",
+          "plain": "Check your connection and this device",
+          "line": "A full check of your network, from your router to the world's biggest websites."
         }
       ]
     },
@@ -116,8 +121,8 @@
         },
         {
           "ref": "Hash",
-          "plain": "How a password is protected",
-          "line": "Watch, step by step, what happens to a password when it is stored."
+          "plain": "How hashing works",
+          "line": "A short course by hash family, with labs that walk through each step."
         }
       ]
     },
@@ -264,6 +269,11 @@
           "ref": "CyberCity",
           "plain": "Walk around a city made of text",
           "line": "Four places built from nothing but characters — a city in the rain, a frontier town, the Moon, a castle town at dusk."
+        },
+        {
+          "ref": "Jellyfish",
+          "plain": "A jellyfish, swimming",
+          "line": "A moon jelly drifting across the screen. Nothing to do but watch."
         }
       ]
     }

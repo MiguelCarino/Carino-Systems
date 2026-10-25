@@ -56,19 +56,19 @@
   "carino.systems": {
     "es": {
       "title": "Carino Systems",
-      "desc": "Soluciones abiertas y gratis para todos: abre una imagen médica, arregla un documento, crea tu currículum, configura tu computadora. Sin instalar ni cuenta."
+      "desc": "Soluciones abiertas y gratis para todos: abre una imagen médica, arregla un documento, crea tu currículum, configura tu computadora. Las herramientas web no se instalan ni piden cuenta."
     },
     "pt-BR": {
       "title": "Carino Systems",
-      "desc": "Soluções abertas e grátis para todos: abra uma imagem médica, corrija um documento, crie um currículo, configure o computador. Sem instalar, sem conta."
+      "desc": "Soluções abertas e grátis para todos: abra uma imagem médica, corrija um documento, crie um currículo, configure o computador. As ferramentas web não se instalam nem pedem conta."
     },
     "ja": {
       "title": "Carino Systems",
-      "desc": "誰でも無料で使えるオープンなツール。医用画像を開く、文書を直す、履歴書を作る、PCを設定する。インストールもアカウントも不要、ファイルはPCから出ない。"
+      "desc": "誰でも無料で使えるオープンなツール。医用画像を開く、文書を直す、履歴書を作る、PCを設定する。Webツールはインストールもアカウントも不要、ファイルはPCから出ない。"
     },
     "ru": {
       "title": "Carino Systems",
-      "desc": "Открытые бесплатные решения: откройте медснимок, исправьте документ, составьте резюме, настройте компьютер. Без установки и аккаунта, файлы остаются у вас."
+      "desc": "Открытые бесплатные решения: откройте медснимок, исправьте документ, составьте резюме, настройте компьютер. Веб-инструменты без установки и аккаунта, файлы остаются у вас."
     }
   },
   "compass.carino.systems": {

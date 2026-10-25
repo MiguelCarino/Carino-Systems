@@ -29,7 +29,8 @@ GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
-Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems"
+Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
+TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity"
 # Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
 # being listed, so their copies had drifted; Carino-Systems carries it for
 # legal.html only (the hub page itself keeps its inline navbar).
@@ -40,7 +41,9 @@ Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems"
 SUBSITES="Carino-DICOM/docs Custom-Images/docs"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
-BESPOKE="Asobi Retina DICOM-editor Learn MultiWeb MusicGrid TV"
+# (TV, Retina, DICOM-editor, Learn, Asobi and MusicGrid moved to the shared navbar
+# with the page-type work, 2026-10; Teleprompter and CyberCity joined then too.)
+BESPOKE="MultiWeb"
 
 # Network-oriented sites that also carry the opt-in Sys. Status panel
 # (public IPv4/IPv6, ISP, connection type, RTT). This is the in-navbar
