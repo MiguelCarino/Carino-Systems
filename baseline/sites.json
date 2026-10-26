@@ -79,6 +79,7 @@
   {
     "domain": "dcm.carino.systems",
     "dir": "DICOM-editor",
+    "repo": "Carino-DICOM-Editor",
     "name": "Carino DICOM Editor",
     "type": "suite",
     "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability."

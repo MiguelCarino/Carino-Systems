@@ -30,7 +30,7 @@ NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
 Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
-TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity"
+TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro"
 # Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
 # being listed, so their copies had drifted; Carino-Systems carries it for
 # legal.html only (the hub page itself keeps its inline navbar).
@@ -38,7 +38,7 @@ TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity"
 # Project pages that live in a subfolder of a non-web repo but still run the
 # shared navbar. Same treatment as GROUPA — they were drifting because nothing
 # copied to them.
-SUBSITES="Carino-DICOM/docs Custom-Images/docs"
+SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web/editor Custom-Images/docs"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 # (TV, Retina, DICOM-editor, Learn, Asobi and MusicGrid moved to the shared navbar
@@ -121,4 +121,13 @@ done
 # Retired, deliberately absent: pentarch, AssemblyRoadmap and MetadataViewer
 # never existed under those names; ip, Multisearch-index, ProcessFlow and
 # SimpleTranscoding were removed from GitHub.
+
+# A site with an offline service worker hashes what it ships into sw.js's
+# VERSION; a copied file changes that hash, and an unchanged sw.js never
+# reinstalls, so installed copies would keep the old files forever.
+for sw in */tools/build_sw.py; do
+  [ -f "$sw" ] || continue
+  site="$(dirname "$(dirname "$sw")")"
+  (cd "$site" && python3 -I tools/build_sw.py --check >/dev/null 2>&1 || { python3 -I tools/build_sw.py >/dev/null && echo "  $(basename "$site")  (sw.js rebuilt)"; })
+done
 echo "Done. ($(echo $GROUPA $SUBSITES | wc -w) group-A + $(echo $BESPOKE | wc -w) bespoke + $(echo $DIAG | wc -w) diag + $(echo $ANIM | wc -w) anim)"

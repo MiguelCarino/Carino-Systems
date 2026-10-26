@@ -14,6 +14,8 @@
 
 const I18N = {
     es: {
+        // header GitHub icon title
+        'Carino-Systems on GitHub': 'Carino-Systems en GitHub',
         // ---- added: footer, Carino Test, Jellyfish ----
         'Check your connection and this device': 'Revisa tu conexión y este dispositivo',
         'A full check of your network, from your router to the world\'s biggest websites.': 'Una revisión completa de tu red, desde tu router hasta los sitios web más grandes del mundo.',
@@ -259,6 +261,8 @@ const I18N = {
         'Unknown GPU': 'GPU desconocida',
     },
     'pt-BR': {
+        // header GitHub icon title
+        'Carino-Systems on GitHub': 'Carino-Systems no GitHub',
         // ---- added: footer, Carino Test, Jellyfish ----
         'Check your connection and this device': 'Verifique sua conexão e este dispositivo',
         'A full check of your network, from your router to the world\'s biggest websites.': 'Uma verificação completa da sua rede, do seu roteador aos maiores sites do mundo.',
@@ -504,6 +508,8 @@ const I18N = {
         'Unknown GPU': 'GPU desconhecida',
     },
     ja: {
+        // header GitHub icon title
+        'Carino-Systems on GitHub': 'GitHub の Carino-Systems',
         // ---- added: footer, Carino Test, Jellyfish ----
         'Check your connection and this device': '回線とこの端末をチェック',
         'A full check of your network, from your router to the world\'s biggest websites.': 'ルーターから世界の主要サイトまで、ネットワークをまるごとチェック。',
@@ -749,6 +755,8 @@ const I18N = {
         'Unknown GPU': 'GPU不明',
     },
     ru: {
+        // header GitHub icon title
+        'Carino-Systems on GitHub': 'Carino-Systems на GitHub',
         // ---- added: footer, Carino Test, Jellyfish ----
         'Check your connection and this device': 'Проверьте соединение и это устройство',
         'A full check of your network, from your router to the world\'s biggest websites.': 'Полная проверка сети — от вашего роутера до крупнейших сайтов мира.',
@@ -1019,9 +1027,9 @@ function applyStaticI18n() {
     });
 }
 
-// Prominent title attributes (brand links) — explicit, not via data-i18n.
+// Prominent title attributes (brand links, the GitHub icon) — explicit, not via data-i18n.
 function applyTitleI18n() {
-    document.querySelectorAll('.brand-name a[title]').forEach((el) => {
+    document.querySelectorAll('.brand-name a[title], .social-row a[href*="github.com"][title]').forEach((el) => {
         if (!el.dataset.i18nTitle) el.dataset.i18nTitle = el.getAttribute('title');
         el.setAttribute('title', t(el.dataset.i18nTitle));
     });

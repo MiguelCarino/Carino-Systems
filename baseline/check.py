@@ -10,6 +10,8 @@
 
 A check passes only when this script verified it; nothing is taken on trust.
 Exit status is 1 when any check fails, so it can gate a commit.
+.github/workflows/fleet-check.yml runs it (and --types) every day on fresh
+clones of every site's repository, and opens a "Fleet check failed" issue.
 
 Each check below states its method in its docstring. The item numbers are the
 20-point checklist in docs/BASELINE-SCOPE.md. Items that are decisions rather
@@ -374,7 +376,7 @@ def provenance(repo):
     human, and which reviews went stale (the file changed after its commit)."""
     files = git_files(repo)
     code = [f for f in files if f.endswith(CODE) and not SKIP.search(f) and Path(f).name not in SHARED
-            and MARK not in read(REPOS / repo / f)[:300]]
+            and (f == 'index.html' or MARK not in read(REPOS / repo / f)[:300])]
     ledger = read(REPOS / repo / 'AUDIT.md')
     if not ledger:
         return None

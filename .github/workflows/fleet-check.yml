@@ -1,0 +1,117 @@
+# Runs the fleet gates every day, the way they run on the owner's machine:
+# baseline/check.py (the 20-point baseline) and check.py --types (each site
+# has its page type's blocks, the shared UI, Branding's tokens and a main
+# navbar action). Read-only; it changes nothing in any repository.
+#
+# check.py looks for every site's repository beside this one, so the job
+# clones each one listed in baseline/sites.json into the workspace root,
+# shallow (the checks read files and `git ls-files`, never history). A site
+# whose repository has another name says so with "repo" in sites.json.
+#
+# Any failure opens an issue titled "Fleet check failed", or comments on the
+# open one when the failures differ from its last post, and fails the run.
+
+name: fleet-check
+
+on:
+  schedule:
+    # Off the hour: on-the-hour slots queue for hours on shared runners.
+    - cron: '41 7 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['baseline/**', '.github/workflows/fleet-check.yml']
+
+concurrency:
+  group: fleet-check
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  fleet-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: Carino-Systems
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.x'
+
+      - name: Clone every site's repository beside this one
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          sites = json.load(open('Carino-Systems/baseline/sites.json', encoding='utf-8'))
+          seen = {'Carino-Systems'}
+          for s in sites:
+              d = s['dir'].split('/')[0]
+              if d in seen:
+                  continue
+              seen.add(d)
+              repo = s.get('repo', d)
+              r = subprocess.run(['git', 'clone', '--depth', '1', '--quiet',
+                                  f'https://github.com/MiguelCarino/{repo}.git', d])
+              if r.returncode:
+                  print(f'::warning::could not clone MiguelCarino/{repo}')
+          PY
+
+      - name: Run the baseline and the page-type gate
+        id: check
+        shell: bash
+        working-directory: Carino-Systems
+        run: |
+          set +e
+          python3 baseline/check.py > "$RUNNER_TEMP/baseline.md"; b=$?
+          python3 baseline/check.py --types > "$RUNNER_TEMP/types.md"; t=$?
+          set -e
+          cat "$RUNNER_TEMP/baseline.md" "$RUNNER_TEMP/types.md" >> "$GITHUB_STEP_SUMMARY"
+          body="$RUNNER_TEMP/alerts.md"
+          : > "$body"
+          # The failure lines only ("- **domain** check: note"), each gate under its own heading.
+          for part in baseline types; do
+            lines=$(grep -E '^- \*\*' "$RUNNER_TEMP/$part.md" || true)
+            [ -n "$lines" ] && printf '### %s\n\n%s\n\n' "$( [ $part = types ] && echo 'Page-type gate' || echo 'Baseline')" "$lines" >> "$body"
+          done
+          echo "failed=$(( b != 0 || t != 0 ? 1 : 0 ))" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update the alert issue
+        if: always() && steps.check.outcome == 'success'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          body="$RUNNER_TEMP/alerts.md"
+          if [ ! -s "$body" ]; then
+            echo "Every check passed."
+            exit 0
+          fi
+          # Exact title, open only: a closed issue means it was dealt with.
+          num=$(gh issue list --state open --search 'in:title "Fleet check failed"' --json number,title \
+                  --jq '[.[] | select(.title == "Fleet check failed")][0].number // empty')
+          alerts_of() { tr -d '\r' | grep -v -e '^Run: ' -e '^$' || true; }
+          now=$(alerts_of < "$body")
+          printf '\nRun: %s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> "$body"
+          if [ -n "$num" ]; then
+            # Same failures as the last post: say nothing, so a lasting failure is not a daily notification.
+            last=$(gh issue view "$num" --json body,comments \
+                     --jq '([.comments[] | select(.author.login | startswith("github-actions"))] | last | .body) // .body')
+            if [ "$(printf '%s\n' "$last" | alerts_of)" = "$now" ]; then
+              echo "Failures unchanged since the last post on #$num."
+              exit 0
+            fi
+            gh issue comment "$num" --body-file "$body"
+          else
+            gh issue create --title 'Fleet check failed' --body-file "$body"
+          fi
+
+      - name: Fail the run when a check failed
+        if: steps.check.outputs.failed == '1'
+        run: exit 1
