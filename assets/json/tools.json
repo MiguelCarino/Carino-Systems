@@ -495,7 +495,7 @@
       "keywords": "subtitles srt ass vtt timing offset resync captions"
     },
     {
-      "name": "TelePrompter",
+      "name": "Teleprompter",
       "icon": "📺",
       "mark": "assets/marks/teleprompter.svg",
       "url": "https://teleprompter.carino.systems/",

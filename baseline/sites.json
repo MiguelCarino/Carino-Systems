@@ -258,7 +258,7 @@
   {
     "domain": "teleprompter.carino.systems",
     "dir": "Teleprompter",
-    "name": "TelePrompter",
+    "name": "Teleprompter",
     "type": "tool",
     "desc": "A free online teleprompter: paste your script, set the speed and read, with mirror mode for teleprompter glass."
   },
