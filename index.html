@@ -170,7 +170,7 @@
     /* A long unbroken token in a translation would otherwise spill straight out
        past a card's rounded border. `break-word` and not `anywhere`: the latter
        is Safari 15.4+ only and buys nothing here. */
-    .hero h1, .sec-head h2, .why-card h3, .band h2, .spot-body, .spot-real { overflow-wrap: break-word; }
+    .title h1, .pane-head h2, .why-card h3, .band h2, .pick-txt, .tool-txt { overflow-wrap: break-word; }
 
     /* ── the fleet header ──
        The full one: brand, live clock, language, social, and the Sys. Status
@@ -365,178 +365,245 @@
     .diag-actions .retry-btn { flex: 1; }
     .complete-test-btn { text-decoration: none; margin-top: 8px; border-color: var(--accent-dim); color: var(--accent); background: var(--accent-faint); }
     .complete-test-btn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
-    /* ── the hero ──
-       Branding's .landing-hero (carino-ui.css), dicom's construction: the mark
-       with the tile rail under it, a two-line claim with the answer in solid
-       gold, one lede. Only what the hub adds is styled here: the rail's motion,
-       the CJK-aware display face, and the promise badge. */
-    /* The body already lays one gold pool across the top of the page; the
-       hero's own would draw a second one boxed inside the shell's gutters. */
-    .hero.landing-hero { background: none; }
-    .hero h1 { font-family: var(--font-display); text-wrap: balance; }
-    .hero h1 .gold { color: var(--accent); }
-    .tiles line { stroke-linecap: round; }
-    .tiles .tile-rail { stroke: var(--accent); stroke-width: 2; opacity: 0.14; }
-    .tiles .sweep { stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: 14 120;
-      filter: drop-shadow(0 0 6px rgba(234,179,8,0.9)); animation: hub-sweep 2.4s linear infinite; }
-    @keyframes hub-sweep { from { stroke-dashoffset: 134; } to { stroke-dashoffset: 0; } }
-    .tiles .tile rect { fill: var(--bg); stroke: var(--accent); stroke-width: 1.6; opacity: 0.5; }
-    /* Motion is decoration: a reader who asked their system for less of it keeps
-       the shape and loses the travel. */
-    @media (prefers-reduced-motion: reduce) { .tiles .sweep { animation: none; stroke-dasharray: none; opacity: 0.45; } }
+    /* ── one screen, like a game's main menu ──
+       The page does not scroll. A menu on the left — the title, the promise,
+       then every section numbered like a game menu — and a stage on the right
+       that shows whichever section is chosen. On a phone it is the other
+       half of a game menu: the menu is a screen, choosing opens the section as
+       a screen of its own, and Back returns.
+       The four rules still hold: choosing is a click, a tap or a key, never a
+       hover; every tool is named twice; the whole card is the link; and the
+       promise sits under the title on the first screen. */
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; }
+    .game {
+      flex: 1 1 auto; min-height: 0; width: 100%; max-width: 1440px; margin: 0 auto;
+      display: grid; grid-template-columns: minmax(290px, 360px) 1fr; grid-template-rows: minmax(0, 1fr) auto;
+      column-gap: clamp(24px, 3.4vw, 56px); padding: 0 var(--pad-r) 0 var(--pad-l);
+    }
+    .side { display: flex; flex-direction: column; min-height: 0; padding: clamp(16px, 3.4vh, 40px) 0 10px; }
+    .title-mark { width: clamp(38px, 5.4vh, 58px); height: auto; display: block; }
+    .title h1 {
+      margin-top: clamp(8px, 1.4vh, 16px); font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(1.4rem, 0.9rem + 1.5vh, 2.15rem); line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance;
+    }
+    .title h1 span { display: block; }
+    .title h1 .gold { color: var(--accent); }
     /* The one claim that is a badge rather than a sentence, because it is the
        one a visitor is looking for and should not have to find in a paragraph. */
     .promise {
-      display: inline-flex; align-items: center; gap: 11px; margin-top: clamp(10px, 1.6vh, 20px);
-      padding: 11px 18px 11px 15px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 9px; margin-top: clamp(10px, 1.8vh, 20px);
+      padding: 8px 14px 8px 11px; border-radius: 999px;
       border: 1px solid var(--accent-dim); background: var(--accent-faint);
-      color: var(--text); font-size: var(--fs-lg); font-weight: 600;
+      color: var(--text); font-size: var(--fs-sec); font-weight: 600;
     }
-    .promise svg { width: 19px; height: 19px; color: var(--accent); flex: none; }
+    .promise svg { width: 17px; height: 17px; color: var(--accent); flex: none; }
 
-    /* ══ opensuse.org's arrangement, in our own colours ═══════════════════
-       A centred hero over one big picture, six reasons in two rows of three, a
-       short list, two things named first with four beside them, then every link
-       in columns. The page scrolls; that is the shape, not a concession. */
-    body { min-height: 100dvh; }
-    main.shell { padding-bottom: clamp(20px, 4vh, 44px); }
+    /* The menu. Each entry: its number (the key that picks it), its name, and
+       how many tools it holds. The chosen one is gold, nudged right, with a
+       bar at its edge — a selection you can see without a pointer on it. */
+    .menu {
+      margin-top: clamp(12px, 3vh, 34px); display: flex; flex-direction: column; gap: 1px;
+      min-height: 0; overflow-y: auto; scrollbar-width: none;
+    }
+    .menu::-webkit-scrollbar { display: none; }
+    .menu-item {
+      -webkit-appearance: none; appearance: none; border: 0; background: none; font: inherit; color: inherit;
+      position: relative; display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+      padding: clamp(4px, 0.85vh, 10px) 12px; border-radius: 10px;
+      color: var(--text-sec); font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(0.98rem, 0.78rem + 0.62vh, 1.22rem); line-height: 1.25;
+      transition: color .15s, background .15s, transform .2s cubic-bezier(.2,.8,.2,1);
+    }
+    .menu-item .n { flex: none; width: 2.2ch; font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-sm); color: var(--text-muted); }
+    .menu-item .i { flex: none; width: 18px; height: 18px; opacity: .75; }
+    .menu-item[aria-selected="true"] .i { opacity: 1; }
+    .menu-item .c { margin-left: auto; padding-left: 10px; font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-sm); color: var(--text-muted); }
+    .menu-item:hover { color: var(--text); background: rgba(255,255,255,0.035); }
+    .menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .menu-item[aria-selected="true"] { color: var(--accent); background: var(--accent-faint); transform: translateX(6px); }
+    .menu-item[aria-selected="true"] .n, .menu-item[aria-selected="true"] .c { color: var(--accent); }
+    .menu-item[aria-selected="true"]::before {
+      content: ""; position: absolute; left: -6px; top: 22%; bottom: 22%; width: 3px; border-radius: 3px;
+      background: var(--accent); box-shadow: 0 0 10px var(--accent);
+    }
+    .menu-sep { height: 1px; margin: clamp(4px, 0.9vh, 8px) 12px; background: var(--border); flex: none; }
 
-    .promise { margin-top: clamp(16px, 2.4vh, 26px); }
+    /* The stage. Normally everything fits; on a screen too small for that the
+       stage scrolls inside itself rather than the page. */
+    .stage { min-height: 0; overflow-y: auto; padding: clamp(16px, 3.4vh, 40px) 2px 12px; scrollbar-width: thin; }
+    .pane[hidden] { display: none; }
+    .pane.enter { animation: pane-in .32s cubic-bezier(.2,.8,.2,1); }
+    @keyframes pane-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+    .pane-head { margin-bottom: clamp(12px, 2.6vh, 26px); }
+    .pane-head h2 {
+      font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+      font-size: clamp(1.35rem, 0.9rem + 1.3vh, 2rem);
+    }
+    .pane-head p { margin-top: 6px; color: var(--text-sec); font-size: var(--fs-lg); }
+    .back {
+      display: none; -webkit-appearance: none; appearance: none; align-items: center; gap: 6px; margin-bottom: 12px;
+      padding: 6px 12px 6px 8px; border-radius: 999px; border: 1px solid var(--border); background: none;
+      color: var(--text-sec); font: inherit; font-size: var(--fs-sec); cursor: pointer;
+    }
+    .back svg { width: 16px; height: 16px; }
+    .back:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* The picture. openSUSE shows the desktop you get; this shows the fleet. */
-    .wall { margin: clamp(30px, 5vh, 60px) 0 0; }
-    /* Wrapped flex rather than a grid: auto-fit stretched the tiles to fill the
-       row and left the 35th sitting alone at the left of a third row. Fixed
-       tiles centred instead, so a short last row reads as the end of a wall. */
-    .wall-grid {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: clamp(6px, 0.8vw, 12px);
-      padding: clamp(14px, 2vw, 26px); border: 1px solid var(--border); border-radius: 16px;
-      background: linear-gradient(180deg, var(--surface, #0d0d0d), rgba(0,0,0,0.4));
+    /* Start here: four big cards, each with its tool's full mark. */
+    .pick-grid { display: grid; gap: clamp(10px, 1.4vh, 16px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pick {
+      position: relative; display: flex; gap: 18px; align-items: flex-start;
+      padding: clamp(16px, 2.6vh, 26px) 46px clamp(16px, 2.6vh, 26px) clamp(16px, 2vw, 24px);
+      border-radius: 16px; text-decoration: none; color: inherit;
+      border: 1px solid var(--border); background: var(--card); box-shadow: var(--edge-light), var(--edge-dark);
+      transition: border-color .2s, transform .2s, background .2s;
     }
-    .wall-tile {
-      flex: 0 0 clamp(42px, 3.9vw, 60px);
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: clamp(1.1rem, 1.8vw, 1.7rem); border-radius: 10px;
-      border: 1px solid var(--border); background: rgba(255,255,255,0.02);
-      text-decoration: none; color: inherit;
-      transition: border-color .15s ease, background .15s ease, transform .15s ease;
-    }
-    .wall-tile:hover, .wall-tile:focus-visible {
-      border-color: var(--accent); background: rgba(234,179,8,0.10); transform: translateY(-2px);
-    }
-    .wall-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    /* The mark is a wide lockup in a square box with its own clear space, so it
-       is contained, never cropped. */
-    .wall-mark { width: 78%; height: 78%; object-fit: contain; display: block; pointer-events: none; }
-    .wall-emoji { font-family: var(--font-emoji); line-height: 1; }
-    @media (prefers-reduced-motion: reduce) {
-      .wall-tile { transition: none; }
-      .wall-tile:hover, .wall-tile:focus-visible { transform: none; }
-    }
-    .wall figcaption { margin-top: 14px; color: var(--text-sec); font-size: var(--fs-lg); }
-    .wall figcaption b { color: var(--accent); font-family: var(--font-mono); }
+    .pick:hover { border-color: var(--accent); background: var(--card-lit); transform: translateY(-3px); }
+    .pick:focus-visible, .tool:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .pick-mark { width: clamp(52px, 7vh, 72px); height: auto; flex: none; display: block; }
+    .pick-plain { display: block; font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -0.01em; }
+    .pick-line { display: block; margin-top: 6px; color: var(--text-sec); line-height: 1.5; }
+    .pick-real, .tool-real { display: block; color: var(--text-muted); font-family: var(--font-mono); font-size: var(--fs-sm); }
+    .pick-real { margin-top: 10px; }
+    .pick-go { position: absolute; top: 20px; right: 18px; width: 20px; height: 20px; color: var(--text-muted); transition: color .2s, transform .2s; }
+    .pick:hover .pick-go { color: var(--accent); transform: translate(2px, -2px); }
 
-    /* ── six reasons, two rows of three ── */
+    /* A group's tools. The description is held to two lines so the largest
+       group (eleven) still fits the stage. */
+    .tool-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+    .tool {
+      display: flex; gap: 14px; align-items: flex-start; padding: clamp(10px, 1.6vh, 15px) 15px; border-radius: 12px;
+      border: 1px solid var(--border); background: rgba(255,255,255,0.015); text-decoration: none; color: inherit;
+      transition: border-color .15s, background .15s, transform .15s;
+    }
+    .tool:hover { border-color: var(--accent-dim); background: var(--accent-faint); transform: translateY(-2px); }
+    /* The tool's glyph — its mark's pictogram without the ring — through a mask,
+       so it takes currentColor and turns dark on the gold tile. */
+    .tool-ico {
+      flex: none; width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+      background: var(--accent-faint); border: 1px solid var(--accent-dim); color: var(--accent);
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .tool-ico .g { width: 22px; height: 22px; background: currentColor;
+      -webkit-mask: var(--g) center / contain no-repeat; mask: var(--g) center / contain no-repeat; }
+    .tool-ico .emo { font-family: var(--font-emoji); font-size: 1.2rem; line-height: 1; }
+    .tool:hover .tool-ico { background: var(--accent); border-color: var(--accent); color: #050505; }
+    .tool-txt { min-width: 0; }
+    .tool-plain { display: block; font-weight: 700; line-height: 1.3; }
+    .tool-line {
+      margin-top: 3px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.4;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+    }
+    .tool-real { margin-top: 4px; }
+
+    /* Is this safe to use? — six reasons in three columns. */
+    .why-grid { display: grid; gap: clamp(10px, 1.4vh, 16px); grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); }
+    .why-card { border: 1px solid var(--border); border-radius: 14px; padding: clamp(14px, 2.2vh, 20px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent); }
+    .why-card svg { width: 22px; height: 22px; color: var(--accent); }
+    .why-card h3 { margin: 10px 0 5px; font-size: var(--fs-lg); font-weight: 700; line-height: 1.3; }
+    .why-card p { color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
+
+    /* The no-script list: what a search engine, or a reader without script,
+       sees in the stage before the menu is drawn. */
     .starts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px;
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
     .starts-list a { display: block; height: 100%; border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px 16px; color: var(--text-sec); text-decoration: none; line-height: 1.45;
-      transition: border-color .15s, color .15s; }
-    .starts-list a:hover, .starts-list a:focus-visible { border-color: var(--accent); color: var(--text); }
+      padding: 14px 16px; color: var(--text-sec); text-decoration: none; line-height: 1.45; }
+    .starts-list a:hover { border-color: var(--accent); color: var(--text); }
     .starts-list b { display: block; color: var(--accent); font-weight: 700; margin-bottom: 2px; }
-    .why-grid { display: grid; gap: clamp(12px, 1.4vw, 20px);
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-    .why-card { border: 1px solid var(--border); border-radius: 14px; padding: 20px 20px 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent); }
-    .why-card svg { width: 22px; height: 22px; color: var(--accent); }
-    .why-card h3 { margin: 12px 0 6px; font-size: var(--fs-h3, 1.05rem); font-weight: 700; line-height: 1.3; }
-    .why-card p { color: var(--text-sec); font-size: var(--fs-body); line-height: 1.55; }
 
+    /* The bottom bar: the keys, and what the footer used to hold. */
+    .bar {
+      grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 10px 22px; flex-wrap: wrap;
+      padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--text-muted);
+    }
+    .keys { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+    .keys .sp { width: 10px; }
+    kbd {
+      display: inline-block; min-width: 22px; padding: 1px 6px; border-radius: 5px; text-align: center;
+      border: 1px solid var(--border); border-bottom-width: 2px; color: var(--text-sec); font-family: var(--font-mono); font-size: var(--fs-sm);
+    }
+    .bar-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .bar-links a { color: var(--text-muted); text-decoration: none; }
+    .bar-links a:hover { color: var(--accent); }
 
-    /* ── sections ── */
-    section { padding: 30px 0; }
-    .sec-head { margin-bottom: 22px; }
-    .sec-head h2 {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.2; letter-spacing: -0.02em;
-    }
-    .sec-head p { margin-top: 7px; color: var(--text-sec); font-size: var(--fs-lg); }
-
-    /* ── the plate ──
-       A tool's icon at card size. `shot` in start.json swaps it for a
-       screenshot of the tool, which is worth more to a first-time visitor than
-       any glyph. */
-    .plate {
-      flex: none; align-self: flex-start; width: 56px; height: 56px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-emoji);
-      font-size: 1.75rem; line-height: 1;
-      background: linear-gradient(180deg, #1f1f1f 0%, #131313 100%);
-      border: 1px solid #303030; box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
-      transition: border-color 0.2s, box-shadow 0.2s;
-      overflow: hidden;
-    }
-    /* The image rounds itself rather than relying on the parent's overflow clip,
-       which WebKit drops for the duration of an ancestor transform — and the
-       card lifts on hover. A -webkit-mask-image would also have fixed the clip,
-       but a mask painting area ends at the border box, so it silently deleted
-       the plate's own outer glow below. */
-    .plate img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
-    /* The mark is a wide lockup — 86 by 62.7 in a 100 box — not a square
-       picture, so it is contained rather than covered: cover eats the character
-       before it eats the ring. The svg carries its own clear space, so it needs
-       no padding here, and no rounding because it never reaches an edge. */
-    .plate img.plate-mark { object-fit: contain; border-radius: 0; }
-
-    /* ── the spotlight ──
-       The wall says how much there is; this says what one of them is. It sits
-       above the wall, is the same link as the plate it points at, and its
-       height is set in JS to the tallest tool's worth of words so the wall
-       below it does not jump every four seconds. */
-    .spot { max-width: 620px; margin: 0 auto clamp(14px, 2vh, 20px); position: relative; }
-    .spot-card {
-      display: flex; gap: 16px; align-items: flex-start; text-align: left;
-      padding: 16px 18px; border-radius: 14px;
-      border: 1px solid var(--accent-dim); background: var(--card-lit);
-      box-shadow: var(--edge-light), var(--edge-dark);
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .spot-card:hover { border-color: var(--accent); }
-    .spot-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .spot-card:hover .plate { border-color: var(--accent-dim); box-shadow: inset 0 1px 0 rgba(255,255,255,0.09), 0 0 14px rgba(234,179,8,0.16); }
-    .spot-body { min-width: 0; }
-    .spot-plain {
-      display: block; font-family: var(--font-display); font-weight: 800;
-      font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -0.01em;
-    }
-    .spot-line { display: block; margin-top: 5px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
-    .spot-real { display: block; margin-top: 7px; color: var(--text-muted); font-size: var(--fs-sm); font-family: var(--font-mono); }
-    @media (max-width: 520px) {
-      .spot-card { gap: 13px; padding: 14px; }
-      .plate { width: 46px; height: 46px; font-size: 1.45rem; }
+    /* Short screens: the title and the menu give back height before the
+       menu has to scroll. */
+    @media (max-height: 760px) {
+      .title h1 { font-size: clamp(1.25rem, 0.75rem + 1.5vh, 1.7rem); }
+      .promise { padding-top: 6px; padding-bottom: 6px; }
+      .menu { margin-top: clamp(8px, 2vh, 18px); }
+      .menu-item { padding-top: 3px; padding-bottom: 3px; }
+      .menu-sep { margin-top: 3px; margin-bottom: 3px; }
     }
 
-    /* The plate the spotlight is on. Gold, and a shade brighter than hover, so
-       that on a touch screen — where there is no hover at all — the wall still
-       shows which plate the words belong to. */
-    .wall-tile.is-on {
-      border-color: var(--accent); background: rgba(234,179,8,0.16);
-      box-shadow: 0 0 0 1px var(--accent-dim), 0 0 16px rgba(234,179,8,0.22);
+    /* Short desktop screens: the two-line descriptions go before anything
+       starts to scroll. */
+    @media (min-width: 721px) and (max-height: 760px) {
+      .tool-line { -webkit-line-clamp: 1; line-clamp: 1; }
+      .pick-line { font-size: var(--fs-sec); }
+      .why-card p { display: none; }
+    }
+
+    /* A phone: menu and section are two screens. body.in-pane is set while a
+       section is open. */
+    @media (max-width: 720px) {
+      .game { grid-template-columns: minmax(0, 1fr); }
+      .side, .stage { grid-column: 1; grid-row: 1; }
+      .stage { display: none; padding-top: 14px; }
+      body.in-pane .side { display: none; }
+      body.in-pane .stage { display: block; }
+      .back { display: inline-flex; }
+      .menu-item[aria-selected="true"] { transform: none; }
+      .menu-item[aria-selected="true"]::before { left: 0; }
+      .pick-grid { grid-template-columns: minmax(0, 1fr); }
+      .pick { gap: 14px; padding: 14px 40px 14px 14px; }
+      .pick-mark { width: 44px; }
+      .pick-line { font-size: var(--fs-sec); }
+      .pick-real { margin-top: 6px; }
+      .pick-go { top: 16px; right: 12px; }
+      .title-mark { width: 36px; }
+      .title h1 { font-size: clamp(1.3rem, 0.8rem + 1.4vh, 1.8rem); }
+      .menu { margin-top: clamp(10px, 2.2vh, 24px); }
+      .menu-item { font-size: clamp(0.95rem, 0.7rem + 0.7vh, 1.12rem); }
+      .pane-head { margin-bottom: 12px; }
+      .pane-head h2 { font-size: 1.35rem; }
+      .pane-head p { font-size: var(--fs-sec); margin-top: 4px; }
+      .back { margin-bottom: 8px; }
+      .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+      .tool { gap: 9px; padding: 9px 10px; border-radius: 10px; }
+      .tool-ico { width: 30px; height: 30px; border-radius: 8px; }
+      .tool-ico .g { width: 16px; height: 16px; }
+      .tool-plain { font-size: var(--fs-sec); line-height: 1.25; }
+      .tool-line { display: none; }
+      .tool-real { margin-top: 3px; font-size: var(--fs-micro, 0.7rem); }
+      .why-card { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; }
+      .why-card h3 { margin: 0; font-size: var(--fs-body); }
+      .why-card p { display: none; }
+      .keys { display: none; }
+      .bar { justify-content: center; padding-top: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+      .bar-links { gap: 14px; flex-wrap: nowrap; }
+      .bar-links a:nth-child(3), .bar-links span { display: none; }
+    }
+
+    /* A short phone (an SE, a landscape-ish window): the section's blurb goes
+       first — the menu entry already named it. */
+    @media (max-width: 720px) and (max-height: 700px) {
+      .pane-head p { display: none; }
+      .back { margin-bottom: 4px; }
+      .tool { padding: 8px 9px; }
+      .tool-grid { gap: 6px; }
     }
 
     /* ── the two ways out: a person, or the full index ── */
     .band {
-      margin: 34px 0 0; padding: 34px 30px; border-radius: 16px;
+      margin: 0; padding: clamp(24px, 4vh, 40px) clamp(20px, 3vw, 34px); border-radius: 16px;
       border: 1px solid var(--border); background: var(--card); box-shadow: var(--edge-light), var(--edge-dark);
       display: flex; align-items: center; justify-content: space-between; gap: 26px; flex-wrap: wrap;
     }
     .band.lit { border-color: var(--accent-dim); background: var(--card-lit); }
-    /* The footer ends the page now, and .site-foot carries its own bottom
-       padding, so main needs none. */
-    main.shell { padding-bottom: 0; }
-    main > .site-foot { margin-top: 40px; }
     .band h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.25rem, 2.2vw, 1.6rem); letter-spacing: -0.02em; }
     .band p { margin-top: 8px; color: var(--text-sec); max-width: 58ch; }
     .band-act { display: flex; gap: 12px; flex-wrap: wrap; flex: none; }
@@ -574,8 +641,6 @@
 
     @media (max-width: 720px) {
       :root { --pad: 16px; }
-      .hero { padding: 34px 0 26px; }
-      .promise { font-size: var(--fs-body); align-items: flex-start; }
       .band { padding: 26px 20px; }
       .band-act { width: 100%; }
       .btn { width: 100%; justify-content: center; }
@@ -583,7 +648,7 @@
     @media (max-width: 560px) {
       /* The brand is never cut to "Carino Sys…": it keeps its width, and the
          GitHub and LinkedIn buttons step aside instead — both are in the
-         footer. The legal shield stays, it is the fleet's fixed slot. */
+         bottom bar. The legal shield stays, it is the fleet's fixed slot. */
       .brand-name { font-size: var(--fs-h3); flex: none; overflow: visible; }
       .social-row .icon-btn:not(#cnLegal) { display: none; }
       .header-inner { gap: 10px; }
@@ -613,7 +678,7 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      .btn:hover, .icon-btn:hover, .wall-tile:hover { transform: none; }
+      .btn:hover, .icon-btn:hover, .pick:hover, .tool:hover, .menu-item { transform: none !important; }
     }
   </style>
 </head>
@@ -714,61 +779,28 @@
   </div>
 </header>
 
-<main class="shell">
+<main class="game">
 
-  <!-- Laid out the way opensuse.org lays its front page out: a centred hero
-       over one big picture, six reasons in two rows of three, a short list of
-       what it does, then two things named first with four beside them, and
-       every link in columns at the end. Its arrangement, not its palette — the
-       gold and the black are ours.
-
-       It scrolls, and that is the point of the shape: openSUSE's page is not
-       trying to fit, it is trying to be read in order. -->
-
-  <section class="hero landing-hero">
-    <div class="hero-mark lh-mark" aria-hidden="true">
-      <img class="mark" src="logo.svg" alt="" width="120" height="120" decoding="async">
-      <svg class="tiles lh-motif" viewBox="0 0 200 40" preserveAspectRatio="xMidYMid meet">
-        <line class="tile-rail" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
-        <line class="sweep" x1="6" y1="20" x2="194" y2="20" pathLength="100" />
-        <g class="tile">
-          <rect x="16" y="14" width="12" height="12" rx="2" /><rect x="44" y="14" width="12" height="12" rx="2" />
-          <rect x="72" y="14" width="12" height="12" rx="2" /><rect x="100" y="14" width="12" height="12" rx="2" />
-          <rect x="128" y="14" width="12" height="12" rx="2" /><rect x="156" y="14" width="12" height="12" rx="2" />
-        </g>
-      </svg>
+  <!-- The menu: the title, the promise, and every section. The sections are
+       drawn from start.json by the script below; the stage beside it shows the
+       chosen one. -->
+  <aside class="side">
+    <div class="title">
+      <img class="title-mark" src="logo.svg" alt="" width="58" height="58" decoding="async">
+      <h1><span data-i18n>Open solutions made for everyone.</span> <span class="gold" data-i18n>Free for anyone.</span></h1>
+      <p class="promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span data-i18n>Your files never leave your computer.</span>
+      </p>
     </div>
-    <h1><span data-i18n>Open solutions made for everyone.</span><br><span class="gold" data-i18n>Free for anyone.</span></h1>
-    <p class="lede lh-lede" data-i18n>Open a medical image, fix a document, build a résumé, set up a computer. The web tools need nothing installed, no account and no payment.</p>
-    <p class="promise">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      <span data-i18n>Your files never leave your computer.</span>
-    </p>
+    <nav class="menu" id="menu" role="tablist" aria-orientation="vertical" aria-label="Carino Systems"></nav>
+  </aside>
 
-    <!-- openSUSE puts a desktop screenshot here to say "this is what you get".
-         There are no screenshots in this repository yet, and inventing one would
-         be worse than none, so the picture is the fleet itself: every tool it
-         holds, at a glance. It is built from the registry, so it can never show
-         a tool the hub does not have. -->
-    <figure class="wall">
-      <!-- One tool at a time, named and described, over the wall it belongs to.
-           A wall of 35 emoji is a rebus otherwise: you can see there is a lot
-           here, but not what any of it is. It advances on its own and stops the
-           moment a pointer or the keyboard reaches a plate, because someone
-           reading is someone who has already chosen. -->
-      <div class="spot" id="spot"></div>
-      <div class="wall-grid" id="wall"></div>
-      <figcaption><b id="wallCount">—</b> <span data-i18n>tools, all of them free, none of them asking for an account.</span></figcaption>
-    </figure>
-  </section>
-
-  <!-- Plain links in the HTML itself. The wall above is drawn by script from the
-       registry; this list is what a search engine or a reader without script
-       sees first. Non-health tools only while §P.22 of the business plan holds. -->
-  <section class="starts">
-    <div class="sec-head">
-      <h2 data-i18n>A few to start with</h2>
-    </div>
+  <section class="stage" id="stage">
+    <!-- Every tool pane is drawn here. Until the script runs — or for a reader
+         without it — the stage holds plain links. Non-health tools only while
+         §P.22 of the business plan holds. -->
+    <div class="pane" id="p-tools" role="tabpanel">
     <ul class="starts-list">
       <li><a href="https://hardware.carino.systems/"><b>Hardware</b> <span data-i18n>Find who made a network card from its MAC address</span></a></li>
       <li><a href="https://metadata.carino.systems/"><b>Metadata</b> <span data-i18n>See what a file says about you, and remove a photo's GPS location</span></a></li>
@@ -779,12 +811,13 @@
       <li><a href="https://vitae.carino.systems/"><b>Vitae</b> <span data-i18n>Make a résumé and save it as a PDF</span></a></li>
       <li><a href="https://password.carino.systems/"><b>Password</b> <span data-i18n>Make a strong password and send it safely</span></a></li>
     </ul>
-  </section>
-
-  <section class="why">
-    <div class="sec-head">
-      <h2 data-i18n>Is this safe to use?</h2>
     </div>
+
+    <div class="pane" id="p-safe" role="tabpanel" hidden>
+      <div class="pane-head">
+        <button type="button" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n>Back</span></button>
+        <h2 data-i18n>Is this safe to use?</h2>
+      </div>
     <div class="why-grid">
       <div class="why-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -817,12 +850,12 @@
         <p data-i18n>Every tool is written down twice — what it does, and what it is called — so you never have to already know the word to find the thing.</p>
       </div>
     </div>
-  </section>
+    </div>
 
-
-
-
-
+    <div class="pane" id="p-hand" role="tabpanel" hidden>
+      <div class="pane-head">
+        <button type="button" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n>Back</span></button>
+      </div>
   <div class="band lit">
     <div>
       <h2 data-i18n>Would you like a hand?</h2>
@@ -835,19 +868,24 @@
       </a>
     </div>
   </div>
+    </div>
+  </section>
 
-
-
-  <!-- The hub's footer (Branding #footer): where the code is, the legal page,
-       and the reference every page here is built from. -->
-  <footer class="site-foot">
-    <div class="sf-links">
+  <!-- The bottom bar: the keys, and what the footer held — where the code is,
+       the legal page, and the reference every page here is built from. -->
+  <footer class="bar">
+    <span class="keys" aria-hidden="true">
+      <kbd>↑</kbd><kbd>↓</kbd> <span data-i18n>choose</span><span class="sp"></span>
+      <kbd>1</kbd>–<kbd>0</kbd> <span data-i18n>jump</span><span class="sp"></span>
+      <kbd>Tab</kbd> <span data-i18n>into the tools</span>
+    </span>
+    <nav class="bar-links">
       <a href="https://github.com/MiguelCarino/Carino-Systems" target="_blank" rel="noopener" data-i18n>Source</a>
       <a href="https://carino.systems/legal.html" data-i18n>Legal &amp; privacy</a>
       <a href="https://branding.carino.systems/" data-i18n>Design system</a>
       <a href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <div class="sf-line"><span>Carino Systems · AGPL-3.0 · </span><span data-i18n>Every tool links to its own source.</span></div>
+      <span>AGPL-3.0</span>
+    </nav>
   </footer>
 
 </main>
@@ -870,7 +908,7 @@
 const START = 'assets/json/start.json';
 const TOOLS = 'assets/json/tools.json';
 
-let DATA = null, INDEX = new Map(), TOTAL = 0;
+let DATA = null, INDEX = new Map(), TAGS = [];
 
 /* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
    Fall through to the English key until it does — which is exactly what
@@ -879,162 +917,197 @@ const T = (s) => (typeof t === 'function' ? t(s) : s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const $ = (id) => document.getElementById(id);
 
-/* Every tool the wall shows, and the words for it. The address, the icon and
-   the mark come from the registry; the plain name and the one-line description come from
-   start.json, which is where the fleet's plain wording lives. A tool that is in
-   the registry but in no group still gets a plate — it falls back to its own
-   name and the registry's description rather than dropping off the wall. */
-function spotItems() {
-  const entries = new Map(DATA.groups.flatMap((g) => g.tools).map((e) => [e.ref, e]));
-  return [...INDEX.values()].map((tool) => {
-    const e = entries.get(tool.name) || {};
-    return {
-      tool,
-      plain: T(e.plain || tool.name),
-      line: T(e.line || tool.desc || ''),
-      shot: e.shot || '',
-    };
-  });
+/* The catalogue is by industry: the registry's own tags (tools.json), each
+   with its label, blurb and icon. A tool sits under every industry it is
+   tagged with, as in a shop catalogue. Medical is last because §P.22 of the
+   business plan keeps the health tools listed but not promoted until W3 —
+   moving it is this one line. start.json still supplies the plain words for
+   every tool and the four picks. */
+const ORDER = ['files', 'media', 'business', 'systems', 'network', 'security', 'learn', 'medical'];
+
+/* A tool and the words for it: the address and the mark from the registry,
+   the plain name and the one line from start.json. */
+function item(entry) {
+  const tool = INDEX.get(entry.ref);
+  if (!tool) return null;
+  return { tool, plain: T(entry.plain || tool.name), line: T(entry.line || tool.desc || '') };
 }
 
 /* Every tool in the fleet is on its own subdomain, so every link is a new tab
    — but the test is the URL, not the assumption. */
 const offsite = (url) => /^https?:/i.test(url) && !url.startsWith(location.origin);
 const newTab = (url) => (offsite(url) ? ' target="_blank" rel="noopener"' : '');
+// The mark's pictogram without the ring, deployed beside it by Branding/marks.
+const glyphOf = (tool) => (tool.mark ? tool.mark.replace(/\.svg$/, '-glyph.svg') : '');
+// Named twice (rule two) — unless the plain name already is the real one.
+const realName = (it) => (it.plain === it.tool.name ? '' : it.tool.name);
+const BACK = () => `<button type="button" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>${esc(T('Back'))}</span></button>`;
 
-/* The spotlight: the tool the wall is pointing at, said in words.
-   The plate, in order of preference: a screenshot if one has been captured,
-   then the tool's own mark — the gold C with its character, which is the thing
-   that actually appears in its tab and its dock — and the emoji only if the
-   registry names no mark. The emoji stays on the wall tile either way, so the
-   plate can carry the real identity without the wall losing its shorthand. */
-function spotHtml(it) {
-  const plate = it.shot
-    ? `<span class="plate"><img src="${esc(it.shot)}" alt="" loading="lazy" decoding="async"></span>`
-    : it.tool.mark
-      ? `<span class="plate"><img class="plate-mark" src="${esc(it.tool.mark)}" alt="" loading="lazy" decoding="async"></span>`
-      : `<span class="plate">${esc(it.tool.icon)}</span>`;
-  return `<a class="spot-card" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
-    ${plate}
-    <span class="spot-body">
-      <span class="spot-plain">${esc(it.plain)}</span>
-      <span class="spot-line">${esc(it.line)}</span>
-      <span class="spot-real">${esc(it.tool.name)}</span>
+function pickHtml(it) {
+  const face = it.tool.mark
+    ? `<img class="pick-mark" src="${esc(it.tool.mark)}" alt="" width="72" height="72" decoding="async">`
+    : `<span class="tool-ico"><span class="emo">${esc(it.tool.icon)}</span></span>`;
+  const real = realName(it) ? `<span class="pick-real">${esc(realName(it))}</span>` : '';
+  return `<a class="pick" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
+    ${face}
+    <span class="pick-txt">
+      <span class="pick-plain">${esc(it.plain)}</span>
+      <span class="pick-line">${esc(it.line)}</span>
+      ${real}
+    </span>
+    <svg class="pick-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+  </a>`;
+}
+
+function toolHtml(it) {
+  const g = glyphOf(it.tool);
+  const ico = g ? `<span class="g" style="--g:url('${esc(g)}')"></span>`
+                : `<span class="emo">${esc(it.tool.icon)}</span>`;
+  const real = realName(it) ? `<span class="tool-real">${esc(realName(it))}</span>` : '';
+  return `<a class="tool" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
+    <span class="tool-ico" aria-hidden="true">${ico}</span>
+    <span class="tool-txt">
+      <span class="tool-plain">${esc(it.plain)}</span>
+      <span class="tool-line">${esc(it.line)}</span>
+      ${real}
     </span>
   </a>`;
 }
 
-/* The wall: every tool in the registry as a plate, and each plate a way in.
-   openSUSE shows a screenshot of the desktop you get; this shows the fleet you
-   get, and because it is built from the registry it can never show a tool the
-   hub does not have. The label carries both names, which is the page's rule.
-   Each plate is the tool's own mark — the generated gold C with its character,
-   the same picture as its tab — and the emoji only where the registry names no
-   mark yet. */
-function renderWall() {
-  $('wall').innerHTML = ITEMS.map((it) => {
-    const label = it.plain === it.tool.name ? it.tool.name : it.plain + ' — ' + it.tool.name;
-    const face = it.tool.mark
-      ? `<img class="wall-mark" src="${esc(it.tool.mark)}" alt="" width="40" height="40" loading="lazy" decoding="async">`
-      : `<span class="wall-emoji" aria-hidden="true">${esc(it.tool.icon)}</span>`;
-    return `<a class="wall-tile" href="${esc(it.tool.url)}"${newTab(it.tool.url)}` +
-      ` title="${esc(label)}" aria-label="${esc(label)}">${face}</a>`;
-  }).join('');
-  $('wallCount').textContent = ITEMS.length;
-}
-
-/* ── the spotlight, one tool at a time ──
-   It advances on its own and stops the moment a pointer or the keyboard reaches
-   a plate: someone reading has already chosen, and moving the words out from
-   under them would be the site arguing with its own visitor. It also stops when
-   the tab is hidden, so a page left open in the background is not animating to
-   nobody, and it never starts under prefers-reduced-motion. */
-const SPOT_MS = 4200;
-let ITEMS = [], spotAt = 0, spotTimer = null, spotHeld = false;
+/* The sections, in menu order. A tools section is drawn into #p-tools; the
+   two that are prose (#p-safe, #p-hand) are markup, translated in place. */
+let SECTIONS = [], current = null;
+const phone = window.matchMedia('(max-width: 720px)');
 const stillPlease = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-function showSpot(i, animate) {
-  if (!ITEMS.length) return;
-  spotAt = ((i % ITEMS.length) + ITEMS.length) % ITEMS.length;
-  const spot = $('spot');
-  spot.innerHTML = spotHtml(ITEMS[spotAt]);
-  const tiles = $('wall').children;
-  for (let n = 0; n < tiles.length; n++) tiles[n].classList.toggle('is-on', n === spotAt);
-  const card = spot.firstElementChild;
-  if (animate && !stillPlease.matches && card && card.animate) {
-    card.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }],
-      { duration: 220, easing: 'ease-out' });
+function sections() {
+  const entries = new Map(DATA.groups.flatMap((g) => g.tools).map((e) => [e.ref, e]));
+  const wordsFor = (tool) => item(entries.get(tool.name) || { ref: tool.name });
+  const tags = [...ORDER.map((id) => TAGS.find((t) => t.id === id)).filter(Boolean),
+                ...TAGS.filter((t) => !ORDER.includes(t.id))];
+  const picks = (DATA.featured || []).map((n) => item(entries.get(n) || { ref: n })).filter(Boolean);
+  return [
+    { id: 'start', title: T('Start here'), blurb: T('Four that most people need sooner or later.'), picks,
+      icon: '<path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>' },
+    ...tags.map((t) => ({
+      id: t.id, title: T(t.label), blurb: T(t.blurb || ''), icon: t.path,
+      items: [...INDEX.values()].filter((tool) => (tool.tags || []).includes(t.id)).map(wordsFor),
+    })).filter((x) => x.items.length),
+    { sep: true },
+    { id: 'safe', title: T('Is this safe to use?'), pane: 'p-safe',
+      icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>' },
+    { id: 'hand', title: T('Would you like a hand?'), pane: 'p-hand',
+      icon: '<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/>' },
+  ];
+}
+
+function renderMenu() {
+  let n = 0;
+  $('menu').innerHTML = SECTIONS.map((x) => {
+    if (x.sep) return '<div class="menu-sep" role="presentation"></div>';
+    n += 1;
+    const count = x.items ? `<span class="c">${x.items.length}</span>` : '';
+    // The registry's icon paths are its own static data, not user input.
+    const icon = x.icon ? `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${x.icon}</svg>` : '';
+    // Ten number keys: 1–9, then 0. Anything past the tenth has no key.
+    const key = n <= 10 ? n % 10 : '';
+    return `<button type="button" class="menu-item" role="tab" id="m-${esc(x.id)}" data-id="${esc(x.id)}"` +
+      ` aria-selected="false" tabindex="-1"><span class="n">${key}</span>${icon}<span class="t">${esc(x.title)}</span>${count}</button>`;
+  }).join('');
+}
+
+function paneFor(x) { return $(x.pane || 'p-tools'); }
+
+function show(id, animate) {
+  const x = SECTIONS.find((s) => s.id === id) || SECTIONS[0];
+  current = x.id;
+  for (const b of $('menu').querySelectorAll('.menu-item')) {
+    const on = b.dataset.id === x.id;
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+    b.tabIndex = on ? 0 : -1;
+  }
+  if (!x.pane) {
+    const body = x.picks
+      ? `<div class="pick-grid">${x.picks.map(pickHtml).join('')}</div>`
+      : `<div class="tool-grid">${x.items.map(toolHtml).join('')}</div>`;
+    $('p-tools').innerHTML =
+      `<div class="pane-head">${BACK()}<h2>${esc(x.title)}</h2><p>${esc(x.blurb)}</p></div>${body}`;
+  }
+  for (const p of $('stage').querySelectorAll('.pane')) p.hidden = p !== paneFor(x);
+  const pane = paneFor(x);
+  pane.setAttribute('aria-labelledby', 'm-' + x.id);
+  $('stage').scrollTop = 0;
+  if (animate && !stillPlease.matches) {
+    pane.classList.remove('enter'); void pane.offsetWidth; pane.classList.add('enter');
   }
 }
 
-function spotStop() { clearInterval(spotTimer); spotTimer = null; }
-function spotStart() {
-  if (spotTimer || spotHeld || stillPlease.matches || document.hidden || ITEMS.length < 2) return;
-  spotTimer = setInterval(() => showSpot(spotAt + 1, true), SPOT_MS);
+/* The address carries the section (#documents, #safe…), so a section can be
+   linked to and the browser's Back works. On a phone an address with a
+   section means that section is open; an empty one means the menu. */
+function fromHash(animate) {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const known = SECTIONS.some((s) => s.id === id);
+  document.body.classList.toggle('in-pane', known && phone.matches);
+  show(known ? id : (current || 'start'), animate);
 }
 
-/* The card holds the tallest tool's worth of words, so the wall below it does
-   not move every time the spotlight changes. Measured, not guessed: the copy is
-   translated, and the longest line in Russian is not the longest in Japanese.
-   The measurer is absolutely positioned, so its own height never feeds back
-   into the height being measured. */
-function sizeSpot() {
-  const spot = $('spot');
-  if (!ITEMS.length) return;
-  const probe = document.createElement('div');
-  probe.style.cssText = 'position:absolute;visibility:hidden;left:0;right:0;pointer-events:none';
-  spot.appendChild(probe);
-  let tallest = 0;
-  for (const it of ITEMS) {
-    probe.innerHTML = spotHtml(it);
-    tallest = Math.max(tallest, probe.firstElementChild.getBoundingClientRect().height);
-  }
-  spot.removeChild(probe);
-  spot.style.minHeight = Math.ceil(tallest) + 'px';
-}
-
-function wireSpot() {
-  const wall = $('wall'), spot = $('spot');
-  const hold = (i) => { spotHeld = true; spotStop(); showSpot(i, true); };
-  const release = () => { spotHeld = false; spotStart(); };
-  const indexOf = (el) => [...wall.children].indexOf(el.closest('.wall-tile'));
-
-  wall.addEventListener('pointerover', (e) => {
-    const i = indexOf(e.target);
-    if (i >= 0 && i !== spotAt) hold(i); else if (i >= 0) { spotHeld = true; spotStop(); }
-  });
-  wall.addEventListener('focusin', (e) => { const i = indexOf(e.target); if (i >= 0) hold(i); });
-  wall.addEventListener('pointerleave', release);
-  wall.addEventListener('focusout', (e) => { if (!wall.contains(e.relatedTarget)) release(); });
-  // Reading the spotlight is the same as reading a plate: hold it still.
-  spot.addEventListener('pointerenter', () => { spotHeld = true; spotStop(); });
-  spot.addEventListener('pointerleave', release);
-  spot.addEventListener('focusin', () => { spotHeld = true; spotStop(); });
-  spot.addEventListener('focusout', (e) => { if (!spot.contains(e.relatedTarget)) release(); });
-
-  document.addEventListener('visibilitychange', () => (document.hidden ? spotStop() : spotStart()));
-  stillPlease.addEventListener('change', () => (stillPlease.matches ? spotStop() : spotStart()));
-  let resized;
-  window.addEventListener('resize', () => { clearTimeout(resized); resized = setTimeout(sizeSpot, 150); });
+function choose(id) {
+  if ('#' + id === location.hash) { fromHash(false); return; }
+  location.hash = id;
 }
 
 let wired = false;
+function wire() {
+  const menu = $('menu');
+  menu.addEventListener('click', (e) => {
+    const b = e.target.closest('.menu-item');
+    if (b) choose(b.dataset.id);
+  });
+  // A menu answers the arrows: up and down move the choice, Home and End go to
+  // the ends. On a phone they only move focus — choosing there opens a screen.
+  menu.addEventListener('keydown', (e) => {
+    const items = [...menu.querySelectorAll('.menu-item')];
+    const at = items.indexOf(document.activeElement);
+    let to = -1;
+    if (e.key === 'ArrowDown') to = (at + 1) % items.length;
+    else if (e.key === 'ArrowUp') to = (at - 1 + items.length) % items.length;
+    else if (e.key === 'Home') to = 0;
+    else if (e.key === 'End') to = items.length - 1;
+    if (to < 0) return;
+    e.preventDefault();
+    items[to].focus();
+    if (!phone.matches) choose(items[to].dataset.id);
+  });
+  // Number keys pick a section from anywhere, as long as nobody is typing.
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (!/^[0-9]$/.test(e.key)) return;
+    const items = [...menu.querySelectorAll('.menu-item')];
+    const b = items[(Number(e.key) + 9) % 10];
+    if (b) { choose(b.dataset.id); b.focus(); }
+  });
+  $('stage').addEventListener('click', (e) => {
+    if (!e.target.closest('.back')) return;
+    if (location.hash) history.back(); else fromHash(false);
+  });
+  window.addEventListener('hashchange', () => fromHash(true));
+  phone.addEventListener('change', () => fromHash(false));
+}
 
 function render() {
   if (!DATA) return;
-  ITEMS = spotItems();
-  renderWall();
-  showSpot(spotAt, false);
-  sizeSpot();
-  if (!wired) { wireSpot(); wired = true; }
-  spotStart();
+  SECTIONS = sections();
+  renderMenu();
+  if (!wired) { wire(); wired = true; }
+  fromHash(false);
 
   // Every tool in tools.json should be on the page somewhere — this is the hub,
   // and a tool the hub does not list is a tool nobody can find. Missing ones are
   // named in the console rather than shown, because the person reading the page
   // cannot act on it and the person maintaining it can.
-  const shown = new Set(DATA.groups.flatMap((g) => g.tools).map((x) => x.ref));
-  const missing = [...INDEX.keys()].filter((n) => !shown.has(n));
+  const listed = new Set(DATA.groups.flatMap((g) => g.tools).map((e) => e.ref));
+  const missing = [...INDEX.keys()].filter((n) => !listed.has(n));
   if (missing.length) console.warn('[hub] not listed in start.json:', missing.join(', '));
 }
 
@@ -1042,12 +1115,9 @@ function render() {
 window.renderTools = render;
 
 function broken(err) {
-  spotStop();
-  $('wall').innerHTML = '';
-  $('spot').style.minHeight = '';
-  $('spot').innerHTML =
+  $('p-tools').insertAdjacentHTML('afterbegin',
     `<div class="broken"><p>${esc(T('The list of tools could not be loaded.'))}</p>` +
-    `<p><code>${esc(err.message)}</code></p></div>`;
+    `<p><code>${esc(err.message)}</code></p></div>`);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1061,7 +1131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ))
     .then(([start, tools]) => {
       DATA = start;
-      TOTAL = (tools.tools || []).length;
+      TAGS = tools.tags || [];
       (tools.tools || []).forEach((x) => INDEX.set(x.name, x));
       render();
     })
