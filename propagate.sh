@@ -11,6 +11,7 @@
 #   canonical carino-lang.js   = Carino-Systems/carino-lang.js  (this repo)
 #   canonical carino-bridge.js = ../Quote/carino-bridge.js
 #   canonical carino-ui.{css,js} = ../Branding/carino-ui.{css,js}
+#   canonical carino-fx.js     = ../Currency/carino-fx.js
 set -euo pipefail
 cd "$(dirname "$0")/.."          # -> the folder holding all the sibling repos
 
@@ -21,6 +22,7 @@ ANIM_CSS_SRC="Branding/carino-anim.css"
 ANIM_JS_SRC="Branding/carino-anim.js"
 LANG_SRC="Carino-Systems/carino-lang.js"
 BRIDGE_SRC="Quote/carino-bridge.js"
+FX_SRC="Currency/carino-fx.js"
 UI_CSS_SRC="Branding/carino-ui.css"
 UI_JS_SRC="Branding/carino-ui.js"
 
@@ -87,6 +89,13 @@ for f in */carino-lang.js */*/carino-lang.js; do
   [ -e "$f" ] || continue
   [ "$f" -ef "$LANG_SRC" ] || cp "$LANG_SRC" "$f"
   echo "  ${f%/carino-lang.js}  (lang)"
+done
+# Shared exchange rates (latest ECB/Frankfurter, open.er-api.com for the gaps), one snapshot shared
+# across *.carino.systems by cookie. Discovered: a site opts in by carrying the file.
+for f in */carino-fx.js; do
+  [ -e "$f" ] || continue
+  [ "$f" -ef "$FX_SRC" ] || cp "$FX_SRC" "$f"
+  echo "  ${f%/carino-fx.js}  (fx)"
 done
 for f in */carino-bridge.js */*/carino-bridge.js */*/*/carino-bridge.js */*/*/*/carino-bridge.js; do
   [ -e "$f" ] || continue
