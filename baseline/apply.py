@@ -126,7 +126,7 @@ def alternates(site):
 def head_block(site):
     esc = lambda s: html.escape(s, quote=True)
     return fill(template('head.html').rstrip('\n'), image=image_tag(site), alternates=alternates(site),
-                desc=esc(site['desc']), domain=site['domain'], name=esc(site['name']),
+                desc=esc(site['desc']), line=esc(site['line']), domain=site['domain'], name=esc(site['name']),
                 site_name=esc(site['name'] if site.get('standalone') else 'Carino Systems'),
                 jsonld=json_ld(site))
 

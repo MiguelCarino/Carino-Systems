@@ -4,7 +4,8 @@
     "dir": "Aldis-Lamp",
     "name": "Aldis Lamp",
     "type": "tool",
-    "desc": "Speak, and a signal lamp sends it in Morse — on screen, in fullscreen, on the phone torch and as a sidetone. Point the camera at a light to read a lamp back. Runs entirely in the browser."
+    "desc": "Speak, and a signal lamp sends it in Morse — on screen, in fullscreen, on the phone torch and as a sidetone. Point the camera at a light to read a lamp back. Runs entirely in the browser.",
+    "line": "Speak, and a signal lamp sends it in Morse."
   },
   {
     "domain": "asobi.carino.systems",
@@ -12,14 +13,16 @@
     "name": "Asobi — Board Games",
     "type": "play",
     "also": "suite",
-    "desc": "Play Shogi (将棋) — human vs human, human vs AI, or AI vs AI — Hanafuda Koi-Koi (花札) against the computer, and the Pentarch deterministic auto-battler. Runs entirely in your browser."
+    "desc": "Play Shogi (将棋) — human vs human, human vs AI, or AI vs AI — Hanafuda Koi-Koi (花札) against the computer, and the Pentarch deterministic auto-battler. Runs entirely in your browser.",
+    "line": "Shogi, Hanafuda and Pentarch, in your browser."
   },
   {
     "domain": "branding.carino.systems",
     "dir": "Branding",
     "name": "Carino Branding",
     "type": "reference",
-    "desc": "The living design-system reference — tokens, components and copy-ready snippets for every Carino project."
+    "desc": "The living design-system reference — tokens, components and copy-ready snippets for every Carino project.",
+    "line": "The design system every Carino site is built from."
   },
   {
     "domain": "butter.carino.systems",
@@ -27,6 +30,7 @@
     "name": "ButterEye",
     "type": "product",
     "desc": "ButterEye makes the videos you play in mpv smoother: new in-between frames, live or as a saved copy. Free software for Fedora Linux, Windows and macOS.",
+    "line": "Smoother video playback in mpv.",
     "standalone": true,
     "software": "Linux, Windows, macOS"
   },
@@ -36,6 +40,7 @@
     "name": "Carino Systems",
     "type": "hub",
     "desc": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. The web tools need no install and no account, and your files never leave your computer.",
+    "line": "Open solutions made for everyone, free for anyone.",
     "hub": true
   },
   {
@@ -43,14 +48,16 @@
     "dir": "Compass",
     "name": "Compass",
     "type": "learn",
-    "desc": "A 12-axis political compass measured by intention — Mind, Suggest, Enforce — not number grading. Compare against leaders, thinkers and fictional characters, in 2D or 3D."
+    "desc": "A 12-axis political compass measured by intention — Mind, Suggest, Enforce — not number grading. Compare against leaders, thinkers and fictional characters, in 2D or 3D.",
+    "line": "A political compass measured by intention."
   },
   {
     "domain": "currency.carino.systems",
     "dir": "Currency",
     "name": "Carino Currency",
     "type": "live",
-    "desc": "Carino Currency — a keyless, in-browser finance watcher: live FX trends and movers, finance news, and export/import trade value. Data from ECB/Frankfurter, GDELT and the World Bank; nothing is uploaded."
+    "desc": "Carino Currency — a keyless, in-browser finance watcher: live FX trends and movers, finance news, and export/import trade value. Data from ECB/Frankfurter, GDELT and the World Bank; nothing is uploaded.",
+    "line": "Live exchange rates, finance news and trade."
   },
   {
     "domain": "cve.carino.systems",
@@ -58,6 +65,7 @@
     "name": "CVE Database",
     "type": "live",
     "desc": "Search CVE security vulnerabilities from the NIST NVD — CVSS scores, filters and trends, fast and offline-capable, in your browser.",
+    "line": "Search known security flaws, fast.",
     "pages": [
       "stats.html"
     ]
@@ -67,14 +75,16 @@
     "dir": "CyberCity",
     "name": "CyberCity",
     "type": "play",
-    "desc": "Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round."
+    "desc": "Four walkable worlds drawn entirely in text characters — a rain-lit city, an 1880s frontier town, the Moon and a castle town at dusk — with the sun going round.",
+    "line": "Four walkable worlds drawn in text."
   },
   {
     "domain": "desk.carino.systems",
     "dir": "Desk",
     "name": "Desk",
     "type": "tool",
-    "desc": "Help-desk snippet workspace — search, fill in and copy canned replies for support tickets, in your browser."
+    "desc": "Help-desk snippet workspace — search, fill in and copy canned replies for support tickets, in your browser.",
+    "line": "Fill in a ticket, copy the right reply."
   },
   {
     "domain": "dcm.carino.systems",
@@ -82,28 +92,32 @@
     "repo": "Carino-DICOM-Editor",
     "name": "Carino DICOM Editor",
     "type": "suite",
-    "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability."
+    "desc": "Inspect and modify X-ray metadata tags for HIPAA compliance and PACS interoperability.",
+    "line": "Read, edit and anonymise DICOM files."
   },
   {
     "domain": "distro.carino.systems",
     "dir": "findmeadistro",
     "name": "Find Me a Distro",
     "type": "learn",
-    "desc": "Pick a Linux or BSD family and get one of its distros at random, with a link to its site. A random pick, not a match; your choices stay in the link."
+    "desc": "Pick a Linux or BSD family and get one of its distros at random, with a link to its site. A random pick, not a match; your choices stay in the link.",
+    "line": "Get a random Linux or BSD distro to try."
   },
   {
     "domain": "fiscal.carino.systems",
     "dir": "Fiscal",
     "name": "Fiscal",
     "type": "tool",
-    "desc": "An offline card that holds your fiscal identity — personal and business — for every jurisdiction you file in. Check digits validated on device, spelled out phonetically for the counter, and never sent anywhere."
+    "desc": "An offline card that holds your fiscal identity — personal and business — for every jurisdiction you file in. Check digits validated on device, spelled out phonetically for the counter, and never sent anywhere.",
+    "line": "Your tax numbers for every country, offline."
   },
   {
     "domain": "font.carino.systems",
     "dir": "Fonts",
     "name": "Carino Fonts",
     "type": "tool",
-    "desc": "Make fonts in your browser: pixel and vector glyph editing, kerning, live preview, TTF/WOFF export and subsetting. Everything stays on your machine."
+    "desc": "Make fonts in your browser: pixel and vector glyph editing, kerning, live preview, TTF/WOFF export and subsetting. Everything stays on your machine.",
+    "line": "Draw your own font and export it."
   },
   {
     "domain": "hardware.carino.systems",
@@ -111,56 +125,64 @@
     "name": "Hardware",
     "type": "reference",
     "also": "tool",
-    "desc": "Decode a MAC address to its vendor and bits, jump to any brand's warranty & driver pages, and get feature-first hardware build recommendations. Runs entirely in your browser."
+    "desc": "Decode a MAC address to its vendor and bits, jump to any brand's warranty & driver pages, and get feature-first hardware build recommendations. Runs entirely in your browser.",
+    "line": "Warranty, drivers and support for every brand."
   },
   {
     "domain": "hash.carino.systems",
     "dir": "Hash",
     "name": "Hash",
     "type": "learn",
-    "desc": "A course in how hashing works: modules by hash family, step-by-step labs that walk through each round, and progress kept in your browser."
+    "desc": "A course in how hashing works: modules by hash family, step-by-step labs that walk through each round, and progress kept in your browser.",
+    "line": "See how a hash is made, step by step."
   },
   {
     "domain": "jellyfish.carino.systems",
     "dir": "Jellyfish",
     "name": "Jellyfish",
     "type": "play",
-    "desc": "A moon jelly, swimming. Ambient WebGL."
+    "desc": "A moon jelly, swimming. Ambient WebGL.",
+    "line": "A moon jelly, swimming."
   },
   {
     "domain": "kanban.carino.systems",
     "dir": "Kanban",
     "name": "Kanban",
     "type": "tool",
-    "desc": "A free Kanban board with no account and no server: the whole board lives in its link, so you can bookmark it or share it."
+    "desc": "A free Kanban board with no account and no server: the whole board lives in its link, so you can bookmark it or share it.",
+    "line": "A task board that lives in its link."
   },
   {
     "domain": "law.carino.systems",
     "dir": "Law",
     "name": "Law — Official Sources",
     "type": "reference",
-    "desc": "A directory of where law is officially published, country by country: the gazette of record, the constitution, the consolidated statutes, the courts and the treaties, each linked at the body that publishes it. The sources that are not official say so."
+    "desc": "A directory of where law is officially published, country by country: the gazette of record, the constitution, the consolidated statutes, the courts and the treaties, each linked at the body that publishes it. The sources that are not official say so.",
+    "line": "Where each country officially publishes its law."
   },
   {
     "domain": "learn.carino.systems",
     "dir": "Learn",
     "name": "Carino Learn",
     "type": "learn",
-    "desc": "Carino Learn: hands-on, checkable learning modules with interactive visualizers — x86-64 assembly, PC architecture, Bash, GNU tools, Linux administration, Git & version control, networking, netplan declarative network configuration, web browsers, regex, cryptography, quantum computing, DICOM & HL7 healthcare interoperability, and ISO 27001 compliance."
+    "desc": "Carino Learn: hands-on, checkable learning modules with interactive visualizers — x86-64 assembly, PC architecture, Bash, GNU tools, Linux administration, Git & version control, networking, netplan declarative network configuration, web browsers, regex, cryptography, quantum computing, DICOM & HL7 healthcare interoperability, and ISO 27001 compliance.",
+    "line": "Hands-on lessons on how computers work."
   },
   {
     "domain": "media.carino.systems",
     "dir": "Media",
     "name": "Media Suite",
     "type": "suite",
-    "desc": "Client-side file & media suite: PDF to images, OCR, signature cleanup, image conversion, ffmpeg command builder and audio to WAV. Everything runs in your browser."
+    "desc": "Client-side file & media suite: PDF to images, OCR, signature cleanup, image conversion, ffmpeg command builder and audio to WAV. Everything runs in your browser.",
+    "line": "Convert, read and clean up files."
   },
   {
     "domain": "metadata.carino.systems",
     "dir": "Metadata",
     "name": "Metadata",
     "type": "tool",
-    "desc": "See every piece of metadata in almost any file, edit EXIF, PDF and MP3 tags, and strip GPS location from photos — in your browser. Your files are never uploaded."
+    "desc": "See every piece of metadata in almost any file, edit EXIF, PDF and MP3 tags, and strip GPS location from photos — in your browser. Your files are never uploaded.",
+    "line": "See and edit the hidden details in a file."
   },
   {
     "domain": "music.carino.systems",
@@ -168,6 +190,7 @@
     "name": "Music Wall",
     "type": "play",
     "desc": "A personal music wall and per-country collection. Click any cover to play, browse by country, queue songs and follow along with synced lyrics.",
+    "line": "A personal music wall, country by country.",
     "image": "assets/images/logo.webp"
   },
   {
@@ -175,21 +198,24 @@
     "dir": "NetplanConfig",
     "name": "Netplan Configurator",
     "type": "tool",
-    "desc": "Build Linux network configs without YAML mistakes — netplan, systemd-networkd and NetworkManager files generated in your browser."
+    "desc": "Build Linux network configs without YAML mistakes — netplan, systemd-networkd and NetworkManager files generated in your browser.",
+    "line": "Build Linux network configs without YAML mistakes."
   },
   {
     "domain": "offline.carino.systems",
     "dir": "Offline",
     "name": "Carino Offline",
     "type": "reference",
-    "desc": "What to download before you can't, which software still works with the WAN cable pulled, what the hardware costs in Mexico, and how physical media beats a blocked route. Runs entirely in your browser, offline."
+    "desc": "What to download before you can't, which software still works with the WAN cable pulled, what the hardware costs in Mexico, and how physical media beats a blocked route. Runs entirely in your browser, offline.",
+    "line": "Plan for the day the internet goes away."
   },
   {
     "domain": "password.carino.systems",
     "dir": "Password",
     "name": "Password",
     "type": "tool",
-    "desc": "Make a strong password, and send it to someone safely. Everything happens in your browser."
+    "desc": "Make a strong password, and send it to someone safely. Everything happens in your browser.",
+    "line": "Make a strong password and send it safely."
   },
   {
     "domain": "ping.carino.systems",
@@ -197,14 +223,16 @@
     "name": "Ping",
     "type": "live",
     "also": "tool",
-    "desc": "Client-side latency measurement and ping log analysis: round trip, jitter, packet loss and the DNS/TLS/TTFB split from your browser, or any saved ping output read in the tab. Nothing leaves the page."
+    "desc": "Client-side latency measurement and ping log analysis: round trip, jitter, packet loss and the DNS/TLS/TTFB split from your browser, or any saved ping output read in the tab. Nothing leaves the page.",
+    "line": "Measure latency, or read a saved ping log."
   },
   {
     "domain": "quote.carino.systems",
     "dir": "Quote",
     "name": "Quote",
     "type": "tool",
-    "desc": "Make a clean price quote for your services or products and export it to PDF — free, in your browser, no account."
+    "desc": "Make a clean price quote for your services or products and export it to PDF — free, in your browser, no account.",
+    "line": "Make a clean price quote and export it to PDF."
   },
   {
     "domain": "dlss.carino.systems",
@@ -212,6 +240,7 @@
     "name": "DLSS 5 for Linux",
     "type": "product",
     "desc": "DLSS 5 for Linux puts NVIDIA's DLSS 5 neural rendering into Steam games running under Proton, and runs the same model over your pictures and videos. Free software for Fedora and any recent Linux.",
+    "line": "DLSS 5 for Steam games under Proton.",
     "standalone": true,
     "software": "Linux"
   },
@@ -220,7 +249,8 @@
     "dir": "Retina",
     "name": "Carino Retina",
     "type": "suite",
-    "desc": "Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order."
+    "desc": "Eye examination, refraction & dispensing suite — annotate a fundus for an automatic cup-to-disc ratio, refract, work up a spectacle/CL dispense, and export a study PDF, DICOM, prescription or lens order.",
+    "line": "Eye exams: fundus, refraction and dispensing."
   },
   {
     "domain": "setup.carino.systems",
@@ -228,6 +258,7 @@
     "name": "Carino Setup",
     "type": "product",
     "desc": "One command that configures Linux, Windows or macOS: hardware and distribution detection, drivers, and 15 purpose profiles. Nothing to install first.",
+    "line": "Set up any computer with one command.",
     "software": "Linux, Windows, macOS"
   },
   {
@@ -236,6 +267,7 @@
     "name": "Software Catalogue",
     "type": "reference",
     "desc": "Straight download links and install commands for software and operating systems — Linux, Windows and macOS — in one searchable catalog.",
+    "line": "Straight download links and install commands.",
     "image": "assets/images/logo.webp"
   },
   {
@@ -244,6 +276,7 @@
     "name": "Stocks",
     "type": "live",
     "desc": "Client-side markets watchlist, portfolio and alerts. Your keys, your device. Monitoring only, never advice.",
+    "line": "A markets watchlist and portfolio, on your device.",
     "pages": [
       "popout.html"
     ]
@@ -253,49 +286,56 @@
     "dir": "SyncSubsStudio",
     "name": "Sync Studio",
     "type": "tool",
-    "desc": "Fix out-of-sync subtitles and lyrics: shift, stretch and re-time .srt, .lrc and .ass files and preview them, in your browser."
+    "desc": "Fix out-of-sync subtitles and lyrics: shift, stretch and re-time .srt, .lrc and .ass files and preview them, in your browser.",
+    "line": "Fix out-of-sync subtitles and lyrics."
   },
   {
     "domain": "teleprompter.carino.systems",
     "dir": "Teleprompter",
     "name": "Teleprompter",
     "type": "tool",
-    "desc": "A free online teleprompter: paste your script, set the speed and read, with mirror mode for teleprompter glass."
+    "desc": "A free online teleprompter: paste your script, set the speed and read, with mirror mode for teleprompter glass.",
+    "line": "Paste your script, set the speed and read."
   },
   {
     "domain": "test.carino.systems",
     "dir": "Test",
     "name": "Carino Test",
     "type": "live",
-    "desc": "Carino Test — a complete in-browser network and system diagnostics suite: WAN/LAN, NAT and WebRTC topology, DNS-over-HTTPS, latency, speed, and a live reachability sweep of the top 50 websites in the world."
+    "desc": "Carino Test — a complete in-browser network and system diagnostics suite: WAN/LAN, NAT and WebRTC topology, DNS-over-HTTPS, latency, speed, and a live reachability sweep of the top 50 websites in the world.",
+    "line": "Network and system diagnostics, in your browser."
   },
   {
     "domain": "time.carino.systems",
     "dir": "Time",
     "name": "Time",
     "type": "live",
-    "desc": "Local time, UTC and Unix epoch — a searchable world-clock with pinned zones, live stock-market opening hours, plus countdowns you can add and share."
+    "desc": "Local time, UTC and Unix epoch — a searchable world-clock with pinned zones, live stock-market opening hours, plus countdowns you can add and share.",
+    "line": "Local time, world clocks and market hours."
   },
   {
     "domain": "topo.carino.systems",
     "dir": "Topo",
     "name": "Topo",
     "type": "tool",
-    "desc": "Draw network diagrams in your browser — devices, links and IP addressing on an interactive canvas, shared as a private link."
+    "desc": "Draw network diagrams in your browser — devices, links and IP addressing on an interactive canvas, shared as a private link.",
+    "line": "Draw a network that checks itself."
   },
   {
     "domain": "tv.carino.systems",
     "dir": "TV",
     "name": "TV",
     "type": "live",
-    "desc": "Watch many live news streams from around the world at once. Add YouTube or any embeddable stream, organize by country, and share your wall with a link."
+    "desc": "Watch many live news streams from around the world at once. Add YouTube or any embeddable stream, organize by country, and share your wall with a link.",
+    "line": "Watch many live streams at once."
   },
   {
     "domain": "vitae.carino.systems",
     "dir": "Vitae",
     "name": "Vitae",
     "type": "tool",
-    "desc": "Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser."
+    "desc": "Build a clean, print-ready résumé with live editing and PDF export. Your data stays in your browser.",
+    "line": "Build a clean résumé and print it to PDF."
   },
   {
     "domain": "dicom.carino.systems",
@@ -303,6 +343,7 @@
     "name": "Carino DICOM",
     "type": "product",
     "desc": "A self-hosted DICOM gateway and continuity appliance: receives, routes, forwards and de-identifies studies, answers Query/Retrieve and DICOMweb, and serves an emergency worklist when the PACS is down. Not a medical device, not for primary diagnosis.",
+    "line": "A DICOM gateway that keeps working when the PACS is down.",
     "software": "Linux, Windows, macOS"
   },
   {
@@ -311,6 +352,7 @@
     "name": "Carino Images",
     "type": "product",
     "desc": "Purpose-built Fedora: six COSMIC + Hyprland desktops and two headless appliances — Asterisk/FreePBX telephony and an intranet keystone for a LAN with no working WAN — each shipping the integration one kind of work needs. Installer ISO or bootc container image.",
+    "line": "Purpose-built Fedora systems for your work.",
     "software": "Linux (Fedora)"
   }
 ]
