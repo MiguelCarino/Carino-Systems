@@ -221,11 +221,6 @@
           "line": "Search reported vulnerabilities by product, severity or number."
         },
         {
-          "ref": "MultiWeb",
-          "plain": "Watch every project at once",
-          "line": "A grid of live pages that refreshes itself."
-        },
-        {
           "ref": "TV",
           "plain": "Watch several streams at once",
           "line": "A wall of live sources for a control room."

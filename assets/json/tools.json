@@ -383,19 +383,6 @@
       "keywords": "exif file magic bytes strip properties"
     },
     {
-      "name": "MultiWeb",
-      "icon": "🧱",
-      "mark": "assets/marks/multiweb.svg",
-      "url": "https://github.com/MiguelCarino/MultiWeb",
-      "desc": "Watch every project in the workshop at once — a grid of live iframes that auto-refreshes each tile as its files change. Runs on your own machine.",
-      "cta": "View on GitHub ↗",
-      "tags": [
-        "systems"
-      ],
-      "keywords": "preview iframe grid wall local dev live reload sites",
-      "local": true
-    },
-    {
       "name": "Music Wall",
       "icon": "🎵",
       "mark": "assets/marks/music.svg",

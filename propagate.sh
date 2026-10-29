@@ -47,7 +47,7 @@ SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web/editor Custom-Images/docs"
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 # (TV, Retina, DICOM-editor, Learn, Asobi and MusicGrid moved to the shared navbar
 # with the page-type work, 2026-10; Teleprompter and CyberCity joined then too.)
-BESPOKE="MultiWeb"
+BESPOKE=""  # MultiWeb, the last one, was deleted 2026-10-29
 
 # Network-oriented sites that also carry the opt-in Sys. Status panel
 # (public IPv4/IPv6, ISP, connection type, RTT). This is the in-navbar
