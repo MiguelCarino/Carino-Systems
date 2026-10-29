@@ -674,11 +674,50 @@
     /* the fleet header drops in while the intro plays, as their nav does */
     body.intro-on .top-header { animation: in-nav .7s cubic-bezier(.2,.7,.2,1) 1.35s both; z-index: 160; }
     @keyframes in-nav { 0% { transform: translateY(-100%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+    .intro-skip .on-touch { display: none; }
+    /* A phone: one left-aligned column (the C, then the title, then the
+       copy), so the title never sits on the mark, and the same choreography
+       done with transform and opacity only. The desktop's 26vw blurs and the
+       blurred exit cost a phone's GPU up to 180 ms a frame; scale, slide and
+       fade read the same at this size. */
     @media (max-width: 720px) {
-      .intro-fig { left: -8vw; top: 38%; width: 78vw; opacity: .55; }
-      .intro-title { left: 7vw; right: 7vw; top: 42%; font-size: clamp(2.4rem, 1rem + 7vw, 3.4rem); }
-      .intro-copy { left: 7vw; right: 7vw; bottom: 20vh; text-align: left; }
-      .intro-go { right: 7vw; top: auto; bottom: 30vh; width: 72px; height: 72px; display: none; }
+      .intro { display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+        padding: 0 7vw calc(14dvh + env(safe-area-inset-bottom, 0px));
+        background: radial-gradient(520px 420px at 20% 28%, rgba(234,179,8,.12), transparent 70%), var(--bg); }
+      .intro-fig { position: static; translate: none; width: min(40vw, 26dvh); filter: drop-shadow(0 0 28px rgba(234,179,8,.22)); }
+      .intro-title { position: static; translate: none; max-width: none; margin-top: 3.2dvh; text-shadow: none;
+        font-size: clamp(2.1rem, .9rem + 7.4vw, 3.2rem); }
+      .intro-sub { font-size: .42em; margin-top: .45em; }
+      .intro-copy { position: static; margin-top: 3.6dvh; text-align: left; max-width: 34ch; }
+      .intro-go { display: none; }
+      .intro-lines { bottom: calc(8dvh + env(safe-area-inset-bottom, 0px)); }
+      .intro-skip { bottom: calc(3dvh + env(safe-area-inset-bottom, 0px)); }
+    }
+    /* A phone on its side: too short for either layout, so the C stands on
+       the left and the title and copy sit beside it. */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .intro { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; align-content: center;
+        column-gap: 6vw; row-gap: 2.4dvh; padding: 60px 6vw calc(12dvh + env(safe-area-inset-bottom, 0px)); }
+      .intro-fig { position: static; translate: none; grid-row: 1 / span 2; align-self: center; width: min(26vw, 44dvh); }
+      .intro-title { position: static; translate: none; max-width: none; align-self: end; text-shadow: none;
+        font-size: clamp(1.6rem, .6rem + 6dvh, 2.8rem); }
+      .intro-sub { font-size: .42em; }
+      .intro-copy { position: static; align-self: start; text-align: left; max-width: 46ch; }
+      .intro-copy b { font-size: clamp(1rem, .7rem + 2.4dvh, 1.3rem); }
+      .intro-go { display: none; }
+      .intro-lines { bottom: 9dvh; }
+    }
+    @media (max-width: 720px), (pointer: coarse) {
+      .intro-fig { will-change: transform, opacity; animation-name: in-fig-lite; animation-duration: 1s; }
+      .intro-title { will-change: transform, opacity; animation-name: in-title-lite; animation-duration: .9s; animation-delay: .4s; }
+      .intro.out { animation-name: out-intro-lite; animation-duration: .45s; }
+    }
+    @keyframes in-fig-lite { 0% { transform: scale(1.22); opacity: 0; } 100% { transform: none; opacity: 1; } }
+    @keyframes in-title-lite { 0% { transform: translateX(-24vw); opacity: 0; } 100% { transform: none; opacity: 1; } }
+    @keyframes out-intro-lite { to { opacity: 0; transform: translateY(-2.5dvh) scale(1.02); } }
+    @media (hover: none) {
+      .intro-skip .on-keys { display: none; }
+      .intro-skip .on-touch { display: inline; }
     }
 
     /* ── choose an industry ──
@@ -1083,7 +1122,7 @@
     <svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="46"/><path d="M42 34l14 14-14 14"/></svg>
     <span data-i18n>Enter</span>
   </button>
-  <p class="intro-skip" data-i18n>Press any key or click to continue</p>
+  <p class="intro-skip"><span class="on-keys" data-i18n>Press any key or click to continue</span><span class="on-touch" data-i18n>Tap anywhere to continue</span></p>
 </div>
 
 

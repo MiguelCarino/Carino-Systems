@@ -323,6 +323,7 @@ const I18N = {
         // ---- the intro and the line-up ----
         "Enter": "Entrar",
         "Press any key or click to continue": "Pulsa cualquier tecla o haz clic para continuar",
+        "Tap anywhere to continue": "Toca en cualquier lugar para continuar",
         "Choose an industry": "Elige una industria",
         "Each one has its own menu of tools.": "Cada una tiene su propio menú de herramientas.",
         "All industries": "Todas las industrias",
@@ -644,6 +645,7 @@ const I18N = {
         // ---- the intro and the line-up ----
         "Enter": "Entrar",
         "Press any key or click to continue": "Pressione qualquer tecla ou clique para continuar",
+        "Tap anywhere to continue": "Toque em qualquer lugar para continuar",
         "Choose an industry": "Escolha uma área",
         "Each one has its own menu of tools.": "Cada uma tem seu próprio menu de ferramentas.",
         "All industries": "Todas as áreas",
@@ -965,6 +967,7 @@ const I18N = {
         // ---- the intro and the line-up ----
         "Enter": "入る",
         "Press any key or click to continue": "何かキーを押すかクリックして続ける",
+        "Tap anywhere to continue": "どこかをタップして続ける",
         "Choose an industry": "分野を選ぶ",
         "Each one has its own menu of tools.": "それぞれに専用のツールメニューがあります。",
         "All industries": "すべての分野",
@@ -1286,6 +1289,7 @@ const I18N = {
         // ---- the intro and the line-up ----
         "Enter": "Войти",
         "Press any key or click to continue": "Нажмите любую клавишу или щёлкните, чтобы продолжить",
+        "Tap anywhere to continue": "Коснитесь экрана, чтобы продолжить",
         "Choose an industry": "Выберите отрасль",
         "Each one has its own menu of tools.": "У каждой своё меню инструментов.",
         "All industries": "Все отрасли",
