@@ -1050,6 +1050,8 @@
     :root[data-carino-theme="color"] .why-card { background: var(--bg-card); }
     :root[data-carino-theme="color"] .pill.go { color: var(--ct-on-accent); }
     :root[data-carino-theme="color"] .zoom { background: var(--ct-scrim, rgba(10,20,40,.4)); }
+    /* "Is it safe?" icons are decoration, not links: one identity hue */
+    :root[data-carino-theme="color"] #z-safe .why-card svg { color: var(--ct-purple); }
     /* a colour per section */
     :root[data-carino-theme="color"] [data-sec="start"]    { --sec: var(--ct-amber); }
     :root[data-carino-theme="color"] [data-sec="files"]    { --sec: var(--ct-blue); }
