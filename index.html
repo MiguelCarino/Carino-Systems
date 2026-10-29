@@ -27,6 +27,24 @@
   <script type="application/json" id="carino-head-i18n">{"es": {"title": "Carino Systems", "desc": "Soluciones abiertas y gratis para todos: abre una imagen médica, arregla un documento, crea tu currículum, configura tu computadora. Las herramientas web no se instalan ni piden cuenta."}, "pt-BR": {"title": "Carino Systems", "desc": "Soluções abertas e grátis para todos: abra uma imagem médica, corrija um documento, crie um currículo, configure o computador. As ferramentas web não se instalam nem pedem conta."}, "ja": {"title": "Carino Systems", "desc": "誰でも無料で使えるオープンなツール。医用画像を開く、文書を直す、履歴書を作る、PCを設定する。Webツールはインストールもアカウントも不要、ファイルはPCから出ない。"}, "ru": {"title": "Carino Systems", "desc": "Открытые бесплатные решения: откройте медснимок, исправьте документ, составьте резюме, настройте компьютер. Веб-инструменты без установки и аккаунта, файлы остаются у вас."}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Carino Systems", "url": "https://carino.systems/", "description": "Open solutions made for everyone, free for anyone — open a medical image, fix a document, build a résumé, set up a computer. The web tools need no install and no account, and your files never leave your computer.", "publisher": {"@type": "Person", "name": "Miguel Cariño", "url": "https://carino.systems/"}}</script>
   <!-- /carino:head -->
+  <!-- Theme before first paint, so neither theme flashes the other:
+       ?theme=gold|color (review links; not stored) > carino-theme cookie
+       (shared across *.carino.systems) > localStorage > Gold & Black. -->
+  <meta name="theme-color" content="#050505" id="carinoThemeColor">
+  <script>
+  (function () {
+    var d = document.documentElement, t = null;
+    function pick(v) { return v === 'gold' ? 'gold' : (v === 'color' || v === 'colour') ? 'color' : null; }
+    try { t = pick(new URLSearchParams(location.search).get('theme')); } catch (e) {}
+    if (!t) { try { var m = document.cookie.match(/(?:^|;\s*)carino-theme=([^;]*)/); if (m) t = pick(decodeURIComponent(m[1])); } catch (e) {} }
+    if (!t) { try { t = pick(localStorage.getItem('carino-theme')); } catch (e) {} }
+    t = t || 'gold';
+    d.setAttribute('data-carino-theme', t);
+    var dark = d.getAttribute('data-theme') !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches;
+    var meta = document.getElementById('carinoThemeColor');
+    if (meta) meta.content = t === 'gold' ? '#050505' : (dark ? '#0e1420' : '#eef3fc');
+  })();
+  </script>
   <link rel="stylesheet" href="fonts/carino-fonts.css">
   <!-- Tokens and the shared components (.landing-hero, .site-foot) come from
        carino-ui.css; the page's own names are declared below. -->
@@ -477,15 +495,19 @@
       transition: border-color .15s, background .15s, transform .15s;
     }
     .tool:hover { border-color: var(--accent-dim); background: var(--accent-faint); transform: translateY(-2px); }
-    /* The tool's glyph — its mark's pictogram without the ring — through a mask,
-       so it takes currentColor and turns dark on the gold tile. */
+    /* The tool's mark, gold ring and pictogram, as on the picks. A tool with no
+       mark gets its emoji on a gold tile instead. */
+    .tool-mark { flex: none; width: 44px; height: 44px; transition: transform .15s; }
+    .tool-mark img { width: 100%; height: 100%; display: block; }
+    .tool-mark .color,
+    :root[data-carino-theme="color"] .tool-mark .gold { display: none; }
+    :root[data-carino-theme="color"] .tool-mark .color { display: block; }
+    .tool:hover .tool-mark { transform: scale(1.06); }
     .tool-ico {
       flex: none; width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
       background: var(--accent-faint); border: 1px solid var(--accent-dim); color: var(--accent);
       transition: background .15s, color .15s, border-color .15s;
     }
-    .tool-ico .g { width: 22px; height: 22px; background: currentColor;
-      -webkit-mask: var(--g) center / contain no-repeat; mask: var(--g) center / contain no-repeat; }
     .tool-ico .emo { font-family: var(--font-emoji); font-size: 1.2rem; line-height: 1; }
     .tool:hover .tool-ico { background: var(--accent); border-color: var(--accent); color: #050505; }
     .tool-txt { min-width: 0; }
@@ -575,7 +597,7 @@
       .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
       .tool { gap: 9px; padding: 9px 10px; border-radius: 10px; }
       .tool-ico { width: 30px; height: 30px; border-radius: 8px; }
-      .tool-ico .g { width: 16px; height: 16px; }
+      .tool-mark { width: 32px; height: 32px; }
       .tool-plain { font-size: var(--fs-sec); line-height: 1.25; }
       .tool-line { display: none; }
       .tool-real { margin-top: 3px; font-size: var(--fs-micro, 0.7rem); }
@@ -680,7 +702,68 @@
       }
       .btn:hover, .icon-btn:hover, .pick:hover, .tool:hover, .menu-item { transform: none !important; }
     }
+
+    /* ── the Colourful theme ──
+       carino-theme.css remaps the tokens, so everything above that reads one
+       follows on its own. These are the values this page hard-codes for black:
+       the header and card gradients, the gold glow, black text on a filled
+       accent. Each section also owns a colour, as Software's categories do:
+       its menu icon is drawn in it, and so is the tile of a tool with no mark. */
+    :root[data-carino-theme="color"] {
+      --card: var(--bg-card); --card-lit: var(--bg-card);
+      --edge-light: 0 0 0 transparent; --edge-dark: var(--ct-shadow-1);
+      scrollbar-color: var(--ct-scroll) transparent;
+    }
+    :root[data-carino-theme="color"] body { background-image: var(--stage-grad); }
+    :root[data-carino-theme="color"] ::selection { color: var(--ct-on-accent); -webkit-text-fill-color: var(--ct-on-accent); }
+    :root[data-carino-theme="color"] .top-header {
+      background: var(--ct-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    }
+    :root[data-carino-theme="color"] .top-header .brand-name { background-image: var(--gold-text); }
+    :root[data-carino-theme="color"] .brand-name span { -webkit-text-fill-color: var(--text); }
+    :root[data-carino-theme="color"] .clock-tz,
+    :root[data-carino-theme="color"] .icon-btn:hover,
+    :root[data-carino-theme="color"] .tool:hover .tool-ico,
+    :root[data-carino-theme="color"] .btn:not(.ghost) { color: var(--ct-on-accent); }
+    :root[data-carino-theme="color"] .icon-btn:hover { box-shadow: var(--ct-shadow-1); }
+    :root[data-carino-theme="color"] .btn:hover { box-shadow: var(--ct-shadow-2); }
+    :root[data-carino-theme="color"] .diag-dropdown { background: var(--bg-card); border-color: var(--border); box-shadow: var(--ct-shadow-3); }
+    :root[data-carino-theme="color"] .status-dot.success { background: var(--ok); box-shadow: none; }
+    :root[data-carino-theme="color"] .status-dot.slow { background: var(--warn); box-shadow: none; }
+    :root[data-carino-theme="color"] .status-dot.fail { background: var(--err); box-shadow: none; }
+    :root[data-carino-theme="color"] .status-dot.unknown,
+    :root[data-carino-theme="color"] .status-dot.scanning { background: var(--text-muted); }
+    :root[data-carino-theme="color"] .menu-item:hover { background: var(--ct-hover); }
+    :root[data-carino-theme="color"] .pick:hover { box-shadow: var(--ct-shadow-3); }
+    :root[data-carino-theme="color"] .tool,
+    :root[data-carino-theme="color"] .why-card { background: var(--bg-card); }
+    :root[data-carino-theme="color"] .tool:hover { box-shadow: var(--ct-shadow-2); }
+    /* the picks' marks: gold ring, pictogram in colour */
+    .pick-mark.color,
+    :root[data-carino-theme="color"] .pick-mark.gold { display: none; }
+    :root[data-carino-theme="color"] .pick-mark.color { display: block; }
+    /* a colour per section */
+    :root[data-carino-theme="color"] #m-start,    :root[data-carino-theme="color"] #p-tools[data-sec="start"]    { --sec: var(--ct-amber); }
+    :root[data-carino-theme="color"] #m-files,    :root[data-carino-theme="color"] #p-tools[data-sec="files"]    { --sec: var(--ct-blue); }
+    :root[data-carino-theme="color"] #m-media,    :root[data-carino-theme="color"] #p-tools[data-sec="media"]    { --sec: var(--ct-red); }
+    :root[data-carino-theme="color"] #m-business, :root[data-carino-theme="color"] #p-tools[data-sec="business"] { --sec: var(--ct-amber); }
+    :root[data-carino-theme="color"] #m-systems,  :root[data-carino-theme="color"] #p-tools[data-sec="systems"]  { --sec: var(--ct-indigo); }
+    :root[data-carino-theme="color"] #m-network,  :root[data-carino-theme="color"] #p-tools[data-sec="network"]  { --sec: var(--ct-teal); }
+    :root[data-carino-theme="color"] #m-security, :root[data-carino-theme="color"] #p-tools[data-sec="security"] { --sec: var(--ct-green); }
+    :root[data-carino-theme="color"] #m-learn,    :root[data-carino-theme="color"] #p-tools[data-sec="learn"]    { --sec: var(--ct-purple); }
+    :root[data-carino-theme="color"] #m-medical,  :root[data-carino-theme="color"] #p-tools[data-sec="medical"]  { --sec: var(--ct-pink); }
+    :root[data-carino-theme="color"] .menu-item .i { color: var(--sec, currentColor); }
+    :root[data-carino-theme="color"] #p-tools .tool-ico {
+      color: var(--sec, var(--accent)); border-color: color-mix(in srgb, var(--sec, var(--accent)) 30%, transparent);
+      background: color-mix(in srgb, var(--sec, var(--accent)) 10%, transparent);
+    }
+    :root[data-carino-theme="color"] #p-tools .tool:hover { border-color: var(--sec, var(--accent)); }
+    :root[data-carino-theme="color"] #p-tools .tool:hover .tool-ico { background: var(--sec, var(--accent)); border-color: var(--sec, var(--accent)); color: var(--ct-on-accent); }
+    /* the switch sits beside the brand; the row's 22px gap is for the clock */
+    .top-header .ct-switch { margin: 0 -12px 0 -4px; }
   </style>
+  <!-- Colourful theme + the switch; nothing applies until data-carino-theme="color". -->
+  <link rel="stylesheet" href="carino-theme.css">
 </head>
 <body>
 
@@ -937,15 +1020,18 @@ function item(entry) {
    — but the test is the URL, not the assumption. */
 const offsite = (url) => /^https?:/i.test(url) && !url.startsWith(location.origin);
 const newTab = (url) => (offsite(url) ? ' target="_blank" rel="noopener"' : '');
-// The mark's pictogram without the ring, deployed beside it by Branding/marks.
-const glyphOf = (tool) => (tool.mark ? tool.mark.replace(/\.svg$/, '-glyph.svg') : '');
+// A mark's colour variant, deployed beside it by Branding/marks, for the
+// Colourful theme.
+const colorOf = (tool) => tool.mark.replace(/\.svg$/, '-color.svg');
 // Named twice (rule two) — unless the plain name already is the real one.
 const realName = (it) => (it.plain === it.tool.name ? '' : it.tool.name);
 const BACK = () => `<button type="button" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>${esc(T('Back'))}</span></button>`;
 
 function pickHtml(it) {
+  // Both colourings of the mark; the theme's CSS shows one.
   const face = it.tool.mark
-    ? `<img class="pick-mark" src="${esc(it.tool.mark)}" alt="" width="72" height="72" decoding="async">`
+    ? `<img class="pick-mark gold" src="${esc(it.tool.mark)}" alt="" width="72" height="72" decoding="async">` +
+      `<img class="pick-mark color" src="${esc(colorOf(it.tool))}" alt="" width="72" height="72" decoding="async">`
     : `<span class="tool-ico"><span class="emo">${esc(it.tool.icon)}</span></span>`;
   const real = realName(it) ? `<span class="pick-real">${esc(realName(it))}</span>` : '';
   return `<a class="pick" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
@@ -960,12 +1046,15 @@ function pickHtml(it) {
 }
 
 function toolHtml(it) {
-  const g = glyphOf(it.tool);
-  const ico = g ? `<span class="g" style="--g:url('${esc(g)}')"></span>`
-                : `<span class="emo">${esc(it.tool.icon)}</span>`;
+  // The whole mark, as on the picks; a tool with none keeps its emoji tile.
+  const face = it.tool.mark
+    ? `<span class="tool-mark" aria-hidden="true">` +
+      `<img class="gold" src="${esc(it.tool.mark)}" alt="" width="44" height="44" decoding="async">` +
+      `<img class="color" src="${esc(colorOf(it.tool))}" alt="" width="44" height="44" decoding="async"></span>`
+    : `<span class="tool-ico" aria-hidden="true"><span class="emo">${esc(it.tool.icon)}</span></span>`;
   const real = realName(it) ? `<span class="tool-real">${esc(realName(it))}</span>` : '';
   return `<a class="tool" href="${esc(it.tool.url)}"${newTab(it.tool.url)}>
-    <span class="tool-ico" aria-hidden="true">${ico}</span>
+    ${face}
     <span class="tool-txt">
       <span class="tool-plain">${esc(it.plain)}</span>
       <span class="tool-line">${esc(it.line)}</span>
@@ -1030,6 +1119,7 @@ function show(id, animate) {
     const body = x.picks
       ? `<div class="pick-grid">${x.picks.map(pickHtml).join('')}</div>`
       : `<div class="tool-grid">${x.items.map(toolHtml).join('')}</div>`;
+    $('p-tools').dataset.sec = x.id;
     $('p-tools').innerHTML =
       `<div class="pane-head">${BACK()}<h2>${esc(x.title)}</h2><p>${esc(x.blurb)}</p></div>${body}`;
   }
@@ -1187,6 +1277,9 @@ document.addEventListener('keydown', (e) => {
 <script src="./carino-clock.js" defer></script>
 <script src="carino-lang.js" defer></script>
 <script src="i18n.js" defer></script>
+<!-- The hub's C has no pictogram, so it has no colour variant: the switch is
+     the gold C in both themes. -->
+<script src="carino-theme.js" data-mark="logo.svg" data-mark-color="logo.svg" defer></script>
 <script src="./assets/js/clock-network.js"></script>
 <script src="./assets/js/services.js"></script>
 </body>

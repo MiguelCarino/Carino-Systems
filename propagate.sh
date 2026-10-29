@@ -25,6 +25,8 @@ BRIDGE_SRC="Quote/carino-bridge.js"
 FX_SRC="Currency/carino-fx.js"
 UI_CSS_SRC="Branding/carino-ui.css"
 UI_JS_SRC="Branding/carino-ui.js"
+THEME_CSS_SRC="Branding/carino-theme.css"
+THEME_JS_SRC="Branding/carino-theme.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
 GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
@@ -113,6 +115,16 @@ for f in */carino-ui.css */*/carino-ui.css; do
   [ "$f" -ef "$UI_CSS_SRC" ] || cp "$UI_CSS_SRC" "$f"
   [ "$d/carino-ui.js" -ef "$UI_JS_SRC" ] || cp "$UI_JS_SRC" "$d/carino-ui.js"
   echo "  $d  (ui)"
+done
+# The Colourful theme and its switch. Discovered like the shared UI: a site
+# that carries carino-theme.css has adopted it (the no-flash snippet in its
+# <head>, the script tag naming its marks) and gets the current pair.
+for f in */carino-theme.css */*/carino-theme.css; do
+  [ -e "$f" ] || continue
+  d="${f%/carino-theme.css}"
+  [ "$f" -ef "$THEME_CSS_SRC" ] || cp "$THEME_CSS_SRC" "$f"
+  [ "$d/carino-theme.js" -ef "$THEME_JS_SRC" ] || cp "$THEME_JS_SRC" "$d/carino-theme.js"
+  echo "  $d  (theme)"
 done
 for d in $ANIM; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }
