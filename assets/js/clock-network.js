@@ -439,7 +439,10 @@ async function detectSystem() {
     let vendor = "";
     let renderer = "";
     try {
-      const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+      // Gecko deprecated the debug extension (it warns on every request) and
+      // its plain RENDERER already names the GPU, so it is not asked there.
+      const gecko = /\bFirefox\//.test(navigator.userAgent);
+      const dbg = gecko ? null : gl.getExtension("WEBGL_debug_renderer_info");
       if (dbg) {
         vendor   = gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL)   || "";
         renderer = gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "";

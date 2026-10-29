@@ -19,13 +19,25 @@
     "",
     "'shot' is optional: a screenshot at assets/shots/<file>.webp, shown instead of",
     "the icon plate. A real picture of the tool beats any glyph for a first-time",
-    "visitor, so fill these in as they are captured."
+    "visitor, so fill these in as they are captured.",
+    "",
+    "'fun' names the tools the hub lifts out of Media and Learn into its own",
+    "Just for fun section — games, art and things to watch. The registry's tags",
+    "stay as they are; only the hub regroups them."
   ],
   "featured": [
     "Media Suite",
     "Password",
     "Vitae",
     "Metadata"
+  ],
+  "fun": [
+    "Asobi — Board Games",
+    "Jellyfish",
+    "Music Wall",
+    "CyberCity",
+    "Compass",
+    "Aldis Lamp"
   ],
   "groups": [
     {
