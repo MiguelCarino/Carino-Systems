@@ -103,14 +103,14 @@
       "subject": "cybercity.carino.systems"
     },
     "dcm.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-11-28T11:50:24Z",
-      "not_before": "2026-08-30T11:50:25Z",
+      "not_after": "2027-01-27T15:16:50Z",
+      "not_before": "2026-10-29T15:16:51Z",
       "san": [
         "dcm.carino.systems"
       ],
-      "sha256": "84:04:02:50:FC:02:DD:F7:89:7E:D7:B1:20:A4:CD:7C:36:3A:D4:09:3B:3E:5F:DF:3A:2C:AD:7C:D6:D3:08:70",
+      "sha256": "44:35:07:D9:23:36:AB:FF:68:9D:A4:92:BC:E3:E9:BF:94:26:C7:63:5B:1B:35:B6:62:3C:BE:A8:ED:69:40:1D",
       "subject": "dcm.carino.systems"
     },
     "desk.carino.systems": {
