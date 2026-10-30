@@ -510,12 +510,12 @@
       "icon": "🕸️",
       "mark": "assets/marks/topo.svg",
       "url": "https://topo.carino.systems",
-      "desc": "Draw network topologies in the browser — devices, links and addressing on an interactive canvas.",
+      "desc": "A network register you draw — devices, subnets, racks and Wi-Fi, checked as you go and turned into a site report.",
       "cta": "Launch ↗",
       "tags": [
         "network"
       ],
-      "keywords": "topology diagram network map documentation"
+      "keywords": "topology diagram network map documentation register inventory rack wifi subnet ip report labels"
     },
     {
       "name": "TV",

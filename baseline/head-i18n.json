@@ -618,22 +618,22 @@
   "topo.carino.systems": {
     "es": {
       "title": "Hacer diagramas de red — dibuja topologías en línea | Topo",
-      "desc": "Dibuja diagramas de red en tu navegador: dispositivos, enlaces y direccionamiento IP en un lienzo interactivo, compartidos como enlace privado.",
+      "desc": "Documenta una red en tu navegador: dispositivos, subredes, cables, racks y Wi-Fi, revisados en busca de conflictos y bucles mientras dibujas, con un informe del sitio imprimible.",
       "line": "Dibuja una red que se revisa sola."
     },
     "pt-BR": {
       "title": "Ferramenta de diagrama de rede — desenhe topologias online | Topo",
-      "desc": "Desenhe diagramas de rede no navegador — dispositivos, links e endereçamento IP em uma tela interativa, compartilhados por link privado.",
+      "desc": "Documente uma rede no navegador — dispositivos, sub-redes, cabos, racks e Wi-Fi, verificados contra conflitos e loops enquanto você desenha, com um relatório do local para imprimir.",
       "line": "Desenhe uma rede que se verifica sozinha."
     },
     "ja": {
       "title": "ネットワーク構成図作成ツール オンライン | Topo",
-      "desc": "ブラウザでネットワーク構成図を作成。機器、接続、IPアドレスをインタラクティブなキャンバスに配置し、非公開リンクで共有。",
+      "desc": "ブラウザでネットワークを文書化。機器、サブネット、ケーブル、ラック、Wi-Fiを描くそばから競合やループを検出し、印刷できるサイトレポートにまとめます。",
       "line": "自分でチェックするネットワーク図を描く。"
     },
     "ru": {
       "title": "Схема сети онлайн — рисуйте топологию сети | Topo",
-      "desc": "Рисуйте схемы сети в браузере: устройства, связи и IP-адресация на интерактивном холсте, с отправкой по приватной ссылке.",
+      "desc": "Документируйте сеть в браузере: устройства, подсети, кабели, стойки и Wi-Fi проверяются на конфликты и петли прямо при рисовании, а итог — печатный отчёт по объекту.",
       "line": "Нарисуйте сеть, которая проверяет себя сама."
     }
   },

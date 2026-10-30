@@ -318,7 +318,7 @@
     "dir": "Topo",
     "name": "Topo",
     "type": "tool",
-    "desc": "Draw network diagrams in your browser — devices, links and IP addressing on an interactive canvas, shared as a private link.",
+    "desc": "Document a network in your browser — devices, subnets, cables, racks and Wi-Fi, checked for conflicts and loops as you draw, with a printable site report.",
     "line": "Draw a network that checks itself."
   },
   {
