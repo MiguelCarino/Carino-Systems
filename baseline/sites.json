@@ -96,6 +96,14 @@
     "line": "Read, edit and anonymise DICOM files."
   },
   {
+    "domain": "files.carino.systems",
+    "dir": "Files",
+    "name": "Carino Files",
+    "type": "suite",
+    "desc": "See what any file really is and what it carries, then convert, read or clean it up: PDF to images, OCR, signature cleanup, image and audio conversion, an ffmpeg command builder, and metadata you can view, edit or strip (EXIF, PDF, MP3, photo GPS). Everything runs in your browser; files are never uploaded.",
+    "line": "Convert, read, inspect and clean up files."
+  },
+  {
     "domain": "distro.carino.systems",
     "dir": "findmeadistro",
     "name": "Find Me a Distro",
@@ -167,22 +175,6 @@
     "type": "learn",
     "desc": "Carino Learn: hands-on, checkable learning modules with interactive visualizers — x86-64 assembly, PC architecture, Bash, GNU tools, Linux administration, Git & version control, networking, netplan declarative network configuration, web browsers, regex, cryptography, quantum computing, DICOM & HL7 healthcare interoperability, and ISO 27001 compliance.",
     "line": "Hands-on lessons on how computers work."
-  },
-  {
-    "domain": "media.carino.systems",
-    "dir": "Media",
-    "name": "Media Suite",
-    "type": "suite",
-    "desc": "Client-side file & media suite: PDF to images, OCR, signature cleanup, image conversion, ffmpeg command builder and audio to WAV. Everything runs in your browser.",
-    "line": "Convert, read and clean up files."
-  },
-  {
-    "domain": "metadata.carino.systems",
-    "dir": "Metadata",
-    "name": "Metadata",
-    "type": "tool",
-    "desc": "See every piece of metadata in almost any file, edit EXIF, PDF and MP3 tags, and strip GPS location from photos — in your browser. Your files are never uploaded.",
-    "line": "See and edit the hidden details in a file."
   },
   {
     "domain": "music.carino.systems",

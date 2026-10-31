@@ -29,11 +29,11 @@ THEME_CSS_SRC="Branding/carino-theme.css"
 THEME_JS_SRC="Branding/carino-theme.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
-GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Metadata \
+GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Files \
 NetplanConfig Topo PlanetDayum Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
-Media Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
+Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
 TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro"
 # Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
 # being listed, so their copies had drifted; Carino-Systems carries it for
@@ -141,9 +141,11 @@ done
 #
 # Retired, deliberately absent: pentarch, AssemblyRoadmap and MetadataViewer
 # never existed under those names; ip, Multisearch-index, ProcessFlow and
-# SimpleTranscoding were removed from GitHub.
+# SimpleTranscoding were removed from GitHub. Media and Metadata (merged into
+# Files 2026-10-31; redirect stubs only, no shared files).
 
-# A site with an offline service worker hashes what it ships into sw.js's
+# A site with an offline service worker (today Fiscal, Aldis-Lamp and Files;
+# found by the glob below) hashes what it ships into sw.js's
 # VERSION; a copied file changes that hash, and an unchanged sw.js never
 # reinstalls, so installed copies would keep the old files forever.
 for sw in */tools/build_sw.py; do

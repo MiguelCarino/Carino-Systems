@@ -128,6 +128,19 @@
       "keywords": "dicom tags anonymize de-identify deidentify phi dcm editor"
     },
     {
+      "name": "Carino Files",
+      "icon": "📁",
+      "mark": "assets/marks/files.svg",
+      "url": "https://files.carino.systems/",
+      "desc": "See what any file is and what it carries, then convert, read or clean it up: PDF→image, OCR, signature cleanup, image & audio converters, an ffmpeg command builder, and metadata you can view, edit or strip — all in-browser.",
+      "cta": "Launch ↗",
+      "tags": [
+        "files",
+        "media"
+      ],
+      "keywords": "pdf ocr convert image audio ffmpeg signature scan exif metadata gps strip location magic bytes file type properties"
+    },
+    {
       "name": "Carino Fonts",
       "icon": "🔤",
       "mark": "assets/marks/font.svg",
@@ -355,32 +368,6 @@
         "business"
       ],
       "keywords": "law legal gazette constitution statute legislation courts jurisprudence diario oficial journal officiel kanpo legifrance dof scjn"
-    },
-    {
-      "name": "Media Suite",
-      "icon": "🎬",
-      "mark": "assets/marks/media.svg",
-      "url": "https://media.carino.systems/",
-      "desc": "PDF→image, OCR, signature cleanup, image & audio converters and an ffmpeg command builder — all in-browser.",
-      "cta": "Launch ↗",
-      "tags": [
-        "media",
-        "files"
-      ],
-      "keywords": "pdf ocr convert image audio ffmpeg signature scan"
-    },
-    {
-      "name": "Metadata",
-      "icon": "📂",
-      "mark": "assets/marks/metadata.svg",
-      "url": "https://metadata.carino.systems",
-      "desc": "Extract and display file metadata — EXIF data, document properties, and hidden fields.",
-      "cta": "Launch ↗",
-      "tags": [
-        "files",
-        "medical"
-      ],
-      "keywords": "exif file magic bytes strip properties"
     },
     {
       "name": "Music Wall",

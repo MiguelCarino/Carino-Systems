@@ -1264,10 +1264,10 @@
     </div>
     <div class="grid" id="grid">
       <ul class="starts-list">
-        <li><a href="https://media.carino.systems/"><b>Media</b> <span data-i18n>Turn a PDF into images, or read the text in a scan</span></a></li>
+        <li><a href="https://files.carino.systems/"><b>Files</b> <span data-i18n>Turn a PDF into images, or read the text in a scan</span></a></li>
         <li><a href="https://password.carino.systems/"><b>Password</b> <span data-i18n>Make a strong password and send it safely</span></a></li>
         <li><a href="https://vitae.carino.systems/"><b>Vitae</b> <span data-i18n>Make a résumé and save it as a PDF</span></a></li>
-        <li><a href="https://metadata.carino.systems/"><b>Metadata</b> <span data-i18n>See what a file says about you, and remove a photo's GPS location</span></a></li>
+        <li><a href="https://files.carino.systems/#metadata"><b>Files</b> <span data-i18n>See what a file says about you, and remove a photo's GPS location</span></a></li>
         <li><a href="https://ping.carino.systems/"><b>Ping</b> <span data-i18n>Check how slow your connection really is, and read a ping log</span></a></li>
         <li><a href="https://topo.carino.systems/"><b>Topo</b> <span data-i18n>Draw the network in your office</span></a></li>
       </ul>
@@ -1431,6 +1431,8 @@ const fold = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-
 /* Each tool's address on this page, #t/<slug>: its subdomain where it has
    one, so #t/vitae opens Vitae's preview and can be shared. */
 let SLUGS = new Map(), BYSLUG = new Map();
+// Media and Metadata merged into Files (2026-10-31).
+const SLUG_ALIAS = { media: 'files', metadata: 'files' };
 function slugAll() {
   SLUGS = new Map(); BYSLUG = new Map();
   for (const tool of INDEX.values()) {
@@ -1439,6 +1441,10 @@ function slugAll() {
     s = s || fold(tool.name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     while (BYSLUG.has(s)) s += '-';
     SLUGS.set(tool, s); BYSLUG.set(s, tool);
+  }
+  // Retired subdomains whose tools live on elsewhere: old #t/ links still land.
+  for (const [old, now] of Object.entries(SLUG_ALIAS)) {
+    if (!BYSLUG.has(old) && BYSLUG.has(now)) BYSLUG.set(old, BYSLUG.get(now));
   }
 }
 

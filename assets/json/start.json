@@ -26,10 +26,10 @@
     "stay as they are; only the hub regroups them."
   ],
   "featured": [
-    "Media Suite",
+    "Carino Files",
     "Password",
     "Vitae",
-    "Metadata"
+    "Hash"
   ],
   "fun": [
     "Asobi — Board Games",
@@ -68,14 +68,9 @@
       "blurb": "The everyday file jobs, done in the page.",
       "tools": [
         {
-          "ref": "Media Suite",
-          "plain": "Convert and read documents",
-          "line": "Turn a PDF into images, pull the text out of a photo, convert audio and video."
-        },
-        {
-          "ref": "Metadata",
-          "plain": "See what a file is hiding",
-          "line": "Where a photo was taken, who wrote a document, what a file really is."
+          "ref": "Carino Files",
+          "plain": "Convert, read and see what a file is hiding",
+          "line": "Turn a PDF into images, pull the text out of a photo, convert audio and video, and see where a photo was taken."
         },
         {
           "ref": "Sync Studio",

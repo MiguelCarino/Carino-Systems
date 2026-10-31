@@ -175,6 +175,28 @@
       "line": "Заполните заявку и скопируйте нужный ответ."
     }
   },
+  "files.carino.systems": {
+    "es": {
+      "title": "Convertir, leer y ver metadatos de archivos — Carino Files",
+      "desc": "Mira qué es de verdad un archivo y qué lleva dentro: PDF a imágenes, OCR, firmas, conversión de imagen y audio, comandos ffmpeg y metadatos EXIF, PDF y MP3 que puedes ver, editar o quitar. En tu navegador; nada se sube.",
+      "line": "Convierte, lee, inspecciona y limpia archivos."
+    },
+    "pt-BR": {
+      "title": "Converter, ler e ver metadados de arquivos — Carino Files",
+      "desc": "Veja o que um arquivo realmente é e o que ele carrega: PDF em imagens, OCR, assinaturas, conversão de imagem e áudio, comandos ffmpeg e metadados EXIF, PDF e MP3 para ver, editar ou remover. No navegador; nada é enviado.",
+      "line": "Converta, leia, inspecione e limpe arquivos."
+    },
+    "ja": {
+      "title": "ファイル変換・OCR・メタデータ確認 — Carino Files",
+      "desc": "ファイルの正体と中身を確認し、変換・読み取り・整理。PDFの画像化、OCR、署名の整形、画像・音声変換、ffmpegコマンド作成、EXIF・PDF・MP3メタデータの表示・編集・削除。ブラウザ内で処理、アップロードなし。",
+      "line": "ファイルを変換・読み取り・確認・整理。"
+    },
+    "ru": {
+      "title": "Конвертация, OCR и метаданные файлов — Carino Files",
+      "desc": "Узнайте, что на самом деле за файл и что он несёт: PDF в изображения, OCR, очистка подписи, конвертация изображений и аудио, команды ffmpeg и метаданные EXIF, PDF и MP3 — смотреть, править, удалять. В браузере, без загрузки.",
+      "line": "Конвертируйте, читайте, проверяйте и очищайте файлы."
+    }
+  },
   "fiscal.carino.systems": {
     "es": {
       "title": "Carino Fiscal — identidad fiscal sin conexión en cualquier país",
@@ -327,50 +349,6 @@
       "title": "Carino Learn — ассемблер, Linux, Git, сети, DICOM и HL7",
       "desc": "Практические модули с визуализаторами: ассемблер x86-64, устройство ПК, Bash, Linux, Git, сети, netplan, regex, криптография, кванты, DICOM и HL7, ISO 27001.",
       "line": "Практические уроки о том, как работают компьютеры."
-    }
-  },
-  "media.carino.systems": {
-    "es": {
-      "title": "Convertir PDF a imagen, OCR y multimedia — Carino Media",
-      "desc": "Suite de archivos y multimedia: PDF a imágenes, OCR, limpieza de firmas, conversión de imágenes, comandos ffmpeg y audio a WAV. Todo en tu navegador.",
-      "line": "Convierte, lee y limpia archivos."
-    },
-    "pt-BR": {
-      "title": "Converter PDF em imagem, OCR e mídia — Carino Media",
-      "desc": "Suíte de arquivos e mídia: PDF em imagens, OCR, limpeza de assinaturas, conversão de imagens, gerador de comandos ffmpeg e áudio para WAV. Tudo no navegador.",
-      "line": "Converta, leia e limpe arquivos."
-    },
-    "ja": {
-      "title": "PDF 画像変換・OCR・メディア変換 — Carino Media",
-      "desc": "ブラウザ完結のファイル・メディアツール。PDFの画像化、OCR、署名画像の整形、画像変換、ffmpegコマンド作成、音声のWAV変換。",
-      "line": "ファイルを変換・読み取り・整理。"
-    },
-    "ru": {
-      "title": "PDF в картинку, OCR и конвертер медиа — Carino Media",
-      "desc": "Набор для файлов и медиа: PDF в изображения, OCR, очистка подписи, конвертация изображений, конструктор команд ffmpeg и аудио в WAV. Всё работает в браузере.",
-      "line": "Конвертируйте, читайте и очищайте файлы."
-    }
-  },
-  "metadata.carino.systems": {
-    "es": {
-      "title": "Ver y editar metadatos EXIF, GPS, PDF y MP3 — Carino Metadata",
-      "desc": "Mira todos los metadatos de casi cualquier archivo, edita etiquetas EXIF, PDF y MP3 y quita la ubicación GPS de tus fotos en tu navegador. Nada se sube.",
-      "line": "Mira y edita los datos ocultos de un archivo."
-    },
-    "pt-BR": {
-      "title": "Ver e editar metadados EXIF, GPS, PDF e MP3 — Carino Metadata",
-      "desc": "Veja todos os metadados de quase qualquer arquivo, edite tags EXIF, PDF e MP3 e remova a localização GPS das fotos, no navegador. Nada é enviado.",
-      "line": "Veja e edite os dados ocultos de um arquivo."
-    },
-    "ja": {
-      "title": "メタデータ確認・編集 EXIF/GPS | Carino",
-      "desc": "ほぼすべてのファイルのメタデータを表示。EXIF・PDF・MP3タグを編集し、写真のGPS位置情報を削除。ブラウザ内で処理、アップロードなし。",
-      "line": "ファイルの隠れた情報を確認・編集。"
-    },
-    "ru": {
-      "title": "Просмотр и правка метаданных EXIF, GPS, PDF — Carino Metadata",
-      "desc": "Смотрите все метаданные почти любого файла, редактируйте теги EXIF, PDF и MP3 и удаляйте GPS-координаты из фото — в браузере. Файлы никуда не загружаются.",
-      "line": "Просмотр и правка скрытых данных файла."
     }
   },
   "music.carino.systems": {
