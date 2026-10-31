@@ -292,12 +292,12 @@
     "netplan.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-11-29T08:52:18Z",
-      "not_before": "2026-08-31T08:52:19Z",
+      "not_after": "2027-01-28T20:42:18Z",
+      "not_before": "2026-10-30T20:42:19Z",
       "san": [
         "netplan.carino.systems"
       ],
-      "sha256": "26:DF:E7:B1:36:AB:2C:09:8C:F8:63:86:91:AD:7E:11:64:65:FC:CF:17:12:F5:8A:FB:B4:68:9E:F6:A9:93:86",
+      "sha256": "1E:47:EB:7B:0F:1F:56:AA:E6:3D:23:9D:B4:72:E3:5E:0B:A8:BF:8C:36:6A:D8:41:98:59:00:65:48:28:C0:D8",
       "subject": "netplan.carino.systems"
     },
     "offline.carino.systems": {
