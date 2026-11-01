@@ -1090,7 +1090,7 @@
     :root[data-carino-theme="color"] .pill.go { color: var(--ct-on-accent); }
     :root[data-carino-theme="color"] .zoom { background: var(--ct-scrim, rgba(10,20,40,.4)); }
     /* "Is it safe?" icons are decoration, not links: one identity hue */
-    :root[data-carino-theme="color"] #z-safe .why-card svg { color: var(--ct-purple); }
+    :root[data-carino-theme="color"] .hero-why .why-card svg { color: var(--ct-purple); }
     /* a colour per section */
     :root[data-carino-theme="color"] [data-sec="start"]    { --sec: var(--ct-amber); }
     :root[data-carino-theme="color"] [data-sec="files"]    { --sec: var(--ct-blue); }
@@ -1131,7 +1131,7 @@
     .eyebrow::after { content: ""; flex: 0 1 120px; height: 1px; background: linear-gradient(90deg, var(--accent-dim), transparent); }
 
     /* the hero: top-anchored, text left, how it works right */
-    .hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .9fr); gap: clamp(28px, 5vw, 90px); align-items: start; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(28px, 4vw, 72px); align-items: start; }
     .hero-h { margin-top: clamp(14px, 2.4vh, 26px); font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em; line-height: 1.02;
       font-size: clamp(2.2rem, 1rem + 3.6vw, calc(4.6rem + var(--tall) * .02)); text-wrap: balance; }
     .hero-h span { display: block; }
@@ -1148,13 +1148,26 @@
     .hero-trust svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
     .hero-how { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column;
       border-left: 2px solid #1d1d1d; }
-    .hero-how li { display: flex; gap: 18px; padding: clamp(14px, 2.4vh, 24px) 0 clamp(14px, 2.4vh, 24px) clamp(18px, 2vw, 28px); position: relative; }
+    .hero-how li { display: flex; gap: 18px; padding: clamp(10px, 1.6vh, 18px) 0 clamp(10px, 1.6vh, 18px) clamp(18px, 2vw, 28px); position: relative; }
     .hero-how li + li { border-top: 1px solid #1a1a1a; }
     .hero-how li::before { content: ""; position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);
       transform: scaleY(0); transform-origin: top; transition: transform .4s var(--ease-out); }
     .hero-how li:hover::before { transform: none; }
     .how-ico { flex: none; width: 26px; height: 26px; margin-top: 2px; color: var(--accent); }
-    .hero-svc .eyebrow { margin-top: clamp(10px, 4vh, 60px); }
+    .hero-why { margin-top: clamp(4px, 1.4vh, 24px); }
+    .hero-why .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 1vw, 14px); }
+    .hero-why .why-card { padding: clamp(12px, 1.6vh, 18px) 16px; }
+    .hero-why .why-card h3 { font-size: var(--fs-body); margin: 6px 0 3px; }
+    .hero-why .why-card p { font-size: var(--fs-sm); }
+    .hero-svc .eyebrow { margin-top: clamp(18px, 3.4vh, 36px); }
+    .hero-values { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .hero-values li > a, .hero-values li:not(:has(> a)) { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px;
+      border: 1px solid var(--accent-dim); border-radius: 14px; background: var(--accent-faint); color: inherit; text-decoration: none; }
+    .hero-values li > a { transition: border-color .15s, background .15s; }
+    .hero-values li > a:hover, .hero-values li > a:focus-visible { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); outline: none; }
+    .val-ico { flex: none; width: 26px; height: 26px; margin-top: 1px; color: var(--accent); }
+    .hero-values h3 { font-family: var(--font-mono); font-size: var(--fs-sec); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+    .hero-values p { margin-top: 3px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
     .hero-trust a { text-decoration: none; transition: border-color .15s, background .15s; }
     .hero-trust a:hover, .hero-trust a:focus-visible { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); outline: none; }
     .how-n { flex: none; font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; line-height: 1.1; color: var(--accent); }
@@ -1217,6 +1230,7 @@
     @media (max-width: 720px) {
       .slide-in { padding-top: 22px; padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       .hero-how { grid-template-columns: minmax(0, 1fr); }
+      .hero-why .why-grid { grid-template-columns: minmax(0, 1fr); }
       .hero-how li { flex-direction: row; padding: 14px 0 0; }
       .hero-act .btn { flex: 1 1 auto; justify-content: center; }
       .pager { right: max(2px, env(safe-area-inset-right, 0px)); }
@@ -1232,7 +1246,8 @@
     .s-head p, .hero-lede { text-wrap: pretty; }
     @media (max-height: 800px), (max-width: 720px) { .next { display: none; } }
     @media (max-height: 800px) and (min-width: 1101px) {
-      .hero-svc .eyebrow { margin-top: 0; }
+      .hero-svc .eyebrow { margin-top: 16px; }
+      .hero-values li > a, .hero-values li:not(:has(> a)) { padding: 10px 16px; }
       .hero-how li { padding-top: 11px; padding-bottom: 11px; }
       .hero-how p { font-size: var(--fs-sm); }
     }
@@ -1440,27 +1455,47 @@
     <div class="slide-in">
       <div class="hero">
         <div class="hero-main">
-          <p class="eyebrow rise" style="--d:0"><span>Carino Systems</span></p>
           <h1 class="hero-h rise" id="heroTitle" style="--d:1"><span data-i18n>Open solutions made for everyone.</span> <span class="gold" data-i18n>Free for anyone.</span></h1>
           <p class="hero-lede rise" style="--d:2" data-i18n>We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.</p>
           <div class="hero-act rise" style="--d:3">
             <button type="button" class="btn" data-go="1"><span data-i18n>See the products</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
             <a class="btn ghost" href="#hand"><span data-i18n>Talk to us</span></a>
           </div>
-          <ul class="hero-trust rise" style="--d:4">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg><span data-i18n>Open source</span></li>
-            <li><a href="#safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n>Your data stays with you</span></a></li>
-          </ul>
         </div>
-        <section class="hero-svc" aria-labelledby="svcTitle">
-          <h2 class="eyebrow rise" id="svcTitle" style="--d:2"><span data-i18n>Services</span></h2>
-          <ul class="hero-how">
-          <li class="rise" style="--d:3"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><div><h3 data-i18n>Setup</h3><p data-i18n>We install and configure the software, the workstations and the network, on site or remotely, and leave it documented.</p></div></li>
-          <li class="rise" style="--d:4"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><div><h3 data-i18n>Support</h3><p data-i18n>Updates, backups and fixes, and a person to call who already knows your setup when something breaks.</p></div></li>
-          <li class="rise" style="--d:5"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div><h3 data-i18n>Hardware</h3><p data-i18n>Workstations, servers and network equipment chosen for the job and delivered ready to work.</p></div></li>
-          <li class="rise" style="--d:6"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg><div><h3 data-i18n>Custom work</h3><p data-i18n>Features, integrations and tools built for the way your clinic or office actually works.</p></div></li>
-          </ul>
-        </section>
+        <div class="hero-why">
+          <div class="why-grid">
+            <div class="why-card rise" style="--d:2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <h3 data-i18n>Your file is opened by the page itself.</h3>
+              <p data-i18n>It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.</p>
+            </div>
+            <div class="why-card rise" style="--d:3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="12" cy="12" r="10"/></svg>
+              <h3 data-i18n>The web tools: nothing to install, no account.</h3>
+              <p data-i18n>Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.</p>
+            </div>
+            <div class="why-card rise" style="--d:4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+              <h3 data-i18n>Free, and open to read.</h3>
+              <p data-i18n>Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.</p>
+            </div>
+            <div class="why-card rise" style="--d:5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+              <h3 data-i18n>Most of it keeps working with the cable out.</h3>
+              <p data-i18n>The work happens in the page, so once it has loaded, a dropped line does not stop it. The few that read live data say so on their own page.</p>
+            </div>
+            <div class="why-card rise" style="--d:6">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              <h3 data-i18n>The same on a phone, a tablet or a computer.</h3>
+              <p data-i18n>There is one version and it is this one. Nothing to keep updated, and nothing that only works on the machine you were not carrying.</p>
+            </div>
+            <div class="why-card rise" style="--d:7">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <h3 data-i18n>Named in plain words, and by its real name.</h3>
+              <p data-i18n>Every tool is written down twice — what it does, and what it is called — so you never have to already know the word to find the thing.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <button type="button" class="next" data-go="1"><span data-i18n>Products</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -1517,14 +1552,13 @@
           <span class="pan-soon" data-i18n>Coming soon</span>
           <span class="prod-info" data-name="Atrium"><span class="kind" data-i18n>Desktop · Linux</span><span class="prod-line" data-i18n>A complete, polished desktop for Fedora: bar, panels, notifications, launcher, dock or taskbar, themes and a built-in LLM chat, set up in one step.</span><span class="prod-go"><span class="soon-tag" data-i18n>Coming soon</span></span></span>
         </div>
-        <div class="pan prod-pan soon" role="listitem" tabindex="0" aria-disabled="true" style="--i:6" data-cap="6">
+        <a class="pan prod-pan" role="listitem" href="https://cerberus.carino.systems/" target="_blank" rel="noopener" style="--i:6" data-cap="6">
           <span class="pan-shot none" aria-hidden="true"></span>
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/cerberus.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/cerberus-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Cerberus</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">07</span><span class="pan-sub" data-i18n>Self-hosted AI</span></span>
-          <span class="pan-soon" data-i18n>Coming soon</span>
-          <span class="prod-info" data-name="Cerberus"><span class="kind" data-i18n>Self-hosted AI</span><span class="prod-line" data-i18n>Run language models on your own hardware: one place to manage the models, one API for your apps and a web interface that works on a phone. Prompts never leave your network.</span><span class="prod-go"><span class="soon-tag" data-i18n>Coming soon</span></span></span>
-        </div>
+          <span class="prod-info" data-name="Cerberus"><span class="kind" data-i18n>Self-hosted AI</span><span class="prod-line" data-i18n>Run language models on your own hardware: one place to manage the models, one API for your apps and a web interface that works on a phone. Prompts never leave your network.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
       </div>
       <div class="prod-cap" id="prodCap" aria-hidden="true"></div>
     </div>
@@ -1592,50 +1626,9 @@
   <button type="button" data-go="1"><span data-i18n>Products</span></button>
   <button type="button" data-go="2"><span data-i18n>More tools</span></button>
 </nav>
-<!-- The two panes the safe and help buttons open. The panes are markup so i18n.js translates them in place. -->
+<!-- The help pane. Markup, so i18n.js translates it in place. -->
 <div class="zoom" id="zoom" hidden>
   <div class="zoom-card" id="zoomCard" role="dialog" aria-modal="true">
-    <div class="zoom-body" id="z-safe" hidden>
-      <div class="z-head">
-        <button type="button" class="pill" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n>Back</span></button>
-        <h2 data-i18n>Is this safe to use?</h2>
-      </div>
-      <div class="z-pad">
-      <div class="why-grid">
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <h3 data-i18n>Your file is opened by the page itself.</h3>
-          <p data-i18n>It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="12" cy="12" r="10"/></svg>
-          <h3 data-i18n>The web tools: nothing to install, no account.</h3>
-          <p data-i18n>Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino DICOM and Carino Setup, say so on their own page.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-          <h3 data-i18n>Free, and open to read.</h3>
-          <p data-i18n>Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
-          <h3 data-i18n>Most of it keeps working with the cable out.</h3>
-          <p data-i18n>The work happens in the page, so once it has loaded, a dropped line does not stop it. The few that read live data say so on their own page.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          <h3 data-i18n>The same on a phone, a tablet or a computer.</h3>
-          <p data-i18n>There is one version and it is this one. Nothing to keep updated, and nothing that only works on the machine you were not carrying.</p>
-        </div>
-        <div class="why-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <h3 data-i18n>Named in plain words, and by its real name.</h3>
-          <p data-i18n>Every tool is written down twice — what it does, and what it is called — so you never have to already know the word to find the thing.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
     <div class="zoom-body" id="z-hand" hidden>
       <div class="z-art"><img class="where-mark" src="logo.svg" alt="" width="96" height="96" style="width:96px"></div>
       <div class="z-txt">
@@ -2243,7 +2236,9 @@ function backOut() {
 
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
-  if (h === 'safe' || h === 'hand') { if (!view) showGrid(); openPane(h); return; }
+  // The reasons it is safe live on the hero now; old #safe links land there.
+  if (h === 'safe') { closePane(); goSlide(0, { hash: false, instant: !booted }); showGrid(); history.replaceState(null, '', location.pathname + location.search); return; }
+  if (h === 'hand') { if (!view) showGrid(); openPane(h); return; }
   closePane();
   const si = SLIDE_IDS.indexOf(h);
   if (si > 0) { goSlide(si, { hash: false, instant: !booted }); showGrid(); return; }
@@ -2294,7 +2289,7 @@ function wire() {
   // #safe and #hand are pushed, so Back closes them.
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    const a = e.target.closest('a[href="#safe"], a[href="#hand"]');
+    const a = e.target.closest('a[href="#hand"]');
     if (a) {
       e.preventDefault();
       if (location.hash !== a.getAttribute('href')) history.pushState({ pane: true }, '', a.getAttribute('href'));

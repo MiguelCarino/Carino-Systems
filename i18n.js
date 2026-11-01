@@ -95,7 +95,7 @@ const I18N = {
         'Your file is opened by the page itself.': 'La propia página abre tu archivo.',
         'It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.': 'Se lee en tu propia computadora, en la página que tienes abierta. No se envía a ningún lado, así que el estudio de un paciente o un contrato firmado se queda donde ya estaba.',
         'The web tools: nothing to install, no account.': 'Las herramientas web: nada que instalar, ninguna cuenta.',
-        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino DICOM and Carino Setup, say so on their own page.': 'Abre el enlace y empieza. No hay registro, no hay correo que entregar y no hay prueba que se acabe. Las pocas que se instalan, como Carino DICOM y Carino Setup, lo dicen en su propia página.',
+        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.': 'Abre el enlace y empieza. No hay registro, no hay correo que entregar y no hay prueba que se acabe. Las pocas que se instalan, como Carino Images y Carino Setup, lo dicen en su propia página.',
         'Free, and open to read.': 'Gratis, y abierto para revisar.',
         'Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.': 'Cada herramienta de aquí es gratuita y su código es público: quien sepa hacerlo puede comprobar qué hace.',
         'Most of it keeps working with the cable out.': 'Casi todo sigue funcionando sin conexión.',
@@ -332,6 +332,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Escríbeme sobre una instalación o un proyecto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Every line is public, so anyone can read and check what it does.": "Cada línea es pública, así que cualquiera puede leer y revisar lo que hace.",
+        "It runs in your browser or on your own machines. Nothing is sent to us.": "Funciona en tu navegador o en tus propios equipos. No nos llega nada.",
         "Setup · Linux, Windows, macOS": "Instalación · Linux, Windows, macOS",
         "We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.": "Creamos herramientas y entornos de código abierto para la mayoría de las industrias, les damos soporte y los adaptamos a tu forma de trabajar. Funcionan en tu navegador o en tus propios equipos, así que tus datos se quedan contigo.",
         "See the products": "Ver los productos",
@@ -446,7 +448,7 @@ const I18N = {
         'Your file is opened by the page itself.': 'A própria página abre o seu arquivo.',
         'It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.': 'Ele é lido no seu próprio computador, pela página que você abriu. Não é enviado a lugar nenhum, então o exame de um paciente ou um contrato assinado continua onde já estava.',
         'The web tools: nothing to install, no account.': 'As ferramentas web: nada para instalar, nenhuma conta.',
-        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino DICOM and Carino Setup, say so on their own page.': 'Abra o link e comece. Não há cadastro, nenhum e-mail para entregar e nenhum teste que acaba. As poucas que se instalam, como Carino DICOM e Carino Setup, dizem isso na própria página.',
+        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.': 'Abra o link e comece. Não há cadastro, nenhum e-mail para entregar e nenhum teste que acaba. As poucas que se instalam, como Carino Images e Carino Setup, dizem isso na própria página.',
         'Free, and open to read.': 'Gratuito, e aberto para conferir.',
         'Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.': 'Cada ferramenta daqui é gratuita e o código por trás dela é público: quem souber pode conferir o que ela faz.',
         'Most of it keeps working with the cable out.': 'Quase tudo continua funcionando sem conexão.',
@@ -683,6 +685,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Escreva-me sobre uma instalação ou um projeto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Every line is public, so anyone can read and check what it does.": "Cada linha é pública, então qualquer pessoa pode ler e conferir o que ela faz.",
+        "It runs in your browser or on your own machines. Nothing is sent to us.": "Roda no seu navegador ou nas suas próprias máquinas. Nada é enviado para nós.",
         "Setup · Linux, Windows, macOS": "Instalação · Linux, Windows, macOS",
         "We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.": "Criamos ferramentas e ambientes de código aberto para a maioria dos setores, damos suporte e adaptamos ao seu jeito de trabalhar. Eles rodam no seu navegador ou nas suas próprias máquinas, então seus dados ficam com você.",
         "See the products": "Ver os produtos",
@@ -797,7 +801,7 @@ const I18N = {
         'Your file is opened by the page itself.': 'ファイルを開くのはページそのものです。',
         'It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.': '開いているページが、お使いのPCの中でファイルを読み込みます。どこにも送信しないので、患者さんの検査データや署名済みの契約書は元の場所に留まります。',
         'The web tools: nothing to install, no account.': 'Webツールはインストールも登録も不要。',
-        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino DICOM and Carino Setup, say so on their own page.': 'リンクを開けばすぐ使えます。登録もメールアドレスの提出も、期限付きの試用もありません。インストールが必要な一部（Carino DICOM や Carino Setup など）は、それぞれのページにそう書いてあります。',
+        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.': 'リンクを開けばすぐ使えます。登録もメールアドレスの提出も、期限付きの試用もありません。インストールが必要な一部（Carino Images や Carino Setup など）は、それぞれのページにそう書いてあります。',
         'Free, and open to read.': '無料で、中身も公開。',
         'Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.': 'ここにあるツールはすべて無料で、そのコードも公開されています。分かる人なら何をしているか確認できます。',
         'Most of it keeps working with the cable out.': 'ほとんどは回線が切れても動き続けます。',
@@ -1034,6 +1038,8 @@ const I18N = {
         "Write to me about a setup or a project.": "導入やプロジェクトのご相談はこちら。",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Every line is public, so anyone can read and check what it does.": "コードはすべて公開。誰でも読んで、何をしているか確かめられます。",
+        "It runs in your browser or on your own machines. Nothing is sent to us.": "ブラウザか自分のPCで動きます。私たちには何も送られません。",
         "Setup · Linux, Windows, macOS": "セットアップ · Linux, Windows, macOS",
         "We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.": "ほとんどの業界に向けたオープンソースのツールと環境を作り、サポートし、あなたの仕事のやり方に合わせて調整します。ブラウザか自分のPCで動くので、データは手元に残ります。",
         "See the products": "製品を見る",
@@ -1148,7 +1154,7 @@ const I18N = {
         'Your file is opened by the page itself.': 'Файл открывает сама страница.',
         'It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.': 'Он читается на вашем компьютере, открытой у вас страницей. Никуда не отправляется — исследование пациента или подписанный договор остаются там, где были.',
         'The web tools: nothing to install, no account.': 'Веб-инструменты: ничего не устанавливать, без аккаунта.',
-        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino DICOM and Carino Setup, say so on their own page.': 'Откройте ссылку и работайте. Нет регистрации, не нужно оставлять почту, и пробный период не закончится. Те немногие, что устанавливаются, например Carino DICOM и Carino Setup, говорят об этом на своей странице.',
+        'Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.': 'Откройте ссылку и работайте. Нет регистрации, не нужно оставлять почту, и пробный период не закончится. Те немногие, что устанавливаются, например Carino Images и Carino Setup, говорят об этом на своей странице.',
         'Free, and open to read.': 'Бесплатно и открыто для проверки.',
         'Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.': 'Каждый инструмент здесь бесплатный, а его код открыт — кто умеет, может проверить, что он делает.',
         'Most of it keeps working with the cable out.': 'Почти всё продолжает работать без сети.',
@@ -1385,6 +1391,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Напишите мне о настройке или проекте.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Every line is public, so anyone can read and check what it does.": "Весь код открыт: любой может прочитать его и проверить, что он делает.",
+        "It runs in your browser or on your own machines. Nothing is sent to us.": "Работает в браузере или на ваших машинах. Нам ничего не отправляется.",
         "Setup · Linux, Windows, macOS": "Настройка · Linux, Windows, macOS",
         "We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.": "Мы создаём инструменты и среды с открытым кодом для большинства отраслей, поддерживаем их и подстраиваем под вашу работу. Они работают в браузере или на ваших собственных машинах, поэтому данные остаются у вас.",
         "See the products": "Смотреть продукты",
