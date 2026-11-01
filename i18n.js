@@ -332,6 +332,13 @@ const I18N = {
         "Write to me about a setup or a project.": "Escríbeme sobre una instalación o un proyecto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "A network register that checks itself.": "Un registro de red que se revisa solo.",
+        "Eye exams, refraction and dispensing.": "Examen visual, refracción y entrega de lentes.",
+        "View, fix and de-identify DICOM files.": "Ve, corrige y anonimiza archivos DICOM.",
+        "Fedora systems built for one job each.": "Sistemas Fedora hechos para un trabajo cada uno.",
+        "One command to set up any computer.": "Un comando para configurar cualquier computadora.",
+        "A complete desktop for Fedora.": "Un escritorio completo para Fedora.",
+        "Language models on your own hardware.": "Modelos de lenguaje en tu propio hardware.",
         "Every line is public, so anyone can read and check what it does.": "Cada línea es pública, así que cualquiera puede leer y revisar lo que hace.",
         "It runs in your browser or on your own machines. Nothing is sent to us.": "Funciona en tu navegador o en tus propios equipos. No nos llega nada.",
         "Setup · Linux, Windows, macOS": "Instalación · Linux, Windows, macOS",
@@ -685,6 +692,13 @@ const I18N = {
         "Write to me about a setup or a project.": "Escreva-me sobre uma instalação ou um projeto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "A network register that checks itself.": "Um registro de rede que se verifica sozinho.",
+        "Eye exams, refraction and dispensing.": "Exame ocular, refração e dispensação.",
+        "View, fix and de-identify DICOM files.": "Veja, corrija e anonimize arquivos DICOM.",
+        "Fedora systems built for one job each.": "Sistemas Fedora feitos para uma tarefa cada.",
+        "One command to set up any computer.": "Um comando para configurar qualquer computador.",
+        "A complete desktop for Fedora.": "Um desktop completo para o Fedora.",
+        "Language models on your own hardware.": "Modelos de linguagem no seu próprio hardware.",
         "Every line is public, so anyone can read and check what it does.": "Cada linha é pública, então qualquer pessoa pode ler e conferir o que ela faz.",
         "It runs in your browser or on your own machines. Nothing is sent to us.": "Roda no seu navegador ou nas suas próprias máquinas. Nada é enviado para nós.",
         "Setup · Linux, Windows, macOS": "Instalação · Linux, Windows, macOS",
@@ -1038,6 +1052,13 @@ const I18N = {
         "Write to me about a setup or a project.": "導入やプロジェクトのご相談はこちら。",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "A network register that checks itself.": "自分でチェックするネットワーク台帳。",
+        "Eye exams, refraction and dispensing.": "眼科検査、屈折検査、眼鏡処方。",
+        "View, fix and de-identify DICOM files.": "DICOMファイルを表示・修正・匿名化。",
+        "Fedora systems built for one job each.": "用途ごとに作られたFedoraシステム。",
+        "One command to set up any computer.": "ひとつのコマンドでどんなPCもセットアップ。",
+        "A complete desktop for Fedora.": "Fedora向けの完成したデスクトップ。",
+        "Language models on your own hardware.": "自分のハードウェアで動く言語モデル。",
         "Every line is public, so anyone can read and check what it does.": "コードはすべて公開。誰でも読んで、何をしているか確かめられます。",
         "It runs in your browser or on your own machines. Nothing is sent to us.": "ブラウザか自分のPCで動きます。私たちには何も送られません。",
         "Setup · Linux, Windows, macOS": "セットアップ · Linux, Windows, macOS",
@@ -1391,6 +1412,13 @@ const I18N = {
         "Write to me about a setup or a project.": "Напишите мне о настройке или проекте.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "A network register that checks itself.": "Реестр сети, который проверяет себя сам.",
+        "Eye exams, refraction and dispensing.": "Осмотр глаз, рефракция и подбор очков.",
+        "View, fix and de-identify DICOM files.": "Просмотр, правка и обезличивание файлов DICOM.",
+        "Fedora systems built for one job each.": "Системы Fedora, каждая под свою задачу.",
+        "One command to set up any computer.": "Одна команда, чтобы настроить любой компьютер.",
+        "A complete desktop for Fedora.": "Полноценный рабочий стол для Fedora.",
+        "Language models on your own hardware.": "Языковые модели на вашем оборудовании.",
         "Every line is public, so anyone can read and check what it does.": "Весь код открыт: любой может прочитать его и проверить, что он делает.",
         "It runs in your browser or on your own machines. Nothing is sent to us.": "Работает в браузере или на ваших машинах. Нам ничего не отправляется.",
         "Setup · Linux, Windows, macOS": "Настройка · Linux, Windows, macOS",

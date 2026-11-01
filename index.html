@@ -1261,6 +1261,34 @@
        The industry line-up's panel (.pan) with a picture behind it. On a
        desktop the hovered or focused panel's words show in the caption bar
        under the row; on a phone the bands carry their own. */
+
+    /* the one-liner: on the picture, where the plate was, while pointed at */
+    .pan-hint { position: absolute; left: 0; right: 0; bottom: 0; padding: 70px clamp(14px, 9cqw, 22px) clamp(18px, 6%, 34px);
+      background: linear-gradient(180deg, transparent, rgba(5,5,5,.9) 38%);
+      color: var(--text); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em;
+      font-size: clamp(1.05rem, min(10cqw, 3.4cqh), 1.6rem); line-height: 1.2; text-wrap: balance;
+      opacity: 0; transform: translate3d(0, 14px, 0); transition: opacity .3s ease, transform .45s var(--ease-out); pointer-events: none; }
+    .pan-hint::before { content: ""; display: block; width: 36px; height: 3px; margin-bottom: 12px; background: var(--accent); border-radius: 2px; }
+    .prod-pan:hover::after, .prod-pan:focus-visible::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 2px var(--accent); pointer-events: none; }
+    .prod-pan .pan-plate { transition: opacity .25s ease; }
+    .prod-pan:hover .pan-hint, .prod-pan:focus-visible .pan-hint { opacity: 1; transform: none; }
+    .prod-pan:hover .pan-plate, .prod-pan:focus-visible .pan-plate { opacity: 0; }
+    :root[data-carino-theme="color"] .pan-hint { background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg-card) 92%, transparent) 45%); }
+    /* No hover to wait for (a touch screen): the one-liner is always on. */
+    @media (hover: none) and (min-width: 721px) {
+      .pan-hint { opacity: 1; transform: none; }
+      .prod-pan .pan-plate { display: none; }
+    }
+    /* A phone's band: the one-liner under the name and the kind, in place of the longer text. */
+    @media (max-width: 720px) {
+      .pan-hint { opacity: 1; transform: none; left: 64px; right: 14px; top: 66px; bottom: auto; padding: 0; background: none;
+        font-size: 1rem; font-weight: 700; line-height: 1.3; text-wrap: pretty; }
+      .pan-hint::before { display: none; }
+      .prod-pan .prod-info .prod-line { display: none; }
+      .prod-pan .prod-info .kind { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .prod-pan:hover .pan-plate, .prod-pan:focus-visible .pan-plate { opacity: 1; }
+      .prod-pan:hover::after { box-shadow: none; }
+    }
     .s-products .next { display: none; }
     .prod-in { display: flex; flex-direction: column; overflow: hidden; padding-bottom: clamp(16px, 3vh, 30px); }
     .prod-in .s-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 22px; max-width: none; }
@@ -1275,8 +1303,8 @@
       background: linear-gradient(180deg, rgba(5,5,5,.15) 0%, rgba(5,5,5,.35) 45%, rgba(5,5,5,.92) 100%); }
     .pan-shot.none { background:
       repeating-linear-gradient(135deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 2px, transparent 2px 14px), #0b0b0b; opacity: .8; }
-    .prod-pan:hover .pan-shot, .prod-pan:focus-visible .pan-shot, .prod-pan.on .pan-shot { opacity: .9; transform: scale(1.04); filter: none; }
-    .prod-pan.soon:hover .pan-shot, .prod-pan.soon.on .pan-shot { transform: none; }
+    .prod-pan:hover .pan-shot, .prod-pan:focus-visible .pan-shot { opacity: .9; transform: scale(1.04); filter: none; }
+    .prod-pan.soon:hover .pan-shot { transform: none; }
     .pan-mark { position: absolute; left: 12px; top: 12px; width: clamp(34px, 22cqw, 48px); height: clamp(34px, 22cqw, 48px); }
     .prod-pan.soon .pan-mark, .prod-pan.soon .pan-title { opacity: .55; }
     .pan-soon { position: absolute; left: 50%; top: 50%; translate: -50% -50%; writing-mode: vertical-rl; white-space: nowrap;
@@ -1284,20 +1312,8 @@
       font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; color: var(--text-sec); }
     .prod-pan .pan-sub { white-space: nowrap; }
     .prod-pan .prod-info { display: none; }
-    .prod-pan.on .pan-n { background: var(--accent); }
-    .prod-pan.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent); }
     .s-products.enter .prod-pan { animation: pan-in .9s var(--ease-out) both; animation-delay: calc(var(--i) * 60ms + 220ms); }
     .slide.pre .prod-pan { opacity: 0; }
-    /* the caption: the chosen product in words */
-    .prod-cap { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 28px;
-      min-height: 5.6em; padding: clamp(12px, 2vh, 20px) 2px 0; }
-    .prod-cap h3 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.15rem, 1rem + .6vw, 1.6rem); letter-spacing: -0.015em; }
-    .prod-cap h3 .kind { margin-left: 12px; vertical-align: middle; text-align: left; }
-    .prod-cap p { grid-column: 1; margin-top: 4px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.55; max-width: 92ch; }
-    .prod-cap .cap-go { grid-column: 2; grid-row: 1 / span 2; }
-    .prod-cap .cap-go .btn { white-space: nowrap; }
-    .prod-cap.swap > * { animation: cap-in .35s var(--ease-out) both; }
-    @keyframes cap-in { 0% { opacity: 0; transform: translate3d(0, 6px, 0); } 100% { opacity: 1; transform: none; } }
     @media (max-width: 720px) {
       .prod-in { overflow-y: auto; }
       .prod-sel { flex: 1 0 auto; overflow: visible; }
@@ -1314,7 +1330,6 @@
       .pan-soon { display: none; }
       .pan-shot { opacity: .3; }
       .pan-shot::after { background: linear-gradient(90deg, rgba(5,5,5,.75) 0%, rgba(5,5,5,.55) 60%, rgba(5,5,5,.3) 100%); }
-      .prod-cap { display: none; }
       .s-products.enter .prod-pan { animation-name: pan-in-m; }
     }
     :root[data-carino-theme="color"] .pan-shot { background-color: var(--bg-card); }
@@ -1514,6 +1529,7 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/topo.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/topo-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Topo</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Networks · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>A network register that checks itself.</span>
           <span class="prod-info" data-name="Topo"><span class="kind" data-i18n>Networks · Web app</span><span class="prod-line" data-i18n>Draw your network once and keep it right: devices, addresses, racks and Wi-Fi, checked as you go for conflicts, loops and unreachable gateways, and printed as a site report.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
         <a class="pan prod-pan" role="listitem" href="https://retina.carino.systems/" target="_blank" rel="noopener" style="--i:1" data-cap="1">
@@ -1521,6 +1537,7 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/retina.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/retina-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Retina</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Eye care · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Eye exams, refraction and dispensing.</span>
           <span class="prod-info" data-name="Carino Retina"><span class="kind" data-i18n>Eye care · Web app</span><span class="prod-line" data-i18n>Eye examination, refraction and dispensing in one place. Mark a fundus photo for an automatic cup-to-disc ratio, refract, and export a study PDF, DICOM file, prescription or lens order.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
         <a class="pan prod-pan" role="listitem" href="https://dcm.carino.systems/" target="_blank" rel="noopener" style="--i:2" data-cap="2">
@@ -1528,6 +1545,7 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dcm.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dcm-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">DICOM Editor</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">03</span><span class="pan-sub" data-i18n>Medical imaging · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>View, fix and de-identify DICOM files.</span>
           <span class="prod-info" data-name="Carino DICOM Editor"><span class="kind" data-i18n>Medical imaging · Web app</span><span class="prod-line" data-i18n>Open, check, edit and de-identify DICOM files in the browser. Compare two studies, validate their tags and remove patient data before a file leaves the building. Nothing is uploaded.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
         <a class="pan prod-pan" role="listitem" href="https://images.carino.systems/" target="_blank" rel="noopener" style="--i:3" data-cap="3">
@@ -1535,6 +1553,7 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/images.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/images-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Images</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">04</span><span class="pan-sub" data-i18n>Operating system · Fedora</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Fedora systems built for one job each.</span>
           <span class="prod-info" data-name="Carino Images"><span class="kind" data-i18n>Operating system · Fedora</span><span class="prod-line" data-i18n>Ready-made Fedora systems for one job each: imaging workstations, servers and gaming. Built from one configuration, installed from a single ISO, with updates you can roll back.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
         <a class="pan prod-pan" role="listitem" href="https://setup.carino.systems/" target="_blank" rel="noopener" style="--i:4" data-cap="4">
@@ -1542,6 +1561,7 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/setup.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/setup-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Setup</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">05</span><span class="pan-sub" data-i18n>Setup · Linux, Windows, macOS</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>One command to set up any computer.</span>
           <span class="prod-info" data-name="Carino Setup"><span class="kind" data-i18n>Setup · Linux, Windows, macOS</span><span class="prod-line" data-i18n>One command that sets up Linux, Windows or macOS: drivers, codecs and 15 purpose profiles, with a dry run first.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
         <div class="pan prod-pan soon" role="listitem" tabindex="0" aria-disabled="true" style="--i:5" data-cap="5">
@@ -1550,6 +1570,7 @@
           <span class="pan-title">Atrium</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">06</span><span class="pan-sub" data-i18n>Desktop · Linux</span></span>
           <span class="pan-soon" data-i18n>Coming soon</span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>A complete desktop for Fedora.</span>
           <span class="prod-info" data-name="Atrium"><span class="kind" data-i18n>Desktop · Linux</span><span class="prod-line" data-i18n>A complete, polished desktop for Fedora: bar, panels, notifications, launcher, dock or taskbar, themes and a built-in LLM chat, set up in one step.</span><span class="prod-go"><span class="soon-tag" data-i18n>Coming soon</span></span></span>
         </div>
         <a class="pan prod-pan" role="listitem" href="https://cerberus.carino.systems/" target="_blank" rel="noopener" style="--i:6" data-cap="6">
@@ -1557,10 +1578,10 @@
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/cerberus.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/cerberus-color.svg" alt="" width="48" height="48" decoding="async"></span>
           <span class="pan-title">Cerberus</span>
           <span class="pan-plate" aria-hidden="true"><span class="pan-n">07</span><span class="pan-sub" data-i18n>Self-hosted AI</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Language models on your own hardware.</span>
           <span class="prod-info" data-name="Cerberus"><span class="kind" data-i18n>Self-hosted AI</span><span class="prod-line" data-i18n>Run language models on your own hardware: one place to manage the models, one API for your apps and a web interface that works on a phone. Prompts never leave your network.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
       </div>
-      <div class="prod-cap" id="prodCap" aria-hidden="true"></div>
     </div>
     <button type="button" class="next" data-go="2"><span data-i18n>More tools</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   </section>
@@ -2527,33 +2548,6 @@ function deckKey(e) {
 }
 
 
-/* The products' caption: the panel pointed at, or focused, in words —
-   name, kind, the line and its Open. The first one until then. */
-function capShow(pan) {
-  const cap = $('prodCap'), info = pan && pan.querySelector('.prod-info');
-  if (!cap || !info) return;
-  for (const x of document.querySelectorAll('#prodSel .prod-pan.on')) x.classList.remove('on');
-  pan.classList.add('on');
-  const kind = info.querySelector('.kind').textContent, line = info.querySelector('.prod-line').textContent;
-  const go = pan.href
-    ? `<a class="btn" href="${esc(pan.href)}" target="_blank" rel="noopener" tabindex="-1">${esc(T('Open'))} ${GO_SVG}</a>`
-    : `<span class="soon-tag">${esc(T('Coming soon'))}</span>`;
-  const html = `<h3>${esc(info.dataset.name)}<span class="kind">${esc(kind)}</span></h3><p>${esc(line)}</p><div class="cap-go">${go}</div>`;
-  if (cap.innerHTML === html) return;
-  cap.innerHTML = html;
-  cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
-}
-function wireProducts() {
-  const sel = $('prodSel');
-  if (!sel) return;
-  sel.addEventListener('pointerover', (e) => { if (e.pointerType !== 'touch') capShow(e.target.closest('.prod-pan')); });
-  sel.addEventListener('focusin', (e) => capShow(e.target.closest('.prod-pan')));
-  capShow(sel.querySelector('.prod-pan.on') || sel.querySelector('.prod-pan'));
-  // i18n.js rewrites the panels' words on a language switch; follow it.
-  window.addEventListener('carino:langchange', () => setTimeout(() => capShow(sel.querySelector('.prod-pan.on')), 0));
-  document.addEventListener('DOMContentLoaded', () => setTimeout(() => capShow(sel.querySelector('.prod-pan.on')), 0));
-}
-
 function wireDeck() {
   const deck = $('deck');
   if (!deck) return;
@@ -2613,7 +2607,6 @@ function wireDeck() {
   at = -1;
   goSlide(first, { instant: true, hash: false, quiet: true });
   wireDeck();
-  wireProducts();
   if (first !== TOOLS_AT && !introWanted()) enterSlide(first);
 }
 
