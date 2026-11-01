@@ -157,6 +157,17 @@
       "sha256": "84:23:DC:FE:7C:54:BE:7A:45:02:07:BC:8D:FE:D4:42:6B:4D:18:83:13:CE:8B:56:42:01:46:F7:01:19:79:98",
       "subject": "dlss.carino.systems"
     },
+    "files.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-01-29T17:49:59Z",
+      "not_before": "2026-10-31T17:50:00Z",
+      "san": [
+        "files.carino.systems"
+      ],
+      "sha256": "25:7E:FB:25:9B:7E:49:74:F6:F0:74:E6:04:B0:F9:06:7E:32:D4:E9:16:EF:3E:D9:05:43:70:18:DF:58:05:9F",
+      "subject": "files.carino.systems"
+    },
     "fiscal.carino.systems": {
       "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
@@ -255,28 +266,6 @@
       ],
       "sha256": "85:E8:C1:82:3A:26:F7:5A:67:F9:34:CE:D6:65:85:4C:86:C2:E6:CD:C8:49:93:9B:70:D7:F4:F0:6E:34:C7:77",
       "subject": "learn.carino.systems"
-    },
-    "media.carino.systems": {
-      "issuer_cn": "YR2",
-      "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-31T04:48:55Z",
-      "not_before": "2026-10-02T04:48:56Z",
-      "san": [
-        "media.carino.systems"
-      ],
-      "sha256": "9F:C7:A9:FB:C7:D4:69:9F:8F:66:29:A4:C7:4F:33:04:D4:55:4E:85:4F:55:BB:AB:2C:DA:D3:49:31:52:D2:F5",
-      "subject": "media.carino.systems"
-    },
-    "metadata.carino.systems": {
-      "issuer_cn": "YR2",
-      "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-01T10:01:18Z",
-      "not_before": "2026-09-02T10:01:19Z",
-      "san": [
-        "metadata.carino.systems"
-      ],
-      "sha256": "4E:7D:3B:08:45:87:21:F9:BC:A7:EF:9F:C4:01:E9:B6:74:A7:16:53:7E:8E:3D:14:BB:96:43:0F:4B:7E:86:6B",
-      "subject": "metadata.carino.systems"
     },
     "music.carino.systems": {
       "issuer_cn": "YR1",
