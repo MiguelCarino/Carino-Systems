@@ -107,8 +107,8 @@
     "domain": "distro.carino.systems",
     "dir": "findmeadistro",
     "name": "Find Me a Distro",
-    "type": "learn",
-    "desc": "Pick a Linux or BSD family and get one of its distros at random, with a link to its site. A random pick, not a match; your choices stay in the link.",
+    "type": "play",
+    "desc": "Choose the families, chips and eras to draw from, then pull a Linux or BSD distro at random, with a link to its site. Every distro has the same chance; your collection stays in your browser.",
     "line": "Get a random Linux or BSD distro to try."
   },
   {
