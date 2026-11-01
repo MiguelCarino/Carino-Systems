@@ -413,9 +413,9 @@
     }
     .hello { display: flex; align-items: center; gap: 12px; min-width: 0; }
     .hello img { width: 38px; height: auto; flex: none; }
-    .hello h1 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1;
+    .hello h2 { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1;
       font-size: clamp(1rem, 0.75rem + 0.5vw, 1.3rem); text-wrap: balance; }
-    .hello h1 .gold { color: var(--accent); }
+    .hello h2 .gold { color: var(--accent); }
     .hello p { margin-top: 3px; display: inline-flex; align-items: center; gap: 6px; color: var(--text-sec); font-size: var(--fs-sm); }
     .hello p svg { width: 14px; height: 14px; color: var(--accent); flex: none; }
     .top-r { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; min-width: 0; }
@@ -575,9 +575,9 @@
       .find { width: 280px; }
     }
     @media (max-height: 760px) and (min-width: 721px) {
-      .card { gap: 7px; padding: 14px 16px; }
-      .card .t-mark { width: 46px; height: 46px; }
-      .card p { -webkit-line-clamp: 2; line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+      .grid .card { gap: 7px; padding: 14px 16px; }
+      .grid .card .t-mark { width: 46px; height: 46px; }
+      .grid .card p { -webkit-line-clamp: 2; line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
     }
     @media (max-width: 720px) {
       :root { --pad: 14px; }
@@ -595,13 +595,13 @@
       .all span { display: none; }
       .all { width: 38px; padding: 0; }
       .grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-      .card { flex-direction: row; align-items: center; gap: 12px; padding: 12px 14px; }
-      .card-top { flex: none; }
-      .card .t-mark, .card .t-ico { width: 44px; height: 44px; }
-      .card-n, .card-go { display: none; }
-      .card-body { min-width: 0; }
-      .card h3 { font-size: var(--fs-body); }
-      .card p { font-size: var(--fs-sm); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+      .grid .card { flex-direction: row; align-items: center; gap: 12px; padding: 12px 14px; }
+      .grid .card-top { flex: none; }
+      .grid .card .t-mark, .grid .card .t-ico { width: 44px; height: 44px; }
+      .grid .card-n, .grid .card-go { display: none; }
+      .grid .card-body { min-width: 0; }
+      .grid .card h3 { font-size: var(--fs-body); }
+      .grid .card p { font-size: var(--fs-sm); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
       .zoom { align-items: flex-end; padding: 10px 10px calc(10px + env(safe-area-inset-bottom, 0px)); }
     }
     /* ── the intro ──
@@ -860,7 +860,7 @@
     .sel.picking .pan.picked { opacity: 1; transform: translate3d(0, -10px, 0); }
     .sel.picking .pan.picked .pan-fig { opacity: .6; }
     @media (max-width: 720px) {
-      .hello h1 { font-size: 1.05rem; }
+      .hello h2 { font-size: 1.05rem; }
       .sel-head p { display: none; }
       /* A phone: the line-up stands on its side. Ten bands down the screen,
          each the full width — the plate a block on the left, the name across,
@@ -1104,6 +1104,211 @@
     :root[data-carino-theme="color"] [data-sec="medical"]  { --sec: var(--ct-pink); }
     /* the switch sits beside the brand; the row's 22px gap is for the clock */
     .top-header .ct-switch { margin: 0 -12px 0 -4px; }
+
+    /* ── the deck: four full-screen slides ──
+       The track moves a whole slide at a time (transform only); the slide
+       that is not on screen is inert. overflow: clip, not hidden, so focus
+       and scrollIntoView inside a slide can never scroll the deck itself. */
+    .deck { flex: 1 1 auto; min-height: 0; position: relative; overflow: hidden; overflow: clip; }
+    .deck-track { height: 100%; --at: 0; transform: translate3d(0, calc(var(--at) * -100%), 0);
+      transition: transform .85s var(--ease-in-out); will-change: transform; }
+    .deck-track.instant { transition: none; }
+    .slide { position: relative; height: 100%; display: flex; flex-direction: column; min-height: 0; }
+    .slide > .ps { flex: 1 1 auto; }
+    .slide-in { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+      width: 100%; max-width: 1560px; margin: 0 auto;
+      padding: calc(clamp(22px, 6vh, 72px) + var(--tall) * .08) var(--pad-r) calc(72px + env(safe-area-inset-bottom, 0px)) var(--pad-l); }
+    :root { --tall: max(0px, 100vh - 900px); }
+
+    /* a slide's content arriving: each part rises in reading order */
+    .slide.pre .rise { opacity: 0; }
+    .slide.enter .rise { animation: rise .8s var(--ease-out) both; animation-delay: calc(var(--d, 0) * 70ms + 200ms); }
+    .slide.enter.late .rise { animation-delay: calc(var(--d, 0) * 70ms + 520ms); }
+    @keyframes rise { 0% { opacity: 0; transform: translate3d(0, 26px, 0); } 100% { opacity: 1; transform: none; } }
+
+    .eyebrow { display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+    .eyebrow::after { content: ""; flex: 0 1 120px; height: 1px; background: linear-gradient(90deg, var(--accent-dim), transparent); }
+
+    /* the hero: top-anchored, text left, how it works right */
+    .hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .9fr); gap: clamp(28px, 5vw, 90px); align-items: start; }
+    .hero-h { margin-top: clamp(14px, 2.4vh, 26px); font-family: var(--font-display); font-weight: 900; letter-spacing: -0.035em; line-height: 1.02;
+      font-size: clamp(2.2rem, 1rem + 3.6vw, calc(4.6rem + var(--tall) * .02)); text-wrap: balance; }
+    .hero-h span { display: block; }
+    .hero-h .gold { color: var(--accent); }
+    .hero-lede { margin-top: clamp(16px, 2.6vh, 28px); max-width: 60ch; color: var(--text-sec); font-size: clamp(1rem, .9rem + .35vw, 1.2rem); line-height: 1.6; }
+    .hero-act { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(22px, 3.6vh, 38px); }
+    .hero-act .btn { cursor: pointer; }
+    .hero-trust { list-style: none; margin: clamp(22px, 3.6vh, 40px) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 12px;
+      color: var(--text-muted); font-size: var(--fs-sec); }
+    .hero-trust li, .hero-trust a { display: inline-flex; align-items: center; gap: 9px; height: 40px; padding: 0 16px 0 13px; border-radius: 999px;
+      border: 1px solid var(--accent-dim); background: var(--accent-faint); color: var(--text); font-weight: 700; font-size: var(--fs-sec);
+      font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-trust li:has(> a) { padding: 0; border: 0; background: none; }
+    .hero-trust svg { width: 18px; height: 18px; color: var(--accent); flex: none; }
+    .hero-how { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column;
+      border-left: 2px solid #1d1d1d; }
+    .hero-how li { display: flex; gap: 18px; padding: clamp(14px, 2.4vh, 24px) 0 clamp(14px, 2.4vh, 24px) clamp(18px, 2vw, 28px); position: relative; }
+    .hero-how li + li { border-top: 1px solid #1a1a1a; }
+    .hero-how li::before { content: ""; position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);
+      transform: scaleY(0); transform-origin: top; transition: transform .4s var(--ease-out); }
+    .hero-how li:hover::before { transform: none; }
+    .how-ico { flex: none; width: 26px; height: 26px; margin-top: 2px; color: var(--accent); }
+    .hero-svc .eyebrow { margin-top: clamp(10px, 4vh, 60px); }
+    .hero-trust a { text-decoration: none; transition: border-color .15s, background .15s; }
+    .hero-trust a:hover, .hero-trust a:focus-visible { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); outline: none; }
+    .how-n { flex: none; font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; line-height: 1.1; color: var(--accent); }
+    .hero-how h3 { font-family: var(--font-display); font-weight: 800; font-size: var(--fs-h3); letter-spacing: -0.01em; }
+    .hero-how p { margin-top: 4px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.5; }
+
+    /* products and services */
+    .s-head { max-width: 70ch; }
+    .s-head h2 { margin-top: 10px; font-family: var(--font-display); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05;
+      font-size: clamp(1.8rem, 1rem + 2.4vw, 3.4rem); text-wrap: balance; }
+    .s-head p:last-child { margin-top: 10px; color: var(--text-sec); font-size: var(--fs-body); line-height: 1.6; }
+    .prod .card-top { align-items: center; }
+    .kind { font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-muted); text-align: right; }
+    .prod h3 { font-size: clamp(1.15rem, 1rem + .4vw, 1.4rem); }
+    .prod-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; color: var(--accent); font-weight: 700; font-size: var(--fs-sec); }
+    .prod-go svg { width: 17px; height: 17px; transition: transform .18s; }
+    .prod:hover .prod-go svg, .prod:focus-visible .prod-go svg { transform: translate(2px, -2px); }
+    .prod.soon .t-mark { opacity: .55; filter: grayscale(.6); }
+    .prod.soon:hover { transform: none; border-color: #2a2a2a; box-shadow: inset 0 1px 0 rgba(255,255,255,.05); }
+    .soon-tag { padding: 4px 10px; border-radius: 999px; border: 1px dashed var(--accent-dim); color: var(--text-sec);
+      font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* the way on: the next slide's name, at the foot of each slide */
+    .next { -webkit-appearance: none; appearance: none; position: absolute; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 14px; border: 0; background: none; cursor: pointer;
+      color: var(--text-muted); font: inherit; font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .12em; text-transform: uppercase; }
+    .next svg { width: 20px; height: 20px; color: var(--accent); animation: nudge 2.2s var(--ease-in-out) infinite; }
+    .next:hover, .next:focus-visible { color: var(--text); outline: none; }
+    @keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateY(5px); } }
+
+    /* the pager: one dot per slide, its name on hover */
+    .pager { position: fixed; right: max(10px, env(safe-area-inset-right, 0px)); top: 50%; translate: 0 -50%; z-index: 80;
+      display: flex; flex-direction: column; gap: 4px; }
+    .pager button { -webkit-appearance: none; appearance: none; position: relative; display: flex; align-items: center; justify-content: flex-end;
+      width: 26px; height: 26px; padding: 0; border: 0; background: none; cursor: pointer; }
+    .pager button::after { content: ""; width: 8px; height: 8px; margin-right: 9px; border-radius: 999px; background: var(--text-muted); opacity: .5;
+      transition: height .3s var(--ease-out), opacity .2s, background .2s; }
+    .pager button[aria-current="true"]::after { height: 22px; opacity: 1; background: var(--accent); }
+    .pager button:hover::after, .pager button:focus-visible::after { opacity: 1; }
+    .pager button:focus-visible { outline: none; }
+    .pager span { position: absolute; right: 30px; white-space: nowrap; padding: 4px 10px; border-radius: 6px; pointer-events: none;
+      background: rgba(10,10,10,.92); border: 1px solid var(--border); color: var(--text); font-size: var(--fs-sm);
+      opacity: 0; transform: translateX(6px); transition: opacity .18s, transform .18s; }
+    .pager button:hover span, .pager button:focus-visible span { opacity: 1; transform: none; }
+    body.intro-on .pager { opacity: 0; }
+
+    /* the free tools slide: its own heading, smaller than the hero's */
+    .hello .hello-k { display: block; margin: 0; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .hero-how { flex-direction: row; border-left: 0; border-top: 2px solid #1d1d1d; margin-top: 8px; }
+      .hero-how { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+      .hero-how li { gap: 12px; padding: 16px 0 0; }
+      .hero-how li + li { border-top: 0; }
+      .hero-how li::before { display: none; }
+    }
+    @media (max-width: 720px) {
+      .slide-in { padding-top: 22px; padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+      .hero-how { grid-template-columns: minmax(0, 1fr); }
+      .hero-how li { flex-direction: row; padding: 14px 0 0; }
+      .hero-act .btn { flex: 1 1 auto; justify-content: center; }
+      .pager { right: max(2px, env(safe-area-inset-right, 0px)); }
+      .pager span { display: none; }
+      .pager button::after { width: 6px; height: 6px; margin-right: 6px; }
+      .pager button[aria-current="true"]::after { height: 16px; }
+    }
+    /* room for the pager beside the content, above phone width */
+    @media (min-width: 721px) {
+      .slide-in { padding-right: max(var(--pad-r), 52px); }
+      .slide > .ps { padding-right: max(var(--pad-r), 52px); }
+    }
+    .s-head p, .hero-lede { text-wrap: pretty; }
+    @media (max-height: 800px), (max-width: 720px) { .next { display: none; } }
+    @media (max-height: 800px) and (min-width: 1101px) {
+      .hero-svc .eyebrow { margin-top: 0; }
+      .hero-how li { padding-top: 11px; padding-bottom: 11px; }
+      .hero-how p { font-size: var(--fs-sm); }
+    }
+    @media (prefers-reduced-motion: reduce) { .deck-track { transition: none; } .slide.enter .rise { animation: none; } }
+
+    :root[data-carino-theme="color"] .hero-how, :root[data-carino-theme="color"] .hero-how li + li { border-color: var(--border); }
+    :root[data-carino-theme="color"] .pager span { background: var(--bg-card); }
+    :root[data-carino-theme="color"] .prod.soon:hover { border-color: var(--border); box-shadow: none; }
+
+    /* ── the products as a line-up: tall panels, each over its own screenshot ──
+       The industry line-up's panel (.pan) with a picture behind it. On a
+       desktop the hovered or focused panel's words show in the caption bar
+       under the row; on a phone the bands carry their own. */
+    .s-products .next { display: none; }
+    .prod-in { display: flex; flex-direction: column; overflow: hidden; padding-bottom: clamp(16px, 3vh, 30px); }
+    .prod-in .s-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 22px; max-width: none; }
+    .prod-in .s-head .eyebrow { flex: 1 1 100%; }
+    .prod-in .s-head h2 { margin: 0; font-size: clamp(1.6rem, 1rem + 1.8vw, 2.8rem); }
+    .prod-in .s-head p:last-child { margin: 0; flex: 1 1 320px; max-width: 60ch; }
+    .prod-sel { margin-top: clamp(14px, 2.6vh, 28px); scroll-snap-type: none; }
+    .prod-pan { display: block; text-decoration: none; }
+    .pan-shot { position: absolute; inset: 0; background: #0b0b0b center / cover no-repeat; opacity: .42; filter: saturate(.85);
+      transition: opacity .45s ease, transform .9s var(--ease-out), filter .45s ease; }
+    .pan-shot::after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(5,5,5,.15) 0%, rgba(5,5,5,.35) 45%, rgba(5,5,5,.92) 100%); }
+    .pan-shot.none { background:
+      repeating-linear-gradient(135deg, color-mix(in srgb, var(--accent) 7%, transparent) 0 2px, transparent 2px 14px), #0b0b0b; opacity: .8; }
+    .prod-pan:hover .pan-shot, .prod-pan:focus-visible .pan-shot, .prod-pan.on .pan-shot { opacity: .9; transform: scale(1.04); filter: none; }
+    .prod-pan.soon:hover .pan-shot, .prod-pan.soon.on .pan-shot { transform: none; }
+    .pan-mark { position: absolute; left: 12px; top: 12px; width: clamp(34px, 22cqw, 48px); height: clamp(34px, 22cqw, 48px); }
+    .prod-pan.soon .pan-mark, .prod-pan.soon .pan-title { opacity: .55; }
+    .pan-soon { position: absolute; left: 50%; top: 50%; translate: -50% -50%; writing-mode: vertical-rl; white-space: nowrap;
+      padding: 10px 5px; border: 1px dashed var(--accent-dim); border-radius: 999px; background: rgba(5,5,5,.6);
+      font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; color: var(--text-sec); }
+    .prod-pan .pan-sub { white-space: nowrap; }
+    .prod-pan .prod-info { display: none; }
+    .prod-pan.on .pan-n { background: var(--accent); }
+    .prod-pan.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--accent); }
+    .s-products.enter .prod-pan { animation: pan-in .9s var(--ease-out) both; animation-delay: calc(var(--i) * 60ms + 220ms); }
+    .slide.pre .prod-pan { opacity: 0; }
+    /* the caption: the chosen product in words */
+    .prod-cap { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 28px;
+      min-height: 5.6em; padding: clamp(12px, 2vh, 20px) 2px 0; }
+    .prod-cap h3 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.15rem, 1rem + .6vw, 1.6rem); letter-spacing: -0.015em; }
+    .prod-cap h3 .kind { margin-left: 12px; vertical-align: middle; text-align: left; }
+    .prod-cap p { grid-column: 1; margin-top: 4px; color: var(--text-sec); font-size: var(--fs-sec); line-height: 1.55; max-width: 92ch; }
+    .prod-cap .cap-go { grid-column: 2; grid-row: 1 / span 2; }
+    .prod-cap .cap-go .btn { white-space: nowrap; }
+    .prod-cap.swap > * { animation: cap-in .35s var(--ease-out) both; }
+    @keyframes cap-in { 0% { opacity: 0; transform: translate3d(0, 6px, 0); } 100% { opacity: 1; transform: none; } }
+    @media (max-width: 720px) {
+      .prod-in { overflow-y: auto; }
+      .prod-sel { flex: 1 0 auto; overflow: visible; }
+      .prod-pan { flex: 0 0 auto; min-height: 132px; container-type: normal; }
+      .prod-pan .pan-title { position: absolute; left: 64px; right: 14px; top: 12px; bottom: auto; height: auto; display: block;
+        font-size: 1.3rem; }
+      .prod-pan .prod-info { display: block; position: absolute; left: 64px; right: 14px; top: 46px; }
+      .prod-pan .prod-info .kind { display: block; text-align: left; font-size: .68rem; }
+      .prod-pan .prod-line { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+        margin-top: 4px; color: var(--text-sec); font-size: var(--fs-sm); line-height: 1.45; }
+      .prod-pan .prod-go { display: none; }
+      .pan-mark { left: 8px; top: auto; bottom: 10px; width: 40px; height: 40px; z-index: 1; }
+      .prod-pan .pan-n { bottom: auto; height: 56px; }
+      .pan-soon { display: none; }
+      .pan-shot { opacity: .3; }
+      .pan-shot::after { background: linear-gradient(90deg, rgba(5,5,5,.75) 0%, rgba(5,5,5,.55) 60%, rgba(5,5,5,.3) 100%); }
+      .prod-cap { display: none; }
+      .s-products.enter .prod-pan { animation-name: pan-in-m; }
+    }
+    :root[data-carino-theme="color"] .pan-shot { background-color: var(--bg-card); }
+    :root[data-carino-theme="color"] .pan-shot::after { background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg-card) 40%, transparent) 45%, var(--bg-card) 100%); }
+    :root[data-carino-theme="color"] .pan-soon { background: var(--bg-card); }
+
+    /* ── More tools: one grid of everything that is not a product ──
+       The head only speaks while a search is typed. */
+    .ind-head[hidden], #toAll, #steps { display: none !important; }
   </style>
   <!-- Colourful theme + the switch; nothing applies until data-carino-theme="color". -->
   <link rel="stylesheet" href="carino-theme.css">
@@ -1221,14 +1426,119 @@
   </div>
 </header>
 
-<main class="ps">
+<!-- The deck: the page is three full-screen slides that slide rather than
+     scroll — who we are and what we do (hero + services), the products, and
+     the free tools (the industry line-up). One wheel turn, swipe, PageDown or
+     pager dot moves one slide; a slide whose own content is taller than the
+     screen scrolls inside first. Off-screen slides are inert. Addresses:
+     bare = hero, #products, #tools; every industry and #t/ address opens the
+     tools slide. -->
+<main class="deck" id="deck">
+<div class="deck-track" id="deckTrack">
 
-  <!-- Who we are and the promise, the search, and the two questions. -->
+  <section class="slide s-hero" id="s-hero" data-slide="0" aria-labelledby="heroTitle">
+    <div class="slide-in">
+      <div class="hero">
+        <div class="hero-main">
+          <p class="eyebrow rise" style="--d:0"><span>Carino Systems</span></p>
+          <h1 class="hero-h rise" id="heroTitle" style="--d:1"><span data-i18n>Open solutions made for everyone.</span> <span class="gold" data-i18n>Free for anyone.</span></h1>
+          <p class="hero-lede rise" style="--d:2" data-i18n>We build open-source tools and environments for most industries, support them and adapt them to the way you work. They run in your browser or on your own machines, so your data stays with you.</p>
+          <div class="hero-act rise" style="--d:3">
+            <button type="button" class="btn" data-go="1"><span data-i18n>See the products</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            <a class="btn ghost" href="#hand"><span data-i18n>Talk to us</span></a>
+          </div>
+          <ul class="hero-trust rise" style="--d:4">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg><span data-i18n>Open source</span></li>
+            <li><a href="#safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n>Your data stays with you</span></a></li>
+          </ul>
+        </div>
+        <section class="hero-svc" aria-labelledby="svcTitle">
+          <h2 class="eyebrow rise" id="svcTitle" style="--d:2"><span data-i18n>Services</span></h2>
+          <ul class="hero-how">
+          <li class="rise" style="--d:3"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><div><h3 data-i18n>Setup</h3><p data-i18n>We install and configure the software, the workstations and the network, on site or remotely, and leave it documented.</p></div></li>
+          <li class="rise" style="--d:4"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><div><h3 data-i18n>Support</h3><p data-i18n>Updates, backups and fixes, and a person to call who already knows your setup when something breaks.</p></div></li>
+          <li class="rise" style="--d:5"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div><h3 data-i18n>Hardware</h3><p data-i18n>Workstations, servers and network equipment chosen for the job and delivered ready to work.</p></div></li>
+          <li class="rise" style="--d:6"><svg class="how-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg><div><h3 data-i18n>Custom work</h3><p data-i18n>Features, integrations and tools built for the way your clinic or office actually works.</p></div></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <button type="button" class="next" data-go="1"><span data-i18n>Products</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  </section>
+
+  <section class="slide s-products" id="s-products" data-slide="1" aria-labelledby="prodTitle">
+    <div class="slide-in prod-in">
+      <header class="s-head">
+        <p class="eyebrow rise" style="--d:0"><span data-i18n>Products</span></p>
+        <h2 class="rise" id="prodTitle" style="--d:1" data-i18n>What we build</h2>
+        <p class="rise" style="--d:1" data-i18n>Each one is open source and works on its own. When you want a hand, we set it up and support it.</p>
+      </header>
+      <div class="sel prod-sel" id="prodSel" role="list">
+        <a class="pan prod-pan" role="listitem" href="https://topo.carino.systems/" target="_blank" rel="noopener" style="--i:0" data-cap="0">
+          <span class="pan-shot" style="background-image:url(assets/shots/topo.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/topo.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/topo-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Topo</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Networks · Web app</span></span>
+          <span class="prod-info" data-name="Topo"><span class="kind" data-i18n>Networks · Web app</span><span class="prod-line" data-i18n>Draw your network once and keep it right: devices, addresses, racks and Wi-Fi, checked as you go for conflicts, loops and unreachable gateways, and printed as a site report.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" role="listitem" href="https://retina.carino.systems/" target="_blank" rel="noopener" style="--i:1" data-cap="1">
+          <span class="pan-shot" style="background-image:url(assets/shots/retina.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/retina.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/retina-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Retina</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Eye care · Web app</span></span>
+          <span class="prod-info" data-name="Carino Retina"><span class="kind" data-i18n>Eye care · Web app</span><span class="prod-line" data-i18n>Eye examination, refraction and dispensing in one place. Mark a fundus photo for an automatic cup-to-disc ratio, refract, and export a study PDF, DICOM file, prescription or lens order.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" role="listitem" href="https://dcm.carino.systems/" target="_blank" rel="noopener" style="--i:2" data-cap="2">
+          <span class="pan-shot" style="background-image:url(assets/shots/dcm.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dcm.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dcm-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">DICOM Editor</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">03</span><span class="pan-sub" data-i18n>Medical imaging · Web app</span></span>
+          <span class="prod-info" data-name="Carino DICOM Editor"><span class="kind" data-i18n>Medical imaging · Web app</span><span class="prod-line" data-i18n>Open, check, edit and de-identify DICOM files in the browser. Compare two studies, validate their tags and remove patient data before a file leaves the building. Nothing is uploaded.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" role="listitem" href="https://images.carino.systems/" target="_blank" rel="noopener" style="--i:3" data-cap="3">
+          <span class="pan-shot" style="background-image:url(assets/shots/images.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/images.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/images-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Images</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">04</span><span class="pan-sub" data-i18n>Operating system · Fedora</span></span>
+          <span class="prod-info" data-name="Carino Images"><span class="kind" data-i18n>Operating system · Fedora</span><span class="prod-line" data-i18n>Ready-made Fedora systems for one job each: imaging workstations, servers and gaming. Built from one configuration, installed from a single ISO, with updates you can roll back.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" role="listitem" href="https://setup.carino.systems/" target="_blank" rel="noopener" style="--i:4" data-cap="4">
+          <span class="pan-shot" style="background-image:url(assets/shots/setup.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/setup.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/setup-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Setup</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">05</span><span class="pan-sub" data-i18n>Setup · Linux, Windows, macOS</span></span>
+          <span class="prod-info" data-name="Carino Setup"><span class="kind" data-i18n>Setup · Linux, Windows, macOS</span><span class="prod-line" data-i18n>One command that sets up Linux, Windows or macOS: drivers, codecs and 15 purpose profiles, with a dry run first.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <div class="pan prod-pan soon" role="listitem" tabindex="0" aria-disabled="true" style="--i:5" data-cap="5">
+          <span class="pan-shot none" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/atrium.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/atrium-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Atrium</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">06</span><span class="pan-sub" data-i18n>Desktop · Linux</span></span>
+          <span class="pan-soon" data-i18n>Coming soon</span>
+          <span class="prod-info" data-name="Atrium"><span class="kind" data-i18n>Desktop · Linux</span><span class="prod-line" data-i18n>A complete, polished desktop for Fedora: bar, panels, notifications, launcher, dock or taskbar, themes and a built-in LLM chat, set up in one step.</span><span class="prod-go"><span class="soon-tag" data-i18n>Coming soon</span></span></span>
+        </div>
+        <div class="pan prod-pan soon" role="listitem" tabindex="0" aria-disabled="true" style="--i:6" data-cap="6">
+          <span class="pan-shot none" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/cerberus.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/cerberus-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Cerberus</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">07</span><span class="pan-sub" data-i18n>Self-hosted AI</span></span>
+          <span class="pan-soon" data-i18n>Coming soon</span>
+          <span class="prod-info" data-name="Cerberus"><span class="kind" data-i18n>Self-hosted AI</span><span class="prod-line" data-i18n>Run language models on your own hardware: one place to manage the models, one API for your apps and a web interface that works on a phone. Prompts never leave your network.</span><span class="prod-go"><span class="soon-tag" data-i18n>Coming soon</span></span></span>
+        </div>
+      </div>
+      <div class="prod-cap" id="prodCap" aria-hidden="true"></div>
+    </div>
+    <button type="button" class="next" data-go="2"><span data-i18n>More tools</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  </section>
+
+  <section class="slide s-tools" id="s-tools" data-slide="2" aria-label="More tools">
+<div class="ps">
+
+  <!-- The label and the search. -->
   <div class="ps-top">
     <div class="hello">
       <div>
-        <h1><span data-i18n>Open solutions made for everyone.</span> <span class="gold" data-i18n>Free for anyone.</span></h1>
-        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n>Your files never leave your computer.</span></p>
+        <h2 class="hello-k" data-i18n>More tools</h2>
       </div>
     </div>
     <div class="top-r">
@@ -1237,8 +1547,6 @@
         <input type="search" id="find" autocomplete="off" spellcheck="false" enterkeyhint="go" placeholder="What would you like to do?" aria-label="What would you like to do?" aria-controls="grid">
         <kbd class="find-key" aria-hidden="true">/</kbd>
       </label>
-      <a class="q" href="#safe" title="Is this safe to use?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n>Is it safe?</span></a>
-      <a class="q" href="#hand" title="Would you like a hand?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/></svg><span data-i18n>Get help</span></a>
     </div>
   </div>
 
@@ -1274,7 +1582,16 @@
     </div>
   </section>
 
+</div>
+  </section>
+
+</div>
 </main>
+<nav class="pager" id="pager" aria-label="Sections">
+  <button type="button" data-go="0"><span>Carino Systems</span></button>
+  <button type="button" data-go="1"><span data-i18n>Products</span></button>
+  <button type="button" data-go="2"><span data-i18n>More tools</span></button>
+</nav>
 <!-- The two panes the safe and help buttons open. The panes are markup so i18n.js translates them in place. -->
 <div class="zoom" id="zoom" hidden>
   <div class="zoom-card" id="zoomCard" role="dialog" aria-modal="true">
@@ -1328,10 +1645,6 @@
       <!-- The ways to reach me, each named for what it is. A mail address
            joins them once there is one meant for this. -->
       <div class="z-ways">
-        <a class="way" href="https://github.com/MiguelCarino/Carino-Systems/issues" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          <span><b>GitHub</b><small data-i18n>Report a problem or ask for a feature.</small></span>
-        </a>
         <a class="way" href="https://www.linkedin.com/in/miguelcarino94/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           <span><b>LinkedIn</b><small data-i18n>Write to me about a setup or a project.</small></span>
@@ -1371,6 +1684,9 @@ const START = 'assets/json/start.json';
 const TOOLS = 'assets/json/tools.json';
 
 let DATA = null, INDEX = new Map(), TAGS = [];
+/* In the registry but kept off the hub (and out of its search) for now.
+   Delete a name to list it again. */
+const HUB_HIDDEN = new Set(['Carino DICOM']);
 
 /* i18n.js is deferred, so `t` exists by DOMContentLoaded but not before.
    Fall through to the English key until it does — which is exactly what
@@ -1404,7 +1720,6 @@ const PLAIN = {
   medical:  ['Health',                 'Medical images, eye exams and clinical files.'],
 };
 const FUN_ICON = '<rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r=".6"/><circle cx="17.5" cy="13" r=".6"/>';
-const STAR_ICON = '<path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>';
 const svg = (paths, cls) => `<svg class="${cls || ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
 const BACK_SVG = svg('<path d="M15 18l-6-6 6-6"/>');
 const GO_SVG = svg('<path d="M7 17L17 7M8 7h9v9"/>');
@@ -1461,14 +1776,15 @@ function faceHtml(tool, w) {
 }
 
 /* ── the sections ── */
-let SECTIONS = [], WORDS = new Map();
+let SECTIONS = [], WORDS = new Map(), INDUSTRIES = [];
+// The products: on their own slide, not in the More tools grid.
+const CORE = new Set(['Topo', 'Carino Retina', 'Carino DICOM Editor', 'Carino Images', 'Carino Setup']);
 
 function sections() {
   const entries = new Map(DATA.groups.flatMap((g) => g.tools).map((e) => [e.ref, e]));
   WORDS = new Map([...INDEX.values()].map((tool) => [tool, item(entries.get(tool.name) || { ref: tool.name })]));
   const tags = [...ORDER.map((id) => TAGS.find((x) => x.id === id)).filter(Boolean),
                 ...TAGS.filter((x) => !ORDER.includes(x.id))];
-  const picks = (DATA.featured || []).map((n) => INDEX.get(n)).filter(Boolean).map((tool) => WORDS.get(tool));
   const fun = new Set(DATA.fun || []);
   const lifted = ['media', 'learn'];
   const inTag = (id) => [...INDEX.values()].filter((tool) => id === 'fun'
@@ -1476,13 +1792,15 @@ function sections() {
     : (tool.tags || []).includes(id) && !(lifted.includes(id) && fun.has(tool.name)));
   const funTag = fun.size ? [{ id: 'fun', path: FUN_ICON }] : [];
   const order = [...tags, ...funTag].sort((a, b) => (ORDER.indexOf(a.id) + 99) % 99 - (ORDER.indexOf(b.id) + 99) % 99);
-  return [
-    { id: 'start', title: T('Start here'), blurb: T('Four that most people need sooner or later.'), icon: STAR_ICON, items: picks },
-    ...order.map((x) => {
-      const [title, blurb] = PLAIN[x.id] || [x.label, x.blurb || ''];
-      return { id: x.id, title: T(title), blurb: T(blurb), icon: x.path, items: inTag(x.id).map((tool) => WORDS.get(tool)) };
-    }).filter((x) => x.items.length),
-  ];
+  INDUSTRIES = order.map((x) => {
+    const [title, blurb] = PLAIN[x.id] || [x.label, x.blurb || ''];
+    return { id: x.id, title: T(title), blurb: T(blurb), icon: x.path, items: inTag(x.id).map((tool) => WORDS.get(tool)) };
+  }).filter((x) => x.items.length);
+  // More tools: one grid, in industry order, each tool once, the products
+  // left out (they have their own slide). No "Start here" and no industry
+  // menu: the hero and the products already are the start (owner, 2026-11-01).
+  const rest = [...new Set(INDUSTRIES.flatMap((x) => x.items))].filter((it) => !CORE.has(it.tool.name));
+  return [{ id: 'all', title: T('More tools'), blurb: '', icon: '', items: rest }];
 }
 
 /* ── search ──
@@ -1501,7 +1819,7 @@ function indexForSearch() {
   FINDABLE = [...INDEX.values()].map((tool) => {
     const e = entries.get(tool.name) || {};
     const it = WORDS.get(tool);
-    const secs = SECTIONS.filter((x) => x.id !== 'start' && x.items.includes(it)).map((x) => x.title);
+    const secs = INDUSTRIES.filter((x) => x.items.includes(it)).map((x) => x.title);
     const head = fold([it.plain, e.plain, tool.name].join(' '));
     const all = fold([head, it.line, e.line, tool.desc, tool.keywords, ...secs].join(' '));
     return { it, head, all };
@@ -1532,7 +1850,7 @@ function matches(q) {
    grid of cards, each card a straight link to the tool. The address says
    which: #media for an industry, #t/vitae for one tool picked out inside its
    industry (a shared link lands there, with that card lit). */
-let cur = 'start', query = '', lit = null;
+let cur = '', query = '', lit = null;
 const stillPlease = window.matchMedia('(prefers-reduced-motion: reduce)');
 const findBox = () => $('find');
 const SEC = () => SECTIONS.find((x) => x.id === cur) || SECTIONS[0];
@@ -1567,7 +1885,7 @@ function drawInd(animate) {
     $('indTitle').textContent = x.title;
     $('indBlurb').textContent = x.blurb;
   }
-  $('steps').hidden = !!query;
+  head.hidden = !query;
   $('grid').innerHTML = items.length ? items.map(card).join('')
     : `<div class="none"><p>${esc(T('Nothing here matches that yet.'))}</p>` +
       `<p>${esc(T('Try a shorter or plainer word, such as “pdf”, “photo” or “password”.'))}</p>` +
@@ -1579,7 +1897,7 @@ function drawInd(animate) {
 }
 
 function openSection(id, animate) {
-  if (!SECTIONS.some((x) => x.id === id)) id = 'start';
+  if (!SECTIONS.some((x) => x.id === id)) id = SECTIONS[0].id;
   query = ''; if (findBox().value) findBox().value = '';
   const moved = id !== cur;
   cur = id;
@@ -1758,7 +2076,7 @@ function warpBack(x, fn) {
 // Back to the line-up from an industry: its way back where there is one.
 function unpick(fn) {
   const x = SECTIONS.find((y) => y.id === cur);
-  if (stillPlease.matches || !x || query || !$('warp').animate || view !== 'menu') { morph(fn); return; }
+  if (stillPlease.matches || !x || query || !$('warp').animate || view !== 'menu' || at !== TOOLS_AT) { morph(fn); return; }
   warpBack(x, fn);
 }
 
@@ -1833,7 +2151,7 @@ function beamOff(pan) {
    entry, so Back (the page's "All industries" or the browser's) returns
    here; inside an industry the address is only ever replaced. */
 let view = '', introOn = false, searchFromSelect = false;
-const home = () => location.pathname + location.search;
+const home = () => location.pathname + location.search + (at ? '#' + SLIDE_IDS[at] : '');
 
 function drawSelect(animate) {
   const s = $('sel');
@@ -1920,27 +2238,33 @@ function closePane() {
 }
 function backOut() {
   if (history.state && history.state.pane) history.back();
-  else { history.replaceState(null, '', view === 'menu' ? '#' + cur : home()); closePane(); }
+  else { history.replaceState(null, '', home()); closePane(); }
 }
 
 function route() {
   const h = decodeURIComponent(location.hash.slice(1));
-  if (h === 'safe' || h === 'hand') { if (!view) setView('select'); openPane(h); return; }
+  if (h === 'safe' || h === 'hand') { if (!view) showGrid(); openPane(h); return; }
   closePane();
+  const si = SLIDE_IDS.indexOf(h);
+  if (si > 0) { goSlide(si, { hash: false, instant: !booted }); showGrid(); return; }
   if (h.startsWith('t/') && BYSLUG.has(h.slice(2))) {
-    const tool = BYSLUG.get(h.slice(2)), it = WORDS.get(tool);
-    // Its own industry, unless the one already open holds it too.
-    const sec = (view === 'menu' && SECTIONS.find((x) => x.id === cur && x.items.includes(it)))
-      || SECTIONS.find((x) => x.id !== 'start' && x.items.includes(it));
-    if (sec) { setView('menu'); lit = tool; cur = ''; openSection(sec.id, true); }
+    const tool = BYSLUG.get(h.slice(2));
+    // A product's address opens the products slide; any other tool is lit in the grid.
+    if (CORE.has(tool.name)) { goSlide(1, { hash: false, instant: !booted }); showGrid(); return; }
+    goSlide(TOOLS_AT, { hash: false, instant: !booted });
+    query = ''; if (findBox().value) findBox().value = '';
+    lit = tool; setView('menu'); cur = ''; openSection('all', true);
     return;
   }
-  if (query) return;                         // back out of a pane opened mid-search
-  if (!SECTIONS.some((x) => x.id === h)) { setView('select'); return; }
-  const fresh = view !== 'menu' || h !== cur;
+  // Old industry addresses (#network, #media…) still land on the tools.
+  if (h) goSlide(TOOLS_AT, { hash: false, instant: !booted });
+  showGrid();
+}
+// The More tools grid, drawn once and kept (a search in progress survives).
+function showGrid() {
   setView('menu');
-  lit = null;
-  if (fresh) { cur = ''; openSection(h, true); } else drawInd(false);
+  if (query) return;
+  if (cur !== 'all') { lit = null; cur = ''; openSection('all', false); }
 }
 
 let wired = false;
@@ -2008,7 +2332,6 @@ function wire() {
       if ($('diagBox') && $('diagBox').classList.contains('open')) return;
       if (pane) { e.preventDefault(); backOut(); }
       else if (query) { e.preventDefault(); box.value = ''; box.dispatchEvent(new Event('input')); }
-      else if (view === 'menu') { e.preventDefault(); toSelect(); }
       return;
     }
     if (pane && e.key === 'Tab') {
@@ -2021,9 +2344,10 @@ function wire() {
     const tgt = e.target;
     if (pane || /^(INPUT|TEXTAREA|SELECT)$/.test(tgt.tagName) || tgt.isContentEditable) return;
     if ($('diagBox') && ($('diagBox').contains(tgt) || $('diagBox').classList.contains('open'))) return;
-    if (e.key === '/') { e.preventDefault(); box.focus(); box.select(); return; }
-    if (e.key.length === 1 && /\p{L}/u.test(e.key)) { box.focus(); return; }
-    if (!/^Arrow/.test(e.key)) return;
+    if (deckKey(e)) return;
+    if (e.key === '/') { e.preventDefault(); if (at !== TOOLS_AT) goSlide(TOOLS_AT); box.focus({ preventScroll: true }); box.select(); return; }
+    if (e.key.length === 1 && /\p{L}/u.test(e.key)) { if (at !== TOOLS_AT) goSlide(TOOLS_AT); box.focus({ preventScroll: true }); return; }
+    if (!/^Arrow/.test(e.key) || at !== TOOLS_AT) return;
     // The line-up: ←→ walk the panels; Enter (the button's own) chooses.
     if (view === 'select') {
       if (!/^Arrow(Right|Left)$/.test(e.key)) return;
@@ -2036,10 +2360,10 @@ function wire() {
     // The grid: the arrows move across and down it, a column at a time.
     const cards = [...$('grid').querySelectorAll('.card')];
     if (!cards.length) return;
-    const at = cards.indexOf(document.activeElement);
-    if (at < 0) { e.preventDefault(); cards[0].focus(); return; }
+    const pos = cards.indexOf(document.activeElement);
+    if (pos < 0) { e.preventDefault(); cards[0].focus(); return; }
     const cols = getComputedStyle($('grid')).gridTemplateColumns.split(' ').length || 1;
-    const to = { ArrowRight: at + 1, ArrowLeft: at - 1, ArrowDown: at + cols, ArrowUp: at - cols }[e.key];
+    const to = { ArrowRight: pos + 1, ArrowLeft: pos - 1, ArrowDown: pos + cols, ArrowUp: pos - cols }[e.key];
     e.preventDefault();
     if (to >= 0 && to < cards.length) cards[to].focus();
     else if (e.key === 'ArrowUp') box.focus();
@@ -2047,9 +2371,7 @@ function wire() {
 
   window.addEventListener('popstate', () => {
     // A view change cross-fades; a pane opening or closing does not need to.
-    const h = location.hash, toPane = /^#(safe|hand)$/.test(h);
-    const v = toPane ? view : (!h || !(h.startsWith('#t/') || SECTIONS.some((x) => '#' + x.id === h)) ? 'select' : 'menu');
-    if (v !== view && !query) (v === 'select' ? unpick : morph)(route); else route();
+    route();
   });
 }
 
@@ -2067,6 +2389,7 @@ function render() {
   drawSelect(false);
   // A language switch redraws everything; a search in progress survives it.
   if (query) drawInd(false); else route();
+  booted = true;
 
   // Every tool in tools.json should be on the page somewhere — this is the hub,
   // and a tool the hub does not list is a tool nobody can find. Missing ones are
@@ -2092,10 +2415,7 @@ function broken(err) {
 function intro() {
   const el = $('intro');
   if (!el) return;
-  const force = /[?&]intro=1\b/.test(location.search);
-  let seen = false;
-  try { seen = sessionStorage.getItem('carino-intro') === '1'; } catch (e) {}
-  if (!force && (seen || location.hash || stillPlease.matches)) return;
+  if (!introWanted()) return;
   introOn = true;
   el.hidden = false;
   document.body.classList.add('intro-on');
@@ -2108,7 +2428,7 @@ function intro() {
     clearTimeout(timer);
     document.removeEventListener('keydown', key, true);
     el.classList.add('out');
-    enterSelect(true);
+    enterSlide(at, true);
     setTimeout(() => { el.hidden = true; document.body.classList.remove('intro-on'); }, 560);
   };
   el.addEventListener('click', end);
@@ -2116,9 +2436,191 @@ function intro() {
   timer = setTimeout(end, 5200);
 }
 
-// The view is known from the address before anything loads, so neither one
-// flashes in front of the other.
-document.querySelector('.ps').classList.add(location.hash ? 'v-menu' : 'v-select');
+
+/* ── the deck ──
+   Three slides: the hero (with the services), the products, and the free
+   tools (the line-up and its industries, everything above). One wheel turn, one
+   swipe, PageUp/PageDown (and ↑↓ Space Home End outside the tools slide) or a
+   pager dot moves exactly one slide. A slide whose own content is taller than
+   the screen scrolls inside first; a gesture that scrolled it does not also
+   turn the slide. The address follows with replaceState, never a new entry. */
+const SLIDE_IDS = ['', 'products', 'tools'];
+const TOOLS_AT = SLIDE_IDS.indexOf('tools');
+let at = 0, booted = false;
+const slides = () => document.querySelectorAll('#deckTrack > .slide');
+
+function introWanted() {
+  const force = /[?&]intro=1\b/.test(location.search);
+  let seen = false;
+  try { seen = sessionStorage.getItem('carino-intro') === '1'; } catch (e) {}
+  return !!$('intro') && (force || !(seen || location.hash || stillPlease.matches));
+}
+
+function enterSlide(i, late) {
+  const s = slides()[i];
+  if (!s) return;
+  s.classList.remove('pre');
+  if (stillPlease.matches) return;
+  if (i === TOOLS_AT) {
+    const g = $('grid');
+    g.classList.remove('enter'); void g.offsetWidth; g.classList.add('enter');
+    return;
+  }
+  s.classList.remove('enter', 'late'); void s.offsetWidth; s.classList.add('enter');
+  s.classList.toggle('late', !!late);
+}
+
+function goSlide(i, o) {
+  o = o || {};
+  const tr = $('deckTrack');
+  if (!tr) return;
+  i = Math.max(0, Math.min(SLIDE_IDS.length - 1, i));
+  const moved = i !== at;
+  at = i;
+  if (o.instant) tr.classList.add('instant');
+  tr.style.setProperty('--at', i);
+  if (o.instant) { void tr.offsetWidth; tr.classList.remove('instant'); }
+  slides().forEach((s, n) => { s.inert = n !== i; });
+  for (const b of document.querySelectorAll('#pager [data-go]')) b.setAttribute('aria-current', +b.dataset.go === i ? 'true' : 'false');
+  if (moved && !o.quiet) enterSlide(i);
+  if (moved && o.hash !== false && $('zoom').hidden) {
+    const to = i ? '#' + SLIDE_IDS[i] : '';
+    history.replaceState(history.state, '', location.pathname + location.search + to);
+  }
+}
+
+// Busy: an industry opening or closing, a pane or the status drawer open.
+const deckBusy = () => !$('zoom').hidden || ($('warp') && !$('warp').hidden) || $('sel').classList.contains('picking')
+  || ($('diagBox') && $('diagBox').classList.contains('open')) || introOn;
+
+// Can something inside the slide, under `el`, still scroll that way?
+function scrollerIn(el, dir) {
+  const deck = $('deck');
+  for (let n = el instanceof Element ? el : null; n && n !== deck; n = n.parentElement) {
+    if (n.scrollHeight <= n.clientHeight + 1) continue;
+    if (!/(auto|scroll)/.test(getComputedStyle(n).overflowY)) continue;
+    if (dir > 0 ? n.scrollTop + n.clientHeight < n.scrollHeight - 1 : n.scrollTop > 0) return true;
+  }
+  return false;
+}
+
+function deckKey(e) {
+  if (at === 1 && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !deckBusy()) {
+    const pans = [...document.querySelectorAll('#prodSel .prod-pan')];
+    const i = pans.indexOf(document.activeElement);
+    const n = i < 0 ? 0 : (i + (e.key === 'ArrowRight' ? 1 : -1) + pans.length) % pans.length;
+    e.preventDefault(); pans[n].focus({ preventScroll: true });
+    return true;
+  }
+  const k = e.key, onCtl = e.target.closest && e.target.closest('a, button, summary');
+  let to = null;
+  if (k === 'PageDown' || (at < TOOLS_AT && (k === 'ArrowDown' || (k === ' ' && !onCtl)))) to = at + 1;
+  else if (k === 'PageUp' || (at < TOOLS_AT && k === 'ArrowUp') || (at === TOOLS_AT && view === 'select' && k === 'ArrowUp')) to = at - 1;
+  else if (at < TOOLS_AT && k === 'Home') to = 0;
+  else if (at < TOOLS_AT && k === 'End') to = TOOLS_AT;
+  if (to === null || deckBusy()) return false;
+  e.preventDefault();
+  // A slide taller than the screen pages through its own content first.
+  const inner = slides()[at].querySelector('.slide-in');
+  const dir = to > at ? 1 : -1;
+  if (inner && Math.abs(to - at) === 1 && scrollerIn(inner, dir)) {
+    inner.scrollBy({ top: dir * inner.clientHeight * 0.8, behavior: stillPlease.matches ? 'auto' : 'smooth' });
+    return true;
+  }
+  goSlide(to);
+  return true;
+}
+
+
+/* The products' caption: the panel pointed at, or focused, in words —
+   name, kind, the line and its Open. The first one until then. */
+function capShow(pan) {
+  const cap = $('prodCap'), info = pan && pan.querySelector('.prod-info');
+  if (!cap || !info) return;
+  for (const x of document.querySelectorAll('#prodSel .prod-pan.on')) x.classList.remove('on');
+  pan.classList.add('on');
+  const kind = info.querySelector('.kind').textContent, line = info.querySelector('.prod-line').textContent;
+  const go = pan.href
+    ? `<a class="btn" href="${esc(pan.href)}" target="_blank" rel="noopener" tabindex="-1">${esc(T('Open'))} ${GO_SVG}</a>`
+    : `<span class="soon-tag">${esc(T('Coming soon'))}</span>`;
+  const html = `<h3>${esc(info.dataset.name)}<span class="kind">${esc(kind)}</span></h3><p>${esc(line)}</p><div class="cap-go">${go}</div>`;
+  if (cap.innerHTML === html) return;
+  cap.innerHTML = html;
+  cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
+}
+function wireProducts() {
+  const sel = $('prodSel');
+  if (!sel) return;
+  sel.addEventListener('pointerover', (e) => { if (e.pointerType !== 'touch') capShow(e.target.closest('.prod-pan')); });
+  sel.addEventListener('focusin', (e) => capShow(e.target.closest('.prod-pan')));
+  capShow(sel.querySelector('.prod-pan.on') || sel.querySelector('.prod-pan'));
+  // i18n.js rewrites the panels' words on a language switch; follow it.
+  window.addEventListener('carino:langchange', () => setTimeout(() => capShow(sel.querySelector('.prod-pan.on')), 0));
+  document.addEventListener('DOMContentLoaded', () => setTimeout(() => capShow(sel.querySelector('.prod-pan.on')), 0));
+}
+
+function wireDeck() {
+  const deck = $('deck');
+  if (!deck) return;
+  // overflow: clip where it exists; where it does not, undo any scroll
+  // that focus or scrollIntoView gave the deck.
+  deck.addEventListener('scroll', () => { deck.scrollTop = 0; });
+  document.addEventListener('click', (e) => {
+    const g = e.target.closest('[data-go]');
+    if (!g || e.button !== 0) return;
+    e.preventDefault();
+    goSlide(+g.dataset.go);
+  });
+  // The wheel: one gesture, one slide. A trackpad's momentum keeps sending
+  // events after the slide has moved; they extend the lock instead of
+  // turning a second slide.
+  let lock = 0, innerAt = 0;
+  deck.addEventListener('wheel', (e) => {
+    if (e.ctrlKey) return;
+    const d = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : 0;
+    if (!d) return;
+    const now = performance.now();
+    if (scrollerIn(e.target, Math.sign(d))) { innerAt = now; return; }
+    e.preventDefault();
+    if (now < lock) { lock = Math.max(lock, now + 180); return; }
+    if (now - innerAt < 400 || Math.abs(d) < 4 || deckBusy()) return;
+    const to = at + Math.sign(d);
+    if (to < 0 || to >= SLIDE_IDS.length) return;
+    lock = now + 900;
+    goSlide(to);
+  }, { passive: false });
+  // Touch: a clear vertical swipe, from a place that could not scroll that way.
+  let t0 = null;
+  deck.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) { t0 = null; return; }
+    const t = e.touches[0];
+    t0 = { x: t.clientX, y: t.clientY, down: scrollerIn(e.target, 1), up: scrollerIn(e.target, -1) };
+  }, { passive: true });
+  deck.addEventListener('touchend', (e) => {
+    const s = t0; t0 = null;
+    if (!s) return;
+    const t = e.changedTouches[0], dy = s.y - t.clientY, dx = s.x - t.clientX;
+    if (Math.abs(dy) < 60 || Math.abs(dy) < Math.abs(dx) * 1.3) return;
+    if ((dy > 0 ? s.down : s.up) || deckBusy()) return;
+    goSlide(at + (dy > 0 ? 1 : -1));
+  }, { passive: true });
+}
+
+// The view and the slide are known from the address before anything loads,
+// so nothing flashes in front of anything else.
+{
+  const h0 = decodeURIComponent(location.hash.slice(1));
+  const s0 = SLIDE_IDS.indexOf(h0);
+  const tool = !!h0 && s0 < 0 && h0 !== 'safe' && h0 !== 'hand';
+  document.querySelector('.ps').classList.add('v-menu');
+  const first = s0 > 0 ? s0 : tool ? TOOLS_AT : 0;
+  slides().forEach((s) => s.classList.add('pre'));
+  at = -1;
+  goSlide(first, { instant: true, hash: false, quiet: true });
+  wireDeck();
+  wireProducts();
+  if (first !== TOOLS_AT && !introWanted()) enterSlide(first);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   intro();
@@ -2133,7 +2635,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(([start, tools]) => {
       DATA = start;
       TAGS = tools.tags || [];
-      (tools.tools || []).forEach((x) => INDEX.set(x.name, x));
+      (tools.tools || []).filter((x) => !HUB_HIDDEN.has(x.name)).forEach((x) => INDEX.set(x.name, x));
       render();
     })
     .catch(broken);
@@ -2192,6 +2694,11 @@ document.addEventListener('keydown', (e) => {
      the gold C in both themes. -->
 <script src="carino-theme.js" data-mark="logo.svg" data-mark-color="logo.svg" defer></script>
 <script src="./assets/js/clock-network.js"></script>
+<!-- Tab gag disabled 2026-11-01 (kept, not deleted): assets/js/services.js swaps
+     the tab title and favicon to Gmail/Instagram/etc. while the tab is hidden,
+     hot-linking their icons from third-party CDNs. Not right for a company
+     front page. Re-enable by restoring the tag below.
 <script src="./assets/js/services.js"></script>
+-->
 </body>
 </html>
