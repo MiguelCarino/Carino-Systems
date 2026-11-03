@@ -24,6 +24,9 @@
       "sha256": "65:DD:2C:21:B9:9A:79:53:0F:6A:06:2F:0D:C8:65:3A:DB:9D:1A:B1:80:59:B5:B5:86:C4:E7:08:80:54:61:9A",
       "subject": "asobi.carino.systems"
     },
+    "atrium.carino.systems": {
+      "error": "unreachable (no TLS handshake)"
+    },
     "branding.carino.systems": {
       "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
@@ -323,14 +326,14 @@
       "subject": "ping.carino.systems"
     },
     "quote.carino.systems": {
-      "issuer_cn": "YR2",
+      "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-03T07:34:18Z",
-      "not_before": "2026-09-04T07:34:19Z",
+      "not_after": "2027-02-01T07:12:49Z",
+      "not_before": "2026-11-03T07:12:50Z",
       "san": [
         "quote.carino.systems"
       ],
-      "sha256": "42:B5:B3:B4:15:92:99:5F:88:0C:3B:70:19:FB:57:30:D1:6B:1C:72:6D:D8:A1:0B:0B:26:46:4B:A3:8C:EC:D2",
+      "sha256": "39:98:69:26:A1:E9:D9:6E:C7:27:12:7E:3E:8F:A0:34:EE:20:8A:E1:75:34:B2:CD:8F:F6:72:16:53:27:21:21",
       "subject": "quote.carino.systems"
     },
     "retina.carino.systems": {
