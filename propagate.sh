@@ -6,7 +6,7 @@
 #
 #   canonical carino-clock.js  = Carino-Systems/carino-clock.js  (this repo)
 #   canonical carino-navbar.js = ../CVE/carino-navbar.js
-#   canonical carino-diag.js   = ../Topo/carino-diag.js
+#   canonical carino-diag.js   = ../Topo/carino-diag.js  (kept there; Topo itself no longer loads it)
 #   canonical carino-anim.*    = ../Branding/carino-anim.{css,js}
 #   canonical carino-lang.js   = Carino-Systems/carino-lang.js  (this repo)
 #   canonical carino-bridge.js = ../Quote/carino-bridge.js
@@ -54,7 +54,8 @@ BESPOKE=""  # MultiWeb, the last one, was deleted 2026-10-29
 # replacement for the retired standalone IP-lookup site, so a network tool no longer
 # needs its own subdomain for it. Add a site here ONLY after adding
 # <script src="carino-diag.js" defer></script> after its navbar tag.
-DIAG="Topo NetplanConfig Hardware"
+# Topo dropped the panel 2026-11-03 but still holds the canonical file.
+DIAG="NetplanConfig Hardware"
 
 # Sites carrying the per-section animations (carino-anim.css + carino-anim.js).
 # Branding is the canonical source and documents them; the hub uses one under
