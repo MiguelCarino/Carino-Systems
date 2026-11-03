@@ -332,6 +332,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Escríbeme sobre una instalación o un proyecto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Medical imaging · Gateway": "Imagen médica · Gateway",
+        "Keeps imaging moving when a system goes down.": "Mantiene la imagen médica en movimiento cuando un sistema cae.",
         "A network register that checks itself.": "Un registro de red que se revisa solo.",
         "Eye exams, refraction and dispensing.": "Examen visual, refracción y entrega de lentes.",
         "View, fix and de-identify DICOM files.": "Ve, corrige y anonimiza archivos DICOM.",
@@ -692,6 +694,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Escreva-me sobre uma instalação ou um projeto.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Medical imaging · Gateway": "Imagem médica · Gateway",
+        "Keeps imaging moving when a system goes down.": "Mantém a imagem médica fluindo quando um sistema cai.",
         "A network register that checks itself.": "Um registro de rede que se verifica sozinho.",
         "Eye exams, refraction and dispensing.": "Exame ocular, refração e dispensação.",
         "View, fix and de-identify DICOM files.": "Veja, corrija e anonimize arquivos DICOM.",
@@ -1052,6 +1056,8 @@ const I18N = {
         "Write to me about a setup or a project.": "導入やプロジェクトのご相談はこちら。",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Medical imaging · Gateway": "医用画像 · ゲートウェイ",
+        "Keeps imaging moving when a system goes down.": "システムが止まっても画像の流れを止めない。",
         "A network register that checks itself.": "自分でチェックするネットワーク台帳。",
         "Eye exams, refraction and dispensing.": "眼科検査、屈折検査、眼鏡処方。",
         "View, fix and de-identify DICOM files.": "DICOMファイルを表示・修正・匿名化。",
@@ -1412,6 +1418,8 @@ const I18N = {
         "Write to me about a setup or a project.": "Напишите мне о настройке или проекте.",
 
         // ── hub slides: hero + services, products (2026-11-01) ──
+        "Medical imaging · Gateway": "Медицинская визуализация · Шлюз",
+        "Keeps imaging moving when a system goes down.": "Снимки продолжают идти, даже когда система падает.",
         "A network register that checks itself.": "Реестр сети, который проверяет себя сам.",
         "Eye exams, refraction and dispensing.": "Осмотр глаз, рефракция и подбор очков.",
         "View, fix and de-identify DICOM files.": "Просмотр, правка и обезличивание файлов DICOM.",

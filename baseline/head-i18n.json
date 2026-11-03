@@ -680,5 +680,27 @@
       "desc": "Fedora под задачи: шесть десктопов COSMIC + Hyprland и два серверных образа — телефония Asterisk/FreePBX и интранет для LAN без WAN. ISO или образ bootc.",
       "line": "Сборки Fedora, созданные под вашу работу."
     }
+  },
+  "atrium.carino.systems": {
+    "es": {
+      "title": "Atrium — un escritorio completo para Fedora",
+      "desc": "Un escritorio completo sobre Hyprland para Fedora: barra, paneles, notificaciones, lanzador, dock o barra de tareas, Ajustes para todo, once temas y funciones inteligentes privadas en tu equipo.",
+      "line": "Un escritorio completo para Fedora, listo de una sola vez."
+    },
+    "pt-BR": {
+      "title": "Atrium — um desktop completo para o Fedora",
+      "desc": "Um desktop completo sobre o Hyprland para o Fedora: barra, painéis, notificações, lançador, dock ou barra de tarefas, Configurações para tudo, onze temas e recursos inteligentes privados na sua máquina.",
+      "line": "Um desktop completo para o Fedora, pronto de uma só vez."
+    },
+    "ja": {
+      "title": "Atrium — Fedora のための完成したデスクトップ",
+      "desc": "Fedora 用の Hyprland ベースの完全なデスクトップ。バー、パネル、通知、ランチャー、ドックかタスクバー、すべての設定アプリ、11 のテーマ、自分のPCで動くプライベートなスマート機能。",
+      "line": "Fedora のための完成したデスクトップを、一度でセットアップ。"
+    },
+    "ru": {
+      "title": "Atrium — полноценный рабочий стол для Fedora",
+      "desc": "Полноценный рабочий стол на Hyprland для Fedora: панель, уведомления, лаунчер, док или панель задач, «Настройки» для всего, одиннадцать тем и приватные умные функции на вашей машине.",
+      "line": "Полноценный рабочий стол для Fedora, настроенный за один раз."
+    }
   }
 }

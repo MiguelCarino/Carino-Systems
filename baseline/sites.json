@@ -346,5 +346,14 @@
     "desc": "Purpose-built Fedora: six COSMIC + Hyprland desktops and two headless appliances — Asterisk/FreePBX telephony and an intranet keystone for a LAN with no working WAN — each shipping the integration one kind of work needs. Installer ISO or bootc container image.",
     "line": "Purpose-built Fedora systems for your work.",
     "software": "Linux (Fedora)"
+  },
+  {
+    "domain": "atrium.carino.systems",
+    "dir": "Atrium/docs",
+    "name": "Atrium",
+    "type": "product",
+    "desc": "A complete desktop on Hyprland for Fedora: the bar, panels, notifications, a launcher, a dock or a taskbar, a Settings app for every part of it, eleven themes, and private smart features that run on your own machine. One script installs it; another puts everything back.",
+    "line": "A complete desktop for Fedora, set up in one go.",
+    "software": "Linux (Fedora)"
   }
 ]

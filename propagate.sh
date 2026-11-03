@@ -42,7 +42,7 @@ TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistr
 # Project pages that live in a subfolder of a non-web repo but still run the
 # shared navbar. Same treatment as GROUPA — they were drifting because nothing
 # copied to them.
-SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web/editor Custom-Images/docs"
+SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web/editor Custom-Images/docs Atrium/docs"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 # (TV, Retina, DICOM-editor, Learn, Asobi and MusicGrid moved to the shared navbar
