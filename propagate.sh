@@ -30,11 +30,11 @@ THEME_JS_SRC="Branding/carino-theme.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
 GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Files \
-NetplanConfig Topo PlanetDayum Compass \
+NetplanConfig Topo Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
 Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
-TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro"
+TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro TM"
 # Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
 # being listed, so their copies had drifted; Carino-Systems carries it for
 # legal.html only (the hub page itself keeps its inline navbar).
@@ -42,7 +42,7 @@ TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistr
 # Project pages that live in a subfolder of a non-web repo but still run the
 # shared navbar. Same treatment as GROUPA — they were drifting because nothing
 # copied to them.
-SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web/editor Custom-Images/docs Atrium/docs"
+SUBSITES="Carino-DICOM/docs Carino-DICOM/pacs/web Carino-DICOM/pacs/web/editor Custom-Images/docs Atrium/docs Cerberus/site"
 
 # Sites with bespoke navbars that pull in carino-clock.js via a <script> tag.
 # (TV, Retina, DICOM-editor, Learn, Asobi and MusicGrid moved to the shared navbar
@@ -54,8 +54,9 @@ BESPOKE=""  # MultiWeb, the last one, was deleted 2026-10-29
 # replacement for the retired standalone IP-lookup site, so a network tool no longer
 # needs its own subdomain for it. Add a site here ONLY after adding
 # <script src="carino-diag.js" defer></script> after its navbar tag.
-# Topo dropped the panel 2026-11-03 but still holds the canonical file.
-DIAG="NetplanConfig Hardware"
+# Topo dropped the panel 2026-11-03 but still holds the canonical file;
+# NetplanConfig dropped it 2026-11-04.
+DIAG="Hardware"
 
 # Sites carrying the per-section animations (carino-anim.css + carino-anim.js).
 # Branding is the canonical source and documents them; the hub uses one under
@@ -76,6 +77,9 @@ for d in $GROUPA $SUBSITES; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }
   [ "$d/carino-navbar.js" -ef "$NAV_SRC" ] || cp "$NAV_SRC" "$d/carino-navbar.js"
   [ "$d/carino-clock.js" -ef "$CLOCK_SRC" ] || cp "$CLOCK_SRC" "$d/carino-clock.js"
+  # the language file travels with the navbar (it draws no button beside the
+  # new one); the glob below does not reach four folders deep (the PACS's editor)
+  if [ -e "$d/carino-lang.js" ] && ! [ "$d/carino-lang.js" -ef "$LANG_SRC" ]; then cp "$LANG_SRC" "$d/carino-lang.js"; fi
   echo "  $d  (navbar + clock)"
 done
 for d in $BESPOKE; do
@@ -88,7 +92,7 @@ for d in $DIAG; do
   [ "$d/carino-diag.js" -ef "$DIAG_SRC" ] || cp "$DIAG_SRC" "$d/carino-diag.js"
   echo "  $d  (diag)"
 done
-for f in */carino-lang.js */*/carino-lang.js; do
+for f in */carino-lang.js */*/carino-lang.js */*/*/carino-lang.js; do
   [ -e "$f" ] || continue
   [ "$f" -ef "$LANG_SRC" ] || cp "$LANG_SRC" "$f"
   echo "  ${f%/carino-lang.js}  (lang)"
