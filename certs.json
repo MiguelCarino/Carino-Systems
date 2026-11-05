@@ -25,7 +25,7 @@
       "subject": "asobi.carino.systems"
     },
     "atrium.carino.systems": {
-      "error": "unreachable (no TLS handshake)"
+      "error": "verification failed: Hostname mismatch, certificate is not valid for 'atrium.carino.systems'. (served sha256 F2:F9:A1:59:CE:50:A0:A1:68:B3:EA:EA:F2:FC:ED:5A:DD:D4:9B:A3:8E:2B:F6:32:48:F0:57:A1:39:FC:78:56)"
     },
     "branding.carino.systems": {
       "issuer_cn": "YR1",
@@ -60,6 +60,17 @@
       ],
       "sha256": "4E:51:2D:67:9E:75:5F:11:03:5C:A7:9A:E2:BF:D1:7B:7B:C0:6F:D1:15:B0:9B:34:64:0A:60:E8:7D:D2:69:82",
       "subject": "carino.systems"
+    },
+    "clover.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-02-03T02:33:00Z",
+      "not_before": "2026-11-05T02:33:01Z",
+      "san": [
+        "clover.carino.systems"
+      ],
+      "sha256": "C6:9D:AC:BF:76:98:BD:B3:04:58:04:82:78:27:3B:66:C8:40:79:F1:FD:9F:FD:B5:84:19:8F:10:EB:DD:01:AA",
+      "subject": "clover.carino.systems"
     },
     "compass.carino.systems": {
       "issuer_cn": "YR1",
