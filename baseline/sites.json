@@ -44,6 +44,16 @@
     "hub": true
   },
   {
+    "domain": "clover.carino.systems",
+    "dir": "CloverEye",
+    "name": "CloverEye",
+    "type": "product",
+    "desc": "CloverEye is an unofficial desktop client for 4chan: catalogs and threads in a clean, fast window, a thread watcher and two threads side by side. Free software for Linux.",
+    "line": "The boards, at home on your desktop.",
+    "standalone": true,
+    "software": "Linux"
+  },
+  {
     "domain": "compass.carino.systems",
     "dir": "Compass",
     "name": "Compass",
