@@ -150,14 +150,14 @@
       "subject": "dicom.carino.systems"
     },
     "distro.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-06T11:57:18Z",
-      "not_before": "2026-09-07T11:57:19Z",
+      "not_after": "2027-02-04T19:10:47Z",
+      "not_before": "2026-11-06T19:10:48Z",
       "san": [
         "distro.carino.systems"
       ],
-      "sha256": "1E:69:BE:EF:11:2F:15:92:41:46:F7:77:D0:74:C1:F8:50:62:92:AC:C5:10:0E:54:DC:E1:DD:D5:9A:A5:B0:32",
+      "sha256": "43:86:B9:FF:8D:74:B6:4B:3E:34:76:9E:2A:03:25:7D:22:71:F6:4D:76:5C:B2:10:FA:C4:52:22:37:1E:14:DD",
       "subject": "distro.carino.systems"
     },
     "dlss.carino.systems": {
