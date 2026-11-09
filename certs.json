@@ -16,26 +16,26 @@
     "asobi.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-08T20:28:19Z",
-      "not_before": "2026-09-09T20:28:20Z",
+      "not_after": "2027-02-07T05:35:18Z",
+      "not_before": "2026-11-09T05:35:19Z",
       "san": [
         "asobi.carino.systems"
       ],
-      "sha256": "65:DD:2C:21:B9:9A:79:53:0F:6A:06:2F:0D:C8:65:3A:DB:9D:1A:B1:80:59:B5:B5:86:C4:E7:08:80:54:61:9A",
+      "sha256": "96:60:69:63:64:7D:7B:4D:F5:90:4D:4E:FA:03:96:60:C0:32:80:64:15:91:18:B0:1F:C9:F4:BE:D4:C6:1D:07",
       "subject": "asobi.carino.systems"
     },
     "atrium.carino.systems": {
       "error": "verification failed: Hostname mismatch, certificate is not valid for 'atrium.carino.systems'. (served sha256 F2:F9:A1:59:CE:50:A0:A1:68:B3:EA:EA:F2:FC:ED:5A:DD:D4:9B:A3:8E:2B:F6:32:48:F0:57:A1:39:FC:78:56)"
     },
     "branding.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-09T03:04:49Z",
-      "not_before": "2026-09-10T03:04:50Z",
+      "not_after": "2027-02-07T03:56:49Z",
+      "not_before": "2026-11-09T03:56:50Z",
       "san": [
         "branding.carino.systems"
       ],
-      "sha256": "46:07:70:BF:0C:4C:4F:3C:02:13:70:BD:07:3C:05:CA:00:EA:8B:93:74:24:72:F1:D2:05:C0:50:10:DB:01:88",
+      "sha256": "49:9A:2A:36:B5:C2:D4:CD:9A:B9:0F:38:03:04:46:B5:49:7F:C5:26:E1:EF:CB:F3:27:D4:56:11:0F:9C:45:66",
       "subject": "branding.carino.systems"
     },
     "butter.carino.systems": {
