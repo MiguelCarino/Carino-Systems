@@ -1002,6 +1002,10 @@
     :root[data-carino-theme="color"] .zoom { background: var(--ct-scrim, rgba(10,20,40,.4)); }
     /* "Is it safe?" icons are decoration, not links: one identity hue */
     :root[data-carino-theme="color"] .hero-why .why-card svg { color: var(--ct-purple); }
+    :root[data-carino-theme="color"] .phase { background: var(--bg-card); border-color: var(--border); }
+    :root[data-carino-theme="color"] .phase-n, :root[data-carino-theme="color"] .phase-art { color: var(--ct-purple); }
+    :root[data-carino-theme="color"] .phase:not(:last-child)::after { background: var(--border); }
+    :root[data-carino-theme="color"] .phase:hover { border-color: var(--ct-purple); background: color-mix(in srgb, var(--ct-purple) 8%, var(--bg-card)); box-shadow: 0 0 22px color-mix(in srgb, var(--ct-purple) 18%, transparent); }
     /* a colour per section */
     :root[data-carino-theme="color"] [data-sec="start"]    { --sec: var(--ct-amber); }
     :root[data-carino-theme="color"] [data-sec="files"]    { --sec: var(--ct-blue); }
@@ -1068,6 +1072,46 @@
     .hero-why .why-card { padding: clamp(12px, 1.6vh, 18px) 16px; }
     .hero-why .why-card h3 { font-size: var(--fs-body); margin: 6px 0 3px; }
     .hero-why .why-card p { font-size: var(--fs-sm); }
+    /* the three phases: free in the browser -> self-hosted -> made for you */
+    .phase-eyebrow { margin: 0 0 10px; }
+    .phases { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .phase { position: relative; display: flex; gap: 16px; align-items: flex-start; padding: clamp(16px, 2.3vh, 22px) 18px;
+      border: 1px solid var(--accent-dim); border-radius: 16px; background: var(--accent-faint);
+      transition: border-color .2s, background .2s, box-shadow .2s; }
+    .phase:hover { border-color: var(--accent); background: var(--accent-glow); box-shadow: 0 0 22px var(--accent-glow); }
+    .phase:hover .phase-art { opacity: 1; }
+    .phase:not(:last-child)::after { content: ""; position: absolute; left: 36px; bottom: -13px; width: 2px; height: 12px; background: var(--accent-dim); }
+    .phase-n { flex: none; min-width: 2ch; font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 2.6vw, 36px); line-height: 1; color: var(--accent); }
+    .phase h3 { margin: 0 0 3px; font-size: var(--fs-lg); font-weight: 700; line-height: 1.3; overflow-wrap: break-word; }
+    .phase p { color: var(--text-sec); font-size: var(--fs-sm); line-height: 1.5; }
+    .hero-why .why-mini { margin-top: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .hero-why .why-mini .why-card { padding: 12px 14px; }
+    .hero-why .why-mini .why-card svg { width: 18px; height: 18px; }
+    .hero-why .why-mini .why-card h3 { font-size: var(--fs-sec); }
+    /* beside each phase: a small looping picture of it */
+    .phase > div { flex: 1 1 auto; min-width: 0; }
+    .phase-art { flex: none; width: 44px; height: 44px; margin-left: auto; align-self: center; color: var(--accent); opacity: .9; }
+    .phase-art svg { width: 100%; height: 100%; overflow: visible; }
+    .pa1 .ln { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pa-type 3.6s var(--ease-out, ease-out) infinite; }
+    .pa1 .l2 { animation-delay: .35s; } .pa1 .l3 { animation-delay: .7s; }
+    @keyframes pa-type { 0% { stroke-dashoffset: 1; } 30%, 80% { stroke-dashoffset: 0; opacity: 1; } 95%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+    .pa2 .dl { animation: pa-drop 2s ease-in-out infinite; }
+    .pa2 .tray { animation: pa-catch 2s ease-in-out infinite; transform-origin: 24px 42px; }
+    @keyframes pa-drop { 0% { transform: translateY(-8px); opacity: 0; } 25% { opacity: 1; } 60% { transform: translateY(4px); opacity: 1; } 80%, 100% { transform: translateY(6px); opacity: 0; } }
+    @keyframes pa-catch { 0%, 55%, 100% { transform: none; } 68% { transform: scaleY(.85); } }
+    .pa3 .k { animation: pa-slide 4.2s ease-in-out infinite alternate; }
+    .pa3 .k1 { --dx: 16px; } .pa3 .k2 { --dx: -14px; animation-delay: -1.4s; } .pa3 .k3 { --dx: 12px; animation-delay: -2.6s; }
+    @keyframes pa-slide { from { transform: none; } to { transform: translateX(var(--dx)); } }
+    /* floating product marks behind the hero, in the empty spots (same idea as setup.carino.systems) */
+    .s-hero > .mark-float { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .s-hero > .slide-in { position: relative; z-index: 1; } .s-hero > .next { z-index: 1; }
+    .mark-float img { position: absolute; opacity: 0; animation: mk-drift var(--life, 7s) ease-in-out forwards; }
+    @keyframes mk-drift {
+      0%   { opacity: 0; transform: translateY(14px) rotate(var(--r0, -8deg)) scale(.85); }
+      25%, 75% { opacity: var(--peak, .3); }
+      100% { opacity: 0; transform: translateY(-26px) rotate(var(--r1, 8deg)) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) { .phase-art * { animation: none !important; stroke-dashoffset: 0 !important; } .mark-float { display: none; } }
     .hero-svc .eyebrow { margin-top: clamp(18px, 3.4vh, 36px); }
     .hero-values { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
     .hero-values li > a, .hero-values li:not(:has(> a)) { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px;
@@ -1140,6 +1184,9 @@
       .slide-in { padding-top: 22px; padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
       .hero-how { grid-template-columns: minmax(0, 1fr); }
       .hero-why .why-grid { grid-template-columns: minmax(0, 1fr); }
+      .hero-why .why-mini { grid-template-columns: minmax(0, 1fr); }
+      .mark-float { display: none; }
+      .phase-art { width: 36px; height: 36px; }
       .hero-how li { flex-direction: row; padding: 14px 0 0; }
       .hero-act .btn { flex: 1 1 auto; justify-content: center; }
       .pager { right: max(2px, env(safe-area-inset-right, 0px)); }
@@ -1198,7 +1245,8 @@
       .prod-pan:hover .pan-plate, .prod-pan:focus-visible .pan-plate { opacity: 1; }
       .prod-pan:hover::after { box-shadow: none; }
     }
-    .s-products .next { display: none; }
+    .s-products .next, .s-services .next { display: none; }
+    .s-services .prod-sel { flex: 1 1 auto; }
     .prod-in { display: flex; flex-direction: column; overflow: hidden; padding-bottom: clamp(16px, 3vh, 30px); }
     .prod-in .s-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 22px; max-width: none; }
     .prod-in .s-head .eyebrow { flex: 1 1 100%; }
@@ -1221,7 +1269,7 @@
       font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: .08em; text-transform: uppercase; color: var(--text-sec); }
     .prod-pan .pan-sub { white-space: nowrap; }
     .prod-pan .prod-info { display: none; }
-    .s-products.enter .prod-pan { animation: pan-in .9s var(--ease-out) both; animation-delay: calc(var(--i) * 60ms + 220ms); }
+    .s-products.enter .prod-pan, .s-services.enter .prod-pan { animation: pan-in .9s var(--ease-out) both; animation-delay: calc(var(--i) * 60ms + 220ms); }
     .slide.pre .prod-pan { opacity: 0; }
     @media (max-width: 720px) {
       .prod-in { overflow-y: auto; }
@@ -1239,7 +1287,7 @@
       .pan-soon { display: none; }
       .pan-shot { opacity: .3; }
       .pan-shot::after { background: linear-gradient(90deg, rgba(5,5,5,.75) 0%, rgba(5,5,5,.55) 60%, rgba(5,5,5,.3) 100%); }
-      .s-products.enter .prod-pan { animation-name: pan-in-m; }
+      .s-products.enter .prod-pan, .s-services.enter .prod-pan { animation-name: pan-in-m; }
     }
     :root[data-carino-theme="color"] .pan-shot { background-color: var(--bg-card); }
     :root[data-carino-theme="color"] .pan-shot::after { background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--bg-card) 40%, transparent) 45%, var(--bg-card) 100%); }
@@ -1323,7 +1371,6 @@
        to the box, never stretched, and cross-fade while it resizes. The product
        row fades in under the tabs on open, and slides toward the chosen tab on
        a change. The rest of the page holds still. */
-    html.vt-prod .ind-pan[data-ind="personal"] { view-transition-name: ind-personal; }
     html.vt-prod .ind-pan[data-ind="infrastructure"] { view-transition-name: ind-infrastructure; }
     html.vt-prod .ind-pan[data-ind="health"] { view-transition-name: ind-health; }
     html.vt-prod #prodSel { view-transition-name: prod-row; }
@@ -1454,17 +1501,18 @@
   <p><span data-i18n>Runs in your browser. Sys. Status checks your connection only when you open it: it asks ipify and ipapi.co for your public address, Cloudflare and Google for a DNS lookup, and GitHub for a speed sample.</span></p>
 </div>
 
-<!-- The deck: the page is three full-screen slides that slide rather than
+<!-- The deck: the page is four full-screen slides that slide rather than
      scroll — who we are and what we do (hero + services), the products, and
      the free tools (the industry line-up). One wheel turn, swipe, PageDown or
      pager dot moves one slide; a slide whose own content is taller than the
      screen scrolls inside first. Off-screen slides are inert. Addresses:
-     bare = hero, #products, #tools; every industry and #t/ address opens the
+     bare = hero, #products, #services, #tools; every industry and #t/ address opens the
      tools slide. -->
 <main class="deck" id="deck">
 <div class="deck-track" id="deckTrack">
 
   <section class="slide s-hero" id="s-hero" data-slide="0" aria-labelledby="heroTitle">
+    <div class="mark-float" id="markFloat" aria-hidden="true"></div>
     <div class="slide-in">
       <div class="hero">
         <div class="hero-main">
@@ -1476,36 +1524,39 @@
           </div>
         </div>
         <div class="hero-why">
-          <div class="why-grid">
-            <div class="why-card rise" style="--d:2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <h3 data-i18n>Your file is opened by the page itself.</h3>
-              <p data-i18n>It is read on your own computer, by the page you have open. It is not sent anywhere, so a patient study or a signed contract stays where it already is.</p>
-            </div>
-            <div class="why-card rise" style="--d:3">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="12" cy="12" r="10"/></svg>
-              <h3 data-i18n>The web tools: nothing to install, no account.</h3>
-              <p data-i18n>Open the link and start. There is no sign-up, no e-mail to hand over and no trial that ends. The few you install, such as Carino Images and Carino Setup, say so on their own page.</p>
-            </div>
-            <div class="why-card rise" style="--d:4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-              <h3 data-i18n>Free, and open to read.</h3>
-              <p data-i18n>Every tool here is free to use, and the code behind it is public — anyone who knows how can check what it does.</p>
-            </div>
+          <p class="eyebrow phase-eyebrow rise" style="--d:1"><span data-i18n>How it works</span></p>
+          <ol class="phases">
+            <li class="phase rise" style="--d:2">
+              <span class="phase-n" aria-hidden="true">01</span>
+              <div><h3 data-i18n>Free in your browser.</h3><p data-i18n>Open source and client-side: it runs on your own device, with no account and no trial.</p></div>
+              <span class="phase-art pa1" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="40" height="32" rx="4"/><path d="M4 16h40"/><circle cx="9" cy="12" r=".6"/><circle cx="13" cy="12" r=".6"/><circle cx="17" cy="12" r=".6"/><path class="ln l1" pathLength="1" d="M10 23h22"/><path class="ln l2" pathLength="1" d="M10 29h28"/><path class="ln l3" pathLength="1" d="M10 35h16"/></svg></span>
+            </li>
+            <li class="phase rise" style="--d:3">
+              <span class="phase-n" aria-hidden="true">02</span>
+              <div><h3 data-i18n>Host it yourself.</h3><p data-i18n>Optional installers put it on your own server. The code is open, so you can see exactly what runs.</p></div>
+              <span class="phase-art pa2" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><g class="dl"><path d="M24 6v22"/><path d="M15 19l9 9 9-9"/></g><path class="tray" d="M8 32v6a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4v-6"/></svg></span>
+            </li>
+            <li class="phase rise" style="--d:4">
+              <span class="phase-n" aria-hidden="true">03</span>
+              <div><h3 data-i18n>Made for your work.</h3><p data-i18n>Need something more? Contact us and we adapt it, or build it, for the way you work.</p></div>
+              <span class="phase-art pa3" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14h36M6 24h36M6 34h36" opacity=".45"/><circle class="k k1" cx="16" cy="14" r="4" fill="currentColor"/><circle class="k k2" cx="32" cy="24" r="4" fill="currentColor"/><circle class="k k3" cx="22" cy="34" r="4" fill="currentColor"/></svg></span>
+            </li>
+          </ol>
+          <div class="why-grid why-mini">
             <div class="why-card rise" style="--d:5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
-              <h3 data-i18n>Most of it keeps working with the cable out.</h3>
-              <p data-i18n>The work happens in the page, so once it has loaded, a dropped line does not stop it. The few that read live data say so on their own page.</p>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <h3 data-i18n>Your files never leave your computer.</h3>
+              <p data-i18n>The page opens them on your own device.</p>
             </div>
             <div class="why-card rise" style="--d:6">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-              <h3 data-i18n>The same on a phone, a tablet or a computer.</h3>
-              <p data-i18n>There is one version and it is this one. Nothing to keep updated, and nothing that only works on the machine you were not carrying.</p>
+              <h3 data-i18n>Any device, even offline.</h3>
+              <p data-i18n>Phone, tablet or computer. Nothing to install.</p>
             </div>
             <div class="why-card rise" style="--d:7">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              <h3 data-i18n>Named in plain words, and by its real name.</h3>
-              <p data-i18n>Every tool is written down twice — what it does, and what it is called — so you never have to already know the word to find the thing.</p>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24"/><path d="M14.83 14.83l4.24 4.24"/><path d="M14.83 9.17l4.24-4.24"/><path d="M4.93 19.07l4.24-4.24"/></svg>
+              <h3 data-i18n>Support, if you want it.</h3>
+              <p data-i18n>The tools never need us. Help is there when you do.</p>
             </div>
           </div>
         </div>
@@ -1517,28 +1568,77 @@
   <section class="slide s-products" id="s-products" data-slide="1" aria-labelledby="prodTitle">
     <div class="slide-in prod-in">
       <header class="s-head">
-        <p class="eyebrow rise" style="--d:0"><span data-i18n>Products</span></p>
+        <p class="eyebrow rise" style="--d:0"><span data-i18n>Core products</span></p>
         <h2 class="rise" id="prodTitle" style="--d:1" data-i18n>What we build</h2>
         <p class="rise" style="--d:1" data-i18n>Each one is open source and works on its own. When you want a hand, we set it up and support it.</p>
       </header>
       <div class="sel ind-sel" id="indSel" role="list" aria-label="Industries">
-        <button type="button" class="pan ind-pan" role="listitem" data-ind="personal" data-sec="systems" aria-pressed="false" aria-controls="prodSel" style="--i:0">
-          <span class="pan-shot" style="background-image:url(assets/shots/images.webp)" aria-hidden="true"></span>
-          <span class="ind-top"><span class="ind-num" aria-hidden="true">01</span><span class="ind-name" data-i18n>Personal and Customer Services</span><span class="ind-line" data-i18n>Your computers and your own AI, and the tools you serve your clients with.</span></span>
-          <span class="ind-list" aria-hidden="true"><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/images.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/images-color.svg" alt="" width="28" height="28" decoding="async"></span>Images</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/setup.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/setup-color.svg" alt="" width="28" height="28" decoding="async"></span>Setup</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/atrium.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/atrium-color.svg" alt="" width="28" height="28" decoding="async"></span>Atrium</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/cerberus.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/cerberus-color.svg" alt="" width="28" height="28" decoding="async"></span>Cerberus</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/quote.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/quote-color.svg" alt="" width="28" height="28" decoding="async"></span>Quote</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/desk.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/desk-color.svg" alt="" width="28" height="28" decoding="async"></span>Desk</span></span>
-        </button>
-        <button type="button" class="pan ind-pan" role="listitem" data-ind="infrastructure" data-sec="network" aria-pressed="false" aria-controls="prodSel" style="--i:1">
+        <button type="button" class="pan ind-pan" role="listitem" data-ind="infrastructure" data-sec="network" aria-pressed="false" aria-controls="prodSel" style="--i:0">
           <span class="pan-shot" style="background-image:url(assets/shots/topo.webp)" aria-hidden="true"></span>
-          <span class="ind-top"><span class="ind-num" aria-hidden="true">02</span><span class="ind-name" data-i18n>Infrastructure</span><span class="ind-line" data-i18n>Networks you can document, and a plan for the day the internet goes.</span></span>
+          <span class="ind-top"><span class="ind-num" aria-hidden="true">01</span><span class="ind-name" data-i18n>Infrastructure</span><span class="ind-line" data-i18n>Networks you can document, and a plan for the day the internet goes.</span></span>
           <span class="ind-list" aria-hidden="true"><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/topo.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/topo-color.svg" alt="" width="28" height="28" decoding="async"></span>Topo</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/offline.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/offline-color.svg" alt="" width="28" height="28" decoding="async"></span>Offline</span></span>
         </button>
-        <button type="button" class="pan ind-pan" role="listitem" data-ind="health" data-sec="medical" aria-pressed="false" aria-controls="prodSel" style="--i:2">
+        <button type="button" class="pan ind-pan" role="listitem" data-ind="health" data-sec="medical" aria-pressed="false" aria-controls="prodSel" style="--i:1">
           <span class="pan-shot" style="background-image:url(assets/shots/retina.webp)" aria-hidden="true"></span>
-          <span class="ind-top"><span class="ind-num" aria-hidden="true">03</span><span class="ind-name" data-i18n>Health</span><span class="ind-line" data-i18n>Eye care and medical imaging, from the exam to the archive.</span></span>
+          <span class="ind-top"><span class="ind-num" aria-hidden="true">02</span><span class="ind-name" data-i18n>Health</span><span class="ind-line" data-i18n>Eye care and medical imaging, from the exam to the archive.</span></span>
           <span class="ind-list" aria-hidden="true"><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/retina.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/retina-color.svg" alt="" width="28" height="28" decoding="async"></span>Retina</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/dicom.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/dicom-color.svg" alt="" width="28" height="28" decoding="async"></span>DICOM</span><span class="ind-item"><span class="t-mark" aria-hidden="true"><img class="gold" src="assets/marks/dcm.svg" alt="" width="28" height="28" decoding="async"><img class="color" src="assets/marks/dcm-color.svg" alt="" width="28" height="28" decoding="async"></span>DICOM Editor</span></span>
         </button>
       </div>
       <div class="sel prod-sel" id="prodSel" role="list">
+        <a class="pan prod-pan" data-ind="infrastructure" style="--i:0" role="listitem" href="https://topo.carino.systems/" target="_blank" rel="noopener">
+          <span class="pan-shot" style="background-image:url(assets/shots/topo.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/topo.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/topo-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Topo</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Networks · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>A network register that checks itself.</span>
+          <span class="prod-info" data-name="Topo"><span class="kind" data-i18n>Networks · Web app</span><span class="prod-line" data-i18n>Draw your network once and keep it right: devices, addresses, racks and Wi-Fi, checked as you go for conflicts, loops and unreachable gateways, and printed as a site report.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" data-ind="infrastructure" style="--i:1" role="listitem" href="https://offline.carino.systems/" target="_blank" rel="noopener">
+          <span class="pan-shot" style="background-image:url(assets/shots/offline.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/offline.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/offline-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Offline</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Intranet · Planner</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Plan for the day the internet goes away.</span>
+          <span class="prod-info" data-name="Carino Offline"><span class="kind" data-i18n>Intranet · Planner</span><span class="prod-line" data-i18n>Plan an intranet that keeps working without the internet: what to download before you lose it, and the software, hardware and sneakernet to run on it.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" data-ind="health" style="--i:0" role="listitem" href="https://retina.carino.systems/" target="_blank" rel="noopener">
+          <span class="pan-shot" style="background-image:url(assets/shots/retina.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/retina.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/retina-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">Retina</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Eye care · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Eye exams, refraction and dispensing.</span>
+          <span class="prod-info" data-name="Carino Retina"><span class="kind" data-i18n>Eye care · Web app</span><span class="prod-line" data-i18n>Eye examination, refraction and dispensing in one place. Mark a fundus photo for an automatic cup-to-disc ratio, refract, and export a study PDF, DICOM file, prescription or lens order.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" data-ind="health" style="--i:1" role="listitem" href="https://dicom.carino.systems/" target="_blank" rel="noopener">
+          <span class="pan-shot" style="background-image:url(assets/shots/dicom.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dicom.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dicom-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">DICOM</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Medical imaging · Gateway</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>Keeps imaging moving when a system goes down.</span>
+          <span class="prod-info" data-name="Carino DICOM"><span class="kind" data-i18n>Medical imaging · Gateway</span><span class="prod-line" data-i18n>A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+        <a class="pan prod-pan" data-ind="health" style="--i:2" role="listitem" href="https://dcm.carino.systems/" target="_blank" rel="noopener">
+          <span class="pan-shot" style="background-image:url(assets/shots/dcm.webp)" aria-hidden="true"></span>
+          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dcm.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dcm-color.svg" alt="" width="48" height="48" decoding="async"></span>
+          <span class="pan-title">DICOM Editor</span>
+          <span class="pan-plate" aria-hidden="true"><span class="pan-n">03</span><span class="pan-sub" data-i18n>Medical imaging · Web app</span></span>
+          <span class="pan-hint" aria-hidden="true" data-i18n>View, fix and de-identify DICOM files.</span>
+          <span class="prod-info" data-name="Carino DICOM Editor"><span class="kind" data-i18n>Medical imaging · Web app</span><span class="prod-line" data-i18n>Open, check, edit and de-identify DICOM files in the browser. Compare two studies, validate their tags and remove patient data before a file leaves the building. Nothing is uploaded.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
+        </a>
+      </div>
+    </div>
+    <button type="button" class="next" data-go="2"><span data-i18n>Services</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  </section>
+
+  <!-- Personal and customer services: shown directly, no industry to pick. -->
+  <section class="slide s-services" id="s-services" data-slide="2" aria-labelledby="svcTitle">
+    <div class="slide-in prod-in">
+      <header class="s-head">
+        <p class="eyebrow rise" style="--d:0"><span data-i18n>Services</span></p>
+        <h2 class="rise" id="svcTitle" style="--d:1" data-i18n>Personal and Customer Services</h2>
+        <p class="rise" style="--d:1" data-i18n>Your computers and your own AI, and the tools you serve your clients with.</p>
+      </header>
+      <div class="sel prod-sel" id="svcSel" role="list">
         <a class="pan prod-pan" data-ind="personal" style="--i:0" role="listitem" href="https://images.carino.systems/" target="_blank" rel="noopener">
           <span class="pan-shot" style="background-image:url(assets/shots/images.webp)" aria-hidden="true"></span>
           <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/images.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/images-color.svg" alt="" width="48" height="48" decoding="async"></span>
@@ -1587,52 +1687,12 @@
           <span class="pan-hint" aria-hidden="true" data-i18n>Canned replies, filled in and ready to send.</span>
           <span class="prod-info" data-name="Desk"><span class="kind" data-i18n>Help desk · Web app</span><span class="prod-line" data-i18n>Search, fill in and copy canned replies for support tickets. Load your team’s own replies from a file you host. Nothing leaves the browser.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
         </a>
-        <a class="pan prod-pan" data-ind="infrastructure" style="--i:0" role="listitem" href="https://topo.carino.systems/" target="_blank" rel="noopener">
-          <span class="pan-shot" style="background-image:url(assets/shots/topo.webp)" aria-hidden="true"></span>
-          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/topo.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/topo-color.svg" alt="" width="48" height="48" decoding="async"></span>
-          <span class="pan-title">Topo</span>
-          <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Networks · Web app</span></span>
-          <span class="pan-hint" aria-hidden="true" data-i18n>A network register that checks itself.</span>
-          <span class="prod-info" data-name="Topo"><span class="kind" data-i18n>Networks · Web app</span><span class="prod-line" data-i18n>Draw your network once and keep it right: devices, addresses, racks and Wi-Fi, checked as you go for conflicts, loops and unreachable gateways, and printed as a site report.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
-        </a>
-        <a class="pan prod-pan" data-ind="infrastructure" style="--i:1" role="listitem" href="https://offline.carino.systems/" target="_blank" rel="noopener">
-          <span class="pan-shot" style="background-image:url(assets/shots/offline.webp)" aria-hidden="true"></span>
-          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/offline.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/offline-color.svg" alt="" width="48" height="48" decoding="async"></span>
-          <span class="pan-title">Offline</span>
-          <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Intranet · Planner</span></span>
-          <span class="pan-hint" aria-hidden="true" data-i18n>Plan for the day the internet goes away.</span>
-          <span class="prod-info" data-name="Carino Offline"><span class="kind" data-i18n>Intranet · Planner</span><span class="prod-line" data-i18n>Plan an intranet that keeps working without the internet: what to download before you lose it, and the software, hardware and sneakernet to run on it.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
-        </a>
-        <a class="pan prod-pan" data-ind="health" style="--i:0" role="listitem" href="https://retina.carino.systems/" target="_blank" rel="noopener">
-          <span class="pan-shot" style="background-image:url(assets/shots/retina.webp)" aria-hidden="true"></span>
-          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/retina.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/retina-color.svg" alt="" width="48" height="48" decoding="async"></span>
-          <span class="pan-title">Retina</span>
-          <span class="pan-plate" aria-hidden="true"><span class="pan-n">01</span><span class="pan-sub" data-i18n>Eye care · Web app</span></span>
-          <span class="pan-hint" aria-hidden="true" data-i18n>Eye exams, refraction and dispensing.</span>
-          <span class="prod-info" data-name="Carino Retina"><span class="kind" data-i18n>Eye care · Web app</span><span class="prod-line" data-i18n>Eye examination, refraction and dispensing in one place. Mark a fundus photo for an automatic cup-to-disc ratio, refract, and export a study PDF, DICOM file, prescription or lens order.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
-        </a>
-        <a class="pan prod-pan" data-ind="health" style="--i:1" role="listitem" href="https://dicom.carino.systems/" target="_blank" rel="noopener">
-          <span class="pan-shot" style="background-image:url(assets/shots/dicom.webp)" aria-hidden="true"></span>
-          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dicom.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dicom-color.svg" alt="" width="48" height="48" decoding="async"></span>
-          <span class="pan-title">DICOM</span>
-          <span class="pan-plate" aria-hidden="true"><span class="pan-n">02</span><span class="pan-sub" data-i18n>Medical imaging · Gateway</span></span>
-          <span class="pan-hint" aria-hidden="true" data-i18n>Keeps imaging moving when a system goes down.</span>
-          <span class="prod-info" data-name="Carino DICOM"><span class="kind" data-i18n>Medical imaging · Gateway</span><span class="prod-line" data-i18n>A self-hosted DICOM gateway that keeps imaging moving when a system goes down — receive, route and forward studies, serve them by Q/R or DICOMweb. Not an enterprise PACS.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
-        </a>
-        <a class="pan prod-pan" data-ind="health" style="--i:2" role="listitem" href="https://dcm.carino.systems/" target="_blank" rel="noopener">
-          <span class="pan-shot" style="background-image:url(assets/shots/dcm.webp)" aria-hidden="true"></span>
-          <span class="t-mark pan-mark" aria-hidden="true"><img class="gold" src="assets/marks/dcm.svg" alt="" width="48" height="48" decoding="async"><img class="color" src="assets/marks/dcm-color.svg" alt="" width="48" height="48" decoding="async"></span>
-          <span class="pan-title">DICOM Editor</span>
-          <span class="pan-plate" aria-hidden="true"><span class="pan-n">03</span><span class="pan-sub" data-i18n>Medical imaging · Web app</span></span>
-          <span class="pan-hint" aria-hidden="true" data-i18n>View, fix and de-identify DICOM files.</span>
-          <span class="prod-info" data-name="Carino DICOM Editor"><span class="kind" data-i18n>Medical imaging · Web app</span><span class="prod-line" data-i18n>Open, check, edit and de-identify DICOM files in the browser. Compare two studies, validate their tags and remove patient data before a file leaves the building. Nothing is uploaded.</span><span class="prod-go"><span data-i18n>Open</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></span></span>
-        </a>
       </div>
     </div>
-    <button type="button" class="next" data-go="2"><span data-i18n>More tools</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+    <button type="button" class="next" data-go="3"><span data-i18n>More tools</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   </section>
 
-  <section class="slide s-tools" id="s-tools" data-slide="2" aria-label="More tools">
+  <section class="slide s-tools" id="s-tools" data-slide="3" aria-label="More tools">
 <div class="ps">
 
   <!-- The label and the search. -->
@@ -1691,7 +1751,8 @@
 <nav class="pager" id="pager" aria-label="Sections">
   <button type="button" data-go="0"><span>Carino Systems</span></button>
   <button type="button" data-go="1"><span data-i18n>Products</span></button>
-  <button type="button" data-go="2"><span data-i18n>More tools</span></button>
+  <button type="button" data-go="2"><span data-i18n>Services</span></button>
+  <button type="button" data-go="3"><span data-i18n>More tools</span></button>
 </nav>
 <!-- The help pane. Markup, so i18n.js translates it in place. -->
 <div class="zoom" id="zoom" hidden>
@@ -2303,7 +2364,8 @@ function backOut() {
 }
 
 function route() {
-  const h = decodeURIComponent(location.hash.slice(1));
+  let h = decodeURIComponent(location.hash.slice(1));
+  if (h === 'products/personal') h = 'services';   // the personal products have their own slide now
   // The reasons it is safe live on the hero now; old #safe links land there.
   if (h === 'safe') { closePane(); goSlide(0, { hash: false, instant: !booted }); showGrid(); history.replaceState(null, '', location.pathname + location.search); return; }
   if (h === 'hand') { if (!view) showGrid(); openPane(h); return; }
@@ -2316,10 +2378,12 @@ function route() {
     const tool = BYSLUG.get(h.slice(2));
     // A product's address opens the products slide; any other tool is lit in the grid.
     if (CORE.has(tool.name)) {
-      goSlide(1, { hash: false, instant: !booted });
-      const info = document.querySelector(`#prodSel .prod-info[data-name="${CSS.escape(tool.name)}"]`);
+      const info = document.querySelector(`.prod-pan .prod-info[data-name="${CSS.escape(tool.name)}"]`);
       const p = info && info.closest('.prod-pan');
-      if (p) { pickInd(p.dataset.ind, { hash: false, quiet: !booted }); spot(p); }
+      const svc = !!(p && p.closest('#svcSel'));
+      goSlide(svc ? 2 : 1, { hash: false, instant: !booted });
+      if (p && !svc) pickInd(p.dataset.ind, { hash: false, quiet: !booted });
+      if (p) spot(p);
       showGrid(); return;
     }
     goSlide(TOOLS_AT, { hash: false, instant: !booted });
@@ -2511,13 +2575,13 @@ function intro() {
 
 
 /* ── the deck ──
-   Three slides: the hero (with the services), the products, and the free
-   tools (the line-up and its industries, everything above). One wheel turn, one
+   Four slides: the hero, the core products (Infrastructure, Health), the
+   personal and customer services, and the free tools (the line-up and its industries, everything above). One wheel turn, one
    swipe, PageUp/PageDown (and ↑↓ Space Home End outside the tools slide) or a
    pager dot moves exactly one slide. A slide whose own content is taller than
    the screen scrolls inside first; a gesture that scrolled it does not also
    turn the slide. The address follows with replaceState, never a new entry. */
-const SLIDE_IDS = ['', 'products', 'tools'];
+const SLIDE_IDS = ['', 'products', 'services', 'tools'];
 const TOOLS_AT = SLIDE_IDS.indexOf('tools');
 let at = 0, booted = false;
 const slides = () => document.querySelectorAll('#deckTrack > .slide');
@@ -2569,7 +2633,7 @@ function goSlide(i, o) {
    back. Choosing from the full line-up pushes an entry (#products/<id>), so
    Back, Escape or the chosen tab again return to the line-up; switching tabs
    only replaces the address. */
-const IND_IDS = ['personal', 'infrastructure', 'health'];
+const IND_IDS = ['infrastructure', 'health'];
 let pickedInd = '';
 function slideHash(i) { return SLIDE_IDS[i] + (i === 1 && pickedInd ? '/' + pickedInd : ''); }
 
@@ -2660,10 +2724,11 @@ function scrollerIn(el, dir) {
 }
 
 function deckKey(e) {
-  if (at === 1 && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !deckBusy()) {
-    // ←→ walk the row the focus is in: the industries, or the products shown.
-    const inInd = !pickedInd || $('indSel').contains(document.activeElement);
-    const pans = inInd ? [...$('indSel').querySelectorAll('.ind-pan')] : [...$('prodSel').querySelectorAll('.prod-pan:not([hidden])')];
+  if ((at === 1 || at === 2) && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !deckBusy()) {
+    // ←→ walk the row the focus is in: the industries, the products shown, or the services.
+    const inInd = at === 1 && (!pickedInd || $('indSel').contains(document.activeElement));
+    const pans = at === 2 ? [...$('svcSel').querySelectorAll('.prod-pan')]
+      : inInd ? [...$('indSel').querySelectorAll('.ind-pan')] : [...$('prodSel').querySelectorAll('.prod-pan:not([hidden])')];
     const i = pans.indexOf(document.activeElement);
     const n = i < 0 ? 0 : (i + (e.key === 'ArrowRight' ? 1 : -1) + pans.length) % pans.length;
     e.preventDefault(); pans[n].focus({ preventScroll: true });
@@ -2740,7 +2805,8 @@ function wireDeck() {
 // The view and the slide are known from the address before anything loads,
 // so nothing flashes in front of anything else.
 {
-  const h0 = decodeURIComponent(location.hash.slice(1));
+  let h0 = decodeURIComponent(location.hash.slice(1));
+  if (h0 === 'products/personal') h0 = 'services';
   const s0 = h0.startsWith('products/') ? 1 : SLIDE_IDS.indexOf(h0);
   const tool = !!h0 && s0 < 0 && h0 !== 'safe' && h0 !== 'hand';
   if (s0 === 1 && h0 !== 'products') pickInd(h0.slice(9), { hash: false, quiet: true });
@@ -2848,5 +2914,49 @@ document.addEventListener('keydown', (e) => {
      front page. Re-enable by restoring the tag below.
 <script src="./assets/js/services.js"></script>
 -->
+<script>
+/* Floating product marks in the hero (as on setup.carino.systems): one fades
+   in every second or two at a free spot of the hero -- never on its text or
+   cards -- drifts a few seconds and is removed. At most six at a time; none
+   while the tab is hidden, off the hero slide, on a phone or with reduced
+   motion. Gold marks in Gold, the -color set in Colourful. */
+(() => {
+  const layer = document.getElementById('markFloat');
+  const hero = document.getElementById('s-hero');
+  if (!layer || !hero || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const MARKS = 'aldis asobi atrium branding cerberus compass currency cve cybercity dcm desk dicom distro files fiscal font hardware hash images jellyfish kanban law learn music netplan offline password ping quote retina setup software stocks subs teleprompter test time topo tv vitae'.split(' ');
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const hit = (a, b, m) => a.x < b.right + m && a.x + a.s > b.left - m && a.y < b.bottom + m && a.y + a.s > b.top - m;
+  function spawn() {
+    if (document.hidden || innerWidth <= 720 || layer.querySelectorAll('img').length >= 6) return;
+    const hb = hero.getBoundingClientRect();
+    if (hb.bottom < 80 || hb.top > innerHeight - 80) return;          // hero not on screen
+    const busy = [...hero.querySelectorAll('.hero-main > *, .hero-why > *, .next')]
+      .map(el => el.getBoundingClientRect()).filter(r => r.width && r.height);
+    const s = Math.round(rnd(34, 58));
+    let spot = null;
+    for (let i = 0; i < 14 && !spot; i++) {
+      const c = { x: rnd(8, hb.width - s - 8), y: rnd(8, hb.height - s - 8), s };
+      const abs = { x: c.x + hb.left, y: c.y + hb.top, s };
+      if (busy.some(r => hit(abs, r, 32))) continue;   // room for the drift
+      if ([...layer.children].some(o => Math.abs(parseFloat(o.style.left) - c.x) < s + 16 && Math.abs(parseFloat(o.style.top) - c.y) < s + 16)) continue;
+      spot = c;
+    }
+    if (!spot) return;
+    const color = document.documentElement.getAttribute('data-carino-theme') === 'color';
+    const img = new Image(s, s);
+    img.alt = ''; img.decoding = 'async';
+    img.src = 'assets/marks/' + MARKS[Math.floor(Math.random() * MARKS.length)] + (color ? '-color' : '') + '.svg';
+    img.style.left = spot.x + 'px'; img.style.top = spot.y + 'px';
+    img.style.setProperty('--life', rnd(5, 9).toFixed(1) + 's');
+    img.style.setProperty('--peak', rnd(color ? .35 : .22, color ? .55 : .38).toFixed(2));
+    img.style.setProperty('--r0', rnd(-14, 4).toFixed(0) + 'deg');
+    img.style.setProperty('--r1', rnd(-4, 14).toFixed(0) + 'deg');
+    img.addEventListener('animationend', () => img.remove());
+    layer.appendChild(img);
+  }
+  (function tick() { spawn(); setTimeout(tick, rnd(900, 2200)); })();
+})();
+</script>
 </body>
 </html>
