@@ -12,6 +12,7 @@
 #   canonical carino-bridge.js = ../Quote/carino-bridge.js
 #   canonical carino-ui.{css,js} = ../Branding/carino-ui.{css,js}
 #   canonical carino-fx.js     = ../Currency/carino-fx.js
+#   canonical carino-pdf.js    = ../Branding/carino-pdf.js (+ carino-html2canvas.js, html2canvas 1.4.1, MIT)
 set -euo pipefail
 cd "$(dirname "$0")/.."          # -> the folder holding all the sibling repos
 
@@ -27,6 +28,8 @@ UI_CSS_SRC="Branding/carino-ui.css"
 UI_JS_SRC="Branding/carino-ui.js"
 THEME_CSS_SRC="Branding/carino-theme.css"
 THEME_JS_SRC="Branding/carino-theme.js"
+PDF_SRC="Branding/carino-pdf.js"
+H2C_SRC="Branding/carino-html2canvas.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
 GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Files \
@@ -130,6 +133,16 @@ for f in */carino-theme.css */*/carino-theme.css; do
   [ "$f" -ef "$THEME_CSS_SRC" ] || cp "$THEME_CSS_SRC" "$f"
   [ "$d/carino-theme.js" -ef "$THEME_JS_SRC" ] || cp "$THEME_JS_SRC" "$d/carino-theme.js"
   echo "  $d  (theme)"
+done
+# Every report's file as PDF or HTML (the preview's PDF | HTML switch). Discovered:
+# a site that carries carino-pdf.js gets the current one and the html2canvas
+# beside it, which it loads on the first PDF only.
+for f in */carino-pdf.js */*/carino-pdf.js */*/*/carino-pdf.js */*/*/*/carino-pdf.js; do
+  [ -e "$f" ] || continue
+  d="$(dirname "$f")"
+  [ "$f" -ef "$PDF_SRC" ] || cp "$PDF_SRC" "$f"
+  [ "$d/carino-html2canvas.js" -ef "$H2C_SRC" ] || cp "$H2C_SRC" "$d/carino-html2canvas.js"
+  echo "  $d  (pdf)"
 done
 for d in $ANIM; do
   [ -d "$d" ] || { echo "  skip $d (missing)"; continue; }
