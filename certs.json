@@ -350,12 +350,12 @@
     "retina.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-09T10:24:47Z",
-      "not_before": "2026-09-10T10:24:48Z",
+      "not_after": "2027-02-07T23:35:48Z",
+      "not_before": "2026-11-09T23:35:49Z",
       "san": [
         "retina.carino.systems"
       ],
-      "sha256": "5E:25:9B:B4:B4:32:E0:0B:DC:10:AC:AB:95:88:DF:A2:F9:D2:0E:C4:8F:AB:35:D3:96:31:0A:B9:82:97:6F:23",
+      "sha256": "D2:13:54:81:D3:09:1D:BF:99:FA:39:AB:11:01:CF:74:FE:0C:C4:D9:89:B1:5B:78:50:56:53:2B:72:15:08:1F",
       "subject": "retina.carino.systems"
     },
     "setup.carino.systems": {
