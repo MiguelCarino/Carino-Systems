@@ -216,14 +216,14 @@
       "subject": "hardware.carino.systems"
     },
     "hash.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-10T16:12:49Z",
-      "not_before": "2026-09-11T16:12:50Z",
+      "not_after": "2027-02-08T19:18:50Z",
+      "not_before": "2026-11-10T19:18:51Z",
       "san": [
         "hash.carino.systems"
       ],
-      "sha256": "B3:BF:90:C8:D8:9C:4E:B2:70:BC:D7:AB:00:6F:07:90:35:52:A9:AD:79:2E:B5:17:DE:F9:D4:30:94:A7:D5:81",
+      "sha256": "43:2D:B0:B1:D8:74:34:C7:97:DF:89:19:33:3A:2F:BB:68:EB:AF:68:72:2C:64:DD:EB:77:0E:0D:C6:15:6B:EC",
       "subject": "hash.carino.systems"
     },
     "images.carino.systems": {
