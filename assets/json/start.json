@@ -211,6 +211,11 @@
           "line": "The same applications, installed the same way, across every machine."
         },
         {
+          "ref": "Donate — Where to give",
+          "plain": "Where to donate to open source",
+          "line": "The projects and foundations behind open source, each at its own donate page. We take nothing."
+        },
+        {
           "ref": "CVE Database",
           "plain": "Look up a security flaw",
           "line": "Search reported vulnerabilities by product, severity or number."

@@ -444,6 +444,19 @@
       "keywords": "apps packages deployment catalog inventory os"
     },
     {
+      "name": "Donate — Where to give",
+      "icon": "💛",
+      "mark": "assets/marks/donate.svg",
+      "url": "https://donate.carino.systems/",
+      "desc": "Where to give to open source: platforms, fiscal hosts and foundations, each linked at its own donate page. Carino Systems takes no donations.",
+      "cta": "Open ↗",
+      "tags": [
+        "learn",
+        "systems"
+      ],
+      "keywords": "donate donation give open source free software sponsor sponsorship fiscal host foundation charity github sponsors open collective liberapay infrastructure dicom orthanc"
+    },
+    {
       "name": "Stocks",
       "icon": "📈",
       "mark": "assets/marks/stocks.svg",

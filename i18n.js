@@ -392,6 +392,10 @@ const I18N = {
         "Custom work": "Desarrollo a medida",
         "Features, integrations and tools built for the way your clinic or office actually works.": "Funciones, integraciones y herramientas hechas para la forma en que tu clínica u oficina realmente trabaja.",
         "More tools": "Más herramientas",
+        'Donate — Where to give': 'Donar — Dónde dar',
+        'Where to give to open source: platforms, fiscal hosts and foundations, each linked at its own donate page. Carino Systems takes no donations.': 'Dónde donar al código abierto: plataformas, anfitriones fiscales y fundaciones, cada uno enlazado a su propia página de donación. Carino Systems no acepta donaciones.',
+        'Where to donate to open source': 'Dónde donar al código abierto',
+        'The projects and foundations behind open source, each at its own donate page. We take nothing.': 'Los proyectos y fundaciones detrás del código abierto, cada uno en su propia página de donación. Nosotros no aceptamos nada.',
     },
     'pt-BR': {
         // header GitHub icon title
@@ -772,6 +776,10 @@ const I18N = {
         "Custom work": "Sob medida",
         "Features, integrations and tools built for the way your clinic or office actually works.": "Funções, integrações e ferramentas feitas para o jeito que sua clínica ou escritório realmente trabalha.",
         "More tools": "Mais ferramentas",
+        'Donate — Where to give': 'Doar — Onde doar',
+        'Where to give to open source: platforms, fiscal hosts and foundations, each linked at its own donate page. Carino Systems takes no donations.': 'Onde doar para o código aberto: plataformas, hosts fiscais e fundações, cada um com link para sua própria página de doação. A Carino Systems não aceita doações.',
+        'Where to donate to open source': 'Onde doar para o código aberto',
+        'The projects and foundations behind open source, each at its own donate page. We take nothing.': 'Os projetos e fundações por trás do código aberto, cada um na sua própria página de doação. Nós não aceitamos nada.',
     },
     ja: {
         // header GitHub icon title
@@ -1152,6 +1160,10 @@ const I18N = {
         "Custom work": "カスタム開発",
         "Features, integrations and tools built for the way your clinic or office actually works.": "クリニックやオフィスの実際の仕事のやり方に合わせた機能、連携、ツールを作ります。",
         "More tools": "その他のツール",
+        'Donate — Where to give': '寄付 — 寄付先の案内',
+        'Where to give to open source: platforms, fiscal hosts and foundations, each linked at its own donate page. Carino Systems takes no donations.': 'オープンソースへの寄付先：プラットフォーム、財政支援団体、財団を各団体の公式寄付ページへリンク。Carino Systems は寄付を受け付けていません。',
+        'Where to donate to open source': 'オープンソースへの寄付先',
+        'The projects and foundations behind open source, each at its own donate page. We take nothing.': 'オープンソースを支えるプロジェクトと財団を、それぞれの寄付ページで。私たちは何も受け取りません。',
     },
     ru: {
         // header GitHub icon title
@@ -1532,6 +1544,10 @@ const I18N = {
         "Custom work": "Разработка на заказ",
         "Features, integrations and tools built for the way your clinic or office actually works.": "Функции, интеграции и инструменты под то, как на самом деле работает ваша клиника или офис.",
         "More tools": "Другие инструменты",
+        'Donate — Where to give': 'Пожертвования — куда жертвовать',
+        'Where to give to open source: platforms, fiscal hosts and foundations, each linked at its own donate page. Carino Systems takes no donations.': 'Куда жертвовать на открытый код: платформы, фискальные хосты и фонды, каждый со ссылкой на собственную страницу пожертвований. Carino Systems пожертвований не принимает.',
+        'Where to donate to open source': 'Куда жертвовать на открытый код',
+        'The projects and foundations behind open source, each at its own donate page. We take nothing.': 'Проекты и фонды, стоящие за открытым кодом, — каждый на своей странице пожертвований. Мы ничего не принимаем.',
     },
 };
 
