@@ -37,7 +37,7 @@ NetplanConfig Topo Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
 Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \
-TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro TM"
+TV Teleprompter Learn Retina DICOM-editor Asobi MusicGrid CyberCity findmeadistro TM Donate"
 # Ping, Stocks, Test, Offline, Law and Jellyfish ran the shared navbar without
 # being listed, so their copies had drifted; Carino-Systems carries it for
 # legal.html only (the hub page itself keeps its inline navbar).

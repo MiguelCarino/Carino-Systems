@@ -307,6 +307,28 @@
       "line": "Доска задач, которая живёт в ссылке."
     }
   },
+  "donate.carino.systems": {
+    "es": {
+      "title": "Carino Donate — dónde donar al software libre",
+      "desc": "Dónde donar al código abierto: plataformas, anfitriones fiscales y fundaciones, cada uno enlazado a su propia página de donación. Carino Systems no acepta donaciones de ningún tipo.",
+      "line": "Dónde donar al código abierto. Nosotros no aceptamos nada."
+    },
+    "pt-BR": {
+      "title": "Carino Donate — onde doar para o software livre",
+      "desc": "Onde doar para o código aberto: plataformas, hosts fiscais e fundações, cada um com link para sua própria página de doação. A Carino Systems não aceita doações de nenhum tipo.",
+      "line": "Onde doar para o código aberto. Nós não aceitamos nada."
+    },
+    "ja": {
+      "title": "Carino Donate — オープンソースへの寄付先",
+      "desc": "オープンソースへの寄付先の案内。プラットフォーム、財政支援団体、財団を各団体の公式寄付ページへリンク。Carino Systems はいかなる寄付も受け付けていません。",
+      "line": "オープンソースへの寄付先。私たちは受け取りません。"
+    },
+    "ru": {
+      "title": "Carino Donate — куда жертвовать на открытый код",
+      "desc": "Куда жертвовать на открытый код: платформы, фискальные хосты и фонды, каждый со ссылкой на собственную страницу пожертвований. Carino Systems не принимает пожертвований ни в каком виде.",
+      "line": "Куда жертвовать на открытый код. Мы ничего не принимаем."
+    }
+  },
   "law.carino.systems": {
     "es": {
       "title": "Carino Law — fuentes jurídicas oficiales, por país",

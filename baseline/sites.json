@@ -365,5 +365,13 @@
     "desc": "A complete desktop on Hyprland for Fedora: the bar, panels, notifications, a launcher, a dock or a taskbar, a Settings app for every part of it, eleven themes, and private smart features that run on your own machine. One script installs it; another puts everything back.",
     "line": "A complete desktop for Fedora, set up in one go.",
     "software": "Linux (Fedora)"
+  },
+  {
+    "domain": "donate.carino.systems",
+    "dir": "Donate",
+    "name": "Donate — Where to give",
+    "type": "reference",
+    "desc": "Where to donate to open source: the platforms, fiscal hosts and foundations that get money to the people who build it, each linked at its own donate page. Carino Systems does not accept donations of any kind.",
+    "line": "Where to give to open source. We take nothing."
   }
 ]
