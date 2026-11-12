@@ -171,6 +171,17 @@
       "sha256": "84:23:DC:FE:7C:54:BE:7A:45:02:07:BC:8D:FE:D4:42:6B:4D:18:83:13:CE:8B:56:42:01:46:F7:01:19:79:98",
       "subject": "dlss.carino.systems"
     },
+    "donate.carino.systems": {
+      "issuer_cn": "YR1",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-02-10T09:47:03Z",
+      "not_before": "2026-11-12T09:47:04Z",
+      "san": [
+        "donate.carino.systems"
+      ],
+      "sha256": "14:30:8E:6D:B8:2E:B1:79:2C:1F:38:50:B3:99:7F:F0:35:BB:58:EB:34:63:65:85:32:F9:98:55:EC:D5:C8:41",
+      "subject": "donate.carino.systems"
+    },
     "files.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
