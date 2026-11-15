@@ -33,7 +33,7 @@ H2C_SRC="Branding/carino-html2canvas.js"
 
 # Sites whose navbar IS the shared carino-navbar.js (it injects carino-clock.js).
 GROUPA="Aldis-Lamp Branding CVE Quote Fiscal Hardware Hash Files \
-NetplanConfig Topo Compass \
+NetplanConfig Topo Flow Compass \
 SimpleCountdown Desk Kanban Password \
 Vitae SimpleSetup SoftwareCatalog SyncSubsStudio Time Currency \
 Fonts Ping Stocks Test Offline Law Jellyfish Carino-Systems \

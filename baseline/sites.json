@@ -130,6 +130,14 @@
     "line": "Your tax numbers for every country, offline."
   },
   {
+    "domain": "flow.carino.systems",
+    "dir": "Flow",
+    "name": "Flow",
+    "type": "tool",
+    "desc": "Draw the workflow of a user interface in your browser — screens at any size, the decisions between them and what takes the user from one to the next, checked as you draw.",
+    "line": "Draw a workflow that checks itself."
+  },
+  {
     "domain": "font.carino.systems",
     "dir": "Fonts",
     "name": "Carino Fonts",
