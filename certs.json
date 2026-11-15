@@ -204,6 +204,17 @@
       "sha256": "BB:63:B2:B8:C9:2B:1D:A7:6F:2D:45:41:42:A4:E0:4A:56:C5:77:12:47:2E:93:64:48:91:20:68:D9:60:27:7D",
       "subject": "fiscal.carino.systems"
     },
+    "flow.carino.systems": {
+      "issuer_cn": "YR2",
+      "issuer_org": "Let's Encrypt",
+      "not_after": "2027-02-13T06:37:00Z",
+      "not_before": "2026-11-15T06:37:01Z",
+      "san": [
+        "flow.carino.systems"
+      ],
+      "sha256": "D1:34:7D:08:F5:6D:CA:46:5C:DA:95:7E:77:EB:8B:1E:F7:6A:24:04:AD:55:9E:88:9B:8E:54:6B:96:DC:78:AD",
+      "subject": "flow.carino.systems"
+    },
     "font.carino.systems": {
       "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
