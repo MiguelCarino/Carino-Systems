@@ -75,12 +75,12 @@
     "compass.carino.systems": {
       "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-15T21:08:17Z",
-      "not_before": "2026-09-16T21:08:18Z",
+      "not_after": "2027-02-14T02:18:46Z",
+      "not_before": "2026-11-16T02:18:47Z",
       "san": [
         "compass.carino.systems"
       ],
-      "sha256": "7A:D8:2D:7B:14:52:12:D1:FC:0E:9D:B7:E4:FF:9D:27:3C:C4:F7:FE:0D:BE:18:6B:FF:BB:BC:45:E3:AC:D7:7D",
+      "sha256": "ED:85:D7:F5:72:75:F9:99:73:1B:84:46:96:97:88:1F:7D:A9:E7:A8:FC:9C:4F:A8:04:82:12:89:70:23:65:E5",
       "subject": "compass.carino.systems"
     },
     "currency.carino.systems": {
@@ -139,14 +139,14 @@
       "subject": "desk.carino.systems"
     },
     "dicom.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-15T16:37:18Z",
-      "not_before": "2026-09-16T16:37:19Z",
+      "not_after": "2027-02-13T20:49:17Z",
+      "not_before": "2026-11-15T20:49:18Z",
       "san": [
         "dicom.carino.systems"
       ],
-      "sha256": "FA:02:04:7E:5E:D6:5E:87:85:79:69:EB:D1:D8:38:34:D0:9D:3C:36:A0:B6:ED:EE:59:8A:D1:13:DD:A4:BE:D3",
+      "sha256": "63:4D:DA:68:7D:8C:73:75:5B:9C:43:4A:3E:10:F6:87:2E:A8:05:E8:9C:5C:AF:EB:AB:1F:0F:5B:EA:8C:74:44",
       "subject": "dicom.carino.systems"
     },
     "distro.carino.systems": {
