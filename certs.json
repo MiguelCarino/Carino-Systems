@@ -50,15 +50,15 @@
       "subject": "butter.carino.systems"
     },
     "carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-21T10:20:56Z",
-      "not_before": "2026-09-22T10:20:57Z",
+      "not_after": "2027-02-19T16:26:49Z",
+      "not_before": "2026-11-21T16:26:50Z",
       "san": [
         "carino.systems",
         "www.carino.systems"
       ],
-      "sha256": "4E:51:2D:67:9E:75:5F:11:03:5C:A7:9A:E2:BF:D1:7B:7B:C0:6F:D1:15:B0:9B:34:64:0A:60:E8:7D:D2:69:82",
+      "sha256": "E4:C1:22:E0:19:B4:68:52:87:7B:E3:80:5A:D8:E2:D8:AD:B3:B0:88:8A:F4:4E:1B:E5:38:F1:7D:97:D9:47:47",
       "subject": "carino.systems"
     },
     "clover.carino.systems": {
