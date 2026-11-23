@@ -130,12 +130,12 @@
     "desk.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-23T02:27:49Z",
-      "not_before": "2026-09-24T02:27:50Z",
+      "not_after": "2027-02-21T07:45:49Z",
+      "not_before": "2026-11-23T07:45:50Z",
       "san": [
         "desk.carino.systems"
       ],
-      "sha256": "95:4E:B0:84:A0:3F:C3:1A:A0:42:94:C1:B9:65:E6:AC:1F:A9:CA:E6:4C:A9:D2:5F:19:50:0A:9F:A0:1B:08:4F",
+      "sha256": "4F:C7:12:D9:5D:63:52:9A:14:C0:6A:62:C2:60:21:15:35:30:39:AC:B1:C4:2F:D2:1B:8C:E1:2F:72:23:DF:D0",
       "subject": "desk.carino.systems"
     },
     "dicom.carino.systems": {
@@ -273,12 +273,12 @@
     "kanban.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-22T13:19:19Z",
-      "not_before": "2026-09-23T13:19:20Z",
+      "not_after": "2027-02-20T14:56:47Z",
+      "not_before": "2026-11-22T14:56:48Z",
       "san": [
         "kanban.carino.systems"
       ],
-      "sha256": "82:FD:F9:7D:60:EB:B9:D3:2B:D7:26:50:50:E9:54:A5:80:D3:3A:89:0A:BF:CA:92:6A:F4:10:21:E5:2F:AD:80",
+      "sha256": "1A:08:A8:2C:0D:0F:2F:8A:AA:F7:EC:BA:92:D2:96:5A:F6:A9:F2:B1:9E:18:A4:66:2A:A2:FA:C0:65:AA:3E:B3",
       "subject": "kanban.carino.systems"
     },
     "law.carino.systems": {
@@ -403,14 +403,14 @@
       "subject": "software.carino.systems"
     },
     "stocks.carino.systems": {
-      "issuer_cn": "YR2",
+      "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-23T12:25:49Z",
-      "not_before": "2026-09-24T12:25:50Z",
+      "not_after": "2027-02-21T15:13:17Z",
+      "not_before": "2026-11-23T15:13:18Z",
       "san": [
         "stocks.carino.systems"
       ],
-      "sha256": "48:D8:05:EE:5C:F7:DA:97:F3:53:B5:88:71:50:DB:34:1F:F2:ED:B0:03:D0:27:15:DB:9D:BC:73:BA:28:4B:0D",
+      "sha256": "8E:E7:61:BB:A2:8B:FE:D4:E7:01:AF:58:A4:2D:14:E0:B1:88:56:E5:1C:A4:81:C7:6C:1E:66:02:CD:0E:90:D8",
       "subject": "stocks.carino.systems"
     },
     "subs.carino.systems": {
@@ -436,14 +436,14 @@
       "subject": "teleprompter.carino.systems"
     },
     "test.carino.systems": {
-      "issuer_cn": "YR2",
+      "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-23T03:04:50Z",
-      "not_before": "2026-09-24T03:04:51Z",
+      "not_after": "2027-02-21T05:28:48Z",
+      "not_before": "2026-11-23T05:28:49Z",
       "san": [
         "test.carino.systems"
       ],
-      "sha256": "1A:0A:11:67:6A:08:5D:1F:57:F7:28:67:3A:E2:13:81:F7:F6:EB:FC:26:8E:D2:5C:7F:80:8E:0E:50:72:D8:A5",
+      "sha256": "A7:B5:7A:B2:F8:D5:91:5A:D8:F8:1C:AE:7D:3B:D9:2E:13:55:DF:70:5F:15:DA:5F:4E:95:81:71:01:20:59:70",
       "subject": "test.carino.systems"
     },
     "time.carino.systems": {
@@ -458,14 +458,14 @@
       "subject": "time.carino.systems"
     },
     "topo.carino.systems": {
-      "issuer_cn": "YR2",
+      "issuer_cn": "YR1",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-22T13:23:50Z",
-      "not_before": "2026-09-23T13:23:51Z",
+      "not_after": "2027-02-20T21:58:48Z",
+      "not_before": "2026-11-22T21:58:49Z",
       "san": [
         "topo.carino.systems"
       ],
-      "sha256": "42:43:8D:1E:40:11:FB:34:56:97:1F:B1:57:C5:8E:5E:23:09:46:4D:99:8A:20:4D:1D:4C:01:0D:81:7C:80:54",
+      "sha256": "94:AC:E5:DE:A7:C9:E2:60:73:47:9B:CB:68:19:15:E0:4A:C4:96:E4:53:CD:C4:34:06:9C:6D:CC:29:C8:F0:AD",
       "subject": "topo.carino.systems"
     },
     "tv.carino.systems": {
@@ -482,12 +482,12 @@
     "vitae.carino.systems": {
       "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-22T12:27:20Z",
-      "not_before": "2026-09-23T12:27:21Z",
+      "not_after": "2027-02-20T16:02:47Z",
+      "not_before": "2026-11-22T16:02:48Z",
       "san": [
         "vitae.carino.systems"
       ],
-      "sha256": "DA:2C:D1:0B:D1:6F:1D:A5:ED:6F:CD:54:D3:23:D5:60:A4:E4:FE:3C:07:21:0F:BB:79:4C:A7:3F:3D:69:A7:7E",
+      "sha256": "4A:2D:B1:BB:CE:15:4B:03:E9:35:1D:71:E4:97:90:4E:FF:04:EB:BB:CB:84:3C:96:CB:71:5E:20:01:2A:D0:2B",
       "subject": "vitae.carino.systems"
     }
   },
