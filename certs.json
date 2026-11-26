@@ -216,14 +216,14 @@
       "subject": "flow.carino.systems"
     },
     "font.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-26T15:29:18Z",
-      "not_before": "2026-09-27T15:29:19Z",
+      "not_after": "2027-02-24T16:13:47Z",
+      "not_before": "2026-11-26T16:13:48Z",
       "san": [
         "font.carino.systems"
       ],
-      "sha256": "CE:53:4E:2E:AA:A4:E1:56:6B:8E:D1:F4:79:DC:6B:21:AC:C2:BB:3B:CB:76:D8:36:8D:7E:40:26:10:BF:AD:49",
+      "sha256": "AF:F9:2D:13:8A:25:DC:A6:1D:15:57:95:A4:2E:08:D2:6F:01:DF:0C:7D:97:FF:2B:47:EA:04:BA:5E:CF:C2:48",
       "subject": "font.carino.systems"
     },
     "hardware.carino.systems": {
@@ -249,14 +249,14 @@
       "subject": "hash.carino.systems"
     },
     "images.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-26T00:39:49Z",
-      "not_before": "2026-09-27T00:39:50Z",
+      "not_after": "2027-02-24T05:17:17Z",
+      "not_before": "2026-11-26T05:17:18Z",
       "san": [
         "images.carino.systems"
       ],
-      "sha256": "64:EF:24:CE:46:3A:D4:F1:4B:E9:A3:03:1D:31:38:D1:C9:4C:7D:F9:A9:54:78:D2:9D:82:B1:F1:C6:27:54:FE",
+      "sha256": "1C:3A:B5:6B:A0:37:34:96:C1:9D:F1:63:D2:20:CC:78:34:72:73:83:C7:F8:0C:43:1B:1B:0D:72:88:3B:FA:D2",
       "subject": "images.carino.systems"
     },
     "jellyfish.carino.systems": {
