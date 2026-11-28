@@ -425,14 +425,14 @@
       "subject": "subs.carino.systems"
     },
     "teleprompter.carino.systems": {
-      "issuer_cn": "YR1",
+      "issuer_cn": "YR2",
       "issuer_org": "Let's Encrypt",
-      "not_after": "2026-12-28T03:36:49Z",
-      "not_before": "2026-09-29T03:36:50Z",
+      "not_after": "2027-02-26T08:51:46Z",
+      "not_before": "2026-11-28T08:51:47Z",
       "san": [
         "teleprompter.carino.systems"
       ],
-      "sha256": "17:6C:9F:FF:96:CF:5C:4F:4B:05:11:51:ED:D8:48:D7:16:89:FE:53:43:5B:3B:82:04:2F:D1:98:CF:43:24:09",
+      "sha256": "0E:67:E3:F0:6E:A0:67:E7:1E:DD:C5:7D:2A:92:D8:31:46:22:1E:2B:7D:0E:34:C8:16:9A:B4:9C:2F:C5:1F:2B",
       "subject": "teleprompter.carino.systems"
     },
     "test.carino.systems": {
